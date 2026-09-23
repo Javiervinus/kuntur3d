@@ -1,0 +1,28 @@
+name: Quiero mi ciudad
+description: Proponer una ciudad nueva para Kuntur 3D.
+title: "[Ciudad] "
+labels: ["ciudad-nueva"]
+body:
+  - type: input
+    id: ciudad
+    attributes:
+      label: Ciudad y país
+      placeholder: Cuenca, Ecuador
+    validations:
+      required: true
+  - type: textarea
+    id: por-que
+    attributes:
+      label: ¿Qué la haría especial en 3D?
+      description: Lugares icónicos, barrios, historia…
+  - type: dropdown
+    id: ayuda
+    attributes:
+      label: ¿Te animas a ayudar con ella?
+      description: Cada ciudad necesita a alguien que la conozca para revisar que se vea como es.
+      options:
+        - Sí, quiero ayudar a armarla y revisarla
+        - Puedo mandar fotos e información
+        - Por ahora solo la propongo
+    validations:
+      required: true

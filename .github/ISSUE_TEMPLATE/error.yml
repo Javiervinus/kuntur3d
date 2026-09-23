@@ -1,0 +1,24 @@
+name: Error
+description: Algo se rompe, se ve raro o va lento.
+title: "[Error] "
+labels: ["error"]
+body:
+  - type: textarea
+    id: que
+    attributes:
+      label: ¿Qué pasó?
+      description: Qué hiciste, qué esperabas y qué pasó en cambio. Una captura o un video ayuda mucho.
+    validations:
+      required: true
+  - type: input
+    id: punto
+    attributes:
+      label: Link al punto donde pasa (si aplica)
+      description: En la app, `Esc` → COMPARTIR → copiar link.
+  - type: input
+    id: equipo
+    attributes:
+      label: Navegador y equipo
+      placeholder: Chrome 140 en una laptop con Windows 11 / Safari en iPhone 15…
+    validations:
+      required: true

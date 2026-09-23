@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: package.json
+          cache: npm
+      - run: npm ci
+      # Revisa tipos y arma la app. Los datos del mundo no están en git (se generan con
+      # `npm run data`), así que acá solo se valida el código.
+      - run: npm run build

@@ -1,0 +1,49 @@
+name: Un edificio o lugar está mal / agrega mi casa
+description: La altura, la forma, el color o el nombre no cuadran, o falta algo en el mapa.
+title: "[Edificio] "
+labels: ["edificio"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias! Con el link al punto exacto lo encontramos en segundos.
+        En la app: `Esc` → **COMPARTIR** → copiar link.
+  - type: input
+    id: punto
+    attributes:
+      label: Link al punto exacto
+      description: El link que copias en COMPARTIR (abre la ciudad justo ahí).
+      placeholder: https://…/?lat=-2.18746&lon=-79.89833
+    validations:
+      required: true
+  - type: dropdown
+    id: que
+    attributes:
+      label: ¿Qué pasa?
+      options:
+        - Falta un edificio o lugar
+        - La altura no es la real
+        - La forma o el techo están mal
+        - El color o el aspecto no se parecen
+        - El nombre está mal o falta
+        - Es mi casa y quiero que se vea bien
+        - Otra cosa
+    validations:
+      required: true
+  - type: textarea
+    id: detalle
+    attributes:
+      label: Cuéntanos cómo es en la realidad
+      description: Pisos, color, forma del techo, cómo se llama… Puedes arrastrar fotos aquí (solo fotos tuyas).
+    validations:
+      required: true
+  - type: input
+    id: pisos
+    attributes:
+      label: ¿Cuántos pisos tiene? (si sabes)
+  - type: checkboxes
+    id: fotos
+    attributes:
+      label: Fotos
+      options:
+        - label: Las fotos que subí son mías y se pueden usar en el proyecto (CC BY-SA 4.0).

@@ -1,0 +1,12 @@
+name: Idea
+description: Algo que te gustaría ver en Kuntur 3D.
+title: "[Idea] "
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: ¿Cuál es la idea?
+      description: Qué te gustaría y para qué te serviría.
+    validations:
+      required: true
