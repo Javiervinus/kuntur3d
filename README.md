@@ -77,6 +77,9 @@ npm run deploy   # typecheck + vite build + wrangler deploy
   el plugin de Vite). El plan gratis trae 100 mil por día.
 - Los tiles satelitales se piden directo a Esri, que permite CORS, en vez de pasar por el proxy.
 - `public/_headers`: los archivos de `/assets` (con hash en el nombre) quedan en caché un año.
+- Vista previa al compartir el link (WhatsApp, Facebook, X…): título, descripción e imagen
+  (`public/og.jpg`, 1200 × 630) salen de `config/game.json` → `app.share` y los escribe en el HTML
+  el plugin `server/shareMeta.ts` al armar la app.
 - Límites del plan gratis: 20 000 archivos (hoy ~9 500) y 25 MB por archivo. Por eso el relieve
   se guarda comprimido (paso `terrain`: 4,7 MB en vez de 29 MB), lo que además acortó la
   primera carga.
@@ -110,6 +113,19 @@ pausa → CONTROLES.
 
 Al recargar retomas donde quedaste (y en el carro, si ibas manejando); un link con
 `?lat=&lon=` manda sobre eso. Se guarda en el navegador (`config/game.json` → `resume`).
+
+**En el celular** (o cualquier pantalla táctil) aparecen controles para los dedos
+(`src/ui/touch.ts`, `config/game.json` → `touch`):
+
+- **Joystick** a la izquierda: nace donde apoyas el dedo y es analógico (360°, empujar a medias
+  camina y al borde corre; manejando, acelera, frena y gira según cuánto lo empujes).
+- **Mirar**: arrastrar un dedo por el resto de la pantalla; **dos dedos** acercan o alejan la cámara
+  (y el mapa grande).
+- **Botones** a la derecha según lo que estés haciendo (SALTAR, PLANEAR, CARRO; manejando FRENO y
+  BAJAR) y arriba MENÚ y CÁMARA. El − / + del velocímetro cambia la velocidad.
+- El HUD se compacta, las fichas de lugares llegan recogidas en la píldora y la pestaña
+  CONTROLES explica los gestos. Por dentro todo aprieta las mismas teclas que el teclado
+  (`Input.setVirtual`), así el resto del juego no distingue.
 
 ### El personaje
 
