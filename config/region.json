@@ -1,0 +1,1858 @@
+{
+  "id": "gye-duran",
+  "name": "Guayaquil · Durán",
+  "bbox": {
+    "west": -80,
+    "south": -2.29,
+    "east": -79.745,
+    "north": -2.06
+  },
+  "projection": "EPSG:32717",
+  "chunkSize": 500,
+  "outputDir": "public/world",
+  "cacheDir": "pipeline/.cache",
+  "userAgent": "kuntur3d/0.1 (javiervin@hotmail.com)",
+  "terrain": {
+    "demUrlTemplate": "https://copernicus-dem-30m.s3.amazonaws.com/{name}/{name}.tif",
+    "demNameTemplate": "Copernicus_DSM_COG_10_{lat}_00_{lon}_00_DEM",
+    "gridSpacing": 10,
+    "buildingRemovalWindowPx": 3,
+    "smoothSigmaPx": 1.2,
+    "waterDepth": 4
+  },
+  "overture": {
+    "release": null,
+    "bboxMarginDeg": 0.002
+  },
+  "buildings": {
+    "minArea": 6,
+    "simplifyTolerance": 0.3,
+    "floorHeight": 3.2,
+    "minHeight": 3.2,
+    "defaultHeight": 4.5,
+    "maxHeight": 180,
+    "heightPercentile": 75,
+    "baseSink": 0.4,
+    "overlaps": { "minOverlap": 0.01 },
+    "openBuildings": {
+      "listUrl": "https://storage.googleapis.com/storage/v1/b/open-buildings-temporal-data/o",
+      "gcsHttpBase": "https://storage.googleapis.com/",
+      "manifestPrefix": "v1/manifests/",
+      "date": "2023_06_30",
+      "bands": {
+        "height": {
+          "name": "building_height",
+          "resampling": "nearest"
+        },
+        "presence": {
+          "name": "building_presence",
+          "resampling": "average"
+        }
+      },
+      "sampleResolution": 4
+    },
+    "fill": {
+      "minPresence": 0.5,
+      "clearancePx": 1,
+      "minArea": 40,
+      "upsample": 4,
+      "simplify": 1.2,
+      "minRectangularity": 0.8,
+      "gap": 0.2
+    },
+    "outline": {
+      "minArea": 1500,
+      "minRoofs": 3,
+      "maxLargestRoof": 0.5
+    },
+    "terrace": {
+      "maxRelief": 3.5,
+      "minSlope": 0.1,
+      "minDepth": 4,
+      "width": 7,
+      "minArea": 6,
+      "sample": 4,
+      "seed": 3,
+      "keepHeightSources": [0, 1]
+    },
+    "stadiums": {
+      "select": [
+        "way[\"leisure\"=\"stadium\"]",
+        "relation[\"leisure\"=\"stadium\"]"
+      ],
+      "excludeSports": ["horse_racing"],
+      "minArea": 3000,
+      "maxArea": 150000,
+      "minInside": 0.5,
+      "siteMargin": 25,
+      "maxGap": 35,
+      "minStandArea": 150,
+      "rowDepth": 0.85,
+      "front": 2.2,
+      "riser": [0.3, 0.6],
+      "minTop": 8,
+      "maxTop": 40,
+      "minRowArea": 2,
+      "simplify": 0.15
+    },
+    "roofs": {
+      "zoom": 16,
+      "sampleOffsets": [
+        -0.25,
+        0,
+        0.25
+      ],
+      "minArea": 25,
+      "maxArea": 450,
+      "maxHeight": 10.5,
+      "minRectangularity": 0.85,
+      "maxAspect": 4,
+      "tile": {
+        "hueMin": -25,
+        "hueMax": 38,
+        "minSaturation": 0.22,
+        "minValue": 0.2
+      },
+      "hipShare": 0.5,
+      "hipMaxAspect": 1.8,
+      "slopeDeg": [
+        18,
+        30
+      ],
+      "ridgeAboveMeasured": 0.5
+    },
+    "skyline": {
+      "minHeight": 9,
+      "tallHeight": 15,
+      "group": 8
+    }
+  },
+  "water": {
+    "classes": [
+      "river",
+      "lake",
+      "ocean",
+      "lagoon",
+      "canal",
+      "reservoir",
+      "water",
+      "pond",
+      "stream",
+      "fishpond",
+      "wastewater",
+      "basin",
+      "estuary",
+      "bay"
+    ],
+    "simplifyTolerance": 1,
+    "minArea": 200,
+    "freshNames": [
+      "Río Guayas",
+      "Río Daule",
+      "Río Babahoyo"
+    ]
+  },
+  "imagery": {
+    "urlTemplate": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    "attribution": "Imagen satelital © Esri, Maxar, Earthstar Geographics",
+    "tileSize": 256,
+    "concurrency": 8,
+    "jpegQuality": 84,
+    "overview": {
+      "zoom": 15,
+      "maxSize": 4096
+    },
+    "treesZoom": 16,
+    "treesMetersPerPixel": 2,
+    "runtime": {
+      "minZoom": 14,
+      "maxZoom": 18,
+      "bboxMarginDeg": 0.01
+    }
+  },
+  "trees": {
+    "canopy": {
+      "urlTemplate": "https://dataforgood-fb-data.s3.amazonaws.com/forests/v2/global/dinov3_global_chm_v2_ml3/chm/{quadkey}.tif",
+      "quadkeyZoom": 10,
+      "nodata": 255,
+      "resolution": 1.2
+    },
+    "minHeight": 2.5,
+    "maxHeight": 35,
+    "smoothSigmaPx": 0.7,
+    "peakWindows": [
+      [
+        0,
+        2
+      ],
+      [
+        8,
+        3
+      ],
+      [
+        15,
+        4
+      ]
+    ],
+    "crown": {
+      "min": 1.2,
+      "max": 7,
+      "maxInflate": 1.6
+    },
+    "brightnessMax": 150,
+    "colorWindowPx": 3,
+    "buildingBuffer": 1.2,
+    "roads": {
+      "clearance": 0.3,
+      "minSpacing": 3
+    },
+    "maxPerChunk": 1500,
+    "seed": 7
+  },
+  "ao": {
+    "resolution": 2,
+    "directions": 16,
+    "distances": [
+      2,
+      3,
+      4,
+      6,
+      8,
+      11,
+      15,
+      20,
+      27,
+      36,
+      48,
+      64
+    ],
+    "canopyMin": 2,
+    "svfStep": 4,
+    "heightUnit": 2,
+    "skipAbove": 0.995,
+    "webpEffort": 4
+  },
+  "bridges": {
+    "sample": 5,
+    "minLength": 8,
+    "kinds": {
+      "footway": "foot",
+      "cycleway": "foot",
+      "pedestrian": "foot",
+      "path": "foot",
+      "track": "foot",
+      "steps": "steps"
+    },
+    "kindOrder": [
+      "road",
+      "foot",
+      "steps"
+    ],
+    "exclude": {
+      "aeroway": [
+        "jet_bridge"
+      ]
+    },
+    "lowValues": [
+      "boardwalk"
+    ],
+    "low": {
+      "land": 0.5,
+      "water": 1.2
+    },
+    "margin": {
+      "road": 0.9,
+      "foot": 0.4,
+      "steps": 0.15
+    },
+    "deck": {
+      "road": 1.3,
+      "foot": 0.5,
+      "steps": 0.3
+    },
+    "grade": {
+      "road": 0.055,
+      "foot": 0.1,
+      "steps": 0.6
+    },
+    "landClearance": {
+      "road": 5.5,
+      "foot": 5.3,
+      "steps": 5.3
+    },
+    "water": {
+      "perMeterSpan": 0.012,
+      "min": 2.5,
+      "max": {
+        "road": 16,
+        "foot": 3.5,
+        "steps": 3.5
+      }
+    },
+    "minAbove": 0.3,
+    "crossing": {
+      "endSkip": 4,
+      "pad": 2,
+      "minSine": 0.5
+    },
+    "attach": {
+      "slack": 3,
+      "kinds": [
+        "foot",
+        "steps"
+      ],
+      "hangShare": 0.5
+    },
+    "ramp": {
+      "kinds": [
+        "road"
+      ],
+      "maxLength": 320,
+      "maxTurnDeg": 35,
+      "tolerance": 0.5
+    },
+    "stairs": {
+      "kinds": [
+        "foot",
+        "steps"
+      ],
+      "grade": 0.6,
+      "minRise": 0.8,
+      "maxLength": 24,
+      "openKinds": [
+        "steps"
+      ]
+    },
+    "footFlatMaxLength": 90,
+    "surface": {
+      "road": "asphalt",
+      "foot": "concrete",
+      "steps": "concrete"
+    },
+    "lampSides": {
+      "both": [
+        1,
+        -1
+      ],
+      "staggered": [
+        1,
+        -1
+      ],
+      "one": [
+        1
+      ]
+    },
+    "repairGrade": {
+      "road": 0.12,
+      "foot": 0.25,
+      "steps": 1
+    },
+    "quays": {
+      "promenades": [
+        "Simón Bolívar Promenade",
+        "Malecón Puerto Santa Ana",
+        "Malecón del Salado",
+        "Jardines Del Malecon",
+        "Malecón Eloy Alfaro",
+        "Malecón del Guasmo"
+      ],
+      "reach": 35,
+      "minWaterArea": 20000,
+      "simplify": 1.5,
+      "minLength": 40,
+      "sample": 4,
+      "probe": 3,
+      "height": {
+        "from": 3,
+        "to": 15,
+        "step": 1.5,
+        "percentile": 50,
+        "smooth": 80,
+        "minFreeboard": 1.5,
+        "maxFreeboard": 4.5,
+        "maxGrade": 0.01
+      },
+      "width": {
+        "min": 4,
+        "max": 16,
+        "tolerance": 0.3,
+        "percentile": 75
+      },
+      "deck": 0.8,
+      "margin": 0.35,
+      "surface": "paving",
+      "lamps": {
+        "spacing": 18,
+        "inset": 0.9,
+        "height": 5,
+        "led": 0.9
+      },
+      "palms": {
+        "spacing": 14,
+        "inset": 4.5,
+        "margin": 1,
+        "jitter": 2,
+        "height": [
+          7,
+          13
+        ]
+      }
+    }
+  },
+  "roads": {
+    "overpass": {
+      "endpoints": [
+        "https://overpass-api.de/api/interpreter",
+        "https://overpass.private.coffee/api/interpreter",
+        "https://overpass.kumi.systems/api/interpreter"
+      ],
+      "timeoutSeconds": 300,
+      "httpTimeoutSeconds": 360,
+      "retriesPerEndpoint": 2,
+      "bboxMarginDeg": 0.003,
+      "select": [
+        "way[\"highway\"]",
+        "way[\"amenity\"=\"parking\"]",
+        "node[\"highway\"=\"crossing\"]"
+      ]
+    },
+    "materials": [
+      "asphalt",
+      "concrete",
+      "paving",
+      "unpaved"
+    ],
+    "surfaces": {
+      "asphalt": [
+        "asphalt",
+        "chipseal"
+      ],
+      "concrete": [
+        "concrete",
+        "concrete:plates",
+        "concrete:lanes",
+        "cement"
+      ],
+      "paving": [
+        "paving_stones",
+        "sett",
+        "cobblestone",
+        "unhewn_cobblestone",
+        "bricks",
+        "brick",
+        "stone"
+      ],
+      "unpaved": [
+        "unpaved",
+        "dirt",
+        "earth",
+        "ground",
+        "gravel",
+        "fine_gravel",
+        "compacted",
+        "sand",
+        "mud",
+        "pebblestone",
+        "rock",
+        "grass",
+        "grass_paver",
+        "clay"
+      ]
+    },
+    "photoResolvedSurfaces": {
+      "paved": [
+        "asphalt",
+        "concrete"
+      ]
+    },
+    "classes": {
+      "motorway": {
+        "priority": 10,
+        "width": 11,
+        "lanes": 4,
+        "lanesOneway": 3,
+        "sidewalk": 0,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "trunk": {
+        "priority": 9,
+        "width": 11,
+        "lanes": 4,
+        "lanesOneway": 3,
+        "sidewalk": 2,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "primary": {
+        "priority": 8,
+        "width": 10,
+        "lanes": 4,
+        "lanesOneway": 3,
+        "sidewalk": 2.4,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "secondary": {
+        "priority": 7,
+        "width": 9,
+        "lanes": 2,
+        "lanesOneway": 2,
+        "sidewalk": 2.2,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "tertiary": {
+        "priority": 6,
+        "width": 8,
+        "lanes": 2,
+        "lanesOneway": 2,
+        "sidewalk": 2,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "motorway_link": {
+        "priority": 5,
+        "width": 6,
+        "lanes": 2,
+        "lanesOneway": 1,
+        "sidewalk": 0,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "trunk_link": {
+        "priority": 5,
+        "width": 6,
+        "lanes": 2,
+        "lanesOneway": 1,
+        "sidewalk": 0,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "primary_link": {
+        "priority": 5,
+        "width": 6,
+        "lanes": 2,
+        "lanesOneway": 1,
+        "sidewalk": 1.5,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "secondary_link": {
+        "priority": 5,
+        "width": 5.5,
+        "lanes": 2,
+        "lanesOneway": 1,
+        "sidewalk": 1.5,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "tertiary_link": {
+        "priority": 5,
+        "width": 5.5,
+        "lanes": 2,
+        "lanesOneway": 1,
+        "sidewalk": 1.5,
+        "marked": true,
+        "material": "asphalt"
+      },
+      "residential": {
+        "priority": 4,
+        "width": 7,
+        "sidewalk": 1.5,
+        "marked": false,
+        "material": "asphalt"
+      },
+      "unclassified": {
+        "priority": 4,
+        "width": 6.5,
+        "sidewalk": 1.2,
+        "marked": false,
+        "material": "asphalt"
+      },
+      "road": {
+        "priority": 3,
+        "width": 6,
+        "sidewalk": 1,
+        "marked": false,
+        "material": "asphalt"
+      },
+      "living_street": {
+        "priority": 3,
+        "width": 5,
+        "sidewalk": 1,
+        "marked": false,
+        "material": "concrete"
+      },
+      "service": {
+        "priority": 2,
+        "width": 4.5,
+        "sidewalk": 0,
+        "marked": false,
+        "material": "asphalt"
+      },
+      "pedestrian": {
+        "priority": 2,
+        "width": 5,
+        "sidewalk": 0,
+        "marked": false,
+        "material": "paving"
+      },
+      "track": {
+        "priority": 1,
+        "width": 3.5,
+        "sidewalk": 0,
+        "marked": false,
+        "material": "unpaved"
+      },
+      "footway": {
+        "priority": 1,
+        "width": 2,
+        "sidewalk": 0,
+        "marked": false,
+        "material": "concrete"
+      },
+      "cycleway": {
+        "priority": 1,
+        "width": 2,
+        "sidewalk": 0,
+        "marked": false,
+        "material": "asphalt"
+      },
+      "steps": {
+        "priority": 1,
+        "width": 2,
+        "sidewalk": 0,
+        "marked": false,
+        "material": "concrete"
+      },
+      "path": {
+        "priority": 1,
+        "width": 1.6,
+        "sidewalk": 0,
+        "marked": false,
+        "material": "unpaved"
+      }
+    },
+    "serviceWidths": {
+      "driveway": 3,
+      "parking_aisle": 5.5,
+      "alley": 3.5,
+      "drive-through": 3.5
+    },
+    "markedMaterials": [
+      "asphalt",
+      "concrete"
+    ],
+    "sidewalkMaterials": [
+      "asphalt",
+      "concrete",
+      "paving"
+    ],
+    "sidewalkTags": {
+      "yes": [
+        "yes",
+        "both",
+        "separate"
+      ],
+      "no": [
+        "no",
+        "none"
+      ],
+      "sides": [
+        "left",
+        "right"
+      ],
+      "taggedWidth": 1.5
+    },
+    "laneWidth": 3.2,
+    "minLaneWidth": 2.6,
+    "maxLaneWidth": 4.5,
+    "maxLanes": 8,
+    "minWidth": 1,
+    "maxWidth": 40,
+    "onewayValues": [
+      "yes",
+      "true",
+      "1",
+      "-1"
+    ],
+    "onewayJunctions": [
+      "roundabout",
+      "circular"
+    ],
+    "onewayClasses": [
+      "motorway",
+      "motorway_link"
+    ],
+    "excludeUnlessNo": [
+      "bridge",
+      "tunnel"
+    ],
+    "excludeValues": {
+      "indoor": [
+        "yes"
+      ],
+      "footway": [
+        "sidewalk",
+        "crossing"
+      ],
+      "area": [
+        "yes"
+      ]
+    },
+    "areas": {
+      "pedestrian": {
+        "match": {
+          "highway": [
+            "pedestrian",
+            "footway"
+          ],
+          "area": [
+            "yes"
+          ]
+        },
+        "material": "paving"
+      },
+      "parking": {
+        "match": {
+          "amenity": [
+            "parking"
+          ]
+        },
+        "excludeValues": {
+          "parking": [
+            "multi-storey",
+            "underground",
+            "rooftop"
+          ]
+        },
+        "material": "asphalt"
+      }
+    },
+    "areaSimplify": 0.3,
+    "crossings": {
+      "values": [
+        "zebra",
+        "marked",
+        "traffic_signals",
+        "uncontrolled"
+      ],
+      "untagged": false
+    },
+    "junctions": {
+      "minPriority": 6,
+      "minAngleDeg": 25,
+      "maxBoxLength": 30,
+      "mergeGap": 14
+    },
+    "photo": {
+      "zoom": 16,
+      "spacing": 4,
+      "minWidth": 4.5,
+      "excessGreenMax": 12,
+      "shadowLumMax": 50,
+      "minSamples": 5,
+      "classes": [
+        "asphalt",
+        "concrete",
+        "unpaved"
+      ],
+      "minVote": 0.6,
+      "neighbors": 25,
+      "priorNeighbors": 15,
+      "priorScale": 250,
+      "priorWeight": 3,
+      "minTrainingPerClass": 30,
+      "folds": 5,
+      "seed": 11
+    },
+    "tone": {
+      "min": 0.82,
+      "max": 1.18
+    },
+    "map": {
+      "simplify": 2,
+      "minParkArea": 400
+    },
+    "parking": {
+      "width": 2.2,
+      "classes": {
+        "residential": {
+          "probability": 0.8,
+          "travel": 6
+        },
+        "unclassified": {
+          "probability": 0.6,
+          "travel": 6
+        },
+        "tertiary": {
+          "probability": 0.7
+        },
+        "secondary": {
+          "probability": 0.55
+        },
+        "primary": {
+          "probability": 0.35
+        }
+      },
+      "excludeTags": {
+        "junction": [
+          "roundabout",
+          "circular"
+        ]
+      },
+      "tags": {
+        "keys": [
+          "parking:{side}",
+          "parking:lane:{side}"
+        ],
+        "sides": [
+          "left",
+          "right"
+        ],
+        "both": "both",
+        "no": [
+          "no",
+          "no_parking",
+          "no_stopping",
+          "separate",
+          "fire_lane"
+        ]
+      },
+      "probe": 25,
+      "probeSpacing": 6,
+      "minFootprint": 12,
+      "minHitShare": 0.3,
+      "minSidewalk": 1.2,
+      "front": {
+        "share": 0.6,
+        "minHeight": 7,
+        "maxSidewalk": 4.5
+      },
+      "median": {
+        "probe": 30,
+        "spacing": 10,
+        "share": 0.5,
+        "minOpposite": 0.6
+      },
+      "spots": {
+        "spacing": 6.2,
+        "jitter": 0.5,
+        "lateralJitter": 0.12,
+        "headingJitterDeg": 1.5,
+        "occupancy": [
+          0.35,
+          0.85
+        ],
+        "nodeClear": 7,
+        "crossingClear": 5,
+        "drivewayClear": 3.5,
+        "drivewayClasses": [
+          "service",
+          "track"
+        ],
+        "pathClasses": [
+          "footway",
+          "path",
+          "cycleway",
+          "steps",
+          "pedestrian"
+        ],
+        "blockClasses": [
+          "motorway",
+          "trunk",
+          "primary",
+          "secondary",
+          "tertiary",
+          "motorway_link",
+          "trunk_link",
+          "primary_link",
+          "secondary_link",
+          "tertiary_link",
+          "residential",
+          "unclassified",
+          "road",
+          "living_street",
+          "service",
+          "track",
+          "pedestrian"
+        ],
+        "ownRoadTolerance": 0.3,
+        "endClear": 5,
+        "seed": 21
+      }
+    },
+    "chunkMargin": 8,
+    "lamps": {
+      "classes": {
+        "motorway": {
+          "spacing": 40,
+          "height": 12,
+          "sides": "both",
+          "led": 0.6
+        },
+        "trunk": {
+          "spacing": 34,
+          "height": 12,
+          "sides": "both",
+          "led": 0.45
+        },
+        "primary": {
+          "spacing": 32,
+          "height": 11,
+          "sides": "both",
+          "led": 0.3
+        },
+        "secondary": {
+          "spacing": 32,
+          "height": 10,
+          "sides": "staggered",
+          "led": 0.18
+        },
+        "tertiary": {
+          "spacing": 34,
+          "height": 10,
+          "sides": "staggered",
+          "led": 0.12
+        },
+        "motorway_link": {
+          "spacing": 38,
+          "height": 11,
+          "sides": "one",
+          "led": 0.5
+        },
+        "trunk_link": {
+          "spacing": 36,
+          "height": 11,
+          "sides": "one",
+          "led": 0.4
+        },
+        "primary_link": {
+          "spacing": 34,
+          "height": 10,
+          "sides": "one",
+          "led": 0.3
+        },
+        "secondary_link": {
+          "spacing": 34,
+          "height": 10,
+          "sides": "one",
+          "led": 0.18
+        },
+        "tertiary_link": {
+          "spacing": 34,
+          "height": 10,
+          "sides": "one",
+          "led": 0.12
+        },
+        "residential": {
+          "spacing": 36,
+          "height": 9,
+          "sides": "one",
+          "led": 0.08
+        },
+        "unclassified": {
+          "spacing": 38,
+          "height": 9,
+          "sides": "one",
+          "led": 0.05
+        },
+        "road": {
+          "spacing": 40,
+          "height": 9,
+          "sides": "one",
+          "led": 0.05
+        },
+        "living_street": {
+          "spacing": 30,
+          "height": 8,
+          "sides": "one",
+          "led": 0.1
+        },
+        "pedestrian": {
+          "spacing": 22,
+          "height": 5,
+          "sides": "one",
+          "led": 0.6
+        }
+      },
+      "unlitValues": [
+        "no",
+        "disused"
+      ],
+      "unpavedKeep": 0.55,
+      "minRoadLength": 12,
+      "curbInset": 0.6,
+      "shoulder": 1,
+      "minDistance": 12,
+      "deadShare": 0.02,
+      "ledNames": [
+        "9 de octubre",
+        "malecón simón bolívar",
+        "vía a la costa",
+        "puente de la unidad nacional",
+        "isidro ayora"
+      ],
+      "unit": 0.5,
+      "heightUnit": 0.1,
+      "seed": 11
+    },
+    "eventMargin": 60,
+    "decimals": 1
+  },
+  "grounds": {
+    "select": [
+      "way[\"leisure\"~\"^(park|garden|playground|dog_park|pitch)$\"]",
+      "relation[\"leisure\"~\"^(park|garden|pitch)$\"]",
+      "way[\"landuse\"~\"^(grass|village_green|recreation_ground|meadow)$\"]",
+      "relation[\"landuse\"~\"^(grass|village_green|recreation_ground|meadow)$\"]",
+      "way[\"place\"=\"square\"]"
+    ],
+    "parks": {
+      "leisure": [
+        "park",
+        "garden",
+        "playground",
+        "dog_park"
+      ],
+      "landuse": [
+        "grass",
+        "village_green",
+        "recreation_ground",
+        "meadow"
+      ],
+      "place": [
+        "square"
+      ]
+    },
+    "pitches": {
+      "leisure": [
+        "pitch"
+      ]
+    },
+    "sports": {
+      "soccer": [
+        "soccer",
+        "futsal",
+        "football",
+        "association_football",
+        "indoor_soccer"
+      ],
+      "basketball": [
+        "basketball"
+      ],
+      "volleyball": [
+        "volleyball",
+        "beachvolleyball",
+        "ecuavolley",
+        "ecuavoley"
+      ],
+      "tennis": [
+        "tennis",
+        "padel"
+      ]
+    },
+    "surfaces": {
+      "grass": [
+        "grass"
+      ],
+      "turf": [
+        "artificial_turf",
+        "artificial_grass"
+      ],
+      "hard": [
+        "concrete",
+        "asphalt",
+        "paved",
+        "tartan",
+        "acrylic",
+        "paving_stones",
+        "rubber",
+        "cement"
+      ],
+      "earth": [
+        "dirt",
+        "earth",
+        "ground",
+        "clay",
+        "gravel",
+        "unpaved",
+        "compacted",
+        "fine_gravel"
+      ],
+      "sand": [
+        "sand"
+      ]
+    },
+    "minArea": 20,
+    "simplify": 0.3
+  },
+  "geocoder": {
+    "url": "https://nominatim.openstreetmap.org/search",
+    "lookupUrl": "https://nominatim.openstreetmap.org/lookup",
+    "attribution": "Búsqueda © OpenStreetMap / Nominatim",
+    "minIntervalMs": 1100,
+    "arrival": {
+      "snap": 250,
+      "step": 5,
+      "networks": ["walks", "traffic"]
+    }
+  },
+  "places": {
+    "zones": {
+      "select": ["relation[\"boundary\"=\"administrative\"][\"admin_level\"~\"^(6|8|9|10)$\"]"],
+      "levels": { "10": "barrio", "9": "parroquia", "8": "parroquia", "6": "cantón" },
+      "stripPrefixes": ["Parroquia "],
+      "rename": {
+        "Duran": "Durán",
+        "Brisas del Rio": "Brisas del Río",
+        "Cdla Limonal Del Rio": "Cdla. Limonal del Río",
+        "Ciudad Colon": "Ciudad Colón",
+        "Coop Empleados Del Municipio": "Coop. Empleados del Municipio",
+        "Cooperativa Juan pablo": "Cooperativa Juan Pablo",
+        "El Condor": "El Cóndor",
+        "Las Orquideas": "Las Orquídeas",
+        "Urbanización Ciudad del Rio 2": "Urbanización Ciudad del Río 2"
+      },
+      "simplify": 4,
+      "minArea": 2000
+    },
+    "photos": {
+      "api": "https://commons.wikimedia.org/w/api.php",
+      "width": 960,
+      "thumb": {
+        "size": 112,
+        "quality": 76
+      }
+    }
+  },
+  "search": {
+    "file": "search.json",
+    "unit": 0.5,
+    "orderCell": 32,
+    "text": {
+      "symbols": { "&": "y", "/": "y", "'": "", "\u2019": "", "\u2018": "", "\u00b4": "", "`": "" },
+      "abbreviations": {
+        "av": "avenida", "avda": "avenida", "ave": "avenida", "avs": "avenida",
+        "blvd": "boulevard", "blv": "boulevard", "bvd": "boulevard", "bulevar": "boulevard",
+        "cl": "calle", "cll": "calle", "clle": "calle",
+        "psje": "pasaje", "pje": "pasaje", "pj": "pasaje", "cjon": "callejon",
+        "cdla": "ciudadela", "cda": "ciudadela", "cdl": "ciudadela", "urb": "urbanizacion", "coop": "cooperativa",
+        "dr": "doctor", "dra": "doctora", "gral": "general", "gnral": "general", "sto": "santo", "sta": "santa",
+        "pdte": "presidente", "ing": "ingeniero", "arq": "arquitecto", "lcdo": "licenciado", "lcda": "licenciada",
+        "mons": "monsenor", "mnsr": "monsenor", "crnel": "coronel", "cnel": "coronel", "tnte": "teniente",
+        "tte": "teniente", "cap": "capitan", "sgto": "sargento", "hno": "hermano", "sr": "senor", "sra": "senora",
+        "cc": "centro comercial", "univ": "universidad", "hosp": "hospital", "mcdo": "mercado",
+        "km": "kilometro", "mz": "manzana", "gye": "guayaquil"
+      },
+      "numbers": {
+        "uno": "1", "primero": "1", "primera": "1", "primer": "1",
+        "dos": "2", "segundo": "2", "segunda": "2",
+        "tres": "3", "tercero": "3", "tercera": "3", "tercer": "3",
+        "cuatro": "4", "cuarto": "4", "cuarta": "4",
+        "cinco": "5", "quinto": "5", "quinta": "5",
+        "seis": "6", "sexto": "6", "sexta": "6",
+        "siete": "7", "septimo": "7", "septima": "7",
+        "ocho": "8", "octavo": "8", "octava": "8",
+        "nueve": "9", "noveno": "9", "novena": "9",
+        "diez": "10", "decimo": "10", "decima": "10",
+        "once": "11", "doce": "12", "trece": "13", "catorce": "14", "quince": "15", "dieciseis": "16",
+        "diecisiete": "17", "dieciocho": "18", "diecinueve": "19", "veinte": "20", "veintiuno": "21",
+        "veintidos": "22", "veintitres": "23", "veinticuatro": "24", "veinticinco": "25", "veintiseis": "26",
+        "veintisiete": "27", "veintiocho": "28", "veintinueve": "29", "treinta": "30"
+      },
+      "romans": {
+        "ii": "2", "iii": "3", "iv": "4", "vi": "6", "vii": "7", "viii": "8", "ix": "9", "xi": "11", "xii": "12",
+        "xiii": "13", "xiv": "14", "xv": "15", "xvi": "16", "xvii": "17", "xviii": "18", "xix": "19", "xx": "20"
+      },
+      "ordinalSuffixes": ["ro", "ra", "do", "da", "er", "era", "to", "ta", "mo", "ma", "vo", "va", "avo", "ava"],
+      "stopwords": [
+        "de", "del", "la", "las", "el", "los", "y", "e", "en", "a", "al", "and", "ciudadela", "urbanizacion",
+        "cooperativa", "lotizacion", "barrio"
+      ],
+      "streetTypes": [
+        "avenida", "calle", "boulevard", "via", "pasaje", "callejon", "peatonal", "paseo", "carretera", "autopista",
+        "diagonal", "transversal", "retorno", "herradura", "camino"
+      ],
+      "streetTypeGroups": [
+        ["avenida", "boulevard", "via", "autopista", "carretera"],
+        ["calle", "pasaje", "callejon", "peatonal", "paseo", "transversal", "diagonal", "retorno", "herradura", "camino"]
+      ],
+      "codeTokens": ["no", "ne", "so", "se"],
+      "phonetic": [["ch", "#"], ["ll", "y"], ["qu", "k"], ["ce", "se"], ["ci", "si"], ["c", "k"], ["z", "s"], ["b", "v"], ["h", ""], ["#", "ch"]],
+      "separators": ["y", "e", "con", "esquina", "esq", "and"]
+    },
+    "arrival": { "sidewalkNetwork": "walks", "sidewalkMeters": 25, "clearance": 1.0 },
+    "streets": {
+      "excludeHighways": ["platform", "corridor", "raceway", "bus_stop", "elevator", "proposed", "construction", "services", "rest_area"],
+      "altTags": ["alt_name", "loc_name", "old_name", "official_name", "short_name", "alt_name_1", "name_1"],
+      "genericNames": ["calle", "calle urbana", "sin nombre", "s n", "pasaje", "callejon", "peatonal", "via", "avenida", "sendero"],
+      "aliases": { "Simón Bolívar Palacios": ["Malecón Simón Bolívar", "Malecón"] },
+      "mergeMeters": 250,
+      "sampleMeters": 200,
+      "lengthWeight": 0.1,
+      "lengthReference": 1000,
+      "classes": {
+        "motorway": { "label": "Autopista", "weight": 1.0 },
+        "trunk": { "label": "Avenida", "weight": 0.9 },
+        "primary": { "label": "Avenida", "weight": 0.8 },
+        "secondary": { "label": "Avenida", "weight": 0.7 },
+        "tertiary": { "label": "Calle", "weight": 0.55 },
+        "motorway_link": { "label": "Autopista", "weight": 0.4 },
+        "trunk_link": { "label": "Avenida", "weight": 0.35 },
+        "primary_link": { "label": "Avenida", "weight": 0.35 },
+        "secondary_link": { "label": "Avenida", "weight": 0.3 },
+        "tertiary_link": { "label": "Calle", "weight": 0.3 },
+        "residential": { "label": "Calle", "weight": 0.4 },
+        "unclassified": { "label": "Calle", "weight": 0.35 },
+        "road": { "label": "Calle", "weight": 0.3 },
+        "living_street": { "label": "Calle", "weight": 0.3 },
+        "service": { "label": "Calle", "weight": 0.2 },
+        "pedestrian": { "label": "Peatonal", "weight": 0.35 },
+        "footway": { "label": "Peatonal", "weight": 0.25 },
+        "steps": { "label": "Escalinata", "weight": 0.25 },
+        "cycleway": { "label": "Ciclovía", "weight": 0.25 },
+        "path": { "label": "Sendero", "weight": 0.2 },
+        "track": { "label": "Camino", "weight": 0.2 }
+      },
+      "defaultClass": { "label": "Calle", "weight": 0.2 }
+    },
+    "crossings": { "mergeMeters": 80 },
+    "areas": {
+      "select": [
+        "node[\"place\"~\"^(city|town|village|hamlet|suburb|quarter|neighbourhood|locality)$\"][\"name\"]",
+        "way[\"place\"~\"^(city|town|village|hamlet|suburb|quarter|neighbourhood|locality)$\"][\"name\"]"
+      ],
+      "kinds": {
+        "city": { "label": "Ciudad", "priority": 0, "weight": 1.0, "assign": false },
+        "town": { "label": "Ciudad", "priority": 1, "weight": 0.9, "assign": false },
+        "cantón": { "label": "Cantón", "priority": 2, "weight": 0.9, "assign": false },
+        "parroquia": { "label": "Parroquia", "priority": 3, "weight": 0.8, "assign": false },
+        "barrio": { "label": "Barrio", "priority": 4, "weight": 0.7, "assign": true },
+        "suburb": { "label": "Sector", "priority": 5, "weight": 0.7, "assign": true },
+        "quarter": { "label": "Barrio", "priority": 6, "weight": 0.6, "assign": true },
+        "neighbourhood": { "label": "Barrio", "priority": 7, "weight": 0.6, "assign": true },
+        "village": { "label": "Pueblo", "priority": 8, "weight": 0.5, "assign": true },
+        "hamlet": { "label": "Sector", "priority": 9, "weight": 0.4, "assign": true },
+        "locality": { "label": "Lugar", "priority": 10, "weight": 0.3, "assign": false }
+      },
+      "defaultKind": { "label": "Zona", "priority": 11, "weight": 0.3, "assign": false },
+      "regionKind": "cantón",
+      "assignMeters": 900,
+      "mergeMeters": 1500,
+      "poiPrefixes": [
+        "centro comercial", "hospital", "mercado", "terminal", "estacion", "subestacion", "facultad", "parque",
+        "cementerio", "liga", "kartodromo", "nightclub", "discoteca", "centro de salud", "maternidad", "muelle",
+        "universidad", "colegio", "escuela", "unidad educativa", "iglesia", "centro de convenciones", "monumento",
+        "centro de operaciones", "fundacion", "club", "estadio", "coliseo", "aeropuerto", "peaje", "redondel",
+        "complejo", "puerto maritimo"
+      ],
+      "poiWords": ["universidad", "mall", "peaje", "metrovia", "s a", "cia ltda", "ltda"]
+    },
+    "places": {
+      "columns": ["id", "geometry", "names", "categories", "basic_category", "taxonomy", "confidence", "brand", "operating_status"],
+      "minConfidence": 0.4,
+      "closedStatuses": ["permanently_closed", "temporarily_closed"],
+      "dedupeMeters": 60,
+      "confidenceWeight": 0.3,
+      "fallback": { "label": "Lugar", "group": "place", "weight": 0 },
+      "categories": [
+        { "label": "Centro comercial", "group": "mall", "weight": 0.7, "keys": ["shopping_mall"], "aliases": ["centros comerciales", "mall", "malls", "shopping", "plaza comercial"], "prefixes": ["centro comercial", "mall", "plaza comercial"], "confirm": { "words": ["mall", "centro comercial", "shopping", "plaza", "galeria", "paseo", "centro", "piazza", "village", "outlet", "megamaxi"], "confidence": 0.9, "otherwise": "Tienda" } },
+        { "label": "Hospital", "group": "health", "weight": 0.6, "keys": ["hospital", "emergency_department", "emergency_or_urgent_care_facility"], "aliases": ["hospitales", "emergencia", "emergencias"], "prefixes": ["hospital"], "confirm": { "words": ["hospital", "clinica", "clinic", "maternidad", "iess", "sanatorio", "policlinico", "emergencia"], "confidence": 0.9, "otherwise": "Consultorio médico" } },
+        { "label": "Aeropuerto", "group": "transport", "weight": 0.7, "keys": ["airport", "air_transport_facility_or_service"], "aliases": ["aeropuertos"], "prefixes": ["aeropuerto"], "confirm": { "words": ["aeropuerto", "airport"], "confidence": 0.95, "otherwise": "Transporte" } },
+        { "label": "Estadio", "group": "sport", "weight": 0.6, "keys": ["stadium_arena"], "aliases": ["estadios", "coliseo", "coliseos", "arena"], "prefixes": ["estadio", "coliseo"], "confirm": { "words": ["estadio", "coliseo", "arena", "stadium"], "confidence": 0.9, "otherwise": "Club deportivo" } },
+        { "label": "Universidad", "group": "school", "weight": 0.5, "keys": ["college_university", "campus_building"], "aliases": ["universidades", "facultad", "facultades", "campus"], "prefixes": ["universidad", "facultad"], "confirm": { "words": ["universidad", "facultad", "university", "politecnic", "campus", "instituto superior", "espol", "ucsg", "uees", "ecotec", "uide", "ube", "ups", "ulvr", "unemi", "agraria"], "confidence": 0.9, "otherwise": "Academia" } },
+        { "label": "Museo", "group": "culture", "weight": 0.5, "keys": ["museum", "planetarium", "aquarium"], "aliases": ["museos"], "prefixes": ["museo"] },
+        { "label": "Galería de arte", "group": "culture", "weight": 0.35, "keys": ["art_gallery", "arts_and_crafts_space"], "aliases": ["galeria", "galerias", "arte"] },
+        { "label": "Monumento", "group": "culture", "weight": 0.45, "keys": ["monument", "memorial_site", "lighthouse", "public_fountain"], "aliases": ["monumentos", "estatua", "faro", "pileta"], "prefixes": ["monumento", "estatua", "faro"] },
+        { "label": "Cementerio", "group": "worship", "weight": 0.3, "keys": ["cemetery", "funeral_services_and_cemeteries"], "aliases": ["cementerios", "camposanto", "panteon"], "prefixes": ["cementerio", "camposanto"] },
+        { "label": "Sitio histórico", "group": "culture", "weight": 0.35, "keys": ["historic_site"], "aliases": ["historico", "historicos"], "generic": true },
+        { "label": "Teatro", "group": "culture", "weight": 0.4, "keys": ["theatre_venue", "performing_arts_venue"], "aliases": ["teatros", "auditorio"], "prefixes": ["teatro"] },
+        { "label": "Centro cultural", "group": "culture", "weight": 0.35, "keys": ["cultural_center", "arts_and_entertainment", "cultural_and_historic"], "aliases": ["cultura", "cultural"], "generic": true },
+        { "label": "Biblioteca", "group": "school", "weight": 0.35, "keys": ["library"], "aliases": ["bibliotecas"] },
+        { "label": "Cine", "group": "culture", "weight": 0.4, "keys": ["movie_theater", "cinema"], "aliases": ["cines", "supercines", "cinemark"], "prefixes": ["cine", "cines", "supercines", "cinemark"] },
+        { "label": "Parque de diversiones", "group": "sport", "weight": 0.35, "keys": ["amusement_park", "amusement_attraction", "arcade", "gaming_venue", "casino"], "aliases": ["juegos", "diversiones"], "prefixes": ["parque de diversiones"] },
+        { "label": "Zoológico", "group": "park", "weight": 0.45, "keys": ["zoo", "animal_attraction"], "aliases": ["zoologico", "zoo", "animales"], "prefixes": ["zoologico"] },
+        { "label": "Parque", "group": "park", "weight": 0.45, "keys": ["park", "dog_park", "garden", "nature_reserve", "national_park", "recreational_trail_or_path"], "aliases": ["parques", "jardin", "jardines", "reserva"], "prefixes": ["parque"] },
+        { "label": "Juegos infantiles", "group": "park", "weight": 0.2, "keys": ["playground"], "aliases": ["juegos infantiles", "ninos"] },
+        { "label": "Plaza", "group": "park", "weight": 0.35, "keys": ["public_plaza"], "aliases": ["plazas", "plazoleta"] },
+        { "label": "Playa", "group": "park", "weight": 0.35, "keys": ["beach"], "aliases": ["playas", "balneario"], "prefixes": ["playa"] },
+        { "label": "Río", "group": "park", "weight": 0.3, "keys": ["river", "canal", "lake", "waterfall", "water_feature"], "aliases": ["rios", "estero", "lago", "laguna"], "prefixes": ["rio", "estero"] },
+        { "label": "Isla", "group": "park", "weight": 0.35, "keys": ["island"], "aliases": ["islas"], "prefixes": ["isla"] },
+        { "label": "Cerro", "group": "park", "weight": 0.35, "keys": ["mountain"], "aliases": ["cerros", "loma", "mirador"], "prefixes": ["cerro"] },
+        { "label": "Muelle", "group": "transport", "weight": 0.3, "keys": ["pier", "marina"], "aliases": ["muelles", "embarcadero", "puerto"], "prefixes": ["muelle", "embarcadero"] },
+        { "label": "Puente", "group": "transport", "weight": 0.35, "keys": ["bridge"], "aliases": ["puentes"], "prefixes": ["puente"] },
+        { "label": "Terminal de buses", "group": "transport", "weight": 0.45, "keys": ["bus_station"], "aliases": ["terminal", "terminales", "terminal terrestre"], "prefixes": ["terminal terrestre", "terminal de buses"] },
+        { "label": "Parada de transporte", "group": "transport", "weight": 0.2, "keys": ["public_transit_facility_or_service", "ground_transport_facility_or_service"], "aliases": ["parada", "paradas", "metrovia", "bus", "buses"], "prefixes": ["parada", "estacion metrovia", "metrovia"], "prefixesWin": true },
+        { "label": "Estación de tren", "group": "transport", "weight": 0.35, "keys": ["train_station"], "aliases": ["tren", "estacion"], "prefixes": ["estacion del tren", "estacion de tren", "estacion antigua del tren"] },
+        { "label": "Estacionamiento", "group": "car", "weight": 0.1, "keys": ["parking"], "aliases": ["parqueadero", "parqueaderos", "parqueo", "estacionamientos"], "prefixes": ["parqueadero", "estacionamiento"] },
+        { "label": "Gasolinera", "group": "fuel", "weight": 0.2, "keys": ["gas_station", "fueling_station"], "aliases": ["gasolineras", "gasolina", "bomba", "estacion de servicio", "combustible"], "prefixes": ["gasolinera", "estacion de servicio"] },
+        { "label": "Taxi", "group": "car", "weight": 0.1, "keys": ["taxi_or_ride_share_service"], "aliases": ["taxis", "cooperativa de taxis"] },
+        { "label": "Agencia de viajes", "group": "transport", "weight": 0.1, "keys": ["travel_service"], "aliases": ["viajes", "turismo", "tours"] },
+        { "label": "Transporte", "group": "transport", "weight": 0.1, "keys": ["travel_and_transportation", "b2b_transportation_and_storage_service"], "aliases": ["transportes", "logistica"], "generic": true },
+        { "label": "Envíos", "group": "service", "weight": 0.1, "keys": ["shipping_or_delivery_service"], "aliases": ["envios", "courier", "paqueteria", "encomiendas"] },
+        { "label": "Taller mecánico", "group": "car", "weight": 0.1, "keys": ["automotive_repair", "automotive_service", "vehicle_service", "auto_body_shop", "truck_repair", "auto_customization", "auto_detailing"], "aliases": ["taller", "talleres", "mecanica", "mecanico", "enderezada", "pintura automotriz"], "prefixes": ["taller", "mecanica automotriz"] },
+        { "label": "Lavadora de autos", "group": "car", "weight": 0.1, "keys": ["car_wash"], "aliases": ["lavadora", "lavadoras", "lavado de autos", "car wash", "autolavado"], "prefixes": ["lavadora", "autolavado", "car wash"] },
+        { "label": "Lubricadora", "group": "car", "weight": 0.1, "keys": ["oil_change_station"], "aliases": ["lubricadoras", "cambio de aceite"], "prefixes": ["lubricadora"] },
+        { "label": "Vulcanizadora", "group": "car", "weight": 0.1, "keys": ["tire_dealer_and_repair", "wheel_and_rim_repair"], "aliases": ["vulcanizadoras", "llantas", "llantera"], "prefixes": ["vulcanizadora", "tecnicentro", "llantera"] },
+        { "label": "Concesionaria", "group": "car", "weight": 0.15, "keys": ["auto_dealer", "vehicle_dealer"], "aliases": ["concesionarias", "concesionario", "autos", "carros", "motos"], "prefixes": ["concesionaria", "concesionario"] },
+        { "label": "Repuestos", "group": "car", "weight": 0.1, "keys": ["vehicle_parts_store"], "aliases": ["repuesto", "autopartes", "accesorios para autos"] },
+        { "label": "Farmacia", "group": "pharmacy", "weight": 0.25, "keys": ["pharmacy_and_drug_store", "pharmacy", "drugstore"], "aliases": ["farmacias", "botica", "boticas", "medicinas"], "prefixes": ["farmacia", "farmacias"] },
+        { "label": "Clínica", "group": "health", "weight": 0.35, "keys": ["outpatient_care_facility", "primary_care_or_general_clinic", "specialized_medical_facility", "surgery", "pediatric_clinic", "behavioral_or_mental_health_clinic", "reproductive_perinatal_and_womens_care"], "aliases": ["clinicas", "centro medico", "centro de salud", "policlinico", "dispensario", "subcentro"], "prefixes": ["clinica", "policlinico", "centro medico", "centro de salud", "dispensario", "subcentro", "maternidad"] },
+        { "label": "Consultorio médico", "group": "health", "weight": 0.15, "keys": ["health_care", "specialized_health_care", "medical_service", "physical_medicine_and_rehabilitation", "complementary_and_alternative_medicine"], "aliases": ["consultorio", "consultorios", "medico", "medicos", "doctor", "doctores", "especialista"], "generic": true, "prefixes": ["consultorio"] },
+        { "label": "Dentista", "group": "health", "weight": 0.15, "keys": ["dental_clinic"], "aliases": ["dentistas", "odontologo", "odontologos", "odontologia", "dental", "consultorio dental"], "prefixes": ["clinica dental", "consultorio dental", "consultorio odontologico", "odontologia", "dentista"] },
+        { "label": "Laboratorio clínico", "group": "health", "weight": 0.15, "keys": ["diagnostics_imaging_or_lab_service", "laboratory_testing", "diagnostic_imaging"], "aliases": ["laboratorio", "laboratorios", "examenes", "rayos x", "imagenes"], "prefixes": ["laboratorio clinico", "laboratorio"] },
+        { "label": "Óptica", "group": "health", "weight": 0.15, "keys": ["vision_or_eye_care_clinic", "eyewear_store", "eye_care_clinic", "optometrist"], "aliases": ["opticas", "lentes", "gafas", "oftalmologo"], "prefixes": ["optica"] },
+        { "label": "Veterinaria", "group": "health", "weight": 0.1, "keys": ["animal_or_pet_service"], "aliases": ["veterinarias", "veterinario", "mascotas"], "prefixes": ["veterinaria", "clinica veterinaria"] },
+        { "label": "Tienda de mascotas", "group": "shop", "weight": 0.1, "keys": ["animal_and_pet_store"], "aliases": ["mascotas", "pet shop", "petshop"] },
+        { "label": "Banco", "group": "money", "weight": 0.3, "keys": ["bank_or_credit_union"], "aliases": ["bancos", "cooperativa de ahorro"], "prefixes": ["banco"] },
+        { "label": "Cajero automático", "group": "money", "weight": 0.15, "keys": ["atm"], "aliases": ["cajero", "cajeros", "atm"], "prefixes": ["cajero"] },
+        { "label": "Seguros", "group": "money", "weight": 0.05, "keys": ["insurance_agency"], "aliases": ["aseguradora", "aseguradoras"] },
+        { "label": "Envío de dinero", "group": "money", "weight": 0.1, "keys": ["money_transfer_service", "currency_exchange"], "aliases": ["remesas", "casa de cambio", "western union"] },
+        { "label": "Servicios financieros", "group": "money", "weight": 0.05, "keys": ["financial_service"], "aliases": ["financiera", "prestamos", "credito"] },
+        { "label": "Supermercado", "group": "shop", "weight": 0.35, "keys": ["supermarket", "superstore", "warehouse_club_store", "hypermarket", "discount_store"], "aliases": ["supermercados", "super", "comisariato", "comisariatos", "hipermercado"], "prefixes": ["supermercado", "comisariato", "mi comisariato", "hipermercado", "supermaxi", "megamaxi", "gran aki", "super aki", "hipermarket", "coral hipermercados", "almacenes tia"] },
+        { "label": "Tienda de víveres", "group": "shop", "weight": 0.1, "keys": ["grocery_store", "convenience_store", "organic_grocery_store", "korean_grocery_store", "produce_store", "specialty_foods_store", "food_and_beverage_store", "health_food_store", "dairy_store"], "aliases": ["tienda", "tiendas", "viveres", "abarrotes", "despensa", "minimarket", "micromercado", "bodega"], "generic": true, "prefixes": ["tienda", "viveres", "minimarket", "micromercado", "despensa", "abarrotes"] },
+        { "label": "Mercado", "group": "shop", "weight": 0.35, "keys": ["farmers_market", "market"], "aliases": ["mercados", "feria"], "prefixes": ["mercado"] },
+        { "label": "Licorería", "group": "bar", "weight": 0.05, "keys": ["liquor_store"], "aliases": ["licorerias", "licores"], "prefixes": ["licoreria"] },
+        { "label": "Carnicería", "group": "shop", "weight": 0.05, "keys": ["butcher_shop", "fishmonger"], "aliases": ["carnicerias", "carnes", "pescaderia"], "prefixes": ["carniceria", "tercena"] },
+        { "label": "Tienda por departamentos", "group": "shop", "weight": 0.3, "keys": ["department_store"], "aliases": ["almacen", "almacenes", "departamentos"] },
+        { "label": "Tienda de ropa", "group": "shop", "weight": 0.1, "keys": ["fashion_and_apparel_store", "clothing_store", "womens_clothing_store", "mens_clothing_store", "childrens_clothing_store", "fashion_boutique", "uniform_store", "bridal_shop", "lingerie_store", "fashion_accessories_store"], "aliases": ["ropa", "boutique", "moda", "vestidos", "uniformes"], "prefixes": ["boutique"] },
+        { "label": "Zapatería", "group": "shop", "weight": 0.1, "keys": ["shoe_store"], "aliases": ["zapaterias", "zapatos", "calzado"], "prefixes": ["zapateria"] },
+        { "label": "Joyería", "group": "shop", "weight": 0.1, "keys": ["jewelry_store"], "aliases": ["joyerias", "joyas", "relojeria"], "prefixes": ["joyeria"] },
+        { "label": "Ferretería", "group": "shop", "weight": 0.1, "keys": ["hardware_store", "hardware_home_and_garden_store", "home_improvement_store", "lumber_store"], "aliases": ["ferreterias", "herramientas"], "prefixes": ["ferreteria"] },
+        { "label": "Materiales de construcción", "group": "shop", "weight": 0.1, "keys": ["building_supply_store"], "aliases": ["materiales", "construccion", "cemento"] },
+        { "label": "Mueblería", "group": "shop", "weight": 0.1, "keys": ["furniture_store", "mattress_store", "home_goods_store", "linen_store", "carpet_store", "kitchen_supply_store", "lighting_store"], "aliases": ["muebles", "mueblerias", "colchones", "decoracion", "hogar"], "prefixes": ["muebleria"] },
+        { "label": "Electrodomésticos", "group": "shop", "weight": 0.1, "keys": ["appliance_store"], "aliases": ["electrodomestico", "linea blanca"] },
+        { "label": "Vivero", "group": "park", "weight": 0.05, "keys": ["nursery_and_gardening_store"], "aliases": ["viveros", "plantas"] },
+        { "label": "Electrónica", "group": "shop", "weight": 0.1, "keys": ["electronics_store", "mobile_phone_store", "computer_store", "electronics"], "aliases": ["electronica", "celulares", "tecnologia", "computadoras", "computacion"] },
+        { "label": "Librería", "group": "shop", "weight": 0.1, "keys": ["books_music_and_video_store", "educational_supply_store"], "aliases": ["librerias", "libros"], "prefixes": ["libreria"] },
+        { "label": "Papelería", "group": "shop", "weight": 0.05, "keys": ["office_supply_store"], "aliases": ["papelerias", "utiles", "utiles escolares", "suministros de oficina"], "prefixes": ["papeleria", "bazar"] },
+        { "label": "Floristería", "group": "shop", "weight": 0.05, "keys": ["flowers_and_gifts_store"], "aliases": ["floristerias", "flores", "regalos"], "prefixes": ["floristeria"] },
+        { "label": "Artículos deportivos", "group": "sport", "weight": 0.05, "keys": ["sporting_goods_store"], "aliases": ["deportes", "deportivos"] },
+        { "label": "Juguetería", "group": "shop", "weight": 0.05, "keys": ["toys_and_games_store"], "aliases": ["jugueterias", "juguetes"], "prefixes": ["jugueteria"] },
+        { "label": "Instrumentos musicales", "group": "shop", "weight": 0.05, "keys": ["musical_instrument_and_pro_audio_store"], "aliases": ["instrumentos", "musica"] },
+        { "label": "Manualidades", "group": "shop", "weight": 0.05, "keys": ["arts_crafts_and_hobby_store"], "aliases": ["arte", "hobbies"] },
+        { "label": "Tienda de cosméticos", "group": "beauty", "weight": 0.05, "keys": ["personal_care_and_beauty_store"], "aliases": ["cosmeticos", "perfumeria", "perfumes", "maquillaje"] },
+        { "label": "Artículos para fiestas", "group": "shop", "weight": 0.05, "keys": ["party_supply_store"], "aliases": ["fiestas", "globos", "cotillon"] },
+        { "label": "Tienda", "group": "shop", "weight": 0.05, "keys": ["shopping", "specialty_store", "second_hand_store", "outlet_store", "souvenir_store", "medical_supply_store", "duty_free_store"], "aliases": ["tiendas", "almacen"], "generic": true },
+        { "label": "Distribuidora", "group": "shop", "weight": 0.05, "keys": ["supplier_or_distributor", "wholesaler"], "aliases": ["distribuidoras", "mayorista", "mayoristas"], "generic": true },
+        { "label": "Marisquería", "group": "food", "weight": 0.15, "keys": ["seafood_restaurant"], "aliases": ["mariscos", "cevicheria", "cevicherias", "ceviche", "encebollado", "cangrejo"], "prefixes": ["marisqueria", "cevicheria"] },
+        { "label": "Pizzería", "group": "food", "weight": 0.15, "keys": ["pizza_restaurant"], "aliases": ["pizzerias", "pizza", "pizzas"], "prefixes": ["pizzeria"] },
+        { "label": "Hamburguesas", "group": "food", "weight": 0.15, "keys": ["burger_restaurant"], "aliases": ["hamburguesa", "hamburgueseria", "burger", "burgers"] },
+        { "label": "Parrillada", "group": "food", "weight": 0.15, "keys": ["barbecue_restaurant", "steakhouse", "bar_and_grill_restaurant"], "aliases": ["parrilladas", "parrilla", "asados", "carnes", "steakhouse"] },
+        { "label": "Asadero de pollos", "group": "food", "weight": 0.15, "keys": ["chicken_restaurant", "chicken_wings_restaurant"], "aliases": ["asadero", "asaderos", "pollo", "pollos", "pollo asado", "alitas"], "prefixes": ["asadero"] },
+        { "label": "Chifa", "group": "food", "weight": 0.15, "keys": ["chinese_restaurant"], "aliases": ["chifas", "comida china", "chino"], "prefixes": ["chifa"] },
+        { "label": "Comida japonesa", "group": "food", "weight": 0.15, "keys": ["japanese_restaurant", "sushi_restaurant"], "aliases": ["sushi", "japonesa", "japones"] },
+        { "label": "Comida italiana", "group": "food", "weight": 0.15, "keys": ["italian_restaurant"], "aliases": ["italiana", "italiano", "pasta"] },
+        { "label": "Comida mexicana", "group": "food", "weight": 0.15, "keys": ["mexican_restaurant"], "aliases": ["mexicana", "mexicano", "tacos", "burritos"] },
+        { "label": "Comida rápida", "group": "food", "weight": 0.15, "keys": ["fast_food_restaurant", "sandwich_shop", "food_truck_stand", "hot_dog_restaurant"], "aliases": ["comida rapida", "fast food", "sanduches", "hot dogs"] },
+        { "label": "Panadería", "group": "food", "weight": 0.1, "keys": ["bakery", "patisserie_cake_shop", "donut_shop"], "aliases": ["panaderias", "pan", "pasteleria", "pastelerias"], "prefixes": ["panaderia", "pasteleria"] },
+        { "label": "Heladería", "group": "food", "weight": 0.1, "keys": ["ice_cream_shop", "frozen_yogurt_shop", "gelato_shop"], "aliases": ["heladerias", "helados", "helado"], "prefixes": ["heladeria"] },
+        { "label": "Postres", "group": "food", "weight": 0.1, "keys": ["dessert_shop", "cupcake_shop", "candy_store", "chocolatier"], "aliases": ["dulces", "tortas", "dulceria", "chocolates"] },
+        { "label": "Cafetería", "group": "cafe", "weight": 0.15, "keys": ["cafe", "coffee_shop", "non_alcoholic_beverage_venue", "tea_room"], "aliases": ["cafeterias", "cafe", "cafes", "coffee"], "prefixes": ["cafeteria", "cafe"] },
+        { "label": "Jugos", "group": "cafe", "weight": 0.1, "keys": ["smoothie_juice_bar"], "aliases": ["juguerias", "jugueria", "batidos"] },
+        { "label": "Comedor", "group": "food", "weight": 0.1, "keys": ["casual_eatery", "diner", "delicatessen", "food_service", "soup_restaurant"], "aliases": ["comedores", "almuerzos", "comida", "picanteria"], "generic": true },
+        { "label": "Restaurante", "group": "food", "weight": 0.15, "keys": ["restaurant", "food_and_drink"], "aliases": ["restaurantes", "comida", "comer", "almuerzo", "cena"], "generic": true, "prefixes": ["restaurante", "restaurant"] },
+        { "label": "Bar", "group": "bar", "weight": 0.1, "keys": ["bar", "lounge", "alcoholic_beverage_venue", "gastropub", "tapas_bar", "brewery", "winery", "pub", "cocktail_bar"], "aliases": ["bares", "pub", "cerveza", "cerveceria", "karaoke"], "prefixes": ["bar"] },
+        { "label": "Discoteca", "group": "bar", "weight": 0.15, "keys": ["dance_club", "nightlife_venue"], "aliases": ["discotecas", "disco", "discos", "club nocturno"], "prefixes": ["discoteca", "disco", "nightclub"] },
+        { "label": "Música en vivo", "group": "bar", "weight": 0.1, "keys": ["music_venue"], "aliases": ["conciertos", "musica en vivo"] },
+        { "label": "Club nocturno", "group": "bar", "weight": 0.05, "keys": ["adult_entertainment_venue"], "aliases": ["night club", "nightclub"] },
+        { "label": "Hotel", "group": "hotel", "weight": 0.3, "keys": ["hotel", "resort"], "aliases": ["hoteles", "hospedaje", "alojamiento"], "prefixes": ["hotel"] },
+        { "label": "Hostal", "group": "hotel", "weight": 0.15, "keys": ["lodging", "hostel", "bed_and_breakfast", "private_lodging", "lodge", "cottage", "service_apartment", "motel"], "aliases": ["hostales", "hospedaje", "alojamiento", "motel", "moteles"], "prefixes": ["hostal", "hostel", "motel"] },
+        { "label": "Camping", "group": "hotel", "weight": 0.1, "keys": ["campground"], "aliases": ["acampar"] },
+        { "label": "Iglesia", "group": "worship", "weight": 0.3, "keys": ["christian_place_of_worship", "church_cathedral", "church", "place_of_worship"], "aliases": ["iglesias", "templo", "templos", "capilla", "catedral", "santuario", "basilica"], "prefixes": ["iglesia", "capilla", "catedral", "santuario", "basilica"] },
+        { "label": "Templo", "group": "worship", "weight": 0.3, "keys": ["jewish_place_of_worship", "buddhist_place_of_worship", "hindu_place_of_worship", "mosque"], "aliases": ["templos", "sinagoga", "mezquita"] },
+        { "label": "Organización religiosa", "group": "worship", "weight": 0.1, "keys": ["religious_organization"], "aliases": ["ministerio", "misiones"], "generic": true },
+        { "label": "Unidad educativa", "group": "school", "weight": 0.3, "keys": ["place_of_learning", "school", "private_school", "public_school", "religious_school", "high_school", "middle_school", "education", "educational_facility"], "aliases": ["colegio", "colegios", "escuela", "escuelas", "unidades educativas", "liceo"], "generic": true, "prefixes": ["unidad educativa", "colegio", "liceo"] },
+        { "label": "Escuela", "group": "school", "weight": 0.25, "keys": ["elementary_school"], "aliases": ["escuelas", "primaria"], "prefixes": ["escuela"] },
+        { "label": "Guardería", "group": "school", "weight": 0.15, "keys": ["preschool", "child_care_and_day_care"], "aliases": ["guarderias", "kinder", "jardin de infantes", "inicial", "cdi"], "prefixes": ["guarderia", "centro de desarrollo infantil"] },
+        { "label": "Academia", "group": "school", "weight": 0.1, "keys": ["specialty_school", "educational_service", "tutoring_service", "driving_school", "language_school"], "aliases": ["academias", "cursos", "instituto", "institutos", "clases"], "prefixes": ["academia", "instituto"] },
+        { "label": "Centro de investigación", "group": "school", "weight": 0.2, "keys": ["research_institute"], "aliases": ["investigacion", "instituto"] },
+        { "label": "Salón de belleza", "group": "beauty", "weight": 0.05, "keys": ["personal_or_beauty_service", "beauty_salon", "hair_salon", "nail_salon", "skin_care_and_makeup", "makeup_artist", "hair_removal", "laser_hair_removal", "tanning_salon"], "aliases": ["peluqueria", "peluquerias", "salon", "unas", "estetica", "belleza"], "prefixes": ["salon de belleza", "peluqueria", "estetica"] },
+        { "label": "Barbería", "group": "beauty", "weight": 0.05, "keys": ["barber"], "aliases": ["barberias", "barbero", "peluqueria"], "prefixes": ["barberia", "barber"] },
+        { "label": "Tatuajes", "group": "beauty", "weight": 0.05, "keys": ["tattoo_and_piercing"], "aliases": ["tatuaje", "tattoo", "piercing"] },
+        { "label": "Spa", "group": "beauty", "weight": 0.05, "keys": ["wellness_service", "spa", "day_spa", "medical_spa", "health_spa", "massage_therapy"], "aliases": ["spas", "masajes", "bienestar"], "prefixes": ["spa"] },
+        { "label": "Gimnasio", "group": "sport", "weight": 0.15, "keys": ["gym", "fitness_studio"], "aliases": ["gimnasios", "gym", "crossfit"], "prefixes": ["gimnasio", "gym"] },
+        { "label": "Cancha", "group": "sport", "weight": 0.15, "keys": ["sport_field", "sport_court", "skate_park", "golf_course"], "aliases": ["canchas", "futbol", "indor", "skatepark", "golf"], "prefixes": ["cancha", "canchas"] },
+        { "label": "Piscina", "group": "sport", "weight": 0.15, "keys": ["swimming_pool"], "aliases": ["piscinas", "natacion"], "prefixes": ["piscina", "piscinas"] },
+        { "label": "Club deportivo", "group": "sport", "weight": 0.15, "keys": ["sport_or_recreation_club", "sport_league", "sport_team", "sports_and_recreation", "sport_or_fitness_facility"], "aliases": ["club", "clubes", "deportes", "deportivo"], "generic": true, "prefixes": ["club deportivo", "liga deportiva", "complejo deportivo"] },
+        { "label": "Salón de eventos", "group": "service", "weight": 0.05, "keys": ["event_or_party_service", "event_venue", "party_and_event_planning", "caterer", "wedding_planning"], "aliases": ["eventos", "fiestas", "recepciones", "salon de eventos"], "generic": true, "prefixes": ["salon de eventos", "salon de recepciones", "centro de eventos", "centro de convenciones"] },
+        { "label": "Oficina pública", "group": "gov", "weight": 0.3, "keys": ["government_office", "government_department", "community_and_government", "public_facility"], "aliases": ["municipio", "gobierno", "registro civil", "oficinas publicas", "ministerio"], "generic": true, "prefixes": ["municipio", "registro civil", "ministerio", "gobernacion", "prefectura"] },
+        { "label": "Policía", "group": "gov", "weight": 0.25, "keys": ["police_station", "public_safety_service"], "aliases": ["policia", "upc", "comisaria"], "prefixes": ["upc", "policia", "unidad de policia"] },
+        { "label": "Bomberos", "group": "gov", "weight": 0.25, "keys": ["fire_station"], "aliases": ["bombero", "cuartel de bomberos"], "prefixes": ["bomberos", "cuerpo de bomberos", "benemerito cuerpo de bomberos"] },
+        { "label": "Juzgado", "group": "gov", "weight": 0.2, "keys": ["courthouse"], "aliases": ["juzgados", "corte", "fiscalia", "judicatura"], "prefixes": ["juzgado", "fiscalia", "corte", "unidad judicial"] },
+        { "label": "Embajada", "group": "gov", "weight": 0.2, "keys": ["embassy"], "aliases": ["embajadas", "consulado", "consulados"], "prefixes": ["embajada", "consulado"] },
+        { "label": "Instalación militar", "group": "gov", "weight": 0.2, "keys": ["military_site"], "aliases": ["militar", "cuartel", "base naval"] },
+        { "label": "Cárcel", "group": "gov", "weight": 0.1, "keys": ["jail_or_prison"], "aliases": ["carcel", "penitenciaria", "prision"] },
+        { "label": "Organización social", "group": "gov", "weight": 0.1, "keys": ["social_or_community_service", "community_center", "civic_organization", "youth_organization", "family_service", "food_bank", "labor_union", "political_organization", "environmental_or_ecological_service", "senior_living_facility"], "aliases": ["fundacion", "fundaciones", "comunidad", "asociacion"], "generic": true, "prefixes": ["fundacion", "asociacion"] },
+        { "label": "Servicio público", "group": "gov", "weight": 0.15, "keys": ["public_utility", "electric_utility_provider", "water_utility_provider", "b2b_energy_and_utility_service", "public_restroom"], "aliases": ["luz", "agua", "electricidad", "cnel", "interagua"] },
+        { "label": "Abogado", "group": "service", "weight": 0.05, "keys": ["attorney_or_law_firm", "legal_service"], "aliases": ["abogados", "notaria", "notarias", "legal", "juridico"], "prefixes": ["abogado", "abogados", "estudio juridico", "notaria"] },
+        { "label": "Inmobiliaria", "group": "service", "weight": 0.05, "keys": ["real_estate_service"], "aliases": ["inmobiliarias", "bienes raices", "arriendos", "venta de casas"], "prefixes": ["inmobiliaria"] },
+        { "label": "Imprenta", "group": "service", "weight": 0.05, "keys": ["printing_service"], "aliases": ["imprentas", "copias", "impresiones", "copiadora", "grafica"], "prefixes": ["imprenta", "copiadora"] },
+        { "label": "Lavandería", "group": "service", "weight": 0.05, "keys": ["laundry_service"], "aliases": ["lavanderias", "tintoreria"], "prefixes": ["lavanderia"] },
+        { "label": "Servicio técnico", "group": "service", "weight": 0.05, "keys": ["technical_service", "appliance_repair_service"], "aliases": ["reparacion", "reparaciones", "tecnico"] },
+        { "label": "Servicios del hogar", "group": "service", "weight": 0.05, "keys": ["home_service", "hvac_service", "home_security", "home_cleaning", "key_and_locksmith", "pest_control_service", "sewing_and_alterations"], "aliases": ["hogar", "cerrajero", "cerrajeria", "aire acondicionado", "costurera", "fumigacion"] },
+        { "label": "Construcción", "group": "service", "weight": 0.05, "keys": ["building_or_construction_service", "contractor"], "aliases": ["constructora", "constructoras"] },
+        { "label": "Alquiler", "group": "service", "weight": 0.05, "keys": ["rental_service", "recreational_equipment_rental"], "aliases": ["alquileres", "renta"] },
+        { "label": "Bodega", "group": "service", "weight": 0.05, "keys": ["storage_facility"], "aliases": ["bodegas", "almacenamiento"] },
+        { "label": "Fábrica", "group": "service", "weight": 0.05, "keys": ["manufacturer", "b2b_industrial_and_machine_service", "commercial_industrial"], "aliases": ["fabricas", "industria", "industrias", "planta"], "generic": true },
+        { "label": "Medios", "group": "service", "weight": 0.1, "keys": ["media_service", "radio_station", "television_station"], "aliases": ["radio", "television", "canal", "periodico"] },
+        { "label": "Agencia de publicidad", "group": "service", "weight": 0.05, "keys": ["advertising_agency", "marketing_agency", "internet_marketing_service", "social_media_agency"], "aliases": ["publicidad", "marketing"] },
+        { "label": "Contador", "group": "service", "weight": 0.05, "keys": ["accountant"], "aliases": ["contadores", "contabilidad"] },
+        { "label": "Diseño", "group": "service", "weight": 0.05, "keys": ["design_service", "interior_design"], "aliases": ["disenador", "arquitectura"] },
+        { "label": "Empresa", "group": "service", "weight": 0.05, "keys": ["corporate_or_business_office", "professional_service", "b2b_service", "b2b_office_and_professional_service", "b2b_science_and_technology_service", "agricultural_service", "services_and_business"], "aliases": ["empresas", "oficina", "oficinas"], "generic": true },
+        { "label": "Servicios", "group": "service", "weight": 0.05, "keys": ["lifestyle_services", "security_service", "psychic_advising"], "aliases": ["servicio"], "generic": true },
+        { "label": "Granja", "group": "park", "weight": 0.05, "keys": ["farm", "agriculture", "fish_farm", "livestock_breeder"], "aliases": ["granjas", "hacienda", "camaronera"] },
+        { "label": "Lugar", "group": "place", "weight": 0.05, "keys": ["geographic_entities", "land_feature", "built_feature"], "aliases": ["lugares", "sitio"], "generic": true }
+      ],
+      "aliases": {
+        "Municipalidad de Guayaquil": ["Palacio Municipal", "Municipio de Guayaquil", "Alcaldía de Guayaquil"],
+        "Ilustre Municipalidad de Guayaquil": ["Palacio Municipal", "Municipio de Guayaquil", "Alcaldía de Guayaquil"]
+      }
+    },
+    "osmPlaces": {
+      "select": [
+        "nwr[\"name\"][\"amenity\"]",
+        "nwr[\"name\"][\"shop\"]",
+        "nwr[\"name\"][\"office\"]",
+        "nwr[\"name\"][\"tourism\"]",
+        "nwr[\"name\"][\"leisure\"]",
+        "nwr[\"name\"][\"healthcare\"]",
+        "nwr[\"name\"][\"historic\"]",
+        "nwr[\"name\"][\"craft\"]",
+        "nwr[\"name\"][\"club\"]",
+        "nwr[\"name\"][\"aeroway\"~\"^(aerodrome|terminal)$\"]",
+        "nwr[\"name\"][\"railway\"=\"station\"]",
+        "nwr[\"name\"][\"public_transport\"=\"station\"]",
+        "nwr[\"name\"][\"man_made\"~\"^(lighthouse|tower|pier)$\"]",
+        "nwr[\"name\"][\"landuse\"~\"^(retail|commercial)$\"]",
+        "nwr[\"name\"][\"building\"~\"^(cathedral|church|chapel|hospital|university|college|school|stadium|train_station|government|civic|public|museum|mosque|temple|retail|commercial)$\"]"
+      ],
+      "keys": ["amenity", "healthcare", "shop", "tourism", "leisure", "office", "historic", "craft", "club", "aeroway", "railway", "public_transport", "man_made", "landuse", "building"],
+      "skip": [
+        "amenity=drinking_water", "amenity=post_box", "amenity=waste_basket", "amenity=waste_disposal", "amenity=waste_transfer_station", "amenity=recycling",
+        "amenity=bicycle_parking", "amenity=parking_space", "amenity=parking_entrance", "amenity=bench", "amenity=toilets", "amenity=shelter",
+        "amenity=fixme", "amenity=nameplate", "amenity=payment_terminal", "amenity=vending_machine", "amenity=watering_place", "amenity=water_point",
+        "amenity=polling_station", "amenity=car_pooling", "amenity=bus_stop", "tourism=information", "historic=traffic_signals", "historic=boundary_stone",
+        "historic=milestone", "leisure=fitness_station", "leisure=bleachers", "leisure=slipway", "shop=no", "shop=vacant"
+      ],
+      "tags": {
+        "amenity=fast_food": "Comida rápida", "amenity=bank": "Banco", "amenity=dentist": "Dentista", "amenity=fuel": "Gasolinera",
+        "amenity=clinic": "Clínica", "amenity=police": "Policía", "amenity=veterinary": "Veterinaria", "amenity=internet_cafe": "Servicios",
+        "amenity=doctors": "Consultorio médico", "amenity=university": "Universidad", "amenity=college": "Universidad",
+        "amenity=community_centre": "Organización social", "amenity=ferry_terminal": "Muelle", "amenity=ice_cream": "Heladería",
+        "amenity=nightclub": "Discoteca", "amenity=social_facility": "Organización social", "amenity=car_rental": "Alquiler",
+        "amenity=marketplace": "Mercado", "amenity=post_office": "Envíos", "amenity=theatre": "Teatro", "amenity=childcare": "Guardería",
+        "amenity=kindergarten": "Guardería", "amenity=events_venue": "Salón de eventos", "amenity=love_hotel": "Hostal",
+        "amenity=money_transfer": "Envío de dinero", "amenity=social_centre": "Organización social", "amenity=stripclub": "Club nocturno",
+        "amenity=dojo": "Gimnasio", "amenity=townhall": "Oficina pública", "amenity=studio": "Medios", "amenity=music_school": "Academia",
+        "amenity=food_court": "Restaurante", "amenity=fountain": "Monumento", "amenity=taxi": "Taxi", "amenity=veterinary_pharmacy": "Veterinaria",
+        "amenity=biergarten": "Bar", "amenity=bureau_de_change": "Servicios financieros", "amenity=vehicle_inspection": "Servicio público",
+        "amenity=monastery": "Iglesia", "amenity=arts_centre": "Centro cultural", "amenity=funeral_hall": "Servicios", "amenity=prison": "Cárcel",
+        "amenity=planetarium": "Museo", "amenity=conference_centre": "Salón de eventos", "amenity=research_institute": "Centro de investigación",
+        "amenity=animal_shelter": "Veterinaria", "amenity=coworking_space": "Empresa", "amenity=trade_school": "Academia",
+        "amenity=dancing_school": "Academia", "amenity=training": "Academia", "amenity=casino": "Salón de eventos", "amenity=gambling": "Salón de eventos",
+        "shop=yes": "Tienda", "shop=convenience": "Tienda de víveres", "shop=car_repair": "Taller mecánico", "shop=hardware": "Ferretería",
+        "shop=hairdresser": "Salón de belleza", "shop=car": "Concesionaria", "shop=clothes": "Tienda de ropa", "shop=car_parts": "Repuestos",
+        "shop=beauty": "Salón de belleza", "shop=trade": "Distribuidora", "shop=tyres": "Vulcanizadora", "shop=furniture": "Mueblería",
+        "shop=variety_store": "Tienda", "shop=stationery": "Papelería", "shop=laundry": "Lavandería", "shop=optician": "Óptica", "shop=kiosk": "Tienda",
+        "shop=repair": "Servicio técnico", "shop=computer": "Electrónica", "shop=mobile_phone": "Electrónica", "shop=travel_agency": "Agencia de viajes",
+        "shop=copyshop": "Imprenta", "shop=paint": "Ferretería", "shop=shoes": "Zapatería", "shop=printing": "Imprenta", "shop=baby_goods": "Tienda",
+        "shop=gift": "Tienda", "shop=butcher": "Carnicería", "shop=bicycle": "Artículos deportivos", "shop=confectionery": "Postres",
+        "shop=funeral_directors": "Servicios", "shop=alcohol": "Licorería", "shop=mall": "Centro comercial", "shop=shopping_centre": "Centro comercial",
+        "shop=greengrocer": "Tienda de víveres", "shop=general": "Tienda", "shop=books": "Librería", "shop=motorcycle": "Concesionaria",
+        "shop=electrical": "Ferretería", "shop=medical_supply": "Tienda", "shop=bed": "Mueblería", "shop=jewelry": "Joyería",
+        "shop=sports": "Artículos deportivos", "shop=photo": "Servicios", "shop=pet": "Tienda de mascotas", "shop=florist": "Floristería",
+        "shop=dry_cleaning": "Lavandería", "shop=appliance": "Electrodomésticos", "shop=video": "Electrónica", "shop=ice_cream": "Heladería",
+        "shop=pastry": "Panadería", "shop=wholesale": "Distribuidora", "shop=motorcycle_repair": "Taller mecánico", "shop=outdoor": "Artículos deportivos",
+        "shop=tailor": "Tienda de ropa", "shop=toys": "Juguetería", "shop=beverages": "Distribuidora", "shop=chemist": "Farmacia",
+        "shop=flooring": "Materiales de construcción", "shop=doityourself": "Ferretería", "shop=boutique": "Tienda de ropa", "shop=gas": "Distribuidora",
+        "shop=pawnbroker": "Servicios financieros", "shop=building_materials": "Materiales de construcción", "shop=massage": "Spa",
+        "shop=food": "Tienda de víveres", "shop=bathroom_furnishing": "Materiales de construcción", "shop=musical_instrument": "Instrumentos musicales",
+        "shop=construction": "Construcción", "shop=tattoo": "Tatuajes", "shop=fashion": "Tienda de ropa", "shop=seafood": "Tienda de víveres",
+        "shop=deli": "Tienda de víveres", "shop=fabric": "Manualidades", "shop=party": "Artículos para fiestas", "shop=cosmetics": "Tienda de cosméticos",
+        "shop=perfumery": "Tienda de cosméticos", "shop=ticket": "Agencia de viajes", "shop=kitchen": "Mueblería", "shop=art": "Galería de arte",
+        "shop=office_supplies": "Papelería", "shop=interior_decoration": "Mueblería", "shop=money_lender": "Servicios financieros",
+        "shop=fishing": "Artículos deportivos", "shop=supermarket": "Supermercado", "shop=department_store": "Tienda por departamentos",
+        "office=company": "Empresa", "office=government": "Oficina pública", "office=administrative": "Oficina pública", "office=telecommunication": "Empresa",
+        "office=medical": "Consultorio médico", "office=educational_institution": "Academia", "office=foundation": "Organización social",
+        "office=notary": "Abogado", "office=insurance": "Seguros", "office=research": "Centro de investigación", "office=lawyer": "Abogado",
+        "office=estate_agent": "Inmobiliaria", "office=ngo": "Organización social", "office=religion": "Organización religiosa",
+        "office=financial": "Servicios financieros", "office=diplomatic": "Embajada", "office=newspaper": "Medios",
+        "office=construction_company": "Construcción", "office=union": "Organización social", "office=political_party": "Organización social",
+        "office=water_utility": "Servicio público", "office=energy_supplier": "Servicio público", "office=university": "Universidad",
+        "office=employment_agency": "Servicios", "office=charity": "Organización social", "office=association": "Organización social",
+        "tourism=guest_house": "Hostal", "tourism=apartment": "Hostal", "tourism=chalet": "Hostal", "tourism=camp_site": "Camping",
+        "tourism=caravan_site": "Camping", "tourism=artwork": "Monumento", "tourism=gallery": "Galería de arte", "tourism=zoo": "Zoológico",
+        "tourism=theme_park": "Parque de diversiones",
+        "leisure=pitch": "Cancha", "leisure=sports_centre": "Club deportivo", "leisure=fitness_centre": "Gimnasio", "leisure=dance": "Academia",
+        "leisure=water_park": "Parque de diversiones", "leisure=stadium": "Estadio", "leisure=sports_hall": "Club deportivo", "leisure=track": "Cancha",
+        "leisure=amusement_arcade": "Parque de diversiones", "leisure=indoor_play": "Juegos infantiles", "leisure=nature_reserve": "Parque",
+        "leisure=beach_resort": "Playa", "leisure=recreation_ground": "Parque", "leisure=common": "Parque",
+        "healthcare=hospital": "Hospital", "healthcare=clinic": "Clínica", "healthcare=doctor": "Consultorio médico", "healthcare=dentist": "Dentista",
+        "healthcare=rehabilitation": "Clínica", "healthcare=laboratory": "Laboratorio clínico", "healthcare=blood_bank": "Laboratorio clínico",
+        "healthcare=birthing_centre": "Clínica", "healthcare=hospice": "Clínica",
+        "historic=memorial": "Monumento", "historic=tomb": "Monumento", "historic=wayside_shrine": "Monumento", "historic=wayside_cross": "Monumento",
+        "club=sport": "Club deportivo",
+        "aeroway=aerodrome": "Aeropuerto", "aeroway=terminal": "Aeropuerto", "railway=station": "Estación de tren",
+        "public_transport=station": "Parada de transporte", "man_made=lighthouse": "Sitio histórico",
+        "landuse=retail": "Centro comercial", "landuse=commercial": "Empresa",
+        "building=cathedral": "Iglesia", "building=chapel": "Iglesia", "building=university": "Universidad", "building=college": "Universidad",
+        "building=stadium": "Estadio", "building=train_station": "Estación de tren", "building=government": "Oficina pública",
+        "building=civic": "Oficina pública", "building=public": "Oficina pública", "building=museum": "Museo", "building=mosque": "Templo",
+        "building=temple": "Templo", "building=retail": "Tienda", "building=commercial": "Empresa"
+      },
+      "defaults": {
+        "amenity": "Lugar", "healthcare": "Consultorio médico", "shop": "Tienda", "tourism": "Lugar", "leisure": "Parque", "office": "Empresa",
+        "historic": "Sitio histórico", "craft": "Servicios", "club": "Organización social", "man_made": "Lugar", "building": "Lugar"
+      },
+      "altTags": ["alt_name", "short_name", "official_name", "old_name", "loc_name", "brand"],
+      "confidence": 0.6,
+      "notable": { "tags": ["wikidata", "wikipedia"], "weight": 0.2 },
+      "match": {
+        "meters": 1500,
+        "farMeters": 8000,
+        "farCategories": ["Centro comercial", "Hospital", "Aeropuerto", "Estadio", "Universidad", "Museo", "Terminal de buses", "Estación de tren", "Cementerio", "Teatro", "Zoológico", "Oficina pública", "Juzgado", "Embajada"],
+        "containers": ["Centro comercial", "Hospital", "Clínica", "Universidad", "Mercado", "Terminal de buses", "Aeropuerto", "Estadio"],
+        "importantWeight": 0.3,
+        "smallMeters": 400,
+        "chainMeters": 150,
+        "chainCount": 3,
+        "keepMeters": 30,
+        "twinMeters": 50,
+        "twinShare": 0.5,
+        "minCoreTokens": 2,
+        "minWordLength": 2,
+        "ignoreWords": ["Guayaquil", "GYE", "Ecuador", "Guayas"],
+        "genericWords": ["edificio", "local", "oficina", "sucursal", "matriz", "agencia", "grupo", "compania", "cia", "ltda", "servicio", "almacen", "almacenes", "comercial", "comercializadora", "distribuidora", "importadora", "casa", "store", "shop", "muy", "ilustre"]
+      },
+      "dedupeMeters": 150,
+      "reportMeters": 150
+    }
+  },
+  "shops": {
+    "minConfidence": 0.45,
+    "confidenceWeight": 0.2,
+    "frontMeters": 8,
+    "maxNamedPerBuilding": 12,
+    "excludeNamePrefixes": ["dr", "dra", "doctor", "doctora", "lcdo", "lcda", "lic", "abg", "psic", "odont", "od"],
+    "kinds": [
+      { "id": "farmacia", "priority": 1, "categories": ["Farmacia"], "leadingWords": ["FARMACIA", "FARMACIAS", "BOTICA"] },
+      { "id": "supermercado", "priority": 0.95, "categories": ["Supermercado", "Tienda por departamentos"], "leadingWords": ["SUPERMERCADO", "SUPERMERCADOS", "COMISARIATO"] },
+      { "id": "banco", "priority": 0.9, "categories": ["Banco", "Envío de dinero"], "leadingWords": ["AGENCIA"] },
+      { "id": "comida", "priority": 0.85, "categories": ["Restaurante", "Marisquería", "Pizzería", "Hamburguesas", "Parrillada", "Asadero de pollos", "Chifa", "Comida japonesa", "Comida italiana", "Comida mexicana", "Comida rápida", "Comedor"], "leadingWords": ["RESTAURANTE", "RESTAURANT", "RESTAURANTES", "COMEDOR", "MARISQUERIA", "CEVICHERIA", "PICANTERIA", "ASADERO", "PIZZERIA", "CHIFA", "PARRILLADA"] },
+      { "id": "cafeteria", "priority": 0.8, "categories": ["Cafetería", "Jugos", "Panadería", "Heladería", "Postres"], "leadingWords": ["CAFETERIA", "CAFE", "PANADERIA", "PASTELERIA", "HELADERIA", "HELADERIAS", "DULCERIA"] },
+      { "id": "viveres", "priority": 0.8, "categories": ["Tienda de víveres", "Carnicería", "Licorería", "Mercado"], "leadingWords": ["TIENDA", "VIVERES", "DESPENSA", "MINIMARKET", "MICROMERCADO", "ABARROTES", "LICORERIA", "TERCENA", "CARNICERIA"] },
+      { "id": "ferreteria", "priority": 0.75, "categories": ["Ferretería", "Materiales de construcción"], "leadingWords": ["FERRETERIA", "FERRETERIAS"] },
+      { "id": "bar", "priority": 0.7, "categories": ["Bar", "Discoteca", "Música en vivo", "Club nocturno"], "leadingWords": ["BAR", "DISCOTECA", "KARAOKE"] },
+      { "id": "moda", "priority": 0.7, "categories": ["Tienda de ropa", "Zapatería", "Joyería", "Artículos deportivos", "Juguetería"], "leadingWords": ["BOUTIQUE", "ZAPATERIA", "JOYERIA", "CALZADO"] },
+      { "id": "tecnologia", "priority": 0.7, "categories": ["Electrónica", "Electrodomésticos", "Servicio técnico", "Instrumentos musicales"], "leadingWords": [] },
+      { "id": "belleza", "priority": 0.6, "categories": ["Salón de belleza", "Barbería", "Spa", "Tatuajes", "Tienda de cosméticos"], "leadingWords": ["PELUQUERIA", "SALON", "BARBERIA", "SPA", "ESTETICA"] },
+      { "id": "taller", "priority": 0.6, "categories": ["Taller mecánico", "Repuestos", "Vulcanizadora", "Lubricadora", "Lavadora de autos"], "leadingWords": ["LUBRICADORA", "VULCANIZADORA", "LAVADORA", "TECNICENTRO", "REPUESTOS", "AUTOPARTES"] },
+      { "id": "salud", "priority": 0.5, "categories": ["Óptica", "Dentista", "Laboratorio clínico", "Clínica", "Veterinaria"], "leadingWords": ["OPTICA", "OPTICAS", "CLINICA", "CONSULTORIO", "LABORATORIO", "VETERINARIA"] },
+      { "id": "tienda", "priority": 0.5, "categories": ["Tienda", "Mueblería", "Librería", "Papelería", "Floristería", "Manualidades", "Artículos para fiestas", "Tienda de mascotas", "Imprenta", "Lavandería", "Agencia de viajes", "Envíos", "Distribuidora"], "leadingWords": ["BAZAR", "PAPELERIA", "LIBRERIA", "IMPRENTA", "LAVANDERIA", "MUEBLERIA", "FLORISTERIA", "AGENCIA"] }
+    ],
+    "sign": {
+      "maxChars": 20,
+      "separators": [" - ", " – ", " — ", "|", "(", "[", ",", ":", ";", " / "],
+      "dropChars": "\"“”«»‘’´`",
+      "dropWords": ["S.A.", "S.A", "CIA.", "CIA", "LTDA.", "LTDA", "C.LTDA.", "CIA.LTDA.", "CIA.LTDA", "C.A.", "EC"],
+      "leadingWords": ["COMERCIAL", "COMERCIALIZADORA", "IMPORTADORA", "DISTRIBUIDORA", "DISTRIBUIDORES", "CORPORACION", "GRUPO", "INVERSIONES", "NEGOCIOS", "EMPRESA", "ACADEMIA", "CENTRO", "TALLER", "TALLERES", "SERVICIO", "SERVICIOS", "ALMACEN", "ALMACENES", "LOCAL"],
+      "connectors": ["DE", "DEL", "LA", "LAS", "EL", "LOS", "LO", "Y", "E", "O", "U", "EN", "A", "AL", "CON", "POR", "PARA", "MI", "MIS", "TU", "SU", "SUS", "AND", "THE", "OF", "BY", "&", "-", "+", "."],
+      "articles": ["LA", "LAS", "EL", "LOS", "LO", "MI", "MIS", "TU", "SU", "SUS", "THE"],
+      "danglingWords": ["SAN", "SANTA", "SANTO", "STA", "DON", "DOÑA", "DR", "DRA", "BUEN", "GRAN"],
+      "trailingWords": ["ECUADOR", "EC", "GUAYAQUIL", "GYE", "DURAN", "SAMBORONDON", "NORTE", "SUR", "CENTRO", "MATRIZ", "SUCURSAL", "MALL", "MALL DEL SOL", "MALL DEL SUR", "MALL DEL RIO", "MALL EL FORTIN", "CITY MALL", "RIOCENTRO", "RIOCENTRO NORTE", "RIOCENTRO SUR", "RIOCENTRO CEIBOS", "RIOCENTRO ENTRE RIOS", "SAN MARINO", "POLICENTRO", "PLAZA MAYOR"],
+      "trimChars": " .-&'",
+      "minChars": 3,
+      "chainMinPlaces": 2,
+      "brandSuffixes": ["ECUADOR", "EC"]
+    },
+    "facade": { "partyWallMeters": 2.5, "roadMeters": 12 },
+    "commercial": {
+      "zone": { "radius": 110, "minBuildings": 5, "minShare": 0.15 },
+      "street": { "roadMeters": 25, "length": 90, "minBuildings": 3 }
+    },
+    "mixRadius": 110
+  },
+  "spawn": "Malecón 2000",
+  "landmarks": [
+    {
+      "name": "Malecón 2000",
+      "query": "Malecón Simón Bolívar"
+    },
+    {
+      "name": "La Perla",
+      "query": "La Perla rueda moscovita"
+    },
+    {
+      "name": "Faro del Cerro Santa Ana",
+      "query": "Faro del Cerro Santa Ana"
+    },
+    {
+      "name": "Las Peñas",
+      "query": "Numa Pompilio Llona"
+    },
+    {
+      "name": "MAAC",
+      "query": "Museo Antropológico y de Arte Contemporáneo"
+    },
+    {
+      "name": "Puerto Santa Ana",
+      "query": "Puerto Santa Ana"
+    },
+    {
+      "name": "Parque Seminario (iguanas)",
+      "query": "Parque Seminario"
+    },
+    {
+      "name": "Parque Centenario",
+      "query": "Parque Centenario"
+    },
+    {
+      "name": "Torre Morisca",
+      "query": "Torre Morisca"
+    },
+    {
+      "name": "Palacio de Cristal",
+      "query": "Palacio de Cristal"
+    },
+    {
+      "name": "Malecón del Salado",
+      "osm": "W47030982"
+    },
+    {
+      "name": "Urdesa",
+      "query": "Urdesa"
+    },
+    {
+      "name": "Alborada",
+      "query": "Alborada"
+    },
+    {
+      "name": "Parque Samanes",
+      "osm": "W177730448"
+    },
+    {
+      "name": "Estadio Monumental",
+      "query": "Estadio Monumental Isidro Romero Carbo"
+    },
+    {
+      "name": "Estadio Capwell",
+      "query": "Estadio George Capwell"
+    },
+    {
+      "name": "Aeropuerto",
+      "query": "Aeropuerto Internacional José Joaquín de Olmedo"
+    },
+    {
+      "name": "Terminal Terrestre",
+      "query": "Terminal Terrestre de Guayaquil - Dr. Jaime Roldós Aguilera"
+    },
+    {
+      "name": "Mall del Sol",
+      "query": "Mall del Sol"
+    },
+    {
+      "name": "Suburbio (Febres Cordero)",
+      "query": "Febres Cordero, Guayaquil"
+    },
+    {
+      "name": "Isla Trinitaria",
+      "query": "Isla Trinitaria"
+    },
+    {
+      "name": "Guasmo",
+      "query": "Guasmo Sur"
+    },
+    {
+      "name": "Puente a la Isla Santay",
+      "query": "Puente Basculante - Guayaquil - Isla Santay"
+    },
+    {
+      "name": "Samborondón (La Puntilla)",
+      "query": "La Puntilla, Samborondón"
+    },
+    {
+      "name": "Puente de la Unidad Nacional",
+      "query": "Puente Rafael Mendoza Avilés"
+    },
+    {
+      "name": "Estación del tren · Durán",
+      "query": "Estación Antigua del Tren - Durán"
+    },
+    {
+      "name": "Durán centro",
+      "osm": "N249423310"
+    }
+  ],
+  "attributions": [
+    "Edificios: Overture Maps Foundation (OpenStreetMap, Google Open Buildings, Microsoft)",
+    "Alturas: Google Open Buildings 2.5D Temporal (CC BY 4.0)",
+    "Árboles: Meta y World Resources Institute, High Resolution Canopy Height Maps v2 (CC BY 4.0)",
+    "Relieve: Copernicus DEM GLO-30 © DLR e.V. 2010-2014 y © Airbus Defence and Space GmbH 2014-2018, provisto bajo COPERNICUS por la Unión Europea y la ESA",
+    "© OpenStreetMap contributors"
+  ],
+  "traffic": {
+    "unit": 0.5,
+    "laneFitTolerance": 0.5,
+    "flow": {
+      "origins": 400,
+      "destinations": 60,
+      "maxTripSeconds": 1800,
+      "demandRadius": 300,
+      "seed": 11
+    },
+    "reverseValues": [
+      "-1"
+    ],
+    "exclude": {
+      "tunnel": [
+        "yes",
+        "building_passage"
+      ],
+      "access": [
+        "no"
+      ],
+      "motor_vehicle": [
+        "no"
+      ],
+      "motorcar": [
+        "no"
+      ],
+      "area": [
+        "yes"
+      ]
+    },
+    "classes": {
+      "motorway": {
+        "speed": 90
+      },
+      "trunk": {
+        "speed": 70
+      },
+      "primary": {
+        "speed": 50
+      },
+      "secondary": {
+        "speed": 50
+      },
+      "tertiary": {
+        "speed": 40
+      },
+      "motorway_link": {
+        "speed": 50
+      },
+      "trunk_link": {
+        "speed": 40
+      },
+      "primary_link": {
+        "speed": 30
+      },
+      "secondary_link": {
+        "speed": 30
+      },
+      "tertiary_link": {
+        "speed": 30
+      },
+      "residential": {
+        "speed": 30
+      },
+      "unclassified": {
+        "speed": 30
+      },
+      "road": {
+        "speed": 25
+      },
+      "living_street": {
+        "speed": 15
+      }
+    }
+  },
+  "walks": {
+    "unit": 0.5,
+    "paths": [
+      "footway",
+      "pedestrian",
+      "path",
+      "steps"
+    ],
+    "steps": [
+      "steps"
+    ],
+    "exclude": {
+      "tunnel": [
+        "yes",
+        "building_passage"
+      ],
+      "foot": [
+        "no",
+        "private"
+      ],
+      "access": [
+        "no",
+        "private"
+      ],
+      "area": [
+        "yes"
+      ]
+    },
+    "minCornerDeg": 15,
+    "maxTrim": 15,
+    "quays": {
+      "link": 25,
+      "spacing": 45,
+      "minLength": 30,
+      "minPiece": 1.5,
+      "kind": "pedestrian",
+      "linkKind": "footway",
+      "linkWidth": 2.5
+    }
+  },
+  "aerialways": {
+    "select": [
+      "way[\"aerialway\"~\"^(gondola|cable_car)$\"]",
+      "nwr[\"aerialway\"=\"station\"]",
+      "node[\"aerialway\"=\"pylon\"]"
+    ],
+    "kinds": {
+      "gondola": {
+        "gauge": 6.2,
+        "catenary": 1200
+      },
+      "cable_car": {
+        "gauge": 12,
+        "catenary": 2500
+      }
+    },
+    "station": {
+      "areaSnap": 3,
+      "buildingMatch": 0.5,
+      "cableHeight": 12,
+      "minCableHeight": 7,
+      "headroom": 1.2,
+      "openHalfLength": 18,
+      "openMaxShare": 0.45
+    },
+    "pylon": {
+      "height": 18,
+      "waterHeight": 28,
+      "heights": {},
+      "minHeight": 12,
+      "maxHeight": 60,
+      "cableBelowTop": 2.5
+    },
+    "clearance": {
+      "step": 4,
+      "ground": 12,
+      "building": 7,
+      "water": 17,
+      "stationApproach": 45,
+      "tolerance": 0.05,
+      "iterations": 400
+    },
+    "buildingMargin": 120,
+    "decimals": 2,
+    "normalDecimals": 4
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "characters": {
+    "human": {
+      "build": {
+        "baseUrl": "https://raw.githubusercontent.com/dustinc555/mygame/6f12ffb2f924af86d910ade13e6e2ba3df8cd3df/assets/vendor/quaternius/universal_base_characters/",
+        "body": "base_characters/Regular_Male_FullBody.gltf",
+        "attachments": ["head_attachments/Hair_SimpleParted.gltf"],
+        "animations": {
+          "url": "https://media.githubusercontent.com/media/EspacioKoop/expediente-legado/d6b6bf432e2f6eb587ecc980756a0a6cb4f752c8/godot/assets/cc0/quaternius_ual/UAL1_Standard.glb",
+          "clips": [
+            "Idle_Loop",
+            "Walk_Loop",
+            "Jog_Fwd_Loop",
+            "Jump_Loop",
+            "Swim_Fwd_Loop",
+            "Swim_Idle_Loop",
+            "Driving_Loop",
+            "Push_Loop"
+          ],
+          "translationBones": ["pelvis"]
+        },
+        "dropAttributes": ["COLOR_0", "COLOR_1", "TEXCOORD_1", "TEXCOORD_2", "TEXCOORD_3"],
+        "textureSize": 1024,
+        "textureFormat": "webp",
+        "textureQuality": 85
+      },
+      "output": "public/models/human.glb",
+      "publicUrl": "models/human.glb",
+      "credit": "Humano: Universal Base Characters y Universal Animation Library de Quaternius (CC0)",
+      "yawOffsetDeg": 180,
+      "animations": {
+        "idle": "Idle_Loop",
+        "walk": "Walk_Loop",
+        "run": "Jog_Fwd_Loop",
+        "jump": "Jump_Loop",
+        "climb": "Swim_Fwd_Loop",
+        "glide": "Push_Loop",
+        "swim": "Swim_Fwd_Loop",
+        "swimIdle": "Swim_Idle_Loop",
+        "drive": "Driving_Loop"
+      },
+      "animationSpeed": {},
+      "strideSpeed": { "walk": 1.25, "run": 3.2, "climb": 1.2, "swim": 0.9 },
+      "maxStrideRate": 1.8,
+      "loopOnce": [],
+      "runThreshold": 2.4,
+      "poses": {
+        "glide": { "pitchDeg": 72, "rise": 0 },
+        "climb": { "pitchDeg": -90, "rise": 0.53 },
+        "swim": { "pitchDeg": 0, "rise": 0.6 },
+        "swimIdle": { "pitchDeg": 0, "rise": 0.54 }
+      },
+      "statureNode": "RegularMale",
+      "headBone": "Head",
+      "tints": { "MI_Hair_1": "#3a2618" },
+      "outfit": {
+        "material": "MI_Regular_Male",
+        "hem": 0.012,
+        "hemShade": 0.82,
+        "grain": 0.07,
+        "grainScale": 260,
+        "pieces": [
+          { "name": "suela", "color": "#ecebe6", "yMin": -1, "yMax": 0.028, "xMax": 9, "collarRadius": 0, "collarDrop": 0, "roughness": 0.7, "normal": 0.05, "inflate": 0.012 },
+          { "name": "zapatillas", "color": "#2b2f36", "yMin": 0.028, "yMax": 0.11, "xMax": 9, "collarRadius": 0, "collarDrop": 0, "roughness": 0.75, "normal": 0.15, "inflate": 0.012 },
+          { "name": "jean", "color": "#2a3850", "yMin": 0.11, "yMax": 1.02, "xMax": 9, "collarRadius": 0, "collarDrop": 0, "roughness": 0.95, "normal": 0.15, "inflate": 0.02 },
+          { "name": "camiseta", "color": "#4a8fba", "yMin": 0.98, "yMax": 1.545, "xMax": 0.36, "collarRadius": 0.075, "collarDrop": 0.045, "roughness": 0.9, "normal": 0.12, "inflate": 0.016 }
+        ]
+      }
+    }
+  },
+  "crowd": {
+    "male": {
+      "build": {
+        "baseUrl": "https://raw.githubusercontent.com/dustinc555/mygame/6f12ffb2f924af86d910ade13e6e2ba3df8cd3df/assets/vendor/quaternius/universal_base_characters/",
+        "body": "base_characters/Regular_Male_FullBody.gltf",
+        "attachments": [
+          "head_attachments/Hair_SimpleParted.gltf",
+          "head_attachments/Hair_Buzzed.gltf",
+          "head_attachments/Hair_SlickBack.gltf",
+          "head_attachments/Hair_Balding.gltf"
+        ],
+        "animations": {
+          "url": "https://media.githubusercontent.com/media/EspacioKoop/expediente-legado/d6b6bf432e2f6eb587ecc980756a0a6cb4f752c8/godot/assets/cc0/quaternius_ual/UAL1_Standard.glb",
+          "clips": ["Walk_Loop", "Walk_Formal_Loop", "Idle_Loop", "Idle_Talking_Loop"],
+          "translationBones": ["pelvis"]
+        },
+        "dropAttributes": ["COLOR_0", "COLOR_1", "TEXCOORD_1", "TEXCOORD_2", "TEXCOORD_3"],
+        "textureSize": 512,
+        "textureFormat": "webp",
+        "textureQuality": 85,
+        "lods": [
+          { "ratio": 0.3, "error": 0.02 },
+          { "ratio": 0.08, "error": 0.08 }
+        ]
+      },
+      "output": "public/models/crowd-male.glb",
+      "publicUrl": "models/crowd-male.glb",
+      "credit": "Humano: Universal Base Characters y Universal Animation Library de Quaternius (CC0)"
+    },
+    "female": {
+      "build": {
+        "baseUrl": "https://raw.githubusercontent.com/dustinc555/mygame/6f12ffb2f924af86d910ade13e6e2ba3df8cd3df/assets/vendor/quaternius/universal_base_characters/",
+        "body": "base_characters/Regular_Female_FullBody.gltf",
+        "attachments": [
+          "head_attachments/Hair_Long.gltf",
+          "head_attachments/Hair_Bob.gltf",
+          "head_attachments/Hair_Buns.gltf"
+        ],
+        "animations": {
+          "url": "https://media.githubusercontent.com/media/EspacioKoop/expediente-legado/d6b6bf432e2f6eb587ecc980756a0a6cb4f752c8/godot/assets/cc0/quaternius_ual/UAL1_Standard.glb",
+          "clips": ["Walk_Loop", "Walk_Formal_Loop", "Idle_Loop", "Idle_Talking_Loop"],
+          "translationBones": ["pelvis"]
+        },
+        "dropAttributes": ["COLOR_0", "COLOR_1", "TEXCOORD_1", "TEXCOORD_2", "TEXCOORD_3"],
+        "textureSize": 512,
+        "textureFormat": "webp",
+        "textureQuality": 85,
+        "lods": [
+          { "ratio": 0.3, "error": 0.02 },
+          { "ratio": 0.08, "error": 0.08 }
+        ]
+      },
+      "output": "public/models/crowd-female.glb",
+      "publicUrl": "models/crowd-female.glb",
+      "credit": "Humano: Universal Base Characters y Universal Animation Library de Quaternius (CC0)"
+    }
+  }
+}

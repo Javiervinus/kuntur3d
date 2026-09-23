@@ -1,0 +1,57 @@
+{
+  "settleSeconds": 6,
+  "longFrameMs": [
+    33,
+    50,
+    100
+  ],
+  "scenarios": [
+    {
+      "name": "centro-quieto",
+      "kind": "orbit",
+      "lat": -2.1897,
+      "lon": -79.8878,
+      "character": "human",
+      "seconds": 6,
+      "orbitRate": 0.35
+    },
+    {
+      "name": "vuelo-rapido",
+      "kind": "glide",
+      "lat": -2.2035,
+      "lon": -79.8905,
+      "character": "human",
+      "altitude": 220,
+      "headingDeg": 20,
+      "speedIndex": 3,
+      "seconds": 14
+    },
+    {
+      "name": "manejo",
+      "kind": "drive",
+      "lat": -2.18979,
+      "lon": -79.88777,
+      "character": "human",
+      "seconds": 10,
+      "searchRadius": 200
+    },
+    {
+      "name": "llegada-duran",
+      "kind": "arrive",
+      "lat": -2.1717,
+      "lon": -79.8305,
+      "character": "human",
+      "seconds": 8,
+      "orbitRate": 0.2
+    },
+    {
+      "name": "puente",
+      "kind": "orbit",
+      "lat": -2.16025,
+      "lon": -79.85271,
+      "character": "human",
+      "seconds": 6,
+      "orbitRate": 0.35
+    }
+  ]
+}

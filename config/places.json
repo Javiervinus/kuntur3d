@@ -1,0 +1,859 @@
+{
+  "categories": [
+    {
+      "id": "malecon",
+      "label": "Malecón y río"
+    },
+    {
+      "id": "centro",
+      "label": "Centro histórico"
+    },
+    {
+      "id": "estadios",
+      "label": "Estadios"
+    },
+    {
+      "id": "transporte",
+      "label": "Transporte"
+    },
+    {
+      "id": "barrios",
+      "label": "Barrios y sectores"
+    }
+  ],
+  "landmarkCategories": {
+    "Urdesa": "barrios",
+    "Alborada": "barrios",
+    "Parque Samanes": "barrios",
+    "Aeropuerto": "transporte",
+    "Terminal Terrestre": "transporte",
+    "Mall del Sol": "barrios",
+    "Suburbio (Febres Cordero)": "barrios",
+    "Isla Trinitaria": "barrios",
+    "Guasmo": "barrios",
+    "Samborondón (La Puntilla)": "barrios",
+    "Durán centro": "barrios"
+  },
+  "places": [
+    {
+      "id": "malecon-2000",
+      "name": "Malecón 2000",
+      "kicker": "Malecón · Río Guayas",
+      "category": "malecon",
+      "year": "1999",
+      "text": "El viejo Malecón Simón Bolívar renació con el proyecto Malecón 2000, cuya primera etapa abrió el 9 de octubre de 1999 con aportes de unos 47.000 donantes. Son 2,5 km de jardines, monumentos, museos y muelles junto al Guayas, que reciben en promedio 1,8 millones de visitas al mes.",
+      "fact": "Antes de 1820 este borde del río se llamaba Calle de la Orilla; una ordenanza municipal de 1936 lo bautizó Malecón Simón Bolívar.",
+      "sources": [
+        "https://guayaquil.gob.ec/malecon-cumple-anos-visitas/",
+        "https://www.expreso.ec/guayaquil/2-millones-personas-pisan-malecon-2000-mes-216389.html",
+        "https://es.wikipedia.org/wiki/Malec%C3%B3n_Sim%C3%B3n_Bol%C3%ADvar"
+      ],
+      "anchor": {
+        "landmark": "Malecón 2000"
+      },
+      "height": 14,
+      "radius": 110,
+      "photo": {
+        "file": "File:Malecón 2000 en septiembre de 2025.jpg"
+      }
+    },
+    {
+      "id": "la-perla",
+      "name": "La Perla",
+      "kicker": "Noria · Malecón 2000",
+      "category": "malecon",
+      "year": "2016",
+      "text": "Desde octubre de 2016 gira junto al Guayas esta noria de 57 metros. Sus 36 cabinas con aire acondicionado llevan hasta seis personas cada una, y una vuelta de unos 12 minutos alcanza para ver desde arriba el río, el cerro Santa Ana y el centro.",
+      "fact": "Al abrir, fue presentada como la primera rueda gigante del Ecuador.",
+      "sources": [
+        "https://www.elcomercio.com/actualidad/ecuador/guayaquil-inauguracion-ruedamoscovita-perla-malecon/",
+        "https://www.guayaquilsigloxxi.com/obras_destacadas.php?id=1",
+        "https://www.eltelegrafo.com.ec/noticias/guayaquil/1/los-guayaquilenos-podran-disfrutar-la-perla-desde-hoy",
+        "https://es.wikipedia.org/wiki/La_Perla_(Guayaquil)",
+        "https://www.boonedam.com/es/inspiracion/referencias/la-perla-ferris-wheel"
+      ],
+      "anchor": {
+        "landmark": "La Perla"
+      },
+      "height": 64,
+      "radius": 70,
+      "photo": {
+        "file": "File:La perla.jpg",
+        "focus": [
+          50,
+          30
+        ]
+      }
+    },
+    {
+      "id": "rio-guayas",
+      "name": "Río Guayas y sus lechuguines",
+      "kicker": "Río · Estuario",
+      "category": "malecon",
+      "year": "",
+      "text": "El Guayas nace frente a La Puntilla, donde se juntan el Daule y el Babahoyo, y corre hacia el golfo de Guayaquil. Es un río de marea: según la hora, su corriente baja hacia el mar o el agua salada entra tierra adentro. Por él pasan los lechuguines, islas de jacinto de agua que bajan de la parte alta de la cuenca.",
+      "fact": "El lechuguín flota gracias a bulbos llenos de aire en los pecíolos de sus hojas; crassipes, su nombre científico, significa «de pies gruesos».",
+      "sources": [
+        "https://es.wikipedia.org/wiki/R%C3%ADo_Guayas",
+        "https://www.eluniverso.com/noticias/seguridad/ferry-entre-guayaquil-samborondon-y-duran-arquitecto-plantea-aprovechar-el-rio-para-aliviar-la-movilidad-nota/",
+        "https://www.primicias.ec/noticias/guayaquil/marea-alta-rio-guayas-11marzo/"
+      ],
+      "anchor": {
+        "lat": -2.188531,
+        "lon": -79.876233
+      },
+      "height": 12,
+      "radius": 150,
+      "photo": {
+        "file": "File:En la estación del Ferrocarril de Durán (6881139247).jpg"
+      }
+    },
+    {
+      "id": "hemiciclo-la-rotonda",
+      "name": "Hemiciclo de La Rotonda",
+      "kicker": "Monumento · Malecón 2000",
+      "category": "malecon",
+      "year": "1938",
+      "text": "Recuerda la entrevista que Bolívar y San Martín sostuvieron en Guayaquil en julio de 1822. El Congreso ordenó el monumento en 1913 y se inauguró en 1938; sus estatuas, del español José Antonio Homs, se fundieron en Barcelona. El semicírculo de mármol tiene un truco: un susurro en un extremo se oye en el otro.",
+      "fact": "Según el historiador José Antonio Gómez Iturralde, al principio la Rotonda sí era redonda, pero el tráfico la deterioró y dio paso al hemiciclo.",
+      "sources": [
+        "https://www.eluniverso.com/2008/07/26/0001/18/7B617C298BAA4139AC0B9649CEBF8305.html",
+        "https://guayaquil.gob.ec/ciudad-conmemora-historica-cita-bolivar-san-martin-sello-libertad-america/",
+        "https://es.wikipedia.org/wiki/Hemiciclo_de_la_Rotonda",
+        "https://cronostatos.com/rotonda-guayaquil-efecto-acustico/"
+      ],
+      "anchor": {
+        "monument": "rotonda"
+      },
+      "height": 16,
+      "radius": 70,
+      "photo": {
+        "file": "File:Hemiciclo de la Rotonda en Guayaquil.jpg",
+        "focus": [
+          50,
+          10
+        ]
+      }
+    },
+    {
+      "id": "torre-morisca",
+      "name": "Torre Morisca",
+      "kicker": "Torre del Reloj · Malecón",
+      "category": "malecon",
+      "year": "1931",
+      "text": "Se levantó en menos de un año y se inauguró el 24 de mayo de 1931. Mide 23 metros y guarda un reloj traído de Londres que el gobernador Vicente Rocafuerte estrenó en 1842. Su aire morisco, de arcos y cúpula, llegó con los retoques del arquitecto Juan Orús en los años 30.",
+      "fact": "En 1980, un estafador apodado el Cuentero de Muisne convenció a unos turistas suizos de que la torre era suya y alcanzó a cobrarles un adelanto.",
+      "sources": [
+        "https://guayaquil.gob.ec/torre-morisca-emblema-guayaquil-cumple-92-anos/",
+        "https://www.eluniverso.com/guayaquil/comunidad/la-torre-morisca-en-guayaquil-famosa-por-haber-sido-negociada-por-el-cuentero-de-muisne-cumple-92-anos-nota/",
+        "https://www.redalyc.org/journal/3768/376858946008/",
+        "https://es.wikipedia.org/wiki/Torre_del_Reloj_(Guayaquil)"
+      ],
+      "anchor": {
+        "landmark": "Torre Morisca"
+      },
+      "height": 30,
+      "radius": 60,
+      "photo": {
+        "file": "File:Torre morisca.jpg",
+        "focus": [
+          50,
+          60
+        ]
+      }
+    },
+    {
+      "id": "palacio-municipal",
+      "name": "Palacio Municipal",
+      "kicker": "Sede del Cabildo",
+      "category": "centro",
+      "year": "1929",
+      "text": "Diseñado por el italiano Francesco Maccaferri, empezó a construirse el 31 de julio de 1924 y se inauguró el 27 de febrero de 1929. Mezcla lo neoclásico y lo barroco, y ocupa una manzana entera frente al Malecón, donde antes estuvo la casa del Cabildo en la que se firmó la independencia de 1820.",
+      "fact": "La vieja casa consistorial de madera se quemó a propósito en 1908: bajo ella había madrigueras de ratas ligadas a la peste bubónica.",
+      "sources": [
+        "https://es.wikipedia.org/wiki/Palacio_Municipal_de_Guayaquil",
+        "https://www.eluniverso.com/2002/07/14/0001/18/50635D679A38436896C87D6A84753E37.html"
+      ],
+      "anchor": {
+        "lat": -2.1952689,
+        "lon": -79.8808419
+      },
+      "height": 34,
+      "radius": 60,
+      "photo": {
+        "file": "File:Guayaquil Malecón Ecuador 1340.jpg",
+        "focus": [
+          50,
+          0
+        ]
+      }
+    },
+    {
+      "id": "parque-seminario",
+      "name": "Parque Seminario",
+      "kicker": "Parque de las Iguanas",
+      "category": "centro",
+      "year": "1895",
+      "text": "Fue la Plaza de Armas de la Ciudad Nueva, trazada desde 1693, y frente a ella se alza la Catedral. En 1889 se levantó el monumento ecuestre a Bolívar y en 1895 una donación de la familia Suárez Seminario lo rehízo al estilo francés, con reja y glorieta. Hoy sus dueñas son las iguanas.",
+      "fact": "En la Colonia, esta plaza también se usaba para corridas de toros en días de celebración.",
+      "sources": [
+        "https://es.wikipedia.org/wiki/Parque_Seminario"
+      ],
+      "anchor": {
+        "landmark": "Parque Seminario (iguanas)"
+      },
+      "height": 16,
+      "radius": 70,
+      "photo": {
+        "file": "File:Parque Seminario Ecuador364.JPG",
+        "focus": [
+          50,
+          85
+        ]
+      }
+    },
+    {
+      "id": "catedral-metropolitana",
+      "name": "Catedral Metropolitana",
+      "kicker": "Catedral de San Pedro",
+      "category": "centro",
+      "year": "1937",
+      "text": "Frente al Parque Seminario se alza la catedral de San Pedro, en el mismo solar donde en 1694 empezó a levantarse la iglesia matriz de la Ciudad Nueva. El viejo templo de madera fue desmontado y entre 1924 y 1937 se construyó en su lugar esta iglesia neogótica de hormigón armado.",
+      "fact": "La primera iglesia matriz estuvo en la cima del cerro Santa Ana; hoy, junto al faro, una pequeña capilla recuerda aquel lugar.",
+      "sources": [
+        "https://es.wikipedia.org/wiki/Catedral_metropolitana_de_Guayaquil",
+        "https://www.eluniverso.com/guayaquil/2020/09/09/nota/7971388/bicentenario-escalinatas-diego-noboa/"
+      ],
+      "anchor": {
+        "lat": -2.1945871,
+        "lon": -79.883973
+      },
+      "height": 44,
+      "radius": 60,
+      "photo": {
+        "file": "File:Guayaquil Ecuador351.JPG"
+      }
+    },
+    {
+      "id": "portales-centro",
+      "name": "Los portales del centro",
+      "kicker": "Soportales · Centro",
+      "category": "centro",
+      "year": "",
+      "text": "Caminar el centro es caminar bajo techo: los soportales de sus edificios dan sombra al mediodía y refugio cuando cae el aguacero. La costumbre viene de la Colonia: hacia 1740, según el primer plano de la ciudad, sus casas ya tenían portales, algo que la distinguía de las típicas ciudades españolas.",
+      "fact": "En esa Guayaquil de 1740, de unos 20.000 habitantes, la mayoría de las casas tenía piso alto y un entresuelo que servía de almacén.",
+      "sources": [
+        "https://es.wikipedia.org/wiki/Historia_de_Guayaquil",
+        "https://guayaquil.gob.ec/municipio-guayaquil-llevo-servicios-personas-situacion-calle/"
+      ],
+      "anchor": {
+        "lat": -2.1915978,
+        "lon": -79.8820876
+      },
+      "height": 14,
+      "radius": 70,
+      "photo": {
+        "file": "File:Guayaquil Ecuador 1327.jpg",
+        "focus": [
+          50,
+          90
+        ]
+      }
+    },
+    {
+      "id": "parque-centenario",
+      "name": "Parque Centenario y Columna de los Próceres",
+      "kicker": "Parque · Av. 9 de Octubre",
+      "category": "centro",
+      "year": "1920",
+      "text": "En uno de los parques más emblemáticos de la avenida 9 de Octubre se alza la Columna de los Próceres, homenaje a la independencia del 9 de octubre de 1820. La diseñó el catalán Agustín Querol y la concluyó José Montserrat; se inauguró en 1918, y el parque, en el centenario de 1920.",
+      "fact": "En el fuste de bronce de la columna están grabados el Acta de Independencia de 1820 y los nombres de los patriotas.",
+      "sources": [
+        "https://www.eluniverso.com/noticias/2014/07/10/nota/3214161/bulevar-9-octubre-hacia-parque-centenario",
+        "https://es.wikipedia.org/wiki/Columna_a_los_pr%C3%B3ceres_del_9_de_octubre"
+      ],
+      "anchor": {
+        "landmark": "Parque Centenario"
+      },
+      "height": 36,
+      "radius": 90,
+      "photo": {
+        "file": "File:Parque Centenario.jpg",
+        "focus": [
+          50,
+          0
+        ]
+      }
+    },
+    {
+      "id": "aerovia",
+      "name": "Aerovía",
+      "kicker": "Teleférico · Guayaquil-Durán",
+      "category": "transporte",
+      "year": "2020",
+      "text": "Inaugurada el 21 de diciembre de 2020, la Aerovía mueve 154 cabinas de diez plazas por un recorrido de 4,1 km que cruza el Guayas. Une el Parque Centenario con el malecón de Durán en unos 17 minutos, frente a cerca de una hora en bus. Tiene cinco estaciones, una de ellas solo técnica.",
+      "fact": "La estación Cuatro Mosqueteros, sobre la antigua piscina del Malecón, honra a los nadadores que ganaron el Sudamericano de Lima en 1938.",
+      "sources": [
+        "https://www.elcomercio.com/actualidad/ecuador/guayaquil-inauguracion-aerovia-duran-viteri/",
+        "https://www.aa.com.tr/es/mundo/ecuador-guayaquil-inaugura-el-moderno-sistema-de-cable-a%C3%A9reo-aerov%C3%ADa-/2084545",
+        "https://www.expreso.ec/guayaquil/aerovia-inaugurada-95719.html",
+        "https://beta.aeroviagye.com/lista-estaciones/",
+        "https://www.eluniverso.com/guayaquil/2020/12/08/nota/8075818/aerovia-inaguracion-21-diciembre-transporte-horarios-guayaquil/",
+        "https://es.wikipedia.org/wiki/Aerov%C3%ADa_(Guayaquil)",
+        "https://www.openstreetmap.org/way/890164398"
+      ],
+      "anchor": {
+        "lat": -2.1852742,
+        "lon": -79.8771949
+      },
+      "height": 30,
+      "radius": 70,
+      "photo": {
+        "file": "File:Aerovía - Estación Julián Coronel (2).jpg"
+      }
+    },
+    {
+      "id": "maac",
+      "name": "MAAC",
+      "kicker": "Museo · Malecón 2000",
+      "category": "malecon",
+      "year": "",
+      "text": "El Museo Antropológico y de Arte Contemporáneo está en el extremo norte del Malecón 2000, en Malecón y Loja, junto a Las Peñas. Su muestra permanente, «Los 10.000 años del antiguo Ecuador», recorre los pueblos que habitaron estas tierras mucho antes de que existiera Guayaquil.",
+      "fact": "Su colección reúne unas 50.000 piezas arqueológicas y más de 3.000 obras de arte moderno.",
+      "sources": [
+        "https://educacion.gob.ec/cultura/museo-antropologico-y-de-arte-contemporaneo-provincia-de-guayas/",
+        "https://en.wikipedia.org/wiki/Museo_Antropologico_y_de_Arte_Contemporaneo",
+        "https://es.wikipedia.org/wiki/Museo_Antropol%C3%B3gico_y_de_Arte_Contempor%C3%A1neo"
+      ],
+      "anchor": {
+        "landmark": "MAAC"
+      },
+      "height": 20,
+      "radius": 70,
+      "photo": {
+        "file": "File:Museo Antropologico y de Arte Contemporaneo.jpg",
+        "focus": [
+          50,
+          30
+        ]
+      }
+    },
+    {
+      "id": "barrio-las-penas",
+      "name": "Barrio Las Peñas",
+      "kicker": "Barrio patrimonial",
+      "category": "centro",
+      "year": "",
+      "text": "Al pie del cerro Santa Ana, cuna de Guayaquil, la calle Numa Pompilio Llona reúne 36 casas tradicionales, muchas de madera y con vista al río. Varias son hoy galerías y talleres de artistas. En 1982 el barrio fue declarado patrimonio cultural del Ecuador.",
+      "fact": "La calle lleva el nombre de Numa Pompilio Llona (1832-1907), poeta nacido en Guayaquil; en ella arranca el escalón número 1 de la subida al cerro.",
+      "sources": [
+        "https://guayaquil.gob.ec/barrio-penas-epicentro-historia-guayaquilena/",
+        "https://es.wikipedia.org/wiki/Las_Pe%C3%B1as_(Guayaquil)",
+        "https://www.eluniverso.com/guayaquil/2020/09/09/nota/7971388/bicentenario-escalinatas-diego-noboa/"
+      ],
+      "anchor": {
+        "landmark": "Las Peñas"
+      },
+      "height": 16,
+      "radius": 130,
+      "photo": {
+        "file": "File:Calle Numa Pompilio Llona 1.JPG"
+      }
+    },
+    {
+      "id": "faro-cerro-santa-ana",
+      "name": "Faro del cerro Santa Ana",
+      "kicker": "Mirador · Cerro Santa Ana",
+      "category": "centro",
+      "year": "2002",
+      "text": "Hay que ganárselo: 444 escalones de la escalinata Diego Noboa, entre bares, galerías y tiendas de artesanía. Arriba espera el faro de 18,75 metros, levantado en 2002 y vestido de celeste y blanco como la bandera de Guayaquil, con el río y la ciudad a los pies.",
+      "fact": "Los escalones están numerados: en el 384 está el museo El Fortín. La escalinata honra a Diego Noboa, presidente guayaquileño entre 1850 y 1851.",
+      "sources": [
+        "https://guayaquil.gob.ec/faro-cerro-santa-ana-recibe-mantenimiento-integral/",
+        "https://www.eluniverso.com/guayaquil/2020/06/20/nota/7878234/historia-guayaquil-se-ilumina-faro-cerro/",
+        "https://en.wikipedia.org/wiki/Diego_Noboa",
+        "https://es.wikipedia.org/wiki/Bandera_de_Guayaquil"
+      ],
+      "anchor": {
+        "landmark": "Faro del Cerro Santa Ana"
+      },
+      "height": 26,
+      "radius": 60,
+      "photo": {
+        "file": "File:Lighthouse (49282866766).jpg",
+        "focus": [
+          50,
+          10
+        ]
+      }
+    },
+    {
+      "id": "puerto-santa-ana",
+      "name": "Puerto Santa Ana y The Point",
+      "kicker": "Malecón · Rascacielos",
+      "category": "malecon",
+      "year": "2007",
+      "text": "Donde funcionaban la Cervecería Nacional y otras fábricas, al pie del cerro Santa Ana, abrió en 2007 este barrio de edificios, museos y malecón. En su extremo norte se enrosca The Point: 36 pisos y unos 137 metros, el edificio más alto del Ecuador, con una silueta que evoca los remolinos de la confluencia de dos ríos.",
+      "fact": "Los guayaquileños le dicen «el tornillo»: su planta cuadrada va girando a lo alto de la torre.",
+      "sources": [
+        "https://www.eluniverso.com/2007/04/26/0001/18/D0BB6D25D99B474CBEEBF0D152FF63B3.html",
+        "https://es.wikipedia.org/wiki/Puerto_Santa_Ana_(Guayaquil)",
+        "https://www.skyscrapercenter.com/building/the-point/9448"
+      ],
+      "anchor": {
+        "landmark": "Puerto Santa Ana"
+      },
+      "height": 20,
+      "radius": 130,
+      "photo": {
+        "file": "File:Edificio Sotavento.jpg",
+        "focus": [
+          50,
+          60
+        ]
+      }
+    },
+    {
+      "id": "palacio-de-cristal",
+      "name": "Palacio de Cristal",
+      "kicker": "Antiguo Mercado Sur",
+      "category": "centro",
+      "year": "1905",
+      "text": "Esta nave de acero y cristal junto al río empezó a levantarse en 1905 como el Mercado Sur y fue mercado de víveres durante buena parte del siglo XX. Tras su remodelación a inicios de los 2000 renació como Palacio de Cristal, hoy sala de exposiciones y eventos del Malecón 2000.",
+      "fact": "Por años se atribuyó a Gustave Eiffel, pero no hay pruebas: la obra la dirigieron los ingenieros Francisco Manrique y Carlos Van Ischot.",
+      "sources": [
+        "https://www.eluniverso.com/2004/11/30/0001/18/F77CABDDF7E44E3BAC82EDFE143D40B2.html",
+        "https://guayaquil.gob.ec/malecon-cumple-anos-visitas/",
+        "https://es.wikipedia.org/wiki/Palacio_de_Cristal_de_Guayaquil"
+      ],
+      "anchor": {
+        "landmark": "Palacio de Cristal"
+      },
+      "height": 18,
+      "radius": 80,
+      "photo": {
+        "file": "File:Palacio de cristal 7 7 2019 acercamiento.jpg"
+      }
+    },
+    {
+      "id": "malecon-del-salado",
+      "name": "Malecón del Salado",
+      "kicker": "Malecón · Estero Salado",
+      "category": "malecon",
+      "year": "2003",
+      "text": "El estero Salado no es un río sino un brazo de mar. Desde que en 1840 se abrió una trocha hacia él, bañarse en sus aguas se puso de moda entre los guayaquileños. El malecón que lo bordea junto al puente 5 de Junio se inauguró el 31 de julio de 2003, con un puente colgante peatonal de 55 metros.",
+      "fact": "En esta orilla funcionó entre 1922 y 1967 el American Park, un parque de diversiones muy popular.",
+      "sources": [
+        "https://www.eluniverso.com/2003/07/30/0001/18/62EFB0FF05C240B7BF3072572AFBB7A6.html/",
+        "https://www.primicias.ec/guayaquil/estero-puna-morro-playas-asi-evolucionaron-balnearios-predilectos-guayaquilen-90703/",
+        "https://es.wikipedia.org/wiki/Malec%C3%B3n_del_Salado"
+      ],
+      "anchor": {
+        "landmark": "Malecón del Salado"
+      },
+      "height": 14,
+      "radius": 120,
+      "photo": {
+        "file": "File:Malecon del Salado 2022.jpg"
+      }
+    },
+    {
+      "id": "estadio-monumental",
+      "name": "Estadio Monumental",
+      "kicker": "Estadio · Barcelona SC",
+      "category": "estadios",
+      "year": "1987",
+      "text": "La casa de Barcelona, en Bellavista, se estrenó el 27 de diciembre de 1987 con un amistoso ante Peñarol, y su inauguración oficial fue en mayo de 1988. Con capacidad para más de 57.000 personas, es el estadio más grande del Ecuador y lleva el nombre de Isidro Romero Carbo, el presidente del club que lo impulsó.",
+      "fact": "Aquí se jugó la final de la Copa América 1993: Argentina le ganó 2-1 a México con dos goles de Gabriel Batistuta.",
+      "sources": [
+        "https://www.eldiario.ec/deportes/como-se-construyo-el-estadio-monumental-costos-y-cesion-de-terrenos-29042025/",
+        "https://en.wikipedia.org/wiki/Estadio_Monumental_Isidro_Romero_Carbo"
+      ],
+      "anchor": {
+        "landmark": "Estadio Monumental"
+      },
+      "height": 48,
+      "radius": 170,
+      "photo": {
+        "file": "File:Estadio BSC.jpg"
+      }
+    },
+    {
+      "id": "estadio-capwell",
+      "name": "Estadio George Capwell",
+      "kicker": "Estadio · Emelec",
+      "category": "estadios",
+      "year": "1945",
+      "text": "El estadio de Emelec, en el sur de Guayaquil, abrió en octubre de 1945 y lleva el nombre de George Capwell, el estadounidense de la Empresa Eléctrica del Ecuador que impulsó el club y la obra. En 1947 acogió todo el Sudamericano de selecciones: fue el primer torneo de la Conmebol jugado en el país.",
+      "fact": "No se inauguró con fútbol sino con béisbol: un partido entre Emelec y Oriente, en octubre de 1945.",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Estadio_George_Capwell",
+        "https://es.wikipedia.org/wiki/Estadio_George_Capwell",
+        "https://www.primicias.ec/deportes/ligapro/emelec/datos-estadio-george-capwell-aniversario-guayaquil-cse-107448/"
+      ],
+      "anchor": {
+        "landmark": "Estadio Capwell"
+      },
+      "height": 42,
+      "radius": 120,
+      "photo": {
+        "file": "File:Torre sur-este del estadio Capwell.jpg"
+      }
+    },
+    {
+      "id": "estadio-modelo",
+      "name": "Estadio Modelo Alberto Spencer",
+      "kicker": "Estadio · Fedeguayas",
+      "category": "estadios",
+      "year": "1959",
+      "text": "Se inauguró el 24 de julio de 1959 en la avenida de las Américas y meses después fue la sede del Sudamericano extraordinario de diciembre de ese año. Es de la Federación Deportiva del Guayas y lleva el nombre de Alberto Spencer, máximo goleador histórico de la Copa Libertadores, con 54 goles.",
+      "fact": "El primer gol de la historia del estadio lo marcó el propio Alberto Spencer, el día de la inauguración.",
+      "sources": [
+        "https://www.vistazo.com/actualidad/nacional/estadio-modelo-patrimonio-olvidado-CYVI160516",
+        "https://revistawinner.ec/59-anos-de-inauguracion-del-estadio-modelo-alberto-spencer-herrera/",
+        "https://www.conmebol.com/noticias/alberto-spencer-goleador-eterno-de-america/",
+        "https://es.wikipedia.org/wiki/Campeonato_Sudamericano_1959_(Ecuador)",
+        "https://en.wikipedia.org/wiki/Estadio_Modelo_Alberto_Spencer_Herrera"
+      ],
+      "anchor": {
+        "lat": -2.17884,
+        "lon": -79.894359
+      },
+      "height": 38,
+      "radius": 150
+    },
+    {
+      "id": "estadio-christian-benitez",
+      "name": "Estadio Christian Benítez Betancourt",
+      "kicker": "Estadio · Parque Samanes",
+      "category": "estadios",
+      "year": "2014",
+      "text": "Se inauguró el 20 de febrero de 2014 dentro del Parque Samanes, en el norte de la ciudad, con un partido entre exfiguras de Barcelona y Emelec. Honra a Christian «Chucho» Benítez, delantero de la selección fallecido en 2013, y hoy es la casa de Guayaquil City.",
+      "fact": "En 2015 su cancha de césped sintético obtuvo la certificación FIFA de dos estrellas.",
+      "sources": [
+        "https://www.eluniverso.com/noticias/2014/02/20/nota/2209206/nuevo-estadio-parque-samanes/",
+        "https://www.conmebol.com/banners/en-homenaje-al-chucho-benitez-se-inaugura-estadio-que-lleva-su-nombre/",
+        "https://en.wikipedia.org/wiki/Estadio_Christian_Ben%C3%ADtez_Betancourt"
+      ],
+      "anchor": {
+        "lat": -2.102796,
+        "lon": -79.903764
+      },
+      "height": 24,
+      "radius": 110,
+      "photo": {
+        "file": "File:Estadio Christian Benitez.JPG",
+        "focus": [
+          100,
+          50
+        ]
+      }
+    },
+    {
+      "id": "puente-isla-santay",
+      "name": "Puente a la isla Santay",
+      "kicker": "Puente peatonal · Santay",
+      "category": "malecon",
+      "year": "2014",
+      "text": "Desde la calle El Oro sale el puente peatonal de 840 metros que desde 2014 une Guayaquil con la isla Santay; un tramo basculante se abre para dejar pasar barcos. Del otro lado esperan manglares y una ecoaldea: Santay es sitio Ramsar desde 2000 y Área Nacional de Recreación desde 2010.",
+      "fact": "En junio de 2006 llegaron a Santay 12 cocodrilos de la costa nacidos en el Parque Histórico, para un centro de manejo de esta especie amenazada.",
+      "sources": [
+        "https://www.eluniverso.com/noticias/2014/06/03/nota/3053556/rafael-correa-inauguro-puente-que-une-isla-santay-guayaquil/",
+        "https://2026.eloficial.ec/se-realiza-apertura-del-puente-peatonal-y-ciclovia-guayaquil-isla-santay/",
+        "https://www.comunicacion.gob.ec/presidente-correa-inaugura-puente-basculante-peatonal-duran-isla-santay/",
+        "https://www.primicias.ec/guayaquil/isla-santay-paso-peatonal-puente-basculante-choque-barco-110452/",
+        "https://www.ramsar.org/sites/default/files/documents/library/sitelist.pdf",
+        "https://es.wikipedia.org/wiki/Isla_Santay",
+        "https://en.wikipedia.org/wiki/Santay_Island"
+      ],
+      "anchor": {
+        "landmark": "Puente a la Isla Santay"
+      },
+      "height": 16,
+      "radius": 200,
+      "photo": {
+        "file": "File:Puente santay.jpg",
+        "focus": [
+          50,
+          35
+        ]
+      }
+    },
+    {
+      "id": "puente-unidad-nacional",
+      "name": "Puente de la Unidad Nacional",
+      "kicker": "Puentes · Daule y Babahoyo",
+      "category": "transporte",
+      "year": "1970",
+      "text": "Antes de 1970, los carros cruzaban el río en gabarras. Ese año se abrió este sistema de puentes que salta el Daule hasta La Puntilla y luego el Babahoyo hasta Durán, justo antes de que ambos ríos formen el Guayas. El día que se abrió al público lo cruzaron más de 70.000 personas.",
+      "fact": "El primero en cruzarlo fue el exalcalde Rafael Mendoza Avilés, en un Dodge, con el boleto número 001 del peaje.",
+      "sources": [
+        "https://www.eluniverso.com/guayaquil/2020/11/16/nota/8051224/puente-unidad-nacional-obra-guayaquil-rafael-mendoza-aviles/",
+        "https://es.wikipedia.org/wiki/Puente_de_la_Unidad_Nacional",
+        "https://en.wikipedia.org/wiki/National_Unity_Bridge"
+      ],
+      "anchor": {
+        "landmark": "Puente de la Unidad Nacional"
+      },
+      "height": 34,
+      "radius": 350,
+      "photo": {
+        "file": "File:TURISMO EN EL GOLFO DE GUAYAQUIL 024 (19975585951).jpg",
+        "focus": [
+          50,
+          35
+        ]
+      }
+    },
+    {
+      "id": "estacion-tren-duran",
+      "name": "Estación del tren de Durán",
+      "kicker": "Ferrocarril · Durán",
+      "category": "transporte",
+      "year": "",
+      "text": "Aquí empezaba el Ferrocarril Trasandino, a apenas 4 metros sobre el nivel del mar. Como nunca se construyó un puente ferroviario sobre el Guayas, pasajeros y carga cruzaban en barco desde Guayaquil hasta el muelle de la estación. En 2020 se liquidó Ferrocarriles del Ecuador y el servicio quedó suspendido.",
+      "fact": "El 25 de junio de 1908 la locomotora N.º 8 llegó a Quito: por primera vez, el tren unía la Costa con la capital.",
+      "sources": [
+        "https://es.wikipedia.org/wiki/Ferrocarril_Transandino_del_Ecuador",
+        "https://trenecuador.org/tren-crucero/duran/",
+        "https://www.nodal.am/2020/05/ecuador-ferrocarriles-alfaro-inauguro-correa-rescato-y-moreno-otto-sepulto-por/"
+      ],
+      "anchor": {
+        "landmark": "Estación del tren · Durán"
+      },
+      "height": 14,
+      "radius": 90,
+      "photo": {
+        "file": "File:Rail yard in Duran (27345607906).jpg"
+      }
+    },
+    {
+      "id": "estadio-pablo-sandiford",
+      "name": "Estadio Pablo Sandiford",
+      "kicker": "Estadio · Durán",
+      "category": "estadios",
+      "year": "",
+      "text": "El estadio de Durán lleva el nombre de Pablo Sandiford Amador, basquetbolista nacido en Durán en 1922 y conocido como «la Araña Negra». Fue la gran figura de Ferroviarios de Durán y del Athletic Club de Guayaquil, y un símbolo del baloncesto ecuatoriano.",
+      "fact": "Su hermana Jacinta, también de Durán, ganó en 1951 el primer oro del Ecuador en unos Juegos Panamericanos, en salto alto.",
+      "sources": [
+        "https://www.eltelegrafo.com.ec/noticias/otros/1/hermanos-sandiford-homenaje",
+        "https://mcnbiografias.com/sandiford-amador-pablo",
+        "https://en.wikipedia.org/wiki/Jacinta_Sandiford",
+        "https://es.wikipedia.org/wiki/Estadio_Pablo_Sandiford"
+      ],
+      "anchor": {
+        "lat": -2.169529,
+        "lon": -79.840386
+      },
+      "height": 18,
+      "radius": 90
+    },
+    {
+      "id": "plaza-de-toros-duran",
+      "name": "Plaza de Toros de Durán",
+      "kicker": "Ruedo · Durán",
+      "category": "barrios",
+      "year": "",
+      "text": "Este ruedo está en la zona del recinto ferial de la Asociación de Ganaderos del Litoral y Galápagos, sobre la vía Durán-Yaguachi. Cada octubre, la Expoferia Ganadera, que en 2025 cumplió 80 años, reúne exposición de reses, conciertos y rodeo montubio, la gran fiesta del campo costeño.",
+      "fact": "En el rodeo montubio, la monta del toro es la prueba reina: el jinete se sostiene con una sola mano hasta que el animal lo derriba.",
+      "sources": [
+        "https://www.openstreetmap.org/way/854283650",
+        "https://guayas.gob.ec/diversion-familiar-al-aire-libre-ofrece-la-expoferia-ganadera-de-duran-2023-por-las-fiestas-octubrinas/",
+        "https://www.eluniverso.com/guayaquil/comunidad/feria-ganadera-duran-juegos-conciertos-premios-nota/",
+        "https://www.expreso.ec/provincias/duran-celebra-con-feria-el-rodeo-montubio-260240.html",
+        "https://www.nanmagazine.com/rodeo-montubio-los-vaqueros-descalzos-de-la-costa/"
+      ],
+      "anchor": {
+        "lat": -2.195269,
+        "lon": -79.8168
+      },
+      "height": 16,
+      "radius": 70
+    }
+  ],
+  "zones": [
+    {
+      "id": "zona-centro",
+      "names": [
+        "Rocafuerte",
+        "Carbo-Concepción",
+        "Olmedo-San Alejo",
+        "Roca",
+        "Bolívar",
+        "Bolívar-Sagrario",
+        "9 de Octubre",
+        "Nueve de Octubre Oeste"
+      ],
+      "text": "El damero del centro nació en 1693 como Ciudad Nueva, alrededor de la Plaza de Armas que hoy es el Parque Seminario."
+    },
+    {
+      "id": "zona-las-penas",
+      "names": [
+        "Las Peñas",
+        "Cerro Santa Ana"
+      ],
+      "text": "En las faldas del cerro Santa Ana se asentó Guayaquil en 1547; hoy 444 escalones suben entre casas y galerías hasta el faro."
+    },
+    {
+      "id": "zona-urdesa",
+      "names": [
+        "Urdesa",
+        "Urdesa Central",
+        "Urdesa Norte",
+        "Lomas de Urdesa"
+      ],
+      "text": "Su nombre viene de Urbanizadora del Salado S.A., la empresa que lotizó estas tierras junto al estero a mediados del siglo XX."
+    },
+    {
+      "id": "zona-kennedy",
+      "names": [
+        "Kennedy",
+        "Kennedy Vieja",
+        "Kennedy Nueva"
+      ],
+      "text": "En esta ciudadela abrió en 1979 el Policentro, el primer centro comercial de Guayaquil."
+    },
+    {
+      "id": "zona-alborada",
+      "names": [
+        "Alborada",
+        "Alborada I Etapa",
+        "Alborada II Etapa",
+        "Alborada III Etapa",
+        "Alborada IV etapa",
+        "Alborada V etapa",
+        "Alborada VI",
+        "Alborada VII",
+        "Alborada VIII etapa",
+        "Alborada IX Etapa",
+        "Alborada X",
+        "Alborada XI Etapa",
+        "Alborada XII Etapa",
+        "Alborada XIII Etapa",
+        "Alborada XIV etapa"
+      ],
+      "text": "Empezó a construirse en 1973 para la clase media y creció por etapas, catorce en total, hasta fines de los años 80."
+    },
+    {
+      "id": "zona-sauces",
+      "names": [
+        "Sauces",
+        "Sauces 1",
+        "Sauces 2",
+        "Sauces 3",
+        "Sauces 4",
+        "Sauces 5",
+        "Sauces 6",
+        "Sauces 7",
+        "Sauces 8",
+        "Sauces 9"
+      ],
+      "text": "Nueve etapas levantadas desde 1978 por la Junta Nacional de la Vivienda; en Sauces 6, la Isidro Ayora es la calle de los cangrejales."
+    },
+    {
+      "id": "zona-samanes",
+      "names": [
+        "Samanes",
+        "Samanes 1",
+        "Samanes 2",
+        "Samanes 3",
+        "Samanes 4",
+        "Samanes 5",
+        "Samanes 6",
+        "Samanes 7"
+      ],
+      "text": "Ciudadelas del norte junto al Parque Samanes, un área verde de 851 hectáreas cuya primera fase abrió en 2010."
+    },
+    {
+      "id": "zona-la-garzota",
+      "names": [
+        "Ciudadela Garzota",
+        "Garzota I",
+        "Garzota II",
+        "Garzota III"
+      ],
+      "text": "Ciudadela residencial del norte, vecina de Sauces, Guayacanes y La Alborada, cruzada por la avenida Isidro Ayora."
+    },
+    {
+      "id": "zona-barrio-centenario",
+      "names": [
+        "Barrio Centenario"
+      ],
+      "text": "Fue el primer barrio urbanizado de Guayaquil, con casonas de constructores italianos, y su nombre celebra el centenario de la independencia."
+    },
+    {
+      "id": "zona-barrio-orellana",
+      "names": [
+        "Barrio Orellana",
+        "Orellana"
+      ],
+      "text": "Nació como conjunto de la Caja de Pensiones para profesionales; hoy es zona de oficinas entre la 9 de Octubre y el Salado."
+    },
+    {
+      "id": "zona-suburbio",
+      "names": [
+        "Febres Cordero",
+        "Batallón del Suburbio"
+      ],
+      "text": "Desde los años 50, familias migrantes levantaron casas de caña sobre pilotes en los manglares del estero Salado."
+    },
+    {
+      "id": "zona-guasmo",
+      "names": [
+        "Guasmo Este",
+        "Guasmo Oeste"
+      ],
+      "text": "Toma su nombre de los guasmos, árboles que abundaban en la antigua hacienda que ocupaba gran parte del sur de la ciudad."
+    },
+    {
+      "id": "zona-isla-trinitaria",
+      "names": [
+        "Isla Trinitaria"
+      ],
+      "text": "Isla populosa del sur rodeada por ramales del estero Salado y organizada en cooperativas, como Nigeria o Esmeraldas Chiquito."
+    },
+    {
+      "id": "zona-bastion-popular",
+      "names": [
+        "Bastión Popular"
+      ],
+      "text": "Nació en 1986 en el noroeste de la ciudad y, con los años, sus vecinos han ido legalizando los terrenos donde levantaron sus casas."
+    },
+    {
+      "id": "zona-mapasingue",
+      "names": [
+        "Mapasingue"
+      ],
+      "text": "Lleva el nombre de la antigua hacienda donde en 1860 se firmó el Tratado de Mapasingue entre Ecuador y Perú."
+    },
+    {
+      "id": "zona-la-puntilla",
+      "names": [
+        "Samborondón"
+      ],
+      "text": "La lengua de tierra entre el Daule y el Babahoyo: antes arrozales, hoy urbanizaciones cerradas de Samborondón."
+    },
+    {
+      "id": "zona-duran",
+      "names": [
+        "Durán"
+      ],
+      "text": "Al otro lado del Guayas, creció con la estación del tren y es cantón independiente de Guayaquil desde el 10 de enero de 1986."
+    },
+    {
+      "id": "zona-atarazana",
+      "names": [
+        "Atarazana"
+      ],
+      "text": "Fue la primera urbanización del Banco Ecuatoriano de la Vivienda en Guayaquil; su nombre evoca los galpones de un astillero colonial."
+    },
+    {
+      "id": "zona-miraflores",
+      "names": [
+        "Miraflores",
+        "Ciudadela Miraflores"
+      ],
+      "text": "Ciudadela del noroeste, vecina de Los Ceibos, donde tiene su sede la Universidad Casa Grande."
+    }
+  ]
+}

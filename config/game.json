@@ -1,0 +1,4831 @@
+{
+  "app": {
+    "name": "Kuntur 3D",
+    "titleFormat": "{world} — {name}",
+    "subtitle": "Kuntur 3D · código abierto",
+    "about": [
+      "Creado por Javier Vinueza (© 2026).",
+      "Es software libre: puedes usarlo, estudiarlo, cambiarlo y compartirlo bajo la licencia AGPL-3.0, que pide mantener este crédito y marcar como distinta cualquier versión modificada. Se ofrece sin ninguna garantía."
+    ],
+    "source": { "label": "CÓDIGO Y LICENCIA", "url": "https://github.com/Javiervinus/kuntur3d" }
+  },
+  "worldUrl": "world/manifest.json",
+  "locale": "es-EC",
+  "render": {
+    "maxPixelRatio": 2,
+    "frameCap": {
+      "maxFps": 60,
+      "refreshSamples": 31,
+      "nativeTolerance": 0.05,
+      "lateVsyncShare": 0.75
+    },
+    "cockpit": {
+      "layer": 1,
+      "near": 0.02,
+      "far": 12,
+      "fill": {
+        "color": "#fff3e6",
+        "intensity": 2
+      }
+    },
+    "timeOfDay": {
+      "storageKey": "gye3d.timeOfDay",
+      "date": "today",
+      "utcOffsetHours": -5,
+      "default": "morning",
+      "transitionSeconds": 3.5,
+      "presets": [
+        {
+          "id": "morning",
+          "label": "MAÑANA",
+          "time": "08:00"
+        },
+        {
+          "id": "noon",
+          "label": "MEDIODÍA",
+          "time": "12:30"
+        },
+        {
+          "id": "afternoon",
+          "label": "TARDE",
+          "time": "16:30"
+        },
+        {
+          "id": "night",
+          "label": "NOCHE",
+          "time": "20:30"
+        }
+      ]
+    },
+    "fov": 58,
+    "near": 0.6,
+    "far": 14000,
+    "grading": {
+      "saturate": 1.12,
+      "contrast": 1.06,
+      "brightness": 1
+    },
+    "fog": {
+      "color": "#c8d2d6",
+      "near": 150,
+      "far": 9000,
+      "baseHeight": 0,
+      "scaleHeight": 900,
+      "sunGlow": 0.1,
+      "sunGlowPower": 10,
+      "sunHalo": 0.03,
+      "sunHaloPower": 2
+    },
+    "shadow": {
+      "mapSize": 2048,
+      "split": 70,
+      "far": 900,
+      "splitPerHeight": 1.2,
+      "farPerHeight": 4,
+      "farMax": 2600,
+      "night": {
+        "split": 50,
+        "far": 300
+      },
+      "fade": 0.12,
+      "bias": -0.0003,
+      "normalBias": 0.15,
+      "radius": 1,
+      "shadowNear": 1
+    },
+    "lighting": {
+      "sky": {
+        "turbidity": 8,
+        "rayleigh": 1.3,
+        "mieCoefficient": 0.005,
+        "mieDirectionalG": 0.8,
+        "scale": 0.2,
+        "haze": {
+          "amount": 0.7,
+          "falloff": 4,
+          "color": "#eef1f2"
+        },
+        "saturation": 0.72,
+        "clouds": {
+          "coverage": 0.32,
+          "density": 0.4,
+          "scale": 0.0002,
+          "speed": 2e-05,
+          "elevation": 0.5,
+          "albedo": 0.8
+        }
+      },
+      "sun": {
+        "diffuseShare": 0.33,
+        "referenceAltitude": 60,
+        "rayleighDepth": [
+          0.0464,
+          0.108,
+          0.265
+        ],
+        "aerosolDepth": 0.28
+      },
+      "moon": {
+        "intensity": 0.1,
+        "color": "#aab8e6",
+        "phaseExponent": 1.5,
+        "fadeAltitude": 8,
+        "radiusDeg": 0.6,
+        "brightness": 0.9,
+        "glow": [
+          0.25,
+          1600,
+          0.03,
+          30
+        ],
+        "earthshine": 0.03
+      },
+      "keySwap": {
+        "sunAltitude": -3,
+        "rampDeg": 5
+      },
+      "night": {
+        "from": -2,
+        "to": -12,
+        "lightsOn": [
+          2,
+          -6
+        ],
+        "zenith": "#040914",
+        "horizon": "#0d121c",
+        "cityGlow": {
+          "color": "#c27a3a",
+          "intensity": 0.011,
+          "falloff": 9,
+          "clouds": 1.4
+        },
+        "groundBounce": "#3a2a1a",
+        "twilight": {
+          "color": "#ff8243",
+          "intensity": 0.06,
+          "falloff": 7,
+          "from": -12,
+          "peak": -3,
+          "to": 3
+        },
+        "stars": {
+          "brightness": 0.6,
+          "grid": 160,
+          "density": 0.2,
+          "size": 1,
+          "exponent": 7
+        }
+      },
+      "groundAlbedo": "#7b715e",
+      "ambient": 1,
+      "selfLightReferenceAltitude": 50,
+      "exposure": [
+        [
+          -18,
+          2.4
+        ],
+        [
+          -8,
+          2
+        ],
+        [
+          -2,
+          1.6
+        ],
+        [
+          5,
+          1.35
+        ],
+        [
+          15,
+          1.15
+        ],
+        [
+          30,
+          1
+        ]
+      ],
+      "environment": {
+        "size": 128
+      },
+      "minShadowLight": 0.0001,
+      "fogSamples": 8,
+      "fogElevationDeg": 2,
+      "windows": {
+        "lit": [
+          [
+            -14,
+            0.26
+          ],
+          [
+            -4,
+            0.34
+          ],
+          [
+            0,
+            0.18
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        "glow": [
+          [
+            -8,
+            1.1
+          ],
+          [
+            -2,
+            0.8
+          ],
+          [
+            3,
+            0
+          ]
+        ],
+        "warm": "#ffb567",
+        "cool": "#dde6ff",
+        "coolShare": 0.3
+      },
+      "skyOcclusion": {
+        "radius": 1300,
+        "hysteresis": 250,
+        "concurrency": 4,
+        "canopyOpacity": 0.55,
+        "ambient": 1,
+        "photo": 0.35,
+        "specular": 1,
+        "facade": {
+          "frontOffset": 3,
+          "gain": 2.2,
+          "min": 0.3
+        }
+      },
+      "streetLights": {
+        "sodium": "#ffb468",
+        "led": "#ffe9d6",
+        "underLamp": 0.6,
+        "armShare": 0.15,
+        "stretch": 1.25,
+        "reach": 3.5,
+        "falloff": 1,
+        "minHeight": 0.5,
+        "maxIrradiance": 4,
+        "near": {
+          "size": 2048,
+          "texels": 1024,
+          "recenter": 256,
+          "edge": 256
+        },
+        "regionTexel": 25,
+        "surface": {
+          "wallOffset": 4,
+          "wallFactor": 0.6,
+          "roofFade": [
+            3,
+            10
+          ],
+          "wallFade": [
+            4,
+            12
+          ]
+        },
+        "halo": {
+          "size": 2.4,
+          "minPixels": 2,
+          "maxPixels": 40,
+          "farFalloff": 1,
+          "core": 12,
+          "glow": 0.25,
+          "brightness": 1.5,
+          "drop": 0.25,
+          "depthPull": 0.02,
+          "maxDistance": 15000
+        },
+        "poles": {
+          "radius": 400,
+          "recenter": 40,
+          "maxInstances": 3000,
+          "referenceHeight": 10,
+          "shaft": {
+            "baseRadius": 0.14,
+            "topRadius": 0.08,
+            "segments": 8,
+            "color": "#8d8c86"
+          },
+          "arm": {
+            "radius": 0.045,
+            "rise": 0.4,
+            "segments": 6,
+            "color": "#9da1a4"
+          },
+          "head": {
+            "size": [
+              0.7,
+              0.16,
+              0.3
+            ],
+            "color": "#b3b6b8"
+          },
+          "lens": {
+            "size": [
+              0.5,
+              0.03,
+              0.22
+            ],
+            "color": "#cfd2cc",
+            "glow": 8
+          },
+          "roughness": 0.75
+        }
+      }
+    },
+    "skyScaleOfFar": 0.55
+  },
+  "streaming": {
+    "updateIntervalSeconds": 0.25,
+    "terrainRadius": 1900,
+    "terrainHysteresis": 300,
+    "buildingRadius": 1300,
+    "buildingRadiusPerMeterAltitude": 4,
+    "buildingRadiusMax": 2600,
+    "buildingHysteresis": 300,
+    "skylineMidRadius": 4000,
+    "maxResidentBuildings": 160000,
+    "treeRadius": 1300,
+    "treeHysteresis": 250,
+    "workers": 2,
+    "maxMeshesPerFrame": 2,
+    "prepareRadius": 450,
+    "terrainMeshesPerUpdate": 8,
+    "roadRadius": 700,
+    "roadHysteresis": 200,
+    "roadWorkers": 2,
+    "roadTexturesPerFrame": 1
+  },
+  "roads": {
+    "raster": {
+      "texel": 1.25,
+      "influence": 5,
+      "period": 8,
+      "laneCodeStride": 8,
+      "eventFar": 1000
+    },
+    "drawOrder": [
+      "asphalt",
+      "concrete",
+      "paving",
+      "unpaved"
+    ],
+    "fade": {
+      "start": 380,
+      "end": 620
+    },
+    "light": {
+      "lit": 0.62,
+      "self": 0.4
+    },
+    "feather": 0.45,
+    "materials": {
+      "asphalt": {
+        "style": "asphalt",
+        "color": "#76736e",
+        "grain": 0.2,
+        "grainScale": 0.3,
+        "patches": 0.16,
+        "patchScale": 7,
+        "marked": true
+      },
+      "concrete": {
+        "style": "slabs",
+        "color": "#aaa79f",
+        "grain": 0.12,
+        "grainScale": 0.4,
+        "patches": 0.12,
+        "patchScale": 5,
+        "marked": true
+      },
+      "paving": {
+        "style": "pavers",
+        "color": "#8e877d",
+        "grain": 0.1,
+        "grainScale": 0.25,
+        "patches": 0.1,
+        "patchScale": 6,
+        "marked": false
+      },
+      "unpaved": {
+        "style": "dirt",
+        "color": "#9b8b75",
+        "grain": 0.3,
+        "grainScale": 0.35,
+        "patches": 0.26,
+        "patchScale": 4,
+        "marked": false
+      }
+    },
+    "slabs": {
+      "length": 4,
+      "joint": 0.04,
+      "jointShade": 0.35
+    },
+    "pavers": {
+      "length": 0.2,
+      "width": 0.1,
+      "joint": 0.012,
+      "jointShade": 0.3,
+      "variation": 0.14
+    },
+    "dirt": {
+      "rutOffset": 0.85,
+      "rutWidth": 0.35,
+      "rutShade": 0.14,
+      "pebbleSize": 0.09,
+      "pebbleAmount": 0.16,
+      "pebbleShade": 0.22
+    },
+    "sidewalk": {
+      "color": "#b9b4a9",
+      "curbColor": "#d9d5cc",
+      "curbWidth": 0.2,
+      "tile": 0.5,
+      "joint": 0.015,
+      "jointShade": 0.18,
+      "grain": 0.1,
+      "grainScale": 0.3,
+      "gutterWidth": 0.35,
+      "gutterShade": 0.28
+    },
+    "markings": {
+      "white": "#ecebe4",
+      "yellow": "#e8b53a",
+      "lineWidth": 0.13,
+      "doubleGap": 0.12,
+      "dash": 3,
+      "edgeInset": 0.4,
+      "junctionFade": 1.5,
+      "wear": 0.35,
+      "wearScale": 1.3,
+      "stableTolerance": 0.05,
+      "doubleCenterMinLanes": 4,
+      "edgeLinesMinLanes": 4,
+      "edgeLinesMinLanesOneway": 2,
+      "frameTolerance": 0.3
+    },
+    "crosswalk": {
+      "length": 3.2,
+      "stripePeriod": 1,
+      "stripeDuty": 0.5
+    },
+    "parks": {
+      "tile": 0.6,
+      "joint": 0.018,
+      "jointShade": 0.24,
+      "variation": 0.08,
+      "color": "#cfc8b8",
+      "colorMix": 0.3,
+      "fade": {
+        "start": 60,
+        "end": 260
+      }
+    },
+    "pitches": {
+      "lineColor": "#f1f1ea",
+      "lineWidth": {
+        "other": 0.1,
+        "soccer": 0.12,
+        "basketball": 0.08,
+        "volleyball": 0.08,
+        "tennis": 0.07
+      },
+      "stripeWidth": 5,
+      "stripeShade": 0.06,
+      "hardGrain": 0.1,
+      "hardGrainScale": 0.3,
+      "wear": 0.3,
+      "wearScale": 2.5
+    }
+  },
+  "terrain": {
+    "selfLight": 0.55,
+    "litShare": 0.5,
+    "roughness": 1,
+    "outerGround": {
+      "color": "#76806a",
+      "size": 60000,
+      "depthBelowWater": 6
+    },
+    "detail": {
+      "strength": 0.22,
+      "scaleFine": 0.45,
+      "scaleCoarse": 2.2,
+      "fadeStart": 12,
+      "fadeEnd": 160
+    },
+    "farStep": 8,
+    "farOffset": -2.5,
+    "ground": {
+      "fade": {
+        "start": 25,
+        "end": 140
+      },
+      "green": [
+        0.05,
+        0.14
+      ],
+      "soil": [
+        0.09,
+        0.2
+      ],
+      "grass": {
+        "blade": 0.07,
+        "tuft": 0.3,
+        "clump": 1.2,
+        "patch": 3.5,
+        "bladeAmount": 0.55,
+        "tuftAmount": 0.4,
+        "clumpAmount": 0.25,
+        "dryAmount": 0.35,
+        "dryTint": [
+          1.12,
+          1.06,
+          0.8
+        ]
+      },
+      "soilDetail": {
+        "pebbleSize": 0.06,
+        "pebbleAmount": 0.16,
+        "pebbleShade": 0.22,
+        "mottleScale": 1.4,
+        "mottleAmount": 0.16
+      }
+    }
+  },
+  "loading": {
+    "label": "Cargando {world}…",
+    "weights": {
+      "heightmap": 0.15,
+      "overview": 0.2,
+      "water": 0.05,
+      "avatar": 0.1,
+      "lamps": 0.05,
+      "nearby": 0.43,
+      "bridges": 0.02
+    }
+  },
+  "resume": {
+    "storageKey": "gye3d.lastPlace",
+    "saveEverySeconds": 2
+  },
+  "hudRefreshSeconds": 0.12,
+  "prewarm": {
+    "shadowMapSize": 16
+  },
+  "quality": {
+    "adaptive": true,
+    "gpuTimer": true,
+    "targetFps": 60,
+    "windowSeconds": 1.5,
+    "minFramesPerWindow": 20,
+    "maxFrameMs": 250,
+    "frameTrim": 0.1,
+    "declineAbove": 1.1,
+    "declineWindows": 2,
+    "gpuBoundShare": 0.7,
+    "inclineBelow": 0.65,
+    "inclineWindows": 3,
+    "vsyncTolerance": 1.03,
+    "probeWindows": 8,
+    "settleWindows": 3,
+    "levels": [
+      {
+        "pixelRatio": 2,
+        "shadowMapSize": 2048
+      },
+      {
+        "pixelRatio": 1.75,
+        "shadowMapSize": 2048
+      },
+      {
+        "pixelRatio": 1.5,
+        "shadowMapSize": 2048
+      },
+      {
+        "pixelRatio": 1.25,
+        "shadowMapSize": 2048
+      },
+      {
+        "pixelRatio": 1,
+        "shadowMapSize": 2048
+      },
+      {
+        "pixelRatio": 1,
+        "shadowMapSize": 1536
+      },
+      {
+        "pixelRatio": 0.85,
+        "shadowMapSize": 1024
+      },
+      {
+        "pixelRatio": 0.75,
+        "shadowMapSize": 1024
+      }
+    ]
+  },
+  "water": {
+    "riverColor": "#6e5c40",
+    "seaColor": "#4f5040",
+    "photoMix": 0.6,
+    "photoGain": 0.95,
+    "roughness": 0.1,
+    "offset": 0.08,
+    "flow": [
+      0.04,
+      0.3
+    ],
+    "waves": {
+      "length": 9,
+      "lengthFalloff": 0.52,
+      "amplitudeFalloff": 0.88,
+      "octaves": 5,
+      "strength": 0.09,
+      "speed": 0.55,
+      "patchScale": 90,
+      "patchAmount": 0.7,
+      "fade": [
+        0.1,
+        0.35
+      ],
+      "warp": 22,
+      "warpScale": 45,
+      "graze": {
+        "from": 0.03,
+        "to": 0.3,
+        "keep": 0.35,
+        "minReflection": 0.02
+      },
+      "spreadDeg": 38,
+      "groups": {
+        "frequency": 0.21,
+        "depth": 0.7
+      }
+    },
+    "hyacinth": {
+      "scale": 30,
+      "coverage": 0.24,
+      "edge": 0.05,
+      "clumpScale": 2.6,
+      "colors": [
+        "#3d5c27",
+        "#56773a",
+        "#6a7d3b"
+      ],
+      "rim": "#2f3a22",
+      "rimWidth": 0.08,
+      "roughness": 0.8,
+      "bump": 0.55,
+      "drift": 1,
+      "stretch": 2.2,
+      "ragged": 0.35
+    },
+    "nightSpecular": 3,
+    "glints": {
+      "slope": 0.12,
+      "sigmas": 2.2,
+      "minPixels": 1.5,
+      "maxDistance": 6000,
+      "cell": 500,
+      "recenter": 250,
+      "gain": 1,
+      "mirror": 1,
+      "cutoff": 0.002,
+      "segments": 6,
+      "shoreDistance": 80,
+      "shoreRings": 4,
+      "shoreAngles": 12,
+      "wetDepth": 0.25,
+      "waves": {
+        "length": 2.5,
+        "speed": 1.6,
+        "amount": 0.8,
+        "wobble": 1.5,
+        "wobbleLength": 6.8,
+        "wobbleSpeed": 0.7
+      }
+    }
+  },
+  "trees": {
+    "visibleRadius": 1400,
+    "canopyDetail": 1,
+    "canopyShape": {
+      "lumps": 12,
+      "depth": 0.28,
+      "widthDeg": [
+        30,
+        46
+      ],
+      "bottom": 0.75,
+      "fullness": 2.6,
+      "seed": 7
+    },
+    "near": {
+      "radius": 110,
+      "refresh": 5,
+      "detail": 2,
+      "capacity": 2500
+    },
+    "leaves": {
+      "cluster": 0.9,
+      "fine": 0.3,
+      "hollowShade": 0.45,
+      "variation": 0.45,
+      "bump": 0.25,
+      "fade": [
+        30,
+        150
+      ],
+      "underShade": 0.55
+    },
+    "canopyVerticalRatio": 0.36,
+    "canopyMaxAspect": 0.8,
+    "canopyColor": {
+      "albedo": 0.11,
+      "reference": 0.029,
+      "variation": 0.35,
+      "saturation": 1.15,
+      "greenMix": 0.6,
+      "greens": [
+        "#4b7a2d",
+        "#5e8c36",
+        "#3f6d33",
+        "#6d9140",
+        "#557f2a"
+      ]
+    },
+    "canopyTransmission": {
+      "sun": 0.35,
+      "sky": 0.45
+    },
+    "farShadowMinHeight": 12,
+    "trunkRadius": 0.07,
+    "trunkTaper": 0.7,
+    "branches": {
+      "count": 3,
+      "fork": 0.6,
+      "reach": 3.2,
+      "radius": 0.5,
+      "tipRadius": 0.28,
+      "sides": 6,
+      "trunkSides": 7
+    },
+    "trunkColor": "#5b4632",
+    "roughness": 0.9,
+    "clearanceShare": 0.7
+  },
+  "palms": {
+    "reference": 10,
+    "cell": 600,
+    "drawDistance": 1500,
+    "roughness": 0.85,
+    "trunk": {
+      "radius": [
+        0.3,
+        0.17
+      ],
+      "sides": 7,
+      "segments": 6,
+      "bend": 0.5,
+      "color": "#8b7d6b",
+      "colorTop": "#77705f",
+      "shaft": [
+        1.35,
+        1.4
+      ],
+      "shaftColor": "#5f7440",
+      "leanDeg": 5
+    },
+    "crown": {
+      "fronds": 12,
+      "jitter": 0.35,
+      "length": [
+        3.4,
+        4.8
+      ],
+      "width": 0.75,
+      "rise": 0.8,
+      "lower": 0.35,
+      "droop": 1.1,
+      "fold": 0.45,
+      "segments": 5,
+      "color": "#3f6b2a",
+      "tip": "#7f9c47"
+    },
+    "sway": {
+      "amplitude": 0.12,
+      "speed": 0.9
+    }
+  },
+  "buildings": {
+    "floorHeight": 3.2,
+    "windowSpacing": 2.7,
+    "highRiseThreshold": 16,
+    "glassMinHeight": 34,
+    "glassProbability": 0.4,
+    "roofImageryMix": 0.92,
+    "roofShade": 0.8,
+    "aoStrength": 0.42,
+    "roughness": 0.88,
+    "glassRoughness": 0.12,
+    "trimShade": 0.55,
+    "farShadowMinHeight": 12,
+    "stands": {
+      "color": "#9a958c",
+      "nosing": 0.06,
+      "nosingShade": 1.18,
+      "baseHeight": 1.1,
+      "baseShade": 0.8,
+      "seatBand": 0.45,
+      "seatWidth": 0.5,
+      "seatGap": 0.14,
+      "seatGapShade": 0.55
+    },
+    "industrial": {
+      "minArea": 2000,
+      "maxHeight": 20,
+      "palette": [
+        "#e4e6e6",
+        "#d3d8da",
+        "#c9ced0",
+        "#eeeae0",
+        "#cfd9df",
+        "#d9d2c3",
+        "#c4ccc4",
+        "#bfc6cc"
+      ],
+      "ribPeriod": 0.9,
+      "ribShade": 0.07,
+      "plinthHeight": 1.2,
+      "plinthShade": 0.78,
+      "bandTop": 1.4,
+      "bandBottom": 2.4,
+      "bandWindow": 3,
+      "doorSpacing": 14,
+      "doorWidth": 4.5,
+      "doorHeight": 4.8,
+      "doorProbability": 0.45,
+      "doorShade": 0.62,
+      "slat": 0.18
+    },
+    "pitchedRoofs": {
+      "overhang": 0.45,
+      "maxOverhangShare": 0.2,
+      "thickness": 0.14,
+      "minWall": 2.4
+    },
+    "waterTanks": {
+      "probability": 0.45,
+      "maxBuildingHeight": 9,
+      "minArea": 30,
+      "radius": [
+        0.5,
+        0.7
+      ],
+      "height": [
+        1,
+        1.5
+      ],
+      "segments": 10,
+      "margin": 0.3,
+      "colors": [
+        "#23282c",
+        "#1c1f22",
+        "#2e5e8e",
+        "#d8d4c8"
+      ]
+    },
+    "windowColor": "#1c252c",
+    "glassColor": "#3b5a6c",
+    "lowRisePalette": [
+      "#d8cdb6",
+      "#cfc2a4",
+      "#dcd6cb",
+      "#b9c6cb",
+      "#d6bf9a",
+      "#c9ad8f",
+      "#b3c4b0",
+      "#d2b1a4",
+      "#9fb4c7",
+      "#d8c68a",
+      "#c99c89",
+      "#bab4c8",
+      "#c9c3b8",
+      "#a9a49a",
+      "#e0d9c9",
+      "#c2b59a"
+    ],
+    "highRisePalette": [
+      "#d2cdc3",
+      "#c1bbaf",
+      "#aeaaa0",
+      "#d9d4ca",
+      "#a6aaab",
+      "#c2b6a1",
+      "#cbc1ad",
+      "#939899",
+      "#b8b2a6",
+      "#dcd7cd"
+    ],
+    "facade": {
+      "windows": {
+        "width": 0.52,
+        "height": 1.35,
+        "sill": 0.95,
+        "frame": 0.06,
+        "mullionMinWidth": 1.1,
+        "ledge": 0.08,
+        "slabBand": 0.22,
+        "slabShade": 0.9,
+        "missing": 0.12,
+        "frameColors": [
+          "#c9ccce",
+          "#e6e4de",
+          "#5c4a3a",
+          "#2e3135",
+          "#a7abad"
+        ],
+        "door": [
+          1,
+          2.2
+        ],
+        "doorColor": "#6b4a33"
+      },
+      "rooms": {
+        "depth": [
+          3.5,
+          6.5
+        ],
+        "daylight": 0.12,
+        "backShade": 0.55,
+        "walls": [
+          "#d9d2c3",
+          "#c8d0cf",
+          "#e2d7c0",
+          "#b9b0a3",
+          "#d0c4b4",
+          "#aebdc6",
+          "#e5e0d6"
+        ],
+        "floors": [
+          "#6b5443",
+          "#8a8173",
+          "#a39b8d",
+          "#5a4b3f"
+        ],
+        "ceiling": "#ece8df"
+      },
+      "curtains": {
+        "probability": 0.55,
+        "cover": [
+          0.35,
+          1
+        ],
+        "glow": 0.8,
+        "colors": [
+          "#a89a84",
+          "#c9c2b4",
+          "#77879a",
+          "#94725e",
+          "#b8ae90",
+          "#6c7a64"
+        ]
+      },
+      "shops": {
+        "height": 3.8,
+        "signHeight": 0.75,
+        "width": [
+          3.2,
+          6.5
+        ],
+        "pillar": 0.45,
+        "rib": 0.09,
+        "shutter": "#8f9396",
+        "shutterBox": 0.32,
+        "vacant": 0.1,
+        "maxShift": 3,
+        "signGlow": 1.4,
+        "letter": 0.26,
+        "textShare": 0.85,
+        "textHeight": 0.5,
+        "letterStretch": 1.9,
+        "glow": 0.55,
+        "depth": 7,
+        "interiors": {
+          "counter": {
+            "height": 1.05,
+            "color": "#7a5a3e"
+          },
+          "desk": {
+            "height": 0.8,
+            "color": "#c9cdd0"
+          }
+        },
+        "goods": {
+          "shelf": 0.45,
+          "width": 0.28,
+          "fill": 0.75,
+          "tubes": 1.6,
+          "colors": [
+            "#c8322b",
+            "#e0b21c",
+            "#1f5fa8",
+            "#f2f0ea",
+            "#2d8a4e",
+            "#e56b1f",
+            "#7a2e8c",
+            "#d9a07a",
+            "#4a6b8a",
+            "#b8c43a"
+          ],
+          "muted": 0.35,
+          "run": 4
+        },
+        "font": {
+          "A": [
+            ".###.",
+            "#...#",
+            "#####",
+            "#...#",
+            "#...#"
+          ],
+          "B": [
+            "####.",
+            "#...#",
+            "####.",
+            "#...#",
+            "####."
+          ],
+          "C": [
+            ".####",
+            "#....",
+            "#....",
+            "#....",
+            ".####"
+          ],
+          "D": [
+            "####.",
+            "#...#",
+            "#...#",
+            "#...#",
+            "####."
+          ],
+          "E": [
+            "#####",
+            "#....",
+            "####.",
+            "#....",
+            "#####"
+          ],
+          "F": [
+            "#####",
+            "#....",
+            "####.",
+            "#....",
+            "#...."
+          ],
+          "G": [
+            ".####",
+            "#....",
+            "#..##",
+            "#...#",
+            ".####"
+          ],
+          "H": [
+            "#...#",
+            "#...#",
+            "#####",
+            "#...#",
+            "#...#"
+          ],
+          "I": [
+            "#####",
+            "..#..",
+            "..#..",
+            "..#..",
+            "#####"
+          ],
+          "J": [
+            "..###",
+            "...#.",
+            "...#.",
+            "#..#.",
+            ".##.."
+          ],
+          "K": [
+            "#...#",
+            "#..#.",
+            "###..",
+            "#..#.",
+            "#...#"
+          ],
+          "L": [
+            "#....",
+            "#....",
+            "#....",
+            "#....",
+            "#####"
+          ],
+          "M": [
+            "#...#",
+            "##.##",
+            "#.#.#",
+            "#...#",
+            "#...#"
+          ],
+          "N": [
+            "#...#",
+            "##..#",
+            "#.#.#",
+            "#..##",
+            "#...#"
+          ],
+          "O": [
+            ".###.",
+            "#...#",
+            "#...#",
+            "#...#",
+            ".###."
+          ],
+          "P": [
+            "####.",
+            "#...#",
+            "####.",
+            "#....",
+            "#...."
+          ],
+          "Q": [
+            ".###.",
+            "#...#",
+            "#.#.#",
+            "#..#.",
+            ".##.#"
+          ],
+          "R": [
+            "####.",
+            "#...#",
+            "####.",
+            "#..#.",
+            "#...#"
+          ],
+          "S": [
+            ".####",
+            "#....",
+            ".###.",
+            "....#",
+            "####."
+          ],
+          "T": [
+            "#####",
+            "..#..",
+            "..#..",
+            "..#..",
+            "..#.."
+          ],
+          "U": [
+            "#...#",
+            "#...#",
+            "#...#",
+            "#...#",
+            ".###."
+          ],
+          "V": [
+            "#...#",
+            "#...#",
+            "#...#",
+            ".#.#.",
+            "..#.."
+          ],
+          "W": [
+            "#...#",
+            "#...#",
+            "#.#.#",
+            "##.##",
+            "#...#"
+          ],
+          "X": [
+            "#...#",
+            ".#.#.",
+            "..#..",
+            ".#.#.",
+            "#...#"
+          ],
+          "Y": [
+            "#...#",
+            ".#.#.",
+            "..#..",
+            "..#..",
+            "..#.."
+          ],
+          "Z": [
+            "#####",
+            "...#.",
+            "..#..",
+            ".#...",
+            "#####"
+          ],
+          " ": [
+            ".....",
+            ".....",
+            ".....",
+            ".....",
+            "....."
+          ],
+          "0": [
+            ".###.",
+            "#..##",
+            "#.#.#",
+            "##..#",
+            ".###."
+          ],
+          "1": [
+            "..#..",
+            ".##..",
+            "..#..",
+            "..#..",
+            ".###."
+          ],
+          "2": [
+            ".###.",
+            "#...#",
+            "..##.",
+            ".#...",
+            "#####"
+          ],
+          "3": [
+            "####.",
+            "....#",
+            ".###.",
+            "....#",
+            "####."
+          ],
+          "4": [
+            "#..#.",
+            "#..#.",
+            "#####",
+            "...#.",
+            "...#."
+          ],
+          "5": [
+            "#####",
+            "#....",
+            "####.",
+            "....#",
+            "####."
+          ],
+          "6": [
+            ".###.",
+            "#....",
+            "####.",
+            "#...#",
+            ".###."
+          ],
+          "7": [
+            "#####",
+            "...#.",
+            "..#..",
+            ".#...",
+            ".#..."
+          ],
+          "8": [
+            ".###.",
+            "#...#",
+            ".###.",
+            "#...#",
+            ".###."
+          ],
+          "9": [
+            ".###.",
+            "#...#",
+            ".####",
+            "....#",
+            ".###."
+          ],
+          "Ñ": [
+            ".###.",
+            "#...#",
+            "##..#",
+            "#.#.#",
+            "#..##"
+          ],
+          "&": [
+            ".##..",
+            "#..#.",
+            ".##.#",
+            "#..#.",
+            ".##.#"
+          ],
+          "'": [
+            "..#..",
+            "..#..",
+            ".....",
+            ".....",
+            "....."
+          ],
+          "-": [
+            ".....",
+            ".....",
+            ".###.",
+            ".....",
+            "....."
+          ],
+          ".": [
+            ".....",
+            ".....",
+            ".....",
+            ".....",
+            "..#.."
+          ]
+        },
+        "kinds": [
+          {
+            "id": "farmacia",
+            "signs": [
+              "#1d8a4a",
+              "#27a35b",
+              "#0f6b3a",
+              "#f2f0ea",
+              "#1f5fa8"
+            ],
+            "light": "#f3fbff",
+            "openFront": 0,
+            "interior": "shelves",
+            "open": [
+              7.5,
+              8.5
+            ],
+            "close": [
+              21,
+              23
+            ],
+            "allDay": 0.12,
+            "signLit": 0.95,
+            "signLate": 0.4,
+            "words": [
+              "FARMACIA",
+              "BOTICA",
+              "FARMACIA 24H"
+            ]
+          },
+          {
+            "id": "supermercado",
+            "signs": [
+              "#c8322b",
+              "#e0b21c",
+              "#e56b1f",
+              "#f2f0ea"
+            ],
+            "light": "#f6f8ff",
+            "openFront": 0,
+            "interior": "shelves",
+            "open": [
+              8,
+              9
+            ],
+            "close": [
+              20.5,
+              21.5
+            ],
+            "allDay": 0,
+            "signLit": 0.9,
+            "signLate": 0.5,
+            "words": [
+              "SUPERMERCADO",
+              "COMISARIATO",
+              "MINIMARKET"
+            ]
+          },
+          {
+            "id": "banco",
+            "signs": [
+              "#f2c230",
+              "#b0186e",
+              "#1f4f9a",
+              "#1d7a4a",
+              "#f2f0ea"
+            ],
+            "light": "#f3f6ff",
+            "openFront": 0,
+            "interior": "desk",
+            "open": [
+              8.5,
+              9
+            ],
+            "close": [
+              16.5,
+              17.5
+            ],
+            "allDay": 0,
+            "signLit": 0.95,
+            "signLate": 0.85,
+            "words": [
+              "BANCO",
+              "COOPERATIVA",
+              "ENVIOS",
+              "CAJERO"
+            ]
+          },
+          {
+            "id": "comida",
+            "signs": [
+              "#c8322b",
+              "#e0b21c",
+              "#e56b1f",
+              "#f2f0ea",
+              "#2d8a4e",
+              "#1b1f24"
+            ],
+            "light": "#ffdcae",
+            "openFront": 0.55,
+            "interior": "counter",
+            "open": [
+              7,
+              11.5
+            ],
+            "close": [
+              16,
+              23
+            ],
+            "allDay": 0.02,
+            "signLit": 0.65,
+            "signLate": 0.15,
+            "words": [
+              "COMEDOR",
+              "CEVICHERIA",
+              "PICANTERIA",
+              "ASADERO",
+              "POLLOS",
+              "RESTAURANTE",
+              "MARISQUERIA",
+              "ENCEBOLLADOS",
+              "CHIFA",
+              "PARRILLADA",
+              "BOLONES"
+            ]
+          },
+          {
+            "id": "cafeteria",
+            "signs": [
+              "#5c3a24",
+              "#c89b6d",
+              "#f2e6cf",
+              "#2e4a3a",
+              "#e8b4b8"
+            ],
+            "light": "#ffe3bd",
+            "openFront": 0.4,
+            "interior": "counter",
+            "open": [
+              6.5,
+              9
+            ],
+            "close": [
+              19,
+              22
+            ],
+            "allDay": 0,
+            "signLit": 0.65,
+            "signLate": 0.1,
+            "words": [
+              "CAFETERIA",
+              "PANADERIA",
+              "HELADERIA",
+              "JUGOS",
+              "PASTELERIA",
+              "BATIDOS"
+            ]
+          },
+          {
+            "id": "viveres",
+            "signs": [
+              "#c8322b",
+              "#e0b21c",
+              "#1f5fa8",
+              "#f2f0ea",
+              "#2d8a4e"
+            ],
+            "light": "#fff0d6",
+            "openFront": 0.9,
+            "interior": "shelves",
+            "open": [
+              6,
+              8
+            ],
+            "close": [
+              20,
+              23
+            ],
+            "allDay": 0.03,
+            "signLit": 0.35,
+            "signLate": 0.05,
+            "words": [
+              "TIENDA",
+              "VIVERES",
+              "ABARROTES",
+              "DESPENSA",
+              "MINIMARKET",
+              "FRUTERIA",
+              "LICORERIA",
+              "TERCENA",
+              "BODEGA"
+            ]
+          },
+          {
+            "id": "ferreteria",
+            "signs": [
+              "#e56b1f",
+              "#e0b21c",
+              "#1f5fa8",
+              "#c8322b"
+            ],
+            "light": "#fff2dc",
+            "openFront": 1,
+            "interior": "shelves",
+            "open": [
+              7.5,
+              8.5
+            ],
+            "close": [
+              17.5,
+              19
+            ],
+            "allDay": 0,
+            "signLit": 0.3,
+            "signLate": 0.05,
+            "words": [
+              "FERRETERIA",
+              "MATERIALES",
+              "PINTURAS",
+              "ELECTRICOS",
+              "PLOMERIA"
+            ]
+          },
+          {
+            "id": "bar",
+            "signs": [
+              "#1b1f24",
+              "#3a1446",
+              "#12304f",
+              "#5a1a1a"
+            ],
+            "light": "#ffc58f",
+            "openFront": 0.35,
+            "interior": "counter",
+            "open": [
+              16,
+              20
+            ],
+            "close": [
+              24,
+              27
+            ],
+            "allDay": 0,
+            "signLit": 0.95,
+            "signLate": 0.2,
+            "words": [
+              "BAR",
+              "KARAOKE",
+              "DISCOTECA",
+              "BILLAR",
+              "LICORES"
+            ]
+          },
+          {
+            "id": "moda",
+            "signs": [
+              "#1b1f24",
+              "#f2f0ea",
+              "#c2185b",
+              "#7a2e8c",
+              "#d9a07a"
+            ],
+            "light": "#fff4e6",
+            "openFront": 0.1,
+            "interior": "shelves",
+            "open": [
+              9,
+              10.5
+            ],
+            "close": [
+              19,
+              21
+            ],
+            "allDay": 0,
+            "signLit": 0.6,
+            "signLate": 0.3,
+            "words": [
+              "BOUTIQUE",
+              "ZAPATERIA",
+              "CALZADO",
+              "MODAS",
+              "ROPA",
+              "NOVEDADES",
+              "JOYERIA"
+            ]
+          },
+          {
+            "id": "tecnologia",
+            "signs": [
+              "#1f5fa8",
+              "#c8322b",
+              "#1b1f24",
+              "#2b9fd9",
+              "#f2f0ea"
+            ],
+            "light": "#edf4ff",
+            "openFront": 0.15,
+            "interior": "shelves",
+            "open": [
+              9,
+              10
+            ],
+            "close": [
+              19,
+              20.5
+            ],
+            "allDay": 0,
+            "signLit": 0.6,
+            "signLate": 0.25,
+            "words": [
+              "CELULARES",
+              "CYBER",
+              "COMPUTADORAS",
+              "ELECTRONICA",
+              "ACCESORIOS",
+              "REPARACIONES"
+            ]
+          },
+          {
+            "id": "belleza",
+            "signs": [
+              "#d9607f",
+              "#7a2e8c",
+              "#1b1f24",
+              "#f2f0ea",
+              "#e8b4b8"
+            ],
+            "light": "#fff0ee",
+            "openFront": 0.1,
+            "interior": "desk",
+            "open": [
+              8.5,
+              10
+            ],
+            "close": [
+              19,
+              21
+            ],
+            "allDay": 0,
+            "signLit": 0.55,
+            "signLate": 0.1,
+            "words": [
+              "PELUQUERIA",
+              "BARBERIA",
+              "SALON",
+              "ESTETICA",
+              "UÑAS",
+              "SPA"
+            ]
+          },
+          {
+            "id": "taller",
+            "signs": [
+              "#c8322b",
+              "#1f5fa8",
+              "#e0b21c",
+              "#f2f0ea",
+              "#1b1f24"
+            ],
+            "light": "#fff2dc",
+            "openFront": 1,
+            "interior": "shelves",
+            "open": [
+              7.5,
+              8.5
+            ],
+            "close": [
+              17,
+              18.5
+            ],
+            "allDay": 0,
+            "signLit": 0.2,
+            "signLate": 0.05,
+            "words": [
+              "TALLER",
+              "REPUESTOS",
+              "LUBRICADORA",
+              "VULCANIZADORA",
+              "MECANICA",
+              "LLANTAS",
+              "AUTOPARTES"
+            ]
+          },
+          {
+            "id": "salud",
+            "signs": [
+              "#f2f0ea",
+              "#3d8fcf",
+              "#1f8a8a",
+              "#1f5fa8"
+            ],
+            "light": "#f2f8ff",
+            "openFront": 0,
+            "interior": "desk",
+            "open": [
+              8,
+              9
+            ],
+            "close": [
+              18,
+              20
+            ],
+            "allDay": 0.04,
+            "signLit": 0.6,
+            "signLate": 0.3,
+            "words": [
+              "CONSULTORIO",
+              "LABORATORIO",
+              "OPTICA",
+              "DENTAL",
+              "CLINICA",
+              "VETERINARIA"
+            ]
+          },
+          {
+            "id": "tienda",
+            "signs": [
+              "#c8322b",
+              "#e0b21c",
+              "#1f5fa8",
+              "#f2f0ea",
+              "#2d8a4e",
+              "#e56b1f",
+              "#7a2e8c"
+            ],
+            "light": "#fff4e2",
+            "openFront": 0.5,
+            "interior": "shelves",
+            "open": [
+              8,
+              9.5
+            ],
+            "close": [
+              18.5,
+              20.5
+            ],
+            "allDay": 0,
+            "signLit": 0.4,
+            "signLate": 0.1,
+            "words": [
+              "BAZAR",
+              "PAPELERIA",
+              "COPIAS",
+              "LAVANDERIA",
+              "LIBRERIA",
+              "REGALOS",
+              "VARIEDADES",
+              "MUEBLES",
+              "IMPRENTA"
+            ]
+          }
+        ],
+        "fallback": {
+          "kinds": [
+            "tienda",
+            "moda"
+          ],
+          "share": 0.6
+        }
+      },
+      "ac": {
+        "probability": 0.35,
+        "width": 0.8,
+        "height": 0.55,
+        "shadow": 0.75,
+        "color": "#d4d5d1",
+        "fan": 0.19
+      },
+      "grime": {
+        "streaks": 0.2,
+        "streakLength": 1.6,
+        "top": 0.28,
+        "topLength": 2.2,
+        "scale": 0.35
+      },
+      "bars": {
+        "probability": 0.6,
+        "spacing": 0.12,
+        "width": 0.018,
+        "floors": 2,
+        "color": "#2b2d2f"
+      },
+      "curtainWall": {
+        "mullion": 1.5,
+        "mullionWidth": 0.07,
+        "spandrel": 0.9,
+        "interior": 0.45,
+        "frame": "#aeb3b6",
+        "spandrelColor": "#27343d",
+        "roomBays": 3
+      },
+      "interiorFade": [
+        120,
+        260
+      ],
+      "interiorGrazing": [
+        0.12,
+        0.3
+      ],
+      "detailFade": [
+        0.08,
+        0.16
+      ],
+      "portales": {
+        "polygon": [
+          [
+            -2.184,
+            -79.877
+          ],
+          [
+            -2.184,
+            -79.8915
+          ],
+          [
+            -2.1995,
+            -79.89
+          ],
+          [
+            -2.2,
+            -79.883
+          ]
+        ],
+        "minHeight": 7,
+        "minArea": 60,
+        "probability": 0.92,
+        "height": 4.4,
+        "beam": 0.55,
+        "column": 0.6,
+        "depth": 3.4,
+        "bay": [
+          3.4,
+          4.3
+        ],
+        "ceilingDrop": 0.12,
+        "tile": 0.45,
+        "shade": 0.3,
+        "plinthShade": 0.82,
+        "floor": "#a39d93",
+        "ceiling": "#e0d8c8",
+        "lamp": {
+          "color": "#ffe6bf",
+          "glow": 1.4,
+          "radius": 0.16,
+          "light": 6,
+          "bounce": 0.25,
+          "lit": 0.85
+        }
+      }
+    },
+    "zones": [
+      {
+        "name": "Las Peñas",
+        "lat": -2.1812,
+        "lon": -79.8762,
+        "radius": 260,
+        "palette": [
+          "#e3be45",
+          "#3f79b8",
+          "#3aa39b",
+          "#c4473c",
+          "#df8537",
+          "#d06b8c",
+          "#6aa44e",
+          "#957cbf",
+          "#ece5d6",
+          "#e9d09a",
+          "#e05a3f",
+          "#4a9fcf"
+        ]
+      }
+    ]
+  },
+  "player": {
+    "probeDistance": 0.45,
+    "roofLedge": 1.1,
+    "spawnHeightOffset": 0.2,
+    "swimDepth": 1.15,
+    "worldMargin": 20,
+    "cameraTargetShare": 0.83,
+    "eyeShare": 0.92
+  },
+  "characters": {
+    "default": "human",
+    "storageKey": "gye3d.character",
+    "roster": {
+      "human": {
+        "name": "Humano",
+        "model": "human",
+        "height": 1.75,
+        "abilities": {
+          "climb": true,
+          "glide": true,
+          "drive": true
+        },
+        "movement": {
+          "walkSpeed": 1.4,
+          "runSpeed": 3.9,
+          "swimSpeed": 0.9,
+          "swimRunSpeed": 1.5,
+          "speedMultipliers": [
+            0.5,
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "defaultSpeedIndex": 1,
+          "acceleration": 8,
+          "airControl": 0.2,
+          "jumpSpeed": 3,
+          "gravity": 9.81,
+          "climbSpeed": 1.5,
+          "stepHeight": 0.45,
+          "turnRate": 10
+        }
+      }
+    }
+  },
+  "vehicles": {
+    "car": {
+      "name": "Carro",
+      "paint": "#8e1c1f",
+      "paintMetalness": 0.25,
+      "paintRoughness": 0.42,
+      "paintClearcoat": 0.45,
+      "paintClearcoatRoughness": 0.12,
+      "glass": {
+        "color": "#1c252c",
+        "opacity": 0.5,
+        "roughness": 0.06
+      },
+      "trimColor": "#1d1f21",
+      "interiorColor": "#2a2826",
+      "tireColor": "#1a1a1a",
+      "rimColor": "#b9bcbf",
+      "headlightColor": "#fff6e0",
+      "headlightGlow": 0.5,
+      "headlights": {
+        "color": "#fff3dd",
+        "intensity": 400,
+        "range": 70,
+        "coneDeg": [
+          30,
+          10
+        ],
+        "pitchDeg": -2,
+        "foreground": [
+          2.5,
+          5.5
+        ],
+        "lensGlow": 5
+      },
+      "taillightColor": "#b3100f",
+      "taillightGlow": 0.35,
+      "brakeGlow": 2.2,
+      "reverseGlow": 1.6,
+      "plateColor": "#f1f1ec",
+      "body": {
+        "length": 4.35,
+        "width": 1.72,
+        "wheelbase": 2.55,
+        "frontOverhang": 0.85,
+        "track": 1.47,
+        "wheelRadius": 0.31,
+        "wheelWidth": 0.2,
+        "archClearance": 0.05,
+        "fenderBehindArch": 0.12,
+        "fenderAheadOfArch": 0.08,
+        "clearance": 0.17,
+        "bumperHeight": 0.5,
+        "hoodHeight": 0.83,
+        "beltHeight": 0.95,
+        "trunkHeight": 1,
+        "roofHeight": 1.46,
+        "hoodLength": 1.15,
+        "windshieldRun": 0.72,
+        "roofLength": 1.1,
+        "rearWindowRun": 0.6,
+        "noseRound": 0.2,
+        "tailRound": 0.15,
+        "cabinInset": 0.13,
+        "windshieldBulge": 0.035,
+        "glassColumns": 6,
+        "bevel": 0.06,
+        "doorThickness": 0.06,
+        "doorBevel": 0.015,
+        "roofThickness": 0.05,
+        "roofCrown": 0.012,
+        "pillarWidth": 0.08,
+        "bPillarDepth": 0.09,
+        "cPillarReach": 0.42,
+        "curveSegments": 10
+      },
+      "wheel": {
+        "segments": 22,
+        "rimShare": 0.65,
+        "sidewallRound": 0.035,
+        "spokes": 5,
+        "spokeGapShare": 0.55,
+        "rimDepth": 0.04,
+        "rimInset": 0.02,
+        "discShare": 0.78,
+        "discColor": "#6d6f71",
+        "barrelColor": "#3a3c3e"
+      },
+      "details": {
+        "headlight": {
+          "size": [
+            0.36,
+            0.09,
+            0.06
+          ],
+          "inset": 0.27,
+          "drop": 0.12
+        },
+        "grille": {
+          "size": [
+            0.72,
+            0.13,
+            0.04
+          ],
+          "rise": 0.09
+        },
+        "intake": {
+          "size": [
+            0.95,
+            0.1,
+            0.05
+          ],
+          "rise": 0.13
+        },
+        "taillight": {
+          "size": [
+            0.36,
+            0.11,
+            0.05
+          ],
+          "inset": 0.24,
+          "drop": 0.13
+        },
+        "reverseLight": {
+          "size": [
+            0.1,
+            0.05,
+            0.04
+          ],
+          "inset": 0.47,
+          "drop": 0.16
+        },
+        "plate": {
+          "size": [
+            0.36,
+            0.11,
+            0.015
+          ],
+          "frontRise": 0.25,
+          "rearRise": 0.08
+        },
+        "mirror": {
+          "size": [
+            0.08,
+            0.11,
+            0.18
+          ],
+          "out": 0.07,
+          "rise": 0.08,
+          "back": 0.12
+        },
+        "handle": {
+          "size": [
+            0.02,
+            0.025,
+            0.14
+          ],
+          "drop": 0.1,
+          "back": 0.3
+        },
+        "rocker": {
+          "size": [
+            0.05,
+            0.08
+          ],
+          "rise": 0.05
+        },
+        "seam": 0.008,
+        "liner": 0.005
+      },
+      "interior": {
+        "floorHeight": 0.2,
+        "floorThickness": 0.06,
+        "colors": {
+          "dash": "#6a6d72",
+          "cluster": "#505358",
+          "gaugeFace": "#1b1e22",
+          "gaugeBezel": "#cfd2d6",
+          "needle": "#ff7a2f",
+          "panel": "#8a847b",
+          "headliner": "#cfcac0",
+          "console": "#4a4d52",
+          "wheel": "#26282b",
+          "hub": "#3a3c40"
+        },
+        "dash": {
+          "depth": 0.5,
+          "height": 0.34,
+          "rise": 0.04,
+          "slopeShare": 0.4,
+          "lip": 0.05,
+          "bevel": 0.01
+        },
+        "cluster": {
+          "width": 0.34,
+          "height": 0.07,
+          "depth": 0.16,
+          "dialRadius": 0.045,
+          "dialGap": 0.14,
+          "dialDepth": 0.004,
+          "bezel": 0.004,
+          "needle": [
+            0.035,
+            0.004
+          ],
+          "needleAnglesDeg": [
+            140,
+            60
+          ]
+        },
+        "console": {
+          "width": 0.22,
+          "stackDepth": 0.22,
+          "tunnelHeight": 0.2,
+          "tunnelLength": 0.75
+        },
+        "doorCard": {
+          "thickness": 0.03,
+          "armrest": [
+            0.07,
+            0.05,
+            0.42
+          ],
+          "armrestHeight": 0.64
+        },
+        "headliner": {
+          "thickness": 0.02,
+          "gap": 0.01
+        },
+        "pillarTrim": 0.025,
+        "pillarEdge": 0.012,
+        "seat": {
+          "x": -0.36,
+          "y": 0.26,
+          "z": 1.25
+        },
+        "driver": {
+          "drop": 0.405,
+          "back": -0.2
+        },
+        "seatSize": {
+          "width": 0.5,
+          "cushion": 0.5,
+          "cushionHeight": 0.12,
+          "back": 0.62,
+          "backThickness": 0.12,
+          "backTiltDeg": 14,
+          "headrest": [
+            0.26,
+            0.16,
+            0.1
+          ]
+        },
+        "rearBench": {
+          "z": 2.05,
+          "width": 1.3
+        },
+        "steeringWheel": {
+          "z": 1,
+          "y": 0.88,
+          "radius": 0.19,
+          "thickness": 0.016,
+          "tiltDeg": 25,
+          "hubRadius": 0.055,
+          "hubDepth": 0.05,
+          "spokeWidth": 0.035,
+          "spokeAnglesDeg": [
+            -90,
+            0,
+            180
+          ]
+        },
+        "eye": {
+          "x": -0.36,
+          "y": 1.23,
+          "z": 1.27
+        }
+      },
+      "shadow": {
+        "opacity": 0.55,
+        "widthScale": 1.25,
+        "lengthScale": 1.12,
+        "texture": 64,
+        "lift": 0.03
+      },
+      "camera": {
+        "distance": 7.5,
+        "targetHeight": 1.25,
+        "alignRate": 2.6,
+        "lagShare": 0.35,
+        "cabinPitchDeg": -4,
+        "cabinLookDeg": 150,
+        "cabinSwayShare": 0.35
+      },
+      "enterReach": 4.5,
+      "exitSideGap": 0.55,
+      "exitMaxSpeedKmh": 8,
+      "summonDistance": 3.4,
+      "boost": {
+        "multipliers": [
+          1,
+          1.5,
+          2,
+          3
+        ],
+        "defaultIndex": 0,
+        "extraAccelPerStep": 4
+      },
+      "physics": {
+        "fixedStep": 0.008333,
+        "maxSubsteps": 8,
+        "mass": 1250,
+        "yawInertia": 1900,
+        "frontWeightShare": 0.6,
+        "cgHeight": 0.52,
+        "wheelPower": 62000,
+        "minPowerSpeed": 2,
+        "maxSpeedKmh": 180,
+        "reverseMaxKmh": 28,
+        "reversePowerShare": 0.35,
+        "dragArea": 0.66,
+        "airDensity": 1.2,
+        "engineBrake": 0.7,
+        "tireMu": 1.1,
+        "tireLoadSensitivity": 0.25,
+        "tireLoadMuRange": [
+          0.7,
+          1.2
+        ],
+        "tireB": 13,
+        "tireC": 1.4,
+        "slideMu": 0.8,
+        "brakeDecel": 9,
+        "ebdRearBias": 0.85,
+        "absLimit": 0.9,
+        "tractionControl": 0.9,
+        "kinematicBelowSpeed": 2.5,
+        "dynamicAboveSpeed": 5,
+        "holdSpeed": 0.15,
+        "limiterBandKmh": 4,
+        "maxSteerDeg": 33,
+        "steerSeconds": 0.3,
+        "steerReturnSeconds": 0.2,
+        "steerGripShare": 0.95,
+        "steerSlipDeg": 3,
+        "relaxationLength": 0.6,
+        "esc": {
+          "enabled": true,
+          "minSpeedKmh": 12,
+          "gripShare": 0.92,
+          "minLateralShare": 0.35,
+          "yawTolerance": 0.1,
+          "yawGain": 10,
+          "slipGain": 20,
+          "maxSlipDeg": 8,
+          "brakeShare": 0.8,
+          "throttleCut": 0.9
+        },
+        "gravity": 9.81,
+        "stepHeight": 0.3,
+        "maxPlaceSlopeDeg": 12,
+        "wadeDepth": 0.25,
+        "stallDepth": 0.55,
+        "floatDepth": 0.85,
+        "waterDamping": 2.5,
+        "restitution": 0.2,
+        "wallFriction": 0.4,
+        "contactSpacing": 0.9,
+        "contactProbe": 0.75,
+        "accelSmoothing": 12,
+        "launchTolerance": 0.03,
+        "pushOutStep": 0.3,
+        "pushOutSteps": 12,
+        "pitchPerAccel": 0.009,
+        "rollPerLatAccel": 0.016,
+        "bodyStiffness": 60,
+        "bodyDamping": 11
+      },
+      "surfaces": {
+        "asphalt": {
+          "grip": 1,
+          "crr": 0.013,
+          "topSpeedKmh": 0
+        },
+        "concrete": {
+          "grip": 1,
+          "crr": 0.014,
+          "topSpeedKmh": 0
+        },
+        "paving": {
+          "grip": 0.88,
+          "crr": 0.02,
+          "topSpeedKmh": 0
+        },
+        "unpaved": {
+          "grip": 0.7,
+          "crr": 0.05,
+          "topSpeedKmh": 90
+        },
+        "sidewalk": {
+          "grip": 0.95,
+          "crr": 0.018,
+          "topSpeedKmh": 0
+        },
+        "pitch": {
+          "grip": 0.7,
+          "crr": 0.1,
+          "topSpeedKmh": 65
+        },
+        "park": {
+          "grip": 0.62,
+          "crr": 0.12,
+          "topSpeedKmh": 60
+        },
+        "offroad": {
+          "grip": 0.6,
+          "crr": 0.12,
+          "topSpeedKmh": 70
+        }
+      },
+      "unknownSurface": "asphalt"
+    }
+  },
+  "controls": {
+    "keys": {
+      "forward": [
+        "KeyW"
+      ],
+      "back": [
+        "KeyS"
+      ],
+      "left": [
+        "KeyA"
+      ],
+      "right": [
+        "KeyD"
+      ],
+      "run": [
+        "ShiftLeft",
+        "ShiftRight"
+      ],
+      "jump": [
+        "Space"
+      ],
+      "glide": [
+        "KeyH"
+      ],
+      "vehicle": [
+        "KeyF"
+      ],
+      "character": [],
+      "pause": [
+        "Escape",
+        "KeyP"
+      ],
+      "map": [
+        "KeyM"
+      ],
+      "timeOfDay": [
+        "KeyT"
+      ],
+      "handbrake": [
+        "Space"
+      ],
+      "camera": [
+        "KeyC"
+      ],
+      "speedUp": [
+        "Equal",
+        "NumpadAdd"
+      ],
+      "speedDown": [
+        "Minus",
+        "NumpadSubtract"
+      ],
+      "zoomIn": [
+        "ArrowUp"
+      ],
+      "zoomOut": [
+        "ArrowDown"
+      ]
+    },
+    "labels": {
+      "Space": "ESPACIO",
+      "ShiftLeft": "SHIFT",
+      "ShiftRight": "SHIFT",
+      "ArrowUp": "↑",
+      "ArrowDown": "↓",
+      "ArrowLeft": "←",
+      "ArrowRight": "→",
+      "Equal": "+",
+      "NumpadAdd": "+",
+      "Minus": "−",
+      "NumpadSubtract": "−",
+      "Escape": "ESC"
+    }
+  },
+  "glider": {
+    "thermalHeight": 55,
+    "thermalRate": 14,
+    "thermalForwardFactor": 0.3,
+    "trimSpeed": 17,
+    "minSpeed": 9,
+    "maxSpeed": 46,
+    "gravity": 9.8,
+    "drag": 0.35,
+    "sinkRate": 1.3,
+    "pitchRate": 0.9,
+    "turnRate": 0.85,
+    "maxBankDeg": 32,
+    "maxPitchUpDeg": 22,
+    "maxPitchDownDeg": 55,
+    "grabHeight": 4,
+    "span": 9.5,
+    "chord": 3.6,
+    "color": "#2f6ee6",
+    "trimColor": "#f3f6fb"
+  },
+  "camera": {
+    "distance": 7,
+    "minDistance": 2.5,
+    "maxDistance": 80,
+    "gliderDistance": 15,
+    "targetHeight": 1.5,
+    "mouseSensitivity": 0.0026,
+    "zoomStep": 1.18,
+    "followLerp": 9,
+    "autoAlignDelay": 1.4,
+    "autoAlignRate": 1.6,
+    "minPitchDeg": -82,
+    "maxPitchDeg": 65,
+    "defaultPitchDeg": -14,
+    "groundClearance": 0.6,
+    "armProbeStep": 0.5,
+    "armMaxProbes": 32,
+    "armMargin": 0.4,
+    "armMinShare": 0.4,
+    "armReturnRate": 3
+  },
+  "minimap": {
+    "metersPerPixel": 2.6,
+    "speedZoom": {
+      "fullSpeed": 45,
+      "maxFactor": 3.5,
+      "rate": 2
+    },
+    "tileBudgetMs": 3,
+    "places": {
+      "fill": "rgba(9, 24, 32, 0.9)",
+      "stroke": "#58b7e8",
+      "lineWidth": 1.6,
+      "size": 7.5,
+      "dot": "#ffd35c",
+      "dotRadius": 3.5
+    },
+    "player": {
+      "fill": "#ff5a4a",
+      "stroke": "#ffffff",
+      "lineWidth": 2,
+      "cone": {
+        "radius": 46,
+        "halfAngle": 0.5,
+        "alpha": 0.32
+      }
+    },
+    "destination": {
+      "fill": "#ff4d3d",
+      "stroke": "#ffffff",
+      "margin": 12
+    }
+  },
+  "map": {
+    "tile": 256,
+    "levels": [0.75, 1.5, 3, 6, 12, 24, 48, 96],
+    "cell": 500,
+    "maxPixelRatio": 2,
+    "spareTiles": 24,
+    "tileMarginPx": 40,
+    "style": {
+      "land": "#17252b",
+      "park": "#1f3d31",
+      "water": "#1d4a62",
+      "casing": "#0b1519",
+      "bridgeCasingPx": 3,
+      "aerovia": {
+        "color": "#58b7e8",
+        "widthPx": 2,
+        "dashPx": [6, 5]
+      },
+      "roads": [
+        {
+          "classes": ["residential", "unclassified", "road", "living_street"],
+          "color": "#7d9197",
+          "meters": 6.5,
+          "minPx": 0.7,
+          "casingPx": 0.9,
+          "maxMpp": 7,
+          "fadeFromMpp": 3,
+          "fadeAlpha": 0.75
+        },
+        {
+          "classes": ["secondary", "secondary_link", "tertiary", "tertiary_link"],
+          "color": "#d7e1e4",
+          "meters": 9.5,
+          "minPx": 1.1,
+          "casingPx": 1.5,
+          "maxMpp": 40
+        },
+        {
+          "classes": ["primary", "primary_link"],
+          "color": "#f2dea0",
+          "meters": 13,
+          "minPx": 1.6,
+          "casingPx": 1.5
+        },
+        {
+          "classes": ["motorway", "trunk", "motorway_link", "trunk_link"],
+          "color": "#f0bb4c",
+          "meters": 17,
+          "minPx": 2.1,
+          "casingPx": 1.5
+        }
+      ],
+      "labels": {
+        "font": "600 11px Archivo, sans-serif",
+        "color": "#ffffff",
+        "halo": "rgba(6, 14, 18, 0.85)",
+        "haloPx": 3,
+        "zoneFont": "700 10px 'JetBrains Mono', monospace",
+        "zoneColor": "rgba(244, 248, 251, 0.5)",
+        "zoneLetterSpacingPx": 2
+      }
+    },
+    "big": {
+      "baseLevels": 2,
+      "defaultMpp": 6,
+      "minMpp": 0.75,
+      "maxMpp": 96,
+      "wheelZoom": 1.0018,
+      "buttonZoom": 1.6,
+      "dragThreshold": 4,
+      "hitRadius": 12,
+      "tileBudgetMs": 12,
+      "scaleBarPx": 100,
+      "zoneLabels": {
+        "barrio": [1.2, 10],
+        "parroquia": [10, 40],
+        "cantón": [40, 200]
+      }
+    }
+  },
+  "hud": {
+    "shortCredits": "© OpenStreetMap · Esri, Maxar, Earthstar · Overture · Copernicus — créditos completos en la pausa (Esc)",
+    "altitudeFrom": 4,
+    "lockGraceMs": 300,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query={lat},{lon}",
+    "timeCards": {
+      "morning": { "sky": ["#7fb7e6", "#f3d7b0"], "orb": "#fff3c4", "at": [22, 58] },
+      "noon": { "sky": ["#3f8fd6", "#bfe0f5"], "orb": "#fffbe6", "at": [46, 14] },
+      "afternoon": { "sky": ["#5d86c9", "#f0a86b"], "orb": "#ffd79a", "at": [72, 46] },
+      "night": { "sky": ["#0b1633", "#28365e"], "orb": "#e4ecff", "at": [64, 18] }
+    }
+  },
+  "collision": {
+    "gridCell": 24
+  },
+  "mapLinks": {
+    "resolverPath": "api/resolve-map-link",
+    "shortHosts": [
+      "maps.app.goo.gl",
+      "goo.gl",
+      "g.co",
+      "share.google"
+    ],
+    "mapHostPatterns": [
+      "(^|\\.)google\\.[a-z]{2,3}(\\.[a-z]{2})?$",
+      "(^|\\.)maps\\.apple(\\.com)?$"
+    ],
+    "coordinateParams": [
+      "ll",
+      "sll",
+      "center",
+      "coordinate",
+      "cbll"
+    ],
+    "queryParams": [
+      "q",
+      "query",
+      "destination",
+      "daddr",
+      "address"
+    ],
+    "maxRedirects": 5,
+    "timeoutMs": 8000
+  },
+  "geolocation": {
+    "highAccuracy": true,
+    "timeoutMs": 12000,
+    "fallbackTimeoutMs": 10000,
+    "maximumAgeMs": 30000,
+    "errorToastMs": 12000
+  },
+  "search": {
+    "maxResults": 8,
+    "candidatesPerResult": 6,
+    "dedupeMeters": 400,
+    "minLength": { "category": 3, "substring": 3 },
+    "fuzzy": { "minLength": 3, "maxEdits": 1, "longLength": 8, "longMaxEdits": 2 },
+    "ranking": {
+      "tiers": {
+        "exact": 915,
+        "prefix": 900,
+        "category": 880,
+        "categoryAlias": 790,
+        "phrase": 800,
+        "words": 720,
+        "any": 640,
+        "context": 600,
+        "substring": 420,
+        "fuzzy": 320
+      },
+      "kinds": { "landmark": 320, "area": 220, "crossing": 250, "street": 140, "place": 0 },
+      "importance": 150,
+      "landmarkImportance": 1,
+      "exactWord": 12,
+      "extraWord": 8,
+      "altName": 25,
+      "typeMismatch": 60,
+      "looseStructure": 0.3,
+      "partialWord": 150,
+      "partialMinLength": 4,
+      "distance": 45,
+      "distanceScale": 400
+    },
+    "distance": { "roundMeters": 10, "kilometersFrom": 1000, "oneDecimalBelow": 10000 },
+    "labels": {
+      "placeholder": "Calle, esquina, negocio, barrio o link de Google Maps",
+      "list": "Resultados de la búsqueda",
+      "landmark": "Lugar icónico",
+      "crossing": "Intersección",
+      "crossingJoin": " y ",
+      "detailSeparator": " · ",
+      "loading": "Cargando el buscador…",
+      "failed": "El buscador no cargó: Enter busca en OpenStreetMap",
+      "empty": "Nada con ese nombre en el mapa",
+      "emptyHint": "Enter para buscar en OpenStreetMap",
+      "coords": "Coordenadas",
+      "plusCode": "Plus Code",
+      "link": "Link de mapa",
+      "direct": "Enter para ir",
+      "hint": "↑ ↓ elegir · Enter ir · Esc cerrar"
+    }
+  },
+  "destinationMarker": {
+    "color": "#ff4d3d",
+    "beamHeight": 260,
+    "beamStart": 3,
+    "beamRadius": 1.4,
+    "beamOpacity": 0.35,
+    "pinRadius": 1.6,
+    "pinHover": 6,
+    "bobAmplitude": 0.8,
+    "bobSpeed": 2.2
+  },
+  "imagery": {
+    "proxyPath": "api/tiles",
+    "tileSize": 256,
+    "levels": [
+      {
+        "zoom": 18,
+        "radius": 650
+      },
+      {
+        "zoom": 17,
+        "radius": 1700
+      }
+    ],
+    "altitudeRadiusFactor": 2.5,
+    "hysteresis": 200,
+    "maxTextures": 70,
+    "concurrency": 4,
+    "tileCacheSize": 500,
+    "cropMarginPx": 16
+  },
+  "bridges": {
+    "groupSize": 4000,
+    "sampleStep": 5,
+    "topCellWidth": 3.5,
+    "style": {
+      "road": "barrier",
+      "foot": "railing",
+      "steps": "railing",
+      "quay": "railing"
+    },
+    "colors": {
+      "concrete": "#a6a39b",
+      "barrier": "#b5b2aa",
+      "pier": "#a09d95",
+      "rampWall": "#a8a49a",
+      "railing": "#59606a",
+      "roof": "#8c939b"
+    },
+    "roughness": 0.92,
+    "underShade": 0.55,
+    "barrier": {
+      "height": 0.85,
+      "base": 0.42,
+      "top": 0.2
+    },
+    "curb": {
+      "height": 0.18,
+      "width": 0.25
+    },
+    "railing": {
+      "height": 1.1,
+      "barSpacing": 0.14,
+      "bar": 0.03,
+      "rail": 0.06,
+      "postSpacing": 2,
+      "post": 0.08,
+      "fade": [
+        25,
+        90
+      ],
+      "roughness": 0.55,
+      "metalness": 0.5
+    },
+    "piers": {
+      "spacing": {
+        "road": 30,
+        "foot": 14,
+        "steps": 6
+      },
+      "minHeight": 1.2,
+      "column": {
+        "road": 1.3,
+        "foot": 0.35,
+        "steps": 0.25
+      },
+      "columnSpacing": 7.5,
+      "cap": {
+        "height": 0.9,
+        "overhang": 0.35
+      },
+      "sides": 6,
+      "buried": 1,
+      "perMeter": 0.1,
+      "align": {
+        "reach": 22,
+        "maxAngleDeg": 8,
+        "endGap": 0.3,
+        "merge": 0.5
+      }
+    },
+    "rampWall": {
+      "footing": 0.5
+    },
+    "stairs": {
+      "rise": 0.17,
+      "slab": 0.18
+    },
+    "roof": {
+      "height": 2.7,
+      "thickness": 0.1,
+      "overhang": 0.35,
+      "postSpacing": 4,
+      "post": 0.1
+    },
+    "index": {
+      "cell": 16,
+      "slack": 0.4
+    },
+    "walls": {
+      "band": 0.35,
+      "stand": 1.5
+    },
+    "lampShadowDepth": 0.25
+  },
+  "monuments": {
+    "roughness": 0.8,
+    "surface": "concrete",
+    "flood": {
+      "color": "#ffdcae",
+      "intensity": 0.55,
+      "top": 0.45
+    },
+    "ground": {
+      "rings": 3,
+      "angles": 8
+    },
+    "detail": {
+      "sides": 20,
+      "thin": 6,
+      "rimSides": 8,
+      "rimSegments": 144,
+      "rounded": 2,
+      "lathe": 24,
+      "arch": 10
+    },
+    "wind": {
+      "headingDeg": 45
+    },
+    "list": [
+      {
+        "id": "laPerla",
+        "type": "ferrisWheel",
+        "lat": -2.186425,
+        "lon": -79.875865,
+        "headingDeg": 25,
+        "exclude": 8,
+        "flood": 0.12,
+        "hub": 30,
+        "radius": 27,
+        "width": 5.5,
+        "rim": {
+          "tube": 0.3,
+          "inner": 0.93,
+          "innerTube": 0.18
+        },
+        "truss": {
+          "count": 72,
+          "radius": 0.07
+        },
+        "hubDisc": {
+          "radius": 1.5,
+          "thickness": 0.9
+        },
+        "axle": {
+          "radius": 0.55,
+          "overhang": 1
+        },
+        "spokes": {
+          "count": 36,
+          "radius": 0.05,
+          "twistDeg": 6,
+          "hubOffset": 0.8
+        },
+        "crossbar": 0.12,
+        "legs": {
+          "spread": 26,
+          "depth": 7,
+          "radius": 0.65,
+          "brace": {
+            "at": 0.3,
+            "radius": 0.32
+          }
+        },
+        "deck": {
+          "length": 40,
+          "width": 30,
+          "thickness": 1,
+          "freeboard": 1.5
+        },
+        "rpm": 0.083,
+        "cabins": {
+          "count": 36,
+          "size": [
+            2.4,
+            2.4,
+            2.1
+          ],
+          "corner": 0.45,
+          "glass": [
+            0.3,
+            0.85
+          ],
+          "lip": 0.03,
+          "hanger": [
+            0.09,
+            0.5
+          ]
+        },
+        "colors": {
+          "structure": "#e8eae7",
+          "cabin": "#f1f1ee",
+          "glass": "#2b3a44",
+          "deck": "#a19d94",
+          "hub": "#b3b7b7"
+        },
+        "lights": {
+          "rim": 240,
+          "spoke": 9,
+          "radial": 0.35,
+          "size": 0.45,
+          "minPixels": 1.6,
+          "maxPixels": 12,
+          "farFalloff": 1,
+          "core": 6,
+          "glow": 0.45,
+          "depthPull": 0.01,
+          "intensity": 3.5,
+          "speed": 0.06,
+          "waves": 2,
+          "palette": [
+            "#ffdd00",
+            "#034ea2",
+            "#ed1c24",
+            "#6ecff6",
+            "#ffffff",
+            "#6ecff6"
+          ],
+          "cabinGlow": {
+            "color": "#ffe2b8",
+            "intensity": 0.9
+          },
+          "spill": 1.2,
+          "reflect": {
+            "count": 40,
+            "power": 26
+          }
+        }
+      },
+      {
+        "id": "torreMorisca",
+        "type": "clockTower",
+        "lat": -2.195705,
+        "lon": -79.880396,
+        "headingDeg": 15,
+        "exclude": 4,
+        "flood": 1,
+        "base": {
+          "width": 5.8,
+          "height": 4.2
+        },
+        "arches": {
+          "door": [
+            1.5,
+            3
+          ],
+          "window": [
+            0.8,
+            1.7
+          ],
+          "bulge": 1.15,
+          "inset": 0.02
+        },
+        "shaft": {
+          "width": 4.3,
+          "height": 8.6,
+          "pilaster": 0.32,
+          "windows": 2
+        },
+        "cornice": {
+          "overhang": 0.25,
+          "height": 0.35
+        },
+        "clock": {
+          "width": 5,
+          "height": 3.4,
+          "radius": 1.25,
+          "ring": 0.09,
+          "lift": 0.03,
+          "thickness": 0.04,
+          "hour": [
+            0.12,
+            0.55
+          ],
+          "minute": [
+            0.08,
+            0.85
+          ]
+        },
+        "gallery": {
+          "width": 5.6,
+          "height": 0.4,
+          "rail": [
+            0.9,
+            0.12
+          ]
+        },
+        "lantern": {
+          "width": 3,
+          "height": 2.4,
+          "opening": [
+            0.9,
+            1.7
+          ]
+        },
+        "dome": {
+          "radius": 1.5,
+          "rise": 1.3,
+          "bulge": 0.12
+        },
+        "finial": {
+          "radius": 0.12,
+          "taper": 0.5,
+          "height": 0.6,
+          "ball": 0.22
+        },
+        "flag": {
+          "pole": [
+            0.04,
+            2.4
+          ],
+          "size": [
+            1.5,
+            1
+          ],
+          "thickness": 0.03,
+          "stripes": [
+            "#4ab8e8",
+            "#ffffff",
+            "#4ab8e8",
+            "#ffffff",
+            "#4ab8e8"
+          ]
+        },
+        "colors": {
+          "wall": "#ece5d3",
+          "trim": "#9fc0d4",
+          "opening": "#2f343a",
+          "clock": "#f4f1e6",
+          "hands": "#1a1a1a",
+          "dome": "#e3dccb",
+          "finial": "#c9a75a",
+          "pole": "#d8d8d8"
+        },
+        "clockGlow": {
+          "color": "#fff4dc",
+          "intensity": 1.6
+        }
+      },
+      {
+        "id": "rotonda",
+        "type": "hemicycle",
+        "lat": -2.192586,
+        "lon": -79.879224,
+        "headingDeg": 96,
+        "exclude": 22,
+        "flood": 1,
+        "radius": 16,
+        "arcDeg": 180,
+        "supports": {
+          "count": 10,
+          "spacing": 1.3
+        },
+        "column": {
+          "radius": 0.42,
+          "taper": 0.88,
+          "height": 7,
+          "base": [
+            1.3,
+            0.3
+          ],
+          "capital": [
+            1.25,
+            0.35
+          ]
+        },
+        "pillar": {
+          "width": 0.95
+        },
+        "entablature": {
+          "height": 1.1,
+          "depth": 2.6,
+          "overhang": 1
+        },
+        "platform": {
+          "width": 3.4,
+          "steps": 3,
+          "rise": 0.36,
+          "run": 0.45
+        },
+        "pedestal": {
+          "width": 3,
+          "height": 4.4,
+          "cap": [
+            3.4,
+            0.3
+          ]
+        },
+        "statues": {
+          "radius": 0.5,
+          "height": 2.7,
+          "gap": 1.1,
+          "head": 0.3,
+          "arm": 0.14,
+          "reach": 0.35,
+          "shoulder": 0.7,
+          "hand": 0.55
+        },
+        "flags": {
+          "pole": [
+            0.04,
+            3.2
+          ],
+          "size": [
+            1.6,
+            1.05
+          ],
+          "thickness": 0.03,
+          "list": [
+            {
+              "stripes": [
+                "#fcd116",
+                "#003893",
+                "#cf142b"
+              ]
+            },
+            {
+              "stripes": [
+                "#fcd116",
+                "#fcd116",
+                "#003893",
+                "#ce1126"
+              ]
+            },
+            {
+              "stripes": [
+                "#ffdd00",
+                "#ffdd00",
+                "#034ea2",
+                "#ed1c24"
+              ]
+            },
+            {
+              "stripes": [
+                "#d91023",
+                "#ffffff",
+                "#d91023"
+              ],
+              "vertical": true
+            },
+            {
+              "stripes": [
+                "#d52b1e",
+                "#f9e300",
+                "#007934"
+              ]
+            },
+            {
+              "stripes": [
+                "#74acdf",
+                "#ffffff",
+                "#74acdf"
+              ]
+            },
+            {
+              "stripes": [
+                "#ffffff",
+                "#d52b1e"
+              ]
+            },
+            {
+              "stripes": [
+                "#d52b1e",
+                "#ffffff",
+                "#0038a8"
+              ]
+            },
+            {
+              "stripes": [
+                "#ffffff",
+                "#0038a8",
+                "#ffffff",
+                "#0038a8",
+                "#ffffff"
+              ]
+            },
+            {
+              "stripes": [
+                "#4ab8e8",
+                "#ffffff",
+                "#4ab8e8",
+                "#ffffff",
+                "#4ab8e8"
+              ]
+            }
+          ]
+        },
+        "colors": {
+          "stone": "#e2dccd",
+          "column": "#ece6da",
+          "bronze": "#5a4731",
+          "platform": "#c4bdae",
+          "pole": "#d0d0d0"
+        }
+      },
+      {
+        "id": "faro",
+        "type": "lighthouse",
+        "lat": -2.18088,
+        "lon": -79.875499,
+        "exclude": 3,
+        "flood": 1,
+        "height": 14.8,
+        "radius": [
+          3,
+          2.2
+        ],
+        "stripes": {
+          "count": 6,
+          "turns": 1,
+          "across": 4,
+          "along": 40
+        },
+        "door": {
+          "size": [
+            1,
+            2.2
+          ],
+          "inset": 0.02
+        },
+        "gallery": {
+          "radius": 2.9,
+          "height": 0.45,
+          "rail": [
+            1,
+            0.05
+          ],
+          "posts": 20
+        },
+        "lantern": {
+          "radius": 1.4,
+          "height": 2.2,
+          "mullions": 8,
+          "frame": 0.08
+        },
+        "cap": {
+          "height": 1.3,
+          "overhang": 1.12,
+          "ball": 0.25
+        },
+        "colors": {
+          "a": "#f2f2ee",
+          "b": "#6fb3e0",
+          "gallery": "#2c3640",
+          "lantern": "#e6f2ff",
+          "cap": "#35577d",
+          "door": "#2a3038"
+        },
+        "beam": {
+          "count": 2,
+          "length": 320,
+          "angleDeg": 3,
+          "rpm": 5,
+          "intensity": 0.22,
+          "color": "#fff1cf",
+          "tessellation": [
+            64,
+            8
+          ]
+        },
+        "lanternGlow": {
+          "color": "#fff1cf",
+          "intensity": 4
+        }
+      }
+    ]
+  },
+  "traffic": {
+    "radius": 380,
+    "hysteresis": 60,
+    "recenter": 60,
+    "cell": 150,
+    "maxVehicles": 220,
+    "spawnPerFrame": 3,
+    "popDistance": 160,
+    "minSpacing": 6,
+    "climb": 1.5,
+    "roughness": 0.4,
+    "metalness": 0.3,
+    "flow": {
+      "min": 0.3,
+      "max": 2.2,
+      "gamma": 1.6
+    },
+    "hourly": [0.28, 0.2, 0.16, 0.15, 0.2, 0.42, 0.78, 1.12, 1.18, 1.0, 0.92, 0.95, 1.04, 1.04, 0.96, 0.98, 1.06, 1.2, 1.24, 1.08, 0.86, 0.66, 0.5, 0.38],
+    "density": {
+      "motorway": 10,
+      "trunk": 12,
+      "primary": 14,
+      "secondary": 12,
+      "tertiary": 9,
+      "motorway_link": 6,
+      "trunk_link": 6,
+      "primary_link": 6,
+      "secondary_link": 6,
+      "tertiary_link": 6,
+      "residential": 2.5,
+      "unclassified": 2.5,
+      "road": 2,
+      "living_street": 1
+    },
+    "driving": {
+      "accel": 1.6,
+      "decel": 3.0,
+      "maxDecel": 8,
+      "comfort": 2.5,
+      "minGap": 2.0,
+      "headway": 1.2,
+      "exponent": 4,
+      "pace": [
+        0.85,
+        1.1
+      ],
+      "startShare": 0.8,
+      "lateralAccel": 2.2,
+      "cornerLength": 9,
+      "straightBias": 2,
+      "stopped": 0.5,
+      "brakeLights": 1.0,
+      "brakeFade": 6
+    },
+    "junction": {
+      "minDegree": 3,
+      "approach": 30,
+      "stopGap": 2,
+      "clearance": 4,
+      "patience": 25,
+      "green": 12,
+      "memory": 1
+    },
+    "obstacles": {
+      "lookAhead": 40,
+      "walk": 0.6,
+      "car": 2.3
+    },
+    "lights": {
+      "head": {
+        "color": "#fff1d8",
+        "lens": "#e6e4dc",
+        "glow": 5,
+        "halo": 1.4
+      },
+      "tail": {
+        "color": "#ff2414",
+        "lens": "#7e1811",
+        "glow": 2.5,
+        "halo": 0.9
+      },
+      "brake": 3,
+      "facing": {
+        "from": -0.45,
+        "to": 0.35
+      },
+      "halo": {
+        "size": 0.9,
+        "minPixels": 1.5,
+        "maxPixels": 18,
+        "farFalloff": 1,
+        "core": 14,
+        "glow": 0.2,
+        "brightness": 1.5,
+        "depthPull": 0.02,
+        "maxDistance": 3000
+      }
+    },
+    "kinds": [
+      {
+        "name": "car",
+        "share": 0.4,
+        "classes": [],
+        "length": 4.48,
+        "wheelbase": 2.68,
+        "speedFactor": 1,
+        "paint": [
+          "#f1f1ee",
+          "#f1f1ee",
+          "#c7cacd",
+          "#c7cacd",
+          "#9ba0a6",
+          "#5c6167",
+          "#1d1e21",
+          "#1d1e21",
+          "#8b1d20",
+          "#1f3e70",
+          "#d8d2c2",
+          "#3b4a3a"
+        ],
+        "parts": [
+          {
+            "shape": [
+              [
+                -2.22,
+                0.3
+              ],
+              [
+                2.22,
+                0.3
+              ],
+              [
+                2.24,
+                0.62
+              ],
+              [
+                1.9,
+                0.8
+              ],
+              [
+                -1.95,
+                0.86
+              ],
+              [
+                -2.24,
+                0.74
+              ]
+            ],
+            "width": 1.76
+          },
+          {
+            "shape": [
+              [
+                -1.62,
+                0.86
+              ],
+              [
+                0.98,
+                0.8
+              ],
+              [
+                0.3,
+                1.38
+              ],
+              [
+                -1.2,
+                1.4
+              ]
+            ],
+            "width": 1.62,
+            "color": "#1a2329"
+          },
+          {
+            "box": [
+              1.5,
+              0.05,
+              1.5
+            ],
+            "at": [
+              -0.45,
+              1.415,
+              0
+            ]
+          }
+        ],
+        "wheels": {
+          "radius": 0.31,
+          "width": 0.21,
+          "track": 1.5,
+          "axles": [
+            1.35,
+            -1.33
+          ],
+          "segments": 10,
+          "color": "#151515"
+        },
+        "lights": {
+          "size": [
+            0.04,
+            0.11,
+            0.3
+          ],
+          "head": [
+            2.24,
+            0.57,
+            0.58
+          ],
+          "tail": [
+            -2.24,
+            0.66,
+            0.6
+          ]
+        }
+      },
+      {
+        "name": "taxi",
+        "share": 0.28,
+        "classes": [],
+        "length": 4.48,
+        "wheelbase": 2.68,
+        "speedFactor": 1.05,
+        "paint": [
+          "#f5c400",
+          "#f2bd00",
+          "#f7cc1a"
+        ],
+        "parts": [
+          {
+            "shape": [
+              [
+                -2.22,
+                0.3
+              ],
+              [
+                2.22,
+                0.3
+              ],
+              [
+                2.24,
+                0.62
+              ],
+              [
+                1.9,
+                0.8
+              ],
+              [
+                -1.95,
+                0.86
+              ],
+              [
+                -2.24,
+                0.74
+              ]
+            ],
+            "width": 1.76
+          },
+          {
+            "shape": [
+              [
+                -1.62,
+                0.86
+              ],
+              [
+                0.98,
+                0.8
+              ],
+              [
+                0.3,
+                1.38
+              ],
+              [
+                -1.2,
+                1.4
+              ]
+            ],
+            "width": 1.62,
+            "color": "#1a2329"
+          },
+          {
+            "box": [
+              1.5,
+              0.05,
+              1.5
+            ],
+            "at": [
+              -0.45,
+              1.415,
+              0
+            ]
+          },
+          {
+            "box": [
+              0.24,
+              0.15,
+              0.52
+            ],
+            "at": [
+              -0.35,
+              1.515,
+              0
+            ],
+            "color": "#f6f1e2",
+            "glow": "#ffd98a",
+            "glowIntensity": 1.5
+          }
+        ],
+        "wheels": {
+          "radius": 0.31,
+          "width": 0.21,
+          "track": 1.5,
+          "axles": [
+            1.35,
+            -1.33
+          ],
+          "segments": 10,
+          "color": "#151515"
+        },
+        "lights": {
+          "size": [
+            0.04,
+            0.11,
+            0.3
+          ],
+          "head": [
+            2.24,
+            0.57,
+            0.58
+          ],
+          "tail": [
+            -2.24,
+            0.66,
+            0.6
+          ]
+        }
+      },
+      {
+        "name": "suv",
+        "share": 0.14,
+        "classes": [],
+        "length": 4.68,
+        "wheelbase": 2.84,
+        "speedFactor": 1,
+        "paint": [
+          "#f1f1ee",
+          "#f1f1ee",
+          "#c7cacd",
+          "#c7cacd",
+          "#9ba0a6",
+          "#5c6167",
+          "#1d1e21",
+          "#1d1e21",
+          "#8b1d20",
+          "#1f3e70",
+          "#d8d2c2",
+          "#3b4a3a"
+        ],
+        "parts": [
+          {
+            "shape": [
+              [
+                -2.32,
+                0.4
+              ],
+              [
+                2.32,
+                0.4
+              ],
+              [
+                2.34,
+                0.78
+              ],
+              [
+                2.0,
+                0.98
+              ],
+              [
+                -2.3,
+                1.0
+              ],
+              [
+                -2.34,
+                0.9
+              ]
+            ],
+            "width": 1.86
+          },
+          {
+            "shape": [
+              [
+                -2.22,
+                1.0
+              ],
+              [
+                1.15,
+                0.98
+              ],
+              [
+                0.55,
+                1.66
+              ],
+              [
+                -2.12,
+                1.7
+              ]
+            ],
+            "width": 1.72,
+            "color": "#1a2329"
+          },
+          {
+            "box": [
+              2.6,
+              0.06,
+              1.66
+            ],
+            "at": [
+              -0.8,
+              1.71,
+              0
+            ]
+          }
+        ],
+        "wheels": {
+          "radius": 0.36,
+          "width": 0.24,
+          "track": 1.6,
+          "axles": [
+            1.42,
+            -1.42
+          ],
+          "segments": 10,
+          "color": "#151515"
+        },
+        "lights": {
+          "size": [
+            0.04,
+            0.12,
+            0.3
+          ],
+          "head": [
+            2.34,
+            0.76,
+            0.62
+          ],
+          "tail": [
+            -2.34,
+            0.92,
+            0.66
+          ]
+        }
+      },
+      {
+        "name": "pickup",
+        "share": 0.1,
+        "classes": [],
+        "length": 5.26,
+        "wheelbase": 3.05,
+        "speedFactor": 0.97,
+        "paint": [
+          "#f1f1ee",
+          "#c7cacd",
+          "#9ba0a6",
+          "#1d1e21",
+          "#8b1d20",
+          "#23466f",
+          "#6d6a5c"
+        ],
+        "parts": [
+          {
+            "shape": [
+              [
+                -2.62,
+                0.45
+              ],
+              [
+                2.62,
+                0.45
+              ],
+              [
+                2.64,
+                0.82
+              ],
+              [
+                2.25,
+                1.0
+              ],
+              [
+                -2.62,
+                1.0
+              ]
+            ],
+            "width": 1.86
+          },
+          {
+            "shape": [
+              [
+                -0.55,
+                1.0
+              ],
+              [
+                1.3,
+                1.0
+              ],
+              [
+                0.72,
+                1.7
+              ],
+              [
+                -0.5,
+                1.72
+              ]
+            ],
+            "width": 1.72,
+            "color": "#1a2329"
+          },
+          {
+            "box": [
+              1.25,
+              0.06,
+              1.66
+            ],
+            "at": [
+              0.08,
+              1.73,
+              0
+            ]
+          },
+          {
+            "box": [
+              2.0,
+              0.38,
+              0.07
+            ],
+            "at": [
+              -1.6,
+              1.19,
+              0.895
+            ]
+          },
+          {
+            "box": [
+              2.0,
+              0.38,
+              0.07
+            ],
+            "at": [
+              -1.6,
+              1.19,
+              -0.895
+            ]
+          },
+          {
+            "box": [
+              0.07,
+              0.38,
+              1.86
+            ],
+            "at": [
+              -2.585,
+              1.19,
+              0
+            ]
+          }
+        ],
+        "wheels": {
+          "radius": 0.37,
+          "width": 0.25,
+          "track": 1.6,
+          "axles": [
+            1.55,
+            -1.5
+          ],
+          "segments": 10,
+          "color": "#151515"
+        },
+        "lights": {
+          "size": [
+            0.04,
+            0.12,
+            0.3
+          ],
+          "head": [
+            2.64,
+            0.8,
+            0.64
+          ],
+          "tail": [
+            -2.64,
+            0.95,
+            0.72
+          ]
+        }
+      },
+      {
+        "name": "bus",
+        "share": 0.08,
+        "classes": [
+          "trunk",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk_link",
+          "primary_link"
+        ],
+        "length": 11.6,
+        "wheelbase": 6.3,
+        "speedFactor": 0.8,
+        "paint": [
+          "#ecece6",
+          "#2f6db5",
+          "#c9342a",
+          "#1f8a4c",
+          "#f0a51f",
+          "#6f3a9c"
+        ],
+        "parts": [
+          {
+            "box": [
+              11.6,
+              1.0,
+              2.5
+            ],
+            "at": [
+              0,
+              0.9,
+              0
+            ]
+          },
+          {
+            "box": [
+              11.5,
+              1.15,
+              2.44
+            ],
+            "at": [
+              0,
+              1.975,
+              0
+            ],
+            "color": "#1a2329"
+          },
+          {
+            "box": [
+              11.6,
+              0.5,
+              2.5
+            ],
+            "at": [
+              0,
+              2.8,
+              0
+            ]
+          },
+          {
+            "box": [
+              0.06,
+              0.22,
+              1.7
+            ],
+            "at": [
+              5.8,
+              2.72,
+              0
+            ],
+            "color": "#2a2a2a",
+            "glow": "#ffb640",
+            "glowIntensity": 2
+          }
+        ],
+        "wheels": {
+          "radius": 0.52,
+          "width": 0.32,
+          "track": 2.1,
+          "axles": [
+            3.4,
+            -2.9
+          ],
+          "segments": 10,
+          "color": "#151515"
+        },
+        "lights": {
+          "size": [
+            0.05,
+            0.16,
+            0.3
+          ],
+          "head": [
+            5.8,
+            0.75,
+            0.95
+          ],
+          "tail": [
+            -5.8,
+            0.95,
+            1.0
+          ]
+        }
+      }
+    ]
+  },
+  "places": {
+    "markers": {
+      "maxDistance": 3200,
+      "fadeStart": 2400,
+      "labelDistance": 650,
+      "minScale": 0.62,
+      "pinSize": 26,
+      "declutterMargin": 4
+    },
+    "card": {
+      "defaultRadius": 110,
+      "leaveMargin": 45,
+      "autoCollapseSeconds": 16,
+      "factLabel": "¿SABÍAS QUE…?",
+      "goLabel": "IR AQUÍ",
+      "closeLabel": "Cerrar",
+      "photoLabel": "Foto",
+      "sourcesLabel": "Fuentes",
+      "distanceFormat": "A {m}",
+      "hereLabel": "Estás aquí"
+    },
+    "zones": {
+      "checkSeconds": 0.4,
+      "settleSeconds": 1.2,
+      "totalSeconds": 6.4,
+      "kindLabel": {
+        "barrio": "Barrio",
+        "parroquia": "Parroquia",
+        "cantón": "Cantón"
+      }
+    }
+  },
+  "parking": {
+    "radius": 320,
+    "maxVisible": 2400,
+    "near": 90,
+    "wheelSegments": 5,
+    "cell": 10,
+    "kinds": {
+      "car": 0.5,
+      "suv": 0.2,
+      "pickup": 0.17,
+      "taxi": 0.13
+    }
+  },
+  "pedestrians": {
+    "radius": 170,
+    "hysteresis": 40,
+    "recenter": 50,
+    "cell": 150,
+    "maxPeople": 240,
+    "spawnPerFrame": 4,
+    "popDistance": 90,
+    "density": {
+      "pedestrian": 90,
+      "footway": 55,
+      "steps": 25,
+      "path": 10,
+      "primary": 45,
+      "secondary": 40,
+      "tertiary": 32,
+      "trunk": 18,
+      "primary_link": 12,
+      "secondary_link": 12,
+      "tertiary_link": 12,
+      "trunk_link": 6,
+      "living_street": 25,
+      "residential": 14,
+      "unclassified": 10,
+      "road": 8
+    },
+    "hours": [
+      [
+        0,
+        0.1
+      ],
+      [
+        5,
+        0.12
+      ],
+      [
+        7,
+        0.75
+      ],
+      [
+        9,
+        1
+      ],
+      [
+        12,
+        0.85
+      ],
+      [
+        15,
+        0.9
+      ],
+      [
+        18,
+        1
+      ],
+      [
+        20,
+        0.7
+      ],
+      [
+        22,
+        0.35
+      ],
+      [
+        24,
+        0.1
+      ]
+    ],
+    "walking": {
+      "speed": [
+        0.9,
+        1.3
+      ],
+      "accel": 2.0,
+      "idleBelow": 0.25,
+      "lane": [
+        0.2,
+        0.75
+      ],
+      "pathLane": 0.8,
+      "lateralSpeed": 0.6,
+      "straightBias": 1.5,
+      "turnRate": 7,
+      "stepHeight": 0.5,
+      "crossingMin": 2.5,
+      "pause": {
+        "chance": 0.12,
+        "seconds": [
+          3,
+          12
+        ]
+      }
+    },
+    "crossing": {
+      "clear": 24,
+      "near": 6,
+      "moving": 1.0,
+      "patience": 18,
+      "obstacle": 0.7
+    },
+    "chat": {
+      "chance": 0.06,
+      "seconds": [
+        30,
+        120
+      ],
+      "distance": 0.95,
+      "leaveTogether": 0.5
+    },
+    "avoid": {
+      "lookAhead": 3.5,
+      "space": 0.55,
+      "pass": 0.7,
+      "edgeMargin": 0.08
+    },
+    "player": {
+      "patience": 2.5
+    },
+    "animation": {
+      "fps": 60,
+      "blend": 0.3,
+      "walk": [
+        {
+          "clip": "Walk_Loop",
+          "share": 0.8
+        },
+        {
+          "clip": "Walk_Formal_Loop",
+          "share": 0.2
+        }
+      ],
+      "idle": [
+        {
+          "clip": "Idle_Loop",
+          "share": 1
+        }
+      ],
+      "talk": [
+        {
+          "clip": "Idle_Talking_Loop",
+          "share": 1
+        }
+      ],
+      "feet": [
+        "foot_l",
+        "foot_r"
+      ]
+    },
+    "lod": {
+      "distances": [
+        14,
+        45
+      ],
+      "shadows": 1
+    },
+    "look": {
+      "roughness": {
+        "skin": 0.6,
+        "cloth": 0.9,
+        "hair": 0.5,
+        "eyes": 0.15
+      },
+      "hem": 0.012,
+      "hemShade": 0.82,
+      "grain": 0.07,
+      "grainScale": 260,
+      "inflate": 0.014,
+      "sole": "#e6e3dc",
+      "skin": [
+        1.15,
+        1.05,
+        1.0,
+        0.9,
+        0.8,
+        0.68,
+        0.5,
+        0.36
+      ],
+      "tops": [
+        "#ecebe6",
+        "#f4f1e8",
+        "#9cc3e0",
+        "#5a9bd4",
+        "#2a3a5c",
+        "#1f1f22",
+        "#8a8d91",
+        "#b8322e",
+        "#e3c34a",
+        "#f0dc82",
+        "#e39bb0",
+        "#3f7d4f",
+        "#d9772b",
+        "#2f8c8c",
+        "#cdbb9a",
+        "#6a4c8c",
+        "#1f4fa0",
+        "#7a2a33"
+      ],
+      "bottoms": [
+        "#2a3850",
+        "#1e2636",
+        "#56708f",
+        "#1d1d20",
+        "#b9a47c",
+        "#5b5e63",
+        "#26304a",
+        "#d9d6cf",
+        "#5d5f3e"
+      ],
+      "shoes": [
+        "#1c1c1e",
+        "#e2e0da",
+        "#6a6c70",
+        "#4a3423",
+        "#28324a",
+        "#9c2b28"
+      ],
+      "hair": [
+        "#120d0a",
+        "#1b130e",
+        "#2a1d15",
+        "#3a281c",
+        "#4d3526",
+        "#6a4a30",
+        "#8a5a34"
+      ]
+    },
+    "bodies": [
+      {
+        "model": "male",
+        "share": 0.5,
+        "height": [
+          1.6,
+          1.76
+        ],
+        "body": "RegularMale",
+        "eyebrows": "Eyebrows",
+        "eyes": "Eyes",
+        "hair": [
+          {
+            "node": "Hair_SimpleParted",
+            "share": 0.35
+          },
+          {
+            "node": "Hair_Buzzed",
+            "share": 0.3
+          },
+          {
+            "node": "Hair_SlickBack",
+            "share": 0.2
+          },
+          {
+            "node": "Hair_Balding",
+            "share": 0.15
+          }
+        ],
+        "outfit": {
+          "sole": 0.028,
+          "shoes": [
+            {
+              "top": 0.11,
+              "share": 0.72
+            },
+            {
+              "top": 0.035,
+              "share": 0.28
+            }
+          ],
+          "pants": {
+            "top": 1.02,
+            "bottoms": [
+              {
+                "bottom": 0.11,
+                "share": 0.62
+              },
+              {
+                "bottom": 0.48,
+                "share": 0.38
+              }
+            ]
+          },
+          "top": {
+            "bottom": 0.98,
+            "top": 1.545,
+            "collarRadius": 0.075,
+            "collarDrop": 0.045,
+            "sleeves": [
+              {
+                "reach": 0.36,
+                "share": 0.66
+              },
+              {
+                "reach": 0.72,
+                "share": 0.18
+              },
+              {
+                "reach": 0.22,
+                "share": 0.16
+              }
+            ]
+          }
+        }
+      },
+      {
+        "model": "female",
+        "share": 0.5,
+        "height": [
+          1.49,
+          1.63
+        ],
+        "body": "Female_Regular",
+        "eyebrows": "Eyebrows",
+        "eyes": "Eyes",
+        "hair": [
+          {
+            "node": "Hair_Long",
+            "share": 0.5
+          },
+          {
+            "node": "Hair_Bob",
+            "share": 0.25
+          },
+          {
+            "node": "Hair_Buns",
+            "share": 0.25
+          }
+        ],
+        "outfit": {
+          "sole": 0.028,
+          "shoes": [
+            {
+              "top": 0.1,
+              "share": 0.6
+            },
+            {
+              "top": 0.035,
+              "share": 0.4
+            }
+          ],
+          "pants": {
+            "top": 1.0,
+            "bottoms": [
+              {
+                "bottom": 0.11,
+                "share": 0.55
+              },
+              {
+                "bottom": 0.5,
+                "share": 0.45
+              }
+            ]
+          },
+          "top": {
+            "bottom": 0.95,
+            "top": 1.5,
+            "collarRadius": 0.07,
+            "collarDrop": 0.06,
+            "sleeves": [
+              {
+                "reach": 0.34,
+                "share": 0.55
+              },
+              {
+                "reach": 0.7,
+                "share": 0.15
+              },
+              {
+                "reach": 0.2,
+                "share": 0.3
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "aerialways": {
+    "service": {
+      "open": 5.5,
+      "close": 21.5
+    },
+    "rightHand": true,
+    "kinds": {
+      "gondola": {
+        "speed": 5,
+        "minSpeed": 4,
+        "matchDuration": true,
+        "stopSpeed": 0.3,
+        "technicalSpeed": 1.5,
+        "accel": 0.8,
+        "headway": 15,
+        "turnRadius": 10
+      },
+      "cable_car": {
+        "speed": 8,
+        "minSpeed": 5,
+        "matchDuration": true,
+        "stopSpeed": 0.5,
+        "technicalSpeed": 2,
+        "accel": 0.5,
+        "headway": 120,
+        "turnRadius": 12
+      }
+    },
+    "path": {
+      "step": 1,
+      "spanStep": 2,
+      "arcStep": 0.5,
+      "minTurnDeg": 1,
+      "timeStep": 0.05,
+      "cableStep": 2,
+      "filletShare": 0.8,
+      "miterLimit": 2,
+      "minSamples": 8,
+      "speedIterations": 30
+    },
+    "cable": {
+      "radius": 0.026,
+      "minPixels": 1.2,
+      "color": "#3b3f43",
+      "roughness": 0.4,
+      "metalness": 0.85
+    },
+    "cabin": {
+      "length": 2.15,
+      "height": 2.35,
+      "width": 2.05,
+      "corner": 0.2,
+      "segments": 2,
+      "glass": [
+        0.42,
+        0.93
+      ],
+      "lip": 0.02,
+      "pillar": 0.025,
+      "pillarSides": 16,
+      "door": {
+        "width": 0.05,
+        "lip": 0.012,
+        "shade": 0.62
+      },
+      "roof": {
+        "inset": 0.14,
+        "height": 0.07
+      },
+      "ribs": {
+        "count": 3,
+        "from": 0.1,
+        "spacing": 0.075,
+        "height": 0.028,
+        "lip": 0.012,
+        "shade": 0.72
+      },
+      "skirt": {
+        "height": 0.07,
+        "lip": 0.016
+      },
+      "hanger": {
+        "drop": 1.55,
+        "reach": 0.5,
+        "radius": 0.055,
+        "segments": 18,
+        "sides": 6,
+        "path": [
+          [
+            0,
+            0.02
+          ],
+          [
+            0.8,
+            0.12
+          ],
+          [
+            1,
+            0.45
+          ],
+          [
+            0.62,
+            0.82
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "grip": {
+        "size": [
+          0.75,
+          0.32,
+          0.24
+        ],
+        "below": 0.05
+      },
+      "mount": [
+        0.55,
+        0.08,
+        0.42
+      ],
+      "palette": [
+        {
+          "color": "#f1f2ef",
+          "weight": 0.4
+        },
+        {
+          "color": "#0a5caa",
+          "weight": 0.6
+        }
+      ],
+      "colors": {
+        "glass": "#15191d",
+        "frame": "#3a3e43",
+        "grip": "#2a2d31"
+      },
+      "roughness": 0.38,
+      "metalness": 0.08,
+      "glassRoughness": 0.06,
+      "glassMetalness": 0,
+      "glow": {
+        "color": "#ffe4bd",
+        "intensity": 0.5
+      },
+      "near": 260,
+      "far": 3200
+    },
+    "sway": {
+      "damping": 0.45,
+      "windAccel": 0.12,
+      "windPeriods": [
+        9.3,
+        4.1
+      ],
+      "windShares": [
+        1,
+        0.6
+      ],
+      "windPhases": [
+        1,
+        1.7
+      ],
+      "towerKick": 0.06,
+      "maxDeg": 10,
+      "substep": 0.02
+    },
+    "tower": {
+      "colors": {
+        "steel": "#a9adaf",
+        "dark": "#62676b",
+        "sheave": "#2d3034",
+        "concrete": "#a29e95",
+        "pile": "#8d9294",
+        "grating": "#737779",
+        "lens": "#4a0d08"
+      },
+      "roughness": 0.5,
+      "metalness": 0.45,
+      "mast": {
+        "radius": [
+          0.72,
+          0.48
+        ],
+        "referenceHeight": 25,
+        "exponent": 0.5,
+        "sides": 16,
+        "flangeSpacing": 6,
+        "flange": [
+          0.05,
+          0.1
+        ]
+      },
+      "plinth": {
+        "size": 2.4,
+        "height": 1.4,
+        "sink": 0.6
+      },
+      "head": {
+        "armDrop": 0.95,
+        "armHeight": 0.4,
+        "armDepth": 0.5,
+        "inboard": 0.35,
+        "braceDrop": 2.2,
+        "braceInset": 1.4,
+        "braceFoot": 0.5,
+        "braceRadius": 0.11,
+        "gantryRise": 1.8,
+        "gantryOverhang": 0.5,
+        "post": 0.18,
+        "beam": 0.24,
+        "stub": 0.2,
+        "sides": 8
+      },
+      "battery": {
+        "sheaves": 8,
+        "radius": 0.24,
+        "thickness": 0.13,
+        "pitch": 0.56,
+        "plate": [
+          0.34,
+          0.03
+        ],
+        "gap": 0.03,
+        "sides": 12
+      },
+      "platform": {
+        "width": 1.3,
+        "thickness": 0.07,
+        "railHeight": 1.05,
+        "rail": 0.05
+      },
+      "ladder": {
+        "offset": 0.28,
+        "width": 0.46,
+        "rail": 0.05,
+        "sides": 4
+      },
+      "rod": {
+        "radius": 0.04,
+        "min": 1.2,
+        "sides": 4
+      },
+      "river": {
+        "cap": [
+          4.2,
+          1.6
+        ],
+        "piles": {
+          "radius": 0.4,
+          "rise": 3.4,
+          "offsets": [
+            [
+              4.5,
+              5.5
+            ],
+            [
+              4.5,
+              0
+            ],
+            [
+              4.5,
+              -5.5
+            ],
+            [
+              -4.5,
+              -5.5
+            ],
+            [
+              -4.5,
+              0
+            ],
+            [
+              -4.5,
+              5.5
+            ]
+          ]
+        },
+        "rails": {
+          "levels": [
+            1.3,
+            2.9
+          ],
+          "radius": 0.16
+        }
+      },
+      "beacon": {
+        "minHeight": 27,
+        "size": 0.32,
+        "segments": [
+          8,
+          6
+        ],
+        "color": "#ff2a14",
+        "glow": 9,
+        "flash": {
+          "period": 1.5,
+          "on": 0.5
+        }
+      }
+    },
+    "portal": {
+      "margin": 0.5,
+      "floorGap": 0.4,
+      "top": 0.8,
+      "roofEdge": 0.6,
+      "frame": 0.9,
+      "depth": 1.2,
+      "inset": 0.05,
+      "maxSlantDeg": 60,
+      "colors": {
+        "frame": "#e2e4e2"
+      },
+      "maskGap": 0.5,
+      "hall": {
+        "overlap": 2,
+        "margin": 1.5,
+        "slab": 0.25,
+        "strip": [
+          0.3,
+          0.08
+        ],
+        "stripDrop": 0.35,
+        "rail": [
+          0.16,
+          0.22
+        ],
+        "railRise": 0.35,
+        "edge": [
+          0.14,
+          0.02
+        ],
+        "edgeGap": 0.35,
+        "roughness": 0.85,
+        "metalness": 0,
+        "colors": {
+          "floor": "#393835",
+          "wall": "#5d605f",
+          "ceiling": "#1f2224",
+          "back": "#2f3233",
+          "rail": "#3d4246",
+          "strip": "#d9d6ce",
+          "edge": "#c9a431",
+          "outside": "#b9bdbf"
+        },
+        "glow": {
+          "color": "#fff3dc",
+          "intensity": 2.4
+        }
+      },
+      "bullwheel": {
+        "tube": 0.14,
+        "spokes": 8,
+        "spoke": 0.09,
+        "hub": [
+          0.45,
+          0.5
+        ],
+        "hubSides": 16,
+        "shaft": 0.22,
+        "plate": 0.63,
+        "segments": 48,
+        "sides": 8,
+        "color": "#6d7c88"
+      }
+    },
+    "halos": {
+      "cabin": {
+        "size": 1.5,
+        "minPixels": 1.6,
+        "maxPixels": 14,
+        "farFalloff": 1,
+        "core": 10,
+        "glow": 0.25,
+        "brightness": 1.1,
+        "depthPull": 0.02,
+        "maxDistance": 6000,
+        "intensity": 0.8
+      },
+      "beacon": {
+        "size": 0.9,
+        "minPixels": 2.2,
+        "maxPixels": 22,
+        "farFalloff": 0.6,
+        "core": 14,
+        "glow": 0.3,
+        "brightness": 2.2,
+        "depthPull": 0.02,
+        "maxDistance": 12000,
+        "intensity": 1.5
+      }
+    }
+  }
+}
