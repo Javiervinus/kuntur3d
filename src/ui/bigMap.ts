@@ -62,6 +62,9 @@ export class BigMap {
   private dirty = true;
   private open = false;
   private drag: { x: number; y: number; vx: number; vz: number; moved: number } | null = null;
+  /** Dedos sobre el mapa (con dos se acerca o aleja pellizcando). */
+  private readonly fingers = new Map<number, [number, number]>();
+  private pinch = 0;
   private hits: Hit[] = [];
   private readonly point: number[] = [0, 0];
   private readonly labelWidths = new Map<string, number>();
@@ -291,12 +294,32 @@ export class BigMap {
     // pointerup y dejaba el mapa pegado al mouse.
     if (e.button !== 0) return;
     const [x, y] = this.local(e);
+    if (e.pointerType === 'touch') {
+      this.fingers.set(e.pointerId, [x, y]);
+      if (this.fingers.size === 2) {
+        // El segundo dedo empieza a pellizcar: ya no es arrastre ni toque.
+        this.pinch = this.spread();
+        this.canvas.setPointerCapture(e.pointerId);
+        if (this.drag) this.drag.moved = Infinity;
+        return;
+      }
+    }
     this.drag = { x, y, vx: this.view.x, vz: this.view.z, moved: 0 };
     this.canvas.setPointerCapture(e.pointerId);
     this.canvas.classList.add('dragging');
   };
 
   private readonly onMove = (e: PointerEvent): void => {
+    if (this.fingers.has(e.pointerId)) {
+      this.fingers.set(e.pointerId, this.local(e));
+      if (this.fingers.size === 2) {
+        const spread = this.spread();
+        const [[ax, ay], [bx, by]] = [...this.fingers.values()];
+        if (this.pinch > 0 && spread > 0) this.zoomAt(this.pinch / spread, (ax + bx) / 2, (ay + by) / 2);
+        this.pinch = spread;
+        return;
+      }
+    }
     const d = this.drag;
     if (!d) return;
     // El botón se soltó sin que llegara el pointerup (p. ej. fuera de la ventana): se termina el arrastre.
@@ -314,6 +337,13 @@ export class BigMap {
   };
 
   private readonly onUp = (e: PointerEvent): void => {
+    this.fingers.delete(e.pointerId);
+    if (this.fingers.size > 0) {
+      // Queda un dedo tras pellizcar: no arrastra desde donde empezó ni cuenta como toque.
+      this.pinch = 0;
+      this.drag = null;
+      return;
+    }
     const d = this.drag;
     this.endDrag();
     if (!d || d.moved > this.cfg.big.dragThreshold) return;
@@ -337,7 +367,14 @@ export class BigMap {
     this.zoomAt(Math.pow(this.cfg.big.wheelZoom, e.deltaY), x, y);
   };
 
+  private spread(): number {
+    const [a, b] = [...this.fingers.values()];
+    return a && b ? Math.hypot(a[0] - b[0], a[1] - b[1]) : 0;
+  }
+
   private endDrag(): void {
+    this.fingers.clear();
+    this.pinch = 0;
     this.drag = null;
     this.canvas.classList.remove('dragging');
   }
