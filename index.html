@@ -24,6 +24,8 @@
       <symbol id="i-glide" viewBox="0 0 24 24"><path d="M2 10l10-5 10 5-10 2z" /><path d="M12 12v5M9 21l3-4 3 4" /></symbol>
       <symbol id="i-swim" viewBox="0 0 24 24"><circle cx="17" cy="6" r="2" /><path d="M4 12l5-3 4 3 3-2M2 17c2 0 2-1.5 4-1.5S8 17 10 17s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5" /></symbol>
       <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16v-5l2-4h10l2 4v5M3 16h18M7 16v2M17 16v2M5 11h14" /></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></symbol>
       <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12.5a7 7 0 0 0-14 0C5 14.8 12 22 12 22z" /><circle cx="12" cy="9.5" r="2.5" /></symbol>
     </svg>
 
@@ -106,10 +108,17 @@
 
     <div id="credits" class="credits"></div>
 
+    <!-- Controles táctiles (solo en pantallas táctiles; los arma ui/touch.ts). -->
+    <div id="touch" class="touch-ui">
+      <div class="touch-corner" data-touch-corner></div>
+      <div class="touch-stick" data-touch-stick aria-hidden="true"><i class="touch-knob" data-touch-knob></i></div>
+      <div class="touch-actions" data-touch-actions></div>
+    </div>
+
     <div id="pause" class="pause" hidden>
       <div class="pause-title">
         <div class="pause-row"><span class="pause-rule"></span><h2>En pausa</h2><span class="pause-rule after"></span></div>
-        <p><span id="pause-keys">ESC</span> o clic en la ciudad para seguir</p>
+        <p id="pause-hint"><span id="pause-keys">ESC</span> o clic en la ciudad para seguir</p>
         <button type="button" class="resume" data-action="resume">SEGUIR EXPLORANDO</button>
       </div>
     </div>

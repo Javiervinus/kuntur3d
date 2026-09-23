@@ -32,6 +32,7 @@ import { PauseMenu, type TimeCard } from './ui/pauseMenu';
 import { PlaceSearch, type Origin } from './ui/placeSearch';
 import { Search } from './ui/search';
 import { SearchBox } from './ui/searchBox';
+import { type TouchContext, TouchControls } from './ui/touch';
 import './ui/styles.css';
 import { Driving } from './vehicles/driving';
 import { Aerialways } from './world/aerialways';
@@ -269,6 +270,7 @@ async function main(): Promise<void> {
   };
   const player = new PlayerController(world, game.player, game.glider, firstCharacter);
   const controls = new Controls(new Input(container), game.controls);
+  const touch = new TouchControls(game.touch, controls, container, element('touch'));
   const driving = new Driving(game.vehicles.car, world, scene);
 
   // Personaje visible: cada modelo lleva su propia ala delta (el trapecio depende de su altura).
@@ -285,6 +287,14 @@ async function main(): Promise<void> {
     return g;
   };
   scene.add(avatar.root);
+
+  /** Qué botones táctiles corresponden a lo que está haciendo el jugador. */
+  const touchContext = (): TouchContext => {
+    if (driving.active) return 'drive';
+    if (player.mode === 'glide') return 'glide';
+    if (player.mode === 'climb') return 'climb';
+    return 'walk';
+  };
 
   let legendKey = '';
   const refreshLegend = (): void => {
@@ -329,7 +339,7 @@ async function main(): Promise<void> {
       roster.remember(next);
       hud.toast(next.name);
       refreshLegend();
-      pauseMenu.setControls(controlSections(controls, player.character, canSwitch));
+      pauseMenu.setControls(touch.isEnabled ? game.touch.help : controlSections(controls, player.character, canSwitch));
     } catch (err) {
       console.error(err);
       hud.toast(`No se pudo cargar ${next.name}`);
@@ -452,8 +462,9 @@ async function main(): Promise<void> {
     }
     if (next === 'map') bigMap.show(mapPlayer());
     else if (bigMap.isOpen) bigMap.hide();
-    // Con el menú o el mapa, el mouse queda libre para usarlos.
+    // Con el menú o el mapa, el mouse queda libre para usarlos (y se sueltan los controles táctiles).
     if (next !== 'play') controls.input.release();
+    touch.setActive(next === 'play');
   };
   controls.input.onLockLost(() => {
     if (screen !== 'play') return;
@@ -461,7 +472,7 @@ async function main(): Promise<void> {
     setScreen('pause');
   });
   // Un clic en la ciudad (el velo de la pausa lo deja pasar) sigue el juego y vuelve a capturar el mouse.
-  container.addEventListener('mousedown', () => {
+  container.addEventListener('pointerdown', () => {
     if (screen === 'pause') setScreen('play');
   });
   const clock = new Clock(element('clock'), () => daytime.cycle());
@@ -489,6 +500,11 @@ async function main(): Promise<void> {
   ] as const) {
     element(id).textContent = controls.label(action);
   }
+  touch.onEnable(() => {
+    element('pause-hint').textContent = game.touch.pauseHint;
+    pauseMenu.setControls(game.touch.help);
+    if (matchMedia('(orientation: portrait)').matches) hud.toast(game.touch.portraitHint, game.touch.portraitHintMs);
+  });
 
   hud.onSearch(async (query) => {
     const hit = await search.resolve(query);
@@ -664,6 +680,7 @@ async function main(): Promise<void> {
   PlaceGuide.load(manifestUrl, manifest, game.places, heightmap, (x, z, label) => void goTo(x, z, label))
     .then((loaded) => {
       loaded.start();
+      touch.onEnable(() => loaded.setCompact(true));
       // El barrio arriba a la izquierda (y en Compartir), y los nombres de zonas en el mapa grande.
       loaded.onZone((zone) => {
         hud.setLocation(zone);
@@ -850,6 +867,7 @@ async function main(): Promise<void> {
     }
     driving.updateHeadlights();
     refreshLegend();
+    touch.setContext(touchContext(), player.character.abilities);
     syncAvatar(dt);
 
     follow.update(dt, controls, updateSubject());

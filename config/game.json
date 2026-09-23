@@ -7,7 +7,18 @@
       "Creado por Javier Vinueza (© 2026).",
       "Es software libre: puedes usarlo, estudiarlo, cambiarlo y compartirlo bajo la licencia AGPL-3.0, que pide mantener este crédito y marcar como distinta cualquier versión modificada. Se ofrece sin ninguna garantía."
     ],
-    "source": { "label": "CÓDIGO Y LICENCIA", "url": "https://github.com/Javiervinus/kuntur3d" }
+    "source": { "label": "CÓDIGO Y LICENCIA", "url": "https://github.com/Javiervinus/kuntur3d" },
+    "share": {
+      "url": "https://kuntur3d.javiervinueza.workers.dev/",
+      "title": "Kuntur 3D · Guayaquil en 3D",
+      "description": "Recorre Guayaquil y Durán en 3D desde el navegador: camina por sus calles, maneja, trepa edificios y vuela sobre el Malecón. Hecho con datos abiertos, también en el celular.",
+      "image": "og.jpg",
+      "imageWidth": 1200,
+      "imageHeight": 630,
+      "imageAlt": "La ciudad de Guayaquil en 3D con el río Guayas y el Malecón",
+      "locale": "es_EC",
+      "themeColor": "#0b1a22"
+    }
   },
   "worldUrl": "world/manifest.json",
   "locale": "es-EC",
@@ -2459,6 +2470,55 @@
       "Minus": "−",
       "NumpadSubtract": "−",
       "Escape": "ESC"
+    }
+  },
+  "touch": {
+    "detect": "(pointer: coarse)",
+    "joystick": {
+      "zone": 0.45,
+      "radius": 56,
+      "deadzone": 0.14,
+      "runAt": 0.8,
+      "margin": 18
+    },
+    "look": {
+      "sensitivity": 1.5,
+      "pinchZoom": 0.03
+    },
+    "pauseHint": "Toca la ciudad para volver",
+    "portraitHint": "Gira el teléfono: se explora mejor en horizontal",
+    "portraitHintMs": 4000,
+    "help": [
+      {
+        "title": "CON LOS DEDOS",
+        "items": [
+          { "keys": ["JOYSTICK"], "text": "Moverte: pon el dedo a la izquierda y muévelo; al borde, corres" },
+          { "keys": ["ARRASTRAR"], "text": "Mirar alrededor: arrastra un dedo por el resto de la pantalla" },
+          { "keys": ["PELLIZCAR"], "text": "Acercar o alejar la cámara con dos dedos" },
+          { "keys": ["SALTAR"], "text": "Saltar. Para trepar un edificio, camina contra él con el joystick hacia adelante" },
+          { "keys": ["PLANEAR"], "text": "Abrir el ala delta (desde un techo se vuela más lejos)" },
+          { "keys": ["CARRO"], "text": "Llamar al carro y subirte; manejando, el joystick acelera, frena y gira" },
+          { "keys": ["MAPA"], "text": "Toca el minimapa para abrir el mapa grande (se pellizca para acercar)" },
+          { "keys": ["− ×1 +"], "text": "Velocidad al caminar (toca − o + en el velocímetro)" }
+        ]
+      }
+    ],
+    "corner": [
+      { "action": "pause", "label": "MENÚ", "icon": "menu" },
+      { "action": "camera", "label": "CÁMARA", "icon": "camera" }
+    ],
+    "buttons": {
+      "walk": [
+        { "action": "jump", "label": "SALTAR", "main": true },
+        { "action": "glide", "label": "PLANEAR", "ability": "glide" },
+        { "action": "vehicle", "label": "CARRO", "ability": "drive" }
+      ],
+      "climb": [{ "action": "jump", "label": "SOLTARSE", "main": true }],
+      "glide": [{ "action": "glide", "label": "CERRAR ALA", "main": true }],
+      "drive": [
+        { "action": "handbrake", "label": "FRENO", "main": true },
+        { "action": "vehicle", "label": "BAJAR" }
+      ]
     }
   },
   "glider": {

@@ -299,6 +299,8 @@ export class PlaceGuide {
   private manual = false;
   private openFor = 0;
   private collapsed = false;
+  /** Pantallas chicas o táctiles: las fichas que se abren solas llegan recogidas en la píldora. */
+  private compact = false;
   private zoneTimer = 0;
   private zoneShown = '';
   private zoneCandidate = '';
@@ -610,6 +612,12 @@ export class PlaceGuide {
     this.collapsed = false;
     this.card.classList.add('open');
     this.chip.classList.remove('show');
+    if (this.compact && !manual) this.collapse();
+  }
+
+  /** Con controles táctiles la ficha taparía la ciudad y los controles: se abre al tocar la píldora. */
+  setCompact(on: boolean): void {
+    this.compact = on;
   }
 
   /** Recoge la ficha a la píldora (sigue a mano para volver a abrirla). */
