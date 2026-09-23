@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "Si usas Kuntur 3D en un trabajo o investigación, por favor cítalo así."
+type: software
+title: "Kuntur 3D"
+abstract: "Ciudades reales en 3D en el navegador, generadas con datos abiertos. Empieza por Guayaquil y Durán (Ecuador)."
+authors:
+  - family-names: "Vinueza"
+    given-names: "Javier"
+repository-code: "https://github.com/Javiervinus/kuntur3d"
+license: AGPL-3.0-or-later
+keywords:
+  - 3D
+  - ciudades
+  - datos abiertos
+  - OpenStreetMap
+  - Guayaquil
+  - three.js
