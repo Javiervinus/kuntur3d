@@ -1,0 +1,38 @@
+{
+  "name": "kuntur3d",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Ciudades reales en 3D en el navegador, con datos abiertos. Empezando por Guayaquil.",
+  "author": "Javier Vinueza",
+  "license": "AGPL-3.0-or-later",
+  "repository": "github:Javiervinus/kuntur3d",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "data": "uv run pipeline/build_world.py",
+    "dev": "vite",
+    "build": "npm run typecheck && vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler deploy",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json"
+  },
+  "dependencies": {
+    "proj4": "^2.22.0",
+    "suncalc": "^2.0.2",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "^4.5.0",
+    "@gltf-transform/extensions": "^4.5.0",
+    "@gltf-transform/functions": "^4.5.0",
+    "@types/node": "^24.13.6",
+    "@types/three": "^0.186.0",
+    "meshoptimizer": "^1.1.1",
+    "sharp": "^0.35.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "wrangler": "^4.137.0"
+  }
+}

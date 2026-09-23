@@ -1,0 +1,10 @@
+node_modules/
+dist/
+# Datos generados por `npm run data` (se regeneran desde config/region.json)
+public/world/
+public/models/
+pipeline/.cache/
+.DS_Store
+pipeline/.last-run.log
+.wrangler
+__pycache__/
