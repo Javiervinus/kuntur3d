@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Kuntur 3D</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 20'%3E%3Crect width='30' height='20' fill='%23fff'/%3E%3Crect width='30' height='4' fill='%2358b7e8'/%3E%3Crect y='8' width='30' height='4' fill='%2358b7e8'/%3E%3Crect y='16' width='30' height='4' fill='%2358b7e8'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Íconos del HUD (se usan con <use href="#…">). -->
+    <svg class="sprite" aria-hidden="true">
+      <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4" r="2" /><path d="M11 21l2-6-3-3 1-5 4 3 3 1M9 13l-3 2" /></symbol>
+      <symbol id="i-air" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2" /><path d="M12 7v7M6 8l6 3 6-3M8 21l4-7 4 7" /></symbol>
+      <symbol id="i-climb" viewBox="0 0 24 24"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10" /></symbol>
+      <symbol id="i-glide" viewBox="0 0 24 24"><path d="M2 10l10-5 10 5-10 2z" /><path d="M12 12v5M9 21l3-4 3 4" /></symbol>
+      <symbol id="i-swim" viewBox="0 0 24 24"><circle cx="17" cy="6" r="2" /><path d="M4 12l5-3 4 3 3-2M2 17c2 0 2-1.5 4-1.5S8 17 10 17s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5" /></symbol>
+      <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 16v-5l2-4h10l2 4v5M3 16h18M7 16v2M17 16v2M5 11h14" /></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12.5a7 7 0 0 0-14 0C5 14.8 12 22 12 22z" /><circle cx="12" cy="9.5" r="2.5" /></symbol>
+    </svg>
+
+    <div id="world" tabindex="0"></div>
+
+    <header id="location" class="location panel">
+      <svg class="flag" viewBox="0 0 30 20" aria-hidden="true">
+        <rect width="30" height="20" fill="#fff" />
+        <rect y="0" width="30" height="4" fill="#58b7e8" />
+        <rect y="8" width="30" height="4" fill="#58b7e8" />
+        <rect y="16" width="30" height="4" fill="#58b7e8" />
+        <g fill="#fff">
+          <circle cx="9" cy="10" r="1.1" />
+          <circle cx="15" cy="10" r="1.1" />
+          <circle cx="21" cy="10" r="1.1" />
+        </g>
+      </svg>
+      <div>
+        <strong id="location-name">Guayaquil · Durán</strong>
+        <span id="location-sub" hidden></span>
+      </div>
+    </header>
+
+    <form id="search" class="search panel" autocomplete="off">
+      <input id="search-input" placeholder="Lugar, dirección, coordenadas o link de Google Maps" spellcheck="false" autocapitalize="off" />
+      <button type="button" id="locate" class="locate" aria-label="Ir a mi ubicación actual" title="Ir a mi ubicación actual">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2v3.2M12 18.8V22M2 12h3.2M18.8 12H22" />
+          <circle cx="12" cy="12" r="7.6" />
+        </svg>
+      </button>
+      <button type="submit">IR</button>
+    </form>
+
+    <aside id="radar" class="radar panel">
+      <div class="radar-view" data-open-map title="Abrir el mapa">
+        <canvas aria-label="Minimapa: gira con la cámara"></canvas>
+        <span class="radar-north" data-north>N</span>
+        <span class="radar-hint"><kbd id="map-key">M</kbd>MAPA</span>
+      </div>
+      <button type="button" id="clock" class="clock" aria-label="Pasar a la hora siguiente">
+        <svg class="clock-arc" viewBox="0 0 46 26" aria-hidden="true">
+          <path class="clock-track" d="M4 23 A19 17 0 0 1 42 23" />
+          <line class="clock-horizon" x1="1" y1="23.5" x2="45" y2="23.5" />
+          <g class="clock-sun" data-sun><circle class="halo" r="8" /><circle r="5" /></g>
+          <g class="clock-moon" data-moon><circle r="5" /><circle class="bite" cx="2.4" cy="-1.6" r="4.2" /></g>
+        </svg>
+        <span class="clock-text"><strong data-time>--:--</strong><span data-label></span></span>
+        <kbd id="clock-key">T</kbd>
+      </button>
+    </aside>
+
+    <aside id="speedo" class="speedo panel">
+      <div class="speedo-main">
+        <strong id="speed-value">0</strong>
+        <span>KM/H</span>
+      </div>
+      <div class="speedo-side">
+        <span class="speedo-mode">
+          <svg aria-hidden="true"><use id="speed-mode-icon" href="#i-walk" /></svg>
+          <span id="speed-mode-label">CAMINANDO</span>
+        </span>
+        <span id="speed-detail" class="speedo-detail" hidden></span>
+        <span class="speedo-row">
+          <span id="speed-mult" class="speedo-mult"><kbd id="speed-down">−</kbd><b id="speed-mult-value">×1</b><kbd id="speed-up">+</kbd></span>
+          <span id="speed-alt" class="speedo-alt" hidden></span>
+        </span>
+      </div>
+    </aside>
+
+    <footer id="keys" class="keys">
+      <div class="keygroup wasd">
+        <kbd class="k-w" id="key-forward">W</kbd><kbd class="k-a" id="key-left">A</kbd><kbd class="k-s" id="key-back">S</kbd
+        ><kbd class="k-d" id="key-right">D</kbd>
+      </div>
+      <div class="keylist" id="keylist"></div>
+      <p class="hint" id="key-hint"></p>
+    </footer>
+
+    <div id="credits" class="credits"></div>
+
+    <div id="pause" class="pause" hidden>
+      <div class="pause-title">
+        <div class="pause-row"><span class="pause-rule"></span><h2>En pausa</h2><span class="pause-rule after"></span></div>
+        <p><span id="pause-keys">ESC</span> o clic en la ciudad para seguir</p>
+        <button type="button" class="resume" data-action="resume">SEGUIR EXPLORANDO</button>
+      </div>
+    </div>
+
+    <aside id="pause-menu" class="pause-menu panel" hidden aria-label="Menú de pausa">
+      <header class="pm-head">
+        <svg class="flag" viewBox="0 0 30 20" aria-hidden="true">
+          <rect width="30" height="20" fill="#fff" />
+          <rect y="0" width="30" height="4" fill="#58b7e8" />
+          <rect y="8" width="30" height="4" fill="#58b7e8" />
+          <rect y="16" width="30" height="4" fill="#58b7e8" />
+          <g fill="#fff">
+            <circle cx="9" cy="10" r="1.1" />
+            <circle cx="15" cy="10" r="1.1" />
+            <circle cx="21" cy="10" r="1.1" />
+          </g>
+        </svg>
+        <div>
+          <strong data-world>Guayaquil · Durán</strong>
+          <span data-app-subtitle></span>
+        </div>
+      </header>
+      <nav class="pm-tabs" role="tablist" aria-label="Secciones de la pausa">
+        <button type="button" role="tab" data-tab="places" aria-selected="true">LUGARES</button>
+        <button type="button" role="tab" data-tab="time" aria-selected="false">HORA</button>
+        <button type="button" role="tab" data-tab="controls" aria-selected="false">CONTROLES</button>
+        <button type="button" role="tab" data-tab="share" aria-selected="false">COMPARTIR</button>
+        <button type="button" role="tab" data-tab="credits" aria-selected="false">CRÉDITOS</button>
+      </nav>
+      <div class="pm-body">
+        <section data-panel="places" class="pm-places"></section>
+        <section data-panel="time" class="pm-times" hidden></section>
+        <section data-panel="controls" class="pm-controls" hidden></section>
+        <section data-panel="share" class="pm-share" hidden>
+          <p>Estás en <b data-place></b></p>
+          <strong class="pm-coords" data-coords></strong>
+          <div class="pm-buttons">
+            <button type="button" data-action="copy">COPIAR LINK</button>
+            <a data-maps href="#" target="_blank" rel="noopener">ABRIR EN GOOGLE MAPS</a>
+          </div>
+          <p class="pm-note">El link abre la ciudad en este mismo punto.</p>
+        </section>
+        <section data-panel="credits" class="pm-credits" hidden></section>
+      </div>
+      <footer class="pm-foot">
+        <button type="button" data-action="map">ABRIR EL MAPA <kbd id="pause-map-key">M</kbd></button>
+      </footer>
+    </aside>
+
+    <section id="bigmap" class="bigmap" hidden aria-label="Mapa de Guayaquil y Durán">
+      <div class="bigmap-panel panel">
+        <header class="bigmap-head">
+          <h2>Mapa</h2>
+          <span class="bigmap-scale" data-scale></span>
+          <span class="bigmap-hint">Arrastra para moverte · rueda para acercar · toca un lugar o cualquier punto</span>
+          <div class="bigmap-actions">
+            <button type="button" data-action="zoom-out" aria-label="Alejar">−</button>
+            <button type="button" data-action="zoom-in" aria-label="Acercar">+</button>
+            <button type="button" data-action="center">CENTRAR EN MÍ</button>
+            <button type="button" data-action="close">CERRAR <kbd id="bigmap-key">M</kbd></button>
+          </div>
+        </header>
+        <div class="bigmap-view" data-view>
+          <canvas aria-label="Mapa: arrastra para moverte, rueda para acercar, toca un lugar"></canvas>
+          <div class="bigmap-legend">
+            <span><i class="lg-ficha"></i>Lugar con historia</span>
+            <span><i class="lg-dot"></i>Lugar</span>
+            <span><i class="lg-aerovia"></i>Aerovía</span>
+            <span><i class="lg-you"></i>Tú</span>
+          </div>
+          <div class="bigmap-pop" data-pop hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <div id="loading" class="loading">
+      <div class="loading-card">
+        <svg class="flag big" viewBox="0 0 30 20" aria-hidden="true">
+          <rect width="30" height="20" fill="#fff" />
+          <rect y="0" width="30" height="4" fill="#58b7e8" />
+          <rect y="8" width="30" height="4" fill="#58b7e8" />
+          <rect y="16" width="30" height="4" fill="#58b7e8" />
+          <g fill="#fff"><circle cx="9" cy="10" r="1.1" /><circle cx="15" cy="10" r="1.1" /><circle cx="21" cy="10" r="1.1" /></g>
+        </svg>
+        <span id="loading-brand" class="loading-brand"></span>
+        <h1>Guayaquil · Durán</h1>
+        <p id="loading-label">Preparando…</p>
+        <div class="bar"><i id="loading-bar"></i></div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
