@@ -21,8 +21,18 @@ export class Controls {
     return hit;
   }
 
+  /** Cuánto está apretada la acción, de 0 a 1 (el joystick táctil empuja a medias). */
+  amount(action: Action): number {
+    return Math.max(0, ...this.cfg.keys[action].map((code) => this.input.amount(code)));
+  }
+
   axis(negative: Action, positive: Action): number {
-    return (this.isDown(positive) ? 1 : 0) - (this.isDown(negative) ? 1 : 0);
+    return this.amount(positive) - this.amount(negative);
+  }
+
+  /** Tecla con la que los controles táctiles aprietan la acción (null si no tiene ninguna). */
+  code(action: Action): string | null {
+    return this.cfg.keys[action][0] ?? null;
   }
 
   /** Nombre visible de la primera tecla de la acción (para la leyenda del HUD). */

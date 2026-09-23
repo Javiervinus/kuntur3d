@@ -215,8 +215,8 @@ export class Driving {
       return;
     }
     const i = this.input;
-    i.throttle = controls.isDown('forward') ? 1 : 0;
-    i.brake = controls.isDown('back') ? 1 : 0;
+    i.throttle = controls.amount('forward');
+    i.brake = controls.amount('back');
     i.steer = controls.axis('right', 'left');
     i.handbrake = controls.isDown('handbrake');
     if (controls.consume('speedUp')) car.shiftBoost(1);

@@ -1,7 +1,12 @@
-/** Estado de teclado y mouse. Las acciones de un solo disparo se consumen con `consume`. */
+/**
+ * Estado de teclado, mouse y controles táctiles. Las acciones de un solo disparo se consumen con
+ * `consume`. Los controles táctiles apretan teclas "virtuales" (las mismas que el teclado) y el
+ * joystick las aprieta a medias (`amount`).
+ */
 export class Input {
   private readonly down = new Set<string>();
   private readonly pressed = new Set<string>();
+  private readonly virtual = new Map<string, number>();
   private readonly target: HTMLElement;
   lookDx = 0;
   lookDy = 0;
@@ -83,7 +88,39 @@ export class Input {
   };
 
   isDown(code: string): boolean {
-    return this.down.has(code);
+    return this.down.has(code) || this.virtual.has(code);
+  }
+
+  /** Cuánto está apretada la tecla, de 0 a 1: el teclado aprieta entera; el joystick, a medias. */
+  amount(code: string): number {
+    return Math.max(this.down.has(code) ? 1 : 0, this.virtual.get(code) ?? 0);
+  }
+
+  /** Tecla virtual (controles táctiles): `amount` 0 la suelta; al apretarla cuenta como pulsación. */
+  setVirtual(code: string, amount: number): void {
+    if (amount > 0) {
+      if (!this.isDown(code)) this.pressed.add(code);
+      this.virtual.set(code, Math.min(1, amount));
+    } else {
+      this.virtual.delete(code);
+    }
+  }
+
+  /** Suelta todas las teclas virtuales (al pausar, o si el dedo se pierde). */
+  clearVirtual(): void {
+    this.virtual.clear();
+  }
+
+  /** Mirar arrastrando un dedo: suma como el mouse (en píxeles) para la cámara. */
+  look(dx: number, dy: number): void {
+    this.lookDx += dx;
+    this.lookDy += dy;
+    this.lastLookAt = performance.now();
+  }
+
+  /** Zoom de la cámara con dos dedos: suma como la rueda del mouse. */
+  zoom(delta: number): void {
+    this.wheel += delta;
   }
 
   consume(code: string): boolean {
