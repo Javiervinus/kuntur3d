@@ -1,0 +1,8 @@
+{
+  // Publicación en Cloudflare (`npm run deploy`): la página y los datos del mundo como assets
+  // estáticos (dist/, que arma `vite build` con public/) y el Worker para lo que no es un archivo.
+  "name": "kuntur3d",
+  "main": "server/cloudflare/worker.ts",
+  "compatibility_date": "2026-09-01",
+  "assets": { "directory": "./dist" }
+}
