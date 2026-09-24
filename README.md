@@ -229,7 +229,7 @@ Google Maps (ver [HUD, pausa y mapa](#hud-pausa-y-mapa)).
 ### Lugares con historia
 
 Los lugares reconstruidos con cuidado (el Malecón 2000, La Perla, la Torre Morisca, el
-Hemiciclo de La Rotonda, Las Peñas y el faro, los estadios, los puentes, la Aerovía, la
+Palacio Municipal y su pasaje, el Hemiciclo de La Rotonda, Las Peñas y el faro, los estadios, los puentes, la Aerovía, la
 estación del tren de Durán…) tienen un **marcador** con las tres estrellas de la bandera de
 Guayaquil, visible de lejos (el nombre aparece de cerca o al pasar el cursor; si dos se montan
 en pantalla, queda el más cercano) y un rombo celeste en el minimapa.
@@ -540,9 +540,50 @@ Construidos a mano con piezas procedurales (sin modelos externos), en su lugar y
   Martín.
 - **Faro del Cerro Santa Ana**: franjas en espiral, galería, linterna y haces que giran de
   noche.
+- **Palacio Municipal** (Maccaferri, 1924-1929): la manzana entera, en su huella de OSM
+  (63,6 × 58,5 m). Portales en arcada que se caminan (baldosas, locales con cortina metálica o
+  vidriera, faroles colgados), balcón corrido con balaustrada, logia de columnas corintias de dos
+  pisos, entablamento con modillones y dentículos, ático con jarrones, esquinas redondeadas con
+  sus **cuatro cúpulas de escamas** (nervios que de noche se encienden celestes, lucarnas y
+  óculos), un pabellón con frontón y gran arco al centro de cada fachada (cóndores en los
+  extremos, el escudo de Guayaquil en los tímpanos de 10 de Agosto y Clemente Ballén), las dos
+  banderas en la esquina del Malecón y el **Pasaje Arosemena**: se entra por el gran arco del
+  Malecón o de Pichincha, bajo la bóveda de vidrio con costillas de hierro (su sombra cae en el
+  piso de terrazo), balcones de hierro, faroles de globo y la cúpula octogonal del crucero. Se
+  trepa como cualquier edificio (desde el portal o el pasaje) y se camina por la terraza.
 
 Se pisan (La Perla tiene su plataforma, las gradas de La Rotonda) y no se atraviesan. Formas,
 colores y luces en `config/game.json` → `monuments`.
+
+**Cómo se arma un ícono con arquitectura** (el Palacio, y los que vengan: la Gobernación, la
+Biblioteca, Correos…). El procedimiento completo, de la investigación a la medición, está en
+`.agents/skills/model-place/SKILL.md`. En corto:
+
+- **Medidas reales**: la huella y el rumbo de las fachadas salen de OSM; las alturas, de fotos
+  de Wikimedia Commons con una escala conocida (un carro, una persona) y de la foto satelital,
+  que también muestra el techo (cúpulas, pasaje). Todo número va a la config, nada en el código.
+- **Kit de piezas** (`src/world/classical.ts`): molduras barridas por cualquier recorrido (con
+  ingletes), muros con arcos, puertas y ventanas, piezas curvadas para las esquinas redondeadas,
+  columnas corintias (basa ática, fuste con éntasis, capitel con hojas y volutas), balaustres,
+  jarrones, cóndores, ménsulas, frontones, coronas con estrella y cúpulas con nervios.
+- **Material** (`src/render/surfacePatterns.ts`): cada vértice trae su **oclusión ambiental**
+  (loggias, cielos rasos, portales, el fondo del pasaje) y un **dibujo procedural** con relieve:
+  revoque con manchas y chorreado de humedad, escamas de las cúpulas, cortinas metálicas,
+  terrazo y baldosas. De noche los reflectores alumbran según hacia dónde mira cada cara (muros y
+  aleros sí, techos casi nada), así el relieve no se aplana.
+- **Física**: los macizos entran al índice de edificios (se trepan); los aleros y bóvedas son
+  obstáculos que empiezan en altura (debajo se camina) y la cámara no los atraviesa.
+- **Rendimiento**: las piezas repetidas van instanciadas (1 015 dentículos, 970 balaustres, 56
+  columnas…) con su versión simple de lejos (capiteles sin hojas desde 150 m, balaustres
+  prismáticos desde 110 m); los adornos chicos no proyectan sombra; el macizo va en cuadrantes
+  para que la cámara y las sombras descarten lo que no ven; los vértices se sueldan y sus
+  atributos se guardan compactos (normales en 8 bits, luz en half float): 7,9 MB de geometría en
+  vez de 32. Se arma en ~80 ms en la carga. Medido con 10 copias en la vista más cargada (la
+  esquina del Malecón, resolución 2×): ~0,66 ms de GPU por palacio, sombras incluidas; lejos o
+  fuera de cuadro, casi nada.
+- **Terreno**: el relieve de los datos conserva un bulto de ~1,3 m bajo el palacio (el DEM ve
+  el edificio); la base va a la mediana de la vereda y cada puerta arranca de su suelo, así del
+  lado del Malecón no quedan flotando.
 
 ### Estadios
 
@@ -702,7 +743,8 @@ config/places.json   lugares con ficha (historia, fuentes, foto, dónde están) 
 pipeline/            build_world.py → public/world/ (manifest + binarios + texturas);
                      build_model.ts arma un .glb desde piezas glTF (y sus niveles de detalle)
 src/world/           terreno, edificios (+colisiones), calles, agua y sus reflejos, árboles,
-                     puentes y malecones, palmeras, íconos, alumbrado, tráfico, autos estacionados,
+                     puentes y malecones, palmeras, íconos (y el kit de arquitectura clásica con
+                     que se arma el Palacio Municipal), alumbrado, tráfico, autos estacionados,
                      peatones, texturas por chunk
 src/player/          personajes, controlador (caminar/trepar/nadar/planear), cámara, avatar, ropa, ala delta
 src/vehicles/        carro: modelo procedural, física y subir/bajar
@@ -737,6 +779,10 @@ Para otra zona basta con cambiar `bbox`, `projection` (zona UTM) y `landmarks` e
 
 ## Siguientes pasos posibles
 
+- Más íconos con el mismo kit: la Gobernación (al frente del Palacio, en la Plaza de la
+  Administración), la Biblioteca y el Museo Municipal, Correos, la Catedral y toda la avenida 9
+  de Octubre.
+- Corregir en el paso `terrain` los bultos que dejan los edificios grandes en el relieve.
 - Vendedores ambulantes y gente sentada en las bancas del Malecón.
 - Semáforos visibles en los cruces.
 - Que tu carro choque con el tráfico (hoy los vehículos frenan ante ti pero no hay choque).
