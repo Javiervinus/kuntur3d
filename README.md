@@ -126,6 +126,12 @@ Al recargar retomas donde quedaste (y en el carro, si ibas manejando); un link c
 - El HUD se compacta, las fichas de lugares llegan recogidas en la píldora y la pestaña
   CONTROLES explica los gestos. Por dentro todo aprieta las mismas teclas que el teclado
   (`Input.setVirtual`), así el resto del juego no distingue.
+- **Perfil de memoria** (`config/game.json` → `profiles.mobile`, aplicado por `src/core/profile.ts`
+  antes de que arranque el resto): Safari en iPhone cierra la pestaña si pasa su límite de
+  memoria ("Ocurrió un problema varias veces"), lo que pasaba planeando. En pantallas táctiles
+  baja la resolución (1,5×), las sombras (1024), los radios de carga (edificios, árboles, calles,
+  terreno), la imagen satelital (menos texturas y caché) y la vista general (2048 px). Medido en
+  un vuelo de 70 s a 300 m: texturas de ~262 a ~70 MB y geometría de ~200 a ~170 MB.
 
 ### El personaje
 
