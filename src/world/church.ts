@@ -62,7 +62,7 @@ export interface ChurchWing {
  * ábside, el costado que da a la calle (con locales, ventanales apuntados, pretil calado,
  * pináculos y un hastial) y las alas del convento; delante, su plaza con una pila y una estatua.
  * Marco local: origen en el centro de la fachada a nivel de la plaza, x hacia adentro de la nave
- * (la fachada mira a −x) y z a la izquierda de quien entra. Largos en m.
+ * (la fachada mira a −x) y z a la derecha de quien entra. Largos en m.
  */
 export interface Church extends MonumentBase {
   /** Polígonos (marco local) donde no quedan edificios ni árboles de los datos. */
@@ -336,28 +336,22 @@ export class ChurchBuilder {
    * Macizo de caja (en el marco local, pie en la base menos lo enterrado) que entra como edificio,
    * con su azotea del color del techo.
    */
-  private mass(x0: number, x1: number, z0: number, z1: number, height: number, color: THREE.Color): void {
-    const bury = this.c.ground.bury;
-    const m = new THREE.Matrix4().makeTranslation((x0 + x1) / 2, this.base + (height - bury) / 2, (z0 + z1) / 2);
-    this.stone.box(m, x1 - x0, height + bury, z1 - z0, color, this.stucco);
+  /** Macizo de `bottom` (por defecto, desde lo enterrado) a `height`, con su azotea; `solid` lo registra en la física. */
+  private mass(x0: number, x1: number, z0: number, z1: number, height: number, color: THREE.Color, solid = true, bottom = -this.c.ground.bury): void {
+    const m = new THREE.Matrix4().makeTranslation((x0 + x1) / 2, this.base + (height + bottom) / 2, (z0 + z1) / 2);
+    this.stone.box(m, x1 - x0, height - bottom, z1 - z0, color, this.stucco);
     const y = this.base + height + this.c.detail.inset;
     this.stone.quad(new THREE.Vector3(x0, y, z1), new THREE.Vector3(x1, y, z1), new THREE.Vector3(x1, y, z0), new THREE.Vector3(x0, y, z0), this.col.roof);
-    this.record(x0, x1, z0, z1, height);
+    if (solid) this.record(x0, x1, z0, z1, height);
   }
 
-  /** Macizo de los pisos de arriba (de `y0` a `y1`), sobre una planta baja retirada. */
-  private upper(x0: number, x1: number, z0: number, z1: number, y0: number, y1: number): void {
-    const m = new THREE.Matrix4().makeTranslation((x0 + x1) / 2, this.base + (y0 + y1) / 2, (z0 + z1) / 2);
-    this.stone.box(m, x1 - x0, y1 - y0, z1 - z0, this.col.wall, this.stucco);
-    const y = this.base + y1 + this.c.detail.inset;
-    this.stone.quad(new THREE.Vector3(x0, y, z1), new THREE.Vector3(x1, y, z1), new THREE.Vector3(x1, y, z0), new THREE.Vector3(x0, y, z0), this.col.roof);
-    this.record(x0, x1, z0, z1, y1, y0);
-  }
-
-  /** Macizo de la física de `from` a `height` sobre la base (por defecto, desde lo enterrado). */
-  private record(x0: number, x1: number, z0: number, z1: number, height: number, from = -this.c.ground.bury): void {
+  /**
+   * Macizo de la física (entra al índice de edificios): para el jugador es sólido desde el suelo
+   * hasta `height`, empiece donde empiece. Lo que se camina por debajo va con `kit.box` y `bottom`.
+   */
+  private record(x0: number, x1: number, z0: number, z1: number, height: number): void {
     const outline = [new THREE.Vector3(x0, 0, z0), new THREE.Vector3(x1, 0, z0), new THREE.Vector3(x1, 0, z1), new THREE.Vector3(x0, 0, z1)];
-    this.kit.block(outline, this.base + from, this.base + height);
+    this.kit.block(outline, this.base - this.c.ground.bury, this.base + height);
   }
 
   /** Moldura a lo largo de un recorrido (marco local, alturas sobre la base). */
@@ -677,8 +671,9 @@ export class ChurchBuilder {
     const back = c.front.size[1] / 2;
     const length = x1 - x0;
     const face = facesOf(x0, x1, back, L.z, this.base)[1];
-    // Macizo detrás del muro de la calle.
-    this.mass(x0 + t, x1, back, L.z - t, corT, this.col.wall);
+    // Macizo detrás del muro de la calle; en la física va hasta la cara de afuera (el muro no se atraviesa).
+    this.mass(x0 + t, x1, back, L.z - t, corT, this.col.wall, false);
+    this.record(x0, x1, back, L.z, corT);
     const [lw, lSill, lImpost, sharp] = L.lancet;
     const [rw, rh, rSill] = L.rect;
     const [margin, signH, shutter, signGap] = L.shop;
@@ -793,12 +788,39 @@ export class ChurchBuilder {
     const height = w.floors * w.floor;
     const t = c.thickness;
     const [arcadeFace, pier, headroom, arcadeDepth] = w.arcade;
-    // Con arcada, la planta baja se retira la hondura del portal en esa cara (el piso de arriba la techa).
+    // Con arcada, la planta baja se retira la hondura del portal en esa cara y los pisos de arriba
+    // la techan. En la física, el núcleo es el macizo (de abajo hasta la azotea) y lo que vuela
+    // sobre el portal es una caja con `bottom`: debajo se camina.
     const inset = [t, t, t, t];
     if (arcadeFace >= 0) inset[arcadeFace] = arcadeDepth;
     const [ix0, iz1, ix1, iz0] = inset;
-    this.mass(x0 + ix0, x1 - ix1, z0 + iz0, z1 - iz1, w.floor, this.col.wall);
-    this.upper(x0 + t, x1 - t, z0 + t, z1 - t, w.floor, height);
+    this.mass(x0 + ix0, x1 - ix1, z0 + iz0, z1 - iz1, w.floor, this.col.wall, false);
+    this.mass(x0 + t, x1 - t, z0 + t, z1 - t, height, this.col.wall, false, w.floor);
+    // En la física, el macizo llega a la cara de afuera (los muros no se atraviesan), menos en la
+    // cara de la arcada, donde se queda en la planta baja retirada.
+    const solid = [0, 0, 0, 0];
+    if (arcadeFace >= 0) solid[arcadeFace] = arcadeDepth;
+    const [sx0, sz1, sx1, sz0] = solid;
+    this.record(x0 + sx0, x1 - sx1, z0 + sz0, z1 - sz1, height);
+    if (arcadeFace >= 0) {
+      // El portal, de la cara de afuera a la planta baja retirada: arriba, los pisos (una caja con
+      // `bottom`: debajo se camina); en sus puntas, los muros de los lados.
+      const [px0, px1, pz0, pz1] = [
+        [x0, x0 + ix0, z0, z1],
+        [x0, x1, z1 - iz1, z1],
+        [x1 - ix1, x1, z0, z1],
+        [x0, x1, z0, z0 + iz0],
+      ][arcadeFace];
+      this.kit.box((px0 + px1) / 2, (pz0 + pz1) / 2, (px1 - px0) / 2, (pz1 - pz0) / 2, 0, this.base + height, true, this.base + w.floor);
+      // En las caras ±x el portal corre a lo largo de z y sus puntas quedan en z0 y z1; en las ±z, al revés.
+      const endsInZ = arcadeFace % 2 === 0;
+      for (const end of [-1, 1]) {
+        const cx = endsInZ ? (px0 + px1) / 2 : end < 0 ? px0 + t / 2 : px1 - t / 2;
+        const cz = endsInZ ? (end < 0 ? pz0 + t / 2 : pz1 - t / 2) : (pz0 + pz1) / 2;
+        const [hu, hv] = endsInZ ? [(px1 - px0) / 2, t / 2] : [t / 2, (pz1 - pz0) / 2];
+        this.kit.box(cx, cz, hu, hv, 0, this.base + height, false, -Infinity);
+      }
+    }
     const [ww, wh, sill] = w.window;
     facesOf(x0, x1, z0, z1, this.base).forEach((f, i) => {
       const lit = w.faces.includes(i);
