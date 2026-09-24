@@ -208,15 +208,28 @@ Piezas disponibles:
   - `bend` (curva una pieza plana alrededor de una esquina redondeada);
   - `corinthianColumn` (fuste, capitel y su versión simple de lejos);
   - `baluster`/`balusterFar`, `urn`, `condor`, `bracket`, `wreath`, `domeProfile` + `rib`,
-    `lathe`, `arc`, `combine`.
+    `lathe`, `arc`, `combine`;
+  - `pointedHole` (lanceta gótica) y `archPath` (el recorrido de un arco, para su marco);
+  - `figure` (una figura de pie para estatuas; devuelve dónde quedan las manos);
+  - `gableTop` (remate de hastial con contracurvas) y `shield` (escudo);
+  - `faceted` (caras planas para lo que tiene pocos lados: pirámides, troncos) e `inward` (la
+    misma pieza vista desde adentro, como la pared interior de un macetero).
 - `src/world/monumentParts.ts`:
   - `Parts` une las piezas en una geometría con color, oclusión ambiental por vértice, dibujo
     procedural, luz propia y reflectores, y la compacta al unirla;
-  - `place`, `strut`, `prism`, `colorsOf`, `glowOf`.
+  - `Batch`, lo mismo sin una geometría por pieza (cuadriláteros, cajas y piezas directo a un
+    búfer): para lo que tiene miles de piezas chicas;
+  - `place`, `strut`, `prism`, `colorsOf`, `glowOf`, y `patternOf` (el dibujo por su nombre en
+    la config; un nombre que no existe falla al cargar en vez de quedar liso).
+- Builders que ya son tipos paramétricos (se reutilizan con otra config): `palace.ts`,
+  `church.ts` (fachada con torres, nave, crucero con cúpula, costado a la calle, convento y
+  plaza con pila y estatua), `column.ts` (columna conmemorativa sobre pedestal), `park.ts`
+  (paseos, reja con portadas, grupos, faroles, mástiles), `downtown.ts` (familias de fachada de
+  una calle), `street.ts` (cuadras, veredas con `pave`, mobiliario de `streetFurniture.ts`).
 - `src/render/surfacePatterns.ts`: dibujos procedurales con relieve (`PATTERN.stucco`, `scales`,
-  `shutter`, `terrazzo`, `tiles`), parametrizados en `monuments.patterns`. Un material nuevo
-  (ladrillo, bloque visto, piedra, madera, zinc) es un `kind` más ahí + sus parámetros en la
-  config.
+  `shutter`, `terrazzo`, `tiles`, `glazing`, `pavers`, `bars`, `balusters`), parametrizados en
+  `monuments.patterns`. Un material nuevo (ladrillo, bloque visto, piedra, madera, zinc) es un
+  `kind` más ahí + sus parámetros en la config.
 
 Cómo se arma:
 
@@ -361,3 +374,14 @@ Una calle es muchos edificios, y no se modela cada uno como el Palacio:
 - `toNonIndexed` sobre una geometría que ya no tiene índice da una advertencia en consola: aplicar
   la limpieza directo a la `ExtrudeGeometry`.
 - Un arco que se camina sin cajas en las jambas: se atravesaba la pared.
+- Molduras metidas en el muro: `sweep` saca el perfil hacia `eje × tramo`. Con el eje hacia
+  arriba, cada lado se recorre de derecha a izquierda visto desde afuera; alrededor de un vano
+  (eje = la normal de la cara), de la jamba izquierda por la clave a la derecha.
+- Un torno (`lathe`) que se veía al revés (el borde de una pila): el perfil va de afuera hacia
+  adentro para que las caras miren afuera, arriba y al centro.
+- El punto de OSM de un monumento puede estar corrido unos metros (la Columna de los Próceres,
+  ~3,5 m): mirar en el satélite dónde cae el pedestal y dónde se cruzan los paseos, y usar eso.
+- Los pisos de una plaza sacaban los árboles de los datos que crecían en ella: los pisos a ras
+  del suelo no cuentan como ocupados; para despejar algo a propósito está `clear`.
+- Un lugar que se renovó hace poco (la Plaza San Francisco, diciembre de 2025): buscar noticias
+  de la obra antes de dar por buenas fotos viejas.
