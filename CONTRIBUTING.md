@@ -48,6 +48,14 @@ Los detalles de cada paso están en el [README](README.md).
 - **IA sí, a tu nombre.** Puedes usar Claude, Codex u otros agentes; tú respondes por lo que envías:
   que lo hayas probado y lo entiendas.
 
+### Modelar un lugar
+
+Para traer con detalle un monumento, una calle o tu casa (con tus fotos), sigue el procedimiento
+de [`.agents/skills/model-place/SKILL.md`](.agents/skills/model-place/SKILL.md): investigar,
+medir, modelar, comparar con fotos desde el mismo punto y medir cuánto cuesta. Es una skill:
+Codex y los agentes que leen `.agents/skills` la encuentran ahí, y Claude Code por el enlace de
+`.claude/skills`. Se activa sola cuando le pides a tu agente modelar un lugar.
+
 ### Flujo
 
 1. Haz un fork y una rama para tu cambio.
