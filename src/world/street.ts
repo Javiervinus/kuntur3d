@@ -26,7 +26,11 @@ export interface StreetBlock {
   buildings: DowntownBuilding[];
 }
 
-/** config/streets/<archivo>.json: la calle entera en el marco local (x a lo largo, z a la derecha). */
+/**
+ * config/streets/<archivo>.json: la calle entera en el marco local (x a lo largo, z a la derecha).
+ * `clear` y `blocks` los arma build_street.py (skill model-place) desde config/streets/<archivo>/;
+ * el resto se edita a mano en el archivo.
+ */
 export interface StreetFile {
   name: string;
   /** De dónde salió cada dato (huellas, fotos, medidas). */
