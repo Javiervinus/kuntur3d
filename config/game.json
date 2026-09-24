@@ -2804,6 +2804,7 @@
     "altitudeRadiusFactor": 2.5,
     "hysteresis": 200,
     "maxTextures": 70,
+    "overviewMaxSize": 4096,
     "concurrency": 4,
     "tileCacheSize": 500,
     "cropMarginPx": 16

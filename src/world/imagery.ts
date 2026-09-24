@@ -66,7 +66,21 @@ export class Imagery {
   }
 
   async loadOverview(baseUrl: string): Promise<THREE.Texture> {
-    const texture = await new THREE.TextureLoader().loadAsync(new URL(this.manifest.overview.url, baseUrl).href);
+    let texture: THREE.Texture = await new THREE.TextureLoader().loadAsync(new URL(this.manifest.overview.url, baseUrl).href);
+    // Achicada si pasa `overviewMaxSize` (perfil de celular): a 4096 px ocupa ~80 MB en la GPU.
+    const image = texture.image as HTMLImageElement;
+    const scale = this.cfg.overviewMaxSize / Math.max(image.width, image.height);
+    if (scale < 1) {
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(image.width * scale);
+      canvas.height = Math.round(image.height * scale);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Canvas 2D no disponible para achicar la vista general');
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      texture.dispose();
+      texture = new THREE.CanvasTexture(canvas);
+    }
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.anisotropy = this.anisotropy;
     this.overview = texture;
