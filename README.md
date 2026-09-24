@@ -229,7 +229,7 @@ Google Maps (ver [HUD, pausa y mapa](#hud-pausa-y-mapa)).
 ### Lugares con historia
 
 Los lugares reconstruidos con cuidado (el Malecón 2000, La Perla, la Torre Morisca, el
-Palacio Municipal y su pasaje, el Hemiciclo de La Rotonda, Las Peñas y el faro, los estadios, los puentes, la Aerovía, la
+Palacio Municipal y su pasaje, el Hemiciclo de La Rotonda, la iglesia de San Francisco, el Parque Centenario y su Columna, Las Peñas y el faro, los estadios, los puentes, la Aerovía, la
 estación del tren de Durán…) tienen un **marcador** con las tres estrellas de la bandera de
 Guayaquil, visible de lejos (el nombre aparece de cerca o al pasar el cursor; si dos se montan
 en pantalla, queda el más cercano) y un rombo celeste en el minimapa.
@@ -551,6 +551,34 @@ Construidos a mano con piezas procedurales (sin modelos externos), en su lugar y
   Malecón o de Pichincha, bajo la bóveda de vidrio con costillas de hierro (su sombra cae en el
   piso de terrazo), balcones de hierro, faroles de globo y la cúpula octogonal del crucero. Se
   trepa como cualquier edificio (desde el portal o el pasaje) y se camina por la terraza.
+- **Avenida 9 de Octubre**, del Malecón al Parque Centenario (~840 m, 18 cuadras): los 66
+  edificios de sus frentes, cada uno con su huella de OSM y una entrada de config
+  (`config/streets/nueve-de-octubre.json`) sobre unas pocas familias de fachada paramétricas
+  (`src/world/downtown.ts`): portal guayaquileño con columnas, pisos de ventanas, losas y
+  balcones corridos, esquinas redondeadas *streamline*, muro cortina, aletas, retículas,
+  brutalista y neoclásico, con podio y torre retranqueada donde la hay (La Previsora, el Banco
+  Central, San Francisco 300). Veredas de baldosa terracota con su bordillo, que siguen el
+  terreno, y el mobiliario de la regeneración (`src/world/streetFurniture.ts`): los **faroles de
+  hierro de dos linternas con la estrella celeste de Guayaquil** (78, en cada esquina y cada
+  ~27 m; de noche alumbran en lugar de los postes genéricos), árboles en macetero de acero o en
+  alcorque con rejilla (entran a los árboles de la ciudad) y bancas de listones.
+- **Iglesia de San Francisco y Plaza Rocafuerte** (`src/world/church.ts`, un tipo de iglesia
+  paramétrico para las que vengan): fachada de dos cuerpos con columnas, frontones y ventanas
+  en arco, las **dos torres** de tres cuerpos (campanario, ventana con frontón, reloj que se
+  enciende de noche) con sus cúpulas de nervios; nave, crucero con cúpula sobre tambor y ábside;
+  el costado sobre la avenida con los locales, ventanales apuntados, pretil calado, pináculos y
+  el hastial con el escudo franciscano; las alas del convento, y en la plaza la pila con sus
+  surtidores y Vicente Rocafuerte sobre su pedestal. Con los colores de hoy: blanco con
+  molduras y cúpulas azules.
+- **Parque Centenario y la Columna de los Próceres** (`src/world/column.ts`,
+  `src/world/park.ts`): la columna de 27 m sobre su plataforma con escalinatas, zócalo en talud,
+  pedestal de granito rosado con medallones y placas, los próceres de bronce y las alegorías de
+  las esquinas, el fuste de bronce con los grupos que suben en espiral, el panel y el sol dorados,
+  el capitel de mármol y la Libertad con la antorcha sobre el cóndor; su óvalo de césped con
+  reja baja. El parque: los paseos de losas y la plaza circular, la reja de lanzas con las
+  portadas de cada entrada (postes de globos con su cóndor), los grupos de bronce sobre
+  pedestales de mármol, faroles de globos y los dos mástiles con la bandera. Los árboles son los
+  de los datos (la plaza circular queda despejada).
 
 Se pisan (La Perla tiene su plataforma, las gradas de La Rotonda) y no se atraviesan. Formas,
 colores y luces en `config/game.json` → `monuments`.
@@ -584,6 +612,22 @@ Biblioteca, Correos…). El procedimiento completo, de la investigación a la me
 - **Terreno**: el relieve de los datos conserva un bulto de ~1,3 m bajo el palacio (el DEM ve
   el edificio); la base va a la mediana de la vereda y cada puerta arranca de su suelo, así del
   lado del Malecón no quedan flotando.
+
+**Calles y zonas** (la 9 de Octubre): no se modela cada edificio como el Palacio. Se recorre la
+calle y se inventaría cada frente (tipo, pisos, portal, colores), y cada edificio es una
+entrada de config sobre una familia de fachada; las veredas, los faroles, los árboles y las
+bancas salen de reglas por cuadra. Cada cuadra es su propio lugar de la física y del detalle
+(se descarta junta), y la calle despeja de los datos los edificios, árboles y postes que
+reemplaza (`clear`). Piezas nuevas del kit: vanos de arco apuntado (`pointedHole`, `archPath`
+para su marco), figuras de pie para estatuas (`figure`, que devuelve dónde quedan las manos
+para lo que sostienen), remates de hastial (`gableTop`) y escudos (`shield`), piezas de caras
+planas (`faceted`) o vistas desde adentro (`inward`), pisos que siguen el terreno (`pave`) y en
+los dibujos procedurales la carpintería de las ventanas, adoquines, barrotes y balaustres
+calados.
+Rendimiento, medido con 10 copias en la vista más cargada de cada una (resolución 2×, sombras
+incluidas): la avenida entera ~0,45 ms de GPU y 26,8 MB (unos 1,5 MB por cuadra, un quinto de
+la manzana del Palacio), la iglesia con su plaza ~0,15 ms y 3,6 MB, el parque con la Columna
+~0,11 ms y 4 MB. Se arman en ~140 ms en la carga.
 
 ### Estadios
 
@@ -744,7 +788,9 @@ pipeline/            build_world.py → public/world/ (manifest + binarios + tex
                      build_model.ts arma un .glb desde piezas glTF (y sus niveles de detalle)
 src/world/           terreno, edificios (+colisiones), calles, agua y sus reflejos, árboles,
                      puentes y malecones, palmeras, íconos (y el kit de arquitectura clásica con
-                     que se arma el Palacio Municipal), alumbrado, tráfico, autos estacionados,
+                     que se arman el Palacio Municipal, las iglesias y la Columna), calles
+                     modeladas con sus fachadas y mobiliario (la 9 de Octubre), alumbrado,
+                     tráfico, autos estacionados,
                      peatones, texturas por chunk
 src/player/          personajes, controlador (caminar/trepar/nadar/planear), cámara, avatar, ropa, ala delta
 src/vehicles/        carro: modelo procedural, física y subir/bajar
@@ -780,8 +826,8 @@ Para otra zona basta con cambiar `bbox`, `projection` (zona UTM) y `landmarks` e
 ## Siguientes pasos posibles
 
 - Más íconos con el mismo kit: la Gobernación (al frente del Palacio, en la Plaza de la
-  Administración), la Biblioteca y el Museo Municipal, Correos, la Catedral y toda la avenida 9
-  de Octubre.
+  Administración), la Biblioteca y el Museo Municipal, Correos, la Catedral y la 9 de Octubre
+  del Parque Centenario a la Av. Quito (la Casa de la Cultura y la Corte Provincial).
 - Corregir en el paso `terrain` los bultos que dejan los edificios grandes en el relieve.
 - Vendedores ambulantes y gente sentada en las bancas del Malecón.
 - Semáforos visibles en los cruces.
