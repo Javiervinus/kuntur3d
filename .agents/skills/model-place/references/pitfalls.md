@@ -55,9 +55,10 @@ Por eso, antes de dar un lugar por terminado:
 - De noche no queda nada negro donde la gente camina.
 
 **Terreno**
-- Muestrear el suelo en **toda** la huella, no solo en el frente. El modelo de elevación puede
-  subir metros bajo una manzana: en San Francisco sube 2,5 m de la plaza al fondo. Así, lo que da
-  a otra calle queda medio enterrado si arranca de la misma base.
+- Muestrear el suelo en **toda** la huella, no solo en el frente. Si sube metros bajo una
+  manzana, lo que da a otra calle queda medio enterrado si arranca de la misma base.
+- Si la subida viene de un bulto del relieve (edificios altos que el modelo de elevación ve como
+  suelo), se corrige en el pipeline con una zona plana (`terrain.flatZones`), no en el lugar.
 
 **Cierre**
 - La consola del juego sin errores.
@@ -109,6 +110,12 @@ Por eso, antes de dar un lugar por terminado:
 **Terreno**
 - **Puertas flotando ~1 m**: el bulto del terreno. Las puertas son muescas desde la base del muro
   y se rellenan desde el suelo local.
+- **Un bulto de 4 m sobre la 9 de Octubre**, que en la realidad es plana: la iglesia de San
+  Francisco quedaba en su ladera, con 2,5 m de tierra hacia el fondo, y la arcada y los últimos
+  locales medio enterrados. Eran manzanas enteras de torres, más anchas que la ventana con que
+  el paso `terrain` quita los edificios. Se corrigió con la zona plana `centro` en
+  `config/region.json`: una ventana de 250 m, que solo baja el suelo, con los cerros fuera. Se
+  probó GEDTM30 (un DTM global sin edificios) y en el centro era peor.
 
 **Luz y color**
 - **Techos de portal negros u oliva**: oclusión ambiental muy baja o cielo raso muy oscuro.

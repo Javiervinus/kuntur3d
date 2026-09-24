@@ -186,7 +186,10 @@ de dónde salió: OSM, foto (cuál), cinta, satélite o estimado.
 - **Terreno**: el modelo de elevación puede traer un bulto o una pendiente donde está el
   edificio. Muestrear `__gye.heightmap.sample(x, z)` en **toda** la huella:
   - la base va a la mediana de la vereda principal;
-  - cada puerta, local o arcada arranca de su propio suelo.
+  - cada puerta, local o arcada arranca de su propio suelo;
+  - si el suelo sube metros bajo manzanas enteras de edificios altos, no es el lugar: es el
+    relieve. Se corrige en el pipeline con una zona plana (`config/region.json` →
+    `terrain.flatZones`), no en el modelo.
 
 ## 3. Decidir qué se modela
 
