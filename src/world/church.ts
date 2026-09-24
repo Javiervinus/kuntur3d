@@ -333,10 +333,9 @@ export class ChurchBuilder {
   }
 
   /**
-   * Macizo de caja (en el marco local, pie en la base menos lo enterrado) que entra como edificio,
-   * con su azotea del color del techo.
+   * Macizo de caja (marco local) de `bottom` (por defecto, desde lo enterrado) a `height`, con su
+   * azotea del color del techo; `solid` lo registra en la física como edificio.
    */
-  /** Macizo de `bottom` (por defecto, desde lo enterrado) a `height`, con su azotea; `solid` lo registra en la física. */
   private mass(x0: number, x1: number, z0: number, z1: number, height: number, color: THREE.Color, solid = true, bottom = -this.c.ground.bury): void {
     const m = new THREE.Matrix4().makeTranslation((x0 + x1) / 2, this.base + (height + bottom) / 2, (z0 + z1) / 2);
     this.stone.box(m, x1 - x0, height - bottom, z1 - z0, color, this.stucco);
