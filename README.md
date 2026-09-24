@@ -32,7 +32,7 @@ Genera ~190 MB en `public/world/` y deja ~400 MB de caché en `pipeline/.cache/`
 | Paso | Qué hace |
 |---|---|
 | `water` | Ríos y esteros de Overture → polígonos locales |
-| `terrain` | Copernicus DEM → relieve sin los "bultos" de los edificios; el agua queda hundida. Se guarda en 16 bits (menos de 4 mm de error), como diferencias por fila y con gzip: 4,7 MB en vez de 29 MB |
+| `terrain` | Copernicus DEM → relieve sin los "bultos" de los edificios (y, en las zonas planas, sin los de las manzanas densas del centro); el agua queda hundida. Se guarda en 16 bits (menos de 4 mm de error), como diferencias por fila y con gzip: 4,7 MB en vez de 29 MB |
 | `buildings` | Overture + Google Open Buildings 2.5D → huellas con altura (y los que faltan) |
 | `imagery` | Esri World Imagery → vista general y tiles |
 | `roads` | OSM → ejes de calles, parques, canchas, cruces y postes de alumbrado; los parques simplificados del mapa (`map.json`) |
@@ -305,7 +305,7 @@ satelital como "truco" en todo lo que puede:
 | Capa | Fuente | Truco |
 |---|---|---|
 | Suelo | Esri World Imagery: cerca z18 (~0,6 m/px) y z17 bajo demanda; lejos, una vista general de todo el mundo (7 m/px) | Se dibuja casi sin iluminar (la foto ya trae sol y sombras reales); solo una parte recibe luz para que caigan nuestras sombras. De cerca, el color de la foto decide el detalle: **pasto** donde es verde, **tierra con piedritas** donde es cálida. Parques y canchas de OSM encima (ver abajo). |
-| Relieve | Copernicus DEM GLO-30 | Es un DSM (incluye edificios): una apertura morfológica quita los bultos sin borrar los cerros. |
+| Relieve | Copernicus DEM GLO-30 | Es un DSM (incluye edificios): una apertura morfológica quita los bultos sin borrar los cerros. En un centro denso quedaban bultos de manzanas enteras (~4 m sobre la 9 de Octubre, que es plana); en las zonas planas (`config/region.json` → `terrain.flatZones`, hoy el centro, sin los cerros) se usa una ventana más grande, que solo baja el suelo. Se probó GEDTM30 (el DTM global de OpenGeoHub, sin edificios): en el centro trae bultos aún mayores. |
 | Edificios | Overture Maps (OSM + Google Open Buildings + Microsoft) + los que solo ve Google Open Buildings 2.5D | Alturas de Google Open Buildings 2.5D (satélite + IA). Fachadas procedurales en shader (galpones con lámina y portones) y **techos con la foto satelital proyectada**: de teja a dos o cuatro aguas donde la foto muestra teja, losa con tanque de agua en el resto (ver abajo). |
 | Calles | OpenStreetMap (Overpass) | Se dibujan nítidas **encima** de la foto (que de cerca es borrosa y trae los carros aplastados): calzada por material, veredas con bordillo, líneas de carril y pasos cebra. Ver abajo. |
 | Árboles | Meta/WRI Global Canopy Height v2 (altura de copas a 1,2 m) | Cada copa es un máximo local del mapa de alturas, con su altura real y su radio; el color sale de la foto. Nunca sobre la calzada. |
@@ -609,9 +609,9 @@ Biblioteca, Correos…). El procedimiento completo, de la investigación a la me
   vez de 32. Se arma en ~80 ms en la carga. Medido con 10 copias en la vista más cargada (la
   esquina del Malecón, resolución 2×): ~0,66 ms de GPU por palacio, sombras incluidas; lejos o
   fuera de cuadro, casi nada.
-- **Terreno**: el relieve de los datos conserva un bulto de ~1,3 m bajo el palacio (el DEM ve
-  el edificio); la base va a la mediana de la vereda y cada puerta arranca de su suelo, así del
-  lado del Malecón no quedan flotando.
+- **Terreno**: el relieve de los datos traía un bulto bajo el palacio (el DEM ve el edificio; la
+  zona plana del centro lo achicó) y baja hacia el Malecón; la base va a la mediana de la vereda
+  y cada puerta arranca de su suelo, así del lado del Malecón no quedan flotando.
 
 **Calles y zonas** (la 9 de Octubre): no se modela cada edificio como el Palacio. Se recorre la
 calle y se inventaría cada frente (tipo, pisos, portal, colores), y cada edificio es una
@@ -836,7 +836,7 @@ Para otra zona basta con cambiar `bbox`, `projection` (zona UTM) y `landmarks` e
 - Más íconos con el mismo kit: la Gobernación (al frente del Palacio, en la Plaza de la
   Administración), la Biblioteca y el Museo Municipal, Correos, la Catedral y la 9 de Octubre
   del Parque Centenario a la Av. Quito (la Casa de la Cultura y la Corte Provincial).
-- Corregir en el paso `terrain` los bultos que dejan los edificios grandes en el relieve.
+- Más zonas planas (`terrain.flatZones`) si aparecen bultos de edificios en otros barrios densos.
 - Vendedores ambulantes y gente sentada en las bancas del Malecón.
 - Semáforos visibles en los cruces.
 - Que tu carro choque con el tráfico (hoy los vehículos frenan ante ti pero no hay choque).
