@@ -6,6 +6,9 @@ import { withNightLight } from '../render/nightLight';
 
 type TreesConfig = GameConfig['trees'];
 
+/** Lo que trae cada árbol de un chunk (en este orden): x, y, z, alto, radio y r, g, b de la foto (sRGB). */
+export const TREE_FIELDS = 8;
+
 interface TreeChunk {
   canopy: THREE.InstancedMesh;
   trunks: THREE.InstancedMesh;
@@ -324,6 +327,8 @@ export class Trees {
   private nearRadius = 0;
   private nearDirty = true;
   private nearFound = new Float32Array(0);
+  /** Árboles que no vienen de los chunks (los de las calles modeladas): siempre cargados, con su caja. */
+  private readonly fixed: { chunk: TreeChunk; minX: number; maxX: number; minZ: number; maxZ: number }[] = [];
 
   constructor(
     private readonly baseUrl: string,
@@ -383,8 +388,11 @@ export class Trees {
     // Candidatas: (distancia, chunk, índice), en un arreglo plano que se reutiliza.
     let found = 0;
     const chunks: TreeChunk[] = [];
-    for (const [k, chunk] of this.loaded) {
-      if (this.distance(k, x, z) > reach) continue;
+    const nearby = [...this.loaded].filter(([k]) => this.distance(k, x, z) <= reach).map(([, chunk]) => chunk);
+    for (const f of this.fixed) {
+      if (Math.hypot(Math.max(f.minX - x, 0, x - f.maxX), Math.max(f.minZ - z, 0, z - f.maxZ)) <= reach) nearby.push(f.chunk);
+    }
+    for (const chunk of nearby) {
       const c = chunks.length;
       chunks.push(chunk);
       const xz = chunk.xz;
@@ -482,72 +490,96 @@ export class Trees {
       if (this.loaded.has(k) || this.distance(k, focusX, focusZ) > this.stream.treeRadius + this.stream.treeHysteresis) {
         return;
       }
-      // De los más altos a los más bajos: de lejos solo los altos proyectan sombra. Sin los que
-      // quedarían atravesando un puente o una rampa (la foto los vio al lado o debajo).
-      const occupied = this.occupied;
-      const order = Array.from({ length: data.length / info.stride }, (_, t) => t)
-        .filter((t) => {
-          if (!occupied) return true;
-          const o = t * info.stride;
-          const [x, y, z, h, r] = [data[o], data[o + 1], data[o + 2], data[o + 3], data[o + 4]];
-          // El tronco y el borde de la copa (hacia los cuatro lados).
-          const reach = r * this.cfg.clearanceShare;
-          return ![
-            [0, 0],
-            [reach, 0],
-            [-reach, 0],
-            [0, reach],
-            [0, -reach],
-          ].some(([dx, dz]) => occupied(x + dx, z + dz, y + h));
-        })
-        .sort((a, b) => data[b * info.stride + 3] - data[a * info.stride + 3]);
-      const count = order.length;
-      const canopy = new THREE.InstancedMesh(this.canopyGeo, this.canopyMat, count);
-      const trunks = new THREE.InstancedMesh(this.trunkGeo, this.trunkMat, count);
-      const m = new THREE.Matrix4();
-      const q = new THREE.Quaternion();
-      const pos = new THREE.Vector3();
-      const scl = new THREE.Vector3();
-      const up = new THREE.Vector3(0, 1, 0);
-      const color = new THREE.Color();
-      const tint = this.cfg.canopyColor;
-      const greens = tint.greens.map((hex) => new THREE.Color(hex));
-      const xz = new Float32Array(count * 2);
-      let tall = 0;
-      for (let t = 0; t < count; t++) {
-        const o = order[t] * info.stride;
-        if (data[o + 3] >= this.cfg.farShadowMinHeight) tall = t + 1;
-        const [x, y, z, h, r] = [data[o], data[o + 1], data[o + 2], data[o + 3], data[o + 4]];
-        xz[t * 2] = x;
-        xz[t * 2 + 1] = z;
-        // La copa toca la altura medida; su alto no pasa de `canopyMaxAspect` veces su radio
-        // (copas tropicales anchas, no columnas) y el tronco sube hasta su centro.
-        const half = Math.min(this.cfg.canopyVerticalRatio * h, this.cfg.canopyMaxAspect * r);
-        const center = h - half;
-        q.setFromAxisAngle(up, ((x * 12.9898 + z * 78.233) % 1) * Math.PI * 2);
-        m.compose(pos.set(x, y + center, z), q, scl.set(r, half, r));
-        canopy.setMatrixAt(t, m);
-        const trunk = this.cfg.trunkRadius * r;
-        m.compose(pos.set(x, y, z), q, scl.set(trunk, center, trunk));
-        trunks.setMatrixAt(t, m);
-        color.setRGB(data[o + 5], data[o + 6], data[o + 7], THREE.SRGBColorSpace);
-        // Un verde de la paleta por árbol (estable: sale de su posición).
-        const pick = Math.floor(((x * 0.0917 + z * 0.1531) % 1 + 1) % 1 * greens.length);
-        canopy.setColorAt(t, leafColor(color, greens[pick], tint));
-      }
-      for (const mesh of [canopy, trunks]) {
-        mesh.castShadow = true;
-        mesh.receiveShadow = true;
-        mesh.computeBoundingSphere();
-        this.shadow.limitFar(mesh, tall);
-      }
-      this.group.add(canopy, trunks);
-      this.loaded.set(k, { canopy, trunks, xz });
+      const chunk = this.chunk(data, info.stride, this.occupied);
+      this.group.add(chunk.canopy, chunk.trunks);
+      this.loaded.set(k, chunk);
       this.nearDirty = true;
     } catch (err) {
       console.warn('[trees] chunk', k, err);
     } finally {
       this.loading.delete(k);
     }
+  }
+
+  /**
+   * Árboles que el mundo no trae en sus chunks (los de las veredas de una calle modelada, en el
+   * formato de TREE_FIELDS): quedan cargados siempre, sin pasar por el filtro de lo construido.
+   */
+  addFixed(data: Float32Array): void {
+    if (data.length < TREE_FIELDS) return;
+    const chunk = this.chunk(data, TREE_FIELDS, null);
+    let [minX, maxX, minZ, maxZ] = [Infinity, -Infinity, Infinity, -Infinity];
+    for (let o = 0; o < data.length; o += TREE_FIELDS) {
+      minX = Math.min(minX, data[o]);
+      maxX = Math.max(maxX, data[o]);
+      minZ = Math.min(minZ, data[o + 2]);
+      maxZ = Math.max(maxZ, data[o + 2]);
+    }
+    this.group.add(chunk.canopy, chunk.trunks);
+    this.fixed.push({ chunk, minX, maxX, minZ, maxZ });
+    this.nearDirty = true;
+  }
+
+  /** Las mallas de un grupo de árboles (`stride` números por árbol, ver TREE_FIELDS). */
+  private chunk(data: Float32Array, stride: number, occupied: ((x: number, z: number, top: number) => boolean) | null): TreeChunk {
+    // De los más altos a los más bajos: de lejos solo los altos proyectan sombra. Sin los que
+    // quedarían atravesando un puente o una rampa (la foto los vio al lado o debajo).
+    const order = Array.from({ length: data.length / stride }, (_, t) => t)
+      .filter((t) => {
+        if (!occupied) return true;
+        const o = t * stride;
+        const [x, y, z, h, r] = [data[o], data[o + 1], data[o + 2], data[o + 3], data[o + 4]];
+        // El tronco y el borde de la copa (hacia los cuatro lados).
+        const reach = r * this.cfg.clearanceShare;
+        return ![
+          [0, 0],
+          [reach, 0],
+          [-reach, 0],
+          [0, reach],
+          [0, -reach],
+        ].some(([dx, dz]) => occupied(x + dx, z + dz, y + h));
+      })
+      .sort((a, b) => data[b * stride + 3] - data[a * stride + 3]);
+    const count = order.length;
+    const canopy = new THREE.InstancedMesh(this.canopyGeo, this.canopyMat, count);
+    const trunks = new THREE.InstancedMesh(this.trunkGeo, this.trunkMat, count);
+    const m = new THREE.Matrix4();
+    const q = new THREE.Quaternion();
+    const pos = new THREE.Vector3();
+    const scl = new THREE.Vector3();
+    const up = new THREE.Vector3(0, 1, 0);
+    const color = new THREE.Color();
+    const tint = this.cfg.canopyColor;
+    const greens = tint.greens.map((hex) => new THREE.Color(hex));
+    const xz = new Float32Array(count * 2);
+    let tall = 0;
+    for (let t = 0; t < count; t++) {
+      const o = order[t] * stride;
+      if (data[o + 3] >= this.cfg.farShadowMinHeight) tall = t + 1;
+      const [x, y, z, h, r] = [data[o], data[o + 1], data[o + 2], data[o + 3], data[o + 4]];
+      xz[t * 2] = x;
+      xz[t * 2 + 1] = z;
+      // La copa toca la altura medida; su alto no pasa de `canopyMaxAspect` veces su radio
+      // (copas tropicales anchas, no columnas) y el tronco sube hasta su centro.
+      const half = Math.min(this.cfg.canopyVerticalRatio * h, this.cfg.canopyMaxAspect * r);
+      const center = h - half;
+      q.setFromAxisAngle(up, ((x * 12.9898 + z * 78.233) % 1) * Math.PI * 2);
+      m.compose(pos.set(x, y + center, z), q, scl.set(r, half, r));
+      canopy.setMatrixAt(t, m);
+      const trunk = this.cfg.trunkRadius * r;
+      m.compose(pos.set(x, y, z), q, scl.set(trunk, center, trunk));
+      trunks.setMatrixAt(t, m);
+      color.setRGB(data[o + 5], data[o + 6], data[o + 7], THREE.SRGBColorSpace);
+      // Un verde de la paleta por árbol (estable: sale de su posición).
+      const pick = Math.floor(((x * 0.0917 + z * 0.1531) % 1 + 1) % 1 * greens.length);
+      canopy.setColorAt(t, leafColor(color, greens[pick], tint));
+    }
+    for (const mesh of [canopy, trunks]) {
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      mesh.computeBoundingSphere();
+      this.shadow.limitFar(mesh, tall);
+    }
+    return { canopy, trunks, xz };
   }
 }
