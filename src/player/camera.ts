@@ -46,8 +46,11 @@ export class FollowCamera {
     readonly camera: THREE.PerspectiveCamera,
     private readonly cfg: GameConfig['camera'],
     private readonly groundAt: (x: number, z: number) => number,
-    /** Altura del edificio en (x, z) o -Infinity: para que la cámara no quede dentro de uno. */
-    private readonly wallTop: (x: number, z: number) => number,
+    /**
+     * Tope de lo que ocupa (x, z) a la altura y (edificio, alero de un monumento) o -Infinity: para
+     * que la cámara no quede dentro.
+     */
+    private readonly wallTop: (x: number, z: number, y: number) => number,
   ) {
     this.pitch = THREE.MathUtils.degToRad(cfg.defaultPitchDeg);
     this.distance = cfg.distance;
@@ -160,7 +163,7 @@ export class FollowCamera {
       const x = t.x - dir.x * d;
       const y = t.y - dir.y * d;
       const z = t.z - dir.z * d;
-      if (this.wallTop(x, z) > y) return Math.max(c.minDistance * c.armMinShare, d - c.armMargin);
+      if (this.wallTop(x, z, y) > y) return Math.max(c.minDistance * c.armMinShare, d - c.armMargin);
     }
     return dist;
   }

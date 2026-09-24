@@ -43,7 +43,7 @@ import { Buildings, roofTop } from './world/buildings';
 import { Heightmap } from './world/heightmap';
 import { Imagery } from './world/imagery';
 import { DestinationMarker } from './world/marker';
-import { Monuments } from './world/monuments';
+import { MONUMENT_CHUNK, Monuments } from './world/monuments';
 import { Palms } from './world/palms';
 import { Roads } from './world/roads';
 import { SkyOcclusion } from './world/skyOcclusion';
@@ -213,6 +213,8 @@ async function main(): Promise<void> {
     },
   );
   scene.add(buildings.group);
+  // Los macizos de los monumentos (el Palacio Municipal) se trepan y se caminan como edificios.
+  buildings.index.addChunk(MONUMENT_CHUNK, monuments.records);
   const trees = new Trees(
     manifestUrl,
     manifest,
@@ -356,9 +358,9 @@ async function main(): Promise<void> {
     const b = buildings.index.at(x, z);
     return Math.max(heightmap.sample(x, z), manifest.waterLevel, b ? roofTop(b, x, z) : -Infinity);
   };
-  const follow = new FollowCamera(camera, game.camera, surfaceAt, (x, z) => {
+  const follow = new FollowCamera(camera, game.camera, surfaceAt, (x, z, y) => {
     const b = buildings.index.at(x, z);
-    return b ? roofTop(b, x, z) : -Infinity;
+    return Math.max(b ? roofTop(b, x, z) : -Infinity, monuments.wallTop(x, z, y));
   });
   const marker = new DestinationMarker(game.destinationMarker);
   scene.add(marker.group);
