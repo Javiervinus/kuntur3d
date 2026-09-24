@@ -1,0 +1,30 @@
+{
+ "id": "nueveDeOctubre",
+ "title": "Avenida 9 de Octubre",
+ "axis": {"from": [-2.1923875, -79.8796497], "to": [-2.1900526, -79.8869387]},
+ "osm": {"bbox": [-2.1935, -79.8905, -2.188, -79.8785]},
+ "blocks": {
+  "N": [
+   [5.5, 83, "Malecón → Panamá"],
+   [91, 176, "Panamá → Pedro Carbo"],
+   [192, 235, "Pedro Carbo → Córdova"],
+   [242, 376.5, "Córdova → Baquerizo Moreno"],
+   [385, 434.5, "Baquerizo Moreno → Escobedo"],
+   [443, 509.5, "Escobedo → Boyacá"],
+   [522, 648.5, "Boyacá → García Avilés"],
+   [658, 753.5, "García Avilés → Rumichaca"],
+   [762.5, 838.5, "Rumichaca → Lorenzo de Garaicoa"]
+  ],
+  "S": [
+   [8.5, 81.5, "Malecón → Pichincha"],
+   [92.5, 175, "Pichincha → Pedro Carbo"],
+   [188.5, 282.5, "Pedro Carbo → Chile"],
+   [290.5, 374.5, "Chile → Chimborazo"],
+   [383.5, 431, "Chimborazo → Escobedo"],
+   [440, 508, "Escobedo → Boyacá"],
+   [522.5, 647, "Boyacá → García Avilés"],
+   [656, 749.5, "García Avilés → Rumichaca"],
+   [756, 836.5, "Rumichaca → Lorenzo de Garaicoa"]
+  ]
+ }
+}

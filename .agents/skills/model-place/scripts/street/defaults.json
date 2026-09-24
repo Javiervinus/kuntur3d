@@ -1,0 +1,71 @@
+{
+  "osm": {
+    "endpoints": [
+      "https://overpass-api.de/api/interpreter",
+      "https://overpass.kumi.systems/api/interpreter",
+      "https://overpass.private.coffee/api/interpreter"
+    ],
+    "timeout": 150,
+    "grace": 30,
+    "retryPause": 1,
+    "select": [
+      "way[building]",
+      "relation[building]",
+      "way[highway]",
+      "way[leisure]",
+      "way[amenity]",
+      "node[historic]",
+      "node[tourism]",
+      "node[natural=tree]",
+      "node[highway=street_lamp]",
+      "way[man_made]",
+      "way[\"area:highway\"]"
+    ]
+  },
+  "roads": ["primary", "secondary", "tertiary", "residential", "pedestrian", "unclassified", "living_street", "primary_link"],
+  "curb": { "surface": "paving", "inset": 4, "minWidth": 5, "maxSlope": 0.08, "minOffset": 0 },
+  "fronts": { "minSide": 1.5, "probe": 0.2, "start": 0.3, "length": 40, "reach": 30 },
+  "candidates": { "margin": 2, "reach": 30, "front": 16, "levelHeight": 3.1, "levelBase": 2, "overlap": 0.3 },
+  "footprints": {
+    "corner": 4.0,
+    "depth": 25.0,
+    "walk": 7.5,
+    "match": 6,
+    "minFront": 3,
+    "front": 18,
+    "frontTolerance": 1.5,
+    "shift": 30,
+    "shiftCap": 8,
+    "shiftWeight": 0.01,
+    "overlap": -3,
+    "radius": 5.0,
+    "idLength": 40,
+    "cutReach": 300,
+    "weld": 0.05
+  },
+  "sidewalks": { "edge": 0.5, "gap": 3 },
+  "rings": { "dedupe": 0.3, "collinear": 0.05, "decimals": 2 },
+  "clear": { "minArea": 1, "share": 0.25 },
+  "gameBuildings": { "margin": [500, 400] },
+  "satellite": {
+    "zoom": 19,
+    "url": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    "resolution": 0.25,
+    "pause": 0.15,
+    "timeout": 30,
+    "ticks": { "minor": 10, "major": 50, "across": 10, "short": 8, "long": 16, "side": 12 },
+    "font": 11,
+    "colors": { "along": [255, 255, 0], "across": [0, 255, 255] }
+  },
+  "plan": {
+    "scale": 3.0,
+    "half": 130,
+    "length": 330,
+    "overlap": 20,
+    "ticks": [25, 50],
+    "font": 12,
+    "roadWidth": 2,
+    "shade": { "light": 235, "perMeter": 2.2, "dark": 60 },
+    "colors": { "park": [205, 238, 205], "road": [160, 160, 160], "data": [30, 30, 140], "osm": [230, 90, 0], "rule": [255, 0, 0], "label": [0, 0, 0], "paper": [255, 255, 255] }
+  }
+}
