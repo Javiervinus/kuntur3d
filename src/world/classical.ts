@@ -223,6 +223,50 @@ export function archHole(cx: number, y0: number, width: number, impost: number):
   return p;
 }
 
+/**
+ * Hueco de arco apuntado (una lanceta gótica): recto hasta `impost` y arriba dos arcos de radio
+ * `width`·`sharp` (0,5 = medio punto, 1 = arco equilátero) que se juntan en la punta.
+ */
+export function pointedHole(cx: number, y0: number, width: number, impost: number, sharp: number): THREE.Path {
+  const p = new THREE.Path();
+  const h = width / 2;
+  const r = Math.max(width * sharp, h);
+  const rise = Math.sqrt(r * r - (r - h) * (r - h));
+  const a = Math.atan2(rise, r - h);
+  p.moveTo(cx - h, y0);
+  p.lineTo(cx + h, y0);
+  p.lineTo(cx + h, impost);
+  p.absarc(cx + h - r, impost, r, 0, a, false);
+  p.absarc(cx - h + r, impost, r, Math.PI - a, Math.PI, false);
+  p.closePath();
+  return p;
+}
+
+/**
+ * Recorrido del borde de un arco (medio punto con `sharp` 0,5, apuntado con más) en el plano x-y:
+ * sube por la jamba izquierda desde `y0`, pasa por la clave y baja por la derecha. Con eje +z en
+ * `sweep`, la moldura queda alrededor del vano (un arquivolto, un guardapolvo).
+ */
+export function archPath(cx: number, y0: number, width: number, impost: number, sharp: number, segments: number): THREE.Vector3[] {
+  const h = width / 2;
+  const r = Math.max(width * sharp, h);
+  const rise = Math.sqrt(r * r - (r - h) * (r - h));
+  const a = Math.atan2(rise, r - h);
+  const out: THREE.Vector3[] = [];
+  if (y0 < impost) out.push(new THREE.Vector3(cx - h, y0, 0));
+  // Arco izquierdo (centro a la derecha de su arranque) de π a π − a; el derecho, de a a 0.
+  for (let k = 0; k <= segments; k++) {
+    const t = Math.PI - a * (k / segments);
+    out.push(new THREE.Vector3(cx - h + r + Math.cos(t) * r, impost + Math.sin(t) * r, 0));
+  }
+  for (let k = 1; k <= segments; k++) {
+    const t = a - a * (k / segments);
+    out.push(new THREE.Vector3(cx + h - r + Math.cos(t) * r, impost + Math.sin(t) * r, 0));
+  }
+  if (y0 < impost) out.push(new THREE.Vector3(cx + h, y0, 0));
+  return out;
+}
+
 /** Hueco redondo (óculo). */
 export function roundHole(cx: number, cy: number, r: number): THREE.Path {
   const p = new THREE.Path();
@@ -478,6 +522,62 @@ function clean(g: THREE.BufferGeometry): THREE.BufferGeometry {
   return g;
 }
 
+/**
+ * La pieza con caras planas: sin índice y con la normal de cada triángulo (un prisma de pocos
+ * lados, un tronco de pirámide). Los cilindros de three.js comparten los vértices de las aristas
+ * y se sombrean redondeados.
+ */
+export function faceted(g: THREE.BufferGeometry): THREE.BufferGeometry {
+  const flat = g.index ? g.toNonIndexed() : g;
+  if (flat !== g) g.dispose();
+  flat.deleteAttribute('normal');
+  flat.computeVertexNormals();
+  return flat;
+}
+
+/** La pieza vista desde adentro: caras y normales dadas vuelta (la pared interior de un macetero). */
+export function inward(g: THREE.BufferGeometry): THREE.BufferGeometry {
+  const flat = g.index ? g.toNonIndexed() : g;
+  if (flat !== g) g.dispose();
+  // Cada triángulo con su segundo y tercer vértice cambiados (todos los atributos juntos).
+  for (const attr of Object.values(flat.attributes) as THREE.BufferAttribute[]) {
+    const n = attr.itemSize;
+    const a = attr.array;
+    for (let k = 0; k < attr.count; k += 3) {
+      for (let c = 0; c < n; c++) {
+        const t = a[(k + 1) * n + c];
+        a[(k + 1) * n + c] = a[(k + 2) * n + c];
+        a[(k + 2) * n + c] = t;
+      }
+    }
+  }
+  const nor = flat.getAttribute('normal');
+  for (let k = 0; k < nor.count; k++) nor.setXYZ(k, -nor.getX(k), -nor.getY(k), -nor.getZ(k));
+  return flat;
+}
+
+/**
+ * Remate de hastial colonial: dos contracurvas que suben de los hombros (a `rise − curve`) a la
+ * punta (a `rise`), de ancho w, de izquierda a derecha (en el plano x-y, centrado en x = 0).
+ */
+export function gableTop(w: number, rise: number, curve: number, segments: number): THREE.Vector2[] {
+  const left = new THREE.CubicBezierCurve(new THREE.Vector2(-w / 2, rise - curve), new THREE.Vector2(-w / 4, rise - curve), new THREE.Vector2(-w / 4, rise), new THREE.Vector2(0, rise));
+  const right = new THREE.CubicBezierCurve(new THREE.Vector2(0, rise), new THREE.Vector2(w / 4, rise), new THREE.Vector2(w / 4, rise - curve), new THREE.Vector2(w / 2, rise - curve));
+  return [...left.getPoints(segments), ...right.getPoints(segments).slice(1)];
+}
+
+/** Blasón de ancho w y alto h (recto arriba, en punta redondeada abajo), en el plano x-y con la punta en el origen. */
+export function shield(w: number, h: number): THREE.Shape {
+  const s = new THREE.Shape();
+  s.moveTo(-w / 2, h);
+  s.lineTo(-w / 2, h / 3);
+  s.quadraticCurveTo(-w / 2, 0, 0, 0);
+  s.quadraticCurveTo(w / 2, 0, w / 2, h / 3);
+  s.lineTo(w / 2, h);
+  s.closePath();
+  return s;
+}
+
 /** Une piezas con distintos atributos (solo posición y normal). */
 export function combine(list: THREE.BufferGeometry[]): THREE.BufferGeometry {
   const merged = mergeGeometries(list.map((g) => clean(g.index ? g.toNonIndexed() : g)));
@@ -538,6 +638,55 @@ export function urn(h: number, sides: number): THREE.BufferGeometry {
       sides,
     ),
   ]);
+}
+
+/**
+ * Figura de pie para una estatua (de alto `height`, mirando a +z, los pies en y = 0), en
+ * fracciones de su alto: el cuerpo es un torno de los pies a los hombros aplastado de frente
+ * (`depth` = fondo / ancho), con la cabeza, los hombros y dos brazos de dos tramos cada uno: por
+ * brazo, [largo, x, y, z] del brazo y del antebrazo (la dirección no hace falta normalizada).
+ * Devuelve también dónde quedan las manos (para lo que sostienen: una antorcha, un libro).
+ */
+export interface FigureShape {
+  body: number[][];
+  depth: number;
+  head: number[];
+  shoulders: number[];
+  arm: number;
+  arms: number[][][];
+}
+
+export function figure(height: number, s: FigureShape, sides: number): { geometry: THREE.BufferGeometry; hands: THREE.Vector3[] } {
+  const H = height;
+  const parts: THREE.BufferGeometry[] = [];
+  const body = new THREE.LatheGeometry(
+    s.body.map(([r, y]) => new THREE.Vector2(r * H, y * H)),
+    sides,
+  );
+  body.scale(1, 1, s.depth);
+  parts.push(body);
+  const [headR, headY] = s.head;
+  parts.push(new THREE.SphereGeometry(headR * H, sides, sides / 2).translate(0, headY * H, 0));
+  const [halfW, shoulderY] = s.shoulders;
+  const up = new THREE.Vector3(0, 1, 0);
+  const r = s.arm * H;
+  const hands: THREE.Vector3[] = [];
+  s.arms.forEach((segments, k) => {
+    const side = k === 0 ? 1 : -1;
+    let from = new THREE.Vector3(side * halfW * H, shoulderY * H, 0);
+    parts.push(new THREE.SphereGeometry(r, sides / 2, sides / 4).translate(from.x, from.y, from.z));
+    for (const [length, dx, dy, dz] of segments) {
+      const dir = new THREE.Vector3(side * dx, dy, dz).normalize();
+      const to = from.clone().addScaledVector(dir, length * H);
+      const limb = new THREE.CylinderGeometry(r, r, length * H, sides / 2, 1, true);
+      limb.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(up, dir));
+      limb.translate((from.x + to.x) / 2, (from.y + to.y) / 2, (from.z + to.z) / 2);
+      parts.push(limb, new THREE.SphereGeometry(r, sides / 2, sides / 4).translate(to.x, to.y, to.z));
+      from = to;
+    }
+    hands.push(from);
+  });
+  return { geometry: combine(parts), hands };
 }
 
 /**
