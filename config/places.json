@@ -287,6 +287,33 @@
       }
     },
     {
+      "id": "iglesia-san-francisco",
+      "name": "Iglesia de San Francisco y Plaza Rocafuerte",
+      "kicker": "Iglesia · Av. 9 de Octubre",
+      "category": "centro",
+      "year": "1956",
+      "text": "La fundó en 1702 la orden franciscana. La iglesia de madera se perdió en el Gran Incendio de 1896; la reconstrucción empezó en 1899 y se inauguró en 1902. El templo de hoy lo levantó en 1956 el ingeniero Modesto Luque Rivadeneira, siguiendo las líneas de la antigua iglesia de madera. Frente a su fachada, la plaza con la pila y el monumento a Vicente Rocafuerte.",
+      "fact": "El monumento a Rocafuerte, inaugurado el 1 de enero de 1880, fue el primero de la ciudad, y él y su pila salieron intactos del incendio de 1896.",
+      "sources": [
+        "https://es.wikipedia.org/wiki/Iglesia_de_San_Francisco_(Guayaquil)",
+        "https://guayaquil.gob.ec/plaza-san-francisco-plaza-rocafuerte-historia-detras-espacios-emblematicos/",
+        "https://www.expreso.ec/guayaquil/que-cambios-hubo-en-la-plaza-san-francisco-tras-la-intervencion-de-595-000-dolares-268810.html"
+      ],
+      "anchor": {
+        "lat": -2.192075,
+        "lon": -79.8817306
+      },
+      "height": 35,
+      "radius": 60,
+      "photo": {
+        "file": "File:Iglesia de San Francisco (Guayaquil).jpg",
+        "focus": [
+          50,
+          20
+        ]
+      }
+    },
+    {
       "id": "aerovia",
       "name": "Aerovía",
       "kicker": "Teleférico · Guayaquil-Durán",
