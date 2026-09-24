@@ -1,0 +1,14 @@
+{
+  "shot": { "wait": 2500 },
+  "transects": {
+    "step": 5,
+    "half": 30,
+    "res": 0.25,
+    "carriageway": 8,
+    "surfaces": ["paving", "asphalt", "concrete", "unpaved"],
+    "teleportEvery": 200,
+    "settle": 1500
+  },
+  "walk": { "key": "KeyW", "settle": 1500, "sample": 100, "maxMs": 20000, "reach": 0.6, "stuck": { "window": 1000, "minMove": 0.1 } },
+  "gpu": { "copies": 10, "rounds": 16, "settle": 350, "sample": 900, "offset": 0.01, "transparent": false }
+}
