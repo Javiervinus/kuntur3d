@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fotos y juego</title>
+<style>
+  :root { --bg: #f4f2ee; --ink: #1d1f22; --muted: #62666b; --card: #ffffff; --line: #dedad3; --accent: #2f5fae; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #15171a; --ink: #eceae6; --muted: #a2a6ab; --card: #1f2226; --line: #33373c; --accent: #7fa8ea; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1280px; margin: 0 auto; padding: 24px 16px 64px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  .lead { color: var(--muted); margin: 0 0 28px; max-width: 70ch; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+  h2 { font-size: 17px; margin: 0 0 10px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-items: start; }
+  .pair.one { grid-template-columns: 1fr; }
+  figure { margin: 0; }
+  img { width: 100%; height: auto; display: block; border-radius: 6px; background: #0003; }
+  .pair img { max-height: 620px; object-fit: contain; }
+  figcaption { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  figcaption a { color: var(--accent); }
+  .note { font-size: 14px; margin: 10px 0 0; }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1 id="title"></h1>
+  <p class="lead" id="lead"></p>
+  <div id="pairs"></div>
+</main>
+<script>
+// Plantilla de la skill model-place: copiarla a la carpeta temporal, junto a las fotos y las
+// capturas, y llenar esto. Cada par: la foto real (con su crédito) y la captura desde un punto
+// parecido. Sin `photo`, la captura va sola (una vista que no tiene foto de referencia).
+const PAGE = {
+  title: 'LUGAR: fotos reales y el juego',
+  lead: 'Cada par: a la izquierda la foto (de sus autores, con su licencia); a la derecha, el juego desde un punto parecido.',
+};
+const PAIRS = [
+  {
+    title: 'Vista',
+    photo: 'foto.jpg',
+    credit: 'Autor, año, licencia',
+    link: 'https://commons.wikimedia.org/wiki/File:…',
+    shot: 'captura.jpg',
+    note: 'Qué calza y qué no.',
+  },
+];
+
+document.getElementById('title').textContent = PAGE.title;
+document.getElementById('lead').textContent = PAGE.lead;
+document.title = PAGE.title;
+const root = document.getElementById('pairs');
+for (const p of PAIRS) {
+  const section = document.createElement('section');
+  const h2 = document.createElement('h2');
+  h2.textContent = p.title;
+  section.append(h2);
+  const pair = document.createElement('div');
+  pair.className = p.photo ? 'pair' : 'pair one';
+  const figure = (src, caption, link) => {
+    const f = document.createElement('figure');
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = caption;
+    const c = document.createElement('figcaption');
+    c.textContent = caption;
+    if (link) {
+      const a = document.createElement('a');
+      a.href = link;
+      a.textContent = ' · fuente';
+      c.append(a);
+    }
+    f.append(img, c);
+    return f;
+  };
+  if (p.photo) pair.append(figure(p.photo, p.credit, p.link));
+  pair.append(figure(p.shot, 'Juego'));
+  section.append(pair);
+  if (p.note) {
+    const n = document.createElement('p');
+    n.className = 'note';
+    n.textContent = p.note;
+    section.append(n);
+  }
+  root.append(section);
+}
+</script>
+</body>
+</html>
