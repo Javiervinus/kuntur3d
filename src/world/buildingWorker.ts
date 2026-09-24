@@ -54,6 +54,8 @@ export interface BuildingStyle {
   zones: { x: number; z: number; radius: number; palette: string[] }[];
   /** Donde un monumento reemplaza al edificio de los datos (no se dibuja ni choca). */
   exclude: { x: number; z: number; radius: number }[];
+  /** Lo mismo, en polígonos: una calle modelada con sus edificios (el centro de la huella adentro). */
+  excludeAreas: { x: number; z: number }[][];
   /**
    * Portales (galería en la planta baja): los edificios de al menos `minHeight` m y `minArea`
    * m² cuyo centro cae en el polígono (marco local), con esa probabilidad.
@@ -746,6 +748,13 @@ function build(
   const shed = palette(style.industrial.palette);
   const zonePalettes = style.zones.map((zone) => palette(zone.palette));
   const roofOf = new Map(roofs.map((r) => [r[0], r]));
+  const areas = style.excludeAreas.map((polygon) => ({
+    polygon,
+    minX: Math.min(...polygon.map((p) => p.x)),
+    maxX: Math.max(...polygon.map((p) => p.x)),
+    minZ: Math.min(...polygon.map((p) => p.z)),
+    maxZ: Math.max(...polygon.map((p) => p.z)),
+  }));
   const collisions: Collision[] = new Array(raw.length);
   // Geometría de los más altos a los más bajos (sombra lejana solo de los altos); los datos
   // de colisión siguen el orden original (los techos inclinados se refieren a ese índice).
@@ -765,7 +774,10 @@ function build(
     }
     cx /= outer.length / 2;
     cz /= outer.length / 2;
-    if (style.exclude.some((e) => Math.hypot(cx - e.x, cz - e.z) <= e.radius)) {
+    if (
+      style.exclude.some((e) => Math.hypot(cx - e.x, cz - e.z) <= e.radius) ||
+      areas.some((a) => cx >= a.minX && cx <= a.maxX && cz >= a.minZ && cz <= a.maxZ && inPolygon(cx, cz, a.polygon))
+    ) {
       // Sin geometría ni colisión: un recuadro vacío no entra en el índice.
       const empty = new Array<number>(META_STRIDE).fill(0);
       empty[2] = 1;

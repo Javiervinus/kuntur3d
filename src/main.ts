@@ -164,7 +164,8 @@ async function main(): Promise<void> {
     // Todos los personajes: cambiar de uno a otro después es instantáneo.
     step(w.avatar, roster.loadAll()),
     step(w.bridges, bridgesJob),
-    // Alumbrado público (necesita el relieve para el pie de cada poste, y los de los puentes).
+    // Alumbrado público (necesita el relieve para el pie de cada poste, y los de los puentes). Las
+    // calles modeladas ponen sus faroles en lugar de los postes de los datos.
     step(
       w.lamps,
       Promise.all([heightmapJob, bridgesJob]).then(([hm, deck]) =>
@@ -176,6 +177,7 @@ async function main(): Promise<void> {
           game.render.fog,
           renderer,
           deck?.lamps ?? null,
+          { lanterns: Monuments.lanterns(game.monuments, geo, hm), cleared: Monuments.clearedTest(game.monuments, geo) },
         ),
       ),
     ),
@@ -204,6 +206,7 @@ async function main(): Promise<void> {
     {
       zones: game.buildings.zones.map((z) => ({ ...geo.toLocal(z.lat, z.lon), radius: z.radius, palette: z.palette })),
       exclude: monuments.exclusions,
+      excludeAreas: Monuments.clearings(game.monuments, geo),
       portales: {
         polygon: game.buildings.facade.portales.polygon.map(([lat, lon]) => geo.toLocal(lat, lon)),
         minHeight: game.buildings.facade.portales.minHeight,
@@ -221,8 +224,10 @@ async function main(): Promise<void> {
     game.trees,
     game.streaming,
     env.cityShadow,
-    (x, z, top) => (bridges ? bridges.deckAt(x, z, top) > -Infinity : false) || monuments.occupied(x, z),
+    (x, z, top) => (bridges ? bridges.deckAt(x, z, top) > -Infinity : false) || monuments.occupied(x, z) || monuments.cleared(x, z),
   );
+  // Los árboles de las veredas de las calles modeladas (siempre cargados).
+  trees.addFixed(monuments.streetTrees);
   scene.add(trees.group);
   if (lamps) scene.add(lamps.group);
   if (bridges) {

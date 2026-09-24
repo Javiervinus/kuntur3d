@@ -212,10 +212,11 @@ export class Buildings {
     private readonly cfg: GameConfig['buildings'],
     private readonly stream: GameConfig['streaming'],
     collisionCell: number,
-    /** Zonas de paleta y círculos donde un monumento reemplaza al edificio (marco local). */
-    placement: Pick<BuildingStyle, 'zones' | 'exclude' | 'portales'> = {
+    /** Zonas de paleta, y círculos y polígonos donde un monumento reemplaza al edificio (marco local). */
+    placement: Pick<BuildingStyle, 'zones' | 'exclude' | 'excludeAreas' | 'portales'> = {
       zones: [],
       exclude: [],
+      excludeAreas: [],
       portales: { polygon: [], minHeight: Infinity, minArea: Infinity, probability: 0 },
     },
   ) {
@@ -244,6 +245,7 @@ export class Buildings {
       farShadowMinHeight: cfg.farShadowMinHeight,
       zones: placement.zones,
       exclude: placement.exclude,
+      excludeAreas: placement.excludeAreas,
       portales: placement.portales,
       shops: {
         width: shops.width,

@@ -38,6 +38,30 @@ export interface LampData {
    * (el tablero la tapa); el puente la guarda en sus vértices.
    */
   elevated: Uint8Array;
+  /** 1 = se dibuja el poste de concreto; 0 = el farol lo dibuja otro (una calle modelada). */
+  pole: Uint8Array;
+}
+
+/**
+ * Luces de faroles que dibuja otro (las linternas de una calle modelada, world/street.ts): dónde
+ * está cada luz, el suelo bajo ella, su alto sobre él, hacia dónde se estira (rad, desde +x hacia
+ * +z), su potencia (1 = la de un poste) y si es LED (si no, sodio).
+ */
+export interface LanternLights {
+  count: number;
+  x: Float32Array;
+  z: Float32Array;
+  y: Float32Array;
+  h: Float32Array;
+  arm: Float32Array;
+  power: Float32Array;
+  led: Uint8Array;
+}
+
+/** Lo que las calles modeladas cambian del alumbrado: sus linternas, y dónde ya no van los postes de los datos. */
+export interface ModeledLamps {
+  lanterns: LanternLights;
+  cleared(x: number, z: number): boolean;
 }
 
 function decode(
@@ -46,13 +70,21 @@ function decode(
   heightmap: Heightmap,
   cfg: LightsConfig,
   deck: DeckLamps | null,
+  modeled: ModeledLamps | null,
 ): LampData {
-  const street = info.count;
-  if (buffer.byteLength !== street * info.stride) {
-    throw new Error(`lamps.bin inválido: ${buffer.byteLength} bytes, se esperaban ${street * info.stride}`);
+  if (buffer.byteLength !== info.count * info.stride) {
+    throw new Error(`lamps.bin inválido: ${buffer.byteLength} bytes, se esperaban ${info.count * info.stride}`);
   }
-  const count = street + (deck?.count ?? 0);
   const view = new DataView(buffer);
+  const xOf = (k: number): number => view.getInt16(k * info.stride + FIELD.x, true) * info.unit;
+  const zOf = (k: number): number => view.getInt16(k * info.stride + FIELD.z, true) * info.unit;
+  // Los postes de los datos, menos los que caen donde una calle modelada pone sus faroles.
+  const kept: number[] = [];
+  for (let k = 0; k < info.count; k++) if (!modeled?.cleared(xOf(k), zOf(k))) kept.push(k);
+  const street = kept.length;
+  const decks = deck?.count ?? 0;
+  const lanterns = modeled?.lanterns;
+  const count = street + decks + (lanterns?.count ?? 0);
   const sodium = new THREE.Color(cfg.sodium);
   sodium.multiplyScalar(1 / luminance(sodium));
   const led = new THREE.Color(cfg.led);
@@ -66,18 +98,19 @@ function decode(
     arm: new Float32Array(count),
     tint: new Float32Array(count * 3),
     elevated: new Uint8Array(count),
+    pole: new Uint8Array(count).fill(1),
   };
-  const paint = (k: number, flags: number): void => {
+  const paint = (k: number, flags: number, power = 1): void => {
     if (flags & info.flags.dead) return;
     const c = flags & info.flags.led ? led : sodium;
-    data.tint[k * 3] = c.r;
-    data.tint[k * 3 + 1] = c.g;
-    data.tint[k * 3 + 2] = c.b;
+    data.tint[k * 3] = c.r * power;
+    data.tint[k * 3 + 1] = c.g * power;
+    data.tint[k * 3 + 2] = c.b * power;
   };
   for (let k = 0; k < street; k++) {
-    const o = k * info.stride;
-    const x = view.getInt16(o + FIELD.x, true) * info.unit;
-    const z = view.getInt16(o + FIELD.z, true) * info.unit;
+    const o = kept[k] * info.stride;
+    const x = xOf(kept[k]);
+    const z = zOf(kept[k]);
     data.x[k] = x;
     data.z[k] = z;
     data.y[k] = heightmap.sample(x, z);
@@ -96,6 +129,18 @@ function decode(
     data.arm[k] = deck.arm[d];
     data.elevated[k] = deck.ground[d] ? 0 : 1;
     paint(k, deck.flags[d]);
+  }
+  // Linternas: el poste (que no se dibuja) queda donde su luz cae justo en la linterna.
+  for (let j = 0; lanterns && j < lanterns.count; j++) {
+    const k = street + decks + j;
+    const reach = cfg.armShare * lanterns.h[j];
+    data.x[k] = lanterns.x[j] - Math.cos(lanterns.arm[j]) * reach;
+    data.z[k] = lanterns.z[j] - Math.sin(lanterns.arm[j]) * reach;
+    data.y[k] = lanterns.y[j];
+    data.h[k] = lanterns.h[j];
+    data.arm[k] = lanterns.arm[j];
+    data.pole[k] = 0;
+    paint(k, lanterns.led[j] ? info.flags.led : 0, lanterns.power[j]);
   }
   return data;
 }
@@ -298,12 +343,13 @@ export class StreetLamps {
     fog: GameConfig['render']['fog'],
     renderer: THREE.WebGLRenderer,
     deck: DeckLamps | null,
+    modeled: ModeledLamps | null,
   ): Promise<StreetLamps | null> {
     const info = manifest.lamps;
     if (!info) return null;
     const res = await fetch(new URL(info.url, baseUrl));
     if (!res.ok) throw new Error(`No se pudieron cargar los postes (${res.status})`);
-    const lamps = decode(await res.arrayBuffer(), info, heightmap, cfg, deck);
+    const lamps = decode(await res.arrayBuffer(), info, heightmap, cfg, deck, modeled);
     return new StreetLamps(lamps, heightmap, manifest.chunks, cfg, fog, renderer);
   }
 
@@ -403,6 +449,7 @@ export class StreetLamps {
         if (!list) continue;
         for (const k of list) {
           if (count >= p.maxInstances) break;
+          if (!l.pole[k]) continue;
           const dx = l.x[k] - x;
           const dz = l.z[k] - z;
           if (dx * dx + dz * dz > r2) continue;

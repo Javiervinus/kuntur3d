@@ -13,6 +13,10 @@ export function patternUniforms(cfg: PatternsConfig): Record<string, THREE.IUnif
   const sh = cfg.shutter;
   const t = cfg.terrazzo;
   const ti = cfg.tiles;
+  const gl = cfg.glazing;
+  const pv = cfg.pavers;
+  const br = cfg.bars;
+  const bl = cfg.balusters;
   return {
     uStucco: { value: new THREE.Vector4(s.blotch, s.contrast, s.grain, s.grainBump) },
     uStreaks: { value: new THREE.Vector4(s.streaks.width, s.streaks.length, s.streaks.contrast, s.streaks.threshold) },
@@ -23,6 +27,11 @@ export function patternUniforms(cfg: PatternsConfig): Record<string, THREE.IUnif
     uTerrazzoA: { value: new THREE.Color(t.colors[0]) },
     uTerrazzoB: { value: new THREE.Color(t.colors[1]) },
     uTiles: { value: new THREE.Vector4(ti.size, ti.joint, ti.jointShade, ti.variation) },
+    uGlazing: { value: new THREE.Vector4(gl.frame, gl.bump, gl.variation, gl.toneScale) },
+    uPavers: { value: new THREE.Vector4(pv.size[0], pv.size[1], pv.joint, pv.jointShade) },
+    uPaversTone: { value: new THREE.Vector2(pv.variation, pv.bump) },
+    uBars: { value: new THREE.Vector2(br.spacing, br.width) },
+    uBalusters: { value: new THREE.Vector4(bl.spacing, bl.width, bl.plinth, bl.neck) },
     uPatternBump: { value: cfg.bump },
     uAoSpecular: { value: cfg.aoSpecular },
   };
@@ -30,7 +39,7 @@ export function patternUniforms(cfg: PatternsConfig): Record<string, THREE.IUnif
 
 /**
  * Declaraciones del vertex shader (después de `#include <common>`): `aSurface` = (oclusión, LED,
- * tipo de dibujo / 255, —) en bytes y `aDetail` = uv del dibujo en metros (ver
+ * tipo de dibujo / 255, tono del dibujo) en bytes y `aDetail` = uv del dibujo en metros (ver
  * world/monumentParts.ts → compact).
  */
 export const PATTERN_VERTEX_PARS = /* glsl */ `
@@ -39,7 +48,8 @@ attribute vec2 aDetail;
 varying float vGyeAo;
 varying vec3 vGyeDetail;
 varying vec3 vGyeWorld;
-varying float vGyeFoot;`;
+varying float vGyeFoot;
+varying float vGyeTone;`;
 
 /**
  * Después de `worldpos_vertex`: oclusión, coordenadas del dibujo, posición en el mundo y altura
@@ -54,12 +64,14 @@ export const PATTERN_VERTEX = /* glsl */ `
   vGyeWorld = ( modelMatrix * gyeWorldPos ).xyz;
   vGyeFoot = vGyeWorld.y - aFlood.y;
   vGyeAo = aSurface.x;
+  vGyeTone = aSurface.w;
   vGyeDetail = vec3( aDetail, floor( aSurface.z * 255.0 + 0.5 ) );
 }`;
 
 /**
  * Funciones del fragment shader: cada dibujo devuelve cuánto tiñe el color y un relieve (m) del
- * que sale la normal (bump mapping de Mikkelsen, igual que el de three.js).
+ * que sale la normal (bump mapping de Mikkelsen, igual que el de three.js). `gyeMask` es cuánto
+ * de la luz propia deja pasar (la carpintería de una ventana encendida no brilla).
  */
 export const PATTERN_FRAGMENT_PARS = /* glsl */ `
 uniform vec4 uStucco;
@@ -71,12 +83,19 @@ uniform vec4 uTerrazzo;
 uniform vec3 uTerrazzoA;
 uniform vec3 uTerrazzoB;
 uniform vec4 uTiles;
+uniform vec4 uGlazing;
+uniform vec4 uPavers;
+uniform vec2 uPaversTone;
+uniform vec2 uBars;
+uniform vec4 uBalusters;
 uniform float uPatternBump;
 uniform float uAoSpecular;
 varying float vGyeAo;
 varying vec3 vGyeDetail;
 varying vec3 vGyeWorld;
 varying float vGyeFoot;
+varying float vGyeTone;
+float gyeMask = 1.0;
 
 float gyeHash3( vec3 p ) {
   p = fract( p * 0.3183099 + 0.1 );
@@ -152,6 +171,55 @@ vec4 gyePattern( vec3 d, vec3 w ) {
     float tone = 1.0 + ( gyeHash3( vec3( floor( cell ), 5.0 ) ) - 0.5 ) * uTiles.w;
     return vec4( vec3( tone * ( 1.0 - joint * uTiles.z ) ), -joint * 0.002 );
   }
+  if ( kind == 6 ) {
+    // Carpintería: una junta (marco, parteluz, travesaño) en cada entero de las uv, que van en
+    // hojas; el marco es más claro u oscuro que el vidrio según el tono, y cada hoja refleja un
+    // poco distinto. Las juntas no brillan de noche.
+    vec2 g = abs( fract( d.xy + 0.5 ) - 0.5 );
+    vec2 aa = fwidth( d.xy );
+    float frame = max( 1.0 - smoothstep( uGlazing.x - aa.x, uGlazing.x + aa.x, g.x ), 1.0 - smoothstep( uGlazing.x - aa.y, uGlazing.x + aa.y, g.y ) );
+    float pane = 1.0 + ( gyeHash3( vec3( floor( d.xy ), 11.0 ) + floor( w * 0.37 ) ) - 0.5 ) * uGlazing.z;
+    gyeMask = 1.0 - frame;
+    return vec4( vec3( mix( pane, vGyeTone * uGlazing.w, frame ) ), frame * uGlazing.y );
+  }
+  if ( kind == 7 ) {
+    // Adoquines de vereda en hileras trabadas (medio adoquín de corrimiento por hilera), con su
+    // junta hundida y el tono de cada pieza.
+    vec2 cell = d.xy / uPavers.xy;
+    float row = floor( cell.y );
+    cell.x += 0.5 * mod( row, 2.0 );
+    vec2 g = abs( fract( cell ) - 0.5 ) * uPavers.xy;
+    vec2 edge = uPavers.xy * 0.5 - g;
+    float joint = 1.0 - smoothstep( uPavers.z * 0.5, uPavers.z, min( edge.x, edge.y ) );
+    float tone = 1.0 + ( gyeHash3( vec3( floor( cell.x ), row, 7.0 ) ) - 0.5 ) * uPaversTone.x;
+    return vec4( vec3( tone * ( 1.0 - joint * uPavers.w ) ), -joint * uPaversTone.y );
+  }
+  if ( kind == 8 ) {
+    // Baranda de barrotes (uv en m): un barrote cada tanto y la pletina de abajo; lo demás es
+    // hueco (el material con recorte lo descarta, ver GYE_CUTOUT).
+    // De lejos, cuando un barrote ya es más fino que un píxel, un tramado estable con la misma
+    // parte llena (sin el muaré de barrotes que aparecen y desaparecen).
+    float g = abs( fract( d.x / uBars.x + 0.5 ) - 0.5 ) * uBars.x;
+    float bar = max( step( g, uBars.y * 0.5 ), step( d.y, uBars.y ) );
+    float fine = smoothstep( 0.5, 1.0, fwidth( d.x ) / uBars.y );
+    float dither = step( gyeHash3( vec3( floor( gl_FragCoord.xy ), 8.0 ) ), uBars.y / uBars.x );
+    gyeMask = mix( bar, dither, step( 0.5, fine ) );
+    return vec4( vec3( 1.0 ), 0.0 );
+  }
+  if ( kind == 9 ) {
+    // Balaustrada (uv en m, v desde el pie): zócalo lleno abajo, pasamanos lleno arriba y entre
+    // ellos un balaustre por celda con silueta de jarrón (panza abajo, cuello y collar arriba; el
+    // mismo perfil que world/classical.ts → baluster), sombreado como si fuera torneado.
+    float x = abs( fract( d.x / uBalusters.x ) - 0.5 ) * uBalusters.x;
+    float t = clamp( ( d.y - uBalusters.z ) / uBalusters.w, 0.0, 1.0 );
+    float belly = sin( 3.14159 * clamp( t / 0.55, 0.0, 1.0 ) );
+    float collar = smoothstep( 0.72, 0.8, t ) * ( 1.0 - smoothstep( 0.88, 0.96, t ) );
+    float r = uBalusters.y * ( 0.2 + 0.26 * belly + 0.1 * collar );
+    float solid = step( d.y, uBalusters.z ) + step( uBalusters.z + uBalusters.w, d.y );
+    gyeMask = max( min( solid, 1.0 ), step( x, r ) );
+    float turned = sqrt( max( 1.0 - ( x * x ) / max( r * r, 1e-6 ), 0.0 ) );
+    return vec4( vec3( mix( 0.7 + 0.3 * turned, 1.0, min( solid, 1.0 ) ) ), 0.0 );
+  }
   return vec4( 1.0, 1.0, 1.0, 0.0 );
 }
 
@@ -166,9 +234,12 @@ vec3 gyePerturbNormal( vec3 surfPos, vec3 surfNorm, vec2 dHdxy, float faceDir ) 
   return normalize( abs( det ) * surfNorm - grad );
 }`;
 
-/** Después de `color_fragment`: tiñe el color con el dibujo. */
+/** Después de `color_fragment`: tiñe el color con el dibujo (con GYE_CUTOUT, descarta los huecos). */
 export const PATTERN_COLOR = /* glsl */ `
 vec4 gyeSurf = gyePattern( vGyeDetail, vGyeWorld );
+#ifdef GYE_CUTOUT
+  if ( gyeMask < 0.5 ) discard;
+#endif
 diffuseColor.rgb *= gyeSurf.rgb;`;
 
 /** Después de `normal_fragment_maps`: el relieve del dibujo. */

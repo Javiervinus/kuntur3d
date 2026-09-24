@@ -18,6 +18,12 @@ import type { BuildingRecord } from './buildings';
 import type { Heightmap } from './heightmap';
 import { type Glow, type MonumentBase, NO_GLOW, Parts, colorsOf, glowOf, place, prism, strut } from './monumentParts';
 import { type Palace, PalaceBuilder } from './palace';
+import { type Church, ChurchBuilder } from './church';
+import { ColumnBuilder, type VictoryColumn } from './column';
+import { type Park, ParkBuilder, parkLights } from './park';
+import { type Street, StreetBuilder, streetFile } from './street';
+import { lampLights, layoutFurniture } from './streetFurniture';
+import type { LanternLights } from './streetLamps';
 
 type MonumentsConfig = GameConfig['monuments'];
 type FogConfig = GameConfig['render']['fog'];
@@ -127,11 +133,11 @@ interface Lighthouse extends MonumentBase {
   lanternGlow: Glow;
 }
 
-type MonumentConfig = FerrisWheel | ClockTower | Hemicycle | Lighthouse | Palace;
+type MonumentConfig = FerrisWheel | ClockTower | Hemicycle | Lighthouse | Palace | Street | Church | VictoryColumn | Park;
 
 /** Pieza del mundo físico: obstáculo, o piso donde se puede estar (su tope). */
 interface Shape {
-  kind: 'circle' | 'ring' | 'box';
+  kind: 'circle' | 'ring' | 'box' | 'poly';
   x: number;
   z: number;
   /** circle: radio; ring: radio exterior; box: medio largo (a lo largo de `angle`). */
@@ -146,6 +152,8 @@ interface Shape {
   /** Desde dónde ocupa (un alero, la bóveda de un pasaje): debajo se pasa. -Infinity = desde el suelo. */
   bottom: number;
   floor: boolean;
+  /** poly: contorno (x, z del mundo, intercalados); su tope va `top` sobre el terreno (una vereda). */
+  outline?: Float32Array;
 }
 
 /** Un monumento para la física: sus piezas y el círculo que las contiene (descarte rápido). */
@@ -297,6 +305,8 @@ export interface Finish {
   metalness?: number;
   /** Vidrio que deja ver lo de atrás: opacidad (sin escribir profundidad) y de las dos caras. */
   opacity?: number;
+  /** Calado (barandas de barrotes): descarta los huecos de su dibujo y se ve de los dos lados. */
+  cutout?: boolean;
 }
 
 /**
@@ -317,8 +327,9 @@ function createMaterial(cfg: MonumentsConfig, leds?: Leds, finish: Finish = {}):
     transparent: glass,
     opacity: finish.opacity ?? 1,
     depthWrite: !glass,
-    side: glass ? THREE.DoubleSide : THREE.FrontSide,
+    side: glass || finish.cutout ? THREE.DoubleSide : THREE.FrontSide,
   });
+  if (finish.cutout) material.defines = { GYE_CUTOUT: '' };
   const uniforms = {
     uFloodColor: { value: new THREE.Color(cfg.flood.color).multiplyScalar(cfg.flood.intensity) },
     uFloodTop: { value: cfg.flood.top },
@@ -382,12 +393,30 @@ ${PATTERN_VERTEX}`,
       .replace(
         '#include <emissivemap_fragment>',
         `#include <emissivemap_fragment>
-totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood * vGyeAo + vGlow + vLed ) * uLightsOn;`,
+totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood * vGyeAo + vGlow * gyeMask + vLed ) * uLightsOn;`,
       );
   };
-  material.customProgramCacheKey = () => `gye-monument-v5${leds ? `-led${leds.colors}` : ''}`;
+  material.customProgramCacheKey = () => `gye-monument-v6${leds ? `-led${leds.colors}` : ''}${finish.cutout ? '-cutout' : ''}`;
   withNightLight(material);
   return material;
+}
+
+/** Un despeje de una calle o un lugar modelado (contorno x, z intercalado) con su caja. */
+interface ClearArea {
+  ring: Float32Array;
+  minX: number;
+  maxX: number;
+  minZ: number;
+  maxZ: number;
+}
+
+/** Todos los despejes y la caja que los contiene (lo de afuera se descarta con una sola prueba). */
+interface ClearSet {
+  areas: ClearArea[];
+  minX: number;
+  maxX: number;
+  minZ: number;
+  maxZ: number;
 }
 
 /**
@@ -400,9 +429,14 @@ totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood * vGyeAo + vG
  * - el Hemiciclo de la Rotonda: columnata en semicírculo con las banderas, y Bolívar y San
  *   Martín dándose la mano de frente al río;
  * - el Faro del cerro Santa Ana, con sus franjas celestes y blancas en espiral y los haces que
- *   giran de noche.
+ *   giran de noche;
+ * - con su propio builder: el Palacio Municipal (world/palace.ts), la avenida 9 de Octubre con sus
+ *   fachadas y su mobiliario (world/street.ts), la iglesia de San Francisco y su plaza
+ *   (world/church.ts), la Columna de los Próceres (world/column.ts) y el Parque Centenario
+ *   (world/park.ts).
  * Donde un monumento ocupa la huella de un edificio de los datos, ese edificio no se dibuja
- * (`exclusions`); sus pisos y obstáculos entran en la física (`deckAt`, `wallTop`).
+ * (`exclusions`, o los polígonos `clear` de las calles y lugares modelados); sus pisos y
+ * obstáculos entran en la física (`deckAt`, `wallTop`).
  */
 export class Monuments {
   readonly group = new THREE.Group();
@@ -420,6 +454,10 @@ export class Monuments {
   readonly records: BuildingRecord[] = [];
   /** Piezas que solo se ven de cerca o solo de lejos, por monumento (distancia a su centro). */
   private readonly lod: { x: number; z: number; items: { object: THREE.Object3D; distance: number; near: boolean }[] }[] = [];
+  /** Despejes de las calles y lugares modelados, con su caja (ver `cleared`). */
+  private readonly clearAreas: ClearSet;
+  /** Árboles de las veredas de las calles modeladas, como los de los datos (ver `streetTrees`). */
+  private readonly treeData: number[] = [];
 
   constructor(
     private readonly cfg: MonumentsConfig,
@@ -430,6 +468,7 @@ export class Monuments {
   ) {
     this.group.name = 'monuments';
     this.material = createMaterial(cfg);
+    this.clearAreas = Monuments.clearAreasOf(cfg, geo);
     // Asignarla a los tipos de arriba valida la config al compilar.
     this.list = cfg.list;
     for (const m of this.list) {
@@ -456,6 +495,18 @@ export class Monuments {
         case 'palace':
           this.palace(root, site, m as Palace);
           break;
+        case 'church':
+          this.church(root, site, m as Church);
+          break;
+        case 'column':
+          this.column(root, site, m as VictoryColumn);
+          break;
+        case 'park':
+          this.park(root, site, m as Park);
+          break;
+        case 'street':
+          this.street(root, m as Street);
+          break;
         default:
           throw new Error(`Monumento de tipo desconocido en config/game.json → monuments: ${m.type}`);
       }
@@ -472,6 +523,129 @@ export class Monuments {
   /** Círculos (marco local) donde los monumentos reemplazan a los edificios de los datos. */
   get exclusions(): { x: number; z: number; radius: number }[] {
     return this.list.filter((m) => m.exclude > 0).map((m) => ({ ...this.geo.toLocal(m.lat, m.lon), radius: m.exclude }));
+  }
+
+  /**
+   * Polígonos (marco local del mundo) donde las calles y los lugares modelados reemplazan a los
+   * edificios, árboles y postes de los datos (config/streets → clear y el `clear` de cada ícono que
+   * lo trae). No hace falta armar los monumentos para saberlo: el alumbrado lo pide antes.
+   */
+  static clearings(cfg: MonumentsConfig, geo: GeoFrame): { x: number; z: number }[][] {
+    const out: { x: number; z: number }[][] = [];
+    for (const m of cfg.list as readonly MonumentConfig[]) {
+      const polys = m.type === 'street' ? streetFile((m as Street).file).clear : 'clear' in m ? (m as Church | VictoryColumn | Park).clear : [];
+      const at = geo.toLocal(m.lat, m.lon);
+      const r = Math.PI / 2 - THREE.MathUtils.degToRad(m.headingDeg ?? 0);
+      const c = Math.cos(r);
+      const s = Math.sin(r);
+      for (const poly of polys) out.push(poly.map(([lx, lz]) => ({ x: at.x + lx * c + lz * s, z: at.z - lx * s + lz * c })));
+    }
+    return out;
+  }
+
+  /**
+   * Linternas de los faroles de las calles modeladas (config/streets → furniture), para el
+   * alumbrado: como el despeje, se pide antes de armar los monumentos.
+   */
+  static lanterns(cfg: MonumentsConfig, geo: GeoFrame, heightmap: Heightmap): LanternLights {
+    const lights: { x: number; z: number; y: number; h: number; arm: number; power: number; led: boolean }[] = [];
+    for (const m of cfg.list as readonly MonumentConfig[]) {
+      if (m.type !== 'street' && m.type !== 'park') continue;
+      const at = geo.toLocal(m.lat, m.lon);
+      const r = Math.PI / 2 - THREE.MathUtils.degToRad(m.headingDeg ?? 0);
+      const c = Math.cos(r);
+      const s = Math.sin(r);
+      const world = (lx: number, lz: number): { x: number; z: number } => ({ x: at.x + lx * c + lz * s, z: at.z - lx * s + lz * c });
+      if (m.type === 'park') {
+        // Los faroles de globos alumbran alrededor (sin brazo que apunte): el ángulo es el del marco.
+        const p = m as Park;
+        for (const l of parkLights(p)) {
+          const w = world(l.x, l.z);
+          lights.push({ x: w.x, z: w.z, y: heightmap.sample(w.x, w.z) + p.ground.lift, h: l.h, arm: -r, power: p.light.power, led: p.light.led });
+        }
+        continue;
+      }
+      const file = streetFile((m as Street).file);
+      const F = file.furniture;
+      for (const lamp of layoutFurniture(F, file.blocks).lamps) {
+        const foot = world(lamp.x, lamp.z);
+        const y = heightmap.sample(foot.x, foot.z) + file.sidewalks.height;
+        for (const l of lampLights(F, lamp)) {
+          const w = world(l.x, l.z);
+          lights.push({ x: w.x, z: w.z, y, h: l.h, arm: l.out - r, power: F.light.power, led: F.light.led });
+        }
+      }
+    }
+    return {
+      count: lights.length,
+      x: Float32Array.from(lights, (l) => l.x),
+      z: Float32Array.from(lights, (l) => l.z),
+      y: Float32Array.from(lights, (l) => l.y),
+      h: Float32Array.from(lights, (l) => l.h),
+      arm: Float32Array.from(lights, (l) => l.arm),
+      power: Float32Array.from(lights, (l) => l.power),
+      led: Uint8Array.from(lights, (l) => (l.led ? 1 : 0)),
+    };
+  }
+
+  /** Los despejes con su caja, para consultar rápido. */
+  private static clearAreasOf(cfg: MonumentsConfig, geo: GeoFrame): ClearSet {
+    const areas = Monuments.clearings(cfg, geo).map((poly) => ({
+      ring: new Float32Array(poly.flatMap((p) => [p.x, p.z])),
+      minX: Math.min(...poly.map((p) => p.x)),
+      maxX: Math.max(...poly.map((p) => p.x)),
+      minZ: Math.min(...poly.map((p) => p.z)),
+      maxZ: Math.max(...poly.map((p) => p.z)),
+    }));
+    return {
+      areas,
+      minX: Math.min(...areas.map((a) => a.minX)),
+      maxX: Math.max(...areas.map((a) => a.maxX)),
+      minZ: Math.min(...areas.map((a) => a.minZ)),
+      maxZ: Math.max(...areas.map((a) => a.maxZ)),
+    };
+  }
+
+  /** ¿Cae (x, z) en un despeje? Sin armar los monumentos (para el alumbrado). */
+  static clearedTest(cfg: MonumentsConfig, geo: GeoFrame): (x: number, z: number) => boolean {
+    const areas = Monuments.clearAreasOf(cfg, geo);
+    return (x, z) => Monuments.inAreas(areas, x, z);
+  }
+
+  private static inAreas(set: ClearSet, x: number, z: number): boolean {
+    if (x < set.minX || x > set.maxX || z < set.minZ || z > set.maxZ) return false;
+    for (const c of set.areas) {
+      if (x < c.minX || x > c.maxX || z < c.minZ || z > c.maxZ) continue;
+      if (Monuments.inPolygon(c.ring, x, z)) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Árboles de las veredas de las calles modeladas, en el formato de un chunk de árboles del
+   * mundo (x, y, z, alto, radio y color sRGB de la foto por árbol; world/trees.ts → addFixed).
+   */
+  get streetTrees(): Float32Array {
+    return Float32Array.from(this.treeData);
+  }
+
+  /** ¿Cae (x, z) en un despeje de una calle o un lugar modelado? (sin árboles de los datos). */
+  cleared(x: number, z: number): boolean {
+    return Monuments.inAreas(this.clearAreas, x, z);
+  }
+
+  /** Punto dentro de un contorno (x, z intercalados). */
+  private static inPolygon(ring: Float32Array, x: number, z: number): boolean {
+    let hit = false;
+    const n = ring.length / 2;
+    for (let k = 0, m = n - 1; k < n; m = k++) {
+      const xk = ring[k * 2];
+      const zk = ring[k * 2 + 1];
+      const xm = ring[m * 2];
+      const zm = ring[m * 2 + 1];
+      if (zk > z !== zm > z && x < ((xm - xk) * (z - zk)) / (zm - zk) + xk) hit = !hit;
+    }
+    return hit;
   }
 
   /** Suelo bajo un círculo de radio `radius`: el más alto (donde se asienta) y el más bajo (hasta donde baja). */
@@ -571,6 +745,176 @@ export class Monuments {
       far: (object, distance) => lod.items.push({ object, distance, near: false }),
     }).build();
     this.lod.push(lod);
+  }
+  /**
+   * Una iglesia con su plaza (world/church.ts): sus macizos entran como edificios, la plaza como
+   * piso y el detalle chico se esconde de lejos.
+   */
+  private church(root: THREE.Group, site: Site, ch: Church): void {
+    const finish = (f: { roughness: number; metalness: number; opacity?: number }) => createMaterial(this.cfg, undefined, f);
+    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    new ChurchBuilder(ch, {
+      root,
+      materials: { stone: this.material, glass: finish(ch.glass), water: finish(ch.water) },
+      terrain: (lx, lz) => {
+        const w = this.world(root, lx, lz);
+        return this.heightmap.sample(w.x, w.z);
+      },
+      box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, top, floor, bottom, angle),
+      circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, top, floor, bottom),
+      ring: (cx, cz, inner, outer, top, floor) => this.ring(site, root, inner, outer, 0, Math.PI, top, floor, -Infinity, cx, cz),
+      block: (outline, y0, top) => this.record(root, outline, y0, top),
+      ground: (outline, offset) => this.floorPoly(site, root, outline, offset),
+      near: (object, distance) => lod.items.push({ object, distance, near: true }),
+    }).build();
+    this.lod.push(lod);
+  }
+
+  /** Piso a `offset` sobre el terreno dentro de un polígono del marco local (una plaza, un paseo). */
+  private floorPoly(site: Site, root: THREE.Object3D, outline: THREE.Vector3[], offset: number): void {
+    const ring = new Float32Array(outline.length * 2);
+    let cx = 0;
+    let cz = 0;
+    outline.forEach((q, k) => {
+      const w = this.world(root, q.x, q.z);
+      ring[k * 2] = w.x;
+      ring[k * 2 + 1] = w.z;
+      cx += w.x / outline.length;
+      cz += w.z / outline.length;
+    });
+    let r = 0;
+    for (let k = 0; k < ring.length; k += 2) r = Math.max(r, Math.hypot(ring[k] - cx, ring[k + 1] - cz));
+    site.shapes.push({ kind: 'poly', x: cx, z: cz, a: r, b: 0, angle: 0, halfArc: 0, top: offset, bottom: -Infinity, floor: true, outline: ring });
+  }
+
+  /** Una columna conmemorativa con su óvalo de césped (world/column.ts). */
+  private column(root: THREE.Group, site: Site, col: VictoryColumn): void {
+    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    new ColumnBuilder(col, {
+      root,
+      materials: { stone: this.material, rails: createMaterial(this.cfg, undefined, { ...col.rails, cutout: true }) },
+      terrain: (lx, lz) => {
+        const w = this.world(root, lx, lz);
+        return this.heightmap.sample(w.x, w.z);
+      },
+      box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, top, floor, bottom, angle),
+      circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, top, floor, bottom),
+      ring: (cx, cz, inner, outer, top, floor) => this.ring(site, root, inner, outer, 0, Math.PI, top, floor, -Infinity, cx, cz),
+      block: (outline, y0, top) => this.record(root, outline, y0, top),
+      near: (object, distance) => lod.items.push({ object, distance, near: true }),
+    }).build();
+    this.lod.push(lod);
+  }
+
+  /** Un parque con sus paseos, reja, portadas, faroles y mástiles (world/park.ts). */
+  private park(root: THREE.Group, site: Site, p: Park): void {
+    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    new ParkBuilder(p, {
+      root,
+      materials: { stone: this.material, rails: createMaterial(this.cfg, undefined, { ...p.rails, cutout: true }) },
+      terrain: (lx, lz) => {
+        const w = this.world(root, lx, lz);
+        return this.heightmap.sample(w.x, w.z);
+      },
+      box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, top, floor, bottom, angle),
+      circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, top, floor, bottom),
+      ground: (outline, offset) => this.floorPoly(site, root, outline, offset),
+      near: (object, distance) => lod.items.push({ object, distance, near: true }),
+    }).build();
+    this.lod.push(lod);
+  }
+
+  /** Macizo de un monumento como edificio (planta local): se trepa y se camina encima. */
+  private record(root: THREE.Object3D, outline: THREE.Vector3[], y0: number, y1: number): void {
+    const ring = new Float32Array(outline.length * 2);
+    let minX = Infinity;
+    let maxX = -Infinity;
+    let minZ = Infinity;
+    let maxZ = -Infinity;
+    outline.forEach((q, k) => {
+      const w = this.world(root, q.x, q.z);
+      ring[k * 2] = w.x;
+      ring[k * 2 + 1] = w.z;
+      minX = Math.min(minX, w.x);
+      maxX = Math.max(maxX, w.x);
+      minZ = Math.min(minZ, w.z);
+      maxZ = Math.max(maxZ, w.z);
+    });
+    this.records.push({ y0, y1, rings: [ring], minX, maxX, minZ, maxZ, chunk: MONUMENT_CHUNK, roof: null });
+  }
+
+  /**
+   * Una calle modelada (world/street.ts): cada cuadra es su propio lugar de la física y del LOD
+   * (así una consulta no recorre la calle entera), con sus macizos como edificios y sus veredas
+   * como pisos que siguen el terreno.
+   */
+  private street(root: THREE.Group, st: Street): void {
+    const file = streetFile(st.file);
+    const finish = (f: Finish): THREE.MeshStandardMaterial => createMaterial(this.cfg, undefined, f);
+    const glassFinish = this.cfg.street;
+    new StreetBuilder(file, {
+      root,
+      materials: {
+        stone: this.material,
+        glass: finish(glassFinish.glass),
+        rails: finish({ ...glassFinish.rails, cutout: true }),
+      },
+      terrain: (lx, lz) => {
+        const w = this.world(root, lx, lz);
+        return this.heightmap.sample(w.x, w.z);
+      },
+      site: (lx, lz) => {
+        const c = this.world(root, lx, lz);
+        const site: Site = { x: c.x, z: c.z, r: 0, shapes: [] };
+        this.sites.push(site);
+        const lod = { x: c.x, z: c.z, items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+        this.lod.push(lod);
+        const grow = (x: number, z: number, extent: number): void => {
+          site.r = Math.max(site.r, Math.hypot(x - site.x, z - site.z) + extent);
+        };
+        return {
+          block: (outline, y0, top) => {
+            this.record(root, outline, y0, top);
+            for (const q of outline) {
+              const w = this.world(root, q.x, q.z);
+              grow(w.x, w.z, 0);
+            }
+          },
+          box: (lx2, lz2, halfU, halfV, angle, top, floor, bottom) => {
+            this.box(site, root, lx2, lz2, halfU, halfV, top, floor, bottom, angle);
+            const w = this.world(root, lx2, lz2);
+            grow(w.x, w.z, Math.hypot(halfU, halfV));
+          },
+          circle: (lx2, lz2, r, top) => {
+            this.circle(site, root, lx2, lz2, r, top);
+            const w = this.world(root, lx2, lz2);
+            grow(w.x, w.z, r);
+          },
+          ground: (outline, offset) => {
+            const ring = new Float32Array(outline.length * 2);
+            let cx = 0;
+            let cz = 0;
+            outline.forEach((q, k) => {
+              const w = this.world(root, q.x, q.z);
+              ring[k * 2] = w.x;
+              ring[k * 2 + 1] = w.z;
+              cx += w.x / outline.length;
+              cz += w.z / outline.length;
+            });
+            let r = 0;
+            for (let k = 0; k < ring.length; k += 2) r = Math.max(r, Math.hypot(ring[k] - cx, ring[k + 1] - cz));
+            site.shapes.push({ kind: 'poly', x: cx, z: cz, a: r, b: 0, angle: 0, halfArc: 0, top: offset, bottom: -Infinity, floor: true, outline: ring });
+            grow(cx, cz, r);
+          },
+          near: (object, distance) => lod.items.push({ object, distance, near: true }),
+        };
+      },
+      tree: (lx, lz, y, height, radius, color) => {
+        const w = this.world(root, lx, lz);
+        const photo = color.clone().convertLinearToSRGB();
+        this.treeData.push(w.x, y, w.z, height, radius, photo.r, photo.g, photo.b);
+      },
+    }).build();
   }
 
   private ferrisWheel(root: THREE.Group, site: Site, w: FerrisWheel): void {
@@ -1202,7 +1546,14 @@ void main() {
         const sn = Math.sin(s.angle);
         return Math.abs(dx * c + dz * sn) <= s.a + margin && Math.abs(dz * c - dx * sn) <= s.b + margin;
       }
+      case 'poly':
+        return dx * dx + dz * dz <= (s.a + margin) * (s.a + margin) && !!s.outline && Monuments.inPolygon(s.outline, x, z);
     }
+  }
+
+  /** Tope de una pieza en (x, z): el suyo, o sobre el terreno (las veredas). */
+  private topOf(s: Shape, x: number, z: number): number {
+    return s.kind === 'poly' ? this.heightmap.sample(x, z) + s.top : s.top;
   }
 
   /**
@@ -1215,7 +1566,9 @@ void main() {
     for (const site of this.sites) {
       if (Math.hypot(x - site.x, z - site.z) > site.r) continue;
       for (const s of site.shapes) {
-        if (s.floor && s.top <= maxY && s.top > y && Monuments.inside(s, x, z, 0)) y = s.top;
+        if (!s.floor || !Monuments.inside(s, x, z, 0)) continue;
+        const top = this.topOf(s, x, z);
+        if (top <= maxY && top > y) y = top;
       }
     }
     if (y <= best) return best;
@@ -1235,17 +1588,22 @@ void main() {
     for (const site of this.sites) {
       if (Math.hypot(x - site.x, z - site.z) > site.r) continue;
       for (const s of site.shapes) {
-        if (y < s.top && y + this.cfg.clearance > s.bottom && s.top > top && Monuments.inside(s, x, z, 0)) top = s.top;
+        if (y + this.cfg.clearance <= s.bottom || !Monuments.inside(s, x, z, 0)) continue;
+        const t = this.topOf(s, x, z);
+        if (y < t && t > top) top = t;
       }
     }
     return top;
   }
 
-  /** ¿Hay parte de un monumento en (x, z), con un margen (m)? (para no plantar árboles adentro). */
+  /**
+   * ¿Hay parte de un monumento en (x, z), con un margen (m)? (para no plantar árboles adentro). Los
+   * pisos que siguen el terreno (veredas, plazas) no cuentan: un árbol crece en ellos.
+   */
   occupied(x: number, z: number, margin = 0): boolean {
     for (const site of this.sites) {
       if (Math.hypot(x - site.x, z - site.z) > site.r + margin) continue;
-      for (const s of site.shapes) if (Monuments.inside(s, x, z, margin)) return true;
+      for (const s of site.shapes) if (s.kind !== 'poly' && Monuments.inside(s, x, z, margin)) return true;
     }
     return false;
   }
