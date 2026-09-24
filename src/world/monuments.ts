@@ -1,37 +1,34 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import type { GeoFrame } from '../core/geo';
 import type { GameConfig } from '../core/types';
 import { fogTransmittanceGLSL } from '../render/fog';
 import { nightLight, withNightLight } from '../render/nightLight';
+import {
+  PATTERN_AO,
+  PATTERN_COLOR,
+  PATTERN_FRAGMENT_PARS,
+  PATTERN_NORMAL,
+  PATTERN_VERTEX,
+  PATTERN_VERTEX_PARS,
+  patternUniforms,
+} from '../render/surfacePatterns';
 import type { DeckHit } from './bridges';
+import type { BuildingRecord } from './buildings';
 import type { Heightmap } from './heightmap';
+import { type Glow, type MonumentBase, NO_GLOW, Parts, colorsOf, glowOf, place, prism, strut } from './monumentParts';
+import { type Palace, PalaceBuilder } from './palace';
 
 type MonumentsConfig = GameConfig['monuments'];
 type FogConfig = GameConfig['render']['fog'];
 
 const TAU = Math.PI * 2;
 
-/** Luz propia de noche: color (sRGB) e intensidad. */
-interface Glow {
-  color: string;
-  intensity: number;
-}
-
-/** Lo común a todos los monumentos de config/game.json → monuments.list. */
-interface MonumentBase {
-  id: string;
-  type: string;
-  lat: number;
-  lon: number;
-  /** Rumbo del frente (grados desde el norte, horario): el eje x local del monumento. */
-  headingDeg?: number;
-  /** Radio (m) en el que el monumento reemplaza a los edificios de los datos (0 = ninguno). */
-  exclude: number;
-  /** Cuánto lo alumbran de noche los reflectores (0…1). */
-  flood: number;
-}
+/**
+ * Clave de los macizos de los monumentos en el índice de edificios (world/buildings.ts →
+ * BuildingIndex): los chunks de datos van de 0 en adelante, así nunca se descargan con ellos.
+ */
+export const MONUMENT_CHUNK = -1;
 
 interface Flag {
   stripes: string[];
@@ -130,7 +127,7 @@ interface Lighthouse extends MonumentBase {
   lanternGlow: Glow;
 }
 
-type MonumentConfig = FerrisWheel | ClockTower | Hemicycle | Lighthouse;
+type MonumentConfig = FerrisWheel | ClockTower | Hemicycle | Lighthouse | Palace;
 
 /** Pieza del mundo físico: obstáculo, o piso donde se puede estar (su tope). */
 interface Shape {
@@ -146,6 +143,8 @@ interface Shape {
   /** ring: medio ancho del sector (rad). */
   halfArc: number;
   top: number;
+  /** Desde dónde ocupa (un alero, la bóveda de un pasaje): debajo se pasa. -Infinity = desde el suelo. */
+  bottom: number;
   floor: boolean;
 }
 
@@ -181,60 +180,6 @@ interface Clock {
   shown: number;
 }
 
-const NO_GLOW = new THREE.Color(0, 0, 0);
-
-/** Índice 0…n−1 para una geometría sin índice (mergeGeometries pide que todas lo tengan). */
-function sequence(n: number): THREE.BufferAttribute {
-  const index = n > 0xffff ? new Uint32Array(n) : new Uint16Array(n);
-  for (let k = 0; k < n; k++) index[k] = k;
-  return new THREE.BufferAttribute(index, 1);
-}
-
-/**
- * Piezas de un monumento, unidas en una sola geometría: color por vértice, luz propia de noche
- * (vidrios, relojes), cuánto lo alumbran los reflectores (se apagan con la altura desde su base:
- * `base` y `height`, en el mundo) y cuánto lo tiñen los LED montados encima (solo las ruedas).
- */
-class Parts {
-  private readonly list: THREE.BufferGeometry[] = [];
-
-  constructor(
-    private readonly flood: number,
-    private readonly base: number,
-    private readonly height: number,
-  ) {}
-
-  add(geometry: THREE.BufferGeometry, color: THREE.Color, matrix: THREE.Matrix4, glow: THREE.Color = NO_GLOW, led = 0): void {
-    geometry.deleteAttribute('uv');
-    if (!geometry.index) geometry.setIndex(sequence(geometry.getAttribute('position').count));
-    geometry.applyMatrix4(matrix);
-    const n = geometry.getAttribute('position').count;
-    const colors = new Float32Array(n * 3);
-    const glows = new Float32Array(n * 3);
-    const floods = new Float32Array(n * 3);
-    for (let k = 0; k < n; k++) {
-      color.toArray(colors, k * 3);
-      glow.toArray(glows, k * 3);
-      floods[k * 3] = this.flood;
-      floods[k * 3 + 1] = this.base;
-      floods[k * 3 + 2] = this.height;
-    }
-    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    geometry.setAttribute('aGlow', new THREE.BufferAttribute(glows, 3));
-    geometry.setAttribute('aFlood', new THREE.BufferAttribute(floods, 3));
-    geometry.setAttribute('aLed', new THREE.BufferAttribute(new Float32Array(n).fill(led), 1));
-    this.list.push(geometry);
-  }
-
-  merge(): THREE.BufferGeometry {
-    const merged = mergeGeometries(this.list);
-    if (!merged) throw new Error('No se pudo armar la geometría de un monumento');
-    for (const g of this.list) g.dispose();
-    merged.computeBoundingSphere();
-    return merged;
-  }
-}
-
 const _e = new THREE.Euler();
 const _q = new THREE.Quaternion();
 const _p = new THREE.Vector3();
@@ -243,26 +188,6 @@ const _m = new THREE.Matrix4();
 const _size = new THREE.Vector2();
 const _v = new THREE.Vector3();
 const _c = new THREE.Color();
-
-/** Matriz de posición, giro (radianes, en orden XYZ) y escala. */
-function place(x: number, y: number, z: number, rx = 0, ry = 0, rz = 0, sx = 1, sy = 1, sz = 1): THREE.Matrix4 {
-  return new THREE.Matrix4().compose(_p.set(x, y, z), _q.setFromEuler(_e.set(rx, ry, rz)), _s.set(sx, sy, sz));
-}
-
-/** Barra cilíndrica de radio r entre dos puntos. */
-function strut(a: THREE.Vector3, b: THREE.Vector3, r: number, sides: number): { geometry: THREE.BufferGeometry; matrix: THREE.Matrix4 } {
-  const d = new THREE.Vector3().subVectors(b, a);
-  const length = d.length();
-  const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.divideScalar(length));
-  const matrix = new THREE.Matrix4().compose(new THREE.Vector3().addVectors(a, b).multiplyScalar(0.5), q, new THREE.Vector3(1, 1, 1));
-  return { geometry: new THREE.CylinderGeometry(r, r, length, sides, 1, true), matrix };
-}
-
-/** Prisma de `sides` lados con apotema `apothem` y una cara mirando a +x. */
-function prism(apothem: number, height: number, sides: number): THREE.CylinderGeometry {
-  const r = apothem / Math.cos(Math.PI / sides);
-  return new THREE.CylinderGeometry(r, r, height, sides, 1, false, Math.PI / sides);
-}
 
 /**
  * Arco de herradura (morisco) de ancho w y alto total h en el plano x-y, con la base en y = 0:
@@ -366,18 +291,39 @@ interface Leds {
   colors: number;
 }
 
+/** Cómo refleja un material de monumento (vidrio, metal) además de su color. */
+export interface Finish {
+  roughness?: number;
+  metalness?: number;
+  /** Vidrio que deja ver lo de atrás: opacidad (sin escribir profundidad) y de las dos caras. */
+  opacity?: number;
+}
+
 /**
  * Material de los monumentos: color por vértice; de noche, reflectores cálidos desde la base
- * (bajan con la altura) y la luz propia de vidrios y relojes. Con `leds`, la estructura que
- * gira de una rueda: sus aros y rayos se tiñen con el color de los LED que llevan encima (la
- * fase sale del ángulo y la distancia al cubo, en el marco del rotor). `uLightsOn` lo declara
- * la luz de noche (withNightLight), que siempre va encadenada.
+ * (bajan con la altura) y la luz propia de vidrios y relojes. Cada vértice trae además su
+ * oclusión ambiental y un dibujo procedural (revoque, escamas, cortinas, terrazo, baldosas: ver
+ * render/surfacePatterns.ts). Con `leds`, la estructura que gira de una rueda: sus aros y rayos
+ * se tiñen con el color de los LED que llevan encima (la fase sale del ángulo y la distancia al
+ * cubo, en el marco del rotor). `uLightsOn` lo declara la luz de noche (withNightLight), que
+ * siempre va encadenada.
  */
-function createMaterial(cfg: MonumentsConfig, leds?: Leds): THREE.MeshStandardMaterial {
-  const material = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: cfg.roughness });
+function createMaterial(cfg: MonumentsConfig, leds?: Leds, finish: Finish = {}): THREE.MeshStandardMaterial {
+  const glass = finish.opacity !== undefined;
+  const material = new THREE.MeshStandardMaterial({
+    vertexColors: true,
+    roughness: finish.roughness ?? cfg.roughness,
+    metalness: finish.metalness ?? 0,
+    transparent: glass,
+    opacity: finish.opacity ?? 1,
+    depthWrite: !glass,
+    side: glass ? THREE.DoubleSide : THREE.FrontSide,
+  });
   const uniforms = {
     uFloodColor: { value: new THREE.Color(cfg.flood.color).multiplyScalar(cfg.flood.intensity) },
     uFloodTop: { value: cfg.flood.top },
+    uFloodAim: { value: new THREE.Vector3(...cfg.flood.aim) },
+    ...patternUniforms(cfg.patterns),
     ...leds?.uniforms,
   };
   const ledPars = leds ? `uniform vec2 uLedHub;\n${ledGLSL(leds.colors)}` : '';
@@ -385,7 +331,7 @@ function createMaterial(cfg: MonumentsConfig, leds?: Leds): THREE.MeshStandardMa
     ? `
   float gyeLedA = atan( position.y, position.x ) / ${TAU};
   float gyeLedS = clamp( ( length( position.xy ) - uLedHub.x ) / ( uLedHub.y - uLedHub.x ), 0.0, 1.0 );
-  vLed = gyeLedColor( gyeLedA + uLedChase.z * gyeLedS ) * ( aLed * uLedChase.w );`
+  vLed = gyeLedColor( gyeLedA + uLedChase.z * gyeLedS ) * ( aSurface.y * uLedChase.w );`
     : `
   vLed = vec3( 0.0 );`;
   material.onBeforeCompile = (shader) => {
@@ -395,12 +341,13 @@ function createMaterial(cfg: MonumentsConfig, leds?: Leds): THREE.MeshStandardMa
         '#include <common>',
         `#include <common>
 uniform float uFloodTop;
+uniform vec3 uFloodAim;
 attribute vec3 aGlow;
 attribute vec3 aFlood;
-attribute float aLed;
 varying vec3 vGlow;
 varying float vFlood;
 varying vec3 vLed;
+${PATTERN_VERTEX_PARS}
 ${ledPars}`,
       )
       .replace(
@@ -412,33 +359,35 @@ ${ledPars}`,
     gyeFloodPos = instanceMatrix * gyeFloodPos;
   #endif
   float gyeFloodH = clamp( ( ( modelMatrix * gyeFloodPos ).y - aFlood.y ) / max( aFlood.z, 1.0 ), 0.0, 1.0 );
-  vFlood = aFlood.x * mix( 1.0, uFloodTop, gyeFloodH );
+  // Reflectores desde abajo: alumbran los muros y lo que mira hacia abajo, casi nada lo de arriba.
+  vec3 gyeFloodN = objectNormal;
+  #ifdef USE_INSTANCING
+    gyeFloodN = mat3( instanceMatrix ) * gyeFloodN;
+  #endif
+  float gyeFloodY = normalize( mat3( modelMatrix ) * gyeFloodN ).y;
+  float gyeFloodAim = max( gyeFloodY, 0.0 ) * uFloodAim.x + ( 1.0 - abs( gyeFloodY ) ) * uFloodAim.y + max( -gyeFloodY, 0.0 ) * uFloodAim.z;
+  vFlood = aFlood.x * mix( 1.0, uFloodTop, gyeFloodH ) * gyeFloodAim;
   vGlow = aGlow;${ledVertex}
-}`,
+}
+${PATTERN_VERTEX}`,
       );
     shader.fragmentShader = shader.fragmentShader
-      .replace('#include <common>', '#include <common>\nuniform vec3 uFloodColor;\nvarying vec3 vGlow;\nvarying float vFlood;\nvarying vec3 vLed;')
+      .replace(
+        '#include <common>',
+        `#include <common>\nuniform vec3 uFloodColor;\nvarying vec3 vGlow;\nvarying float vFlood;\nvarying vec3 vLed;\n${PATTERN_FRAGMENT_PARS}`,
+      )
+      .replace('#include <color_fragment>', `#include <color_fragment>\n${PATTERN_COLOR}`)
+      .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>\n${PATTERN_NORMAL}`)
+      .replace('#include <aomap_fragment>', `#include <aomap_fragment>\n${PATTERN_AO}`)
       .replace(
         '#include <emissivemap_fragment>',
         `#include <emissivemap_fragment>
-totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood + vGlow + vLed ) * uLightsOn;`,
+totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood * vGyeAo + vGlow + vLed ) * uLightsOn;`,
       );
   };
-  material.customProgramCacheKey = () => `gye-monument-v3${leds ? `-led${leds.colors}` : ''}`;
+  material.customProgramCacheKey = () => `gye-monument-v5${leds ? `-led${leds.colors}` : ''}`;
   withNightLight(material);
   return material;
-}
-
-/** Color de luz propia (lineal) de un `Glow` de la config. */
-function glowOf(g: Glow): THREE.Color {
-  return new THREE.Color(g.color).multiplyScalar(g.intensity);
-}
-
-/** Todos los colores de un bloque `colors` de la config, como THREE.Color. */
-function colorsOf<K extends string>(colors: Record<K, string>): Record<K, THREE.Color> {
-  const out = {} as Record<K, THREE.Color>;
-  for (const key of Object.keys(colors) as K[]) out[key] = new THREE.Color(colors[key]);
-  return out;
 }
 
 /**
@@ -467,6 +416,10 @@ export class Monuments {
   private readonly pixels = { value: 1 };
   private readonly material: THREE.MeshStandardMaterial;
   private readonly list: readonly MonumentConfig[];
+  /** Macizos de los monumentos que entran como edificios (se trepan y se caminan encima). */
+  readonly records: BuildingRecord[] = [];
+  /** Piezas que solo se ven de cerca o solo de lejos, por monumento (distancia a su centro). */
+  private readonly lod: { x: number; z: number; items: { object: THREE.Object3D; distance: number; near: boolean }[] }[] = [];
 
   constructor(
     private readonly cfg: MonumentsConfig,
@@ -499,6 +452,9 @@ export class Monuments {
           break;
         case 'lighthouse':
           this.lighthouse(root, site, m as Lighthouse);
+          break;
+        case 'palace':
+          this.palace(root, site, m as Palace);
           break;
         default:
           throw new Error(`Monumento de tipo desconocido en config/game.json → monuments: ${m.type}`);
@@ -550,21 +506,71 @@ export class Monuments {
     return { x: root.position.x + lx * c + lz * s, z: root.position.z - lx * s + lz * c };
   }
 
-  /** Obstáculo o piso circular en (lx, lz) del marco local; `top` en el mundo. */
-  private circle(site: Site, root: THREE.Object3D, lx: number, lz: number, r: number, top: number, floor = false): void {
+  /** Obstáculo o piso circular en (lx, lz) del marco local; `top` (y `bottom`) en el mundo. */
+  private circle(site: Site, root: THREE.Object3D, lx: number, lz: number, r: number, top: number, floor = false, bottom = -Infinity): void {
     const p = this.world(root, lx, lz);
-    site.shapes.push({ kind: 'circle', x: p.x, z: p.z, a: r, b: 0, angle: 0, halfArc: 0, top, floor });
+    site.shapes.push({ kind: 'circle', x: p.x, z: p.z, a: r, b: 0, angle: 0, halfArc: 0, top, bottom, floor });
   }
 
-  /** Sector de anillo centrado en el monumento; `angle` en el marco local (atan2(z, x)). */
-  private ring(site: Site, root: THREE.Object3D, inner: number, outer: number, angle: number, halfArc: number, top: number, floor = false): void {
-    site.shapes.push({ kind: 'ring', x: root.position.x, z: root.position.z, a: outer, b: inner, angle: angle - root.rotation.y, halfArc, top, floor });
+  /**
+   * Sector de anillo (ángulos en el marco local, atan2(z, x)), centrado en el monumento o en
+   * (cx, cz) del marco local.
+   */
+  private ring(site: Site, root: THREE.Object3D, inner: number, outer: number, angle: number, halfArc: number, top: number, floor = false, bottom = -Infinity, cx = 0, cz = 0): void {
+    const c = this.world(root, cx, cz);
+    site.shapes.push({ kind: 'ring', x: c.x, z: c.z, a: outer, b: inner, angle: angle - root.rotation.y, halfArc, top, bottom, floor });
   }
 
-  /** Rectángulo de medio largo `halfU` (eje x local) y medio ancho `halfV`, centrado en (lx, lz). */
-  private box(site: Site, root: THREE.Object3D, lx: number, lz: number, halfU: number, halfV: number, top: number, floor = false): void {
+  /**
+   * Rectángulo de medio largo `halfU` y medio ancho `halfV`, centrado en (lx, lz), con el largo en
+   * el ángulo `angle` del marco local (0 = eje x).
+   */
+  private box(site: Site, root: THREE.Object3D, lx: number, lz: number, halfU: number, halfV: number, top: number, floor = false, bottom = -Infinity, angle = 0): void {
     const p = this.world(root, lx, lz);
-    site.shapes.push({ kind: 'box', x: p.x, z: p.z, a: halfU, b: halfV, angle: -root.rotation.y, halfArc: 0, top, floor });
+    site.shapes.push({ kind: 'box', x: p.x, z: p.z, a: halfU, b: halfV, angle: angle - root.rotation.y, halfArc: 0, top, bottom, floor });
+  }
+
+  /**
+   * El Palacio Municipal (world/palace.ts): se arma con sus propios vidrios y la bóveda del pasaje;
+   * sus macizos entran como edificios y el detalle fino se esconde de lejos.
+   */
+  private palace(root: THREE.Group, site: Site, p: Palace): void {
+    const finish = (f: { roughness: number; metalness: number; opacity?: number }) => createMaterial(this.cfg, undefined, f);
+    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    const y = (v: number): number => root.position.y + v;
+    new PalaceBuilder(p, {
+      root,
+      materials: { stone: this.material, glass: finish(p.glass), vault: finish(p.vault) },
+      terrain: (lx, lz) => {
+        const w = this.world(root, lx, lz);
+        return this.heightmap.sample(w.x, w.z);
+      },
+      box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, y(top), floor, y(bottom), angle),
+      circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, y(top), floor, y(bottom)),
+      ring: (cx, cz, inner, outer, angle, halfArc, top, floor, bottom) => this.ring(site, root, inner, outer, angle, halfArc, y(top), floor, y(bottom), cx, cz),
+      block: (outline, top) => {
+        const ring = new Float32Array(outline.length * 2);
+        outline.forEach((q, k) => {
+          const w = this.world(root, q.x, q.z);
+          ring[k * 2] = w.x;
+          ring[k * 2 + 1] = w.z;
+        });
+        let minX = Infinity;
+        let maxX = -Infinity;
+        let minZ = Infinity;
+        let maxZ = -Infinity;
+        for (let k = 0; k < ring.length; k += 2) {
+          minX = Math.min(minX, ring[k]);
+          maxX = Math.max(maxX, ring[k]);
+          minZ = Math.min(minZ, ring[k + 1]);
+          maxZ = Math.max(maxZ, ring[k + 1]);
+        }
+        this.records.push({ y0: root.position.y, y1: y(top), rings: [ring], minX, maxX, minZ, maxZ, chunk: MONUMENT_CHUNK, roof: null });
+      },
+      near: (object, distance) => lod.items.push({ object, distance, near: true }),
+      far: (object, distance) => lod.items.push({ object, distance, near: false }),
+    }).build();
+    this.lod.push(lod);
   }
 
   private ferrisWheel(root: THREE.Group, site: Site, w: FerrisWheel): void {
@@ -1173,6 +1179,10 @@ void main() {
     for (const led of this.leds) led.visible = on;
     if (on) this.pixels.value = renderer.getDrawingBufferSize(_size).y / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
     for (const c of this.clocks) if (c.shown !== hours) this.setClock(c, hours);
+    for (const l of this.lod) {
+      const d = Math.hypot(camera.position.x - l.x, camera.position.z - l.z);
+      for (const it of l.items) it.object.visible = d < it.distance === it.near;
+    }
   }
 
   private static inside(s: Shape, x: number, z: number, margin: number): boolean {
@@ -1216,13 +1226,16 @@ void main() {
     return y;
   }
 
-  /** Tope del monumento en (x, z) para alguien a la altura y (-Infinity si no hay): lo que queda más alto es muro. */
+  /**
+   * Tope del monumento en (x, z) para alguien (o la cámara) a la altura y (-Infinity si no hay): lo
+   * que queda más alto es muro, salvo lo que arranca por encima de su cabeza (aleros, bóvedas).
+   */
   wallTop(x: number, z: number, y: number): number {
     let top = -Infinity;
     for (const site of this.sites) {
       if (Math.hypot(x - site.x, z - site.z) > site.r) continue;
       for (const s of site.shapes) {
-        if (y < s.top && s.top > top && Monuments.inside(s, x, z, 0)) top = s.top;
+        if (y < s.top && y + this.cfg.clearance > s.bottom && s.top > top && Monuments.inside(s, x, z, 0)) top = s.top;
       }
     }
     return top;
