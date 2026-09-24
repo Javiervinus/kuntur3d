@@ -1,3 +1,5 @@
+// Primero: ajusta la config al dispositivo (perfil de celular) antes de que otro módulo la lea.
+import './core/profile';
 import * as THREE from 'three';
 import assets from '../config/assets.json';
 import game from '../config/game.json';

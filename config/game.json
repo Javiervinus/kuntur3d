@@ -20,6 +20,46 @@
       "themeColor": "#0b1a22"
     }
   },
+  "profiles": {
+    "mobile": {
+      "when": "(pointer: coarse)",
+      "overrides": {
+        "render": { "maxPixelRatio": 1.5, "shadow": { "mapSize": 1024, "farMax": 1500 } },
+        "quality": {
+          "levels": [
+            { "pixelRatio": 1.5, "shadowMapSize": 1024 },
+            { "pixelRatio": 1.25, "shadowMapSize": 1024 },
+            { "pixelRatio": 1, "shadowMapSize": 1024 },
+            { "pixelRatio": 0.85, "shadowMapSize": 1024 },
+            { "pixelRatio": 0.75, "shadowMapSize": 1024 }
+          ]
+        },
+        "streaming": {
+          "terrainRadius": 1600,
+          "buildingRadius": 900,
+          "buildingRadiusPerMeterAltitude": 2,
+          "buildingRadiusMax": 1500,
+          "maxResidentBuildings": 70000,
+          "skylineMidRadius": 3000,
+          "treeRadius": 800,
+          "roadRadius": 500
+        },
+        "trees": { "visibleRadius": 900 },
+        "palms": { "drawDistance": 900 },
+        "imagery": {
+          "levels": [
+            { "zoom": 18, "radius": 400 },
+            { "zoom": 17, "radius": 1100 }
+          ],
+          "altitudeRadiusFactor": 1.2,
+          "maxTextures": 32,
+          "tileCacheSize": 150,
+          "overviewMaxSize": 2048
+        },
+        "map": { "maxPixelRatio": 1.5, "spareTiles": 12 }
+      }
+    }
+  },
   "worldUrl": "world/manifest.json",
   "locale": "es-EC",
   "render": {
