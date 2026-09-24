@@ -616,7 +616,11 @@ Biblioteca, Correos…). El procedimiento completo, de la investigación a la me
 **Calles y zonas** (la 9 de Octubre): no se modela cada edificio como el Palacio. Se recorre la
 calle y se inventaría cada frente (tipo, pisos, portal, colores), y cada edificio es una
 entrada de config sobre una familia de fachada; las veredas, los faroles, los árboles y las
-bancas salen de reglas por cuadra. Cada cuadra es su propio lugar de la física y del detalle
+bancas salen de reglas por cuadra. Las fuentes de la calle están versionadas en
+`config/streets/nueve-de-octubre/` (el eje y las cuadras, el inventario de los 66 edificios y la
+calzada medida en el juego), y `build_street.py` (en `.agents/skills/model-place/scripts/street/`,
+con OSM y los datos del mundo) arma con ellas `config/streets/nueve-de-octubre.json`; el flujo
+completo, para extenderla o hacer otra, está en la skill (`references/street-pipeline.md`). Cada cuadra es su propio lugar de la física y del detalle
 (se descarta junta), y la calle despeja de los datos los edificios, árboles y postes que
 reemplaza (`clear`). Piezas nuevas del kit: vanos de arco apuntado (`pointedHole`, `archPath`
 para su marco), figuras de pie para estatuas (`figure`, que devuelve dónde quedan las manos
@@ -784,6 +788,10 @@ config/region.json   zona (bbox), fuentes de datos, lugares, parámetros del pip
 config/game.json     render, cámara, personajes, vehículos, controles, colores, streaming
 config/assets.json   modelos de personajes y peatones (de dónde salen, animaciones, poses, ropa)
 config/places.json   lugares con ficha (historia, fuentes, foto, dónde están) y lemas de los barrios
+config/streets/      calles modeladas: <calle>.json (lo que lee el juego) y <calle>/ (sus fuentes:
+                     eje y cuadras, inventario de fachadas, calzada medida)
+.agents/skills/      skills para agentes; model-place trae los scripts de calles y los ayudantes
+                     de consola del juego
 pipeline/            build_world.py → public/world/ (manifest + binarios + texturas);
                      build_model.ts arma un .glb desde piezas glTF (y sus niveles de detalle)
 src/world/           terreno, edificios (+colisiones), calles, agua y sus reflejos, árboles,
