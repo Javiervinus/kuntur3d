@@ -16,7 +16,7 @@
 
 Pasos (las descargas quedan en cacheDir; reprocesar es rápido):
   water      Overture water -> polígonos locales
-  terrain    Copernicus DEM (DSM) -> heightmap local sin "bultos" de edificios
+  terrain    Copernicus DEM (DSM) -> heightmap local sin "bultos" de edificios (y zonas planas)
   buildings  Overture (huellas) + Google Open Buildings 2.5D (alturas y edificios sin huella)
   imagery    Esri World Imagery -> vista general (lejos + minimapa) y tiles para árboles
   roads      OpenStreetMap (Overpass) -> ejes de calles con ancho, material, carriles y cruces; parques y canchas
@@ -429,6 +429,49 @@ def dem_tile_names(tc: dict, bounds: tuple[float, float, float, float]) -> list[
     return names
 
 
+def flatten_zones(dst: np.ndarray, zones: list[dict], fr: Frame, s: float, water: np.ndarray) -> None:
+    """Zonas planas (config → terrain.flatZones). En un centro denso el DSM guarda bultos de
+    varios metros donde hay manzanas enteras de edificios altos, más anchas que la ventana de
+    `buildingRemovalWindowPx` (en la 9 de Octubre, ~4 m sobre unos 200 m de avenida que en la
+    realidad es plana). Dentro de la zona el suelo sale de una apertura con una ventana más
+    grande (`window`, m), sin mirar el agua, suavizada (`smooth`, m) y mezclada con el relieve de
+    afuera a lo largo de `blend` m. Solo baja: el suavizado no puede subir la orilla ni un
+    bajo real. Los cerros tienen que quedar fuera del polígono: la apertura grande los
+    aplastaría."""
+    transform = Affine(s, 0, fr.xmin - s / 2, 0, s, fr.zmin - s / 2)
+    for zone in zones:
+        pts = [fr.lonlat_to_local(lon, lat) for lat, lon in zone["polygon"]]
+        poly = shapely.Polygon([(float(x), float(z)) for x, z in pts])
+        inside = rasterize([(poly, 1)], out_shape=dst.shape, transform=transform, fill=0, dtype="uint8").astype(bool)
+        if not inside.any():
+            log(f"Aviso: la zona plana {zone['name']} no cae en el mapa")
+            continue
+        k = max(1, round(float(zone["window"]) / s))
+        pad = k + math.ceil(float(zone["blend"]) / s) + math.ceil(3 * float(zone["smooth"]) / s)
+        rows, cols = np.nonzero(inside)
+        r0, r1 = max(0, rows.min() - pad), min(dst.shape[0], rows.max() + pad + 1)
+        c0, c1 = max(0, cols.min() - pad), min(dst.shape[1], cols.max() + pad + 1)
+        sub = dst[r0:r1, c0:c1]
+        wet = water[r0:r1, c0:c1]
+        # El agua no entra en la ventana: si no, la orilla se hundiría hacia el nivel del río.
+        land = np.where(wet, np.inf, sub)
+        opened = ndimage.grey_dilation(ndimage.grey_erosion(land, size=(k, k)), size=(k, k))
+        opened = np.where(np.isfinite(opened), opened, sub)
+        # Suavizado solo con lo que es tierra (convolución normalizada).
+        sigma = float(zone["smooth"]) / s
+        dry = (~wet).astype(np.float32)
+        num = ndimage.gaussian_filter(np.where(wet, 0.0, opened), sigma)
+        den = ndimage.gaussian_filter(dry, sigma)
+        opened = np.minimum(np.where(den > 1e-3, num / np.maximum(den, 1e-3), opened), sub)
+        dist = ndimage.distance_transform_edt(~inside[r0:r1, c0:c1]) * s
+        weight = np.clip(1 - dist / float(zone["blend"]), 0, 1)
+        weight[wet] = 0
+        result = sub * (1 - weight) + opened * weight
+        change = result - sub
+        log(f"Zona plana {zone['name']}: {int(inside.sum())} celdas, baja hasta {-change.min():.1f} m (mediana {-np.median(change[inside[r0:r1, c0:c1]]):.1f} m)")
+        dst[r0:r1, c0:c1] = result
+
+
 def step_terrain(ctx: Ctx) -> None:
     tc = ctx.cfg["terrain"]
     fr = ctx.frame
@@ -473,6 +516,7 @@ def step_terrain(ctx: Ctx) -> None:
     )
 
     water_level = 0.0
+    mask = np.zeros(dst.shape, dtype=bool)
     water_path = ctx.out / "water.json"
     if water_path.exists():
         polys = []
@@ -487,11 +531,12 @@ def step_terrain(ctx: Ctx) -> None:
                 fill=0,
                 dtype="uint8",
             ).astype(bool)
-            if mask.any():
-                water_level = float(np.median(dst[mask]))
-                dst[mask] = water_level - float(tc["waterDepth"])
     else:
         log("Aviso: no hay water.json; corre el paso 'water' antes de 'terrain'")
+    flatten_zones(dst, tc.get("flatZones", []), fr, s, mask)
+    if mask.any():
+        water_level = float(np.median(dst[mask]))
+        dst[mask] = water_level - float(tc["waterDepth"])
 
     encoded, scale, offset = encode_heightmap(dst)
     (ctx.out / "heightmap.bin").write_bytes(encoded)

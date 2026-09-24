@@ -18,6 +18,15 @@
     "gridSpacing": 10,
     "buildingRemovalWindowPx": 3,
     "smoothSigmaPx": 1.2,
+    "flatZones": [
+      {
+        "name": "centro",
+        "polygon": [[-2.188, -79.870], [-2.188, -79.895], [-2.205, -79.895], [-2.205, -79.870]],
+        "window": 250,
+        "smooth": 60,
+        "blend": 120
+      }
+    ],
     "waterDepth": 4
   },
   "overture": {
