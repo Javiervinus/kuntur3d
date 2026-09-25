@@ -44,6 +44,15 @@
     return (x, z) => ({ x: (x - x0) * c - (z - z0) * s, z: (x - x0) * s + (z - z0) * c });
   };
 
+  /** Cámara en el punto `a` del mundo, `ay` m sobre su suelo, mirando al punto `b` (`by` m sobre el suyo). */
+  const shotWorld = async (a, ay, b, by, wait) => {
+    await g.teleport(a.x, a.z);
+    await sleep(wait);
+    const p = g.player.position;
+    g.shots.at([a.x - p.x, ground(a) + ay - p.y, a.z - p.z, b.x - p.x, ground(b) + by - p.y, b.z - p.z]);
+    g.follow.firstPerson = true;
+  };
+
   /**
    * Cámara en `cam` mirando a `tgt` ([x, alto sobre el suelo, z] locales), sin el personaje (en
    * primera persona no se dibuja; `root.visible` no sirve, el juego lo repone en cada cuadro).
@@ -51,13 +60,37 @@
    */
   const shotAt = async (place, cam, tgt, wait) => {
     const L = frame(place);
-    const a = L(cam[0], cam[2]);
-    const b = L(tgt[0], tgt[2]);
-    await g.teleport(a.x, a.z);
-    await sleep(wait);
-    const p = g.player.position;
-    g.shots.at([a.x - p.x, ground(a) + cam[1] - p.y, a.z - p.z, b.x - p.x, ground(b) + tgt[1] - p.y, b.z - p.z]);
-    g.follow.firstPerson = true;
+    await shotWorld(L(cam[0], cam[2]), cam[1], L(tgt[0], tgt[2]), tgt[1], wait);
+  };
+
+  /**
+   * El lente de la cámara: campo de visión horizontal en grados (el vertical sale del ancho de la
+   * ventana, así el ancho de la captura abarca lo mismo que el de la foto), o null para volver al
+   * del juego.
+   */
+  const lens = (hfov) => {
+    const cam = g.follow.camera;
+    if (window.__mpFov === undefined) window.__mpFov = cam.fov;
+    cam.fov = hfov ? (2 * Math.atan(Math.tan((hfov * Math.PI) / 360) / cam.aspect) * 180) / Math.PI : window.__mpFov;
+    cam.updateProjectionMatrix();
+  };
+
+  /**
+   * La cámara donde se tomó una foto, con su lente (settings.json → photo): lo que escriben
+   * mapillary.py y photos.py por foto: lat, lon, rumbo (`compass`, grados desde el norte), alto de la
+   * cámara sobre el suelo (`height`), campo de visión horizontal (`hfov`) e inclinación (`pitch`,
+   * grados hacia arriba). Sin `hfov` (una panorámica) queda el lente del juego; `lens(null)` lo
+   * devuelve después.
+   */
+  const shotPhoto = async (photo, o) => {
+    lens(photo.hfov ?? null);
+    const a = g.geo.toLocal(photo.lat, photo.lon);
+    const r = (photo.compass * Math.PI) / 180;
+    const b = { x: a.x + Math.sin(r) * o.distance, z: a.z - Math.cos(r) * o.distance };
+    const h = photo.height ?? o.height;
+    // A la misma altura que la cámara (más la inclinación), aunque el suelo allá esté más alto o más bajo.
+    const by = h + Math.tan(((photo.pitch ?? 0) * Math.PI) / 180) * o.distance + ground(a) - ground(b);
+    await shotWorld(a, h, b, by, o.wait);
   };
 
   /** Oculta (o vuelve a mostrar) el HUD: lo fijo o absoluto que no contiene al canvas. */
@@ -271,6 +304,6 @@
     );
     return `${name}: corriendo`;
   };
-  window.__mp = { frame, local, shotAt, hud, probe, walk, transects, gpu, memory, start, job: (name) => jobs[name] };
-  return 'window.__mp listo: frame, local, shotAt, hud, probe, walk, transects, gpu, memory, start, job';
+  window.__mp = { frame, local, shotAt, lens, shotPhoto, hud, probe, walk, transects, gpu, memory, start, job: (name) => jobs[name] };
+  return 'window.__mp listo: frame, local, shotAt, lens, shotPhoto, hud, probe, walk, transects, gpu, memory, start, job';
 }

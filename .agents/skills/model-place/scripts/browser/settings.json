@@ -1,5 +1,6 @@
 {
   "shot": { "wait": 2500 },
+  "photo": { "distance": 40, "height": 1.7, "wait": 2500 },
   "transects": {
     "step": 5,
     "half": 30,
