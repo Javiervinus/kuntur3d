@@ -824,7 +824,10 @@
    "height": 0.9,
    "taper": 0.95,
    "rim": 0.05,
-   "soil": 0.1
+   "soil": 0.1,
+   "sides": 16,
+   "faceted": false,
+   "rimSides": 4
   },
   "grate": {
    "size": 1.2,

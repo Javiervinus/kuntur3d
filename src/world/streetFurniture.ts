@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { inward, lathe } from './classical';
+import { faceted, inward, lathe } from './classical';
 import { Batch, type Glow, type Surface, colorsOf, glowOf } from './monumentParts';
 
 /**
@@ -11,8 +11,9 @@ export interface StreetFurniture {
   /** Distancia (m) al centro de la cuadra hasta la que se ve su mobiliario. */
   near: number;
   /**
-   * Faroles: a cuántos m del bordillo, cada cuánto como máximo y a cuánto de las puntas de la
-   * vereda (los cruces) van el primero y el último: quedan parejos, con uno en cada esquina.
+   * Faroles: a cuántos m del bordillo, cada cuánto como máximo (0 = sin faroles en la vereda) y a
+   * cuánto de las puntas de la vereda (los cruces) van el primero y el último: quedan parejos, con
+   * uno en cada esquina.
    */
   lamps: { inset: number; spacing: number; margin: number };
   /**
@@ -21,7 +22,7 @@ export interface StreetFurniture {
    * se ven en la foto satelital) y qué parte va en macetero (el resto, en alcorque con rejilla).
    */
   trees: { inset: number; spacing: number; phase: number[]; margin: number; clearance: number; height: number[]; radius: number[]; colors: string[]; planters: number };
-  /** Bancas: una cada tantos árboles, corrida a lo largo desde el árbol y a cuánto del bordillo. */
+  /** Bancas: una cada tantos árboles (0 = sin bancas), corrida a lo largo desde el árbol y a cuánto del bordillo. */
   benches: { every: number; offset: number; inset: number };
   /**
    * Farol ornamental de hierro de dos linternas (el de la regeneración urbana de Guayaquil), en m:
@@ -40,8 +41,12 @@ export interface StreetFurniture {
     lantern: { sides: number; radius: number; foot: number; glass: number; taper: number; roof: number; overhang: number; finial: number };
     star: { radius: number; inner: number; thickness: number; height: number };
   };
-  /** Macetero redondo de acero: radio, alto, cuánto se afina abajo, grosor del borde y hondura de la tierra. */
-  planter: { radius: number; height: number; taper: number; rim: number; soil: number };
+  /**
+   * Macetero: radio, alto, cuánto se afina abajo, grosor del borde, hondura de la tierra, lados,
+   * si sus caras son planas (la jardinera hexagonal de hormigón de las ciudadelas) o redondeadas,
+   * y lados del tubo del borde.
+   */
+  planter: { radius: number; height: number; taper: number; rim: number; soil: number; sides: number; faceted: boolean; rimSides: number };
   /** Alcorque: la rejilla cuadrada a ras de la vereda. */
   grate: { size: number; thickness: number };
   /**
@@ -84,15 +89,23 @@ const rand = (k: number, salt: number): number => {
 
 /**
  * Dónde va cada cosa: a lo largo del bordillo de cada vereda (su primer lado), a la distancia de la
- * config y sin acercarse a los cruces; los árboles, sin pisar un farol.
+ * config y sin acercarse a los cruces; los árboles, sin pisar un farol ni tapar las entradas de los
+ * retiros (`entrances`: tramos en x de la calle).
  */
-export function layoutFurniture(f: StreetFurniture, blocks: readonly BlockLike[]): { lamps: FurnitureItem[]; trees: TreeItem[]; benches: FurnitureItem[] } {
+export function layoutFurniture(
+  f: StreetFurniture,
+  blocks: readonly BlockLike[],
+  entrances: (b: BlockLike) => readonly number[][] = () => [],
+): { lamps: FurnitureItem[]; trees: TreeItem[]; benches: FurnitureItem[] } {
   const lamps: FurnitureItem[] = [];
   const trees: TreeItem[] = [];
   const benches: FurnitureItem[] = [];
   const greens = f.trees.colors.map((c) => new THREE.Color(c));
   let serial = 0;
+  // Lo que ocupa un árbol en la vereda (su macetero o su alcorque), para no tapar una entrada.
+  const reach = Math.max(f.planter.radius, f.grate.size / 2);
   for (const b of blocks) {
+    const doors = entrances(b);
     for (const s of b.sidewalks) {
       const r = s.ring;
       const a = new THREE.Vector2(r[0][0], r[0][1]);
@@ -110,7 +123,7 @@ export function layoutFurniture(f: StreetFurniture, blocks: readonly BlockLike[]
       const L = f.lamps;
       const run = len - 2 * L.margin;
       const gaps = run > 0 ? Math.max(1, Math.ceil(run / L.spacing)) : 0;
-      const lampUs = run > 0 ? Array.from({ length: gaps + 1 }, (_, k) => L.margin + (run * k) / gaps) : [len / 2];
+      const lampUs = L.spacing <= 0 ? [] : run > 0 ? Array.from({ length: gaps + 1 }, (_, k) => L.margin + (run * k) / gaps) : [len / 2];
       for (const u of lampUs) {
         const p = at(u, L.inset);
         lamps.push({ block: b.id, x: p.x, z: p.y, angle });
@@ -120,6 +133,7 @@ export function layoutFurniture(f: StreetFurniture, blocks: readonly BlockLike[]
       for (let u = T.margin + T.phase[side]; u <= len - T.margin; u += T.spacing) {
         if (lampUs.some((q) => Math.abs(q - u) < T.clearance)) continue;
         const p = at(u, T.inset);
+        if (doors.some(([g0, g1]) => p.x + reach > g0 && p.x - reach < g1)) continue;
         const seed = serial++;
         trees.push({
           block: b.id,
@@ -131,7 +145,7 @@ export function layoutFurniture(f: StreetFurniture, blocks: readonly BlockLike[]
           color: greens[Math.floor(rand(seed, 3) * greens.length) % greens.length],
           planter: rand(seed, 4) < T.planters,
         });
-        if (k++ % f.benches.every === 0) {
+        if (f.benches.every > 0 && k++ % f.benches.every === 0) {
           const q = at(u + f.benches.offset, f.benches.inset);
           benches.push({ block: b.id, x: q.x, z: q.y, angle });
         }
@@ -219,10 +233,12 @@ export function furnitureModels(f: StreetFurniture): { lamp: THREE.BufferGeometr
     planter.geometry(g, m, color);
     g.dispose();
   };
-  pot(new THREE.CylinderGeometry(P.radius, P.radius * P.taper, P.height, sides * 2, 1, true), at(0, P.height / 2, 0), c.planter);
-  pot(new THREE.TorusGeometry(P.radius - P.rim / 2, P.rim / 2, sides / 2, sides * 2).rotateX(Math.PI / 2), at(0, P.height, 0), c.planter);
-  pot(inward(new THREE.CylinderGeometry(P.radius - P.rim, P.radius - P.rim, P.soil, sides * 2, 1, true)), at(0, P.height - P.soil / 2, 0), c.planter);
-  pot(new THREE.CircleGeometry(P.radius - P.rim, sides * 2).rotateX(-Math.PI / 2), at(0, P.height - P.soil, 0), c.soil);
+  // Caras planas si las tiene (un cilindro de 6 lados con normales suaves parece redondo).
+  const flat = (g: THREE.BufferGeometry): THREE.BufferGeometry => (P.faceted ? faceted(g) : g);
+  pot(flat(new THREE.CylinderGeometry(P.radius, P.radius * P.taper, P.height, P.sides, 1, true)), at(0, P.height / 2, 0), c.planter);
+  pot(new THREE.TorusGeometry(P.radius - P.rim / 2, P.rim / 2, P.rimSides, P.sides).rotateX(Math.PI / 2), at(0, P.height, 0), c.planter);
+  pot(inward(flat(new THREE.CylinderGeometry(P.radius - P.rim, P.radius - P.rim, P.soil, P.sides, 1, true))), at(0, P.height - P.soil / 2, 0), c.planter);
+  pot(new THREE.CircleGeometry(P.radius - P.rim, P.sides).rotateX(-Math.PI / 2), at(0, P.height - P.soil, 0), c.soil);
 
   // Alcorque: la rejilla cuadrada de hierro, apenas sobre la vereda.
   const G = f.grate;
