@@ -9,7 +9,10 @@ controla (p. ej. Chrome DevTools MCP → `evaluate_script`). Los ayudantes está
 El contenido entero de `helpers.js` es una función: se pasa tal cual como `function` a
 `evaluate_script` (o se pega en la consola y se llama). Deja todo en `window.__mp`. Hay que
 volver a instalarlo cada vez que la página recarga, y el servidor de dev la recarga sola al
-guardar algo en `src/` o `config/`.
+guardar algo en `src/` o `config/`. Por eso, **mientras se escribe código, el servidor apagado**:
+se juntan los cambios, se prende para probarlos todos juntos y se apaga para volver a editar. Si
+no, cada guardado vuelve a cargar el mundo (pesado en una máquina modesta) y mata los trabajos de
+fondo (transectos, GPU).
 
 Antes de nada, esperar a que el lugar exista (con un tope de tiempo):
 
@@ -47,12 +50,35 @@ Después, `take_screenshot`. `shotAt` pone la vista en primera persona, así el 
 en la foto: `root.visible = false` no sirve, porque el juego lo repone en cada cuadro. Para volver
 a jugar: `g.shots.free()` y `g.follow.firstPerson = false`.
 
+**Desde donde se tomó una foto, con su lente.** `mapillary.py` y `photos.py` escriben, por cada
+foto, su cámara (está debajo de cada foto en su hoja de contactos):
+
+```js
+async () => {
+  const mp = window.__mp;
+  const foto = { lat: -2.1378213, lon: -79.8996859, compass: 249.8, height: 2.2, hfov: 85.8 }; // de la hoja de contactos
+  await Promise.race([mp.shotPhoto(foto, /* settings.json → photo */ { distance: 40, height: 1.7, wait: 2500 }), new Promise((r) => setTimeout(r, 12000))]);
+  return 'ok';
+}
+```
+
+- `compass` es el rumbo (grados desde el norte), `height` el alto de la cámara sobre el suelo y
+  `hfov` su campo de visión horizontal. `pitch` (grados hacia arriba) es opcional.
+- `shotPhoto` cambia el lente del juego (`lens(hfov)`): el ancho de la captura abarca lo mismo que
+  el de la foto. `lens(null)` devuelve el del juego.
+- **Afinar a ojo**: el GPS se equivoca unos metros y la brújula unos grados, más en un teléfono.
+  Se corre `lat`/`lon` o `compass` de a poco hasta que los bordes de las fachadas y la línea de la
+  vereda calcen con la foto, y **después** se compara el modelo.
+- Para ver la arquitectura sin tapar nada: esconder `parked-cars`, `traffic` y `pedestrians`
+  (`g.scene.getObjectByName(nombre).visible = false`), y decirlo en la comparación.
+
 Para capturar:
 - **La pestaña al frente**: en segundo plano el navegador frena los timers y las esperas se
   cuelgan.
 - **Un tope de tiempo** en cada llamada (los `Promise.race` de arriba).
 - **Las capturas** van a la carpeta temporal, no al repo. Si la herramienta solo guarda dentro
-  del repo, se mueven después.
+  del repo (Chrome DevTools MCP rechaza rutas de afuera), se guardan en `pipeline/.cache/shots/`
+  (fuera de git) y se mueven después. Sin ruta, la imagen vuelve al chat y no queda archivo.
 
 Vistas mínimas:
 - la esquina principal;

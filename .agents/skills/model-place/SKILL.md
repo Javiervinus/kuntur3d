@@ -1,19 +1,26 @@
 ---
 name: model-place
-description: Procedimiento para traer al mundo de Kuntur 3D un lugar real con su arquitectura, a nivel de detalle y con fotos comparadas. Sirve para un ícono o monumento (como el Palacio Municipal o la Iglesia de San Francisco), una atracción, un edificio, un parque, una calle entera o un tramo más de una (como la 9 de Octubre), una zona, o la casa o el negocio de quien colabora a partir de sus propias fotos. Trae los scripts para calles (OSM, satélite enderezado, planos, inventario de fachadas → config/streets) y los ayudantes de consola del juego (capturas, física, transectos, costo de GPU y memoria). Cubre investigar, medir, modelar con los kits de piezas, la física, comparar con fotos desde el mismo punto, medir el rendimiento, revisar y documentar. Úsala cuando pidan modelar, maquetar, reconstruir, "traer" o extender un lugar o una calle, hacer "mi casa" con fotos, o mejorar el realismo de algo que ya está modelado.
+description: Procedimiento para traer al mundo de Kuntur 3D un lugar real con su arquitectura, a nivel de detalle y con fotos comparadas. Sirve para un ícono o monumento (como el Palacio Municipal o la Iglesia de San Francisco), una atracción, un edificio, un parque, una calle entera o un tramo más de una (como la 9 de Octubre), una zona, o la casa o el negocio de quien colabora a partir de sus propias fotos, siempre lo más fiel posible a cómo está hoy. Trae los scripts para calles (OSM, satélite enderezado, planos, inventario de fachadas → config/streets), para fotos (Mapillary, las más nuevas primero, y las propias con su EXIF) y los ayudantes de consola del juego (la cámara donde se tomó cada foto, física, transectos, costo de GPU y memoria). Cubre investigar, medir, modelar con los kits de piezas, la física, comparar con fotos desde el mismo punto y con el mismo lente, medir el rendimiento, revisar, documentar y repartir el trabajo entre agentes. Úsala cuando pidan modelar, maquetar, reconstruir, "traer" o extender un lugar o una calle, hacer "mi casa" con fotos, o mejorar el realismo de algo que ya está modelado.
 ---
 
 # Modelar un lugar real
 
-La meta: que quien conoce el lugar lo reconozca al primer vistazo, **sin pagar rendimiento de
-más**. El orden importa:
+La meta: **fiel a la realidad y a cómo está hoy**, tanto que quien conoce el lugar lo reconozca
+al primer vistazo, **sin pagar rendimiento de más**. El orden importa:
 1. primero se investiga y se mide;
 2. después se modela;
 3. nada se da por bueno sin compararlo con fotos desde el mismo punto, sin medir cuánto cuesta y
    sin una revisión aparte.
 
-Esta skill la puede usar cualquier persona que colabore en el proyecto, con su agente. Los
-ejemplos completos:
+Esta skill la puede usar cualquier persona que colabore en el proyecto, con su agente. Sirve para
+tres clases de trabajo:
+- **un edificio**: un ícono, un monumento, una atracción;
+- **una calle o un tramo, con cada uno de sus edificios**: cada uno distinto y medido, no parecidos
+  genéricos (ver "Calles y zonas" al final);
+- **algo a partir de las fotos de quien colabora**: su casa, su negocio, o fotos que sacó de una
+  calle.
+
+Los ejemplos completos:
 - **un edificio**: el Palacio Municipal (`src/world/palace.ts`, entrada `palacioMunicipal` de
   `config/game.json` → `monuments.list`);
 - **una calle**: la Av. 9 de Octubre (`config/streets/nueve-de-octubre/`);
@@ -30,7 +37,7 @@ Ante la duda, mirar cómo se resolvió ahí.
 | `references/kit.md` | Al modelar: los tipos que ya existen y las piezas del kit |
 | `references/browser.md` | En el juego: capturas, física, caminar, transectos, costo de GPU y memoria |
 | `references/pitfalls.md` | Antes de cerrar (la lista de revisión), o cuando algo se ve raro |
-| `scripts/street/*.py` | OSM, satélite enderezado, planos y armar la calle (`uv run …`, desde la raíz del repo) |
+| `scripts/street/*.py` | OSM, satélite enderezado, planos, fotos (Mapillary y propias) y armar la calle (`uv run …`, desde la raíz del repo) |
 | `scripts/browser/helpers.js` | Los ayudantes de consola (`window.__mp`); sus valores, en `settings.json` |
 | `assets/compare.html` | La plantilla de la página foto real \| juego |
 
@@ -61,8 +68,11 @@ Pedirle, en este orden de importancia:
 5. **El techo**, si se ve desde algún lado (un piso alto vecino). Si no, sale del satélite.
 6. Con **luz pareja** (nublado o sombra) para que el color salga fiel; una de noche si las luces
    importan.
-7. Los **archivos originales**: el EXIF trae la distancia focal, que sirve para igualar la lente
-   en la comparación.
+7. Los **archivos originales**, con la ubicación del teléfono encendida: no los que pasaron por
+   un chat, que borran el EXIF. El EXIF trae dónde se tomó, hacia dónde, con qué lente y cuándo.
+   `scripts/street/photos.py <lugar> <carpeta>` lo lee, ubica cada foto en el marco del lugar y
+   arma la hoja de contactos; en el juego, `__mp.shotPhoto` pone la cámara ahí mismo.
+8. **Recientes**: cómo está hoy. Si hay fotos de varias épocas, manda la más nueva.
 
 Las fotos quedan **fuera del repo** (en una carpeta temporal). Solo se publican si su dueño
 decide licenciarlas (CC BY-SA 4.0, como el resto del contenido), y entonces sin caras ni placas.
@@ -90,9 +100,34 @@ dirección (entra al mundo como cualquier otro edificio), salvo que el dueño lo
   carpeta temporal o al caché del pipeline, fuera de git.
 - **Para ver el juego**: `npm run dev` y un navegador que el agente pueda controlar (p. ej. Chrome
   DevTools MCP). Las comparaciones van en un HTML local que se abre en el navegador.
+- **Mientras se escribe código, el servidor de dev apagado.** Cada guardado en `src/` o `config/`
+  recarga la página del juego (pesada en una máquina modesta) y mata lo que corría de fondo en
+  ella (transectos, GPU). Se juntan los cambios, se prende para probarlos todos y se apaga para
+  volver a editar.
 - **Al cerrar**:
   - `npm run build` pasa y cada archivo tocado está revisado;
   - un lugar por PR, con capturas y el link al punto (lo pide `CONTRIBUTING.md`).
+
+## Fiel y actual
+
+- **Cada número sale de una fuente, con su fecha.** La hoja de medidas (paso 2) dice de dónde sale
+  cada medida y cada color; en una calle, cada registro del inventario trae su `source`. Lo que se
+  estima a ojo se dice.
+- **Lo más actual que haya.** Las fuentes se ordenan por fecha y manda la más nueva:
+  `mapillary.py` ya elige las más recientes, Commons trae la fecha de cada foto y Street View la
+  muestra en la esquina. Si lo más nuevo tiene años, se usa igual y su fecha va a las fuentes:
+  **no se detiene el trabajo ni se pregunta por eso**.
+- **Contar y medir, no parecer.**
+  - vanos, pisos, columnas y letreros **contados** en la foto;
+  - alturas **medidas** con una escala en el mismo plano;
+  - anchos y fondos del satélite (0,25 m por pixel);
+  - metas: planta y frentes ±0,5 m, alturas ±0,3 m, los conteos exactos, los colores de la foto
+    más nueva con luz pareja.
+- **Comparar desde el mismo punto y con el mismo lente** (`__mp.shotPhoto`, paso 6), **tramo por
+  tramo**: una fachada o una cuadra comparada antes de seguir con la siguiente. Comparar todo al
+  final deja los errores para el final.
+- **Lo que el kit no sabe hacer se agrega al kit** (paso 4): "parecido, porque la familia no tiene
+  esa pieza" no vale.
 
 ## 1. Investigar
 
@@ -130,11 +165,28 @@ curl -s -A "$UA" "https://commons.wikimedia.org/w/api.php?action=query&generator
    - detalles (capiteles, puertas, rejas);
    - espacios que se caminan (pasajes, patios);
    - de noche y aéreas.
-3. Anotar autor, fecha y licencia: las fotos viejas pueden mostrar colores o anexos que ya no
-   están.
+3. Anotar autor, fecha y licencia. Manda la más nueva: las viejas pueden mostrar colores o
+   anexos que ya no están.
 
-**Recorrer la calle (Street View y Mapillary)**, con el navegador del agente, para entender el
-lugar como lo ve quien camina por ahí:
+**Fotos a pie de calle (Mapillary)**, CC BY-SA 4.0: **de estas sí** se sacan colores, tipologías
+(portal, pisos, balcones), letreros, postes y luminarias, con el crédito en las fuentes. Cubre casi
+todo el centro de Guayaquil y las avenidas de las ciudadelas, a veces con varias pasadas por
+calle.
+
+```bash
+MAPILLARY_TOKEN=… uv run .agents/skills/model-place/scripts/street/mapillary.py <lugar> x0 x1 medio
+```
+
+- Baja, por cada tramo de 20 m y cada lado que muestran, las **más nuevas**. De cada una da dónde
+  se tomó, hacia dónde mira, su lente, la fecha y el autor. Arma la hoja de contactos
+  (`mapillary.html` en el caché), con la cámara de cada foto lista para `__mp.shotPhoto`.
+- Necesita un token gratis en `MAPILLARY_TOKEN` (cómo sacarlo: `defaults.json` →
+  `mapillary.tokenHelp`); nunca va al repo.
+- Sin token, a mano en `https://www.mapillary.com/app/?lat=LAT&lng=LON&z=18`: clic en la secuencia
+  más cercana.
+
+**Recorrer la calle (Street View)**, con el navegador del agente, para entender el lugar como lo ve
+quien camina por ahí y ver qué cambió desde las fotos abiertas:
 
 - **Google Street View**:
   - abrir `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=LAT,LON&heading=RUMBO&pitch=0&fov=80`
@@ -143,12 +195,9 @@ lugar como lo ve quien camina por ahí:
     la carpeta temporal;
   - **solo para mirar**: sirve para saber qué fachadas buscar en fuentes abiertas, entender
     volúmenes y retiros, ver qué cambió y decidir desde dónde tomar las fotos propias.
-- **Mapillary**:
-  - abrir `https://www.mapillary.com/app/?lat=LAT&lng=LON&z=18` y hacer clic en la secuencia más
-    cercana; cubre casi todo el centro de Guayaquil, a veces con varias pasadas por calle;
-  - sus imágenes son CC BY-SA 4.0, así que **de estas sí** se pueden sacar colores, tipologías
-    (portal, pisos, balcones), postes y luminarias, con el crédito en las fuentes;
-  - con token (gratis), su API da las imágenes y los objetos detectados por coordenadas.
+- Si Street View es más nuevo que las fotos abiertas y muestra otra cosa (un local que cambió,
+  una fachada pintada), manda lo que está hoy: se anota como **estimado** con la fecha de Street
+  View, y en la comparación se dice qué foto quedó vieja.
 
 **Techo y planta (satélite de Esri)**. Muestra cúpulas, patios, lucernarios y techos que desde la
 calle no se ven. `scripts/street/satellite.py` lo endereza al marco local del lugar, con reglas en
@@ -256,8 +305,11 @@ tiene que dejar un tipo `house` paramétrico, para que la próxima sea solo conf
 
 ## 6. Comparar con las fotos
 
-Por cada foto de referencia buena, una captura **desde el mismo punto y con una lente parecida**,
-con `window.__mp.shotAt` (`references/browser.md`). Vistas mínimas:
+Por cada foto de referencia buena, una captura **desde el mismo punto y con el mismo lente**:
+`window.__mp.shotPhoto` con la cámara que escriben `mapillary.py` y `photos.py` (sin ella,
+`shotAt` y `lens`; ver `references/browser.md`). El GPS y la brújula se equivocan unos metros y unos
+grados: se afina hasta que los bordes de las fachadas calcen. **Tramo por tramo**, no todo al
+final. Vistas mínimas:
 - la esquina principal;
 - cada fachada distinta;
 - lo que se camina;
@@ -278,6 +330,7 @@ medidas. Como vara:
 |---|---|---|
 | Palacio | ~0,66 ms | 7,9 MB |
 | 9 de Octubre entera | ~0,45 ms | ~26 MB |
+| Principal de la Alborada | ~0,4 × la 9 de Octubre | 8,6 MB + ~6 MB del atlas de letreros |
 
 Una casa tiene que costar una fracción de eso.
 
@@ -307,13 +360,17 @@ las capturas no mostraban. Verificar cada hallazgo, corregir y volver a mirar en
 
 ## Calles y zonas
 
-Una calle es muchos edificios, y no se modela cada uno como el Palacio. El flujo completo, con
-los scripts, está en `references/street-pipeline.md`. En corto:
+Una calle se modela **con cada uno de sus edificios**. Cada uno lleva su planta, sus pisos, sus vanos
+contados, sus alturas, sus colores, sus letreros y su retiro, medidos en fotos (las más nuevas) y
+en el satélite. Las familias de fachada (`downtown.ts`) son la herramienta para armarlos, no una
+excusa para dejarlos parecidos. Si un edificio tiene algo que su familia no sabe hacer, se agrega
+a la familia, con su config, o el edificio se modela aparte como ícono. El flujo completo, con los
+scripts, está en `references/street-pipeline.md`. En corto:
 
 1. **Inventario**: recorrer la calle y clasificar cada frente:
    - **ícono**: se modela aparte, como el Palacio (la iglesia, la Columna);
-   - **fachada típica**: un registro del inventario sobre una familia de fachada;
-   - **relleno**: el edificio genérico de los datos basta.
+   - **edificio de la calle**: un registro del inventario, con sus medidas y su `source`;
+   - **detrás**: lo que no da a la calle ni se ve desde ella queda como el edificio de los datos.
 2. **Las fuentes en `config/streets/<calle>/`**:
    - `spec.json`: el eje, las cuadras y la caja de OSM;
    - `inventory.json`: un edificio por registro;
@@ -321,5 +378,23 @@ los scripts, está en `references/street-pipeline.md`. En corto:
 3. **`build_street.py`** arma `config/streets/<calle>.json`. Lo continuo (veredas, faroles,
    árboles, bancas) sale de reglas en la cabecera del mismo archivo.
 4. **Presupuesto** en ms y MB antes de empezar, y medir cada tramo.
-5. **Por tramos**: una cuadra terminada y comparada antes de pasar a la siguiente.
+5. **Por tramos**: una cuadra terminada y **comparada** (`shotPhoto`) antes de pasar a la siguiente.
 6. **Al cerrar**, `build_street.py <calle> --check` tiene que coincidir.
+
+## En paralelo (si el agente puede lanzar subagentes)
+
+Lo que más tarda, investigar e inventariar, se reparte bien. Lo que usa el juego, no.
+
+| Qué | Cómo se reparte |
+|---|---|
+| Investigar e inventariar | Un subagente por tramo (100–150 m de un lado de la calle) o por fachada de un edificio. Trabaja con `mapillary.py`, `photos.py` y el satélite, sin navegador. Escribe su parte del inventario, con cada `source`, y su hoja de medidas en `pipeline/.cache/streets/<calle>/tramos/<tramo>.json`. El agente principal las junta en `inventory.json` y cuida que los nombres de estilos sean los mismos |
+| Piezas nuevas del kit | Primero el agente principal fija la interfaz y las claves de config. Después va un subagente por pieza, cada una en su archivo; si no, chocan en `street.ts` y `monuments.ts` |
+| La revisión | Un revisor por tema, en paralelo: el generador, la geometría, la física, la config (nada hardcodeado ni prestado) y la luz |
+| **No se reparte** | Lo que usa el juego: capturas, `probe`/`walk`, transectos y, sobre todo, la GPU. Todos comparten la misma: se mide con un solo agente y sin otras pestañas del juego abiertas |
+
+- Cada subagente recibe su tramo, "Fiel y actual", el formato del inventario
+  (`street-pipeline.md`, sección 6) y dónde escribir. Devuelve también lo que no pudo medir.
+- **Un solo servidor de dev, en su fase**: mientras alguien edita `src/` o `config/`, nadie prueba en
+  el juego, porque la página recarga. Para probar en paralelo, cada agente trabaja en su worktree
+  con su puerto. `public/world` no está en git: se enlaza (`ln -s`) desde el repo principal.
+- Cada agente que use el navegador necesita su propia instancia.

@@ -91,8 +91,9 @@ parterre, las filas que lo encuentran traen dos columnas más, sus bordes: `[x, 
 material, parterre desde, parterre hasta]`. Se mide con `scripts/browser/helpers.js` →
 `transects` (ver `browser.md`).
 
-**Fuera de git**, en el caché del pipeline (`pipeline/.cache/streets/<nombre>/`): `osm.json` y
-las imágenes de `plan.py` y `satellite.py`.
+**Fuera de git**, en el caché del pipeline (`pipeline/.cache/streets/<nombre>/`): `osm.json`, las
+imágenes de `plan.py` y `satellite.py`, y las fotos con sus hojas de contactos (`mapillary.py`,
+`photos.py`).
 
 ## 3. Los scripts (`scripts/street/`, se corren desde la raíz del repo con `uv run`)
 
@@ -105,6 +106,8 @@ las imágenes de `plan.py` y `satellite.py`.
 | `build_street.py <calle> --check` | Dice si el archivo del juego coincide con sus fuentes (sale con 1 si no) | igual | nada |
 | `plan.py <calle>` | Planos por tramos, hasta la última cuadra de `blocks`: edificios de los datos (con su alto), huellas de OSM, vías y parques, con reglas | spec, OSM, datos del mundo | `plan_*.png` (caché) |
 | `satellite.py <lugar> x0 x1 medio` | Satélite enderezado al marco, con reglas en m (calle, monumento o `lat,lon,rumbo`) | spec o `config/game.json` | `sat_*.png` (caché) |
+| `mapillary.py <lugar> x0 x1 medio` | Las fotos de Mapillary más nuevas por tramo y lado, con su cámara (posición, rumbo, lente), fecha y autor (necesita `MAPILLARY_TOKEN`) | spec o `config/game.json` | `mapillary/`, `mapillary.json`, `mapillary.html` (caché) |
+| `photos.py <lugar> <carpeta>` | Las fotos propias con su EXIF: dónde, hacia dónde, lente y fecha, en el marco del lugar | las fotos (no las copia) | `photos/`, `photos.json`, `photos.html` (caché) |
 
 Los parámetros (umbrales, anchos por defecto, qué se pide a OSM, estilos de los planos) están en
 `scripts/street/defaults.json`; ninguno está escrito en el código. Todos necesitan los datos del
@@ -117,7 +120,9 @@ Antes de empezar: el juego corre con `npm run dev` y el agente tiene un navegado
 controlar.
 
 1. **Recorrer y decidir el tramo.**
-   - Mirar la calle entera: Street View solo para mirar, Mapillary y Commons como fuentes.
+   - Bajar las fotos: `mapillary.py <calle> x0 x1 40` (las más nuevas de cada tramo y lado) y, si
+     hay, las propias con `photos.py`. Mirar la calle entera en sus hojas de contactos; Street View
+     solo para mirar y ver qué cambió.
    - Marcar los íconos, que se modelan aparte como el Palacio (ver `SKILL.md`).
    - Fijar un presupuesto (ms de GPU y MB) antes de modelar.
 2. **`spec.json`**: el eje, la caja de OSM y `headFrom`. Para `axis`, dos puntos sobre el eje de
@@ -134,9 +139,13 @@ controlar.
    - Con `satellite.py <calle> x0 x1 40` por tramos, afinar cada esquina al medio metro y
      anotarla en `blocks`, con los nombres de las calles.
 6. **El inventario.** `plan.py` y `build_street.py --report` muestran qué huellas de OSM dan a la
-   calle en cada cuadra. Recorriendo la calle, anotar cada edificio en `inventory.json`:
-   - su frente aproximado (`s`), en metros desde el origen (los planos traen reglas);
-   - nombre, pisos, estilo y colores (`set`).
+   calle en cada cuadra. Con las fotos del tramo (las más nuevas) y el satélite, anotar cada
+   edificio en `inventory.json`:
+   - su frente (`s`, o `x` exacto), en metros desde el origen (los planos y la hoja de contactos
+     traen la x de cada foto);
+   - nombre, pisos, estilo y lo que lo hace **ese** edificio (`set`): vanos contados, alturas
+     medidas, colores, letreros, retiro;
+   - `source`: de qué fotos (id y fecha) y medidas sale el registro, o "estimado" y por qué.
 
    Primero una cuadra, completa y comparada, y después la siguiente.
 7. **Armar.** `build_street.py <calle>` escribe `config/streets/<calle>.json`. Revisar lo que
@@ -152,7 +161,9 @@ controlar.
      la calle; se ve al recargar, sin correr nada.
    - Lo de cada edificio (pisos, estilo, `set`, huellas) se cambia en `inventory.json` y se
      vuelve a correr `build_street.py`.
-   - Comparar con fotos desde el mismo punto (`browser.md` → capturas y `assets/compare.html`).
+   - Comparar cada cuadra con sus fotos desde el mismo punto y con el mismo lente
+     (`__mp.shotPhoto`, `browser.md` → capturas, y `assets/compare.html`) antes de pasar a la
+     siguiente.
 10. **Cerrar.**
     - `build_street.py <calle> --check`: el archivo del juego tiene que coincidir con sus fuentes.
     - Medir el costo (`browser.md` → GPU y memoria) y hacer la revisión de `pitfalls.md`.
@@ -185,6 +196,7 @@ Un registro por edificio, en una línea:
 | `side` | `N` o `S` (el lado de `blocks`) |
 | `s` | `[desde, hasta]`: el frente aproximado, en m a lo largo del eje. Alcanza con la precisión de un recorrido: el script corre todo el inventario de la cuadra hasta calzar los límites con las huellas de OSM |
 | `name` | Nombre legible; de él sale el `id` |
+| `source` | De dónde salen sus datos: las fotos (id de Mapillary, archivo propio) con su fecha, la cinta, el satélite, o "estimado" y por qué. El script no lo usa: es para quien revisa y para la próxima vez |
 | `floors` | Pisos sobre la planta baja |
 | `style` | Una familia de `styles` en la cabecera (ver la sección 7) |
 | `set` | Retoques del estilo solo para este edificio (mismas claves que `defaults`/`styles`: `portal`, `facade`, `crown`, `colors`…) |
@@ -203,9 +215,14 @@ Un registro por edificio, en una línea:
 | `signs` | Letreros: `[{text, size: [ancho, alto], y, color, background, …}]`. Van en el frente a la avenida salvo `edge`; `out` y `depth` salen de `defaults.json` → `signs`. Los campos, en `DowntownSign` (`src/world/downtown.ts`). Solo nombres de negocios: ni teléfonos ni propaganda política |
 
 **De dónde salen pisos y colores.**
-- Mejor: fotos propias, Mapillary o Commons, con su crédito en `sources`.
+- Mejor: fotos propias, Mapillary o Commons, **las más nuevas**, con su crédito en `sources`.
 - Si solo se pudo estimar mirando Street View (como buena parte de la 9 de Octubre), vale como
-  **estimado**: se dice en `source` del inventario y no se copia ninguna imagen.
+  **estimado**: se dice en `source` del registro (y del inventario) y no se copia ninguna imagen.
+
+**Lo que el script valida.** Antes de armar, `build_street.py` revisa cada registro: claves que no
+existen (una mal escrita o mal anidada se perdería sin aviso), lo que le falta a un lote o a un
+letrero, estilos que la cabecera no tiene, tramos al revés. Si algo falla, lo dice todo junto y no
+escribe nada.
 
 **Íconos dentro de una calle.** Un edificio que la gente reconoce por sí mismo (una iglesia, la
 Casa de la Cultura, la Corte) no va al inventario:
@@ -297,7 +314,8 @@ ajusta el cordón a los transectos, sale una recta absurda: `build_street.py` av
   el plano: suele faltarle `osm`, o su `s` está corrido.
 - **`!! cuadra …: la recta del cordón …`**: ver la sección 9. Si solo la tuercen unas filas
   (una entrada a un parqueadero), probar con `settings.curb.outlier`.
-- **`el retiro trae […]`**: lo que cambia del estilo del retiro va dentro de su `set`.
+- **`El inventario tiene problemas`**: la lista dice, por registro, qué clave sobra o qué falta.
+  Lo que cambia del estilo de un retiro va dentro de su `set`.
 - **`!! fuera de las cuadras`**: el medio de ese registro no cae en ninguna cuadra de su lado (ni a
   menos de `footprints.match` m de una punta): corregir su `s` o `x`, o agregar la cuadra.
 - **`Retiro …: … tiene que ser mayor que 0`** (al cargar el juego): un largo del estilo del retiro

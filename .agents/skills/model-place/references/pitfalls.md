@@ -60,6 +60,13 @@ Por eso, antes de dar un lugar por terminado:
 - Si la subida viene de un bulto del relieve (edificios altos que el modelo de elevación ve como
   suelo), se corrige en el pipeline con una zona plana (`terrain.flatZones`), no en el lugar.
 
+**Fidelidad**
+- Cada edificio comparado con su foto más nueva **desde el mismo punto y con el mismo lente**
+  (`shotPhoto`). Los conteos (vanos, pisos, columnas, locales) dan igual que en la foto.
+- Cada registro del inventario con su `source`, y las fechas de las fotos en `sources`.
+- Letreros: solo nombres de negocios. Ni teléfonos (son datos de alguien) ni propaganda política
+  (partidaria, y queda vieja en meses).
+
 **Cierre**
 - La consola del juego sin errores.
 - `npm run build` pasa.
@@ -93,6 +100,10 @@ Por eso, antes de dar un lugar por terminado:
   el piso más alto. Para probar un portal, se entra caminando desde afuera.
 - **Un jugador que no camina** en ninguna dirección: apareció dentro de un auto estacionado, o la
   pestaña está en segundo plano. Correr el punto de partida o traer la pestaña al frente.
+- **Nada calzaba con la foto** aunque la cámara estaba en su punto: la foto de Mapillary abarcaba
+  86° y el juego 58°. Igualar el lente (`shotPhoto` o `lens`).
+- **Los transectos se perdían a medio medir**: se editaba `config/` con el servidor prendido y la
+  página recargaba. Servidor apagado mientras se escribe; se mide sin tocar nada.
 
 **Geometría**
 - **Paredes interiores de un pasaje que asomaban por la fachada**: su origen tiene que ser el
@@ -136,9 +147,32 @@ Por eso, antes de dar un lugar por terminado:
 - **En el satélite, los edificios altos se ven inclinados**: el techo aparece corrido respecto de
   la base. Las huellas y los frentes se miden donde el edificio toca el suelo, no en el techo.
 - **La recta del cordón de una cuadra que no es calle** (un bulevar peatonal, una plaza) sale
-  absurda. `build_street.py` avisa; ver `street-pipeline.md`, sección 8.
+  absurda. `build_street.py` avisa; ver `street-pipeline.md`, sección 9.
 - **Un lugar que se renovó hace poco** (la Plaza San Francisco, diciembre de 2025): buscar
   noticias de la obra antes de dar por buenas fotos viejas.
+
+**Calles**
+- **Los ajustes de los retiros no llegaban al juego** (rejas, entradas, palmeras): el script
+  anidaba su `set` dos veces, y `--check` coincidía igual, porque compara el archivo consigo
+  mismo. Hoy la validación del inventario ataja las claves que sobran; aun así, mirar en el juego
+  que cada ajuste se ve.
+- **Edificios y lotes armados dos veces**: un registro exacto (`x` + `z`) o un lote cerca del
+  límite entre dos cuadras salía en las dos. Las caras se peleaban y una reja quedaba en medio de
+  la vereda de la cuadra vecina. Hoy cada registro va a una sola cuadra; si aparece un id
+  terminado en `-2`, revisar.
+- **Un letrero tapado por la caja genérica de los locales**: la familia pone, con `shops.sign`,
+  una caja de color a la altura del letrero de cada local. Un letrero propio a esa altura va con
+  `"shops": {"sign": [0, 0, 0]}`.
+- **Autos y maceteros en las entradas de los parqueaderos**, y palmeras donde se estaciona: el
+  carril, el mobiliario y las palmeras respetan las entradas (`gaps`) y las líneas de los
+  puestos. Mirarlo en el juego igual.
+- **La capilla de la Alborada era blanca en las fotos de 2023 y hoy es de ladrillo**: manda lo más
+  nuevo que haya (Street View, fotos propias), y se anota qué foto quedó vieja.
+- **Comparar al final**: en la Alborada se modelaron los 570 m antes de comparar, y los errores
+  aparecieron todos al final. Se compara cuadra por cuadra.
+- **Una calzada de los datos que no es la real** (el parterre de la Alborada: ~6 m en el juego y
+  ~2 m de verdad): la calzada sale de OSM y no se arregla desde la calle. Se anota como pendiente
+  de los datos de vías.
 
 **Herramientas**
 - **Prettier reformateó un archivo entero**: el proyecto no usa formateador; no correr ninguno.
