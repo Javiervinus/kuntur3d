@@ -3,11 +3,19 @@ import type { GameConfig } from '../core/types';
 
 type PatternsConfig = GameConfig['monuments']['patterns'];
 
+/** Atlas vacío mientras no hay letreros (1×1 transparente). */
+function noSigns(): THREE.DataTexture {
+  const t = new THREE.DataTexture(new Uint8Array(4), 1, 1);
+  t.needsUpdate = true;
+  return t;
+}
+
 /**
  * Uniformes de los dibujos procedurales de los monumentos (ver world/monumentParts.ts →
- * PATTERN), sacados de config/game.json → monuments.patterns.
+ * PATTERN), sacados de config/game.json → monuments.patterns, y el atlas de los letreros de las
+ * calles modeladas (render/signAtlas.ts).
  */
-export function patternUniforms(cfg: PatternsConfig): Record<string, THREE.IUniform> {
+export function patternUniforms(cfg: PatternsConfig, signs: THREE.Texture = noSigns()): Record<string, THREE.IUniform> {
   const s = cfg.stucco;
   const f = cfg.scales;
   const sh = cfg.shutter;
@@ -17,6 +25,10 @@ export function patternUniforms(cfg: PatternsConfig): Record<string, THREE.IUnif
   const pv = cfg.pavers;
   const br = cfg.bars;
   const bl = cfg.balusters;
+  const sl = cfg.slabs;
+  const so = cfg.soil;
+  const rt = cfg.roofTiles;
+  const ho = cfg.hoops;
   return {
     uStucco: { value: new THREE.Vector4(s.blotch, s.contrast, s.grain, s.grainBump) },
     uStreaks: { value: new THREE.Vector4(s.streaks.width, s.streaks.length, s.streaks.contrast, s.streaks.threshold) },
@@ -32,6 +44,15 @@ export function patternUniforms(cfg: PatternsConfig): Record<string, THREE.IUnif
     uPaversTone: { value: new THREE.Vector2(pv.variation, pv.bump) },
     uBars: { value: new THREE.Vector2(br.spacing, br.width) },
     uBalusters: { value: new THREE.Vector4(bl.spacing, bl.width, bl.plinth, bl.neck) },
+    uSigns: { value: signs },
+    uHoops: { value: new THREE.Vector3(ho.radius, ho.spacing, ho.width) },
+    uSlabs: { value: new THREE.Vector4(sl.size[0], sl.size[1], sl.joint, sl.jointShade) },
+    uSlabsTone: { value: new THREE.Vector4(sl.variation, sl.grainScale, sl.grain, sl.bump) },
+    uSoil: { value: new THREE.Vector4(so.patch, so.share, so.grainScale, so.grain) },
+    uSoil2: { value: new THREE.Vector2(so.edge, so.bump) },
+    uSoilGrass: { value: new THREE.Color(so.grass) },
+    uRoofTiles: { value: new THREE.Vector4(rt.size[0], rt.size[1], rt.lap, rt.variation) },
+    uRoofTiles2: { value: new THREE.Vector3(rt.lapShade, rt.crest, rt.bump) },
     uPatternBump: { value: cfg.bump },
     uAoSpecular: { value: cfg.aoSpecular },
   };
@@ -88,6 +109,15 @@ uniform vec4 uPavers;
 uniform vec2 uPaversTone;
 uniform vec2 uBars;
 uniform vec4 uBalusters;
+uniform sampler2D uSigns;
+uniform vec3 uHoops;
+uniform vec4 uSlabs;
+uniform vec4 uSlabsTone;
+uniform vec4 uSoil;
+uniform vec2 uSoil2;
+uniform vec3 uSoilGrass;
+uniform vec4 uRoofTiles;
+uniform vec3 uRoofTiles2;
 uniform float uPatternBump;
 uniform float uAoSpecular;
 varying float vGyeAo;
@@ -96,6 +126,8 @@ varying vec3 vGyeWorld;
 varying float vGyeFoot;
 varying float vGyeTone;
 float gyeMask = 1.0;
+// Color de la luz propia además del de la pieza (un letrero se enciende del color de sus letras).
+vec3 gyeGlowTint = vec3( 1.0 );
 
 float gyeHash3( vec3 p ) {
   p = fract( p * 0.3183099 + 0.1 );
@@ -219,6 +251,56 @@ vec4 gyePattern( vec3 d, vec3 w ) {
     gyeMask = max( min( solid, 1.0 ), step( x, r ) );
     float turned = sqrt( max( 1.0 - ( x * x ) / max( r * r, 1e-6 ), 0.0 ) );
     return vec4( vec3( mix( 0.7 + 0.3 * turned, 1.0, min( solid, 1.0 ) ) ), 0.0 );
+  }
+  if ( kind == 10 ) {
+    // Letrero: su pedazo del atlas de letreros (las uv van en el atlas). El alfa es cuánto se
+    // enciende de noche (las letras más que el fondo), y se enciende de su color.
+    vec4 t = texture2D( uSigns, d.xy );
+    gyeMask = t.a;
+    gyeGlowTint = t.rgb;
+    return vec4( t.rgb, 0.0 );
+  }
+  if ( kind == 11 ) {
+    // Cerca de arquitos (uv en m, v desde el pie): un arco de media vuelta cada tanto, montados
+    // unos sobre otros; lo demás es hueco (con GYE_CUTOUT).
+    float k0 = floor( d.x / uHoops.y );
+    float hit = 0.0;
+    for ( int i = -1; i <= 2; i++ ) {
+      float r = length( vec2( d.x - ( k0 + float( i ) ) * uHoops.y, d.y ) );
+      hit = max( hit, 1.0 - step( uHoops.z * 0.5, abs( r - uHoops.x ) ) );
+    }
+    gyeMask = hit * step( 0.0, d.y );
+    return vec4( vec3( 1.0 ), 0.0 );
+  }
+  if ( kind == 12 ) {
+    // Losas de hormigón (calzadas, parqueaderos): juntas rectas y hundidas, cada losa con su tono
+    // y un grano fino.
+    vec2 cell = d.xy / uSlabs.xy;
+    vec2 g = abs( fract( cell ) - 0.5 ) * uSlabs.xy;
+    vec2 edge = uSlabs.xy * 0.5 - g;
+    float joint = 1.0 - smoothstep( uSlabs.z * 0.5, uSlabs.z, min( edge.x, edge.y ) );
+    float tone = 1.0 + ( gyeHash3( vec3( floor( cell ), 12.0 ) ) - 0.5 ) * uSlabsTone.x;
+    float grain = 1.0 + ( gyeNoise3( w / uSlabsTone.y ) - 0.5 ) * uSlabsTone.z;
+    return vec4( vec3( tone * grain * ( 1.0 - joint * uSlabs.w ) ), -joint * uSlabsTone.w );
+  }
+  if ( kind == 13 ) {
+    // Tierra con hierba (parterres, jardineras): manchas de pasto (el color de la pieza por el
+    // tinte del pasto) sobre la tierra, con su grano.
+    float n = gyeNoise3( w / uSoil.x ) * 0.6 + gyeNoise3( w / ( uSoil.x * 0.31 ) ) * 0.4;
+    float grass = smoothstep( 1.0 - uSoil.y - uSoil2.x, 1.0 - uSoil.y + uSoil2.x, n );
+    float grain = gyeNoise3( w / uSoil.z );
+    return vec4( mix( vec3( 1.0 ), uSoilGrass, grass ) * ( 1.0 + ( grain - 0.5 ) * uSoil.w ), grain * uSoil2.y );
+  }
+  if ( kind == 14 ) {
+    // Teja criolla (uv en m: u a lo ancho del faldón, v bajando por la pendiente): canales de
+    // media caña, más claros en la cresta; cada hilera monta sobre la de abajo con su sombra, y
+    // cada teja con su tono.
+    vec2 cell = d.xy / uRoofTiles.xy;
+    float crest = sin( fract( cell.x ) * 3.14159 );
+    float lap = smoothstep( 0.0, uRoofTiles.z, fract( cell.y ) );
+    float tone = 1.0 + ( gyeHash3( vec3( floor( cell ), 14.0 ) ) - 0.5 ) * uRoofTiles.w;
+    float shade = ( 1.0 - uRoofTiles2.y + uRoofTiles2.y * crest ) * mix( 1.0 - uRoofTiles2.x, 1.0, lap );
+    return vec4( vec3( tone * shade ), crest * uRoofTiles2.z );
   }
   return vec4( 1.0, 1.0, 1.0, 0.0 );
 }

@@ -3021,7 +3021,63 @@
         "width": 0.22,
         "plinth": 0.14,
         "neck": 0.62
+      },
+      "hoops": {
+        "radius": 0.42,
+        "spacing": 0.42,
+        "width": 0.035
+      },
+      "slabs": {
+        "size": [
+          3.6,
+          3
+        ],
+        "joint": 0.03,
+        "jointShade": 0.45,
+        "variation": 0.1,
+        "grainScale": 0.35,
+        "grain": 0.1,
+        "bump": 0.003
+      },
+      "soil": {
+        "patch": 1.6,
+        "share": 0.45,
+        "edge": 0.1,
+        "grainScale": 0.08,
+        "grain": 0.25,
+        "bump": 0.01,
+        "grass": "#86a864"
+      },
+      "roofTiles": {
+        "size": [
+          0.22,
+          0.36
+        ],
+        "lap": 0.12,
+        "variation": 0.18,
+        "lapShade": 0.35,
+        "crest": 0.3,
+        "bump": 0.02
       }
+    },
+    "signs": {
+      "size": [
+        2048,
+        1024
+      ],
+      "pixelsPerMeter": 56,
+      "maxPixels": [
+        2000,
+        160
+      ],
+      "padding": 4,
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "fill": 0.62,
+      "margin": 0.06,
+      "backgroundGlow": 0.3,
+      "anisotropy": 8,
+      "offset": 0.01
     },
     "flood": {
       "color": "#ffdcae",

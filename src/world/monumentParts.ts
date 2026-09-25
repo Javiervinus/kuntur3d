@@ -27,10 +27,27 @@ export const NO_GLOW = new THREE.Color(0, 0, 0);
  * Dibujos procedurales de la superficie (los pinta el material de los monumentos con las uv de la
  * pieza, en metros): el revoque con su mancha de humedad, las escamas de una cúpula, una cortina
  * metálica enrollable, un piso de terrazo, baldosas, la carpintería de una ventana (sus uv van en
- * hojas: una junta en cada entero), adoquines de vereda en hileras trabadas, y los barrotes o
- * balaustres de una baranda (solo con el material con recorte).
+ * hojas: una junta en cada entero), adoquines de vereda en hileras trabadas, los barrotes o
+ * balaustres de una baranda y la cerca de arquitos (solo con el material con recorte), un
+ * letrero (sus uv van en el atlas de letreros), losas de hormigón, tierra con hierba y teja.
  */
-export const PATTERN = { none: 0, stucco: 1, scales: 2, shutter: 3, terrazzo: 4, tiles: 5, glazing: 6, pavers: 7, bars: 8, balusters: 9 } as const;
+export const PATTERN = {
+  none: 0,
+  stucco: 1,
+  scales: 2,
+  shutter: 3,
+  terrazzo: 4,
+  tiles: 5,
+  glazing: 6,
+  pavers: 7,
+  bars: 8,
+  balusters: 9,
+  sign: 10,
+  hoops: 11,
+  slabs: 12,
+  soil: 13,
+  roofTiles: 14,
+} as const;
 
 /** El dibujo con ese nombre (de la config); un nombre que no existe es un error, no una pieza lisa. */
 export function patternOf(name: string): number {
