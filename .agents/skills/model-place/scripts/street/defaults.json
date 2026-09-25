@@ -69,5 +69,32 @@
     "roadWidth": 2,
     "shade": { "light": 235, "perMeter": 2.2, "dark": 60 },
     "colors": { "park": [205, 238, 205], "road": [160, 160, 160], "data": [30, 30, 140], "osm": [230, 90, 0], "rule": [255, 0, 0], "label": [0, 0, 0], "paper": [255, 255, 255] }
+  },
+  "mapillary": {
+    "api": "https://graph.mapillary.com/images",
+    "app": "https://www.mapillary.com/app/?pKey={id}&focus=photo",
+    "tokenEnv": "MAPILLARY_TOKEN",
+    "tokenHelp": "gratis: https://www.mapillary.com/dashboard/developers → Register application → Client Token",
+    "fields": ["id", "captured_at", "compass_angle", "computed_compass_angle", "geometry", "computed_geometry", "camera_type", "camera_parameters", "width", "height", "is_pano", "on_foot", "quality_score", "creator", "thumb_2048_url"],
+    "thumb": "thumb_2048_url",
+    "panoTypes": ["equirectangular", "spherical"],
+    "step": 100,
+    "limit": 2000,
+    "bin": 20,
+    "perBin": 3,
+    "side": 45,
+    "staleYears": 3,
+    "height": { "foot": 1.6, "vehicle": 2.2, "unknown": 2.0 },
+    "pause": 0.2,
+    "timeout": 60
+  },
+  "photos": {
+    "extensions": [".jpg", ".jpeg", ".heic", ".heif", ".png"],
+    "diagonal": 43.27,
+    "height": 1.6,
+    "side": 45,
+    "staleYears": 3,
+    "thumb": 1024,
+    "quality": 85
   }
 }
