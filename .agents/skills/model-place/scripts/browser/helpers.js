@@ -92,7 +92,10 @@
   /**
    * Transectos de la calzada a lo largo del eje, de `from` a `to` (settings.json → transects): en
    * cada x, el tramo de calzada que cruza el eje más cerca de él → [x, z desde, z hasta, material]
-   * (nulls si no hay). Es config/streets/<nombre>/transects.json.
+   * (nulls si no hay). En una avenida de doble calzada (`median` > 0), si del otro lado queda la
+   * otra calzada, separada por a lo sumo `median` m de algo que no es calzada (el parterre), la
+   * fila va de borde a borde de las dos y lleva el parterre al final: [x, z desde, z hasta,
+   * material, parterre desde, parterre hasta]. Es config/streets/<nombre>/transects.json.
    */
   const transects = async (place, from, to, o) => {
     const L = frame(place);
@@ -114,14 +117,22 @@
         if (m !== prev) runs.push([+z.toFixed(2), m]);
         prev = m;
       }
+      const roads = runs
+        .map(([a, m], i) => ({ a, b: i + 1 < runs.length ? runs[i + 1][0] : o.half, m }))
+        .filter((r) => road.has(r.m));
       let best = null;
-      runs.forEach(([a, m], i) => {
-        const b = i + 1 < runs.length ? runs[i + 1][0] : o.half;
-        if (!road.has(m) || b <= -o.carriageway || a >= o.carriageway) return;
-        const d = Math.abs((a + b) / 2);
-        if (!best || d < best.d) best = { a, b, m, d };
-      });
-      rows.push(best ? [x, best.a, best.b, best.m] : [x, null, null, null]);
+      for (const r of roads) {
+        if (r.b <= -o.carriageway || r.a >= o.carriageway) continue;
+        const d = Math.abs((r.a + r.b) / 2);
+        if (!best || d < best.d) best = { ...r, d };
+      }
+      // La otra calzada: la siguiente hacia el otro lado del eje, pasando el parterre.
+      const k = best ? roads.findIndex((r) => r.a === best.a) : -1;
+      const other = !best || !(o.median > 0) ? null : best.b <= 0 ? roads[k + 1] : best.a >= 0 ? roads[k - 1] : null;
+      const [south, north] = other ? (best.b <= 0 ? [best, other] : [other, best]) : [];
+      // Pegadas (dos materiales seguidos) no hay parterre: es una sola calzada.
+      if (other && north.a - south.b >= o.res && north.a - south.b <= o.median) rows.push([x, south.a, north.b, best.m, south.b, north.a]);
+      else rows.push(best ? [x, best.a, best.b, best.m] : [x, null, null, null]);
     }
     return rows;
   };

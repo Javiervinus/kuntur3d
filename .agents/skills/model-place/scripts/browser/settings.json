@@ -5,6 +5,7 @@
     "half": 30,
     "res": 0.25,
     "carriageway": 8,
+    "median": 0,
     "surfaces": ["paving", "asphalt", "concrete", "unpaved"],
     "teleportEvery": 200,
     "settle": 1500
