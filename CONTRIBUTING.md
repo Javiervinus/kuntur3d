@@ -34,7 +34,8 @@ npm run data   # genera el mundo desde config/region.json (necesita uv; ~15 min 
 npm run dev
 ```
 
-Los detalles de cada paso están en el [README](README.md).
+Los pasos del pipeline están descritos en
+[docs/como-funciona.md](docs/como-funciona.md#pipeline-de-datos).
 
 ### Reglas
 
