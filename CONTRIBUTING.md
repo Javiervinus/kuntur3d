@@ -9,7 +9,8 @@ Abre un [issue](../../issues/new/choose) con el formulario que corresponda:
 
 - **Un edificio o lugar está mal / agrega mi casa**: la altura, la forma, el color o el nombre no
   cuadran, o falta algo. Lo más útil es el **link al punto exacto**: en la app, `Esc` → COMPARTIR →
-  copiar link. Si puedes, suma fotos tuyas y cuántos pisos tiene.
+  copiar link. Si puedes, suma fotos tuyas recientes (los archivos originales, que traen dónde y
+  hacia dónde se tomaron) y cuántos pisos tiene.
 - **Error**: algo se rompe, se ve raro o va lento.
 - **Quiero mi ciudad**: para sumar otra ciudad.
 - **Idea**: algo que te gustaría ver.
@@ -50,9 +51,11 @@ Los detalles de cada paso están en el [README](README.md).
 
 ### Modelar un lugar
 
-Para traer con detalle un monumento, una calle o tu casa (con tus fotos), sigue el procedimiento
-de [`.agents/skills/model-place/SKILL.md`](.agents/skills/model-place/SKILL.md): investigar,
-medir, modelar, comparar con fotos desde el mismo punto y medir cuánto cuesta. Es una skill:
+Para traer con detalle un monumento, una calle con cada uno de sus edificios o tu casa (con tus
+fotos), sigue el procedimiento de
+[`.agents/skills/model-place/SKILL.md`](.agents/skills/model-place/SKILL.md): investigar con las
+fuentes más actuales, medir, modelar lo más fiel posible, comparar con fotos desde el mismo punto
+y con el mismo lente, y medir cuánto cuesta. Es una skill:
 Codex y los agentes que leen `.agents/skills` la encuentran ahí, y Claude Code por el enlace de
 `.claude/skills`. Se activa sola cuando le pides a tu agente modelar un lugar.
 
