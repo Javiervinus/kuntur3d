@@ -23,7 +23,9 @@
     ]
   },
   "roads": ["primary", "secondary", "tertiary", "residential", "pedestrian", "unclassified", "living_street", "primary_link"],
-  "curb": { "surface": "paving", "inset": 4, "minWidth": 5, "maxSlope": 0.08, "minOffset": 0 },
+  "curb": { "surface": "paving", "inset": 4, "minWidth": 5, "maxSlope": 0.08, "minOffset": 0, "outlier": null },
+  "medians": { "smooth": 5, "minLength": 20, "maxStep": 7.5 },
+  "signs": { "out": 0.2, "depth": 0.15 },
   "fronts": { "minSide": 1.5, "probe": 0.2, "start": 0.3, "length": 40, "reach": 30 },
   "candidates": { "margin": 2, "reach": 30, "front": 16, "levelHeight": 3.1, "levelBase": 2, "overlap": 0.3 },
   "footprints": {

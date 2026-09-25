@@ -13,7 +13,7 @@ datos del mundo (public/world).
   uv run .agents/skills/model-place/scripts/street/build_street.py nueve-de-octubre --report   # huellas de OSM por cuadra
   uv run .agents/skills/model-place/scripts/street/build_street.py nueve-de-octubre --frame    # su entrada de config/game.json
 
-Solo se reescriben `clear` y `blocks`: la cabecera del archivo (estilos, faroles, veredas…) se
+Solo se reescriben `clear`, `blocks` y `medians`: la cabecera del archivo (estilos, faroles, veredas…) se
 edita a mano en el mismo archivo y se conserva. Si el archivo no existe, la cabecera se copia de la
 calle que diga spec.json → headFrom.
 
@@ -89,18 +89,8 @@ class Area:
         return best[1] in ('road', 'park') and best[0] < f['reach']
 
 
-def curb_line(cfg: dict, transects: list, side: str, x0: float, x1: float) -> tuple:
-    """Recta z = a + b·x ajustada al borde de la calzada del lado `side` dentro de la cuadra."""
-    c = cfg['curb']
-    xs, zs = [], []
-    for x, zs_, zn_, m in transects:
-        if zs_ is None:
-            continue
-        if x0 + c['inset'] <= x <= x1 - c['inset'] and m == c['surface'] and (zn_ - zs_) > c['minWidth']:
-            xs.append(x)
-            zs.append(zn_ if side == 'N' else zs_)
-    if not xs:
-        raise SystemExit(f'Sin transectos de calzada ({c["surface"]}) en la cuadra {side} {x0}–{x1}: medirlos (scripts/browser/transects.js)')
+def line_fit(xs: list, zs: list) -> tuple:
+    """Recta z = a + b·x por mínimos cuadrados."""
     n = len(xs)
     mx = sum(xs) / n
     mz = sum(zs) / n
@@ -108,6 +98,63 @@ def curb_line(cfg: dict, transects: list, side: str, x0: float, x1: float) -> tu
     sxz = sum((x - mx) * (z - mz) for x, z in zip(xs, zs))
     b = sxz / sxx if sxx > 0 else 0
     return (mz - b * mx, b)
+
+
+def curb_line(cfg: dict, transects: list, side: str, x0: float, x1: float) -> tuple:
+    """Recta z = a + b·x ajustada al borde de la calzada del lado `side` dentro de la cuadra. Con
+    `curb.outlier`, mientras la fila que más se aparta de la recta lo haga más que eso (una
+    entrada de garaje, un cruce peatonal que corta la calzada), se saca y se vuelve a ajustar: de
+    a una, la peor primero, para que un par de filas muy corridas no tuerzan la recta y se lleven
+    las buenas."""
+    c = cfg['curb']
+    xs, zs = [], []
+    for x, zs_, zn_, m, *_ in transects:
+        if zs_ is None:
+            continue
+        if x0 + c['inset'] <= x <= x1 - c['inset'] and m == c['surface'] and (zn_ - zs_) > c['minWidth']:
+            xs.append(x)
+            zs.append(zn_ if side == 'N' else zs_)
+    if not xs:
+        raise SystemExit(f'Sin transectos de calzada ({c["surface"]}) en la cuadra {side} {x0}–{x1}: medirlos (scripts/browser/transects.js)')
+    a, b = line_fit(xs, zs)
+    limit = c.get('outlier')
+    while limit and len(xs) > 2:
+        worst = max(range(len(xs)), key=lambda k: abs(zs[k] - (a + b * xs[k])))
+        if abs(zs[worst] - (a + b * xs[worst])) <= limit:
+            break
+        del xs[worst], zs[worst]
+        a, b = line_fit(xs, zs)
+    return (a, b)
+
+
+def medians(cfg: dict, transects: list, x0: float, x1: float, dec: int) -> list:
+    """Parterres de una avenida de doble calzada, de las filas de los transectos que lo traen
+    (sus dos bordes): un contorno por tramo seguido (un cruce lo corta), con cada borde suavizado
+    con la mediana de `medians.smooth` filas. Los tramos de menos de `medians.minLength` m no
+    cuentan (un retorno, una fila suelta)."""
+    mc = cfg['medians']
+    rows = sorted([r for r in transects if len(r) >= 6 and r[4] is not None and x0 <= r[0] <= x1], key=lambda r: r[0])
+    runs, run = [], []
+    for r in rows:
+        if run and r[0] - run[-1][0] > mc['maxStep']:
+            runs.append(run)
+            run = []
+        run.append(r)
+    if run:
+        runs.append(run)
+    out = []
+    half = mc['smooth'] // 2
+    for run in runs:
+        if run[-1][0] - run[0][0] < mc['minLength']:
+            continue
+
+        def smooth(k: int) -> list:
+            vals = [r[k] for r in run]
+            return [sorted(vals[max(0, i - half):i + half + 1])[len(vals[max(0, i - half):i + half + 1]) // 2] for i in range(len(vals))]
+        south, north = smooth(4), smooth(5)
+        ring = [[r[0], round(z, dec)] for r, z in zip(run, south)] + [[r[0], round(z, dec)] for r, z in reversed(list(zip(run, north)))]
+        out.append({'id': f"M{run[0][0]:.0f}", 'ring': ring})
+    return out
 
 
 def data_height(game: list, poly: Polygon, share: float):
@@ -193,7 +240,7 @@ def candidates(street: Street, area: Area, game: list, transects: list) -> list:
                                'avenue': av, 'osmHeight': h, 'poly': poly, 'x': round(cx, 1)})
             chosen.sort(key=lambda q: q['x'])
             out.append({'id': f'{side}{x0:.0f}', 'side': side, 'x': [x0, x1], 'between': between,
-                        'curb': [round(a, 3), round(b, 5)], 'buildings': chosen, 'warnings': warnings})
+                        'curb': [round(a, 3), round(b, 5)], 'buildings': chosen, 'warnings': warnings, 'opts': opts})
     return out
 
 
@@ -234,6 +281,10 @@ def build(street: Street) -> dict:
     game = streetlib.game_buildings(frame, cfg['gameBuildings']['margin'])
     transects = street.read('transects.json')
     inventory = street.read('inventory.json')['buildings']
+    for t in inventory:
+        # Un registro con su tramo exacto (`x`) no necesita el aproximado.
+        if 's' not in t and 'x' in t:
+            t['s'] = t['x']
     known = {f"w{b['id']}" for b in area.blds}
     for t in inventory:
         for oid in t.get('osm', []):
@@ -259,16 +310,39 @@ def build(street: Street) -> dict:
         return {'id': c['id'] + ('a' if left else 'b'), 'ring': ring, 'avenue': avs or [0]}
 
     blocks_out, clear, used = [], [], set()
+    # Cuadras que siguen a la anterior del mismo lado (`join`): entre ellas no hay bordillo.
+    joins = {(s, block_row(r)[0]) for s, rows in street.spec['blocks'].items() for r in rows if block_row(r)[3].get('join')}
+    # Cada registro va a una sola cuadra de su lado: la que tiene su medio o, pasando las puntas,
+    # la más cercana a no más de `match` m (así un lote o un edificio en el límite no sale dos veces).
+    spans = {s: [block_row(r)[:2] for r in rows] for s, rows in street.spec['blocks'].items()}
+    home = {}
+    for t in inventory:
+        mid = (t['s'][0] + t['s'][1]) / 2
+        own = spans.get(t['side'], [])
+        inside = [b for b in own if b[0] <= mid < b[1]]
+        near = min(own, key=lambda b: min(abs(mid - b[0]), abs(mid - b[1])), default=None)
+        if inside:
+            home[id(t)] = inside[0]
+        elif near and min(abs(mid - near[0]), abs(mid - near[1])) <= fp['match']:
+            home[id(t)] = near
+        else:
+            print('!! fuera de las cuadras:', t['name'], t['s'], file=sys.stderr)
     for bl in candidates(street, area, game, transects):
         side = bl['side']
         x0, x1 = bl['x']
         a, bcoef = bl['curb']
         sgn = 1 if side == 'N' else -1
+        # Con `lane`, el bordillo real queda esos metros más afuera que la calzada de los datos: en
+        # medio, el carril de estacionamiento.
+        lane = bl['opts'].get('lane', 0)
 
-        def curb(x: float) -> float:
+        def road(x: float) -> float:
             return a + bcoef * x
 
-        table = [t for t in inventory if t['side'] == side and x0 - fp['match'] <= (t['s'][0] + t['s'][1]) / 2 <= x1 + fp['match']]
+        def curb(x: float) -> float:
+            return road(x) + sgn * lane
+
+        table = [t for t in inventory if home.get(id(t)) == (x0, x1)]
         table.sort(key=lambda t: t['s'][0])
         osm = bl['buildings']
         by_id = {c['id']: c for c in osm}
@@ -316,7 +390,13 @@ def build(street: Street) -> dict:
 
         out_b = []
         covered = []  # tramos de frente ya ocupados
+        yards = []  # retiros: (registro, x desde, x hasta, z del fondo o None, edificio)
         for t in table:
+            if t.get('lot'):
+                # Un lote sin edificio (un parqueadero): solo su retiro, del borde de la vereda a `z`.
+                x_a, x_b = t['x']
+                yards.append((t, x_a, x_b, sgn * t['z'][1], None))
+                continue
             cs = assigned[id(t)]
             if cs:
                 poly = unary_union([Polygon(c['ring']).buffer(fp['weld']) for c in cs]).buffer(-fp['weld'])
@@ -332,13 +412,15 @@ def build(street: Street) -> dict:
                     s1 = min(s1, x1 - fp['corner'])
                 for c in (c for u in table for c in assigned[id(u)]):
                     covered.append(front_iv(c)[:2])
-                for c0, c1 in covered:
+                # Con `x` y `z` el rectángulo es exacto (puede quedar detrás de otro): no se corre.
+                exact = 'x' in t and 'z' in t
+                for c0, c1 in [] if exact else covered:
                     if c0 <= s0 < c1:
                         s0 = c1
                     if c0 < s1 <= c1:
                         s1 = c0
                 # Ni encima de las huellas de OSM (de este o de los que vienen después).
-                for c in (c for u in table for c in assigned[id(u)]):
+                for c in [] if exact else (c for u in table for c in assigned[id(u)]):
                     c0, c1, _ = front_iv(c)
                     if c0 < s1 and c1 > s0:
                         if c0 > s0:
@@ -348,8 +430,9 @@ def build(street: Street) -> dict:
                 if s1 - s0 < fp['minFront']:
                     print('!! sin lugar para', t['name'], t['s'], file=sys.stderr)
                     continue
-                zf = line_z((s0 + s1) / 2)
-                depth = t.get('depth', fp['depth'])
+                # Frente y fondo: los del registro (`z`, en m desde el eje) o la línea de fachada.
+                zf = sgn * t['z'][0] if 'z' in t else line_z((s0 + s1) / 2)
+                depth = t['z'][1] - t['z'][0] if 'z' in t else t.get('depth', fp['depth'])
                 pts = [[round(p[0], dec), round(p[1], dec)] for p in [[s0, zf], [s1, zf], [s1, zf + sgn * depth], [s0, zf + sgn * depth]]]
                 covered.append((s0, s1))
             fr = fronts_of(pts)
@@ -380,8 +463,21 @@ def build(street: Street) -> dict:
                 entry['round'] = [dict(vertex=v, radius=t.get('radius', fp['radius']))]
             if 'tower' in t:
                 entry['tower'] = t['tower']
+            if 'signs' in t:
+                # Cada letrero va, si no dice otro lado, en el frente a la avenida.
+                entry['signs'] = [{'edge': av[0], **cfg['signs'], **sg} for sg in t['signs']]
             entry['_avenue'] = av
+            if t.get('behind'):
+                # Detrás de un lote o de otro edificio: su frente no es el borde de la vereda.
+                entry['_behind'] = True
             out_b.append(entry)
+            if 'retiro' in t:
+                # El retiro va de la vereda al frente (el punto del frente más lejos de la calzada),
+                # a lo ancho de su tramo (`retiro.x`) o del frente del edificio.
+                fx = [v[0] for i in av for v in (pts[i], pts[(i + 1) % len(pts)])]
+                span = t['retiro'].get('x', [min(fx), max(fx)]) if isinstance(t['retiro'], dict) else [min(fx), max(fx)]
+                far = max(sgn * v[1] for i in av for v in (pts[i], pts[(i + 1) % len(pts)]))
+                yards.append((t, span[0], span[1], sgn * far, entry))
         # Ids únicos y legibles.
         for e in out_b:
             base = ''.join(ch for ch in e['id'].lower().replace(' ', '-') if ch.isalnum() or ch == '-')[:fp['idLength']]
@@ -392,14 +488,19 @@ def build(street: Street) -> dict:
                 n += 1
             used.add(k)
             e['id'] = k
-        # Vereda: de la calzada a los frentes; donde no hay edificio, de ancho fijo.
+        # Vereda: de la calzada a los frentes; donde no hay edificio o hay un retiro, de ancho fijo.
         sw = cfg['sidewalks']
         inner = []
+        with_yard = {id(y[4]) for y in yards if y[4] is not None}
         for e in out_b:
+            if id(e) in with_yard or e.get('_behind'):
+                continue
             pts = e['ring']
             for i in e['_avenue']:
                 p, q = pts[i], pts[(i + 1) % len(pts)]
                 inner += sorted([p, q], key=lambda v: v[0])
+        for _t, ya, yb, _far, _e in yards:
+            inner += [[ya, round(curb(ya) + sgn * fp['walk'], dec)], [yb, round(curb(yb) + sgn * fp['walk'], dec)]]
         inner = sorted([v for v in inner if x0 - sw['edge'] <= v[0] <= x1 + sw['edge']], key=lambda v: v[0])
         filled = []
         xs = x0
@@ -415,13 +516,61 @@ def build(street: Street) -> dict:
         inner[-1] = [x1, inner[-1][1]]
         ring = [[x0, round(curb(x0), dec)], [x1, round(curb(x1), dec)]] + [[round(v[0], dec), round(v[1], dec)] for v in reversed(inner)]
         ring = clean_ring(cfg, ring)
+        # Retiros: de la vereda al fondo, sin lo que ocupan los edificios. `along` es su borde con
+        # la vereda (de x desde a x hasta) y `depth`, cuánto hay de ahí al edificio (o al fondo del
+        # lote) donde menos.
+        blds = unary_union([Polygon(e['ring']).buffer(0) for e in out_b]) if out_b else Polygon()
+        yards_out = []
+        for t, ya, yb, far, e in yards:
+            za, zb = curb(ya) + sgn * fp['walk'], curb(yb) + sgn * fp['walk']
+            if sgn * far <= sgn * max(za, zb, key=lambda z: sgn * z):
+                print('!! el retiro de', t['name'], 'no tiene fondo (el frente cae sobre la vereda)', file=sys.stderr)
+                continue
+            poly = Polygon([(ya, za), (yb, zb), (yb, far), (ya, far)]).difference(blds.buffer(fp['weld']))
+            if poly.geom_type != 'Polygon':
+                edge = LineString([(ya, za), (yb, zb)])
+                poly = max(poly.geoms, key=lambda p: (p.buffer(fp['weld']).intersection(edge).length, p.area))
+            depth = sgn * far - max(sgn * za, sgn * zb)
+            if e is not None:
+                pts = e['ring']
+                front = [v for v in pts if ya - 1e-6 <= v[0] <= yb + 1e-6]
+                if front:
+                    depth = min(sgn * v[1] - sgn * (curb(v[0]) + sgn * fp['walk']) for v in front)
+            spec = t['retiro'] if isinstance(t['retiro'], dict) else {'style': t['retiro']}
+            name = e['id'] if e is not None else ''.join(ch for ch in t['name'].lower().replace(' ', '-') if ch.isalnum() or ch == '-')[:fp['idLength']]
+            yard = {'id': f'{name}-retiro', 'style': spec['style'],
+                    'ring': clean_ring(cfg, [[round(p[0], dec), round(p[1], dec)] for p in list(poly.exterior.coords)[:-1]]),
+                    'along': [[round(ya, dec), round(za, dec)], [round(yb, dec), round(zb, dec)]], 'depth': round(depth, dec)}
+            unknown = sorted(set(spec) - {'style', 'x', 'set'})
+            if unknown:
+                raise SystemExit(f"{t['name']}: el retiro trae {unknown}; lo que cambia de su estilo va dentro de \"set\"")
+            if spec.get('set'):
+                yard['set'] = spec['set']
+            yards_out.append(yard)
         for e in out_b:
             e.pop('_avenue')
-        blocks_out.append({'id': bl['id'], 'name': f"{'norte' if side == 'N' else 'sur'} {x0:.0f}–{x1:.0f} m",
-                           'sidewalks': [{'ring': ring, 'curbs': [0, 1, len(ring) - 1]}], 'buildings': out_b})
+            e.pop('_behind', None)
+        curbs = [0] + ([1] if (side, x1) not in joins else []) + ([len(ring) - 1] if (side, x0) not in joins else [])
+        entry = {'id': bl['id'], 'name': f"{'norte' if side == 'N' else 'sur'} {x0:.0f}–{x1:.0f} m",
+                 'sidewalks': [{'ring': ring, 'curbs': curbs}], 'buildings': out_b}
+        if yards_out:
+            entry['retiros'] = yards_out
+        if lane:
+            strip = [[x0, round(road(x0), dec)], [x1, round(road(x1), dec)], [x1, round(curb(x1), dec)], [x0, round(curb(x0), dec)]]
+            entry['lane'] = {'ring': strip, 'along': [strip[3], strip[2]]}
+            clear.append(strip)
+        blocks_out.append(entry)
         clear.append(ring)
         for e in out_b:
             clear.append(e['ring'])
+        for y in yards_out:
+            clear.append(y['ring'])
+
+    # Parterres de la avenida (de doble calzada), entre la primera y la última cuadra.
+    xs_all = [v for rows in street.spec['blocks'].values() for row in rows for v in block_row(row)[:2]]
+    center = medians(cfg, transects, min(xs_all), max(xs_all), dec) if xs_all else []
+    for m in center:
+        clear.append(m['ring'])
 
     # Edificios de los datos que se montan sobre los nuevos (su centro puede quedar afuera): también se sacan.
     cl = cfg['clear']
@@ -436,8 +585,12 @@ def build(street: Street) -> dict:
         if gp.intersection(mine).area > cl['share'] * gp.area and not mine.contains(gp.centroid):
             clear.append([[round(p[0], dec), round(p[1], dec)] for p in list(gp.exterior.coords)[:-1]])
             extra += 1
-    print('edificios', sum(len(b['buildings']) for b in blocks_out), 'despejes extra', extra, file=sys.stderr)
-    return {'clear': clear, 'blocks': blocks_out}
+    print('edificios', sum(len(b['buildings']) for b in blocks_out), 'retiros', sum(len(b.get('retiros', [])) for b in blocks_out),
+          'parterres', len(center), 'despejes extra', extra, file=sys.stderr)
+    out = {'clear': clear, 'blocks': blocks_out}
+    if center:
+        out['medians'] = center
+    return out
 
 
 def head(street: Street) -> dict:
@@ -450,7 +603,7 @@ def head(street: Street) -> dict:
             raise SystemExit(f'No existe {street.output.relative_to(REPO)}: poner en spec.json → headFrom de qué calle copiar la cabecera')
         current = json.loads((REPO / 'config' / 'streets' / f'{src}.json').read_text())
         current['name'] = street.spec.get('title', street.name)
-    return {k: v for k, v in current.items() if k not in ('clear', 'blocks')}
+    return {k: v for k, v in current.items() if k not in ('clear', 'blocks', 'medians')}
 
 
 def report(street: Street) -> None:
