@@ -346,10 +346,14 @@ las capturas no mostraban. Verificar cada hallazgo, corregir y volver a mirar en
   cada URL verificada, foto de Commons con su `focus`). Si ya existe, corregirla con lo que salió
   en la investigación. La foto de la ficha se baja con `uv run pipeline/build_world.py --steps
   places`. **Casa o negocio**: sin ficha, salvo que el dueño la quiera.
-- `README.md` → Íconos: qué tiene, cómo se recorre y los números de rendimiento.
+- `docs/lugares.md`: el lugar en "Íconos" o "Calles" (qué tiene y cómo se recorre) y su fila
+  en "Costo". Si es de los que la gente más reconoce, también en la lista de "Qué es" del
+  `README.md`, que se mantiene corta.
 - Si se agregó una pieza al kit, un dibujo, un tipo o un script: anotarlo en
-  `references/kit.md` (o en la referencia que corresponda) y en la sección "Cómo se arma un ícono
-  con arquitectura" del README.
+  `references/kit.md` (o en la referencia que corresponda) y en "Cómo se modela un lugar" de
+  `docs/lugares.md`.
+- Tono de la documentación del proyecto: neutro y descriptivo, como un manual. Dice qué hay y
+  cómo funciona, sin la historia de cómo se llegó ahí (eso va a `references/pitfalls.md`).
 - `npm run build` pasa y cada archivo tocado está revisado.
 - **Reporte a la persona**:
   - qué se hizo;
