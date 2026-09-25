@@ -625,10 +625,14 @@ Biblioteca, Correos…). El procedimiento completo, de la investigación a la me
   zona plana del centro lo achicó) y baja hacia el Malecón; la base va a la mediana de la vereda
   y cada puerta arranca de su suelo, así del lado del Malecón no quedan flotando.
 
-**Calles y zonas** (la 9 de Octubre): no se modela cada edificio como el Palacio. Se recorre la
-calle y se inventaría cada frente (tipo, pisos, portal, colores), y cada edificio es una
-entrada de config sobre una familia de fachada; las veredas, los faroles, los árboles y las
-bancas salen de reglas por cuadra. Las fuentes de la calle están versionadas en
+**Calles y zonas** (la 9 de Octubre, la Alborada): una calle se modela con cada uno de sus
+edificios, cada uno con lo suyo (pisos, vanos contados, alturas, colores, letreros, retiro)
+sacado de las fotos más nuevas y del satélite. Cada edificio es una entrada de config sobre una
+familia de fachada paramétrica, que se extiende cuando un edificio pide algo que todavía no sabe
+hacer; las veredas, los faroles, los árboles y las bancas salen de reglas por cuadra. Las fotos
+de referencia salen de Mapillary (`mapillary.py`, las más nuevas de cada tramo y lado) o de quien
+colabora (`photos.py`, con su EXIF), y en el juego `shotPhoto` pone la cámara donde se tomó cada
+una, con su lente, para compararlas. Las fuentes de la calle están versionadas en
 `config/streets/nueve-de-octubre/` (el eje y las cuadras, el inventario de los 66 edificios y la
 calzada medida en el juego), y `build_street.py` (en `.agents/skills/model-place/scripts/street/`,
 con OSM y los datos del mundo) arma con ellas `config/streets/nueve-de-octubre.json`; el flujo
