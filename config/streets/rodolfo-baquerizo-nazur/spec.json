@@ -1,0 +1,31 @@
+{
+ "id": "rodolfoBaquerizoNazur",
+ "title": "Avenida Rodolfo Baquerizo Nazur (la principal de la Alborada)",
+ "headFrom": "nueve-de-octubre",
+ "axis": {"from": [-2.1394347, -79.8984451], "to": [-2.1362244, -79.9007824]},
+ "osm": {"bbox": [-2.1412, -79.9040, -2.1330, -79.8960]},
+ "settings": {
+  "curb": {"surface": "concrete", "outlier": 1.2},
+  "footprints": {"walk": 3.0},
+  "candidates": {"front": 20}
+ },
+ "blocks": {
+  "N": [
+   [7, 228, "Egas Miranda → Demetrio Aguilera Malta"],
+   [228, 282, "Egas Miranda → Demetrio Aguilera Malta", {"join": true}],
+   [296, 342, "Demetrio Aguilera Malta → Benjamín Carrión"],
+   [342, 450, "Demetrio Aguilera Malta → Benjamín Carrión", {"join": true}],
+   [450, 570, "Demetrio Aguilera Malta → Benjamín Carrión", {"join": true}]
+  ],
+  "S": [
+   [7, 122, "Egas Miranda → calle 17A", {"lane": 3.3}],
+   [129, 206, "calle 17A → Demetrio Aguilera Malta", {"lane": 3.3}],
+   [206, 282, "calle 17A → Demetrio Aguilera Malta", {"join": true, "lane": 3.3}],
+   [295, 314, "Demetrio Aguilera Malta → Benjamín Carrión", {"lane": 3.0}],
+   [314, 388, "Demetrio Aguilera Malta → Benjamín Carrión", {"join": true, "lane": 3.3}],
+   [388, 440, "Demetrio Aguilera Malta → Benjamín Carrión", {"join": true, "lane": 3.3}],
+   [440, 499, "Demetrio Aguilera Malta → Benjamín Carrión", {"join": true, "lane": 3.3}],
+   [499, 570, "Demetrio Aguilera Malta → Benjamín Carrión", {"join": true, "lane": 3.3}]
+  ]
+ }
+}

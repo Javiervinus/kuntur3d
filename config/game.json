@@ -3127,6 +3127,16 @@
         "flood": 0
       },
       {
+        "id": "rodolfoBaquerizoNazur",
+        "type": "street",
+        "file": "rodolfo-baquerizo-nazur",
+        "lat": -2.1394347,
+        "lon": -79.8984451,
+        "headingDeg": 323.82,
+        "exclude": 0,
+        "flood": 0
+      },
+      {
         "id": "iglesiaSanFrancisco",
         "type": "church",
         "lat": -2.192075,
