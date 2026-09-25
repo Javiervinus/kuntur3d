@@ -31,6 +31,19 @@ interface ParkingChunk {
   ready: ChunkReady | null;
 }
 
+/**
+ * Puestos que no vienen de parking.bin (los parqueaderos y carriles de las calles modeladas,
+ * world/monuments.ts → parkingSpots): posición, rumbo (atan2(z, x) de la trompa, en el mundo),
+ * semilla (tipo y color) y cuánto quedan sobre el terreno (el piso del parqueadero).
+ */
+export interface ExtraSpots {
+  x: Float32Array;
+  z: Float32Array;
+  heading: Float32Array;
+  seed: Uint8Array;
+  lift: Float32Array;
+}
+
 /** Medidas de un tipo de vehículo en su marco (x adelante, y arriba, z al costado). */
 interface KindSize {
   halfLength: number;
@@ -58,7 +71,8 @@ function hash01(a: number, b: number): number {
 
 /**
  * Autos estacionados (pipeline, paso `roads`: parking.bin) junto al bordillo, en los carriles de
- * estacionamiento de las calles. Tipo y color salen de la semilla de cada puesto (tipos y
+ * estacionamiento de las calles, más los de los parqueaderos y carriles de las calles modeladas
+ * (`ExtraSpots`, cada uno sobre su piso). Tipo y color salen de la semilla de cada puesto (tipos y
  * pesos en `parking.kinds`, con los modelos y pinturas del tráfico); de noche no llevan luces:
  * los alumbran los postes.
  *
@@ -78,8 +92,10 @@ export class ParkedCars {
   private readonly sin: Float32Array;
   private readonly kind: Uint8Array;
   private readonly paint: Uint8Array;
+  /** Cuánto queda cada auto sobre el terreno (los de los parqueaderos, sobre su piso). */
+  private readonly lift: Float32Array;
   private readonly chunks: ParkingChunk[];
-  private readonly byKey = new Map<number, ParkingChunk>();
+  private readonly byKey = new Map<number, ParkingChunk[]>();
   private readonly kinds: VehicleKind[];
   private readonly sizes: KindSize[];
   private readonly palettes: THREE.Color[][];
@@ -96,6 +112,7 @@ export class ParkedCars {
     traffic: TrafficConfig,
     private readonly grid: ChunkGrid,
     private readonly heightmap: Heightmap,
+    extra: ExtraSpots,
   ) {
     this.group.name = 'parked-cars';
     const count = info.count;
@@ -103,12 +120,14 @@ export class ParkedCars {
       throw new Error(`parking.bin inválido: ${buffer.byteLength} bytes, se esperaban ${count * info.stride}`);
     }
     const view = new DataView(buffer);
-    this.x = new Float32Array(count);
-    this.z = new Float32Array(count);
-    this.cos = new Float32Array(count);
-    this.sin = new Float32Array(count);
-    this.kind = new Uint8Array(count);
-    this.paint = new Uint8Array(count);
+    const all = count + extra.x.length;
+    this.x = new Float32Array(all);
+    this.z = new Float32Array(all);
+    this.cos = new Float32Array(all);
+    this.sin = new Float32Array(all);
+    this.kind = new Uint8Array(all);
+    this.paint = new Uint8Array(all);
+    this.lift = new Float32Array(all);
 
     const weights = cfg.kinds as Record<string, number>;
     this.kinds = Object.keys(weights).map((name) => {
@@ -126,6 +145,14 @@ export class ParkedCars {
     this.palettes = this.kinds.map((k) => k.paint.map((hex) => new THREE.Color(hex)));
 
     const step = 65535;
+    // Tipo y pintura: de la semilla del puesto y su lugar en la lista (estables).
+    const choose = (c: number, seed: number): void => {
+      const r = hash01(seed, c);
+      let k = 0;
+      while (k < cumulative.length - 1 && r >= cumulative[k]) k++;
+      this.kind[c] = k;
+      this.paint[c] = Math.floor(hash01(c, seed) * this.palettes[k].length);
+    };
     this.chunks = info.chunks.map(([i, j, first, n]) => {
       const x0 = grid.xmin + i * grid.size;
       const z0 = grid.zmin + j * grid.size;
@@ -136,17 +163,36 @@ export class ParkedCars {
         const heading = (view.getUint8(o + 4) / 256) * Math.PI * 2;
         this.cos[c] = Math.cos(heading);
         this.sin[c] = Math.sin(heading);
-        const seed = view.getUint8(o + 5);
-        const r = hash01(seed, c);
-        let k = 0;
-        while (k < cumulative.length - 1 && r >= cumulative[k]) k++;
-        this.kind[c] = k;
-        this.paint[c] = Math.floor(hash01(c, seed) * this.palettes[k].length);
+        choose(c, view.getUint8(o + 5));
       }
-      const chunk: ParkingChunk = { i, j, first, count: n, ready: null };
-      this.byKey.set(j * grid.nx + i, chunk);
-      return chunk;
+      return { i, j, first, count: n, ready: null };
     });
+    // Los puestos de afuera van después de los de parking.bin, agrupados en sus propios chunks.
+    const groups = new Map<number, number[]>();
+    for (let k = 0; k < extra.x.length; k++) {
+      const i = Math.floor((extra.x[k] - grid.xmin) / grid.size);
+      const j = Math.floor((extra.z[k] - grid.zmin) / grid.size);
+      const key = j * grid.nx + i;
+      groups.set(key, [...(groups.get(key) ?? []), k]);
+    }
+    let next = count;
+    for (const [key, list] of groups) {
+      const first = next;
+      for (const k of list) {
+        this.x[next] = extra.x[k];
+        this.z[next] = extra.z[k];
+        this.cos[next] = Math.cos(extra.heading[k]);
+        this.sin[next] = Math.sin(extra.heading[k]);
+        this.lift[next] = extra.lift[k];
+        choose(next, extra.seed[k]);
+        next++;
+      }
+      this.chunks.push({ i: key % grid.nx, j: Math.floor(key / grid.nx), first, count: list.length, ready: null });
+    }
+    for (const chunk of this.chunks) {
+      const key = chunk.j * grid.nx + chunk.i;
+      this.byKey.set(key, [...(this.byKey.get(key) ?? []), chunk]);
+    }
 
     const material = createVehicleMaterial(traffic, { value: 0 });
     const capacity = cfg.maxVisible;
@@ -184,12 +230,13 @@ export class ParkedCars {
     cfg: ParkingConfig,
     traffic: TrafficConfig,
     heightmap: Heightmap,
+    extra: ExtraSpots,
   ): Promise<ParkedCars | null> {
     const info = manifest.parking;
     if (!info) return null;
     const res = await fetch(new URL(info.url, baseUrl));
     if (!res.ok) throw new Error(`No se pudieron cargar los autos estacionados (${res.status})`);
-    return new ParkedCars(await res.arrayBuffer(), info, cfg, traffic, manifest.chunks, heightmap);
+    return new ParkedCars(await res.arrayBuffer(), info, cfg, traffic, manifest.chunks, heightmap, extra);
   }
 
   /** Autos dibujados ahora (para depurar). */
@@ -239,26 +286,27 @@ export class ParkedCars {
     const j1 = Math.floor((z + reach - zmin) / size);
     for (let j = j0; j <= j1; j++) {
       for (let i = i0; i <= i1; i++) {
-        const chunk = this.byKey.get(j * nx + i);
-        const ready = chunk?.ready;
-        if (!chunk || !ready) continue;
-        const col = Math.floor((x - (xmin + i * size)) / this.cfg.cell);
-        const row = Math.floor((z - (zmin + j * size)) / this.cfg.cell);
-        for (let r = row - 1; r <= row + 1; r++) {
-          if (r < 0 || r >= ready.cells) continue;
-          for (let c = col - 1; c <= col + 1; c++) {
-            if (c < 0 || c >= ready.cells) continue;
-            const cell = r * ready.cells + c;
-            for (let k = ready.cellStart[cell]; k < ready.cellStart[cell + 1]; k++) {
-              const local = ready.items[k];
-              const car = chunk.first + local;
-              const dims = this.sizes[this.kind[car]];
-              const dx = x - ready.centers[local * 3];
-              const dz = z - ready.centers[local * 3 + 2];
-              const along = dx * this.cos[car] + dz * this.sin[car];
-              const across = -dx * this.sin[car] + dz * this.cos[car];
-              if (Math.abs(along) <= dims.halfLength && Math.abs(across) <= dims.halfWidth) {
-                top = Math.max(top, ready.centers[local * 3 + 1] + dims.height);
+        for (const chunk of this.byKey.get(j * nx + i) ?? []) {
+          const ready = chunk.ready;
+          if (!ready) continue;
+          const col = Math.floor((x - (xmin + i * size)) / this.cfg.cell);
+          const row = Math.floor((z - (zmin + j * size)) / this.cfg.cell);
+          for (let r = row - 1; r <= row + 1; r++) {
+            if (r < 0 || r >= ready.cells) continue;
+            for (let c = col - 1; c <= col + 1; c++) {
+              if (c < 0 || c >= ready.cells) continue;
+              const cell = r * ready.cells + c;
+              for (let k = ready.cellStart[cell]; k < ready.cellStart[cell + 1]; k++) {
+                const local = ready.items[k];
+                const car = chunk.first + local;
+                const dims = this.sizes[this.kind[car]];
+                const dx = x - ready.centers[local * 3];
+                const dz = z - ready.centers[local * 3 + 2];
+                const along = dx * this.cos[car] + dz * this.sin[car];
+                const across = -dx * this.sin[car] + dz * this.cos[car];
+                if (Math.abs(along) <= dims.halfLength && Math.abs(across) <= dims.halfWidth) {
+                  top = Math.max(top, ready.centers[local * 3 + 1] + dims.height);
+                }
               }
             }
           }
@@ -305,7 +353,7 @@ export class ParkedCars {
       _s.set(-2 * hw * dz, side - other, 2 * hw * dx).normalize();
       _u.crossVectors(_s, _f).normalize();
       _s.crossVectors(_f, _u);
-      const y = (front + back + side + other) / 4;
+      const y = (front + back + side + other) / 4 + this.lift[c];
       _matrix.makeBasis(_f, _u, _s).setPosition(x, y, z);
       _matrix.toArray(matrices, local * 16);
       centers[local * 3] = x;

@@ -1,7 +1,10 @@
 import * as THREE from 'three';
+import type { SignFace, SignRect } from '../render/signAtlas';
 import { type DowntownBuilding, DowntownBuilder, type DowntownKit, type DowntownLights, type DowntownStyle, deepMerge } from './downtown';
+import { type Median, type MedianStyle, buildMedian, medianLampModel, medianLamps, medianTrees } from './medians';
 import { Batch, type MonumentBase, type Surface, patternOf } from './monumentParts';
 import { type FurnitureItem, type StreetFurniture, furnitureModels, layoutFurniture } from './streetFurniture';
+import { type Lane, type LaneStyle, type LotKit, type Retiro, type RetiroStyle, buildLane, buildRetiro, checkLane, checkRetiro } from './streetLots';
 
 /**
  * Una calle con sus edificios, en config/game.json → monuments.list (tipo `street`): dónde está su
@@ -18,12 +21,27 @@ export interface Sidewalk {
   curbs: number[];
 }
 
-/** Una cuadra (un lado de una manzana): sus veredas y sus edificios. Se ve y se descarta junta. */
+/**
+ * Una cuadra (un lado de una manzana): sus veredas, sus edificios, los retiros frente a ellos y
+ * el carril de estacionamiento junto a la calzada. Se ve y se descarta junta.
+ */
 export interface StreetBlock {
   id: string;
   name?: string;
   sidewalks: Sidewalk[];
   buildings: DowntownBuilding[];
+  retiros?: Retiro[];
+  lane?: Lane;
+}
+
+/** Cómo se ve una vereda (o el piso de un parterre): alto, bordillo y su color, piso y su dibujo. */
+interface PavedStyle {
+  height: number;
+  curb: number;
+  color: string;
+  curbColor: string;
+  pattern: string;
+  scale: number[];
 }
 
 /**
@@ -41,8 +59,12 @@ export interface StreetFile {
   lights: DowntownLights;
   /** Colores de los letreros de los locales. */
   signs: string[];
-  /** Pisos que siguen el terreno: largo de cada tramo, cuánto quedan sobre el suelo y cuánto se entierran los muros. */
-  ground: { step: number; lift: number; bury: number };
+  /**
+   * Pisos que siguen el terreno: largo de cada tramo, cuánto quedan sobre el suelo y cuánto se
+   * entierran los muros; y el grosor de la física de las vallas (rejas de los retiros, la cerca
+   * del parterre), que hace falta si la calle las tiene.
+   */
+  ground: { step: number; lift: number; bury: number; wall?: number };
   /** Distancia (m) al centro de una cuadra hasta la que se ven sus detalles. */
   detail: { near: number };
   sidewalks: {
@@ -57,6 +79,13 @@ export interface StreetFile {
   };
   /** Faroles, árboles y bancas de las veredas (world/streetFurniture.ts). */
   furniture: StreetFurniture;
+  /** Estilos de los retiros (world/streetLots.ts), por nombre. */
+  retiros?: Record<string, RetiroStyle>;
+  /** El carril de estacionamiento (world/streetLots.ts). */
+  lane?: LaneStyle;
+  /** El parterre de una avenida de doble calzada (world/medians.ts) y los de esta calle (los arma el script). */
+  median?: MedianStyle;
+  medians?: Median[];
   /**
    * Polígonos (marco local) donde no quedan edificios, árboles ni postes de los datos: la calle
    * con sus veredas y las huellas de los edificios que se reemplazan.
@@ -98,6 +127,13 @@ export interface StreetKit {
   site(x: number, z: number): StreetSite;
   /** Un árbol de la vereda (marco local, pie a la altura `y` del mundo) para los árboles de la ciudad. */
   tree(x: number, z: number, y: number, height: number, radius: number, color: THREE.Color): void;
+  /** Una palmera (marco local, pie a la altura `y` del mundo) para las palmeras de la ciudad. */
+  palm(x: number, z: number, y: number, height: number): void;
+  /** Un auto estacionado (marco local): centro, trompa (atan2(z, x) local) y cuánto queda sobre el terreno. */
+  car(x: number, z: number, angle: number, lift: number): void;
+  /** Dónde está un letrero en el atlas de letreros, y cuánto se separa su cara de lo que tiene detrás (m). */
+  signRect(s: SignFace): SignRect;
+  signOffset: number;
 }
 
 /** Recorta el polígono `poly` (x, z) al rectángulo [x0, x1] × [z0, z1] (Sutherland–Hodgman). */
@@ -160,18 +196,117 @@ export class StreetBuilder {
   private readonly signs: THREE.Color[];
   private readonly furniture: ReturnType<typeof layoutFurniture>;
   private readonly models: ReturnType<typeof furnitureModels>;
+  /** El poste de dos brazos del parterre (uno para todos). */
+  private medianModel: THREE.BufferGeometry | null = null;
 
   constructor(
     private readonly f: StreetFile,
     private readonly kit: StreetKit,
   ) {
     this.signs = f.signs.map((c) => new THREE.Color(c));
-    this.furniture = layoutFurniture(f.furniture, f.blocks);
+    this.furniture = layoutFurniture(f.furniture, f.blocks, (b) => this.entrances(b as StreetBlock));
     this.models = furnitureModels(f.furniture);
   }
 
   build(): void {
     for (const block of this.f.blocks) this.block(block);
+    for (const m of this.f.medians ?? []) this.median(m);
+  }
+
+  /** Física de una valla (marco de la calle): de a a b, hasta `top` (mundo), del grosor de `ground.wall`. */
+  private fence(site: StreetSite, a: THREE.Vector2, b: THREE.Vector2, top: number): void {
+    const thick = this.f.ground.wall;
+    if (thick === undefined) throw new Error(`config/streets (${this.f.name}): falta ground.wall (el grosor de la física de las vallas)`);
+    const len = a.distanceTo(b);
+    if (len < 1e-3) return;
+    site.box((a.x + b.x) / 2, (a.y + b.y) / 2, len / 2, thick / 2, Math.atan2(b.y - a.y, b.x - a.x), top, false, -Infinity);
+  }
+
+  /** Un estilo de retiro por nombre, con los retoques del retiro. */
+  private retiroStyle(r: Retiro): RetiroStyle {
+    const preset = this.f.retiros?.[r.style];
+    if (!preset) throw new Error(`Retiro de estilo desconocido en config/streets (${this.f.name}): ${r.style}`);
+    const style = deepMerge(preset, r.set);
+    checkRetiro(style, `${r.id} (config/streets: ${this.f.name})`);
+    return style;
+  }
+
+  /** Las entradas de los retiros de una cuadra (tramos en x de la calle): ahí no va un auto ni un árbol. */
+  private entrances(block: StreetBlock): number[][] {
+    return (block.retiros ?? []).flatMap((r) => this.retiroStyle(r).gaps);
+  }
+
+  /** Lo que un retiro o un carril necesita para armarse, en los lotes de su cuadra. */
+  private lotKit(stone: Batch, detail: Batch, rails: Batch, site: StreetSite): LotKit {
+    const step = this.f.ground.step;
+    return {
+      terrain: (x, z) => this.kit.terrain(x, z),
+      stone,
+      detail,
+      rails,
+      step,
+      pave: (ring, lift, color, surface) => pave(stone, ring, (x, z) => this.kit.terrain(x, z) + lift, step, color, surface),
+      car: (x, z, angle, lift) => this.kit.car(x, z, angle, lift),
+      palm: (x, z, y, height) => this.kit.palm(x, z, y, height),
+      wall: (a, b, top) => this.fence(site, a, b, top),
+      ground: (ring, offset) =>
+        site.ground(
+          ring.map(([x, z]) => new THREE.Vector3(x, 0, z)),
+          offset,
+        ),
+    };
+  }
+
+  /**
+   * Un parterre: su piso con el bordillo y la cerca (su propio lugar del LOD), los postes de dos
+   * brazos instanciados y sus árboles (los de la ciudad).
+   */
+  private median(m: Median): void {
+    const style = this.f.median;
+    if (!style) throw new Error(`config/streets (${this.f.name}) tiene parterres sin "median"`);
+    const xs = m.ring.map((p) => p[0]);
+    const zs = m.ring.map((p) => p[1]);
+    const site = this.kit.site((Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...zs) + Math.max(...zs)) / 2);
+    const stone = new Batch();
+    const rails = new Batch();
+    const group = new THREE.Group();
+    group.name = `street-${m.id}`;
+    buildMedian(m, style, {
+      terrain: (x, z) => this.kit.terrain(x, z),
+      stone,
+      rails,
+      pave: (ring, curbs, paved) => this.pavement({ ring, curbs }, paved, stone, site),
+      wall: (a, b, top) => this.fence(site, a, b, top),
+    });
+    const lamps = medianLamps(style, [m]);
+    if (lamps.length) {
+      const geometry = this.medianModel ?? (this.medianModel = medianLampModel(style));
+      const mesh = new THREE.InstancedMesh(geometry, this.kit.materials.stone, lamps.length);
+      const mat = new THREE.Matrix4();
+      lamps.forEach((l, k) => mesh.setMatrixAt(k, mat.makeTranslation(l.x, this.kit.terrain(l.x, l.z) + style.height, l.z)));
+      mesh.computeBoundingSphere();
+      mesh.name = `${group.name}-lamps`;
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      group.add(mesh);
+      site.near(mesh, style.lamps.near);
+      const [baseR] = style.lamps.pole.base;
+      for (const l of lamps) site.circle(l.x, l.z, baseR, this.kit.terrain(l.x, l.z) + style.height + style.lamps.pole.height);
+    }
+    for (const t of medianTrees(style, [m])) this.kit.tree(t.x, t.z, this.kit.terrain(t.x, t.z) + style.height, t.height, t.radius, t.color);
+    const add = (batch: Batch, material: THREE.Material, name: string, shadow: boolean): THREE.Mesh | null => {
+      if (batch.empty) return null;
+      const mesh = new THREE.Mesh(batch.build(), material);
+      mesh.name = `${group.name}-${name}`;
+      mesh.castShadow = shadow;
+      mesh.receiveShadow = true;
+      group.add(mesh);
+      return mesh;
+    };
+    add(stone, this.kit.materials.stone, 'stone', true);
+    const fence = add(rails, this.kit.materials.rails, 'rails', false);
+    if (fence) site.near(fence, this.f.detail.near);
+    this.kit.root.add(group);
   }
 
   /** Estilo de un edificio: el base, el estilo con nombre y sus retoques. */
@@ -205,6 +340,8 @@ export class StreetBuilder {
       bury: f.ground.bury,
       block: (outline, y0, top) => site.block(outline, y0, top),
       box: (x, z, halfU, halfV, angle, top, floor, bottom) => site.box(x, z, halfU, halfV, angle, top, floor, bottom),
+      signRect: (s) => this.kit.signRect(s),
+      signOffset: this.kit.signOffset,
     };
     for (const b of block.buildings) {
       const podium = new DowntownBuilder(b, this.style(b.style, b.set), kit);
@@ -223,7 +360,15 @@ export class StreetBuilder {
       const style = deepMerge(deepMerge(this.style(tower.style, t.style ? undefined : b.set), t.set), { ground: 0 });
       new DowntownBuilder(tower, style, kit, top).build();
     }
-    for (const s of block.sidewalks) this.sidewalk(s, stone, site);
+    const S = f.sidewalks;
+    for (const s of block.sidewalks) this.pavement(s, { height: S.height, curb: S.curb, color: S.color, curbColor: S.curbColor, pattern: S.pattern, scale: S.scale }, stone, site);
+    const lots = this.lotKit(stone, detail, rails, site);
+    for (const r of block.retiros ?? []) buildRetiro(r, this.retiroStyle(r), lots);
+    if (block.lane) {
+      if (!f.lane) throw new Error(`config/streets (${f.name}): la cuadra ${block.id} tiene carril y falta "lane"`);
+      checkLane(f.lane, `${block.id} (config/streets: ${f.name})`);
+      buildLane(block.lane, f.lane, lots, block.id, this.entrances(block));
+    }
 
     const group = new THREE.Group();
     group.name = `street-${block.id}`;
@@ -293,13 +438,12 @@ export class StreetBuilder {
   }
 
   /**
-   * Vereda: la losa a `height` sobre el terreno (en tramos de `ground.step` que lo siguen), con
-   * adoquines en uv del marco de la calle; en los lados que dan a la calzada, el bordillo (su
-   * canto y su franja de arriba).
+   * Vereda (o el piso de un parterre): la losa a `height` sobre el terreno (en tramos de
+   * `ground.step` que lo siguen), con su dibujo en uv del marco de la calle; en los lados que dan
+   * a la calzada, el bordillo (su canto y su franja de arriba).
    */
-  private sidewalk(s: Sidewalk, stone: Batch, site: StreetSite): void {
+  private pavement(s: Sidewalk, S: PavedStyle, stone: Batch, site: StreetSite): void {
     const f = this.f;
-    const S = f.sidewalks;
     const step = f.ground.step;
     const color = new THREE.Color(S.color);
     const curbColor = new THREE.Color(S.curbColor);

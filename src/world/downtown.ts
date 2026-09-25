@@ -1,8 +1,10 @@
 import * as THREE from 'three';
+import type { SignFace, SignRect } from '../render/signAtlas';
 import { type Profile, archHole, rectHole, sweep, wall } from './classical';
-import { type Batch, type Glow, PATTERN, type Surface, colorsOf, glowOf } from './monumentParts';
+import { type Batch, type Glow, PATTERN, type Surface, colorsOf, glowOf, patternOf } from './monumentParts';
 
 const UP = new THREE.Vector3(0, 1, 0);
+const WHITE = new THREE.Color(1, 1, 1);
 
 /**
  * Cómo es un edificio del centro de Guayaquil (config/streets/*.json → defaults y styles): planta
@@ -91,6 +93,11 @@ export interface DowntownStyle {
     /** Clásico: pisos con balconcito en cada ventana (vuelo y cuánto más ancho que la ventana). */
     balconettes: number[];
     balconette: number[];
+    /**
+     * Revestimiento del muro de los pisos: un dibujo (PATTERN) y cuántas unidades del dibujo mide
+     * cada metro (las losas de un revestimiento de paneles). Sin él, revoque.
+     */
+    cladding?: { pattern: string; scale: number[] };
   };
   crown: {
     /** Antepecho de la azotea: alto y grosor; 'balustrade' lo hace de balaustres en las fachadas. */
@@ -105,8 +112,8 @@ export interface DowntownStyle {
   };
   /** Aires acondicionados colgados: qué parte de las ventanas, y su ancho, alto y fondo. */
   ac: { share: number; size: number[] };
-  /** Oclusión ambiental: cielo raso del portal, piso (junto a los locales), locales, vanos, balcones, azotea. */
-  ao: { soffit: number; floor: number; shop: number; reveal: number; balcony: number; roof: number };
+  /** Oclusión ambiental: cielo raso del portal, piso (junto a los locales), locales, vanos, balcones, azotea, franjas. */
+  ao: { soffit: number; floor: number; shop: number; reveal: number; balcony: number; roof: number; band: number };
   colors: {
     wall: string;
     trim: string;
@@ -123,6 +130,42 @@ export interface DowntownStyle {
   };
   /** Tono de la carpintería respecto del vidrio (0…1, ver PATTERN.glazing). */
   frameTone: number;
+  /**
+   * Techo: 'flat' (azotea con su antepecho), 'gables' (un tejado a dos aguas por tramo de
+   * fachada, con el hastial al frente y la cumbrera hacia el fondo `depth` m: las galerías
+   * comerciales de la Alborada), 'gable' (a dos aguas sobre toda la huella, la cumbrera a lo
+   * largo) o 'hip' (a cuatro aguas sobre toda la huella). Los inclinados son de teja y valen
+   * para huellas de cuatro lados. Pendiente (grados), alero (m), `bays` vanos de fachada por
+   * tejado (gables) y color de la teja. Sin él, azotea.
+   */
+  roof?: { kind: string; pitch: number; eave: number; depth: number; bays: number; color: string };
+  /** Alero de teja sobre la planta baja, en los frentes: alto de su arranque sobre la base, vuelo, pendiente (grados), color y el de abajo. */
+  awning?: { height: number; depth: number; pitch: number; color: string; soffit: string };
+  /**
+   * Franjas corridas por los frentes (la faja de un letrero, una marquesina): desde y hasta qué
+   * alto sobre la base, cuánto vuelan de la fachada y su color.
+   */
+  bands?: { y: number[]; out: number; color: string }[];
+}
+
+/**
+ * Un letrero de un edificio (el `signs` de cada edificio del inventario): la cara con su texto
+ * (render/signAtlas.ts) sobre el lado `edge` de la huella (su índice en `ring`; build_street.py
+ * pone el frente a la avenida), centrado en `x` (del marco de la calle; si no, el medio del lado)
+ * y a `y` m sobre la base. La cara vuela `out` m de la fachada; detrás, una caja de `depth` m del
+ * color del fondo (0 = letras pegadas al muro). Con `pole`, un tótem: un poste (ancho y color)
+ * desde el suelo; con `back`, se lee también de atrás. `glow`: su luz de noche (si no, la de la
+ * calle).
+ */
+export interface DowntownSign extends SignFace {
+  edge: number;
+  x?: number;
+  y: number;
+  out: number;
+  depth: number;
+  pole?: { width: number; color: string };
+  back?: boolean;
+  glow?: Glow;
 }
 
 /** Torre retranqueada sobre un edificio (su podio): otra fachada, otros pisos. */
@@ -159,6 +202,7 @@ export interface DowntownBuilding {
   /** Esquinas redondeadas (streamline): vértice de la huella y radio. */
   round?: { vertex: number; radius: number }[];
   tower?: DowntownTower;
+  signs?: DowntownSign[];
 }
 
 /** Luces de noche de los edificios. */
@@ -170,6 +214,8 @@ export interface DowntownLights {
   lamp: Glow;
   /** Plafón del portal: ancho y alto. */
   lampSize: number[];
+  /** Letreros (si el letrero no trae la suya). */
+  sign?: Glow;
 }
 
 /** Lo que el constructor necesita de la calle (world/street.ts): dónde poner cada cosa. */
@@ -196,6 +242,9 @@ export interface DowntownKit {
   block(outline: THREE.Vector3[], y0: number, top: number): void;
   /** Rectángulo de física (marco local; largo en el ángulo `angle` = atan2(z, x) local). */
   box(x: number, z: number, halfU: number, halfV: number, angle: number, top: number, floor: boolean, bottom: number): void;
+  /** Dónde está un letrero en el atlas de letreros (sus uv), y cuánto se separa su cara de lo que tiene detrás (m). */
+  signRect(s: SignFace): SignRect;
+  signOffset: number;
 }
 
 /**
@@ -436,12 +485,186 @@ export class DowntownBuilder {
         else this.shopfront(e);
       }
       this.facade(e);
+      if (e.arc < 0) {
+        this.bands(e);
+        this.awning(e);
+      }
     }
     for (const chain of this.chains()) this.chainParts(chain);
     this.sides();
     this.roof();
+    this.pitched();
+    this.signs();
     this.physics();
     return { base: this.base, top: this.top };
+  }
+
+  /** Cuadrilátero a-b-c-d mirando hacia arriba (`up`) o hacia abajo: lo da vuelta si hace falta. */
+  private facing(up: boolean, a: THREE.Vector3, b: THREE.Vector3, c: THREE.Vector3, d: THREE.Vector3, color: THREE.Color, surface: Surface, uv?: number[]): void {
+    const n = new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(d, a));
+    if (n.y >= 0 === up) this.kit.stone.quad(a, b, c, d, color, surface, uv);
+    else this.kit.stone.quad(b, a, d, c, color, surface, uv && [uv[2], uv[3], uv[0], uv[1], uv[6], uv[7], uv[4], uv[5]]);
+  }
+
+  /** Franjas de color corridas por un frente (DowntownStyle.bands). */
+  private bands(e: Edge): void {
+    const m = this.frame(e);
+    for (const b of this.s.bands ?? []) {
+      const [y0, y1] = b.y;
+      this.box(this.kit.stone, m, e.len, y1 - y0, b.out, e.len / 2, this.base + (y0 + y1) / 2, b.out / 2, new THREE.Color(b.color), { ao: this.s.ao.band });
+    }
+  }
+
+  /** Alero de teja sobre la planta baja de un frente (DowntownStyle.awning): el faldón y su cielo. */
+  private awning(e: Edge): void {
+    const a = this.s.awning;
+    if (!a || this.s.ground <= 0) return;
+    const m = this.frame(e);
+    const P = (x: number, y: number, z: number): THREE.Vector3 => this.p(m, x, y, z);
+    const y0 = this.base + a.height;
+    const drop = a.depth * Math.tan(THREE.MathUtils.degToRad(a.pitch));
+    const slope = Math.hypot(a.depth, drop);
+    // Faldón: del muro (arriba) al borde (abajo), con la teja bajando por la pendiente.
+    this.kit.stone.quad(P(0, y0 - drop, a.depth), P(e.len, y0 - drop, a.depth), P(e.len, y0, 0), P(0, y0, 0), new THREE.Color(a.color), { pattern: PATTERN.roofTiles }, [0, slope, e.len, slope, e.len, 0, 0, 0]);
+    this.kit.stone.quad(P(0, y0, 0), P(e.len, y0, 0), P(e.len, y0 - drop, a.depth), P(0, y0 - drop, a.depth), new THREE.Color(a.soffit), { ao: this.s.ao.soffit });
+  }
+
+  /**
+   * Tejados de teja (DowntownStyle.roof), sobre la azotea: una hilera de hastiales al frente
+   * ('gables') o un techo a dos o cuatro aguas sobre toda la huella de cuatro lados ('gable',
+   * 'hip'), con su alero y el cielo del alero.
+   */
+  private pitched(): void {
+    const r = this.s.roof;
+    if (!r || r.kind === 'flat') return;
+    const tile = new THREE.Color(r.color);
+    const t = Math.tan(THREE.MathUtils.degToRad(r.pitch));
+    const tiles: Surface = { pattern: PATTERN.roofTiles, ao: this.s.ao.roof };
+    const wall: Surface = { pattern: PATTERN.stucco };
+    const soffit: Surface = { ao: this.s.ao.soffit };
+    const top = this.top;
+    if (r.kind === 'gables') {
+      for (const e of this.edges) {
+        if (!e.front || e.arc >= 0) continue;
+        const m = this.frame(e);
+        const P = (x: number, y: number, z: number): THREE.Vector3 => this.p(m, x, y, z);
+        const n = Math.max(1, Math.round(e.len / (this.s.facade.bay * r.bays)));
+        const w = e.len / n;
+        const rise = (w / 2) * t;
+        const slope = Math.hypot(w / 2, rise);
+        const run = r.depth + r.eave;
+        for (let k = 0; k < n; k++) {
+          const u0 = k * w;
+          const um = u0 + w / 2;
+          const u1 = u0 + w;
+          const ridge = top + rise;
+          // Hastiales: el del frente mira a la calle; el de atrás, al fondo.
+          this.kit.stone.tri(P(u0, top, 0), P(u1, top, 0), P(um, ridge, 0), this.col.wall, wall, [u0, top, u1, top, um, ridge]);
+          this.kit.stone.tri(P(u1, top, -r.depth), P(u0, top, -r.depth), P(um, ridge, -r.depth), this.col.wall, wall, [u1, top, u0, top, um, ridge]);
+          // Faldones (uv: a lo largo de la cumbrera y bajando), con el alero hacia la calle.
+          this.facing(true, P(u0, top, r.eave), P(um, ridge, r.eave), P(um, ridge, -r.depth), P(u0, top, -r.depth), tile, tiles, [0, slope, 0, 0, run, 0, run, slope]);
+          this.facing(true, P(um, ridge, r.eave), P(u1, top, r.eave), P(u1, top, -r.depth), P(um, ridge, -r.depth), tile, tiles, [0, 0, 0, slope, run, slope, run, 0]);
+          // Cielo del alero (se ve desde la vereda).
+          this.facing(false, P(u0, top, 0), P(um, ridge, 0), P(um, ridge, r.eave), P(u0, top, r.eave), this.col.soffit, soffit);
+          this.facing(false, P(um, ridge, 0), P(u1, top, 0), P(u1, top, r.eave), P(um, ridge, r.eave), this.col.soffit, soffit);
+        }
+      }
+      return;
+    }
+    const E = this.edges;
+    if (E.length !== 4) return;
+    // Marco del techo: a lo largo del lado más largo, con el centro de la huella.
+    const k0 = E[0].len >= E[1].len ? 0 : 1;
+    const ux = E[k0].x;
+    const uz = E[k0].n;
+    const L = (E[k0].len + E[k0 + 2].len) / 2;
+    const S = (E[k0 + 1].len + E[(k0 + 3) % 4].len) / 2;
+    const c = E.reduce((acc, e) => acc.add(e.a), new THREE.Vector3()).divideScalar(4);
+    const P = (u: number, v: number, y: number): THREE.Vector3 => c.clone().addScaledVector(ux, u).addScaledVector(uz, v).setY(y);
+    const e = r.eave;
+    const yE = top - e * t;
+    const yR = top + (S / 2) * t;
+    const hr = r.kind === 'hip' ? Math.max(0, L / 2 - S / 2) : L / 2 + e;
+    const lu = L / 2 + e;
+    const lv = S / 2 + e;
+    const down = lv / Math.cos(Math.atan(t));
+    // Faldones largos (a los dos lados de la cumbrera).
+    for (const sv of [1, -1]) {
+      this.facing(true, P(-lu, sv * lv, yE), P(lu, sv * lv, yE), P(hr, 0, yR), P(-hr, 0, yR), tile, tiles, [-lu, down, lu, down, hr, 0, -hr, 0]);
+    }
+    if (r.kind === 'hip') {
+      // Cabeceras: los triángulos de las puntas (con la misma pendiente: bajan lo mismo).
+      const downU = down;
+      for (const su of [1, -1]) {
+        const a = P(su * lu, -lv, yE);
+        const b = P(su * lu, lv, yE);
+        const tip = P(su * hr, 0, yR);
+        const n = new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(tip, a));
+        if (n.y >= 0) this.kit.stone.tri(a, b, tip, tile, tiles, [-lv, downU, lv, downU, 0, 0]);
+        else this.kit.stone.tri(b, a, tip, tile, tiles, [lv, downU, -lv, downU, 0, 0]);
+      }
+    } else {
+      // Hastiales en las puntas.
+      for (const su of [1, -1]) {
+        const a = P(su * (L / 2), -S / 2, top);
+        const b = P(su * (L / 2), S / 2, top);
+        const tip = P(su * (L / 2), 0, yR);
+        const out = ux.clone().multiplyScalar(su);
+        const n = new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(tip, a));
+        if (n.dot(out) >= 0) this.kit.stone.tri(a, b, tip, this.col.wall, wall, [-S / 2, top, S / 2, top, 0, yR]);
+        else this.kit.stone.tri(b, a, tip, this.col.wall, wall, [S / 2, top, -S / 2, top, 0, yR]);
+      }
+    }
+    if (r.kind === 'hip') {
+      // Cielo del alero: del muro al borde, alrededor (a cuatro aguas, el borde va parejo).
+      const wallC = [P(-L / 2, -S / 2, top), P(L / 2, -S / 2, top), P(L / 2, S / 2, top), P(-L / 2, S / 2, top)];
+      const eaveC = [P(-lu, -lv, yE), P(lu, -lv, yE), P(lu, lv, yE), P(-lu, lv, yE)];
+      for (let k = 0; k < 4; k++) {
+        const j = (k + 1) % 4;
+        this.facing(false, wallC[k], wallC[j], eaveC[j], eaveC[k], this.col.soffit, soffit);
+      }
+      return;
+    }
+    // A dos aguas: bajo cada faldón, el alero a lo largo (del muro al borde) y, pasando cada hastial,
+    // el vuelo que sube con la pendiente hasta la cumbrera.
+    for (const sv of [1, -1]) {
+      this.facing(false, P(-lu, sv * (S / 2), top), P(lu, sv * (S / 2), top), P(lu, sv * lv, yE), P(-lu, sv * lv, yE), this.col.soffit, soffit);
+      for (const su of [1, -1]) {
+        this.facing(false, P(su * (L / 2), 0, yR), P(su * lu, 0, yR), P(su * lu, sv * (S / 2), top), P(su * (L / 2), sv * (S / 2), top), this.col.soffit, soffit);
+      }
+    }
+  }
+
+  /** Los letreros del edificio (DowntownBuilding.signs), con su caja, su tótem y su luz. */
+  private signs(): void {
+    for (const sg of this.b.signs ?? []) {
+      const e = this.edges.find((q) => q.orig === sg.edge && q.arc < 0);
+      if (!e) throw new Error(`Letrero "${sg.text}" de ${this.b.id}: la huella no tiene el lado ${sg.edge}`);
+      const [w, h] = sg.size;
+      // A lo largo: la x de la calle llevada al lado (si el lado no va a lo largo, al medio).
+      const dx = e.b.x - e.a.x;
+      const u = sg.x === undefined || Math.abs(dx) < 1e-3 ? e.len / 2 : ((sg.x - e.a.x) / dx) * e.len;
+      const m = this.frame(e, u - w / 2, 0);
+      const y0 = this.base + sg.y - h / 2;
+      const glow = sg.glow ?? this.kit.lights.sign;
+      const face: Surface = { pattern: PATTERN.sign, glow: glow ? glowOf(glow) : undefined };
+      const rect = this.kit.signRect(sg);
+      const gap = this.kit.signOffset;
+      this.face(this.kit.stone, m, 0, y0, w, y0 + h, sg.out + gap, WHITE, face, false, rect);
+      const back = new THREE.Color(sg.background);
+      if (sg.depth > 0) this.box(this.kit.stone, m, w, h, sg.depth, w / 2, y0 + h / 2, sg.out - sg.depth / 2, back);
+      if (sg.back) this.face(this.kit.stone, m, 0, y0, w, y0 + h, sg.out - sg.depth - gap, WHITE, face, true, rect);
+      if (sg.pole) {
+        const [px, pz] = this.at(e, u, sg.out - sg.depth / 2);
+        const foot = this.kit.terrain(px, pz) - this.kit.bury;
+        const pw = sg.pole.width;
+        this.box(this.kit.stone, m, pw, y0 - foot, pw, w / 2, (foot + y0) / 2, sg.out - sg.depth / 2, new THREE.Color(sg.pole.color));
+        const angle = Math.atan2(e.x.z, e.x.x);
+        this.kit.box(px, pz, pw / 2, pw / 2, angle, y0, false, -Infinity);
+        // La caja del letrero también ataja (a la altura de la cabeza se choca, no se atraviesa).
+        this.kit.box(px, pz, w / 2, Math.max(sg.depth, pw) / 2, angle, y0 + h, false, y0);
+      }
+    }
   }
 
   // ---------------------------------------------------------------------------------------------
@@ -826,7 +1049,7 @@ export class DowntownBuilder {
       const a = accents.find((q) => k >= (q.bays[0] + n) % n && k <= (q.bays[1] + n) % n);
       return a ? new THREE.Color(a.color) : c.wall;
     };
-    const wall: Surface = { pattern: PATTERN.stucco };
+    const wall: Surface = f.cladding ? { pattern: patternOf(f.cladding.pattern), scale: f.cladding.scale } : { pattern: PATTERN.stucco };
     const strip = (x0: number, x1: number, ya: number, yb: number): void => {
       const xs = [x0, ...cuts.filter((q) => q > x0 + 1e-4 && q < x1 - 1e-4), x1];
       for (let k = 0; k + 1 < xs.length; k++) this.face(this.kit.stone, m, xs[k], ya, xs[k + 1], yb, 0, colorAt((xs[k] + xs[k + 1]) / 2), wall);

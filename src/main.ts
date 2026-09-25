@@ -234,8 +234,9 @@ async function main(): Promise<void> {
     scene.add(bridges.group);
     if (lamps) bridges.bakeNight(lamps.data, game.render.lighting.streetLights);
   }
-  // Palmeras de los malecones (junto a la baranda de los muelles).
-  const palms = bridges?.palms.length ? new Palms(bridges.palms, game.palms) : null;
+  // Palmeras de los malecones (junto a la baranda de los muelles) y de los retiros de las calles modeladas.
+  const palmList = [...(bridges?.palms ?? []), ...monuments.streetPalms];
+  const palms = palmList.length ? new Palms(palmList, game.palms) : null;
   if (palms) scene.add(palms.group);
   // Reflejos en el río de noche: los postes de las orillas y los puentes, y los LED de La Perla
   // (que giran y cambian de color).
@@ -718,7 +719,7 @@ async function main(): Promise<void> {
     })
     .catch((err: unknown) => console.error('[traffic]', err));
   // Autos estacionados junto a las veredas (con el mismo programa de los del tráfico).
-  ParkedCars.load(manifestUrl, manifest, game.parking, game.traffic, heightmap)
+  ParkedCars.load(manifestUrl, manifest, game.parking, game.traffic, heightmap, monuments.parkingSpots)
     .then(async (loaded) => {
       if (!loaded) return;
       await renderer.compileAsync(loaded.group, camera, scene);

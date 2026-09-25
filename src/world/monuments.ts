@@ -4,6 +4,7 @@ import type { GeoFrame } from '../core/geo';
 import type { GameConfig } from '../core/types';
 import { fogTransmittanceGLSL } from '../render/fog';
 import { nightLight, withNightLight } from '../render/nightLight';
+import { type SignFace, SignAtlas } from '../render/signAtlas';
 import {
   PATTERN_AO,
   PATTERN_COLOR,
@@ -16,7 +17,9 @@ import {
 import type { DeckHit } from './bridges';
 import type { BuildingRecord } from './buildings';
 import type { Heightmap } from './heightmap';
+import { medianLights } from './medians';
 import { type Glow, type MonumentBase, NO_GLOW, Parts, colorsOf, glowOf, place, prism, strut } from './monumentParts';
+import type { ExtraSpots } from './parkedCars';
 import { type Palace, PalaceBuilder } from './palace';
 import { type Church, ChurchBuilder } from './church';
 import { ColumnBuilder, type VictoryColumn } from './column';
@@ -318,7 +321,7 @@ export interface Finish {
  * cubo, en el marco del rotor). `uLightsOn` lo declara la luz de noche (withNightLight), que
  * siempre va encadenada.
  */
-function createMaterial(cfg: MonumentsConfig, leds?: Leds, finish: Finish = {}): THREE.MeshStandardMaterial {
+function createMaterial(cfg: MonumentsConfig, leds?: Leds, finish: Finish = {}, signs?: THREE.Texture): THREE.MeshStandardMaterial {
   const glass = finish.opacity !== undefined;
   const material = new THREE.MeshStandardMaterial({
     vertexColors: true,
@@ -334,7 +337,7 @@ function createMaterial(cfg: MonumentsConfig, leds?: Leds, finish: Finish = {}):
     uFloodColor: { value: new THREE.Color(cfg.flood.color).multiplyScalar(cfg.flood.intensity) },
     uFloodTop: { value: cfg.flood.top },
     uFloodAim: { value: new THREE.Vector3(...cfg.flood.aim) },
-    ...patternUniforms(cfg.patterns),
+    ...patternUniforms(cfg.patterns, signs),
     ...leds?.uniforms,
   };
   const ledPars = leds ? `uniform vec2 uLedHub;\n${ledGLSL(leds.colors)}` : '';
@@ -393,10 +396,10 @@ ${PATTERN_VERTEX}`,
       .replace(
         '#include <emissivemap_fragment>',
         `#include <emissivemap_fragment>
-totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood * vGyeAo + vGlow * gyeMask + vLed ) * uLightsOn;`,
+totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood * vGyeAo + vGlow * gyeMask * gyeGlowTint + vLed ) * uLightsOn;`,
       );
   };
-  material.customProgramCacheKey = () => `gye-monument-v6${leds ? `-led${leds.colors}` : ''}${finish.cutout ? '-cutout' : ''}`;
+  material.customProgramCacheKey = () => `gye-monument-v7${leds ? `-led${leds.colors}` : ''}${finish.cutout ? '-cutout' : ''}`;
   withNightLight(material);
   return material;
 }
@@ -458,6 +461,12 @@ export class Monuments {
   private readonly clearAreas: ClearSet;
   /** Árboles de las veredas de las calles modeladas, como los de los datos (ver `streetTrees`). */
   private readonly treeData: number[] = [];
+  /** Palmeras de los retiros de las calles modeladas (ver `streetPalms`). */
+  private readonly palmData: number[][] = [];
+  /** Autos estacionados en los retiros y carriles de las calles modeladas (ver `parkingSpots`). */
+  private readonly spots: { x: number; z: number; heading: number; seed: number; lift: number }[] = [];
+  /** Los letreros de las calles modeladas, en un atlas (render/signAtlas.ts). */
+  private readonly signAtlas: SignAtlas;
 
   constructor(
     private readonly cfg: MonumentsConfig,
@@ -467,7 +476,8 @@ export class Monuments {
     private readonly fog: FogConfig,
   ) {
     this.group.name = 'monuments';
-    this.material = createMaterial(cfg);
+    this.signAtlas = new SignAtlas(Monuments.signFaces(cfg), cfg.signs);
+    this.material = createMaterial(cfg, undefined, {}, this.signAtlas.texture);
     this.clearAreas = Monuments.clearAreasOf(cfg, geo);
     // Asignarla a los tipos de arriba valida la config al compilar.
     this.list = cfg.list;
@@ -520,6 +530,13 @@ export class Monuments {
     this.group.updateMatrixWorld(true);
   }
 
+  /** Los letreros de los edificios de todas las calles modeladas (para armar el atlas). */
+  private static signFaces(cfg: MonumentsConfig): SignFace[] {
+    return (cfg.list as readonly MonumentConfig[])
+      .filter((m) => m.type === 'street')
+      .flatMap((m) => streetFile((m as Street).file).blocks.flatMap((b) => b.buildings.flatMap((bd) => bd.signs ?? [])));
+  }
+
   /** Círculos (marco local) donde los monumentos reemplazan a los edificios de los datos. */
   get exclusions(): { x: number; z: number; radius: number }[] {
     return this.list.filter((m) => m.exclude > 0).map((m) => ({ ...this.geo.toLocal(m.lat, m.lon), radius: m.exclude }));
@@ -566,6 +583,14 @@ export class Monuments {
         continue;
       }
       const file = streetFile((m as Street).file);
+      const M = file.median;
+      if (M && file.medians) {
+        // Los postes de dos brazos del parterre: una luz por luminaria, hacia su calzada.
+        for (const l of medianLights(M, file.medians)) {
+          const w = world(l.x, l.z);
+          lights.push({ x: w.x, z: w.z, y: heightmap.sample(w.x, w.z) + M.height, h: l.h, arm: l.out - r, power: M.lamps.light.power, led: M.lamps.light.led });
+        }
+      }
       const F = file.furniture;
       for (const lamp of layoutFurniture(F, file.blocks).lamps) {
         const foot = world(lamp.x, lamp.z);
@@ -627,6 +652,22 @@ export class Monuments {
    */
   get streetTrees(): Float32Array {
     return Float32Array.from(this.treeData);
+  }
+
+  /** Palmeras de los retiros de las calles modeladas: x, z, y (pie), alto y semilla (world/palms.ts). */
+  get streetPalms(): number[][] {
+    return this.palmData;
+  }
+
+  /** Autos estacionados en los retiros y carriles de las calles modeladas (world/parkedCars.ts). */
+  get parkingSpots(): ExtraSpots {
+    return {
+      x: Float32Array.from(this.spots, (p) => p.x),
+      z: Float32Array.from(this.spots, (p) => p.z),
+      heading: Float32Array.from(this.spots, (p) => p.heading),
+      seed: Uint8Array.from(this.spots, (p) => p.seed),
+      lift: Float32Array.from(this.spots, (p) => p.lift),
+    };
   }
 
   /** ¿Cae (x, z) en un despeje de una calle o un lugar modelado? (sin árboles de los datos). */
@@ -914,6 +955,17 @@ export class Monuments {
         const photo = color.clone().convertLinearToSRGB();
         this.treeData.push(w.x, y, w.z, height, radius, photo.r, photo.g, photo.b);
       },
+      palm: (lx, lz, y, height) => {
+        const w = this.world(root, lx, lz);
+        this.palmData.push([w.x, w.z, y, height, this.palmData.length]);
+      },
+      // El rumbo local pasa al mundo restando el giro del marco (como el brazo de un farol).
+      car: (lx, lz, angle, lift) => {
+        const w = this.world(root, lx, lz);
+        this.spots.push({ x: w.x, z: w.z, heading: angle - root.rotation.y, seed: this.spots.length % 256, lift });
+      },
+      signRect: (sign) => this.signAtlas.rect(sign),
+      signOffset: this.cfg.signs.offset,
     }).build();
   }
 

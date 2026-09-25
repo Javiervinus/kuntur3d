@@ -133,7 +133,8 @@
    "shop": 0.8,
    "reveal": 0.7,
    "balcony": 0.75,
-   "roof": 0.9
+   "roof": 0.9,
+   "band": 0.75
   },
   "colors": {
    "wall": "#d9d2c4",
