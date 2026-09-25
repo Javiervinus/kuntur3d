@@ -562,6 +562,18 @@ Construidos a mano con piezas procedurales (sin modelos externos), en su lugar y
   hierro de dos linternas con la estrella celeste de Guayaquil** (78, en cada esquina y cada
   ~27 m; de noche alumbran en lugar de los postes genéricos), árboles en macetero de acero o en
   alcorque con rejilla (entran a los árboles de la ciudad) y bancas de listones.
+- **La principal de la Alborada** (Av. Rodolfo Baquerizo Nazur, de la Egas Miranda a la Benjamín
+  Carrión, ~570 m): los 45 edificios y 13 lotes de sus dos frentes, con los que la gente
+  reconoce: el Pizza Hut con su portal de columnas blancas (se camina) y su letrero en poste, el
+  Banco Internacional con su franja naranja y el revestimiento de placas, el McDonald's gris
+  oscuro de ventanales con su "M" en poste, el Banco Pichincha, el Banco Guayaquil, el Santuario de La Alborada, la
+  capilla de ladrillo con su torre, el Centro Comercial La Alborada con su arcada, Pollo Campero,
+  la UPC y la plaza roja. Cada local con su **letrero** (el nombre, con una letra genérica:
+  los logos no se copian), que de noche se enciende. Delante de los locales, sus
+  **parqueaderos** (puestos pintados, topes amarillo y negro, autos, palmeras) o patios y
+  jardineras, con rejas donde las hay; del lado sur, el carril de parqueo. Al medio, el
+  **parterre** con su cerca baja de arcos, árboles y los postes LED de dos brazos, que de noche
+  alumbran las dos calzadas.
 - **Iglesia de San Francisco y Plaza Rocafuerte** (`src/world/church.ts`, un tipo de iglesia
   paramétrico para las que vengan): fachada de dos cuerpos con columnas, frontones y ventanas
   en arco, las **dos torres** de tres cuerpos (campanario, ventana con frontón, reloj que se
@@ -628,10 +640,20 @@ para lo que sostienen), remates de hastial (`gableTop`) y escudos (`shield`), pi
 planas (`faceted`) o vistas desde adentro (`inward`), pisos que siguen el terreno (`pave`) y en
 los dibujos procedurales la carpintería de las ventanas, adoquines, barrotes y balaustres
 calados.
+La Alborada, una avenida de ciudadela, sumó al kit lo que no tiene el centro: techos inclinados
+(dientes de sierra, a dos y a cuatro aguas, con teja), marquesinas, franjas de color y
+revestimiento de placas en las fachadas, **letreros** (cada uno se dibuja una vez en un atlas
+compartido, `src/render/signAtlas.ts`, recortado a lo que ocupan), el **parterre** con sus
+postes de dos brazos (`src/world/medians.ts`, su contorno sale de la calzada medida en el
+juego), los **retiros** y el carril de parqueo (`src/world/streetLots.ts`: los autos van a los
+autos estacionados de la ciudad y las palmeras a las palmeras), y los dibujos de cerca de
+arcos, losas, tierra con césped y teja.
 Rendimiento, medido con 10 copias en la vista más cargada de cada una (resolución 2×, sombras
 incluidas): la avenida entera ~0,45 ms de GPU y 26,8 MB (unos 1,5 MB por cuadra, un quinto de
 la manzana del Palacio), la iglesia con su plaza ~0,15 ms y 3,6 MB, el parque con la Columna
-~0,11 ms y 4 MB. Se arman en ~140 ms en la carga.
+~0,11 ms y 4 MB. Se arman en ~140 ms en la carga. La Alborada, medida en la misma corrida que la
+9 de Octubre (con la máquina más cargada: 0,33 ms contra 0,87 ms), cuesta unas 0,4 veces la 9 de
+Octubre de GPU, y 8,8 MB de geometría más ~6 MB del atlas de letreros.
 
 ### Estadios
 
@@ -797,9 +819,9 @@ pipeline/            build_world.py → public/world/ (manifest + binarios + tex
 src/world/           terreno, edificios (+colisiones), calles, agua y sus reflejos, árboles,
                      puentes y malecones, palmeras, íconos (y el kit de arquitectura clásica con
                      que se arman el Palacio Municipal, las iglesias y la Columna), calles
-                     modeladas con sus fachadas y mobiliario (la 9 de Octubre), alumbrado,
-                     tráfico, autos estacionados,
-                     peatones, texturas por chunk
+                     modeladas con sus fachadas, letreros, mobiliario, parterres y retiros
+                     (la 9 de Octubre, la principal de la Alborada), alumbrado, tráfico,
+                     autos estacionados, peatones, texturas por chunk
 src/player/          personajes, controlador (caminar/trepar/nadar/planear), cámara, avatar, ropa, ala delta
 src/vehicles/        carro: modelo procedural, física y subir/bajar
 src/ui/              HUD, buscador, minimapa y mapa (capas vectoriales en canvas), pausa, reloj,
