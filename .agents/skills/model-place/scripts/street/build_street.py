@@ -272,6 +272,69 @@ def front_iv(c: dict) -> tuple:
     return (min(xs), max(xs), sum(pts[i][1] for i in c['avenue']) / len(c['avenue']))
 
 
+# Lo que puede traer cada registro del inventario (references/street-pipeline.md, sección 6): una
+# clave mal escrita o mal anidada no se pierde sin aviso.
+RECORD = {'side', 's', 'x', 'z', 'name', 'source', 'floors', 'style', 'set', 'ground', 'tower', 'osm', 'split', 'depth',
+          'round', 'radius', 'accents', 'lot', 'behind', 'retiro', 'signs'}
+SIGN = {'text', 'size', 'y', 'x', 'edge', 'out', 'depth', 'color', 'background', 'font', 'weight', 'italic', 'fill', 'pole', 'back', 'glow'}
+TOWER = {'inset', 'floors', 'style', 'set', 'ring', 'fronts'}
+RETIRO = {'style', 'x', 'set'}
+
+
+def check_inventory(records: list, styles: dict, retiros: dict) -> None:
+    """Falla, con todos los problemas juntos, si un registro trae una clave que el script no usa, le
+    falta lo que necesita o nombra un estilo que la cabecera no tiene."""
+    errs = []
+
+    def bad(t: dict, msg: str) -> None:
+        errs.append(f"{t.get('name', '(sin nombre)')}: {msg}")
+
+    def span(t: dict, v, what: str) -> None:
+        if v is not None and not (isinstance(v, list) and len(v) == 2 and all(isinstance(q, (int, float)) for q in v) and v[0] < v[1]):
+            bad(t, f'{what} tiene que ser [desde, hasta], con desde < hasta')
+
+    for t in records:
+        for k in sorted(set(t) - RECORD):
+            bad(t, f'clave desconocida `{k}`')
+        if 'name' not in t:
+            bad(t, 'falta `name`')
+        if t.get('side') not in ('N', 'S'):
+            bad(t, '`side` es N o S')
+        for k in ('s', 'x', 'z'):
+            span(t, t.get(k), f'`{k}`')
+        if 's' not in t and 'x' not in t:
+            bad(t, 'falta dónde está: `s` o `x`')
+        if 'z' in t and 'x' not in t:
+            bad(t, '`z` va con `x`')
+        if t.get('lot'):
+            if 'x' not in t or 'z' not in t:
+                bad(t, 'un lote necesita `x` y `z`')
+            if 'retiro' not in t:
+                bad(t, 'un lote sin `retiro` no arma nada')
+        elif 'floors' not in t or 'style' not in t:
+            bad(t, 'falta `floors` o `style`')
+        elif t['style'] not in styles:
+            bad(t, f"el estilo `{t['style']}` no está en la cabecera (styles)")
+        r = t.get('retiro')
+        if r is not None:
+            spec = r if isinstance(r, dict) else {'style': r}
+            for k in sorted(set(spec) - RETIRO):
+                bad(t, f'el retiro trae `{k}`; lo que cambia de su estilo va dentro de "set"')
+            if spec.get('style') not in (retiros or {}):
+                bad(t, f"el retiro de estilo `{spec.get('style')}` no está en la cabecera (retiros)")
+            span(t, spec.get('x'), '`retiro.x`')
+        for sg in t.get('signs', []):
+            for k in sorted(set(sg) - SIGN):
+                bad(t, f"el letrero \"{sg.get('text', '?')}\" trae `{k}`")
+            for k in ('text', 'size', 'y', 'color', 'background'):
+                if k not in sg:
+                    bad(t, f"al letrero \"{sg.get('text', '?')}\" le falta `{k}`")
+        for k in sorted(set(t.get('tower') or {}) - TOWER):
+            bad(t, f'la torre trae `{k}`')
+    if errs:
+        raise SystemExit('El inventario tiene problemas (references/street-pipeline.md, sección 6):\n  ' + '\n  '.join(errs))
+
+
 def build(street: Street) -> dict:
     cfg = street.cfg
     fp = cfg['footprints']
@@ -541,9 +604,6 @@ def build(street: Street) -> dict:
             yard = {'id': f'{name}-retiro', 'style': spec['style'],
                     'ring': clean_ring(cfg, [[round(p[0], dec), round(p[1], dec)] for p in list(poly.exterior.coords)[:-1]]),
                     'along': [[round(ya, dec), round(za, dec)], [round(yb, dec), round(zb, dec)]], 'depth': round(depth, dec)}
-            unknown = sorted(set(spec) - {'style', 'x', 'set'})
-            if unknown:
-                raise SystemExit(f"{t['name']}: el retiro trae {unknown}; lo que cambia de su estilo va dentro de \"set\"")
             if spec.get('set'):
                 yard['set'] = spec['set']
             yards_out.append(yard)
@@ -646,7 +706,9 @@ def main() -> None:
     if args.report:
         report(street)
         return
-    out = {**head(street), **build(street)}
+    hd = head(street)
+    check_inventory(street.read('inventory.json')['buildings'], hd.get('styles', {}), hd.get('retiros'))
+    out = {**hd, **build(street)}
     text = json.dumps(out, ensure_ascii=False, indent=1)
     rel = street.output.relative_to(REPO)
     if args.check:
