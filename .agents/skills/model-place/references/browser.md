@@ -133,6 +133,11 @@ Corren de fondo (tardan un par de minutos por kilómetro):
 El resultado es `transects.json` de la calle: se guarda tal cual, o se agregan sus filas si se
 está extendiendo el tramo. Si el sitio de la calle ya está en el juego, el lugar puede ser su id.
 
+En una avenida de doble calzada, pasar `median` (el ancho máximo del parterre, en m; con 0 no lo
+busca). Donde las dos calzadas quedan separadas por un hueco de hasta ese ancho, la fila junta
+las dos y agrega los bordes del parterre: `[x, z desde, z hasta, material, parterre desde,
+parterre hasta]`. En la Alborada se midió con `median: 12`.
+
 ## Costo
 
 **Memoria**:
@@ -184,6 +189,7 @@ la misma corrida y desde una vista parecida.
 |---|---|---|
 | Palacio | ~0,66 ms | 7,9 MB |
 | 9 de Octubre (18 cuadras) | ~0,45 ms | ~26 MB |
+| Principal de la Alborada (13 cuadras, parterre y retiros) | ~0,4 × la 9 de Octubre en la misma corrida | 8,8 MB (+ atlas de letreros) |
 | Iglesia de San Francisco con su plaza | ~0,15 ms | 3,5 MB |
 | Parque Centenario con la Columna | ~0,11 ms | ~4 MB |
 

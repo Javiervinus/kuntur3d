@@ -6,7 +6,8 @@
 2. Piezas de arquitectura (`classical.ts`)
 3. Juntar piezas (`monumentParts.ts`)
 4. Dibujos procedurales (`surfacePatterns.ts`)
-5. Cómo se arma
+5. Piezas de las calles (`downtown.ts`, `medians.ts`, `streetLots.ts`, `signAtlas.ts`)
+6. Cómo se arma
 
 ## 1. Tipos que ya existen
 
@@ -19,7 +20,7 @@ config, nunca se copia.
 | `church` | `church.ts` | Fachada con torres, nave, crucero con cúpula, costado a la calle con locales, convento con arcada, plaza con pila y estatua | `iglesiaSanFrancisco` |
 | `column` | `column.ts` | Columna conmemorativa: plataforma, pedestal, estatuas, fuste, capitel, remate y césped con reja | `columnaProceres` |
 | `park` | `park.ts` | Paseos, reja con portadas, grupos de bronce, faroles de globos (que alumbran de noche) y mástiles | `parqueCentenario` |
-| `street` | `street.ts` + `downtown.ts` + `streetFurniture.ts` | Una calle entera: cuadras, veredas, fachadas por familia y mobiliario (ver `street-pipeline.md`) | `nueveDeOctubre` |
+| `street` | `street.ts` + `downtown.ts` + `streetFurniture.ts` + `medians.ts` + `streetLots.ts` | Una calle entera: cuadras, veredas, fachadas por familia, letreros, mobiliario, parterre, retiros y carril de parqueo (ver `street-pipeline.md`) | `nueveDeOctubre`, `rodolfoBaquerizoNazur` |
 
 La interfaz de la config de cada tipo vive junto a su builder, con cada campo comentado.
 
@@ -60,11 +61,39 @@ La interfaz de la config de cada tipo vive junto a su builder, con cada campo co
 ## 4. Dibujos procedurales (`src/render/surfacePatterns.ts`)
 
 Dibujos con relieve, parametrizados en `monuments.patterns`: `PATTERN.stucco`, `scales`,
-`shutter`, `terrazzo`, `tiles`, `glazing`, `pavers`, `bars` (calado) y `balusters` (calado). Un
-material nuevo (ladrillo, bloque visto, piedra, madera, zinc) es un `kind` más ahí y sus
-parámetros en la config.
+`shutter`, `terrazzo`, `tiles`, `glazing`, `pavers`, `bars` (calado), `balusters` (calado),
+`hoops` (calado: la cerca baja de arcos de los parterres), `slabs` (losas o placas de
+revestimiento con junta), `soil` (tierra con manchas de césped) y `roofTiles` (teja). Un material
+nuevo (ladrillo, bloque visto, piedra, madera, zinc) es un `kind` más ahí y sus parámetros en la
+config.
 
-## 5. Cómo se arma
+`sign` no es un dibujo: lee el atlas de letreros (ver abajo) con las uv que le da cada letrero.
+
+## 5. Piezas de las calles
+
+Todas se piden desde la config de la calle (`config/streets/<calle>.json`, ver
+`street-pipeline.md`); aquí, qué hay y dónde vive.
+
+- **Fachadas** (`downtown.ts`), además de pisos, portal, locales, balcones y remate:
+  - `roof`: techo inclinado (`gables` en dientes de sierra, `gable` o `hip` a cuatro aguas), con
+    alero y teja;
+  - `awning`: marquesina inclinada sobre la vereda;
+  - `bands`: franjas que salen de la fachada (la banda de color de un banco o una tienda);
+  - `facade.cladding`: revestimiento de placas (un dibujo) en vez de ventanas;
+  - `signs`: letreros pegados a la fachada, parados en un poste o sobre el techo.
+- **Letreros** (`src/render/signAtlas.ts`): cada letrero distinto se dibuja una vez, con su
+  texto, letra y colores, en un atlas compartido por todos los monumentos (`monuments.signs`). El
+  alto del atlas se recorta a lo que ocupan. Solo el nombre, con una letra genérica: los logos no
+  se copian.
+- **Parterre** (`medians.ts`): piso con bordillo, cerca baja, postes LED de dos brazos (sus luces
+  se suman al alumbrado) y árboles, sobre un contorno que arma `build_street.py` desde los
+  transectos.
+- **Retiros y carril** (`streetLots.ts`): el patio o parqueadero entre la vereda y el edificio
+  (piso, puestos pintados, topes, borde de bordillo, jardinera o reja con sus postes, palmeras y
+  autos estacionados) y el carril de parqueo junto al bordillo. Los autos se suman a
+  `ParkedCars` y las palmeras a `Palms`: no son geometría propia de la calle.
+
+## 6. Cómo se arma
 
 - **Coordenadas locales**:
   - trabajar con x a lo largo de la fachada principal;

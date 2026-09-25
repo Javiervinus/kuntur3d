@@ -16,7 +16,9 @@ Esta skill la puede usar cualquier persona que colabore en el proyecto, con su a
 ejemplos completos:
 - **un edificio**: el Palacio Municipal (`src/world/palace.ts`, entrada `palacioMunicipal` de
   `config/game.json` → `monuments.list`);
-- **una calle**: la Av. 9 de Octubre (`config/streets/nueve-de-octubre/`).
+- **una calle**: la Av. 9 de Octubre (`config/streets/nueve-de-octubre/`);
+- **una avenida con parterre, retiros y letreros**: la principal de la Alborada
+  (`config/streets/rodolfo-baquerizo-nazur/`).
 
 Ante la duda, mirar cómo se resolvió ahí.
 

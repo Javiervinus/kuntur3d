@@ -3,8 +3,12 @@
 Una calle no se modela edificio por edificio como el Palacio. Se describe en unos pocos archivos
 y un script la arma: las veredas, las huellas de cada edificio y lo que se despeja de los datos. El
 juego pone el resto con los tipos de fachada de `downtown.ts` y el mobiliario de
-`streetFurniture.ts`. La Av. 9 de Octubre (del Malecón al Parque Centenario, 66 edificios) es el
-ejemplo completo: `config/streets/nueve-de-octubre/` y `config/streets/nueve-de-octubre.json`.
+`streetFurniture.ts`. Hay dos ejemplos completos:
+- la Av. 9 de Octubre (del Malecón al Parque Centenario, 66 edificios), una calle del centro con
+  portales: `config/streets/nueve-de-octubre/` y `config/streets/nueve-de-octubre.json`;
+- la Av. Rodolfo Baquerizo Nazur (la principal de la Alborada, de la Egas Miranda a la Benjamín
+  Carrión, 45 edificios y 13 lotes), una avenida de doble calzada con parterre, locales con
+  retiro, parqueaderos, carril de parqueo y letreros: `config/streets/rodolfo-baquerizo-nazur/`.
 
 ## Contenido
 
@@ -15,8 +19,9 @@ ejemplo completo: `config/streets/nueve-de-octubre/` y `config/streets/nueve-de-
 5. Extender una calle que ya existe
 6. El inventario, campo por campo
 7. Estilos de fachada
-8. Cuadras que no son una calle con veredas
-9. Cuando algo falla
+8. Avenidas: parterre, retiros y carril de parqueo
+9. Cuadras que no son una calle con veredas
+10. Cuando algo falla
 
 ## 1. Qué es una calle en el juego
 
@@ -26,13 +31,15 @@ ejemplo completo: `config/streets/nueve-de-octubre/` y `config/streets/nueve-de-
 - **`config/streets/<nombre>.json`**: lo que lee el juego.
   - La **cabecera** se edita a mano en este mismo archivo: `name`, `sources`, `defaults`,
     `styles`, `lights`, `signs`, `ground`, `detail`, `sidewalks` y `furniture` (faroles,
-    árboles, bancas).
-  - **`clear`** y **`blocks`** los escribe el script. No se tocan a mano: se pierden en la
-    próxima corrida.
+    árboles, bancas). En una avenida, además, `retiros`, `lane` y `median` (sección 8).
+  - **`clear`**, **`blocks`** y **`medians`** los escribe el script. No se tocan a mano: se
+    pierden en la próxima corrida.
 - **El código**:
   - `src/world/street.ts` arma cada cuadra y sus veredas (`pave`);
-  - `src/world/downtown.ts` arma las fachadas por familia (los `styles`);
-  - `src/world/streetFurniture.ts` reparte el mobiliario.
+  - `src/world/downtown.ts` arma las fachadas por familia (los `styles`) y sus letreros;
+  - `src/world/streetFurniture.ts` reparte el mobiliario;
+  - `src/world/medians.ts` arma el parterre y `src/world/streetLots.ts` los retiros y el carril
+    de parqueo.
 
 Marco de la calle: x a lo largo del eje (desde el origen, hacia donde apunta el rumbo), z a la
 derecha. Todas las coordenadas de los archivos están en ese marco, en metros.
@@ -62,18 +69,27 @@ derecha. Todas las coordenadas de los archivos están en ese marco, en metros.
   vale la del archivo.
 - `blocks`: por lado (`N`, a la derecha del eje con z positiva; `S`, a la izquierda), el tramo
   de cada cuadra, **de esquina a esquina de la calzada transversal**, y entre qué calles queda.
-  - Opcional, al final, un objeto con opciones de esa cuadra.
-  - Por ahora, `"curb": [a, b]` fija la recta del cordón (z = a + b·x) en vez de ajustarla a los
-    transectos. Sirve donde la calzada no es la de siempre (ver la sección 8).
-- `settings`: pisa cualquier valor de `scripts/street/defaults.json` para esta calle (por
-  ejemplo, `{"footprints": {"walk": 6}}` si la vereda sin edificio es más angosta).
+  - Opcional, al final, un objeto con opciones de esa cuadra:
+    - `"curb": [a, b]` fija la recta del cordón (z = a + b·x) en vez de ajustarla a los
+      transectos. Sirve donde la calzada no es la de siempre (ver la sección 9);
+    - `"join": true`: la cuadra sigue a la anterior del mismo lado sin calle de por medio (se
+      parte solo para que cada tramo tenga su propia recta de cordón). Entre las dos no va
+      bordillo transversal;
+    - `"lane": m`: el bordillo real queda esos metros más afuera que la calzada del juego, y ese
+      carril se arma como carril de parqueo (sección 8).
+- `settings`: pisa cualquier valor de `scripts/street/defaults.json` para esta calle. Por
+  ejemplo, `{"footprints": {"walk": 6}}` si la vereda sin edificio es más angosta, o
+  `{"curb": {"outlier": 1.2}}` para que el ajuste del cordón descarte, de a una y de la peor a la
+  mejor, las filas que se alejan más de 1,2 m de la recta (entradas a parqueaderos, paradas).
 
 **`inventory.json`**: un registro por edificio que da a la calle (ver la sección 6), más
 `source`, de dónde salieron pisos y colores.
 
 **`transects.json`**: la calzada medida en el juego cada pocos metros: `[x, z desde, z hasta,
-material]` (o nulls). De ahí sale la recta del cordón de cada cuadra. Se mide con
-`scripts/browser/helpers.js` → `transects` (ver `browser.md`).
+material]` (o nulls). De ahí sale la recta del cordón de cada cuadra. En una avenida con
+parterre, las filas que lo encuentran traen dos columnas más, sus bordes: `[x, z desde, z hasta,
+material, parterre desde, parterre hasta]`. Se mide con `scripts/browser/helpers.js` →
+`transects` (ver `browser.md`).
 
 **Fuera de git**, en el caché del pipeline (`pipeline/.cache/streets/<nombre>/`): `osm.json` y
 las imágenes de `plan.py` y `satellite.py`.
@@ -110,7 +126,8 @@ controlar.
    `config/game.json`: falta el archivo que lee el juego.
 4. **Transectos.** En el juego, con los ayudantes de consola instalados, correr `transects` con
    el marco `{lat, lon, headingDeg}` de la entrada, de un poco antes a un poco después del tramo.
-   Guardar el resultado en `transects.json` (ver `browser.md`).
+   En una avenida con parterre, con `median` (el ancho máximo del parterre, en m). Guardar el
+   resultado en `transects.json` (ver `browser.md`).
 5. **Las cuadras.**
    - En los transectos, un cruce es donde la calzada ocupa todo el ancho: filas como
      `[85, -30, 30, "asphalt"]`.
@@ -127,7 +144,7 @@ controlar.
    - `edificios N`;
    - avisos `!! sin lugar para …`: un edificio sin huella al que no le quedó frente libre;
    - avisos `!! cuadra …`: la recta del cordón salió muy inclinada o del otro lado del eje. No
-     seguir hasta resolverlo (sección 8).
+     seguir hasta resolverlo (sección 9).
 8. **Entrar al juego.** Agregar la entrada de `--frame` a `config/game.json` → `monuments.list`.
    Editar el JSON como texto, insertando el bloque. El servidor de dev recarga solo.
 9. **Iterar.**
@@ -179,6 +196,11 @@ Un registro por edificio, en una línea:
 | `depth` | Fondo de la huella inventada (por defecto, `footprints.depth`) |
 | `round` | `E` o `W`: redondea la esquina de ese extremo del frente; `radius` le da el radio |
 | `accents` | `[{bays, color}]`: vanos del frente con otro color |
+| `z` | Con `x`: `[frente, fondo]` en m desde el eje (positivos, de los dos lados). El rectángulo es exacto: no se corre por las huellas vecinas (sirve para un edificio detrás de otro o de un lote) |
+| `behind` | El edificio queda detrás de un lote o de otro edificio: su frente no marca el borde de la vereda |
+| `lot` | Un lote sin edificio (un parqueadero, una entrada): solo su retiro, con `x` y `z` (del fondo sirve `z[1]`) |
+| `retiro` | El patio o parqueadero entre la vereda y el frente: el nombre de un estilo de `retiros`, o `{style, x, set}` con su tramo (`x`, si no el del frente) y retoques del estilo (`set`) |
+| `signs` | Letreros: `[{text, size: [ancho, alto], y, color, background, …}]`. Van en el frente a la avenida salvo `edge`; `out` y `depth` salen de `defaults.json` → `signs`. Los campos, en `DowntownSign` (`src/world/downtown.ts`). Solo nombres de negocios: ni teléfonos ni propaganda política |
 
 **De dónde salen pisos y colores.**
 - Mejor: fotos propias, Mapillary o Commons, con su crédito en `sources`.
@@ -214,7 +236,35 @@ cada campo está en `DowntownStyle`, con sus comentarios, en `src/world/downtown
 Un estilo nuevo se agrega en la cabecera. Un tipo de fachada que `downtown.ts` todavía no sabe
 armar se agrega ahí como un `kind` genérico, nunca como código para un solo edificio.
 
-## 8. Cuadras que no son una calle con veredas
+## 8. Avenidas: parterre, retiros y carril de parqueo
+
+En las avenidas de las ciudadelas (la Alborada, Urdesa, Sauces) los locales no dan a la vereda:
+tienen delante un parqueadero o un patio, y la avenida tiene parterre. Todo sale de la cabecera
+de la calle y del inventario:
+
+- **Parterre** (`median` en la cabecera; contorno en `medians`): `build_street.py` lo arma de las
+  filas de los transectos que traen sus bordes, un contorno por tramo seguido. Los bordes se
+  suavizan con la mediana de `medians.smooth` filas; un salto de más de `medians.maxStep` m (un
+  cruce) lo corta, y los tramos de menos de `medians.minLength` m no cuentan
+  (`defaults.json`). La cabecera da el piso, el bordillo, la cerca baja, los postes de dos brazos
+  y los árboles (`MedianStyle` en `src/world/medians.ts`).
+- **Retiros** (`retiros` en la cabecera: un estilo por tipo, como `parqueo`, `cerrado`, `jardin`
+  o `plaza`): cada edificio con `retiro` y cada lote (`lot`) lleva uno, de la vereda al frente.
+  El estilo da el piso, los puestos pintados, los topes, el borde (bordillo, jardinera o reja
+  con postes, con huecos en `gaps` para las entradas), las palmeras y qué parte de los puestos
+  lleva auto (`RetiroStyle` en `src/world/streetLots.ts`).
+- **Carril de parqueo** (`lane` en la cabecera y en la cuadra de `spec.json`): cuando el bordillo
+  real queda más afuera que la calzada del juego, ese carril se pavimenta y lleva autos
+  estacionados en paralelo.
+
+Los autos van a `ParkedCars` y las palmeras a `Palms`, como los de los datos: se dibujan y se
+chocan igual.
+
+**Lo que no calza (todavía)**: la calzada del juego sale de OSM y puede no coincidir con la real.
+En la Alborada, el juego deja ~6 m entre las dos calzadas y el parterre real mide ~2 m; el
+parterre del juego llena ese hueco. Corregirlo es cosa de los datos de vías, no de la calle.
+
+## 9. Cuadras que no son una calle con veredas
 
 `street.ts` arma cada cuadra como una calle de siempre: calzada, cordón, vereda y mobiliario con
 las reglas de la cabecera. Hay tramos que no son así. En la 9 de Octubre, entre Pedro Moncayo y
@@ -233,7 +283,7 @@ ajusta el cordón a los transectos, sale una recta absurda: `build_street.py` av
   Se agregan como opciones de la cuadra en `spec.json` y del archivo de la calle, nunca como un
   caso especial para una sola calle.
 
-## 9. Cuando algo falla
+## 10. Cuando algo falla
 
 - **`Falta …/spec.json` o `…transects.json`**: la calle no tiene sus fuentes. Ver la sección 2.
 - **`Falta pipeline/.cache/streets/<calle>/osm.json`**: correr `fetch_osm.py`.
@@ -245,7 +295,13 @@ ajusta el cordón a los transectos, sale una recta absurda: `build_street.py` av
   satélite y corregir `osm` o `split` en el inventario.
 - **`!! sin lugar para …`**: el frente `s` de ese edificio cae entero sobre huellas de otros. Ver
   el plano: suele faltarle `osm`, o su `s` está corrido.
-- **`!! cuadra …: la recta del cordón …`**: ver la sección 8.
+- **`!! cuadra …: la recta del cordón …`**: ver la sección 9. Si solo la tuercen unas filas
+  (una entrada a un parqueadero), probar con `settings.curb.outlier`.
+- **`el retiro trae […]`**: lo que cambia del estilo del retiro va dentro de su `set`.
+- **`!! fuera de las cuadras`**: el medio de ese registro no cae en ninguna cuadra de su lado (ni a
+  menos de `footprints.match` m de una punta): corregir su `s` o `x`, o agregar la cuadra.
+- **`Retiro …: … tiene que ser mayor que 0`** (al cargar el juego): un largo del estilo del retiro
+  (franjas, pilares) quedó en 0; se pisa en su `set` o en el estilo de la cabecera.
 - **`--check` dice NO coincide** sin que nadie haya cambiado las fuentes: alguien editó `blocks` o
   `clear` a mano, o cambiaron OSM o los datos del mundo. Volver a armar y revisar la diferencia en
   el juego.
