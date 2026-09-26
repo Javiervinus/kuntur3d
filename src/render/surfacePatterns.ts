@@ -29,6 +29,16 @@ export function patternUniforms(cfg: PatternsConfig, signs: THREE.Texture = noSi
   const so = cfg.soil;
   const rt = cfg.roofTiles;
   const ho = cfg.hoops;
+  const ru = cfg.rubble;
+  const di = cfg.diamonds;
+  const mo = cfg.mosaic;
+  // Los pesos de los colores del mosaico, acumulados: la placa toma el primero por debajo de su azar.
+  const moTotal = mo.weights.reduce((a, b) => a + b, 0);
+  const st = cfg.stripes;
+  const co = cfg.corrugated;
+  const bk = cfg.blocks;
+  const cl = cfg.chainLink;
+  const wi = cfg.wires;
   return {
     uStucco: { value: new THREE.Vector4(s.blotch, s.contrast, s.grain, s.grainBump) },
     uStreaks: { value: new THREE.Vector4(s.streaks.width, s.streaks.length, s.streaks.contrast, s.streaks.threshold) },
@@ -53,6 +63,24 @@ export function patternUniforms(cfg: PatternsConfig, signs: THREE.Texture = noSi
     uSoilGrass: { value: new THREE.Color(so.grass) },
     uRoofTiles: { value: new THREE.Vector4(rt.size[0], rt.size[1], rt.lap, rt.variation) },
     uRoofTiles2: { value: new THREE.Vector3(rt.lapShade, rt.crest, rt.bump) },
+    uRubble: { value: new THREE.Vector4(ru.size, ru.joint, ru.jointShade, ru.variation) },
+    uRubble2: { value: new THREE.Vector2(ru.tintShare, ru.bump) },
+    uRubbleTint: { value: new THREE.Color(ru.tint) },
+    uDiamonds: { value: new THREE.Vector4(di.size[0], di.size[1], di.groove, di.shade) },
+    uDiamondsBump: { value: di.bump },
+    uMosaic: { value: new THREE.Vector4(mo.size[0], mo.size[1], mo.joint, mo.jointShade) },
+    uMosaic2: { value: new THREE.Vector4(mo.variation, mo.bump, mo.weights[0] / moTotal, (mo.weights[0] + mo.weights[1]) / moTotal) },
+    uMosaicA: { value: new THREE.Color(mo.colors[0]) },
+    uMosaicB: { value: new THREE.Color(mo.colors[1]) },
+    uMosaicC: { value: new THREE.Color(mo.colors[2]) },
+    uStripes: { value: new THREE.Vector3(st.period, st.duty, st.shade) },
+    uCorrugated: { value: new THREE.Vector3(co.pitch, co.contrast, co.depth) },
+    uCorrugated2: { value: new THREE.Vector4(co.streaks.width, co.streaks.length, co.streaks.contrast, co.streaks.threshold) },
+    uBlocks: { value: new THREE.Vector4(bk.size[0], bk.size[1], bk.joint, bk.jointShade) },
+    uBlocks2: { value: new THREE.Vector2(bk.variation, bk.bump) },
+    uBlocksWarm: { value: new THREE.Color(bk.warm) },
+    uChainLink: { value: new THREE.Vector2(cl.spacing, cl.width) },
+    uWires: { value: new THREE.Vector2(wi.spacing, wi.width) },
     uPatternBump: { value: cfg.bump },
     uAoSpecular: { value: cfg.aoSpecular },
   };
@@ -69,20 +97,25 @@ attribute vec2 aDetail;
 varying float vGyeAo;
 varying vec3 vGyeDetail;
 varying vec3 vGyeWorld;
+varying vec3 vGyeLocal;
 varying float vGyeFoot;
 varying float vGyeTone;`;
 
 /**
- * Después de `worldpos_vertex`: oclusión, coordenadas del dibujo, posición en el mundo y altura
- * sobre la base del monumento (`aFlood.y`, la declara el material de los monumentos).
+ * Después de `worldpos_vertex`: oclusión, coordenadas del dibujo, posición en el mundo, posición
+ * desde el origen de la malla (orientada como el mundo: ver `gyePattern`) y altura sobre la base
+ * del monumento (`aFlood.y`, la declara el material de los monumentos).
  */
 export const PATTERN_VERTEX = /* glsl */ `
 {
-  vec4 gyeWorldPos = vec4( transformed, 1.0 );
+  vec4 gyeMeshPos = vec4( transformed, 1.0 );
   #ifdef USE_INSTANCING
-    gyeWorldPos = instanceMatrix * gyeWorldPos;
+    gyeMeshPos = instanceMatrix * gyeMeshPos;
   #endif
-  vGyeWorld = ( modelMatrix * gyeWorldPos ).xyz;
+  vGyeWorld = ( modelMatrix * gyeMeshPos ).xyz;
+  // Sin la traslación de la malla: la misma posición del mundo menos el origen de la malla, con
+  // números de cientos de metros aunque el lugar quede a kilómetros del origen del mundo.
+  vGyeLocal = mat3( modelMatrix ) * gyeMeshPos.xyz;
   vGyeFoot = vGyeWorld.y - aFlood.y;
   vGyeAo = aSurface.x;
   vGyeTone = aSurface.w;
@@ -118,11 +151,30 @@ uniform vec2 uSoil2;
 uniform vec3 uSoilGrass;
 uniform vec4 uRoofTiles;
 uniform vec3 uRoofTiles2;
+uniform vec4 uRubble;
+uniform vec2 uRubble2;
+uniform vec3 uRubbleTint;
+uniform vec4 uDiamonds;
+uniform float uDiamondsBump;
+uniform vec4 uMosaic;
+uniform vec4 uMosaic2;
+uniform vec3 uMosaicA;
+uniform vec3 uMosaicB;
+uniform vec3 uMosaicC;
+uniform vec3 uStripes;
+uniform vec3 uCorrugated;
+uniform vec4 uCorrugated2;
+uniform vec4 uBlocks;
+uniform vec2 uBlocks2;
+uniform vec3 uBlocksWarm;
+uniform vec2 uChainLink;
+uniform vec2 uWires;
 uniform float uPatternBump;
 uniform float uAoSpecular;
 varying float vGyeAo;
 varying vec3 vGyeDetail;
 varying vec3 vGyeWorld;
+varying vec3 vGyeLocal;
 varying float vGyeFoot;
 varying float vGyeTone;
 float gyeMask = 1.0;
@@ -146,8 +198,11 @@ float gyeNoise3( vec3 x ) {
   );
 }
 
-// Tinte (rgb) y relieve (a, en m) del dibujo de la pieza.
-vec4 gyePattern( vec3 d, vec3 w ) {
+// Tinte (rgb) y relieve (a, en m) del dibujo de la pieza: d = (uv del dibujo, tipo), w = posición
+// en el mundo, l = posición desde el origen de la malla orientada como el mundo (vGyeLocal) y n =
+// la normal de la cara en la vista (vNormal: three la declara después de este código, así que
+// entra como argumento).
+vec4 gyePattern( vec3 d, vec3 w, vec3 l, vec3 n ) {
   int kind = int( d.z + 0.5 );
   if ( kind == 1 ) {
     // Revoque: manchas grandes de la pintura gastada, chorreado vertical de la humedad (más
@@ -302,6 +357,140 @@ vec4 gyePattern( vec3 d, vec3 w ) {
     float shade = ( 1.0 - uRoofTiles2.y + uRoofTiles2.y * crest ) * mix( 1.0 - uRoofTiles2.x, 1.0, lap );
     return vec4( vec3( tone * shade ), crest * uRoofTiles2.z );
   }
+  if ( kind == 15 ) {
+    // Piedra rústica (mampostería de piedra irregular, uv en m): cada celda de un Voronoi es una
+    // piedra con su tono, su tinte y su abombado; entre ellas, la junta de mortero hundida.
+    vec2 p = d.xy / uRubble.x;
+    vec2 ip = floor( p );
+    vec2 fp = fract( p );
+    float f1 = 8.0;
+    float f2 = 8.0;
+    vec2 id = ip;
+    for ( int j = -1; j <= 1; j++ ) {
+      for ( int i = -1; i <= 1; i++ ) {
+        vec2 g = vec2( float( i ), float( j ) );
+        vec2 o = vec2( gyeHash3( vec3( ip + g, 15.0 ) ), gyeHash3( vec3( ip + g, 16.0 ) ) ) * 0.8 + 0.1;
+        float dd = length( g + o - fp );
+        if ( dd < f1 ) {
+          f2 = f1;
+          f1 = dd;
+          id = ip + g;
+        } else if ( dd < f2 ) {
+          f2 = dd;
+        }
+      }
+    }
+    // Distancia (m, aproximada) al borde de la piedra.
+    float edge = ( f2 - f1 ) * 0.5 * uRubble.x;
+    float joint = 1.0 - smoothstep( uRubble.y * 0.5, uRubble.y, edge );
+    float tone = 1.0 + ( gyeHash3( vec3( id, 17.0 ) ) - 0.5 ) * uRubble.w;
+    vec3 tint = mix( vec3( 1.0 ), uRubbleTint, gyeHash3( vec3( id, 18.0 ) ) * uRubble2.x );
+    float dome = min( edge, uRubble.x * 0.25 );
+    return vec4( tint * tone * ( 1.0 - joint * uRubble.z ), ( dome - joint * uRubble.y ) * uRubble2.y / uRubble.x );
+  }
+  if ( kind == 16 ) {
+    // Relieve de rombos (uv en m): una retícula de ranuras en diagonal, cada rombo de
+    // uDiamonds.xy de ancho y alto, con su ranura hundida y en sombra.
+    vec2 q = vec2( d.x / uDiamonds.x + d.y / uDiamonds.y, d.x / uDiamonds.x - d.y / uDiamonds.y );
+    vec2 g = abs( fract( q ) - 0.5 );
+    float line = 0.5 - max( g.x, g.y );
+    float groove = 1.0 - smoothstep( uDiamonds.z * 0.5, uDiamonds.z, line );
+    return vec4( vec3( 1.0 - groove * uDiamonds.w ), -groove * uDiamondsBump );
+  }
+  if ( kind == 17 ) {
+    // Mosaico de placas (uv en m): cada placa de uMosaic.xy toma uno de los tres colores de la
+    // config según sus pesos acumulados (uMosaic2.zw; el color de la pieza los tiñe: blanco = tal
+    // cual), con su tono y su junta hundida.
+    vec2 cell = d.xy / uMosaic.xy;
+    vec2 g = abs( fract( cell ) - 0.5 ) * uMosaic.xy;
+    vec2 edge = uMosaic.xy * 0.5 - g;
+    float joint = 1.0 - smoothstep( uMosaic.z * 0.5, uMosaic.z, min( edge.x, edge.y ) );
+    float pick = gyeHash3( vec3( floor( cell ), 17.0 ) );
+    vec3 plate = pick < uMosaic2.z ? uMosaicA : ( pick < uMosaic2.w ? uMosaicB : uMosaicC );
+    float tone = 1.0 + ( gyeHash3( vec3( floor( cell ), 19.0 ) ) - 0.5 ) * uMosaic2.x;
+    return vec4( plate * tone * ( 1.0 - joint * uMosaic.w ), -joint * uMosaic2.y );
+  }
+  if ( kind == 18 ) {
+    // Franjas pintadas a lo largo de u (un bordillo amarillo y negro): cada período (x), una
+    // franja de la parte y del período teñida por z. De lejos, cuando el período ya cabe en un
+    // píxel, el tono promedio (sin muaré).
+    float t = fract( d.x / uStripes.x );
+    float aa = fwidth( d.x ) / uStripes.x;
+    // Distancia con signo al borde más cercano de la franja (positiva adentro).
+    float edge = t <= uStripes.y ? min( t, uStripes.y - t ) : -min( t - uStripes.y, 1.0 - t );
+    float band = smoothstep( -aa, aa, edge );
+    band = mix( band, uStripes.y, smoothstep( 0.25, 0.5, aa ) );
+    return vec4( vec3( mix( 1.0, uStripes.z, band ) ), 0.0 );
+  }
+  if ( kind == 20 ) {
+    // Plancha ondulada (fibrocemento, zinc): ondas que bajan por la pendiente, medidas de través
+    // (la dirección sale de la normal de la cara: sirve igual en una pieza instanciada y
+    // escalada), la cresta más clara que el valle y chorreados de mugre que bajan. De lejos,
+    // cuando una onda ya no llega a un par de píxeles, se apaga (sin muaré).
+    // Se mide desde el origen de la malla (l) y con la normal de sus vértices, no con la posición
+    // del mundo ni sus derivadas: a kilómetros del origen, el float de la GPU redondea la
+    // posición al milímetro y la dirección sacada de sus derivadas sale ruido de píxel a píxel.
+    // Todas las instancias de una malla miden desde el mismo origen: las ondas siguen de una
+    // pieza a la de al lado como en el mundo. La normal viene en 8 bits (monumentParts.ts →
+    // compact): exacta en una cara alineada con los ejes de su pieza (las casas, los techos de un
+    // mall); en un faldón horneado en diagonal, las ondas pueden torcerse ~1° (a 11° de pendiente).
+    vec3 fn = inverseTransformDirection( n, viewMatrix );
+    float hl = length( fn.xz );
+    vec2 down = hl > 0.02 ? fn.xz / hl : vec2( 0.0, 1.0 );
+    float across = dot( l.xz, vec2( -down.y, down.x ) );
+    float along = dot( l.xz, down );
+    float ph = across / uCorrugated.x;
+    float wave = sin( ph * 6.2831853 );
+    float fade = 1.0 - smoothstep( 0.2, 0.5, fwidth( ph ) );
+    float streak = gyeNoise3( vec3( across / uCorrugated2.x, along / uCorrugated2.y, 20.0 ) );
+    float tint = 1.0 + wave * uCorrugated.y * fade - max( streak - uCorrugated2.w, 0.0 ) * uCorrugated2.z;
+    return vec4( vec3( tint ), wave * uCorrugated.z * fade );
+  }
+  if ( kind == 21 ) {
+    // Bloque, ladrillo o piedra en hiladas trabadas (medio largo de corrimiento por hilada),
+    // medidos como la plancha ondulada (desde el origen de la malla, con la normal de sus
+    // vértices): el largo a lo largo del muro (su dirección sale de la normal de la cara) y las
+    // hiladas por altura; en una cara horizontal, en planta. La pieza trae sus uv en 1 y su escala
+    // en d: cuánto mide cada pieza respecto del bloque de la config. Junta hundida, y cada pieza
+    // con su tono y su tinte cálido, tanto más cuanto más tono tenga la pieza (0 = bloque parejo,
+    // 1 = piedra).
+    vec3 fn = inverseTransformDirection( n, viewMatrix );
+    float hl = length( fn.xz );
+    vec2 p = hl > 0.5 ? vec2( dot( l.xz, vec2( -fn.z, fn.x ) ) / hl, l.y ) : l.xz;
+    vec2 size = uBlocks.xy * max( d.xy, vec2( 0.05 ) );
+    vec2 cell = p / size;
+    float row = floor( cell.y );
+    cell.x += 0.5 * mod( row, 2.0 );
+    vec2 g = abs( fract( cell ) - 0.5 ) * size;
+    vec2 edge = size * 0.5 - g;
+    float joint = 1.0 - smoothstep( uBlocks.z * 0.5, uBlocks.z, min( edge.x, edge.y ) );
+    float h1 = gyeHash3( vec3( floor( cell.x ), row, 21.0 ) );
+    float h2 = gyeHash3( vec3( floor( cell.x ), row, 22.0 ) );
+    vec3 tint = vec3( 1.0 + ( h1 - 0.5 ) * uBlocks2.x * vGyeTone ) * mix( vec3( 1.0 ), uBlocksWarm, h2 * vGyeTone );
+    return vec4( tint * ( 1.0 - joint * uBlocks.w ), -joint * uBlocks2.y );
+  }
+  if ( kind == 22 ) {
+    // Malla de alambre en rombos (uv en m): dos juegos de alambres a 45°, separados spacing; lo
+    // demás es hueco (con GYE_CUTOUT). De lejos, cuando el alambre ya es más fino que un píxel,
+    // un tramado estable con la misma parte llena.
+    vec2 q = vec2( d.x + d.y, d.x - d.y ) * 0.70710678 / uChainLink.x;
+    vec2 g = abs( fract( q + 0.5 ) - 0.5 ) * uChainLink.x;
+    float wire = step( min( g.x, g.y ), uChainLink.y * 0.5 );
+    float fine = smoothstep( 0.5, 1.0, fwidth( d.x ) / uChainLink.y );
+    float dither = step( gyeHash3( vec3( floor( gl_FragCoord.xy ), 22.0 ) ), 2.0 * uChainLink.y / uChainLink.x );
+    gyeMask = mix( wire, dither, step( 0.5, fine ) );
+    return vec4( vec3( 1.0 ), 0.0 );
+  }
+  if ( kind == 23 ) {
+    // Hilos horizontales (cerco eléctrico, alambre; uv en m, v desde el pie): uno cada spacing,
+    // el primero a spacing del pie; lo demás es hueco (con GYE_CUTOUT) y de lejos, tramado.
+    float g = abs( fract( d.y / uWires.x + 0.5 ) - 0.5 ) * uWires.x;
+    float wire = step( g, uWires.y * 0.5 ) * step( uWires.x * 0.5, d.y );
+    float fine = smoothstep( 0.5, 1.0, fwidth( d.y ) / uWires.y );
+    float dither = step( gyeHash3( vec3( floor( gl_FragCoord.xy ), 23.0 ) ), uWires.y / uWires.x );
+    gyeMask = mix( wire, dither, step( 0.5, fine ) );
+    return vec4( vec3( 1.0 ), 0.0 );
+  }
   return vec4( 1.0, 1.0, 1.0, 0.0 );
 }
 
@@ -318,7 +507,7 @@ vec3 gyePerturbNormal( vec3 surfPos, vec3 surfNorm, vec2 dHdxy, float faceDir ) 
 
 /** Después de `color_fragment`: tiñe el color con el dibujo (con GYE_CUTOUT, descarta los huecos). */
 export const PATTERN_COLOR = /* glsl */ `
-vec4 gyeSurf = gyePattern( vGyeDetail, vGyeWorld );
+vec4 gyeSurf = gyePattern( vGyeDetail, vGyeWorld, vGyeLocal, vNormal );
 #ifdef GYE_CUTOUT
   if ( gyeMask < 0.5 ) discard;
 #endif

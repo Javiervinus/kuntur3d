@@ -3058,6 +3058,79 @@
         "lapShade": 0.35,
         "crest": 0.3,
         "bump": 0.02
+      },
+      "rubble": {
+        "size": 0.38,
+        "joint": 0.035,
+        "jointShade": 0.45,
+        "variation": 0.3,
+        "tint": "#e6d2b8",
+        "tintShare": 0.6,
+        "bump": 0.012
+      },
+      "diamonds": {
+        "size": [
+          0.6,
+          0.45
+        ],
+        "groove": 0.06,
+        "shade": 0.3,
+        "bump": 0.006
+      },
+      "mosaic": {
+        "size": [
+          1.1,
+          1.1
+        ],
+        "joint": 0.02,
+        "jointShade": 0.3,
+        "variation": 0.06,
+        "bump": 0.002,
+        "colors": [
+          "#BC4A45",
+          "#CF5D58",
+          "#E4643F"
+        ],
+        "weights": [
+          0.52,
+          0.33,
+          0.15
+        ]
+      },
+      "stripes": {
+        "period": 1.0,
+        "duty": 0.5,
+        "shade": 0.08
+      },
+      "corrugated": {
+        "pitch": 0.177,
+        "contrast": 0.14,
+        "depth": 0.02,
+        "streaks": {
+          "width": 0.6,
+          "length": 3.5,
+          "contrast": 0.16,
+          "threshold": 0.55
+        }
+      },
+      "blocks": {
+        "size": [
+          0.4,
+          0.2
+        ],
+        "joint": 0.012,
+        "jointShade": 0.3,
+        "variation": 0.5,
+        "bump": 0.004,
+        "warm": "#f2cfa0"
+      },
+      "chainLink": {
+        "spacing": 0.05,
+        "width": 0.004
+      },
+      "wires": {
+        "spacing": 0.18,
+        "width": 0.004
       }
     },
     "signs": {

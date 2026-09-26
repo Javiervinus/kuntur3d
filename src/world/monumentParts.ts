@@ -29,7 +29,15 @@ export const NO_GLOW = new THREE.Color(0, 0, 0);
  * metálica enrollable, un piso de terrazo, baldosas, la carpintería de una ventana (sus uv van en
  * hojas: una junta en cada entero), adoquines de vereda en hileras trabadas, los barrotes o
  * balaustres de una baranda y la cerca de arquitos (solo con el material con recorte), un
- * letrero (sus uv van en el atlas de letreros), losas de hormigón, tierra con hierba y teja.
+ * letrero (sus uv van en el atlas de letreros), losas de hormigón, tierra con hierba, teja,
+ * mampostería de piedra, placas con rombos, un mosaico de placas en los colores de la config
+ * (cada placa toma uno al azar, según su peso), franjas pintadas a lo largo (el bordillo amarillo y
+ * negro de un acceso), plancha ondulada (fibrocemento, zinc) y bloque, ladrillo o piedra en
+ * hiladas. Estos dos últimos se miden en la posición desde el origen de la malla, orientada como
+ * el mundo (sirven en piezas instanciadas y escaladas, y siguen de una instancia a la de al lado);
+ * en el bloque, las uv de la pieza van fijas en 1 y su `scale` dice cuánto mide cada pieza
+ * respecto del bloque de la config. Y, calados, la malla de alambre en rombos (canchas,
+ * cerramientos) y los hilos horizontales de un cerco eléctrico o de alambre.
  */
 export const PATTERN = {
   none: 0,
@@ -47,6 +55,14 @@ export const PATTERN = {
   slabs: 12,
   soil: 13,
   roofTiles: 14,
+  rubble: 15,
+  diamonds: 16,
+  mosaic: 17,
+  stripes: 18,
+  corrugated: 20,
+  blocks: 21,
+  chainLink: 22,
+  wires: 23,
 } as const;
 
 /** El dibujo con ese nombre (de la config); un nombre que no existe es un error, no una pieza lisa. */
@@ -62,6 +78,12 @@ export interface Surface {
   glow?: THREE.Color;
   /** Cuánto la tiñen los LED que lleva montados (solo las ruedas). */
   led?: number;
+  /**
+   * Cuánto se tiñe con el color de su instancia (0…1) con el material `paint` de los lugares
+   * (world/placeKit.ts): la pared de una casa repetida lleva el color de cada casa y su techo o
+   * sus ventanas no. Va en el mismo byte que `led` (una pieza no lleva las dos cosas).
+   */
+  paint?: number;
   /**
    * Oclusión ambiental: cuánto cielo y rebote le llega (1 = a la intemperie). Constante, o por
    * vértice según su posición y normal ya ubicadas (marco del monumento).
@@ -139,7 +161,7 @@ export class Parts {
   /** Como `add`, con oclusión ambiental y dibujo procedural. */
   put(geometry: THREE.BufferGeometry, color: THREE.Color, matrix: THREE.Matrix4, surface: Surface = {}): void {
     const glow = surface.glow ?? NO_GLOW;
-    const led = surface.led ?? 0;
+    const led = surface.led ?? surface.paint ?? 0;
     const pattern = surface.pattern ?? PATTERN.none;
     const withUv = pattern !== PATTERN.none && geometry.getAttribute('uv') !== undefined;
     const [su, sv] = surface.scale ?? [1, 1];
@@ -347,7 +369,7 @@ export class Batch {
     v[o + 10] = glow.g;
     v[o + 11] = glow.b;
     v[o + 12] = typeof ao === 'number' ? ao : ao(p, n);
-    v[o + 13] = s.led ?? 0;
+    v[o + 13] = s.led ?? s.paint ?? 0;
     v[o + 14] = s.pattern ?? PATTERN.none;
     v[o + 15] = s.tone ?? 0;
     v[o + 16] = u * su;
