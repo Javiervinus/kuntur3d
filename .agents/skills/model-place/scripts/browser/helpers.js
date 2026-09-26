@@ -175,18 +175,29 @@
    * clones corridos `offset` m, rondas on/off intercaladas; el resultado es por copia. Con
    * `transparent`, las copias van sin escribir profundidad (para medir el costo por pixel en GPUs
    * de Apple, donde copias opacas en el mismo lugar no lo miden). Desde la vista más cargada.
+   * Cada copia lleva los ganchos de render y de sombra de su original (`clone()` no los copia):
+   * sin ellos, lo que se dibuja distinto según la distancia o la cascada de la sombra (las casas
+   * instanciadas por celdas) se mediría de más.
    */
   const gpu = async (place, o) => {
     const m = g.monuments.group.getObjectByName(place);
     if (!m) throw new Error(`No hay monumento '${place}'`);
+    const adaptive = g.quality.cfg.adaptive;
     g.quality.cfg.adaptive = false;
     if (!window.__mpGpu) {
       window.__mpGpu = [];
       g.gpuTimer.onSample((ms) => window.__mpGpu.push(ms));
     }
     const clones = [];
+    const originals = [];
+    m.traverse((n) => originals.push(n));
     for (let k = 0; k < o.copies; k++) {
       const c = m.clone(true);
+      let i = 0;
+      c.traverse((n) => {
+        const src = originals[i++];
+        for (const hook of ['onBeforeRender', 'onAfterRender', 'onBeforeShadow', 'onAfterShadow']) n[hook] = src[hook];
+      });
       c.position.x += o.offset * (k + 1);
       c.visible = false;
       if (o.transparent) {
@@ -224,6 +235,7 @@
       }
     } finally {
       for (const c of clones) c.removeFromParent();
+      g.quality.cfg.adaptive = adaptive;
     }
     const s = diffs.filter(Number.isFinite).sort((a, b) => a - b);
     const q = (f) => (s.length ? Math.round(s[Math.floor((s.length - 1) * f)] * 1000) / 1000 : null);
@@ -279,19 +291,31 @@
     return { reached, stuck, end: track[track.length - 1], track };
   };
 
-  /** Memoria de la geometría de un monumento: atributos e índices, cada geometría una vez. */
+  /**
+   * Memoria de la geometría de un monumento: atributos, índices y búferes de instancias
+   * (`instanceMatrix`, `instanceColor`), cada arreglo una vez aunque lo compartan varias
+   * geometrías (las variantes de un modelo de casa comparten posiciones y normales).
+   */
   const memory = (place) => {
     const m = g.monuments.group.getObjectByName(place);
-    const seen = new Set();
+    const geometries = new Set();
+    const arrays = new Set();
     let bytes = 0;
+    const count = (a) => {
+      if (!a || arrays.has(a.array)) return;
+      arrays.add(a.array);
+      bytes += a.array.byteLength;
+    };
     m.traverse((n) => {
+      count(n.instanceMatrix);
+      count(n.instanceColor);
       const geo = n.geometry;
-      if (!geo || seen.has(geo)) return;
-      seen.add(geo);
-      for (const a of Object.values(geo.attributes)) bytes += a.array.byteLength;
-      if (geo.index) bytes += geo.index.array.byteLength;
+      if (!geo || geometries.has(geo)) return;
+      geometries.add(geo);
+      for (const a of Object.values(geo.attributes)) count(a);
+      count(geo.index);
     });
-    return { mb: Math.round((bytes / 1048576) * 10) / 10, geometries: seen.size };
+    return { mb: Math.round((bytes / 1048576) * 10) / 10, geometries: geometries.size };
   };
 
   const jobs = {};
