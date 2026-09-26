@@ -1,0 +1,2620 @@
+{
+ "about": "Lo que config/sites/duran-city/config.py lee de la hoja de medidas de la investigación del trazado de Durán City (2026-09-25; la hoja completa, con fotos y notas, queda fuera del repo en pipeline/.cache/model-place/duranCity/trazado.json): el marco, las etapas con su muro, las secciones tipo, los ejes de las calles y las áreas sociales. Cada medida lleva su fuente.",
+ "id": "duranCity-trazado",
+ "frame": {
+  "lat": -2.196419,
+  "lon": -79.76265,
+  "headingDeg": 85.0,
+  "why": "origen en el centro del techo de la garita de Amaranto, sobre el bulevar de acceso (la entrada más antigua); +x a lo largo del bulevar hacia el este (rumbo 85°), +z a la derecha (≈ sur, rumbo 175°): Bromelia queda en z<−47, Amaranto en z>−19 y Camelia al este (x>115)"
+ },
+ "etapas": {
+  "Bromelia": {
+   "poligono": [
+    [
+     -275.64,
+     -394.37
+    ],
+    [
+     -64.96,
+     -324.93
+    ],
+    [
+     107.34,
+     -284.57
+    ],
+    [
+     102.7,
+     -34.51
+    ],
+    [
+     -52.35,
+     -47.17
+    ],
+    [
+     -56.46,
+     -56.6
+    ],
+    [
+     -62.47,
+     -56.78
+    ],
+    [
+     -77.0,
+     -57.24
+    ],
+    [
+     -80.05,
+     -57.34
+    ],
+    [
+     -87.25,
+     -47.12
+    ],
+    [
+     -169.77,
+     -46.83
+    ],
+    [
+     -190.59,
+     -52.27
+    ],
+    [
+     -209.69,
+     -130.66
+    ],
+    [
+     -236.8,
+     -216.95
+    ],
+    [
+     -315.74,
+     -400.98
+    ],
+    [
+     -275.64,
+     -394.37
+    ]
+   ],
+   "area": 99464.0,
+   "perimetro": 1366.9,
+   "osm": 772178813,
+   "muro": {
+    "material": "muro liso de hormigón visto, sin pintar, gris claro con manchas de humedad; sin juntas horizontales visibles; pilares salientes algo más oscuros",
+    "alto": 2.4,
+    "altoRango": [
+     2.2,
+     2.7
+    ],
+    "color": [
+     {
+      "part": "panel",
+      "hex": "#cfc6a6",
+      "source": "estimado (Google Street View, oct 2025): muestreo #a09880 con cielo nublado, equilibrado con una ampliación blanca en la misma toma"
+     },
+     {
+      "part": "pilar",
+      "hex": "#7f6947",
+      "source": "estimado (Google Street View, oct 2025): muestreo #625137 equilibrado igual"
+     }
+    ],
+    "moduloPaneles": "un pilar cada ~7.0 m (rango 6.5–7.6 m)",
+    "remate": "recto, sin alero",
+    "cercoElectrico": true,
+    "source": "estimado (Google Street View, oct 2025)",
+    "confidence": "estimado",
+    "antes": {
+     "material": "paneles prefabricados de hormigón entre pilares (sin enlucir)",
+     "alto": 2.0,
+     "altoRango": [
+      1.8,
+      2.4
+     ],
+     "color": [
+      {
+       "part": "panel",
+       "hex": "#8a7c70",
+       "source": "foto Mapillary 269522292092536 (Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0), a contraluz: medido #413933 y corregido ×2 a ojo"
+      },
+      {
+       "part": "pilar",
+       "hex": "#7a6c5c",
+       "source": "misma foto, pilar #373026 corregido ×2"
+      }
+     ],
+     "moduloPaneles": "un pilar cada ~4-6 m (contado a ojo en la foto; por confirmar)",
+     "remate": "recto, sin alero; en 2023 no se ve alambre de púas ni cerco eléctrico (resolución baja)",
+     "cercoElectrico": null,
+     "source": "Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0: 269522292092536 y 2424873607691348 (muro oeste y sur de Bromelia desde la Vía al PAN); alto por proporción con las casas de 2 pisos detrás (alero ~5,5 m) y por ángulo a 41 m con hfov 84,9°",
+     "confidence": "estimado"
+    },
+    "streetView": {
+     "material": "muro liso de hormigón visto, sin pintar, gris claro con manchas de humedad; sin juntas horizontales visibles; pilares salientes algo más oscuros",
+     "alto": 2.4,
+     "altoRango": [
+      2.2,
+      2.7
+     ],
+     "pilares": {
+      "separacion": 7.0,
+      "rango": [
+       6.5,
+       7.6
+      ]
+     },
+     "color": [
+      {
+       "part": "panel",
+       "hex": "#cfc6a6",
+       "source": "estimado (Google Street View, oct 2025): muestreo #a09880 con cielo nublado, equilibrado con una ampliación blanca en la misma toma"
+      },
+      {
+       "part": "pilar",
+       "hex": "#7f6947",
+       "source": "estimado (Google Street View, oct 2025): muestreo #625137 equilibrado igual"
+      }
+     ],
+     "remate": "recto, sin alero",
+     "cercoElectrico": {
+      "value": true,
+      "detalle": "postes metálicos delgados de ~1 m sobre el muro, con 5 aisladores (5 hilos) y tornapuntas en la base; uno en cada pilar y otro a mitad de vano (cada ~3,5 m)"
+     },
+     "como": "Vía al PAN, a ~33–35 m del muro (distancia desde el polígono OSM): con la focal calibrada (la 'y' de la URL de Maps es el campo vertical: 897 px / tan(fov/2)), el alto visible sale de 2,45 m y el vano de 7,1–7,6 m; el alto coincide con el remate a la altura de la cámara (~2,5 m). La cadencia pilar/alto (0,32–0,34) se repite en tres tomas",
+     "source": "estimado (Google Street View, oct 2025)",
+     "confidence": "estimado",
+     "screenshots": [
+      "pipeline/.cache/model-place/duranCity/streetview/02-muro-oeste-bromelia.png",
+      "pipeline/.cache/model-place/duranCity/streetview/09-muro-bromelia-zoom.png",
+      "pipeline/.cache/model-place/duranCity/streetview/12-bromelia-no-hastiales-via-pan.png",
+      "pipeline/.cache/model-place/duranCity/streetview/19-bromelia-borde-oeste-medio.png",
+      "pipeline/.cache/model-place/duranCity/streetview/20-muro-bromelia-remate-zoom.png"
+     ]
+    }
+   },
+   "source": "OSM way 772178813 (2026-09-25), comparado con Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: los bordes calzan a ±2 m (Bromelia sur z≈−47, Amaranto norte z≈−19)",
+   "confidence": "medido",
+   "estadoObra": "completa (544 casas leídas, 526 construidas; algunos lotes vacíos en la fila norte junto a la laguna)"
+  },
+  "Amaranto": {
+   "poligono": [
+    [
+     -185.45,
+     -2.47
+    ],
+    [
+     -161.72,
+     -19.34
+    ],
+    [
+     -24.86,
+     -19.44
+    ],
+    [
+     -13.09,
+     -6.81
+    ],
+    [
+     -4.48,
+     -5.97
+    ],
+    [
+     7.69,
+     -4.77
+    ],
+    [
+     18.08,
+     -3.75
+    ],
+    [
+     18.4,
+     -17.41
+    ],
+    [
+     131.53,
+     -6.53
+    ],
+    [
+     192.18,
+     2.31
+    ],
+    [
+     115.53,
+     304.82
+    ],
+    [
+     -37.99,
+     271.14
+    ],
+    [
+     -125.39,
+     254.28
+    ],
+    [
+     -137.04,
+     250.57
+    ],
+    [
+     -149.57,
+     243.22
+    ],
+    [
+     -160.68,
+     233.31
+    ],
+    [
+     -171.99,
+     218.93
+    ],
+    [
+     -178.69,
+     199.89
+    ],
+    [
+     -181.44,
+     183.59
+    ],
+    [
+     -179.58,
+     138.82
+    ],
+    [
+     -179.32,
+     68.05
+    ],
+    [
+     -185.45,
+     -2.47
+    ]
+   ],
+   "area": 96703.0,
+   "perimetro": 1244.4,
+   "osm": 772178814,
+   "muro": {
+    "material": "paneles prefabricados de hormigón en 5 hiladas horizontales (~0,46 m cada una) encajadas entre pilares tipo H; pintado",
+    "alto": 2.3,
+    "altoRango": [
+     2.2,
+     2.5
+    ],
+    "color": [
+     {
+      "part": "crema (paneles y pilares)",
+      "hex": "#ebdfc9",
+      "source": "estimado (Google Street View, oct 2025): muestreo #aaa292 equilibrado a blanco"
+     },
+     {
+      "part": "franja ocre",
+      "hex": "#9d7d46",
+      "source": "estimado (Google Street View, oct 2025): muestreo #725b33 equilibrado igual"
+     },
+     {
+      "part": "pilar a la sombra",
+      "hex": "#cfc4a8",
+      "source": "estimado (Google Street View, oct 2025)"
+     }
+    ],
+    "moduloPaneles": "un pilar cada ~2.0 m (rango 1.9–2.3 m)",
+    "remate": "recto, sin cerco eléctrico ni alambre visible",
+    "cercoElectrico": false,
+    "source": "estimado (Google Street View, oct 2025)",
+    "confidence": "estimado",
+    "antes": {
+     "material": "paneles prefabricados de hormigón entre pilares (sin enlucir)",
+     "alto": 2.0,
+     "altoRango": [
+      1.8,
+      2.4
+     ],
+     "color": [
+      {
+       "part": "panel",
+       "hex": "#8a7c70",
+       "source": "foto Mapillary 269522292092536 (Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0), a contraluz: medido #413933 y corregido ×2 a ojo"
+      },
+      {
+       "part": "pilar",
+       "hex": "#7a6c5c",
+       "source": "misma foto, pilar #373026 corregido ×2"
+      }
+     ],
+     "moduloPaneles": "un pilar cada ~4-6 m (contado a ojo en la foto; por confirmar)",
+     "remate": "recto, sin alero; en 2023 no se ve alambre de púas ni cerco eléctrico (resolución baja)",
+     "cercoElectrico": null,
+     "source": "Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0: 269522292092536 y 2424873607691348 (muro oeste y sur de Bromelia desde la Vía al PAN); alto por proporción con las casas de 2 pisos detrás (alero ~5,5 m) y por ángulo a 41 m con hfov 84,9°",
+     "confidence": "estimado"
+    },
+    "streetView": {
+     "material": "paneles prefabricados de hormigón en 5 hiladas horizontales (~0,46 m cada una) encajadas entre pilares tipo H; pintado",
+     "alto": 2.3,
+     "altoRango": [
+      2.2,
+      2.5
+     ],
+     "pilares": {
+      "separacion": 2.0,
+      "rango": [
+       1.9,
+       2.3
+      ]
+     },
+     "pintura": "fondo crema; una franja ocre-mostaza de 2 hiladas que sube o baja una hilada en cada vano (zigzag en escalera) a lo largo de todo el muro, en el lado del bulevar, en el oeste (Vía al PAN) y en el sur (E40)",
+     "color": [
+      {
+       "part": "crema (paneles y pilares)",
+       "hex": "#ebdfc9",
+       "source": "estimado (Google Street View, oct 2025): muestreo #aaa292 equilibrado a blanco"
+      },
+      {
+       "part": "franja ocre",
+       "hex": "#9d7d46",
+       "source": "estimado (Google Street View, oct 2025): muestreo #725b33 equilibrado igual"
+      },
+      {
+       "part": "pilar a la sombra",
+       "hex": "#cfc4a8",
+       "source": "estimado (Google Street View, oct 2025)"
+      }
+     ],
+     "remate": "recto, sin cerco eléctrico ni alambre visible",
+     "cercoElectrico": {
+      "value": false
+     },
+     "delante": "fila de árboles de copa rala (tipo nim/acacia) en la franja de césped seco entre el muro y la Vía al PAN; en el bulevar, árboles en una franja angosta junto al muro",
+     "como": "Vía al PAN, a 31 m del muro oeste (x ≈ −179,5, visto de frente): vano 350 px y alto 420 px con la focal de fov 18°",
+     "source": "estimado (Google Street View, oct 2025)",
+     "confidence": "estimado",
+     "screenshots": [
+      "pipeline/.cache/model-place/duranCity/streetview/01-entrada-bulevar-via-pan.png",
+      "pipeline/.cache/model-place/duranCity/streetview/03-muro-oeste-amaranto.png",
+      "pipeline/.cache/model-place/duranCity/streetview/05-muro-sur-amaranto-e40.png",
+      "pipeline/.cache/model-place/duranCity/streetview/10-bulevar-hacia-garitas-zoom.png",
+      "pipeline/.cache/model-place/duranCity/streetview/22-muro-amaranto-pintado-zoom.png"
+     ]
+    }
+   },
+   "source": "OSM way 772178814 (2026-09-25), comparado con Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: los bordes calzan a ±2 m (Bromelia sur z≈−47, Amaranto norte z≈−19)",
+   "confidence": "medido",
+   "estadoObra": "completa (608 casas leídas, 584 construidas); la oficial dice “prácticamente 100% entregada”"
+  },
+  "Camelia": {
+   "poligono": [
+    [
+     192.18,
+     2.31
+    ],
+    [
+     542.16,
+     117.69
+    ],
+    [
+     440.4,
+     419.45
+    ],
+    [
+     115.53,
+     304.82
+    ],
+    [
+     192.18,
+     2.31
+    ]
+   ],
+   "area": 112207.0,
+   "perimetro": 1343.5,
+   "osm": 772178815,
+   "muro": {
+    "material": "muro liso de hormigón visto sin pintar, beige grisáceo, con pilares salientes (el mismo tipo que Bromelia, no el de paneles de Amaranto)",
+    "alto": 2.2,
+    "altoRango": [
+     2.0,
+     2.4
+    ],
+    "color": [
+     {
+      "part": "panel",
+      "hex": "#bdb097",
+      "source": "estimado (Google Street View, oct 2025): muestreo #928875 equilibrado con la misma corrección que Bromelia"
+     }
+    ],
+    "moduloPaneles": "un pilar cada ~6.5 m (rango 5.7–7.0 m)",
+    "remate": "recto; en el borde sur no se ven postes de cerco eléctrico (oct 2025)",
+    "cercoElectrico": false,
+    "source": "estimado (Google Street View, oct 2025)",
+    "confidence": "estimado",
+    "antes": {
+     "material": "paneles prefabricados de hormigón entre pilares (sin enlucir)",
+     "alto": 2.0,
+     "altoRango": [
+      1.8,
+      2.4
+     ],
+     "color": [
+      {
+       "part": "panel",
+       "hex": "#8a7c70",
+       "source": "foto Mapillary 269522292092536 (Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0), a contraluz: medido #413933 y corregido ×2 a ojo"
+      },
+      {
+       "part": "pilar",
+       "hex": "#7a6c5c",
+       "source": "misma foto, pilar #373026 corregido ×2"
+      }
+     ],
+     "moduloPaneles": "un pilar cada ~4-6 m (contado a ojo en la foto; por confirmar)",
+     "remate": "recto, sin alero; en 2023 no se ve alambre de púas ni cerco eléctrico (resolución baja)",
+     "cercoElectrico": null,
+     "source": "OSM way 772178815 (residential=gated, sin barrier); en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 el borde S y E se ve como línea clara continua: se asume el mismo muro de paneles",
+     "confidence": "estimado (por confirmar en Street View)"
+    },
+    "streetView": {
+     "material": "muro liso de hormigón visto sin pintar, beige grisáceo, con pilares salientes (el mismo tipo que Bromelia, no el de paneles de Amaranto)",
+     "alto": 2.2,
+     "altoRango": [
+      2.0,
+      2.4
+     ],
+     "pilares": {
+      "separacion": 6.5,
+      "rango": [
+       5.7,
+       7.0
+      ]
+     },
+     "color": [
+      {
+       "part": "panel",
+       "hex": "#bdb097",
+       "source": "estimado (Google Street View, oct 2025): muestreo #928875 equilibrado con la misma corrección que Bromelia"
+      }
+     ],
+     "remate": "recto; en el borde sur no se ven postes de cerco eléctrico (oct 2025)",
+     "cercoElectrico": {
+      "value": false,
+      "nota": "solo se vio el borde sur desde la E40"
+     },
+     "como": "E40, a ~49–59 m del muro sur; la distancia sale del polígono OSM y del alto de cámara, por eso el rango es más ancho",
+     "source": "estimado (Google Street View, oct 2025)",
+     "confidence": "estimado",
+     "screenshots": [
+      "pipeline/.cache/model-place/duranCity/streetview/06-borde-sur-camelia-e40.png",
+      "pipeline/.cache/model-place/duranCity/streetview/07-camelia-sur-zoom-e40.png",
+      "pipeline/.cache/model-place/duranCity/streetview/18-camelia-garita-lejos-e40-zoom.png",
+      "pipeline/.cache/model-place/duranCity/streetview/23-camelia-sureste-e40.png"
+     ]
+    }
+   },
+   "source": "OSM way 772178815 (2026-09-25), comparado con Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: los bordes calzan a ±2 m (Bromelia sur z≈−47, Amaranto norte z≈−19)",
+   "confidence": "medido",
+   "estadoObra": "EN CONSTRUCCIÓN: mitad norte con casas (217 construidas, 111 en obra), 4 manzanas del sur (v 185–260 del sub-marco) con calles, bordillos y lotes marcados pero sin casas (219 lotes vacíos) en la imagen 2025-04-20; durancity.com la lista como “Construcción”",
+   "subMarco": {
+    "origen": [
+     200,
+     50
+    ],
+    "giroDeg": 15,
+    "nota": "u a lo largo de sus calles E-O (rumbo 100°), v hacia el sur; x = ox + u·cos − v·sen, z = oz + u·sen + v·cos"
+   },
+   "estadoStreetView": {
+    "finding": "en oct 2025, desde la E40, sobre el muro sur no asoma ninguna casa en los primeros ~100 m hacia el norte: solo hay postes de alumbrado ya instalados. Las casas visibles están a ≥150 m (por tamaño y altura angular), o sea en la mitad norte o en el borde norte de la franja vacía. El estado del 2025-04-20 (4 manzanas del sur sin casas) sigue valiendo en oct 2025; no se descarta obra en la fila más al norte de esa franja",
+    "source": "estimado (Google Street View, oct 2025)",
+    "confidence": "estimado",
+    "screenshots": [
+     "pipeline/.cache/model-place/duranCity/streetview/06-borde-sur-camelia-e40.png",
+     "pipeline/.cache/model-place/duranCity/streetview/07-camelia-sur-zoom-e40.png",
+     "pipeline/.cache/model-place/duranCity/streetview/23-camelia-sureste-e40.png"
+    ]
+   }
+  }
+ },
+ "secciones": {
+  "Amaranto": {
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "franjaLateral": 2.75,
+   "medianaAuto": {
+    "fachadaFachada": 13.1,
+    "nucleoAsfalto": 3.5
+   },
+   "source": "perfil promediado de 110 m sobre la calle OSM 430540137 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); medianas automáticas en 49 tramos (el núcleo de asfalto uniforme subestima el ancho)",
+   "confidence": "estimado"
+  },
+  "Bromelia": {
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "franjaLateral": 3.0,
+   "medianaAuto": {
+    "fachadaFachada": 12.0,
+    "nucleoAsfalto": 3.6
+   },
+   "source": "perfil promediado de 70 m sobre la calle z≈−101 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); medianas automáticas en 40 tramos",
+   "confidence": "estimado"
+  },
+  "Camelia": {
+   "calzada": 5.5,
+   "bordilloVereda": 1.3,
+   "lineaLoteDesdeEje": 4.0,
+   "retiroFrontal": 2.0,
+   "source": "perfil promediado de 110 m (sub-marco Camelia, v −18..8): asfalto uniforme v −8..−3, franjas claras v −9,5..−8,5 y −2,5..−1 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20)",
+   "confidence": "estimado"
+  }
+ },
+ "calles": [
+  {
+   "osm": 430540128,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -167.5,
+     -3.64
+    ],
+    [
+     -169.71,
+     0.25
+    ],
+    [
+     -170.16,
+     5.79
+    ],
+    [
+     -164.99,
+     31.3
+    ],
+    [
+     -165.03,
+     64.77
+    ],
+    [
+     -162.49,
+     99.08
+    ],
+    [
+     -93.89,
+     111.57
+    ],
+    [
+     -64.56,
+     117.09
+    ],
+    [
+     -9.26,
+     128.06
+    ],
+    [
+     1.7,
+     130.12
+    ],
+    [
+     72.26,
+     143.15
+    ],
+    [
+     106.14,
+     150.62
+    ],
+    [
+     137.46,
+     157.22
+    ]
+   ],
+   "desfaseOSM": 2.25,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540128 corrido +2.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540129,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -162.02,
+     97.22
+    ],
+    [
+     -160.84,
+     128.58
+    ],
+    [
+     -164.07,
+     160.46
+    ],
+    [
+     -167.01,
+     189.49
+    ],
+    [
+     -165.0,
+     197.32
+    ],
+    [
+     -158.83,
+     213.48
+    ],
+    [
+     -139.62,
+     232.96
+    ],
+    [
+     -104.47,
+     246.31
+    ],
+    [
+     -68.72,
+     254.38
+    ],
+    [
+     -34.55,
+     260.18
+    ],
+    [
+     91.81,
+     285.3
+    ],
+    [
+     97.38,
+     285.66
+    ],
+    [
+     102.39,
+     284.62
+    ]
+   ],
+   "desfaseOSM": 0.75,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540129 corrido +0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540130,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     5.89,
+     81.06
+    ],
+    [
+     6.39,
+     78.87
+    ],
+    [
+     6.97,
+     76.29
+    ],
+    [
+     6.1,
+     71.48
+    ],
+    [
+     3.44,
+     67.37
+    ],
+    [
+     0.87,
+     65.6
+    ],
+    [
+     -0.6,
+     64.6
+    ],
+    [
+     -5.43,
+     63.58
+    ],
+    [
+     -9.85,
+     64.35
+    ],
+    [
+     -13.72,
+     66.6
+    ],
+    [
+     -16.53,
+     70.08
+    ],
+    [
+     -17.92,
+     74.33
+    ],
+    [
+     -17.73,
+     77.2
+    ],
+    [
+     -17.57,
+     79.35
+    ],
+    [
+     -15.24,
+     83.83
+    ],
+    [
+     -11.31,
+     87.01
+    ],
+    [
+     -6.43,
+     88.39
+    ],
+    [
+     -1.41,
+     87.73
+    ],
+    [
+     2.94,
+     85.15
+    ],
+    [
+     5.89,
+     81.06
+    ]
+   ],
+   "desfaseOSM": 0.0,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540130 corrido +0.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540131,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -5.71,
+     9.95
+    ],
+    [
+     -159.63,
+     -2.52
+    ],
+    [
+     -161.97,
+     -2.11
+    ],
+    [
+     -164.39,
+     -0.58
+    ]
+   ],
+   "desfaseOSM": -2.25,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540131 corrido -2.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540132,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     3.23,
+     42.89
+    ],
+    [
+     161.73,
+     53.71
+    ]
+   ],
+   "desfaseOSM": 2.75,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540132 corrido +2.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540133,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     120.29,
+     82.58
+    ],
+    [
+     104.91,
+     148.02
+    ]
+   ],
+   "desfaseOSM": 1.75,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540133 corrido +1.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540134,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -162.82,
+     32.35
+    ],
+    [
+     -7.82,
+     41.44
+    ]
+   ],
+   "desfaseOSM": 1.25,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540134 corrido +1.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540135,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     85.29,
+     80.94
+    ],
+    [
+     72.08,
+     140.81
+    ]
+   ],
+   "desfaseOSM": 0.62,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540135 corrido +0.62 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540136,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -93.71,
+     69.73
+    ],
+    [
+     -95.87,
+     109.23
+    ]
+   ],
+   "desfaseOSM": 2.38,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540136 corrido +2.38 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540137,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -164.82,
+     199.78
+    ],
+    [
+     -28.17,
+     226.38
+    ],
+    [
+     113.82,
+     255.43
+    ]
+   ],
+   "desfaseOSM": 2.75,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540137 corrido +2.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540138,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -163.77,
+     162.61
+    ],
+    [
+     -20.39,
+     193.52
+    ],
+    [
+     121.8,
+     222.56
+    ]
+   ],
+   "desfaseOSM": 2.12,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540138 corrido +2.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540139,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -160.49,
+     130.44
+    ],
+    [
+     -16.03,
+     162.06
+    ],
+    [
+     128.8,
+     189.61
+    ]
+   ],
+   "desfaseOSM": 1.88,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540139 corrido +1.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540140,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -162.88,
+     66.16
+    ],
+    [
+     -91.45,
+     71.29
+    ],
+    [
+     -17.87,
+     78.63
+    ]
+   ],
+   "desfaseOSM": 1.44,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540140 corrido +1.44 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540141,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     6.3,
+     82.0
+    ],
+    [
+     85.79,
+     84.2
+    ],
+    [
+     121.8,
+     86.1
+    ],
+    [
+     154.64,
+     88.28
+    ]
+   ],
+   "desfaseOSM": 3.13,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540141 corrido +3.13 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540142,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -1.74,
+     -5.76
+    ],
+    [
+     -2.79,
+     7.9
+    ],
+    [
+     -5.01,
+     40.4
+    ],
+    [
+     -7.11,
+     64.59
+    ]
+   ],
+   "desfaseOSM": -2.75,
+   "sentido": "un sentido (OSM oneway, par con parterre)",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540142 corrido -2.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540143,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     0.75,
+     65.59
+    ],
+    [
+     3.3,
+     40.14
+    ],
+    [
+     6.71,
+     6.52
+    ],
+    [
+     7.57,
+     -4.78
+    ]
+   ],
+   "desfaseOSM": -0.12,
+   "sentido": "un sentido (OSM oneway, par con parterre)",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540143 corrido -0.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540145,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     101.86,
+     283.24
+    ],
+    [
+     104.66,
+     281.64
+    ],
+    [
+     106.65,
+     278.85
+    ],
+    [
+     113.64,
+     252.56
+    ],
+    [
+     121.49,
+     220.31
+    ],
+    [
+     128.42,
+     187.59
+    ],
+    [
+     137.19,
+     154.84
+    ],
+    [
+     154.12,
+     84.99
+    ],
+    [
+     161.19,
+     50.81
+    ],
+    [
+     167.15,
+     25.78
+    ],
+    [
+     167.41,
+     19.74
+    ]
+   ],
+   "desfaseOSM": -0.75,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540145 corrido -0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 430540146,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     -5.68,
+     88.44
+    ],
+    [
+     -8.09,
+     125.95
+    ],
+    [
+     -14.91,
+     160.35
+    ],
+    [
+     -19.21,
+     191.59
+    ],
+    [
+     -26.9,
+     223.84
+    ],
+    [
+     -33.67,
+     259.58
+    ]
+   ],
+   "desfaseOSM": -0.75,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 430540146 corrido -0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868110,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -71.3,
+     -128.12
+    ],
+    [
+     -73.17,
+     -101.46
+    ],
+    [
+     -75.14,
+     -64.02
+    ],
+    [
+     -76.07,
+     -57.11
+    ]
+   ],
+   "desfaseOSM": -0.94,
+   "sentido": "un sentido (OSM oneway, par con parterre)",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868110 corrido -0.94 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868111,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -61.47,
+     -56.86
+    ],
+    [
+     -62.11,
+     -64.55
+    ],
+    [
+     -60.2,
+     -100.96
+    ],
+    [
+     -61.14,
+     -127.52
+    ]
+   ],
+   "desfaseOSM": 1.0,
+   "sentido": "un sentido (OSM oneway, par con parterre)",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868111 corrido +1.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868112,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -176.7,
+     -64.26
+    ],
+    [
+     -179.01,
+     -65.95
+    ],
+    [
+     -180.6,
+     -68.81
+    ],
+    [
+     -187.39,
+     -103.05
+    ],
+    [
+     -195.91,
+     -138.93
+    ],
+    [
+     -235.73,
+     -249.23
+    ],
+    [
+     -252.98,
+     -289.09
+    ],
+    [
+     -269.06,
+     -329.27
+    ],
+    [
+     -286.01,
+     -367.86
+    ],
+    [
+     -296.0,
+     -390.31
+    ]
+   ],
+   "desfaseOSM": -1.88,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868112 corrido -1.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868113,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     82.02,
+     -57.64
+    ],
+    [
+     83.49,
+     -59.34
+    ],
+    [
+     84.39,
+     -61.97
+    ],
+    [
+     85.84,
+     -95.97
+    ],
+    [
+     85.36,
+     -132.78
+    ],
+    [
+     86.1,
+     -167.03
+    ],
+    [
+     88.24,
+     -201.47
+    ],
+    [
+     88.23,
+     -235.67
+    ],
+    [
+     90.64,
+     -261.99
+    ],
+    [
+     90.62,
+     -267.02
+    ]
+   ],
+   "desfaseOSM": 1.81,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868113 corrido +1.81 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868114,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -194.11,
+     -137.46
+    ],
+    [
+     -157.61,
+     -137.73
+    ],
+    [
+     -119.88,
+     -136.55
+    ],
+    [
+     -97.52,
+     -136.94
+    ],
+    [
+     -79.48,
+     -136.61
+    ]
+   ],
+   "desfaseOSM": 2.06,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868114 corrido +2.06 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868115,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -185.6,
+     -100.58
+    ],
+    [
+     -74.16,
+     -98.65
+    ],
+    [
+     -61.3,
+     -98.11
+    ],
+    [
+     83.93,
+     -93.12
+    ]
+   ],
+   "desfaseOSM": 2.88,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868115 corrido +2.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868116,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -234.59,
+     -247.87
+    ],
+    [
+     -188.45,
+     -233.84
+    ],
+    [
+     -145.46,
+     -220.94
+    ],
+    [
+     -98.17,
+     -206.04
+    ],
+    [
+     2.05,
+     -180.34
+    ],
+    [
+     83.9,
+     -165.03
+    ]
+   ],
+   "desfaseOSM": 2.12,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868116 corrido +2.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868117,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -70.51,
+     -307.59
+    ],
+    [
+     -79.27,
+     -272.98
+    ],
+    [
+     -87.82,
+     -241.42
+    ],
+    [
+     -96.04,
+     -207.7
+    ]
+   ],
+   "desfaseOSM": -1.62,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868117 corrido -1.62 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868118,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -268.02,
+     -327.72
+    ],
+    [
+     -81.45,
+     -271.09
+    ],
+    [
+     85.9,
+     -233.42
+    ]
+   ],
+   "desfaseOSM": 2.38,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868118 corrido +2.38 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868119,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -251.84,
+     -287.78
+    ],
+    [
+     -89.93,
+     -239.77
+    ],
+    [
+     85.96,
+     -199.46
+    ]
+   ],
+   "desfaseOSM": 2.12,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868119 corrido +2.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868120,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -188.91,
+     -235.53
+    ],
+    [
+     -158.65,
+     -139.45
+    ]
+   ],
+   "desfaseOSM": 1.12,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868120 corrido +1.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868121,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -145.43,
+     -222.79
+    ],
+    [
+     -120.44,
+     -138.43
+    ]
+   ],
+   "desfaseOSM": 0.62,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868121 corrido +0.62 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 769868122,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     3.27,
+     -182.41
+    ],
+    [
+     3.02,
+     -135.8
+    ]
+   ],
+   "desfaseOSM": -0.75,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 769868122 corrido -0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 1009666334,
+   "etapa": "Amaranto",
+   "eje": [
+    [
+     166.43,
+     22.08
+    ],
+    [
+     164.15,
+     20.28
+    ],
+    [
+     161.39,
+     19.65
+    ],
+    [
+     6.64,
+     9.4
+    ]
+   ],
+   "desfaseOSM": -2.88,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 11.5,
+   "source": "eje: OSM way 1009666334 corrido -2.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 1009667793,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     87.15,
+     -264.51
+    ],
+    [
+     85.28,
+     -265.78
+    ],
+    [
+     83.35,
+     -266.44
+    ],
+    [
+     -72.86,
+     -305.09
+    ],
+    [
+     -285.11,
+     -365.74
+    ]
+   ],
+   "desfaseOSM": -3.0,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 1009667793 corrido -3.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 1009667794,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -53.33,
+     -138.02
+    ],
+    [
+     -53.56,
+     -142.88
+    ],
+    [
+     -55.56,
+     -147.33
+    ],
+    [
+     -59.06,
+     -150.73
+    ],
+    [
+     -63.58,
+     -152.63
+    ],
+    [
+     -68.48,
+     -152.76
+    ],
+    [
+     -73.09,
+     -151.09
+    ],
+    [
+     -76.75,
+     -147.87
+    ],
+    [
+     -78.98,
+     -143.52
+    ],
+    [
+     -79.44,
+     -138.67
+    ],
+    [
+     -78.3,
+     -134.42
+    ],
+    [
+     -75.79,
+     -130.79
+    ],
+    [
+     -72.23,
+     -128.19
+    ],
+    [
+     -67.26,
+     -126.83
+    ],
+    [
+     -62.14,
+     -127.48
+    ],
+    [
+     -58.91,
+     -129.08
+    ],
+    [
+     -56.23,
+     -131.5
+    ],
+    [
+     -54.33,
+     -134.55
+    ],
+    [
+     -53.33,
+     -138.02
+    ]
+   ],
+   "desfaseOSM": 0.0,
+   "sentido": "un sentido (OSM oneway, par con parterre)",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 1009667794 corrido +0.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 1009667795,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -53.47,
+     -134.46
+    ],
+    [
+     2.13,
+     -132.24
+    ],
+    [
+     83.42,
+     -129.23
+    ]
+   ],
+   "desfaseOSM": 3.56,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 1009667795 corrido +3.56 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 1009667796,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -63.03,
+     -62.58
+    ],
+    [
+     -76.08,
+     -62.08
+    ],
+    [
+     -171.38,
+     -62.98
+    ],
+    [
+     -176.0,
+     -63.84
+    ]
+   ],
+   "desfaseOSM": -2.0,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 1009667796 corrido -2.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 1009667797,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -63.22,
+     -62.33
+    ],
+    [
+     77.2,
+     -55.77
+    ],
+    [
+     79.58,
+     -56.1
+    ],
+    [
+     81.41,
+     -56.73
+    ]
+   ],
+   "desfaseOSM": 2.25,
+   "sentido": "doble",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 1009667797 corrido +2.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "osm": 1281213988,
+   "etapa": "Bromelia",
+   "eje": [
+    [
+     -60.98,
+     -38.76
+    ],
+    [
+     -62.47,
+     -56.78
+    ]
+   ],
+   "desfaseOSM": 0.0,
+   "sentido": "un sentido (OSM oneway, par con parterre)",
+   "calzada": 6.0,
+   "fachadaFachada": 12.0,
+   "source": "eje: OSM way 1281213988 corrido +0.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones)",
+   "confidence": "estimado"
+  },
+  {
+   "id": "C-S0",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     197.6,
+     41.57
+    ],
+    [
+     506.92,
+     129.35
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-S1",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     187.56,
+     79.05
+    ],
+    [
+     498.2,
+     161.9
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-S2",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     178.26,
+     113.75
+    ],
+    [
+     489.05,
+     196.05
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-S3",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     168.66,
+     149.58
+    ],
+    [
+     478.96,
+     233.7
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-S4",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     157.82,
+     190.02
+    ],
+    [
+     466.17,
+     281.45
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-S5",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     148.69,
+     224.09
+    ],
+    [
+     455.57,
+     321.0
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-S6",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     139.43,
+     258.67
+    ],
+    [
+     447.62,
+     350.65
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada, con bordillos; manzanas sin casas (en obra)",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-S7",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     130.18,
+     293.17
+    ],
+    [
+     438.28,
+     385.52
+    ]
+   ],
+   "sentido": "doble",
+   "calzada": 5.5,
+   "veredas": 1.3,
+   "lineaDeLoteDesdeEje": 4.0,
+   "estado": "asfaltada, con bordillos; manzanas sin casas (en obra)",
+   "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "medido"
+  },
+  {
+   "id": "C-oeste",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     206.8,
+     20.76
+    ],
+    [
+     131.22,
+     302.81
+    ]
+   ],
+   "anchoTotal": 7.0,
+   "nota": "",
+   "source": "perfil de asfalto uniforme (sd<5) u -3..1, v -1..100",
+   "confidence": "estimado"
+  },
+  {
+   "id": "C-central",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     354.1,
+     60.23
+    ],
+    [
+     278.53,
+     342.28
+    ]
+   ],
+   "anchoTotal": 23,
+   "nota": "dos calzadas u≈141-150 y 153-161 con parterre angosto; jardineras a los lados en v -10..100; rotonda en v≈60",
+   "source": "perfil transversal promediado; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20",
+   "confidence": "estimado"
+  },
+  {
+   "id": "C-este",
+   "etapa": "Camelia",
+   "eje": [
+    [
+     509.86,
+     101.97
+    ],
+    [
+     434.28,
+     384.02
+    ]
+   ],
+   "anchoTotal": 8.5,
+   "nota": "",
+   "source": "perfil en v 60..100: asfalto uniforme u 309-316.5",
+   "confidence": "estimado"
+  }
+ ],
+ "social": {
+  "Amaranto": {
+   "recintoPiscina": {
+    "poly": [
+     [
+      -90,
+      80
+     ],
+     [
+      -45,
+      80
+     ],
+     [
+      -45,
+      113
+     ],
+     [
+      -90,
+      113
+     ]
+    ],
+    "piso": "deck beige",
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "piscinaAdultos": {
+    "forma": "libre (trébol / cruz)",
+    "envolvente": [
+     [
+      -84,
+      84
+     ],
+     [
+      -58,
+      84
+     ],
+     [
+      -58,
+      106
+     ],
+     [
+      -84,
+      106
+     ]
+    ],
+    "osm": 1443279626,
+    "osmRect": [
+     28.69,
+     19.47
+    ],
+    "agua": "#4aa3c8",
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "piscinaNinos": {
+    "forma": "ovalada",
+    "envolvente": [
+     [
+      -54,
+      91
+     ],
+     [
+      -48,
+      91
+     ],
+     [
+      -48,
+      104
+     ],
+     [
+      -54,
+      104
+     ]
+    ],
+    "osm": 1443279627,
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "casaClub": "ver volumes",
+   "anexo": {
+    "poly": [
+     [
+      -35,
+      110
+     ],
+     [
+      -28,
+      110
+     ],
+     [
+      -28,
+      113
+     ],
+     [
+      -35,
+      113
+     ]
+    ],
+    "techo": "blanco",
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "explanada": {
+    "poly": [
+     [
+      -22,
+      80
+     ],
+     [
+      -5,
+      80
+     ],
+     [
+      -5,
+      115
+     ],
+     [
+      -22,
+      115
+     ]
+    ],
+    "piso": "beige con senderos curvos",
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "canchas": [
+    {
+     "tipo": "multiuso / básquet (llaves naranjas, círculo central)",
+     "poly": [
+      [
+       29,
+       94
+      ],
+      [
+       47,
+       94
+      ],
+      [
+       47,
+       124
+      ],
+      [
+       29,
+       124
+      ]
+     ],
+     "medidas": [
+      18,
+      30
+     ],
+     "superficie": "azul grisáceo",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+    },
+    {
+     "tipo": "multiuso / básquet",
+     "poly": [
+      [
+       51,
+       94
+      ],
+      [
+       71,
+       94
+      ],
+      [
+       71,
+       124
+      ],
+      [
+       51,
+       124
+      ]
+     ],
+     "medidas": [
+      20,
+      30
+     ],
+     "superficie": "azul grisáceo",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+    },
+    {
+     "tipo": "césped (¿sintético?) — OSM 1443279628 la marca como cancha",
+     "poly": [
+      [
+       5,
+       95
+      ],
+      [
+       27,
+       95
+      ],
+      [
+       27,
+       125
+      ],
+      [
+       5,
+       125
+      ]
+     ],
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20; OSM 1443279628",
+     "confidence": "estimado"
+    }
+   ],
+   "arboles": [
+    {
+     "centro": [
+      32,
+      89
+     ],
+     "copa": 12,
+     "nota": "grupo de árboles grandes al norte de las canchas"
+    },
+    {
+     "centro": [
+      -2,
+      70
+     ],
+     "copa": 14,
+     "nota": "árbol grande en la rotonda"
+    }
+   ],
+   "rotonda": {
+    "centro": [
+     -2,
+     70
+    ],
+    "radio": 12,
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   }
+  },
+  "Bromelia": {
+   "piscinaAdultos": {
+    "forma": "rectangular",
+    "medidas": [
+     10,
+     22
+    ],
+    "centro": [
+     -118,
+     -187
+    ],
+    "ejeLargoDeg": 67,
+    "osm": 1443279634,
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (paralela a la calle oeste 769868112)"
+   },
+   "piscinaNinos": {
+    "forma": "rectangular",
+    "medidas": [
+     8,
+     8
+    ],
+    "centro": [
+     -105,
+     -188
+    ],
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "casaClub": "ver volumes",
+   "glorietas": [
+    {
+     "centro": [
+      -110,
+      -152
+     ],
+     "diametro": 9
+    },
+    {
+     "centro": [
+      -94,
+      -148
+     ],
+     "diametro": 9
+    }
+   ],
+   "canchas": [
+    {
+     "tipo": "fútbol, césped sintético verde con líneas blancas",
+     "poly": [
+      [
+       -62,
+       -182
+      ],
+      [
+       -44,
+       -182
+      ],
+      [
+       -44,
+       -148
+      ],
+      [
+       -62,
+       -148
+      ]
+     ],
+     "medidas": [
+      18,
+      34
+     ],
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20; durancity.com (fotos oficiales subidas 2025-06; solo mirar)"
+    },
+    {
+     "tipo": "tenis (azul)",
+     "poly": [
+      [
+       -44,
+       -178
+      ],
+      [
+       -26,
+       -178
+      ],
+      [
+       -26,
+       -150
+      ],
+      [
+       -44,
+       -150
+      ]
+     ],
+     "medidas": [
+      18,
+      28
+     ],
+     "osm": 1443279632,
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+    },
+    {
+     "tipo": "juegos infantiles sobre piso de caucho verde con 2 círculos naranjas (r≈6 m) y uno chico",
+     "poly": [
+      [
+       -20,
+       -178
+      ],
+      [
+       -2,
+       -178
+      ],
+      [
+       -2,
+       -143
+      ],
+      [
+       -20,
+       -143
+      ]
+     ],
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+    }
+   ],
+   "rotonda": {
+    "centro": [
+     -72,
+     -140
+    ],
+    "radio": 8,
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "osmArea": 1443279635,
+   "fotosUsuario": {
+    "piscina": "rectangular con una de niños aparte unida por un paso; borde de hormigón claro y deck de adoquín cerámico terracota en espiga",
+    "casaClub": "pabellón abierto con techo rojo de dos niveles a 4 aguas sobre postes, con una parte cerrada",
+    "cerco": "muro bajo perimetral beige con remate escalonado y jardineras; cancha de fútbol sintético y de tenis con malla de alambre",
+    "juegos": "sobre un círculo",
+    "source": "estimado (foto de la ficha de Google Maps, sept 2020 y dron subido en jun 2025; solo mirar)",
+    "confidence": "estimado",
+    "screenshots": [
+     "pipeline/.cache/model-place/duranCity/streetview/14-bromelia-piscina-ficha-2020-09.png",
+     "pipeline/.cache/model-place/duranCity/streetview/16-area-social-dron-ficha-2025-06.png"
+    ]
+   }
+  },
+  "Camelia": {
+   "bloque": {
+    "poly": [
+     [
+      313.07,
+      192.11
+     ],
+     [
+      476.31,
+      235.85
+     ],
+     [
+      466.48,
+      272.55
+     ],
+     [
+      303.24,
+      228.81
+     ]
+    ],
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20; OSM 1443279619 “Area Social - Camelia”"
+   },
+   "juegos": {
+    "poly": [
+     [
+      312.56,
+      194.04
+     ],
+     [
+      340.57,
+      201.55
+     ],
+     [
+      331.51,
+      235.35
+     ],
+     [
+      303.5,
+      227.85
+     ]
+    ],
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "piscina": {
+    "forma": "rectangular con extremo escalonado",
+    "poly": [
+     [
+      360.32,
+      224.44
+     ],
+     [
+      392.19,
+      232.98
+     ],
+     [
+      388.31,
+      247.47
+     ],
+     [
+      356.43,
+      238.93
+     ]
+    ],
+    "medidas": [
+     31,
+     13
+    ],
+    "osm": 1443279620,
+    "osmRect": [
+     35.2,
+     14.0
+    ],
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "deck": {
+    "poly": [
+     [
+      362.78,
+      207.5
+     ],
+     [
+      399.49,
+      217.33
+     ],
+     [
+      390.17,
+      252.11
+     ],
+     [
+      353.47,
+      242.27
+     ]
+    ],
+    "piso": "beige",
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "kiosco": {
+    "poly": [
+     [
+      375.46,
+      218.14
+     ],
+     [
+      387.05,
+      221.25
+     ],
+     [
+      384.72,
+      229.94
+     ],
+     [
+      373.13,
+      226.84
+     ]
+    ],
+    "techo": "oscuro",
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "canchas": [
+    {
+     "tipo": "fútbol, césped sintético",
+     "poly": [
+      [
+       400.9,
+       219.78
+      ],
+      [
+       426.98,
+       226.77
+      ],
+      [
+       418.18,
+       259.61
+      ],
+      [
+       392.1,
+       252.62
+      ]
+     ],
+     "medidas": [
+      27,
+      34
+     ],
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+    },
+    {
+     "tipo": "tenis / multiuso azul",
+     "poly": [
+      [
+       433.23,
+       230.51
+      ],
+      [
+       448.68,
+       234.66
+      ],
+      [
+       440.4,
+       265.57
+      ],
+      [
+       424.94,
+       261.42
+      ]
+     ],
+     "medidas": [
+      16,
+      32
+     ],
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+    },
+    {
+     "tipo": "juegos infantiles, piso de caucho naranja con círculos",
+     "poly": [
+      [
+       451.13,
+       233.24
+      ],
+      [
+       475.28,
+       239.71
+      ],
+      [
+       466.48,
+       272.55
+      ],
+      [
+       442.33,
+       266.08
+      ]
+     ],
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (OSM 1443279621 lo marca como vóley playa en arena: no coincide)"
+    }
+   ],
+   "rotonda": {
+    "centro": [
+     329.36,
+     146.78
+    ],
+    "radio": 9,
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   },
+   "jardinerasEje": "franjas curvas plantadas a ambos lados del eje central N-S (u 130–140 y 160–172, v −10..100)",
+   "parqueEntrada": {
+    "poly": [
+     [
+      215,
+      5
+     ],
+     [
+      290,
+      5
+     ],
+     [
+      290,
+      40
+     ],
+     [
+      215,
+      40
+     ]
+    ],
+    "nota": "parque con senderos curvos entre el camino del borde norte y la primera fila",
+    "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20"
+   }
+  }
+ }
+}

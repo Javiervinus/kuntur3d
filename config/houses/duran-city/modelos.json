@@ -1,0 +1,3207 @@
+{
+ "id": "duranCity-modelos",
+ "name": "Durán City: modelos de casa (Amaranto, Bromelia, Camelia)",
+ "developer": {
+  "value": "Prohorizon",
+  "source": "ekos",
+  "confidence": "medido"
+ },
+ "frameNote": "Marco local de la casa: x a lo largo del frente, 0 = esquina izquierda vista desde la calle; z hacia el fondo, 0 = plano de fachada más adelantado; y hacia arriba, 0 = suelo del jardín frontal junto a la fachada. Las casas se construyen en las dos manos (en espejo): el retiro lateral de 1 m puede quedar a la izquierda o a la derecha; aquí se describe la mano de la foto citada.",
+ "common": {
+  "lot": {
+   "frontage": {
+    "value": 7.0,
+    "source": "esri2025: separaciones entre casas cada 7,0 m en la fila sur de la calle OSM 769868128 (Camelia; x 38,7/45,7/52,7 m del marco); plans2023: líneas de lote a 409-418 px = 6,99-7,15 m",
+    "confidence": "medido"
+   },
+   "depth": {
+    "value": [
+     12.0,
+     17.0
+    ],
+    "source": "osm: calles paralelas a 32-43 m entre ejes (Amaranto 32-36, Bromelia 39, Camelia 34-43) menos ~8,4 m de vía y veredas, dividido en dos lotes espalda con espalda; típico ~14-15 m",
+    "confidence": "estimado",
+    "typical": 14.5
+   },
+   "area": {
+    "value": [
+     80,
+     130
+    ],
+    "source": "threads: 80 m² (Amaranto, Bambú/Ceibo); remax: 104 m² (Amaranto, Pino); site2026 vía buscador: Roble 98 m²; icasas: 129,90 m² (esquinera Bromelia)",
+    "confidence": "estimado",
+    "typical": 100
+   },
+   "sideSetback": {
+    "value": 1.0,
+    "source": "plans2023: casa a 58-59 px (0,99-1,01 m) de la línea de lote en Azalea, Lirio, Ebano y Roble 3D; threads: \"retiro lateral 1 metro\"; el otro muro va sobre el lindero",
+    "confidence": "medido"
+   },
+   "frontSetback": {
+    "value": 3.0,
+    "source": "plans2023: jardín frontal > 2,0 m (se corta al borde de la imagen); con lote de ~14,5 m, patio posterior 1,0-1,8 m y casa de 9-10 m quedan ~3 m; el satélite sugiere 2-3 m (el alero de 2 pisos se desplaza ~1,5 m por la toma oblicua)",
+    "confidence": "estimado"
+   },
+   "backYard": {
+    "value": [
+     0.9,
+     1.8
+    ],
+    "source": "plans2023: de la pared posterior a la línea trasera 55-107 px (Lirio 0,9; Azalea 1,7; Ebano 1,8; Roble 1,8 m)",
+    "confidence": "medido"
+   }
+  },
+  "plinth": {
+   "value": 0.25,
+   "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+   "confidence": "medido",
+   "thresholdAboveLawn": [
+    0.04,
+    0.26
+   ]
+  },
+  "floorToFloor": {
+   "value": 2.6,
+   "source": "plans2022 Cedro PA: escalera \"14 x 18,6 cm\" = 2,604 m; photos2023 Roble: tejadillo y banda de entrepiso a ~2,5-2,9 m",
+   "confidence": "medido"
+  },
+  "eave2p": {
+   "value": 5.4,
+   "source": "photos2023: borde inferior de la fascia del alero frontal a 5,43 m (Olivo, escala por ancho 6,0 m), 5,34 (Ebano, volumen adelantado), 5,29-5,51 (Roble), 5,38-5,70 (Cedro); se fija 5,40 y con eso se escalan las alturas de vanos",
+   "confidence": "medido"
+  },
+  "eave1p": {
+   "value": 3.0,
+   "source": "photos2025: Bambú 2,94-3,03 m (escala por ancho 6,0 m y por puerta), Lirio 2,93-3,07, Azalea 3,0",
+   "confidence": "medido"
+  },
+  "roofPitchDeg": {
+   "value": 11,
+   "source": "photos2023 Ebano: el alero de la parte retranqueada 3,3 m está 0,61 m más alto que el del volumen adelantado (mismo faldón) → 10,5°; mly257: hastiales de Bromelia → 11-12°; se usa 11° (19 %)",
+   "confidence": "estimado"
+  },
+  "roof": {
+   "type": {
+    "value": "dos aguas",
+    "source": "camelia2022 (aérea: hastial triangular en muros laterales), wb2017 slide 01 y 03 (Amaranto), wb2014 renders de 1 piso, esri2025 (faldón norte más claro que el sur en casas de fondo N-S: mediana 1,07 en Camelia, 1,06 en Bromelia; en Amaranto 1,01, con mucha dispersión por ampliaciones y techos cambiados)",
+    "confidence": "medido"
+   },
+   "ridge": {
+    "value": "paralela a la calle (hastiales en los muros laterales); excepción: Haya, con hastial hacia la calle",
+    "source": "mismas fuentes; Haya en photos2025 Haya_E2, camelia2022 haya-camelia y wb2014",
+    "confidence": "medido"
+   },
+   "material": {
+    "value": "planchas onduladas de fibrocemento sobre estructura metálica",
+    "source": "wb2012: \"Cubierta: estructura metálica con planchas de fibrocemento\"; fotos: perfil ondulado visible en el alero frontal",
+    "confidence": "medido"
+   },
+   "overhangFront": {
+    "value": 0.5,
+    "source": "plans2022 Cedro: proyección 0,5 m adelante y 0,6 m atrás; bambuPlan: 0,38 m",
+    "confidence": "medido"
+   },
+   "overhangSide": {
+    "value": [
+     0.25,
+     0.6
+    ],
+    "source": "photos2025 Bambú: 0,59 m al lado libre y 0,25 m al lado del lindero; photos2023 Cedro: 0,55 m",
+    "confidence": "medido"
+   },
+   "fascia": {
+    "value": "borde de la plancha a la vista (serrucho del perfil ondulado) con una fascia o correa oscura debajo; algunas casas de Bromelia tienen canaleta de PVC blanca en el alero frontal",
+    "source": "photos2023 Cedro (fascia #564433), bromelia2022 Galeria3 (canaleta blanca)",
+    "confidence": "estimado"
+   }
+  },
+  "door": {
+   "value": {
+    "w": 0.9,
+    "h": 2.1,
+    "frameOuterW": [
+     1.0,
+     1.1
+    ],
+    "type": "puerta metálica de 6 tableros repujados, pintada",
+    "color": "negro (#050303) en Bromelia/Camelia; café oscuro en los renders de Amaranto 2014"
+   },
+   "source": "wb2012 (puertas exteriores metálicas pintadas); photos2023/2025: vano con marco de 1,04-1,12 x 2,05-2,20 m; bambuPlan P-01 ~1,0 m",
+   "confidence": "medido"
+  },
+  "windows": {
+   "value": "corredizas de aluminio de 2 hojas, vidrio claro con malla; moldura de mortero pintada blanca de ~0,10-0,12 m alrededor (en Amaranto 2014 la moldura va del color de acento)",
+   "source": "wb2012; photos2023; bambuPlan V-01 = 1,20 m de vidrio con moldura exterior de 1,38-1,42 m",
+   "confidence": "medido"
+  },
+  "wallLamp": {
+   "value": "aplique ovalado blanco tipo tortuga con rejilla, uno sobre cada ventana de 1 piso (y = 2,55-2,61 m) o uno en el paño central en 2 pisos",
+   "source": "photos2025 Bambú, Lirio; photos2023 Olivo, Roble",
+   "confidence": "estimado"
+  },
+  "frontYard": {
+   "value": "césped a ambos lados de un caminito de baldosa terracota de ~0,9-1,0 m hasta la puerta; palmas enanas (Phoenix roebelenii, 1-2 por casa) con arbustos amarillos junto a la ventana principal; grava gris en la franja lateral",
+   "source": "photos2023, photos2025, plans2023",
+   "confidence": "medido"
+  },
+  "fence": {
+   "value": "sin cerramiento frontal de fábrica; muros de lindero de bloque enlucido y pintado de 1,8-1,9 m entre lotes que arrancan en la línea de fachada; pilar del medidor (0,40-0,45 x ~0,30 x 1,9-2,1 m, con capuchón) en la línea de lote del lado del retiro; portón metálico lateral en algunas",
+   "source": "photos2023 Roble (muro 1,85 m, pilar 1,92 m); bromelia2022 Galeria3 (portón negro, pilar con tejadillo); camelia2022",
+   "confidence": "medido"
+  },
+  "constructionSystem": {
+   "value": {
+    "Amaranto (2012-2017)": "paredes estructurales de hormigón armado",
+    "Bromelia y Camelia (2017-hoy)": "sistema tradicional sismorresistente de ladrillo/bloque (\"Tipo de Estructura: Ladrillo\")"
+   },
+   "source": "wb2012; web.archive.org 2023-12-04 fichas Ebano/Lirio/Rafia/Roble",
+   "confidence": "medido"
+  }
+ },
+ "families": {
+  "1 piso corto": [
+   "bambu"
+  ],
+  "1 piso largo": [
+   "azalea",
+   "lirio",
+   "ceibo",
+   "eucalipto",
+   "ficus"
+  ],
+  "2 pisos compacto": [
+   "cedro",
+   "olivo",
+   "haya",
+   "nogal",
+   "pino"
+  ],
+  "2 pisos largo": [
+   "roble",
+   "rafia",
+   "robinia",
+   "ebano"
+  ]
+ },
+ "models": [
+  {
+   "id": "bambu",
+   "name": "Bambú",
+   "family": "1 piso corto",
+   "etapas": {
+    "value": [
+     "Amaranto",
+     "Bromelia",
+     "Camelia"
+    ],
+    "source": "wb2012 (Villa Bambú 39 m²), site2026 (Bromelia y Camelia)",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 39.0,
+     "floors": 1,
+     "bedrooms": 2,
+     "baths": 1,
+     "priceUSD": {
+      "Bromelia": 39800,
+      "Camelia": 43850
+     },
+     "priceDate": {
+      "Bromelia": "2026-01-26",
+      "Camelia": "2025-06-17"
+     }
+    },
+    "source": "site2026 fichas /casas-bromelia/bambu/ y /casas-camelia/bambu/",
+    "confidence": "medido"
+   },
+   "footprint": {
+    "value": [
+     [
+      0,
+      0
+     ],
+     [
+      6.0,
+      0
+     ],
+     [
+      6.0,
+      6.5
+     ],
+     [
+      0,
+      6.5
+     ]
+    ],
+    "source": "bambuPlan: muros exteriores 998 x 1085 px, relación 1,087; con 39 m² → 5,99 x 6,51 m",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "casa",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       6.5
+      ],
+      [
+       0,
+       6.5
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "roof": "dos aguas paralela al frente",
+     "source": "bambuPlan + photos2025 BAMBU_E2",
+     "confidence": "medido"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 3.0,
+     "source": "photos2025 BAMBU_E2: fascia a (460-112)/116 = 3,0 m",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 3.71,
+     "source": "eave + (6,5/2 + 0,38)·tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "roof": {
+    "overhang": {
+     "value": {
+      "front": 0.38,
+      "back": 0.38,
+      "freeSide": 0.38,
+      "linderoSide": 0.0
+     },
+     "source": "bambuPlan: línea \"proyección de cubierta\" a 63-65 px de los muros (0,38 m), sin alero hacia el lindero; la foto 2025 muestra 0,59 y 0,25 m",
+     "confidence": "medido"
+    },
+    "color": {
+     "value": {
+      "Bromelia 2025 (foto)": "#e3b9a0 teja clara (salmón desteñido)",
+      "Amaranto 2014 (render)": "rojo teja oscuro"
+     },
+     "source": "photos2025 BAMBU_E2 (borde #eed8c1 a pleno sol); wb2014 villa-bambu-fachada",
+     "confidence": "medido"
+    }
+   },
+   "facade": {
+    "openings": [
+     {
+      "type": "ventana",
+      "x": [
+       0.86,
+       2.24
+      ],
+      "y": [
+       1.1,
+       2.5
+      ],
+      "w": 1.38,
+      "h": 1.4,
+      "source": "photos2025 BAMBU_E2 (moldura exterior); vidrio 1,20 m según bambuPlan V-01",
+      "confidence": "medido"
+     },
+     {
+      "type": "puerta",
+      "x": [
+       3.0,
+       4.04
+      ],
+      "y": [
+       0.26,
+       2.34
+      ],
+      "w": 1.04,
+      "h": 2.08,
+      "source": "photos2025 BAMBU_E2 (vano con marco); P-01 en bambuPlan",
+      "confidence": "medido"
+     },
+     {
+      "type": "ventana",
+      "x": [
+       4.33,
+       5.72
+      ],
+      "y": [
+       1.09,
+       2.5
+      ],
+      "w": 1.39,
+      "h": 1.41,
+      "source": "photos2025 BAMBU_E2",
+      "confidence": "medido"
+     }
+    ],
+    "details": [
+     {
+      "value": "dos apliques sobre las ventanas a y = 2,61 m",
+      "source": "photos2025 BAMBU_E2",
+      "confidence": "medido"
+     },
+     {
+      "value": "paño bajo la ventana izquierda en ocre un tono más oscuro (x 0,86-2,24, y 0,26-1,10)",
+      "source": "photos2025 BAMBU_E2",
+      "confidence": "medido"
+     },
+     {
+      "value": "zócalo de 0,25 m del mismo ocre",
+      "source": "photos2025 BAMBU_E2",
+      "confidence": "medido"
+     }
+    ],
+    "colors": [
+     {
+      "value": {
+       "part": "muro",
+       "hex": "#c49a5e",
+       "name": "ocre/mostaza"
+      },
+      "source": "photos2025 BAMBU_E2 muestreo #ad8d5a-#ba8f4c (nublado), corregido a ojo",
+      "confidence": "estimado"
+     },
+     {
+      "value": {
+       "part": "puerta",
+       "hex": "#1a1714"
+      },
+      "source": "photos2025 BAMBU_E2",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "molduras",
+       "hex": "#f2f2ee"
+      },
+      "source": "photos2025 BAMBU_E2",
+      "confidence": "medido"
+     }
+    ]
+   },
+   "notes": "En Amaranto (2014) el Bambú era crema con un paño de ladrillo/piedra oscuro en la parte de la puerta y techo rojo oscuro a dos aguas (wb2014). Tiene \"bases para segundo piso\": es el modelo que más se amplía hacia arriba."
+  },
+  {
+   "id": "azalea",
+   "name": "Azalea",
+   "family": "1 piso largo",
+   "etapas": {
+    "value": [
+     "Bromelia",
+     "Camelia"
+    ],
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 50.14,
+     "floors": 1,
+     "bedrooms": 2,
+     "baths": 2,
+     "priceUSD": {
+      "Bromelia": 46990,
+      "Camelia": 47990
+     },
+     "priceDate": "2026-06-15"
+    },
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "dormitorio máster (adelantado)",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       3.2,
+       0
+      ],
+      [
+       3.2,
+       9.37
+      ],
+      [
+       0,
+       9.37
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "source": "plans2023 azaleapb-4: x 228-415 px, fondo 100-648 px a 58,5 px/m",
+     "confidence": "medido"
+    },
+    {
+     "name": "sala-comedor-cocina (retranqueada 1,68 m)",
+     "footprint": [
+      [
+       3.2,
+       1.68
+      ],
+      [
+       6.14,
+       1.68
+      ],
+      [
+       6.14,
+       9.37
+      ],
+      [
+       3.2,
+       9.37
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "source": "plans2023 azaleapb-4: x 415-587 px, frente 550 px",
+     "confidence": "medido"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 3.0,
+     "source": "photos2025 AzaleaIG_E1",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 3.98,
+     "source": "eave + (9,37/2 + 0,38)·tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "annex": {
+    "value": "lavadero y lavadora afuera, en el patio posterior (x ~2,7-4,4, z 9,4-10,2)",
+    "source": "plans2023 azaleapb-4",
+    "confidence": "estimado"
+   },
+   "facade": {
+    "openings": [
+     {
+      "type": "ventana",
+      "x": [
+       0.92,
+       2.41
+      ],
+      "y": [
+       1.07,
+       2.53
+      ],
+      "w": 1.49,
+      "h": 1.46,
+      "source": "photos2025 AzaleaIG_E1",
+      "confidence": "medido",
+      "paneBelow": "paño de piedra x 0,95-2,41, y 0,05-0,69"
+     },
+     {
+      "type": "puerta",
+      "x": [
+       3.34,
+       4.33
+      ],
+      "y": [
+       0.2,
+       2.3
+      ],
+      "w": 0.99,
+      "h": 2.1,
+      "source": "photos2025 AzaleaIG_E1 (en el plano retranqueado; alto estimado por la perspectiva)",
+      "confidence": "estimado"
+     },
+     {
+      "type": "ventana",
+      "x": [
+       4.46,
+       5.77
+      ],
+      "y": [
+       1.08,
+       2.38
+      ],
+      "w": 1.31,
+      "h": 1.3,
+      "source": "photos2025 AzaleaIG_E1 (plano retranqueado)",
+      "confidence": "estimado"
+     }
+    ],
+    "colors": [
+     {
+      "value": {
+       "part": "volumen adelantado",
+       "hex": "#ecd6b2",
+       "name": "crema vainilla"
+      },
+      "source": "photos2025 AzaleaIG_E1 #f8ddb4 sobreexpuesto",
+      "confidence": "estimado"
+     },
+     {
+      "value": {
+       "part": "volumen retranqueado",
+       "hex": "#9c6e58",
+       "name": "terracota/café"
+      },
+      "source": "photos2025 AzaleaIG_E1 #a7775f",
+      "confidence": "estimado"
+     },
+     {
+      "value": {
+       "part": "piedra bajo ventana",
+       "hex": "#9e8049"
+      },
+      "source": "photos2025 AzaleaIG_E1",
+      "confidence": "estimado"
+     },
+     {
+      "value": {
+       "part": "techo",
+       "hex": "#6f7686",
+       "name": "gris azulado"
+      },
+      "source": "photos2025 AzaleaIG_E1 #8994ac bajo cielo azul",
+      "confidence": "estimado"
+     }
+    ]
+   }
+  },
+  {
+   "id": "lirio",
+   "name": "Lirio",
+   "family": "1 piso largo",
+   "etapas": {
+    "value": [
+     "Bromelia",
+     "Camelia"
+    ],
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 58.34,
+     "floors": 1,
+     "bedrooms": 3,
+     "baths": 2,
+     "priceUSD": {
+      "Bromelia": 58260,
+      "Camelia": 60790
+     },
+     "priceDate": {
+      "Bromelia": "2025-06-18",
+      "Camelia": "2026-06-15"
+     }
+    },
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "sala-cocina (retranqueada 0,60 m)",
+     "footprint": [
+      [
+       0,
+       0.6
+      ],
+      [
+       2.8,
+       0.6
+      ],
+      [
+       2.8,
+       10.03
+      ],
+      [
+       0,
+       10.03
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "source": "plans2023 render.png (espejado como en la foto): 164 px de ancho, frente 607 px, fondo 55 px",
+     "confidence": "medido"
+    },
+    {
+     "name": "dormitorios (adelantado)",
+     "footprint": [
+      [
+       2.8,
+       0
+      ],
+      [
+       5.98,
+       0
+      ],
+      [
+       5.98,
+       10.03
+      ],
+      [
+       2.8,
+       10.03
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "source": "plans2023 render.png: 186 px, frente 642 px (el área 58,34 m² cierra con 58,5 px/m)",
+     "confidence": "medido"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 3.0,
+     "source": "photos2025 LIRIO_E5",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 4.05,
+     "source": "eave + (10,03/2 + 0,38)·tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "openings": [
+     {
+      "type": "ventana",
+      "x": [
+       0.23,
+       1.58
+      ],
+      "y": [
+       0.95,
+       2.37
+      ],
+      "w": 1.35,
+      "h": 1.42,
+      "source": "photos2025 LIRIO_E5",
+      "confidence": "medido"
+     },
+     {
+      "type": "puerta",
+      "x": [
+       1.74,
+       2.78
+      ],
+      "y": [
+       0.13,
+       2.18
+      ],
+      "w": 1.04,
+      "h": 2.05,
+      "source": "photos2025 LIRIO_E5",
+      "confidence": "medido"
+     },
+     {
+      "type": "ventana",
+      "x": [
+       3.7,
+       5.13
+      ],
+      "y": [
+       0.6,
+       2.41
+      ],
+      "w": 1.43,
+      "h": 1.81,
+      "source": "photos2025 LIRIO_E5",
+      "confidence": "medido",
+      "guard": "3 tubos blancos horizontales en la parte baja (y 0,62-1,05)"
+     }
+    ],
+    "details": [
+     {
+      "value": "zócalo de piedra en el volumen adelantado: x 2,81-6,0, y 0-0,48",
+      "source": "photos2025 LIRIO_E5",
+      "confidence": "medido"
+     },
+     {
+      "value": "apliques sobre la ventana izquierda y la derecha a y ≈ 2,53",
+      "source": "photos2025 LIRIO_E5",
+      "confidence": "medido"
+     }
+    ],
+    "colors": [
+     {
+      "value": {
+       "part": "muro",
+       "hex": "#c9bba4",
+       "name": "beige arena"
+      },
+      "source": "photos2025 LIRIO_E5 #beb49f a la sombra, #90816a bajo el alero",
+      "confidence": "estimado"
+     },
+     {
+      "value": {
+       "part": "piedra",
+       "hex": "#8a7a62"
+      },
+      "source": "photos2025 LIRIO_E5 #6a5d49 en sombra",
+      "confidence": "estimado"
+     },
+     {
+      "value": {
+       "part": "techo",
+       "hex": "#686366",
+       "name": "gris café oscuro"
+      },
+      "source": "photos2025 LIRIO_E5",
+      "confidence": "estimado"
+     }
+    ]
+   },
+   "notes": "La foto oficial es la planta en espejo (puerta a la izquierda del centro). Se construye en las dos manos."
+  },
+  {
+   "id": "ceibo",
+   "name": "Ceibo",
+   "family": "1 piso largo (época Amaranto)",
+   "etapas": {
+    "value": [
+     "Amaranto"
+    ],
+    "source": "wb2012 (Villa Ceibo 48 m²), wb2014 fachada, wb2017 modelo-ceibo",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 48,
+     "floors": 1,
+     "bedrooms": 3,
+     "baths": 1,
+     "priceUSD": null,
+     "priceDate": "2012"
+    },
+    "source": "wb2012",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "casa",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       8.0
+      ],
+      [
+       0,
+       8.0
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "source": "m² de wb2012 / 6,0 m de ancho (módulo de lote 7 m con 1 m de retiro); sin planta a la vista",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 3.0,
+     "source": "igual que Bambú/Lirio",
+     "confidence": "estimado"
+    },
+    "ridge": {
+     "value": 3.85,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "composition": {
+     "value": "ventana del dormitorio a la izquierda; puerta de madera oscura al centro-derecha; ventana a la derecha sobre un paño de enchape (ladrillo/piedra café o naranja) que cubre la parte de la puerta; muros crema-rosado; techo rojo oscuro a dos aguas con hastial en el muro lateral",
+     "source": "wb2014 villa-ceibo-fachada (render 800x600)",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "eucalipto",
+   "name": "Eucalipto",
+   "family": "1 piso largo (época Amaranto)",
+   "etapas": {
+    "value": [
+     "Amaranto"
+    ],
+    "source": "wb2012 (Villa Eucalipto 52 m²), wb2014 fachada, wb2017 modelo-eucalipto",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 52,
+     "floors": 1,
+     "bedrooms": 3,
+     "baths": 2,
+     "priceUSD": null,
+     "priceDate": "2012"
+    },
+    "source": "wb2012",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "casa",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       8.7
+      ],
+      [
+       0,
+       8.7
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "source": "m² de wb2012 / 6,0 m de ancho (módulo de lote 7 m con 1 m de retiro); sin planta a la vista",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 3.0,
+     "source": "igual que Bambú/Lirio",
+     "confidence": "estimado"
+    },
+    "ridge": {
+     "value": 3.92,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "composition": {
+     "value": "ventana del dormitorio a la izquierda; puerta de madera oscura al centro-derecha; ventana a la derecha sobre un paño de enchape (ladrillo/piedra café o naranja) que cubre la parte de la puerta; muros crema-rosado; techo rojo oscuro a dos aguas con hastial en el muro lateral",
+     "source": "wb2014 villa-eucalipto-fachada (render 800x600)",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "ficus",
+   "name": "Ficus",
+   "family": "1 piso largo (época Amaranto)",
+   "etapas": {
+    "value": [
+     "Amaranto"
+    ],
+    "source": "wb2012 (Villa Ficus 58 m²), wb2014 fachada, wb2017 modelo-ficus",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 58,
+     "floors": 1,
+     "bedrooms": 3,
+     "baths": 2,
+     "priceUSD": null,
+     "priceDate": "2012"
+    },
+    "source": "wb2012",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "casa",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       9.7
+      ],
+      [
+       0,
+       9.7
+      ]
+     ],
+     "base": 0,
+     "height": 3.0,
+     "levels": 1,
+     "source": "m² de wb2012 / 6,0 m de ancho (módulo de lote 7 m con 1 m de retiro); sin planta a la vista",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 3.0,
+     "source": "igual que Bambú/Lirio",
+     "confidence": "estimado"
+    },
+    "ridge": {
+     "value": 4.02,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "composition": {
+     "value": "ventana del dormitorio a la izquierda; puerta de madera oscura al centro-derecha; ventana a la derecha sobre un paño de enchape (ladrillo/piedra café o naranja) que cubre la parte de la puerta; muros crema-rosado; techo rojo oscuro a dos aguas con hastial en el muro lateral",
+     "source": "wb2014 villa-ficus-fachada (render 800x600)",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "cedro",
+   "name": "Cedro",
+   "family": "2 pisos compacto",
+   "etapas": {
+    "value": [
+     "Bromelia",
+     "Camelia"
+    ],
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 71.92,
+     "floors": 2,
+     "bedrooms": 3,
+     "baths": 2.5,
+     "priceUSD": {
+      "Bromelia": 66550,
+      "Camelia": 69750
+     },
+     "priceDate": "2026-06-15"
+    },
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB principal",
+     "footprint": [
+      [
+       0,
+       0.5
+      ],
+      [
+       4.2,
+       0.5
+      ],
+      [
+       4.2,
+       6.42
+      ],
+      [
+       0,
+       6.42
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB-scaled: sala 2,51 x 2,75 + comedor 2,51 x 2,91 → 118,6 px/m; 713 x 702 px exteriores = 6,01 x 5,92 m",
+     "confidence": "medido"
+    },
+    {
+     "name": "PB caja de escalera (retranqueada)",
+     "footprint": [
+      [
+       4.2,
+       2.0
+      ],
+      [
+       6.0,
+       2.0
+      ],
+      [
+       6.0,
+       6.42
+      ],
+      [
+       4.2,
+       6.42
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB: entrante de 215 x 177 px (1,81 x 1,49 m)",
+     "confidence": "medido"
+    },
+    {
+     "name": "PA (volada 0,5 m adelante y 0,6 m atrás)",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       4.29,
+       0
+      ],
+      [
+       4.29,
+       1.94
+      ],
+      [
+       6.0,
+       1.94
+      ],
+      [
+       6.0,
+       7.02
+      ],
+      [
+       0,
+       7.02
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2022 PA-scaled: dormitorios 2,82 x 2,51 y 2,68 x 4,09 → 121 px/m; 729 x 850 px = 6,02 x 7,02 m; entrante 207 x 235 px",
+     "confidence": "medido"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "paFloor": {
+     "value": 2.85,
+     "source": "0,25 + 2,60",
+     "confidence": "medido"
+    },
+    "eave": {
+     "value": 5.4,
+     "source": "photos2023: borde inferior de la fascia del alero frontal a 5,43 m (Olivo, escala por ancho 6,0 m), 5,34 (Ebano, volumen adelantado), 5,29-5,51 (Roble), 5,38-5,70 (Cedro); se fija 5,40 y con eso se escalan las alturas de vanos",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 6.18,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "openings": [
+     {
+      "type": "ventana PB (sala)",
+      "x": [
+       1.16,
+       2.88
+      ],
+      "y": [
+       0.8,
+       2.14
+      ],
+      "w": 1.72,
+      "h": 1.34,
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido"
+     },
+     {
+      "type": "puerta",
+      "x": [
+       3.25,
+       4.38
+      ],
+      "y": [
+       0.04,
+       2.11
+      ],
+      "w": 1.13,
+      "h": 2.07,
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido"
+     },
+     {
+      "type": "ventana PA",
+      "x": [
+       1.08,
+       2.88
+      ],
+      "y": [
+       3.0,
+       4.88
+      ],
+      "w": 1.8,
+      "h": 1.88,
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido",
+      "guard": "3 tubos blancos horizontales en el tercio bajo (y 3,0-3,25)"
+     },
+     {
+      "type": "franja de escalera",
+      "x": [
+       4.84,
+       5.62
+      ],
+      "y": [
+       1.43,
+       4.6
+      ],
+      "w": 0.78,
+      "h": 3.17,
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido",
+      "pattern": "vidrio / paño beige / vidrio / paño beige / vidrio, en un marco blanco"
+     }
+    ],
+    "details": [
+     {
+      "value": "banda blanca del borde de losa de PA a y 2,45-2,64, sobre el volumen principal",
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido"
+     },
+     {
+      "value": "caja de escalera (x 4,68-6,0) revestida de piedra de piso a techo, con su alero un poco más bajo",
+      "source": "photos2023 Cedro_ConFamilia; photos2025 Cedro E6",
+      "confidence": "medido"
+     }
+    ],
+    "colors": [
+     {
+      "value": {
+       "part": "muro",
+       "hex": "#c8bcb3",
+       "name": "beige"
+      },
+      "source": "photos2023 Cedro_ConFamilia a pleno sol",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "piedra",
+       "hex": "#99806e"
+      },
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "paños de la franja",
+       "hex": "#a18171"
+      },
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "banda y molduras",
+       "hex": "#e0e1e9"
+      },
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "fascia del alero",
+       "hex": "#564433"
+      },
+      "source": "photos2023 Cedro_ConFamilia",
+      "confidence": "medido"
+     }
+    ],
+    "colorVariants": {
+     "value": [
+      "beige + piedra (E6)",
+      "otras tres combinaciones de fábrica (E3, E4, E5)"
+     ],
+     "source": "site media 2025/06 Cedro_SoloCasa_Full_E3..E6",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "olivo",
+   "name": "Olivo",
+   "family": "2 pisos compacto, con porche",
+   "etapas": {
+    "value": [
+     "Amaranto (desde 2014)",
+     "Bromelia",
+     "Camelia (fotos 2022-2023)"
+    ],
+    "source": "wb2014 (Villa Olivo 82 m²), site2026 Bromelia, photos2023",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 81.6,
+     "floors": 2,
+     "bedrooms": 3,
+     "baths": 2.5,
+     "priceUSD": {
+      "Bromelia": 74760
+     },
+     "priceDate": "2025-06-18"
+    },
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB izquierda (sala)",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       3.27,
+       0
+      ],
+      [
+       3.27,
+       6.49
+      ],
+      [
+       0,
+       6.49
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB-6 (ancho 6,0 m supuesto: 670 px) y photos2023 Olivo (quiebre de color a 3,27 m)",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PB derecha detrás del porche",
+     "footprint": [
+      [
+       3.27,
+       1.84
+      ],
+      [
+       6.0,
+       1.84
+      ],
+      [
+       6.0,
+       6.49
+      ],
+      [
+       3.27,
+       6.49
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB-6: porche 333 x 205 px = 2,98 x 1,84 m",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PA (cubre el porche; 0,65 m más larga atrás)",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       7.14
+      ],
+      [
+       0,
+       7.14
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2022 PAo: 700 x 833 px",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 5.43,
+     "source": "photos2023 Olivo_jugando04 (escala por ancho)",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 6.19,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "openings": [
+     {
+      "type": "puerta-ventana PA con balcón francés",
+      "x": [
+       0.96,
+       2.37
+      ],
+      "y": [
+       2.79,
+       4.87
+      ],
+      "w": 1.41,
+      "h": 2.08,
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido",
+      "guard": "baranda de barrotes negros de 0,9 m (y 2,81-3,71)"
+     },
+     {
+      "type": "ventana PB",
+      "x": [
+       1.06,
+       2.28
+      ],
+      "y": [
+       0.97,
+       2.19
+      ],
+      "w": 1.22,
+      "h": 1.22,
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido",
+      "paneBelow": "piedra x 0,96-2,35, y 0-0,96"
+     },
+     {
+      "type": "ventana PA derecha",
+      "x": [
+       3.86,
+       4.97
+      ],
+      "y": [
+       3.5,
+       4.87
+      ],
+      "w": 1.11,
+      "h": 1.37,
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido",
+      "paneBelow": "mitad baja con piedra dentro del marco"
+     },
+     {
+      "type": "porche (vano abierto)",
+      "x": [
+       3.27,
+       6.0
+      ],
+      "y": [
+       0,
+       2.46
+      ],
+      "w": 2.73,
+      "h": 2.46,
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido",
+      "depth": 1.84,
+      "walkable": true
+     }
+    ],
+    "extraEntrances": [
+     {
+      "x": 3.27,
+      "z": [
+       0.2,
+       1.2
+      ],
+      "width": 0.9,
+      "height": 2.1,
+      "facing": "+x (muro izquierdo del porche)",
+      "canopy": true,
+      "walkable": true,
+      "source": "plans2022 PB-6: hoja de la puerta en el muro de la sala que da al porche; en photos2023 no se ve (queda de costado)",
+      "confidence": "estimado"
+     }
+    ],
+    "details": [
+     {
+      "value": "bruñas horizontales en el volumen izquierdo a y 0,92 / 2,34 / 3,51",
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido"
+     },
+     {
+      "value": "aplique entre ventanas del volumen izquierdo a y 2,44",
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido"
+     }
+    ],
+    "colors": [
+     {
+      "value": {
+       "part": "volumen izquierdo",
+       "hex": "#cfc8c2",
+       "name": "gris perla/beige"
+      },
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "volumen derecho y porche",
+       "hex": "#cd9e01",
+       "name": "amarillo"
+      },
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "piedra",
+       "hex": "#907c4d"
+      },
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "baranda",
+       "hex": "#1d1f24"
+      },
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "piso del porche",
+       "hex": "#b19373"
+      },
+      "source": "photos2023 Olivo_jugando04",
+      "confidence": "medido"
+     }
+    ],
+    "eraVariants": {
+     "value": "Amaranto 2014: blanco con bruñas + naranja o café en el volumen del porche; techo rojo",
+     "source": "wb2014 villa-olivo-fachada, wb2017 modelo-olivo-fachada",
+     "confidence": "medido"
+    }
+   }
+  },
+  {
+   "id": "rafia",
+   "name": "Rafia",
+   "family": "2 pisos en L (sala adelantada)",
+   "etapas": {
+    "value": [
+     "Bromelia",
+     "Camelia"
+    ],
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 87.0,
+     "floors": 2,
+     "bedrooms": 3,
+     "baths": 2.5,
+     "priceUSD": {
+      "Bromelia": 82630,
+      "Camelia": 83890
+     },
+     "priceDate": {
+      "Bromelia": "2025-06-06",
+      "Camelia": "2026-01-26"
+     }
+    },
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB sala (adelantada)",
+     "footprint": [
+      [
+       2.83,
+       0
+      ],
+      [
+       5.95,
+       0
+      ],
+      [
+       5.95,
+       8.43
+      ],
+      [
+       2.83,
+       8.43
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB-2/PA-2 a 95,5 px/m (escala por los 87 m²)",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PB hall-comedor (retranqueada 2,98 m)",
+     "footprint": [
+      [
+       0,
+       2.98
+      ],
+      [
+       2.83,
+       2.98
+      ],
+      [
+       2.83,
+       8.43
+      ],
+      [
+       0,
+       8.43
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB-2",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PA máster (adelantada)",
+     "footprint": [
+      [
+       2.93,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       8.59
+      ],
+      [
+       2.93,
+       8.59
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2022 PA-2",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PA izquierda (vuela ~0,9 m sobre la entrada)",
+     "footprint": [
+      [
+       0,
+       2.09
+      ],
+      [
+       2.93,
+       2.09
+      ],
+      [
+       2.93,
+       8.43
+      ],
+      [
+       0,
+       8.43
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2022 PA-2: frente izquierdo a 690 px contra 605 px en PB",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 5.4,
+     "source": "photos2023: borde inferior de la fascia del alero frontal a 5,43 m (Olivo, escala por ancho 6,0 m), 5,34 (Ebano, volumen adelantado), 5,29-5,51 (Roble), 5,38-5,70 (Cedro); se fija 5,40 y con eso se escalan las alturas de vanos",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 6.33,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "composition": {
+     "value": "sin foto frontal de fábrica reciente; por planta: volumen derecho con ventana de sala en PB y de máster en PA; parte izquierda retranqueada con la puerta bajo el volado de PA",
+     "source": "plans2022 PB-2/PA-2; la foto de su ficha (2014/05/IMG_2543) muestra una fila de casas de Bromelia, no el Rafia solo",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "robinia",
+   "name": "Robinia",
+   "family": "2 pisos en L",
+   "etapas": {
+    "value": [
+     "Amaranto (desde 2014)",
+     "Bromelia"
+    ],
+    "source": "wb2014/wb2017, site2026",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 94.0,
+     "floors": 2,
+     "bedrooms": 3,
+     "baths": 2.5,
+     "priceUSD": {
+      "Bromelia": 81240
+     },
+     "priceDate": "2025-06-06"
+    },
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB sala (adelantada, izquierda)",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       2.9,
+       0
+      ],
+      [
+       2.9,
+       8.33
+      ],
+      [
+       0,
+       8.33
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB-7 a ~96 px/m (escala por los 94 m²)",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PB hall-baño (retranqueada 1,4 m)",
+     "footprint": [
+      [
+       2.9,
+       1.39
+      ],
+      [
+       6.0,
+       1.39
+      ],
+      [
+       6.0,
+       8.33
+      ],
+      [
+       2.9,
+       8.33
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2022 PB-7",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PA",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       2.75,
+       0
+      ],
+      [
+       2.75,
+       0.94
+      ],
+      [
+       6.0,
+       0.94
+      ],
+      [
+       6.0,
+       8.65
+      ],
+      [
+       0,
+       8.65
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2022 PA-5",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 5.4,
+     "source": "photos2023: borde inferior de la fascia del alero frontal a 5,43 m (Olivo, escala por ancho 6,0 m), 5,34 (Ebano, volumen adelantado), 5,29-5,51 (Roble), 5,38-5,70 (Cedro); se fija 5,40 y con eso se escalan las alturas de vanos",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 6.34,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "composition": {
+     "value": "Amaranto/Bromelia: volumen izquierdo blanco con bruñas y ventana con balcón francés en PA; volumen derecho en color (naranja) con la puerta y una ventana alta de baño",
+     "source": "wb2014 villa.robinia-fachada; wb2017 modelo-robinia-fachada",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "roble",
+   "name": "Roble 3D / 4D / 5D",
+   "family": "2 pisos largo",
+   "etapas": {
+    "value": [
+     "Amaranto (4D y 5D desde 2012, 3D desde 2014)",
+     "Bromelia",
+     "Camelia"
+    ],
+    "source": "wb2012 (Roble 4D y 5D, 107 m²), wb2014, site2026",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 106.53,
+     "floors": 2,
+     "variants": {
+      "3D": "3 dormitorios, 2,5 baños, sala de TV",
+      "4D": "4 dormitorios (uno en PB), 3 baños",
+      "5D": "5 dormitorios, 4 baños (solo Amaranto)"
+     },
+     "priceUSD": {
+      "Bromelia 3D": 91500,
+      "Bromelia 4D": 91100,
+      "Camelia 3D": 92030,
+      "Camelia 4D": 91630
+     },
+     "priceDate": "2025-06..2026-06"
+    },
+    "source": "site2026, wb2012",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB derecha (sala; adelantada)",
+     "footprint": [
+      [
+       2.92,
+       0
+      ],
+      [
+       6.02,
+       0
+      ],
+      [
+       6.02,
+       9.09
+      ],
+      [
+       2.92,
+       9.09
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2023 plantabaja3D: x 393-574 px, frente 641, fondo 109 px a 58,5 px/m",
+     "confidence": "medido"
+    },
+    {
+     "name": "PB izquierda (entrada; retranqueada 0,58 m)",
+     "footprint": [
+      [
+       0,
+       0.58
+      ],
+      [
+       2.92,
+       0.58
+      ],
+      [
+       2.92,
+       9.09
+      ],
+      [
+       0,
+       9.09
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2023 plantabaja3D: x 222-393 px, frente 607 px",
+     "confidence": "medido"
+    },
+    {
+     "name": "PA derecha (vuela 0,5 m atrás)",
+     "footprint": [
+      [
+       2.9,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       9.66
+      ],
+      [
+       2.9,
+       9.66
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2023 plantaalta3d: x 398-577 px, 80-645 px",
+     "confidence": "medido"
+    },
+    {
+     "name": "PA izquierda",
+     "footprint": [
+      [
+       0,
+       0.62
+      ],
+      [
+       2.9,
+       0.62
+      ],
+      [
+       2.9,
+       9.0
+      ],
+      [
+       0,
+       9.0
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2023 plantaalta3d: x 228-398 px, 115-605 px",
+     "confidence": "medido"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 5.29,
+     "source": "photos2023 Roble_Bicicleta (escala por ancho; 5,51 por puerta de 2,10)",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 6.44,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "openings": [
+     {
+      "type": "ventana PB (izquierda)",
+      "x": [
+       0.24,
+       1.62
+      ],
+      "y": [
+       0.89,
+       2.29
+      ],
+      "w": 1.38,
+      "h": 1.4,
+      "source": "photos2023 Roble_Bicicleta",
+      "confidence": "medido"
+     },
+     {
+      "type": "puerta",
+      "x": [
+       1.73,
+       2.78
+      ],
+      "y": [
+       0.08,
+       2.13
+      ],
+      "w": 1.05,
+      "h": 2.05,
+      "source": "photos2023 Roble_Bicicleta",
+      "confidence": "medido"
+     },
+     {
+      "type": "ventana alta PA izquierda (baño) dentro de marco con piedra",
+      "x": [
+       1.01,
+       2.37
+      ],
+      "y": [
+       3.48,
+       4.88
+      ],
+      "w": 1.36,
+      "h": 1.4,
+      "source": "photos2023 Roble_Bicicleta",
+      "confidence": "medido",
+      "pattern": "vidrio arriba (y 4,44-4,75), piedra abajo (y 3,52-4,40)"
+     },
+     {
+      "type": "marco alto derecho (ventanas PB y PA)",
+      "x": [
+       3.33,
+       5.55
+      ],
+      "y": [
+       0.89,
+       4.99
+      ],
+      "w": 2.22,
+      "h": 4.1,
+      "source": "photos2023 Roble_Bicicleta",
+      "confidence": "medido",
+      "pattern": "vidrio PA (3,68-4,84) / piedra (2,25-3,66) / vidrio PB (1,0-2,21)"
+     }
+    ],
+    "canopy": {
+     "value": {
+      "over": "puerta y ventana PB izquierda",
+      "x": [
+       -0.1,
+       2.9
+      ],
+      "y": [
+       2.52,
+       2.92
+      ],
+      "depth": 0.7,
+      "material": "fibrocemento ondulado sobre ménsulas metálicas",
+      "hex": "#83726c"
+     },
+     "source": "photos2023 Roble_Bicicleta (profundidad estimada 0,6-0,7 m por plans2023: tejadillo de 0,62 m)",
+     "confidence": "medido"
+    },
+    "colors": [
+     {
+      "value": {
+       "part": "volumen izquierdo",
+       "hex": "#c9b8a6",
+       "name": "beige"
+      },
+      "source": "photos2023 Roble_Bicicleta #9c8a79 bajo sombra del alero, corregido",
+      "confidence": "estimado"
+     },
+     {
+      "value": {
+       "part": "volumen derecho",
+       "hex": "#b0b372",
+       "name": "verde pistacho"
+      },
+      "source": "photos2023 Roble_Bicicleta",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "piedra",
+       "hex": "#aa8d77"
+      },
+      "source": "photos2023 Roble_Bicicleta",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "molduras",
+       "hex": "#dbdee6"
+      },
+      "source": "photos2023 Roble_Bicicleta",
+      "confidence": "medido"
+     }
+    ],
+    "eraVariants": {
+     "value": "Amaranto 2012-2014 (vendido como Pino 3D/Roble): mismo esquema con volumen izquierdo café oscuro o verde y derecho crema con bruñas; tejadillo rojo; techo rojo",
+     "source": "wb2014 villa-pino3D-fachada, villa.robles-3D/4D/5D",
+     "confidence": "medido"
+    }
+   },
+   "notes": "Composición idéntica en planta a la del \"Pino 3D\" de 2014. Roble 4D = mismo volumen con un dormitorio en PB (ventana de dormitorio en la fachada izquierda)."
+  },
+  {
+   "id": "ebano",
+   "name": "Ebano",
+   "family": "2 pisos largo con estacionamiento",
+   "etapas": {
+    "value": [
+     "Camelia"
+    ],
+    "source": "site2026",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 91.72,
+     "floors": 2,
+     "bedrooms": 3,
+     "baths": 3.5,
+     "garage": true,
+     "priceUSD": {
+      "Camelia": 83200
+     },
+     "priceDate": "2026-06-15"
+    },
+    "source": "site2026; web.archive.org 2023-12-04 (81 350 USD, jul 2023)",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB ala derecha (sala; adelantada)",
+     "footprint": [
+      [
+       2.87,
+       0
+      ],
+      [
+       5.98,
+       0
+      ],
+      [
+       5.98,
+       9.01
+      ],
+      [
+       2.87,
+       9.01
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2023 pb.png: x 400-582, y 110-637 px",
+     "confidence": "medido"
+    },
+    {
+     "name": "PB izquierda (baño, hall, cocina; retranqueada 3,28 m)",
+     "footprint": [
+      [
+       0,
+       3.28
+      ],
+      [
+       2.87,
+       3.28
+      ],
+      [
+       2.87,
+       9.01
+      ],
+      [
+       0,
+       9.01
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "plans2023 pb.png: x 232-400, frente 445 px",
+     "confidence": "medido"
+    },
+    {
+     "name": "PA ala derecha (vuela 0,6 m atrás)",
+     "footprint": [
+      [
+       2.87,
+       0
+      ],
+      [
+       5.9,
+       0
+      ],
+      [
+       5.9,
+       9.62
+      ],
+      [
+       2.87,
+       9.62
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2023 pa.png: x 400-577, y 75-640 px",
+     "confidence": "medido"
+    },
+    {
+     "name": "PA izquierda",
+     "footprint": [
+      [
+       0,
+       3.28
+      ],
+      [
+       2.87,
+       3.28
+      ],
+      [
+       2.87,
+       8.94
+      ],
+      [
+       0,
+       8.94
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "plans2023 pa.png: y 115-445 px",
+     "confidence": "medido"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eaveFront": {
+     "value": 5.34,
+     "source": "photos2023 Ebano (volumen adelantado)",
+     "confidence": "medido"
+    },
+    "eaveRecessed": {
+     "value": 5.95,
+     "source": "photos2023 Ebano (plano retranqueado, escala 106,8 px/m por su ancho de 2,92 m; puerta = 2,06 m)",
+     "confidence": "medido"
+    },
+    "ridge": {
+     "value": 6.43,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "parking": {
+    "value": "un carro en el jardín frontal delante de la parte retranqueada (franja de ~2,2 m entre el lindero y el ala derecha, 5,3 m de fondo hasta la fachada retranqueada), sin techo",
+    "source": "plans2023 pb.png: carro de 4,84 m dibujado a x 173-300 px",
+    "confidence": "medido"
+   },
+   "facade": {
+    "openings": [
+     {
+      "type": "marco alto del ala derecha (ventanas PB y PA)",
+      "x": [
+       3.53,
+       5.39
+      ],
+      "y": [
+       0.55,
+       5.07
+      ],
+      "w": 1.86,
+      "h": 4.52,
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido",
+      "pattern": "vidrio PA (3,70-4,81) / paño verde (2,24-3,68) / vidrio PB con tubos (0,59-2,20)"
+     },
+     {
+      "type": "puerta (retranqueada 3,28 m)",
+      "x": [
+       1.67,
+       2.73
+      ],
+      "y": [
+       0.14,
+       2.2
+      ],
+      "w": 1.06,
+      "h": 2.06,
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido",
+      "z": 3.28
+     },
+     {
+      "type": "ventana alta de baño (retranqueada)",
+      "x": [
+       0.19,
+       1.26
+      ],
+      "y": [
+       1.84,
+       2.45
+      ],
+      "w": 1.07,
+      "h": 0.61,
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido",
+      "z": 3.28
+     },
+     {
+      "type": "ventana PA (retranqueada)",
+      "x": [
+       0.67,
+       2.36
+      ],
+      "y": [
+       3.59,
+       4.96
+      ],
+      "w": 1.69,
+      "h": 1.37,
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido",
+      "z": 3.28
+     }
+    ],
+    "canopy": {
+     "value": {
+      "over": "puerta retranqueada",
+      "x": [
+       0,
+       2.92
+      ],
+      "y": [
+       2.47,
+       2.84
+      ],
+      "depth": 0.68,
+      "hex": "#5d514f"
+     },
+     "source": "photos2023 Ebano_Madreehija; plans2023 pa.png tejadillo 445-485 px",
+     "confidence": "medido"
+    },
+    "colors": [
+     {
+      "value": {
+       "part": "ala derecha",
+       "hex": "#a38c7a",
+       "name": "piedra (todo el volumen)"
+      },
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "paño entre ventanas",
+       "hex": "#b4c08c",
+       "name": "verde claro"
+      },
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "parte retranqueada",
+       "hex": "#bfab95",
+       "name": "arena"
+      },
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido"
+     },
+     {
+      "value": {
+       "part": "zócalo",
+       "hex": "#b1a189",
+       "y": [
+        0,
+        0.37
+       ]
+      },
+      "source": "photos2023 Ebano_Madreehija",
+      "confidence": "medido"
+     }
+    ]
+   }
+  },
+  {
+   "id": "haya",
+   "name": "Haya",
+   "family": "2 pisos compacto con hastial a la calle",
+   "etapas": {
+    "value": [
+     "Amaranto (2012)",
+     "Camelia (2022-2025)"
+    ],
+    "source": "wb2012 (Villa Haya 69 m²), camelia2022 haya-camelia, photos2025 Haya_E2",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 69,
+     "floors": 2,
+     "bedrooms": 2,
+     "baths": 2.5
+    },
+    "source": "wb2012",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "casa",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       5.8
+      ],
+      [
+       0,
+       5.8
+      ]
+     ],
+     "base": 0,
+     "height": 5.4,
+     "levels": 2,
+     "source": "69 m² / 2 pisos / 6,0 m de ancho; sin planta",
+     "confidence": "estimado"
+    }
+   ],
+   "roof": {
+    "value": "dos aguas con la cumbrera perpendicular a la calle (hastial asimétrico hacia el frente, cumbrera cerca del tercio izquierdo); PA volada sobre PB con banda blanca",
+    "source": "photos2025 Haya_E2, camelia2022 haya-camelia, wb2014 villa-haya-fachada",
+    "confidence": "estimado"
+   },
+   "facade": {
+    "composition": {
+     "value": "Camelia 2025: frente salmón-beige con bruñas, ventana PA con tubos, PB ventana + puerta; volumen lateral café a la izquierda; Amaranto 2014: blanco con bruñas, molduras rosadas y volumen trasero terracota",
+     "source": "photos2025 Haya_E2, wb2014",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "nogal",
+   "name": "Nogal",
+   "family": "2 pisos (época Amaranto)",
+   "etapas": {
+    "value": [
+     "Amaranto"
+    ],
+    "source": "wb2012 (74 m²), wb2014 (78 m²), wb2017",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 74,
+     "floors": 2,
+     "bedrooms": 3,
+     "baths": 2.5
+    },
+    "source": "wb2012 (74 m²), wb2014 (78 m²), wb2017",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       6.4
+      ],
+      [
+       0,
+       6.4
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "m²/2 pisos/6,0 m; sin planta a la vista",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PA",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       6.4
+      ],
+      [
+       0,
+       6.4
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "ídem",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 5.4,
+     "source": "como los de 2 pisos medidos",
+     "confidence": "estimado"
+    },
+    "ridge": {
+     "value": 6.12,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "composition": {
+     "value": "dos colores en vertical: izquierda blanca con cuadrícula de bruñas y ventanas PB/PA; derecha en color (verde o café) con porche/entrada retranqueada en PB y ventana alta de baño en PA (es el antecesor del Olivo)",
+     "source": "wb2014 fachadas; remax foto 44f2a7d2",
+     "confidence": "estimado"
+    }
+   }
+  },
+  {
+   "id": "pino",
+   "name": "Pino (4D) / Pino 3D",
+   "family": "2 pisos (época Amaranto)",
+   "etapas": {
+    "value": [
+     "Amaranto"
+    ],
+    "source": "wb2012 (Pino 86 m², 4 dormitorios), wb2014 (Pino 3D 86 m²), remax (Amaranto 86 m², 4 dormitorios, lote 104 m²)",
+    "confidence": "medido"
+   },
+   "official": {
+    "value": {
+     "areaM2": 86,
+     "floors": 2,
+     "bedrooms": 4,
+     "baths": 3
+    },
+    "source": "wb2012 (Pino 86 m², 4 dormitorios), wb2014 (Pino 3D 86 m²), remax (Amaranto 86 m², 4 dormitorios, lote 104 m²)",
+    "confidence": "medido"
+   },
+   "volumes": [
+    {
+     "name": "PB",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       7.2
+      ],
+      [
+       0,
+       7.2
+      ]
+     ],
+     "base": 0,
+     "height": 2.85,
+     "levels": 1,
+     "source": "m²/2 pisos/6,0 m; sin planta a la vista",
+     "confidence": "estimado"
+    },
+    {
+     "name": "PA",
+     "footprint": [
+      [
+       0,
+       0
+      ],
+      [
+       6.0,
+       0
+      ],
+      [
+       6.0,
+       7.2
+      ],
+      [
+       0,
+       7.2
+      ]
+     ],
+     "base": 2.85,
+     "height": 2.55,
+     "levels": 1,
+     "source": "ídem",
+     "confidence": "estimado"
+    }
+   ],
+   "heights": {
+    "plinth": {
+     "value": 0.25,
+     "source": "bambuPlan y plans2022 (Cedro): piso terminado N+0,25; photos2025 Bambú: banda de zócalo de 30 px = 0,26 m. En las fotos el umbral queda 0,04-0,26 m sobre el césped (el jardín se rellena contra la casa)",
+     "confidence": "medido",
+     "thresholdAboveLawn": [
+      0.04,
+      0.26
+     ]
+    },
+    "eave": {
+     "value": 5.4,
+     "source": "como los de 2 pisos medidos",
+     "confidence": "estimado"
+    },
+    "ridge": {
+     "value": 6.2,
+     "source": "tan 11°",
+     "confidence": "estimado"
+    }
+   },
+   "facade": {
+    "composition": {
+     "value": "igual que el Roble de hoy: izquierda retranqueada con puerta, ventana y tejadillo, ventana de baño con paño en PA; derecha ancha con marco alto de ventanas; bruñas horizontales (foto remax: rosado pálido con paño gris-beige)",
+     "source": "wb2014 fachadas; remax foto 44f2a7d2",
+     "confidence": "estimado"
+    }
+   }
+  }
+ ],
+ "palettes": {
+  "Amaranto (2012-2017)": {
+   "roof": [
+    {
+     "value": {
+      "hex": "#d9828a",
+      "name": "rosado (rojo desteñido)"
+     },
+     "source": "wb2017 slides 01/03 (dron 2017)",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#c9584e",
+      "name": "rojo teja"
+     },
+     "source": "wb2017",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#e8a070",
+      "name": "salmón/naranja"
+     },
+     "source": "wb2017",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#e2cf9c",
+      "name": "crema (pocos)"
+     },
+     "source": "wb2017",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#7a695a",
+      "name": "aparente en el satélite 2025 (mediana de 193/324 techos)"
+     },
+     "source": "esri2025",
+     "confidence": "medido"
+    }
+   ],
+   "walls": [
+    {
+     "value": {
+      "hex": "#efe4dc",
+      "name": "blanco crema (base)"
+     },
+     "source": "wb2014, wb2017",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#e6d3cb",
+      "name": "rosado pálido"
+     },
+     "source": "remax (#beb9b5 nublado), wb2014 Haya",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#5b3f2e",
+      "name": "café (acento)"
+     },
+     "source": "wb2014 Pino 3D, Roble 4D",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#6f7d57",
+      "name": "verde oliva (acento)"
+     },
+     "source": "wb2014 Nogal, Robinia",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#b8612d",
+      "name": "naranja óxido (acento)"
+     },
+     "source": "wb2014 Olivo, Robinia",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#9a8a78",
+      "name": "gris-beige (acento)"
+     },
+     "source": "remax",
+     "confidence": "estimado"
+    }
+   ],
+   "accents": [
+    {
+     "value": "bruñas horizontales blancas o del color de la base; molduras de ventana del color de acento; tejadillos rojos",
+     "source": "wb2014",
+     "confidence": "estimado"
+    }
+   ]
+  },
+  "Bromelia (2017-2022)": {
+   "roof": [
+    {
+     "value": {
+      "hex": "#c65e56",
+      "name": "rojo teja"
+     },
+     "source": "bromelia2022 DJI_0053 (#c65e56-#d3665f al sol)",
+     "confidence": "medido"
+    },
+    {
+     "value": {
+      "hex": "#ab826c",
+      "name": "aparente en el satélite 2025 (mediana de 213/253 techos)"
+     },
+     "source": "esri2025",
+     "confidence": "medido"
+    }
+   ],
+   "walls": [
+    {
+     "value": {
+      "hex": "#e9bf98",
+      "name": "durazno/salmón"
+     },
+     "source": "bromelia2022 Galeria6 (sobreexpuesta), Galeria3",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#e07a3c",
+      "name": "naranja"
+     },
+     "source": "bromelia2022 Galeria3/8",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#d6a23a",
+      "name": "amarillo mostaza"
+     },
+     "source": "2014/05/IMG_2543 (#ba852c a la sombra)",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#5f7a2e",
+      "name": "verde"
+     },
+     "source": "IMG_2543, Galeria3",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#c9b39a",
+      "name": "beige"
+     },
+     "source": "DJI_0053",
+     "confidence": "estimado"
+    }
+   ],
+   "accents": [
+    {
+     "value": "bruñas horizontales; molduras blancas; algunos paños de piedra; tejadillos rojos; canaleta de PVC blanca en algunas",
+     "source": "bromelia2022",
+     "confidence": "estimado"
+    }
+   ]
+  },
+  "Camelia (2021-hoy)": {
+   "roof": [
+    {
+     "value": {
+      "hex": "#7d6d66",
+      "name": "café-gris (sombra)"
+     },
+     "source": "photos2023 tejadillos #83726c/#5d514f, photos2025 Lirio #686366",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#b5a29c",
+      "name": "café-gris al sol desde el aire"
+     },
+     "source": "camelia2022 camelia12",
+     "confidence": "estimado"
+    },
+    {
+     "value": {
+      "hex": "#818870",
+      "name": "aparente en el satélite 2025 (54/64 techos)"
+     },
+     "source": "esri2025",
+     "confidence": "medido"
+    }
+   ],
+   "walls": [
+    {
+     "value": {
+      "hex": "#c8bcb3",
+      "name": "beige"
+     },
+     "source": "photos2023 Cedro",
+     "confidence": "medido"
+    },
+    {
+     "value": {
+      "hex": "#cfc8c2",
+      "name": "gris perla"
+     },
+     "source": "photos2023 Olivo",
+     "confidence": "medido"
+    },
+    {
+     "value": {
+      "hex": "#bfab95",
+      "name": "arena"
+     },
+     "source": "photos2023 Ebano",
+     "confidence": "medido"
+    },
+    {
+     "value": {
+      "hex": "#b0b372",
+      "name": "verde pistacho (acento)"
+     },
+     "source": "photos2023 Roble",
+     "confidence": "medido"
+    },
+    {
+     "value": {
+      "hex": "#cd9e01",
+      "name": "amarillo (acento)"
+     },
+     "source": "photos2023 Olivo",
+     "confidence": "medido"
+    },
+    {
+     "value": {
+      "hex": "#a38c7a",
+      "name": "enchape de piedra"
+     },
+     "source": "photos2023 Ebano, Roble, Cedro",
+     "confidence": "medido"
+    }
+   ],
+   "accents": [
+    {
+     "value": "molduras blancas gruesas (#dbdee6), marcos altos que juntan ventana PB + paño + ventana PA, tubos blancos de protección, puertas negras, tejadillos café",
+     "source": "photos2023",
+     "confidence": "medido"
+    }
+   ]
+  }
+ },
+ "ownerChanges": [
+  {
+   "value": "rejas decorativas blancas en ventanas y puerta (patrón de arabescos o rectángulos)",
+   "source": "remax (Amaranto, todas las ventanas); bromelia2022 Galeria3",
+   "confidence": "estimado",
+   "count": "sin conteo: Street View"
+  },
+  {
+   "value": "jardín frontal embaldosado con cerámica clara para estacionar",
+   "source": "remax",
+   "confidence": "estimado",
+   "count": "sin conteo"
+  },
+  {
+   "value": "cerramiento frontal con reja y portón, o techo liviano sobre el jardín",
+   "source": "esri2025: techos claros de metal adelante y atrás en Amaranto",
+   "confidence": "estimado",
+   "count": "sin conteo"
+  },
+  {
+   "value": "ampliaciones al fondo (techos blancos/metal) y segundo piso sobre casas de 1 piso",
+   "source": "esri2025: 20/324 techos grises o metálicos en Amaranto; site2026 \"bases para segundo piso\"",
+   "confidence": "estimado",
+   "count": "~6 % de los techos de Amaranto no son de fibrocemento original"
+  },
+  {
+   "value": "techo cambiado o repintado",
+   "source": "esri2025 clases de color",
+   "confidence": "estimado",
+   "count": "Amaranto 193 café apagado / 80 rojo / 20 gris / 31 otro; Bromelia 213 rojo / 34 café / 6 otro; Camelia 54 café-gris / 7 gris / 3 otro"
+  },
+  {
+   "value": "fachada repintada en otro color o dos tonos",
+   "source": "wb2017 vs fotos actuales",
+   "confidence": "estimado",
+   "count": "sin conteo: Street View"
+  }
+ ],
+ "counts": {
+  "lotsPerEtapa": {
+   "value": 638,
+   "source": "ekos (638 lotes, citado para Camelia/Amaranto en el buscador); comprobación: 3,3 km de calle interna por etapa (osm) x 2 lados / 7 m menos cruces y parques ≈ 650-750",
+   "confidence": "estimado"
+  },
+  "footprintsOverture": {
+   "value": {
+    "Amaranto": 326,
+    "Bromelia": 253,
+    "Camelia": 66
+   },
+   "source": "overture: huellas de 30-200 m² dentro de cada polígono (mínimo; une casas pegadas y es anterior a gran parte de Camelia)",
+   "confidence": "medido"
+  },
+  "shareTwoStorey": {
+   "value": {
+    "Amaranto": 0.9,
+    "Bromelia": 0.8,
+    "Camelia": "mezcla; en las fotos de 2022-2023 predominan 2 pisos (Cedro, Roble, Olivo, Ebano, Haya) con filas de 1 piso (Bambú, Azalea, Lirio)"
+   },
+   "source": "wb2017 slide 03 (Amaranto casi todo 2 pisos), bromelia2022 DJI_0053 (~2 de cada 9 casas de 1 piso), camelia2022",
+   "confidence": "estimado"
+  },
+  "perModel": {
+   "value": null,
+   "source": "la constructora no publica cuántas casas hay de cada modelo; se asigna por lote con Street View / satélite (ver gaps)",
+   "confidence": "estimado"
+  }
+ },
+ "sources": {
+  "site2026": {
+   "url": "https://durancity.com/",
+   "author": "Durán City / Prohorizon",
+   "date": "2025-06..2026-06 (fichas actualizadas; leídas 2026-09-25)",
+   "license": "todos los derechos reservados: solo mirar",
+   "usedFor": "catálogo actual por etapa (Bromelia, Camelia), m² de construcción, pisos, dormitorios, precios de contexto, \"casa NO adosada\", \"bases para segundo piso\""
+  },
+  "plans2022": {
+   "url": "https://durancity.com/wp-content/uploads/2022/06/ (PB-*.jpg, PA-*.jpg, PAo, PA-4D)",
+   "author": "Durán City",
+   "date": "2022-06-06/07 (subida)",
+   "license": "solo mirar",
+   "usedFor": "plantas CAD de Cedro (con medidas de ambientes), Rafia, Olivo, Robinia y Roble; escalera 14 x 18,6 cm"
+  },
+  "plans2023": {
+   "url": "https://durancity.com/wp-content/uploads/2023/06/ (azaleapb-4.png, render.png, pb.png, pa.png, plantabaja3D.png, plantaalta3d.png, plantabaja4D.png)",
+   "author": "Durán City",
+   "date": "2023-06-09/13",
+   "license": "solo mirar",
+   "usedFor": "plantas a color con el lote dibujado, todas a la misma escala (58,5 px/m, calibrada con los m² de Lirio): ancho de casa, fondos, retiro lateral y ancho de lote"
+  },
+  "bambuPlan": {
+   "url": "https://durancity.com/wp-content/uploads/2023/03/BAMBU-3.jpg",
+   "author": "Durán City",
+   "date": "2023-03-10",
+   "license": "solo mirar",
+   "usedFor": "planta CAD de Bambú con proyección de cubierta, ventanas V-01 y puerta P-01, N+0,25"
+  },
+  "photos2025": {
+   "url": "https://durancity.com/wp-content/uploads/2025/06/ (BAMBU_E2, AzaleaIG_E1, LIRIO_E5, Cedro_SoloCasa_Full_E6, Olivo_SoloCasa_Full_E3, Roble_SoloCasa_Full_3DE3, Ebano_SoloCasa_Full_E3, Haya_E2)",
+   "author": "Durán City",
+   "date": "2025-06-17/18 (subida; son fotos de casas construidas con cielo retocado)",
+   "license": "solo mirar",
+   "usedFor": "fachadas frontales: vanos, alturas de 1 piso, colores de fábrica recientes"
+  },
+  "photos2023": {
+   "url": "https://durancity.com/wp-content/uploads/2023/02/ (Cedro_ConFamilia_4x5, Roble_Bicicleta_4x5, Ebano_Madreehija_4x5, Olivo_jugando04)",
+   "author": "Durán City",
+   "date": "2023-02-06 (subida)",
+   "license": "solo mirar",
+   "usedFor": "fachadas frontales de 2 pisos en Camelia con gente de escala: vanos, alero a 5,40 m, colores"
+  },
+  "camelia2022": {
+   "url": "https://durancity.com/wp-content/uploads/2022/07/ (camelia12.jpg, villas-modelo.jpg, haya-camelia.jpg)",
+   "author": "Durán City",
+   "date": "2022-07-27",
+   "license": "solo mirar",
+   "usedFor": "foto aérea de Camelia en obra: techos a dos aguas con cumbrera paralela a la calle y hastiales en los muros laterales; color café-gris del techo; muros de lindero"
+  },
+  "bromelia2022": {
+   "url": "https://durancity.com/wp-content/uploads/ (2022/05/DJI_0053-scaled.jpg, 2022/03/Galeria3/6/7/8.jpg, 2023/02/Drone_02-scaled.jpg, 2025/06/Bromelia-Drone.png)",
+   "author": "Durán City",
+   "date": "2022-03-18 a 2025-06-12",
+   "license": "solo mirar",
+   "usedFor": "Bromelia: techos rojos, colores de fachada, tejadillos, pilares de medidor, canaletas"
+  },
+  "wb2012": {
+   "url": "https://web.archive.org/web/2012*/durancity.com/villa-* (villas, villa-bambu, -ceibo, -eucalipto, -ficus, -haya, -nogal, -pino, -roble-4d, -roble-5d; urbanizaciones; plan-maestro)",
+   "author": "Durán City (archivo de Internet Archive)",
+   "date": "2012-01-25 a 2012-11-10",
+   "license": "solo mirar",
+   "usedFor": "modelos de la etapa 1 (Amaranto) con m², pisos y dormitorios; especificación: paredes estructurales de hormigón armado, cubierta de estructura metálica con planchas de fibrocemento, puertas exteriores metálicas pintadas, ventanas de aluminio y vidrio con malla"
+  },
+  "wb2014": {
+   "url": "https://web.archive.org/web/2014*/durancity.com/villa-* y /wp-content/uploads/2014/12/villa*-fachada.jpg",
+   "author": "Durán City (Internet Archive)",
+   "date": "páginas 2014-05-23; renders capturados 2015-08-02 y 2016-02-12",
+   "license": "solo mirar",
+   "usedFor": "renders de fachada de Bambú, Ceibo, Eucalipto, Ficus, Haya, Nogal, Olivo, Pino 3D/4D, Robinia, Roble 3D/4D/5D (época Amaranto); Nogal 78 m², Olivo 82 m², Pino 3D 86 m²"
+  },
+  "wb2017": {
+   "url": "https://web.archive.org/web/2018*/durancity.com/wp-content/uploads/2017/11/slide-duran-city-0[1-4].jpg y /2017/11/modelo-*-fachada.jpg",
+   "author": "Durán City (Internet Archive)",
+   "date": "2017-11 (capturas 2018-06-28 / 2019-05-13)",
+   "license": "solo mirar",
+   "usedFor": "fotos de dron de Amaranto terminada: casi todas de 2 pisos, techos a dos aguas paralelos a la calle en rojo/rosado/salmón (desteñidos), fachadas blancas-crema con acentos"
+  },
+  "esri2025": {
+   "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer (identify: DATE 20250420, WorldView-2 0,5 m)",
+   "author": "Esri, Maxar",
+   "date": "2025-04-20",
+   "license": "solo para medir, no se redistribuye",
+   "usedFor": "módulo de lote 7,0 m, fondo de techos, color de techos hoy por etapa, dirección de sombras (sol a ~20° de azimut, ~75° de altura), prueba de dos aguas por brillo de faldones"
+  },
+  "overture": {
+   "url": "pipeline/.cache/overture-building-bca6224d.parquet",
+   "author": "Overture Maps (huellas ML de Google/Microsoft)",
+   "date": "release del caché del proyecto (imágenes ~2022-2023)",
+   "license": "ODbL/CDLA",
+   "usedFor": "huellas de techo típicas 7 x 10 m (casa 6 m + aleros), conteo mínimo de casas por etapa"
+  },
+  "osm": {
+   "url": "https://www.openstreetmap.org/way/772178814 , /way/772178813 , /way/772178815 , /way/1443290074",
+   "author": "OpenStreetMap",
+   "date": "Overpass 2026-09-25",
+   "license": "ODbL",
+   "usedFor": "polígonos de las etapas, calles internas (distancia entre calles 32-43 m), ingresos"
+  },
+  "mly257": {
+   "url": "https://www.mapillary.com/app/?pKey=257071980177574&focus=photo",
+   "author": "kaart_2 (Kaart)",
+   "date": "2023-04-14",
+   "license": "CC BY-SA 4.0",
+   "usedFor": "casas de 2 pisos de Bromelia vistas desde la Vía al PAN por encima del muro perimetral: hastial en el muro lateral, pendiente baja"
+  },
+  "remax": {
+   "url": "https://www.remax.com.ec/listings/casa-en-venta-urbanizacion-duran-city-1",
+   "author": "RE/MAX Ecuador (anuncio)",
+   "date": "leído 2026-09-25 (casa de 11 años)",
+   "license": "solo mirar",
+   "usedFor": "Amaranto, 2 pisos, 86 m² (= Pino 4D), lote 104 m²; foto de fachada con modificaciones de dueño (rejas decorativas blancas, jardín embaldosado)"
+  },
+  "icasas": {
+   "url": "https://casas.cari.ec/casas/view/1514374 (icasas ref. D.C0711)",
+   "author": "El Marquéz Propiedades (anuncio)",
+   "date": "leído 2026-09-25",
+   "license": "solo mirar",
+   "usedFor": "Bromelia, casa esquinera Roble 4D: 129,90 m² de terreno, 106,53 m² de construcción"
+  },
+  "threads": {
+   "url": "https://www.threads.com/@joselosanchez/post/DXh3enVD-kL",
+   "author": "anuncio en Threads (texto visto en el buscador)",
+   "date": "leído 2026-09-25",
+   "license": "solo mirar",
+   "usedFor": "Amaranto, 1 planta: terreno 80 m², construcción 42 m², retiro lateral 1 m"
+  },
+  "ekos": {
+   "url": "https://ekosnegocios.com/articulo/duran-city-la-travesia-de-29-etapas-de-prohorizon",
+   "author": "Ekos Negocios",
+   "date": "2023-09-18",
+   "license": "prensa",
+   "usedFor": "constructora Prohorizon, 416 ha, 29 etapas; Amaranto casi 100 % entregada, Bromelia >80 %, Camelia en obra con 638 lotes (fachadas más modernas)"
+  },
+  "yt2012": {
+   "url": "https://www.youtube.com/watch?v=XKXt01VkcTw",
+   "author": "Durán City",
+   "date": "2012-10-10",
+   "license": "solo mirar",
+   "usedFor": "fecha de lanzamiento de Amaranto (video de render)"
+  }
+ }
+}

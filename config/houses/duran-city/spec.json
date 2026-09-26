@@ -1,0 +1,636 @@
+{
+ "id": "duranCity",
+ "seed": "duran-city",
+ "name": "Durán City: casas (Amaranto, Bromelia, Camelia)",
+ "sources": [
+  "Modelos (plantas, alturas, vanos y colores): hoja de medidas de la investigación, config/houses/duran-city/modelos.json (2026-09-25), sacada de las plantas y fotos de fachada oficiales de durancity.com (plantas de 2022-06 y 2023-06, fotos de 2023-02 y 2025-06) y de los renders de 2014 y el dron de 2017 guardados en el Internet Archive (época de Amaranto). Solo se miraron: nada de sus imágenes está en el repositorio",
+  "Lotes: config/houses/duran-city/lotes.json (investigación del trazado, 2026-09-25): foto satelital Esri World Imagery, WorldView-2 de 0,5 m del 2025-04-20 (solo para medir), ejes de calle de OpenStreetMap (ODbL, © colaboradores de OpenStreetMap) y huellas de Overture Maps",
+  "Techo: planchas onduladas de fibrocemento sobre estructura metálica (especificación de 2012 en el Internet Archive); la onda de 177 mm de paso y 51 mm de alto es la del perfil 7 de catálogo (estimado); pendiente de 11° estimada por el alero retranqueado del Ebano (foto 2023), los hastiales de Bromelia en Mapillary (kaart_2, 2023-04-14, CC BY-SA 4.0) y el brillo de los faldones en el satélite",
+  "Colores de pared por etapa: fotos oficiales de 2023 y 2025, renders de 2014, dron de 2017 y Google Street View de octubre de 2025 desde la Vía al PAN y la E40 (solo mirado): son la paleta de cada etapa, no el color de cada casa (estimado)",
+  "Colores de techo: el de cada lote en el satélite del 2025-04-20, por clases, llevado al color real de su clase con las fotos (el satélite apaga el rojo)",
+  "Cierre del retiro lateral y pilar del medidor: fotos oficiales de 2023 (Roble y Ebano) con la escala de su fachada",
+  "Distancias de detalle (detail): a más de 60 m de la cámara, lo fino de las casas (hasta 5 cm: cantos de molduras, onda del borde del techo, tubos, barandas, ménsulas) mide un pixel o menos a 1440 pixeles de alto con el campo vertical de 58° de la cámara (config/game.json → render.fov): de ahí para afuera no se dibuja. La física va en celdas de 40 m (unas 10 casas cada una): cada consulta de la física recorre las piezas de los pedazos que contienen el punto, y con las celdas de 120 m del LOD eran cientos"
+ ],
+ "lotSource": "config/houses/duran-city/lotes.json → casas (el id): cada lote y su techo medidos en la foto satelital de Esri del 2025-04-20 (solo para medir) sobre los ejes de OpenStreetMap; en Camelia, el estado revisado con lot_states.py sobre la misma toma (2026-09-25: la investigación daba casas donde hay tierra y lotes vacíos o en obra donde hay techo); los lotes vacíos y los que caen en un edificio que no es una casa (spec.json → nonResidential) no se escriben",
+ "nonResidential": [
+  {
+   "name": "escuela (unidad educativa) junto a la garita de Amaranto",
+   "poly": [[20.4, -16.0], [48.1, -16.0], [48.1, 3.5], [20.4, 3.5]],
+   "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, en el mosaico enderezado de la investigación (el marco de lotes.json): el edificio de 2 pisos con techos verdes y dos bloques claros va de x 20,4 a 48,1 y de z −16,0 a 3,5 (medido el 2026-09-26; la investigación lo daba como «techo claro x 20–60, z −18..−3» y lo describe con las fotos del propietario de la ficha de Google Maps, ene–feb 2026). Al este de x 48 siguen las casas de la fila. Sin medidas de su fachada no se modela: sus lotes quedan sin casa"
+  },
+  {
+   "name": "oficina de ventas y administración de la urbanización (esquina noroeste de Camelia)",
+   "poly": [[237.3, 46.0], [239.7, 36.1], [207.2, 28.4], [204.8, 38.3]],
+   "source": "la huella del edificio en Overture Maps (buildings, f1be8975-b3d5-4006-a0a6-6768640be318, bajada el 2026-09-25), llevada al marco de lotes.json: un solo edificio de 35 × 10 m a lo largo de la calle, donde el peine de 7 m de la investigación ponía cinco casas; es la oficina de ventas (el pin de su ficha de Google Maps cae en (212,6, 40,2); foto de jun 2025, solo mirada: un piso, blanca y larga, con un bloque de esquina más alto). Queda el edificio de los datos (el despeje no lo cubre): sus lotes no son casas"
+  }
+ ],
+ "cell": 120,
+ "physicsCell": 40,
+ "detail": {
+  "near": 145,
+  "mid": 60,
+  "shadows": true
+ },
+ "ground": [[-0.5, 0], [0.5, 0], [0, 0.5], [-0.5, 1], [0.5, 1]],
+ "physics": {
+  "boxes": true
+ },
+ "parts": {
+  "source": "Onda del borde del techo: perfil 7 de fibrocemento (177 x 51 mm, catálogo) y la plancha 4 cm más allá de la fascia (fotos 2023, estimado). Moldura de 0,10-0,12 m (fotos 2023-2025, plano del Bambú 2023: ventana V-01 de 1,20 m de vidrio con moldura de 1,38-1,42 m); puerta metálica de 6 tableros de 0,9 m en un vano de 1,04-1,13 m (fotos); tubos blancos y baranda negra (fotos 2023: Cedro, Olivo, Ebano); cierre del retiro de 1,85 m y pilar de 0,40-0,45 x 0,30 x 1,92 m con capuchón (fotos 2023 del Roble y el Ebano, escala por el ancho de 6,0 m); retiro lateral de 1,0 m (plantas 2023 y anuncio de Amaranto); tejadillo de fibrocemento sobre ménsulas metálicas (foto 2023 del Roble). Derrame, grosores, salida de las molduras, ménsulas, apliques y la oclusión: estimados a ojo en las mismas fotos",
+  "bury": 0.3,
+  "finishes": {
+   "main": {"pattern": "stucco"},
+   "accent": {"pattern": "stucco"},
+   "plinth": {"pattern": "stucco"},
+   "lindero": {"pattern": "stucco"},
+   "pillar": {"pattern": "stucco"},
+   "slab": {"pattern": "stucco"},
+   "stone": {"pattern": "blocks", "scale": [0.75, 0.35], "tone": 1},
+   "obra": {"pattern": "blocks", "scale": [1, 1], "tone": 0.25},
+   "door": {"pattern": "slabs", "scale": [8, 4.4]},
+   "glass": {"pattern": "glazing"},
+   "roof": {"pattern": "corrugated"},
+   "canopy": {"pattern": "corrugated"},
+   "floor": {"pattern": "tiles", "scale": [1, 1]}
+  },
+  "molding": {"width": 0.11, "out": 0.025, "role": "trim"},
+  "reveal": 0.12,
+  "glass": {"role": "glass", "tone": 0.9, "glow": {"color": "#ffd9a3", "intensity": 1.2}},
+  "door": {"role": "door", "frame": 0.06, "frameRole": "door"},
+  "garage": {"role": "garage"},
+  "interior": {"role": "interior"},
+  "tube": {"size": 0.035, "role": "guard"},
+  "rail": {"spacing": 0.11, "bar": 0.018, "rail": 0.035, "out": 0.06, "role": "rail"},
+  "roof": {
+   "sheet": 0.02,
+   "fascia": 0.12,
+   "edges": ["front"],
+   "wave": {"pitch": 0.177, "height": 0.051, "segments": 2, "out": 0.04},
+   "soffit": "soffit",
+   "fasciaRole": "fascia",
+   "edge": "roofEdge"
+  },
+  "canopy": {"sheet": 0.02, "bracket": 0.04, "drop": 0.35, "bracketRole": "bracket"},
+  "lamp": {"size": [0.12, 0.2, 0.08], "role": "lamp", "glow": {"color": "#fff0d0", "intensity": 2.5}},
+  "slab": {"role": "slab"},
+  "ao": {"reveal": 0.55, "soffit": 0.5, "porch": 0.45, "canopy": 0.5},
+  "lot": {
+   "setback": 1.0,
+   "closure": {"height": 1.85, "thickness": 0.15, "z": 0, "role": "lindero"},
+   "pillar": {"size": [0.42, 0.3, 1.92], "cap": [0.9, 0.45, 0.04], "role": "pillar", "capRole": "pillarCap"}
+  },
+  "obra": {"thickness": 0.15, "role": "obra"},
+  "sides": 12
+ },
+ "shared": {
+  "soffit": "#8f8a82",
+  "fascia": "#564433",
+  "obra": "#8e8a83"
+ },
+ "common": {
+  "pitch": {
+   "value": 11,
+   "source": "estimada (modelos.json common.roofPitchDeg): 10,5° por el alero retranqueado del Ebano (foto 2023), 11-12° en los hastiales de Bromelia (Mapillary kaart_2, 2023-04-14) y el brillo de los faldones en el satélite (2025-04-20)"
+  },
+  "overhang": {
+   "1": {"front": 0.38, "back": 0.38, "free": 0.59, "lindero": 0.25},
+   "2": {"front": 0.5, "back": 0.5, "free": 0.55, "lindero": 0.25},
+   "source": "1 piso: plano del Bambú 2023 (proyección de cubierta a 0,38 m) y su foto de 2025 (0,59 m al lado libre, 0,25 al del lindero); 2 pisos: 0,5 m adelante (plano del Cedro 2022), atrás igual (estimado), 0,55 m al lado libre (foto 2023 del Cedro) y 0,25 al del lindero (como el Bambú, estimado)"
+  },
+  "colors": {
+   "main": "#c9b8a6",
+   "accent": "#b0b372",
+   "stone": "#a38c7a",
+   "plinth": "#b1a189",
+   "trim": "#f2f2ee",
+   "door": "#1a1714",
+   "glass": "#2e3942",
+   "guard": "#eef0ee",
+   "rail": "#1d1f24",
+   "fascia": "#564433",
+   "soffit": "#8f8a82",
+   "roofEdge": "#6f6660",
+   "canopy": "#83726c",
+   "bracket": "#2a2826",
+   "lamp": "#f1efe8",
+   "slab": "#d9d6cf",
+   "lindero": "#c9b8a6",
+   "pillar": "#c9b8a6",
+   "pillarCap": "#6d6a66",
+   "floor": "#b19373",
+   "interior": "#1c1a18",
+   "garage": "#8a8d90",
+   "roof": "#7d6d66"
+  },
+  "faces": {
+   "source": "el acento, la piedra o el enchape de un volumen va solo en su frente: los muros de los lados y del fondo son del color de la casa (Google Street View de octubre de 2025 desde la Vía al PAN y la E40, solo mirado: las traseras que asoman sobre el muro son de un solo color; foto de usuario de una calle de Bromelia, ago 2023, solo mirada)"
+  },
+  "back": {
+   "1": [
+    {"kind": "window", "side": "back", "x": [1.0, 2.2], "y": [1.0, 2.1], "panes": [2, 1], "source": "ventana del fondo: estimada (Google Street View oct 2025 desde la Vía al PAN, solo mirado: una ventana corrediza de marco blanco en el fondo de cada casa)"},
+    {"kind": "window", "side": "back", "x": [4.0, 4.6], "y": [1.6, 2.1], "panes": [1, 1], "source": "ventanita del baño o la lavandería: estimada (ídem)"}
+   ],
+   "2": [
+    {"kind": "window", "side": "back", "x": [1.0, 2.2], "y": [1.25, 2.25], "panes": [2, 1], "source": "ventana de la cocina en el fondo de la planta baja: estimada (Google Street View oct 2025 desde la Vía al PAN, solo mirado; casi siempre la tapa el muro o una ampliación)"},
+    {"kind": "window", "side": "back", "x": [3.8, 5.0], "y": [3.35, 4.55], "panes": [2, 2], "lit": true, "source": "ventana del dormitorio del fondo en la planta alta, 1,2 × 1,2 m con marco blanco: estimada (Google Street View oct 2025 desde la Vía al PAN, solo mirado: una por casa en las traseras de Bromelia y Amaranto)"},
+    {"kind": "window", "side": "back", "x": [1.3, 1.9], "y": [4.0, 4.5], "panes": [1, 1], "source": "ventanita del baño de la planta alta: estimada (ídem)"}
+   ],
+   "source": "no hay planos del fondo: las ventanas de atrás se estiman en las fotos de las traseras vistas desde afuera del muro"
+  }
+ },
+ "models": {
+  "bambu": {
+   "research": "bambu",
+   "source": "1 piso corto, 6,0 x 6,5 m: plano y foto de 2025",
+   "setback": "left",
+   "overhangSource": "foto 2025 del Bambú: 0,59 m al lado libre (izquierda) y 0,25 al del lindero; plano: 0,38 adelante y atrás",
+   "volumes": [
+    {"from": 0, "role": "main"}
+   ],
+   "plinth": {"height": 0.25, "role": "main", "shade": 0.8},
+   "openings": [
+    {"from": 0, "kind": "window", "panes": [2, 1], "lit": true},
+    {"from": 1, "kind": "door"},
+    {"from": 2, "kind": "window", "panes": [2, 1]}
+   ],
+   "panels": [
+    {"x": [0.86, 2.24], "y": [0.26, 1.1], "role": "main", "shade": 0.8, "source": "modelos.json bambu: paño bajo la ventana izquierda en ocre un tono más oscuro (foto 2025; el tono, estimado)"}
+   ],
+   "lamps": [
+    {"x": 1.55, "y": 2.61, "source": "modelos.json bambu: dos apliques sobre las ventanas a 2,61 m (foto 2025)"},
+    {"x": 5.03, "y": 2.61, "source": "modelos.json bambu: dos apliques sobre las ventanas a 2,61 m (foto 2025)"}
+   ],
+   "colors": {"main": "#c49a5e"}
+  },
+  "azalea": {
+   "research": "azalea",
+   "source": "1 piso largo con el frente escalonado 1,68 m: planta y foto de 2025",
+   "setback": "left",
+   "overhangSource": "foto 2025 de la Azalea: ~0,65 m al lado libre (izquierda) y ~0,2 al del lindero (se usan los comunes de 1 piso); 0,38 adelante y atrás como el Bambú",
+   "volumes": [
+    {"from": 0, "role": "main"},
+    {"from": 1, "role": "accent", "faces": ["front"]}
+   ],
+   "plinth": {"height": 0.25, "role": "main", "shade": 0.92},
+   "openings": [
+    {"from": 0, "kind": "window", "panes": [2, 1], "lit": true},
+    {"from": 1, "kind": "door"},
+    {"from": 2, "kind": "window", "panes": [2, 1]}
+   ],
+   "panels": [
+    {"x": [0.95, 2.41], "y": [-1, 0.69], "role": "stone", "source": "modelos.json azalea.facade.openings[0].paneBelow: paño de piedra bajo la ventana, x 0,95-2,41, y 0,05-0,69 (foto 2025); baja hasta el suelo"}
+   ],
+   "lamps": [
+    {"x": 1.67, "y": 2.72, "source": "foto 2025 de la Azalea: aplique sobre la ventana izquierda (alto estimado)"},
+    {"x": 5.12, "y": 2.6, "source": "foto 2025 de la Azalea: aplique sobre la ventana derecha (alto estimado)"}
+   ],
+   "colors": {"main": "#ecd6b2", "accent": "#9c6e58", "stone": "#9e8049"}
+  },
+  "lirio": {
+   "research": "lirio",
+   "source": "1 piso largo con el frente escalonado 0,60 m: planta 2023 y foto de 2025 (la foto es la planta en espejo; se describe la de la foto)",
+   "setback": "right",
+   "overhangSource": "foto 2025 del Lirio: ~0,6 m al lado libre (derecha) y ~0,27 al del lindero; 0,38 adelante y atrás como el Bambú",
+   "volumes": [
+    {"from": 0, "role": "main"},
+    {"from": 1, "role": "main"}
+   ],
+   "openings": [
+    {"from": 0, "kind": "window", "panes": [2, 1], "lit": true},
+    {"from": 1, "kind": "door"},
+    {"from": 2, "kind": "window", "panes": [2, 1], "guard": {"kind": "tubes", "y": [0.74, 1.0], "count": 3}, "note": "3 tubos blancos en la parte baja, y 0,62-1,05 con su moldura (foto 2025)"}
+   ],
+   "panels": [
+    {"x": [2.81, 5.98], "y": [-1, 0.48], "role": "stone", "source": "modelos.json lirio: zócalo de piedra en el volumen adelantado, x 2,81-6,0, y 0-0,48 (foto 2025); baja hasta el suelo"}
+   ],
+   "lamps": [
+    {"x": 0.9, "y": 2.53, "source": "modelos.json lirio: apliques sobre las ventanas a ~2,53 m (foto 2025)"},
+    {"x": 4.41, "y": 2.53, "source": "modelos.json lirio: apliques sobre las ventanas a ~2,53 m (foto 2025)"}
+   ],
+   "colors": {"main": "#c9bba4", "stone": "#8a7a62"}
+  },
+  "eucalipto": {
+   "research": "eucalipto",
+   "source": "1 piso largo de la época de Amaranto: representa a Ceibo (6,0 x 8,0), Eucalipto (6,0 x 8,7) y Ficus (6,0 x 9,7), la misma fachada en los renders de 2014 (desde la calle no se distinguen); fondo del Eucalipto. Vanos estimados como los del Bambú (sin foto de frente ni planta)",
+   "setback": "left",
+   "volumes": [
+    {"from": 0, "role": "main"}
+   ],
+   "plinth": {"height": 0.25, "role": "main", "shade": 0.9},
+   "openings": [
+    {"kind": "window", "x": [0.86, 2.24], "y": [1.1, 2.5], "panes": [2, 1], "lit": true, "source": "render de 2014 (ventana del dormitorio a la izquierda); medidas como las del Bambú (estimado)"},
+    {"kind": "door", "x": [3.0, 4.04], "y": [0.26, 2.34], "source": "render de 2014 (puerta al centro-derecha); medidas como las del Bambú (estimado)"},
+    {"kind": "window", "x": [4.33, 5.72], "y": [1.09, 2.5], "panes": [2, 1], "source": "render de 2014 (ventana a la derecha); medidas como las del Bambú (estimado)"}
+   ],
+   "panels": [
+    {"x": [2.8, 6.0], "y": [-1, 3.0], "role": "stone", "source": "render de 2014: paño de enchape de ladrillo o piedra que cubre la parte de la puerta (x y alto estimados)"}
+   ],
+   "lamps": [
+    {"x": 1.55, "y": 2.61, "source": "como el Bambú (estimado)"}
+   ],
+   "colors": {"main": "#efe4dc", "stone": "#8a6450"}
+  },
+  "cedro": {
+   "research": "cedro",
+   "source": "2 pisos compacto con la caja de escalera de piedra: plantas CAD de 2022 (con medidas de ambientes) y foto de 2023",
+   "setback": "left",
+   "overhangSource": "foto 2023 del Cedro: 0,55 m al lado libre (izquierda); plano 2022: 0,5 m adelante",
+   "volumes": [
+    {"from": 0, "role": "main"},
+    {"from": 1, "role": "stone", "faces": ["front"]},
+    {"from": 2, "role": "main", "clip": [0, 4.68], "base": 2.45, "note": "hasta donde empieza la piedra (foto 2023: x 4,68); pie en la cara de abajo de la losa volada (la banda blanca del borde de losa se ve a 2,45-2,64 m)"},
+    {"from": 2, "role": "stone", "faces": ["front"], "clip": [4.68, 6.0], "base": 2.45, "note": "la caja de escalera revestida de piedra de piso a techo (foto 2023)"}
+   ],
+   "openings": [
+    {"from": 0, "kind": "window", "panes": [2, 1], "lit": true},
+    {"from": 1, "kind": "door", "x": [3.1, 4.2], "note": "corrida 0,15 m a la izquierda y 0,03 más angosta para que entre en el muro de la planta 2022 (la caja de escalera empieza en x 4,2)"},
+    {"from": 2, "kind": "window", "panes": [2, 1], "guard": {"kind": "tubes", "y": [3.12, 3.26], "count": 3}, "note": "3 tubos blancos en el tercio bajo, y 3,0-3,25 con su moldura (foto 2023)"},
+    {"from": 3, "kind": "frame", "cells": [
+     {"y": [1.43, 2.13], "fill": "glass"},
+     {"y": [2.13, 2.72], "fill": "accent"},
+     {"y": [2.72, 3.31], "fill": "glass"},
+     {"y": [3.31, 3.9], "fill": "accent"},
+     {"y": [3.9, 4.6], "fill": "glass"}
+    ], "note": "vidrio / paño / vidrio / paño / vidrio en partes iguales (foto 2023; los cortes, estimados)"}
+   ],
+   "bands": [
+    {"x": [0, 4.29], "y": [2.45, 2.64], "role": "trim", "source": "modelos.json cedro: banda blanca del borde de losa de PA a 2,45-2,64 m sobre el volumen principal (foto 2023)"}
+   ],
+   "colors": {"main": "#c8bcb3", "stone": "#99806e", "accent": "#a18171", "trim": "#e0e1e9"}
+  },
+  "olivo": {
+   "research": "olivo",
+   "source": "2 pisos compacto con porche bajo la planta alta: planta 2022 y foto de 2023",
+   "setback": "left",
+   "overhangSource": "foto 2023 del Olivo: ~0,5 m al lado libre (izquierda) y ~0,2 al del lindero (se usan los comunes de 2 pisos)",
+   "volumes": [
+    {"from": 0, "role": "main"},
+    {"from": 1, "role": "accent", "faces": ["front"]},
+    {"from": 2, "role": "main", "clip": [0, 3.27], "note": "el color cambia en x 3,27 (foto 2023)"},
+    {"from": 2, "role": "accent", "faces": ["front"], "clip": [3.27, 6.0], "note": "la planta alta sobre el porche, amarilla (foto 2023)"},
+    {"name": "muro lateral del porche", "outline": [[5.72, 0], [6.0, 0], [6.0, 1.84], [5.72, 1.84]], "base": 0, "height": 2.85, "role": "main", "source": "foto 2023 del Olivo: el porche se cierra a la derecha con un muro beige hasta la planta alta (ancho estimado, 0,28 m)"}
+   ],
+   "openings": [
+    {"from": 0, "kind": "window", "panes": [2, 1], "guard": {"kind": "rail", "y": [2.9, 3.71]}, "note": "puerta-ventana con balcón francés: baranda de barrotes negros de 0,9 m (y 2,81-3,71, foto 2023)"},
+    {"from": 1, "kind": "window", "panes": [2, 1], "lit": true},
+    {"from": 2, "kind": "frame", "cells": [
+     {"y": [3.5, 4.22], "fill": "stone"},
+     {"y": [4.22, 4.87], "fill": "glass"}
+    ], "note": "mitad baja con piedra dentro del marco (foto 2023; el corte, estimado)"},
+    {"kind": "window", "x": [3.72, 4.69], "y": [0.98, 2.2], "panes": [2, 1], "source": "foto 2023 del Olivo: la ventana del fondo del porche (escala por el ancho de 6,0 m; no está en la hoja de medidas)"},
+    {"kind": "door", "side": "right", "x": [0.25, 1.15], "y": [0.2, 2.3], "plane": 3.27, "source": "modelos.json olivo.facade.extraEntrances[0]: la puerta en el muro de la sala que da al porche (planta 2022; en la foto no se ve), 0,9 x 2,1 m (estimado)"}
+   ],
+   "panels": [
+    {"x": [0.96, 2.35], "y": [-1, 0.96], "role": "stone", "source": "modelos.json olivo.facade.openings[1].paneBelow: piedra bajo la ventana de PB, x 0,96-2,35, y 0-0,96 (foto 2023)"}
+   ],
+   "bands": [
+    {"x": [0, 3.27], "y": [0.91, 0.93], "role": "main", "shade": 0.62, "source": "modelos.json olivo: bruñas horizontales en el volumen izquierdo a 0,92 / 2,34 / 3,51 m (foto 2023; el ancho de la bruña y su sombra, estimados)"},
+    {"x": [0, 3.27], "y": [2.33, 2.35], "role": "main", "shade": 0.62, "source": "ídem"},
+    {"x": [0, 3.27], "y": [3.5, 3.52], "role": "main", "shade": 0.62, "source": "ídem"}
+   ],
+   "floors": [
+    {"outline": [[3.27, 0], [5.72, 0], [5.72, 1.84], [3.27, 1.84]], "y": 0.2, "role": "floor", "source": "modelos.json olivo: piso del porche #b19373 (foto 2023); alto estimado"}
+   ],
+   "lamps": [
+    {"x": 1.67, "y": 2.44, "source": "modelos.json olivo: aplique entre las ventanas del volumen izquierdo a 2,44 m (foto 2023)"}
+   ],
+   "colors": {"main": "#cfc8c2", "accent": "#cd9e01", "stone": "#907c4d"}
+  },
+  "roble": {
+   "research": "roble",
+   "source": "2 pisos largo con el frente en L (Roble 3D, 4D y 5D; el Pino 3D de 2014 era la misma fachada): plantas 2023 a escala y foto de 2023",
+   "setback": "left",
+   "overhangSource": "comunes de 2 pisos; foto 2023 del Roble: ~0,45 m al lado libre (izquierda)",
+   "volumes": [
+    {"from": 0, "role": "accent", "faces": ["front"]},
+    {"from": 1, "role": "main"},
+    {"from": 2, "role": "accent", "faces": ["front"]},
+    {"from": 3, "role": "main"}
+   ],
+   "openings": [
+    {"from": 0, "kind": "window", "panes": [2, 1], "lit": true},
+    {"from": 1, "kind": "door"},
+    {"from": 2, "kind": "frame", "cells": [
+     {"y": [3.48, 4.42], "fill": "stone"},
+     {"y": [4.42, 4.88], "fill": "glass"}
+    ], "note": "vidrio arriba (4,44-4,75) y piedra abajo (3,52-4,40) dentro del marco (foto 2023)"},
+    {"from": 3, "kind": "frame", "cells": [
+     {"y": [0.89, 2.23], "fill": "glass"},
+     {"y": [2.23, 3.67], "fill": "stone"},
+     {"y": [3.67, 4.99], "fill": "glass"}
+    ], "note": "vidrio PB (1,0-2,21) / piedra (2,25-3,66) / vidrio PA (3,68-4,84) en el marco alto (foto 2023)"}
+   ],
+   "canopies": [
+    {"x": [-0.1, 2.9], "y": [2.52, 2.92], "depth": 0.7, "role": "canopy", "source": "modelos.json roble.facade.canopy: tejadillo de fibrocemento sobre ménsulas sobre la puerta y la ventana izquierda, x -0,1-2,9, y 2,52-2,92, 0,7 m de vuelo (foto 2023 y plano 2023)"}
+   ],
+   "lamps": [
+    {"x": 0.93, "y": 2.36, "source": "foto 2023 del Roble: aplique bajo el tejadillo, sobre la ventana izquierda (escala por el ancho de 6,0 m)"}
+   ],
+   "colors": {"main": "#c9b8a6", "accent": "#b0b372", "stone": "#aa8d77", "trim": "#dbdee6", "canopy": "#83726c"}
+  },
+  "robleAmaranto": {
+   "research": "roble",
+   "source": "Roble 4D y 5D de Amaranto (2012-2014): la planta del Roble de hoy con los colores de los renders de 2014 (Internet Archive): el volumen izquierdo en color (café o verde) y el derecho crema con bruñas horizontales",
+   "setback": "left",
+   "overhangSource": "comunes de 2 pisos",
+   "volumes": [
+    {"from": 0, "role": "main"},
+    {"from": 1, "role": "accent", "faces": ["front"]},
+    {"from": 2, "role": "main"},
+    {"from": 3, "role": "accent", "faces": ["front"]}
+   ],
+   "openings": [
+    {"from": 0, "kind": "window", "panes": [2, 1], "lit": true},
+    {"from": 1, "kind": "door"},
+    {"from": 2, "kind": "frame", "cells": [
+     {"y": [3.48, 4.42], "fill": "stone"},
+     {"y": [4.42, 4.88], "fill": "glass"}
+    ], "note": "como el Roble de 2023 (render de 2014: la misma composición)"},
+    {"from": 3, "kind": "frame", "cells": [
+     {"y": [0.89, 2.23], "fill": "glass"},
+     {"y": [2.23, 3.67], "fill": "stone"},
+     {"y": [3.67, 4.99], "fill": "glass"}
+    ], "note": "como el Roble de 2023 (render de 2014: la misma composición)"}
+   ],
+   "bands": [
+    {"x": [2.92, 6.02], "y": [0.91, 0.93], "role": "main", "shade": 0.62, "source": "renders de 2014: bruñas horizontales en el volumen crema; alturas como las del Olivo (estimado)"},
+    {"x": [2.92, 6.02], "y": [2.33, 2.35], "role": "main", "shade": 0.62, "source": "ídem"},
+    {"x": [2.92, 6.02], "y": [3.5, 3.52], "role": "main", "shade": 0.62, "source": "ídem"}
+   ],
+   "canopies": [
+    {"x": [-0.1, 2.9], "y": [2.52, 2.92], "depth": 0.7, "role": "canopy", "source": "tejadillo rojo sobre la puerta (renders de 2014), medidas del Roble de 2023 (foto y plano)"}
+   ],
+   "lamps": [
+    {"x": 0.93, "y": 2.36, "source": "como el Roble de 2023 (estimado)"}
+   ],
+   "colors": {"main": "#efe4dc", "accent": "#5b3f2e", "stone": "#8a6450"}
+  },
+  "pino": {
+   "research": "pino",
+   "source": "Pino 3D y 4D de Amaranto (86 m²): la fachada del Roble de hoy (renders de 2014) sobre una planta de 6,0 x 7,2 m (m² / 2 pisos / 6 m de ancho, estimado); en Amaranto el volumen izquierdo va en color y el derecho crema con bruñas",
+   "setback": "left",
+   "volumes": [
+    {"name": "PB derecha (sala)", "outline": [[2.92, 0], [6.0, 0], [6.0, 7.2], [2.92, 7.2]], "base": 0, "height": 2.85, "role": "main", "source": "como el Roble, con el fondo de 7,2 m (estimado)"},
+    {"name": "PB izquierda (entrada, retranqueada)", "outline": [[0, 0.58], [2.92, 0.58], [2.92, 7.2], [0, 7.2]], "base": 0, "height": 2.85, "role": "accent", "faces": ["front"], "source": "como el Roble (estimado)"},
+    {"name": "PA derecha", "outline": [[2.92, 0], [6.0, 0], [6.0, 7.2], [2.92, 7.2]], "base": 2.85, "height": 2.55, "role": "main", "source": "como el Roble (estimado)"},
+    {"name": "PA izquierda", "outline": [[0, 0.62], [2.92, 0.62], [2.92, 7.2], [0, 7.2]], "base": 2.85, "height": 2.55, "role": "accent", "faces": ["front"], "source": "como el Roble (estimado)"}
+   ],
+   "eave": 5.4,
+   "openings": [
+    {"kind": "window", "x": [0.24, 1.62], "y": [0.89, 2.29], "panes": [2, 1], "lit": true, "source": "como el Roble de 2023 (render de 2014: la misma composición; estimado)"},
+    {"kind": "door", "x": [1.73, 2.78], "y": [0.08, 2.13], "source": "como el Roble (estimado)"},
+    {"kind": "frame", "x": [1.01, 2.37], "y": [3.48, 4.88], "cells": [{"y": [3.48, 4.42], "fill": "stone"}, {"y": [4.42, 4.88], "fill": "glass"}], "source": "ventana de baño con paño (render de 2014), como la del Roble (estimado)"},
+    {"kind": "frame", "x": [3.33, 5.55], "y": [0.89, 4.99], "cells": [{"y": [0.89, 2.23], "fill": "glass"}, {"y": [2.23, 3.67], "fill": "stone"}, {"y": [3.67, 4.99], "fill": "glass"}], "source": "marco alto de ventanas (render de 2014), como el del Roble (estimado)"}
+   ],
+   "bands": [
+    {"x": [2.92, 6.0], "y": [0.91, 0.93], "role": "main", "shade": 0.62, "source": "renders de 2014: bruñas horizontales en el volumen crema; alturas como las del Olivo (estimado)"},
+    {"x": [2.92, 6.0], "y": [2.33, 2.35], "role": "main", "shade": 0.62, "source": "ídem"},
+    {"x": [2.92, 6.0], "y": [3.5, 3.52], "role": "main", "shade": 0.62, "source": "ídem"}
+   ],
+   "canopies": [
+    {"x": [-0.1, 2.9], "y": [2.52, 2.92], "depth": 0.7, "role": "canopy", "source": "tejadillo rojo sobre la puerta (renders de 2014), medidas del Roble (estimado)"}
+   ],
+   "colors": {"main": "#efe4dc", "accent": "#5b3f2e", "stone": "#8a6450"}
+  },
+  "nogal": {
+   "research": "nogal",
+   "source": "Nogal de Amaranto (74-78 m², antecesor del Olivo): dos colores en vertical, la izquierda blanca con bruñas y ventanas en PB y PA, la derecha en color con la entrada retranqueada en PB y la ventana alta del baño en PA (renders de 2014 y foto de RE/MAX); planta 6,0 x 6,4 m (m² / 2 pisos / 6 m de ancho). Todo estimado",
+   "setback": "left",
+   "volumes": [
+    {"name": "PB izquierda", "outline": [[0, 0], [3.2, 0], [3.2, 6.4], [0, 6.4]], "base": 0, "height": 2.85, "role": "main", "source": "estimado (renders de 2014)"},
+    {"name": "PB derecha (entrada retranqueada)", "outline": [[3.2, 1.5], [6.0, 1.5], [6.0, 6.4], [3.2, 6.4]], "base": 0, "height": 2.85, "role": "accent", "faces": ["front"], "source": "estimado (renders de 2014)"},
+    {"name": "muro lateral de la entrada", "outline": [[5.72, 0], [6.0, 0], [6.0, 1.5], [5.72, 1.5]], "base": 0, "height": 2.85, "role": "accent", "source": "como el Olivo (estimado)"},
+    {"name": "PA izquierda", "outline": [[0, 0], [3.2, 0], [3.2, 6.4], [0, 6.4]], "base": 2.85, "height": 2.55, "role": "main", "source": "estimado"},
+    {"name": "PA derecha", "outline": [[3.2, 0], [6.0, 0], [6.0, 6.4], [3.2, 6.4]], "base": 2.85, "height": 2.55, "role": "accent", "faces": ["front"], "source": "estimado"}
+   ],
+   "eave": 5.4,
+   "openings": [
+    {"kind": "window", "x": [0.9, 2.3], "y": [0.95, 2.2], "panes": [2, 1], "lit": true, "source": "renders de 2014 (estimado)"},
+    {"kind": "window", "x": [0.9, 2.3], "y": [3.45, 4.85], "panes": [2, 1], "source": "renders de 2014 (estimado)"},
+    {"kind": "door", "x": [3.95, 4.99], "y": [0.2, 2.28], "source": "renders de 2014: entrada retranqueada en PB (estimado)"},
+    {"kind": "window", "x": [3.9, 4.9], "y": [4.1, 4.8], "panes": [2, 1], "source": "renders de 2014: ventana alta del baño (estimado)"}
+   ],
+   "bands": [
+    {"x": [0, 3.2], "y": [0.91, 0.93], "role": "main", "shade": 0.62, "source": "renders de 2014: cuadrícula de bruñas en la parte blanca; las horizontales como las del Olivo (estimado)"},
+    {"x": [0, 3.2], "y": [2.33, 2.35], "role": "main", "shade": 0.62, "source": "ídem"},
+    {"x": [0, 3.2], "y": [3.5, 3.52], "role": "main", "shade": 0.62, "source": "ídem"}
+   ],
+   "floors": [
+    {"outline": [[3.2, 0], [5.72, 0], [5.72, 1.5], [3.2, 1.5]], "y": 0.2, "role": "floor", "source": "estimado, como el Olivo"}
+   ],
+   "colors": {"main": "#efe4dc", "accent": "#6f7d57"}
+  },
+  "haya": {
+   "research": "haya",
+   "source": "2 pisos compacto con el hastial a la calle, asimétrico: foto de 2025 (de tres cuartos, sin escala), la de Camelia de 2022 y el render de 2014; planta de 6,0 x 5,8 m (69 m² / 2 pisos / 6 m de ancho). Volúmenes, vanos y bruñas estimados en la foto",
+   "setback": "left",
+   "roof": {"kind": "gable", "ridge": "z", "ridgeAt": 2.4, "source": "cumbrera perpendicular a la calle cerca del tercio izquierdo, sobre el volumen café (foto 2025; posición estimada)"},
+   "volumes": [
+    {"name": "volumen lateral café (izquierda, 2 pisos)", "outline": [[0, 0], [2.4, 0], [2.4, 5.8], [0, 5.8]], "base": 0, "height": 5.4, "role": "accent", "source": "foto 2025 del Haya (ancho estimado)"},
+    {"name": "PB derecha (bajo el volado)", "outline": [[2.4, 0.6], [6.0, 0.6], [6.0, 5.8], [2.4, 5.8]], "base": 0, "height": 2.85, "role": "main", "source": "foto 2025: la planta alta vuela sobre la puerta (vuelo estimado, 0,6 m)"},
+    {"name": "PA derecha (volada)", "outline": [[2.4, 0], [6.0, 0], [6.0, 5.8], [2.4, 5.8]], "base": 2.85, "height": 2.55, "role": "main", "source": "foto 2025 (estimado)"}
+   ],
+   "eave": 5.4,
+   "openings": [
+    {"kind": "window", "x": [0.75, 1.6], "y": [3.4, 4.9], "panes": [1, 1], "source": "foto 2025 del Haya: ventana alta en el volumen café (estimado)"},
+    {"kind": "door", "x": [2.9, 3.94], "y": [0.2, 2.28], "source": "foto 2025: puerta bajo el volado (estimado)"},
+    {"kind": "window", "x": [4.35, 5.35], "y": [0.95, 2.2], "panes": [2, 1], "lit": true, "source": "foto 2025: ventana de PB (estimado)"},
+    {"kind": "window", "x": [4.25, 5.35], "y": [3.5, 4.8], "panes": [2, 1], "guard": {"kind": "tubes", "y": [3.66, 3.86], "count": 3}, "source": "modelos.json haya: ventana PA con tubos (foto 2025; medidas estimadas)"}
+   ],
+   "bands": [
+    {"x": [2.4, 6.0], "y": [3.52, 3.54], "role": "main", "shade": 0.62, "source": "foto 2025: bruñas en la planta alta (alturas estimadas)"},
+    {"x": [2.4, 6.0], "y": [4.25, 4.27], "role": "main", "shade": 0.62, "source": "ídem"},
+    {"x": [2.4, 6.0], "y": [0.9, 0.92], "role": "main", "shade": 0.62, "source": "foto 2025: bruñas en la planta baja (alturas estimadas)"},
+    {"x": [2.4, 6.0], "y": [1.9, 1.92], "role": "main", "shade": 0.62, "source": "ídem"}
+   ],
+   "colors": {"main": "#d9a58a", "accent": "#6e4c3e"}
+  },
+  "robinia": {
+   "research": "robinia",
+   "source": "2 pisos en L: plantas de 2022 (escala por los 94 m², estimada) y renders de 2014 y 2017 (izquierda blanca con bruñas y balcón francés en PA; derecha en color con la puerta y la ventana alta del baño). Vanos estimados",
+   "setback": "left",
+   "volumes": [
+    {"from": 0, "role": "main"},
+    {"from": 1, "role": "accent", "faces": ["front"]},
+    {"from": 2, "role": "main", "clip": [0, 2.75]},
+    {"from": 2, "role": "accent", "faces": ["front"], "clip": [2.75, 6.0]}
+   ],
+   "openings": [
+    {"kind": "window", "x": [0.7, 2.2], "y": [0.95, 2.2], "panes": [2, 1], "lit": true, "source": "renders de 2014 y 2017 (estimado)"},
+    {"kind": "window", "x": [0.7, 2.2], "y": [2.95, 4.95], "panes": [2, 1], "guard": {"kind": "rail", "y": [3.06, 3.87]}, "source": "renders de 2014 y 2017: puerta-ventana con balcón francés en PA (medidas como las del Olivo, estimado)"},
+    {"kind": "door", "x": [3.6, 4.64], "y": [0.2, 2.28], "source": "renders: puerta en el volumen en color, retranqueado 1,39 m (planta 2022; estimado)"},
+    {"kind": "window", "x": [3.9, 4.9], "y": [4.1, 4.8], "panes": [2, 1], "source": "renders: ventana alta del baño (estimado)"}
+   ],
+   "bands": [
+    {"x": [0, 2.9], "y": [0.91, 0.93], "role": "main", "shade": 0.62, "source": "renders de 2014: bruñas en el volumen blanco; alturas como las del Olivo (estimado)"},
+    {"x": [0, 2.9], "y": [2.33, 2.35], "role": "main", "shade": 0.62, "source": "ídem"},
+    {"x": [0, 2.9], "y": [3.5, 3.52], "role": "main", "shade": 0.62, "source": "ídem"}
+   ],
+   "colors": {"main": "#efe4dc", "accent": "#b8612d"}
+  },
+  "rafia": {
+   "research": "rafia",
+   "source": "2 pisos en L con la sala adelantada a la derecha y la entrada bajo el volado de la izquierda: plantas de 2022 (escala por los 87 m², estimada); sin foto de frente. Vanos estimados por la planta",
+   "setback": "left",
+   "volumes": [
+    {"from": 0, "role": "main"},
+    {"from": 1, "role": "accent", "faces": ["front"]},
+    {"from": 2, "role": "main"},
+    {"from": 3, "role": "accent", "faces": ["front"]}
+   ],
+   "openings": [
+    {"kind": "window", "x": [3.6, 5.2], "y": [0.9, 2.2], "panes": [2, 1], "lit": true, "source": "planta 2022: ventana de la sala en el volumen derecho (medidas estimadas)"},
+    {"kind": "window", "x": [3.6, 5.2], "y": [3.35, 4.85], "panes": [2, 1], "source": "planta 2022: ventana del máster (estimado)"},
+    {"kind": "door", "x": [0.9, 1.94], "y": [0.2, 2.28], "source": "planta 2022: puerta bajo el volado de PA, retranqueada 2,98 m (estimado)"},
+    {"kind": "window", "x": [0.6, 2.2], "y": [3.4, 4.8], "panes": [2, 1], "source": "planta 2022: ventana de PA izquierda (estimado)"}
+   ],
+   "colors": {"main": "#e9bf98", "accent": "#c9b39a"}
+  },
+  "ebano": {
+   "research": "ebano",
+   "source": "2 pisos largo con el ala derecha de piedra y la izquierda retranqueada 3,28 m: plantas 2023 a escala y foto de 2023",
+   "setback": "left",
+   "volumes": [
+    {"from": 0, "role": "stone", "faces": ["front"]},
+    {"from": 1, "role": "main"},
+    {"from": 2, "role": "stone", "faces": ["front"]},
+    {"from": 3, "role": "main"}
+   ],
+   "openings": [
+    {"from": 0, "kind": "frame", "cells": [
+     {"y": [0.55, 2.22], "fill": "glass"},
+     {"y": [2.22, 3.69], "fill": "accent"},
+     {"y": [3.69, 5.07], "fill": "glass"}
+    ], "guard": {"kind": "tubes", "y": [0.72, 1.12], "count": 4}, "note": "vidrio PB con tubos (0,59-2,20) / paño verde (2,24-3,68) / vidrio PA (3,70-4,81); 4 tubos blancos abajo (foto 2023; su alto, estimado)"},
+    {"from": 1, "kind": "door"},
+    {"from": 2, "kind": "window", "panes": [2, 1]},
+    {"from": 3, "kind": "window", "panes": [2, 1]}
+   ],
+   "panels": [
+    {"x": [2.87, 5.98], "y": [-1, 0.37], "role": "plinth", "source": "modelos.json ebano: zócalo #b1a189 a 0-0,37 m bajo el ala de piedra (foto 2023)"}
+   ],
+   "canopies": [
+    {"x": [0, 2.92], "y": [2.47, 2.84], "depth": 0.68, "role": "canopy", "source": "modelos.json ebano.facade.canopy: tejadillo sobre la puerta retranqueada, x 0-2,92, y 2,47-2,84, 0,68 m de vuelo (foto y plano 2023)"}
+   ],
+   "colors": {"main": "#bfab95", "stone": "#a38c7a", "accent": "#b4c08c", "plinth": "#b1a189", "canopy": "#5d514f"}
+  }
+ },
+ "etapas": {
+  "Amaranto": {
+   "scheme": "amaranto",
+   "wall": "amaranto",
+   "shift": {"value": [0.73, -1.38], "source": "corrimiento de los techos por la toma oblicua del satélite (Esri World Imagery, WorldView-2, 2025-04-20): con los techos a ~5,5 m, las casas quedan corridas hacia el nornoreste respecto de las calles medidas en el asfalto; se midió en el juego (2026-09-25) ajustando la distancia de la fachada a la vereda de las 1.121 casas de Amaranto y Bromelia que dan a una calle según hacia dónde miran (Amaranto 0,50 / −1,60 m, Bromelia 0,98 / −1,14 m; se usa el promedio por casas); la investigación ya lo anotaba (~1,5 m, modelos.json common.frontSetback)"},
+   "twoFloors": {"value": 0.9, "source": "modelos.json counts.shareTwoStorey: Amaranto casi todo de 2 pisos en el dron de 2017 (Internet Archive, slide 03)"},
+   "families": {
+    "1-short": {"bambu": 1},
+    "1-long": {"eucalipto": 1},
+    "2-short": {"nogal": 0.3, "pino": 0.3, "olivo": 0.25, "haya": 0.15},
+    "2-long": {"robleAmaranto": 0.6, "robinia": 0.4}
+   },
+   "familiesSource": "catálogo de Amaranto 2012-2014 (Internet Archive: Bambú, Ceibo, Eucalipto, Ficus; Haya, Nogal, Pino, Roble 4D/5D; desde 2014 Olivo, Robinia, Roble 3D); la constructora no publica cuántas hay de cada uno: pesos estimados",
+   "roofs": {
+    "red": {"color": "#c69a78", "source": "Google Street View de octubre de 2025 desde la Vía al PAN (solo mirado): planchas salmón desteñidas, #b18b69 nublado y a la sombra, llevado a la luz del juego con la relación del rojo de Bromelia en la misma toma (#ac685b → #c65e56); el dron de 2017 las mostraba más rosadas (#d9828a, quedó viejo)"},
+    "reddish": {"color": "#9a6a5a", "source": "el café apagado del satélite 2025 (#7a695a aparente) llevado con la relación entre el rojo real y el aparente de Bromelia (estimado)"},
+    "grey": {"color": "#8b8a84", "source": "Street View de octubre de 2025 desde la Vía al PAN: techos cambiados de fibrocemento gris (estimado)"},
+    "dark": {"color": "#6f6d68", "source": "ídem, más oscuro (estimado)"},
+    "light": {"color": "#cfd1cc", "source": "techos claros de metal del satélite (estimado)"},
+    "other": {"color": "#8b8a84", "source": "como los grises (estimado)"}
+   },
+   "roofDefault": "reddish"
+  },
+  "Bromelia": {
+   "scheme": "bromelia",
+   "wall": "bromelia",
+   "shift": {"value": [0.73, -1.38], "source": "el mismo de Amaranto (misma toma)"},
+   "twoFloors": {"value": 0.8, "source": "modelos.json counts.shareTwoStorey: ~2 de cada 9 casas de 1 piso en el dron de 2022 (DJI_0053)"},
+   "families": {
+    "1-short": {"bambu": 1},
+    "1-long": {"azalea": 0.5, "lirio": 0.5},
+    "2-short": {"cedro": 0.5, "olivo": 0.5},
+    "2-long": {"roble": 0.5, "rafia": 0.25, "robinia": 0.25}
+   },
+   "familiesSource": "catálogo actual de Bromelia (durancity.com, fichas 2025-2026: Bambú, Azalea, Lirio, Cedro, Olivo, Rafia, Robinia, Roble 3D y 4D); pesos estimados",
+   "roofs": {
+    "red": {"color": "#c65e56", "source": "dron de Bromelia de 2022 (DJI_0053, al sol: #c65e56-#d3665f)"},
+    "reddish": {"color": "#a86a5c", "source": "el mismo rojo, más desteñido (estimado)"},
+    "grey": {"color": "#858480", "source": "fibrocemento gris cambiado (estimado)"},
+    "dark": {"color": "#6f6d68", "source": "ídem, más oscuro (estimado)"},
+    "light": {"color": "#c9ccc8", "source": "lámina metálica clara (estimado)"},
+    "other": {"color": "#a86a5c", "source": "como los rojizos (estimado)"}
+   },
+   "roofDefault": "red"
+  },
+  "Camelia": {
+   "scheme": "camelia",
+   "wall": "camelia",
+   "twoFloors": {"value": 0.55, "source": "modelos.json counts.shareTwoStorey: mezcla, con predominio de 2 pisos en las fotos de 2022-2023 y filas de 1 piso (estimado)"},
+   "families": {
+    "1-short": {"bambu": 1},
+    "1-long": {"azalea": 0.5, "lirio": 0.5},
+    "2-short": {"cedro": 0.45, "olivo": 0.3, "haya": 0.25},
+    "2-long": {"roble": 0.45, "ebano": 0.35, "rafia": 0.2}
+   },
+   "familiesSource": "catálogo actual de Camelia (durancity.com: Bambú, Azalea, Lirio, Cedro, Ebano, Rafia, Roble 3D y 4D), el Haya de las fotos de 2022 y 2025 y el Olivo de las de 2023; pesos estimados",
+   "roofs": {
+    "other": {"color": "#77716a", "source": "café-gris: tejadillos #83726c y #5d514f (fotos 2023) y techo del Lirio #686366 (foto 2025); el #7d6d66 de antes salía morado en el juego y el satélite 2025 los muestra gris oliva (#636552 aparente), así que va un gris cálido neutro (estimado, 2026-09-25)"},
+    "grey": {"color": "#74706a", "source": "el mismo, más gris (estimado)"},
+    "dark": {"color": "#5f5a55", "source": "ídem, más oscuro (estimado)"},
+    "reddish": {"color": "#8a6f62", "source": "ídem, más rojizo (estimado)"},
+    "red": {"color": "#a8625a", "source": "rojo desteñido (estimado)"},
+    "light": {"color": "#c9ccc8", "source": "lámina metálica clara (estimado)"}
+   },
+   "roofDefault": "other"
+  }
+ },
+ "schemes": {
+  "amaranto": {
+   "name": "Amaranto (etapa 1, 2012-2017)",
+   "colors": {"trim": "#f2f0ea", "door": "#3b2a20", "canopy": "#b9574f", "roofEdge": "#8a5a50"},
+   "overrides": {
+    "robleAmaranto": {"trim": "#5b3f2e"},
+    "pino": {"trim": "#5b3f2e"},
+    "olivo": {"accent": "#b8612d", "trim": "#b8612d"},
+    "robinia": {"trim": "#b8612d"},
+    "nogal": {"trim": "#6f7d57"},
+    "haya": {"accent": "#a0583c", "trim": "#d9a0a0"}
+   },
+   "painted": ["main", "lindero", "pillar"],
+   "palette": [
+    {"color": "#efe4dc", "weight": 0.45, "name": "blanco crema", "source": "renders de 2014 y dron de 2017 (Internet Archive)"},
+    {"color": "#f2efe9", "weight": 0.2, "name": "blanco", "source": "Street View de octubre de 2025 desde la Vía al PAN: casas crema o blancas (estimado)"},
+    {"color": "#e6d3cb", "weight": 0.2, "name": "rosado pálido", "source": "anuncio de RE/MAX (#beb9b5 nublado) y render del Haya de 2014 (estimado)"},
+    {"color": "#bcb8b0", "weight": 0.15, "name": "gris repintado", "source": "Street View de octubre de 2025: muchas repintadas de gris (estimado)"}
+   ],
+   "source": "modelos.json palettes['Amaranto (2012-2017)']: base crema con bruñas, acentos café, verde o naranja en el volumen de color (y en las molduras, renders de 2014), tejadillos rojos, puertas café oscuro"
+  },
+  "bromelia": {
+   "name": "Bromelia (etapa 2, 2017-2022)",
+   "colors": {"trim": "#f2f2ee", "canopy": "#b9574f", "roofEdge": "#a3564d"},
+   "overrides": {},
+   "painted": ["main", "lindero", "pillar"],
+   "palette": [
+    {"color": "#e9bf98", "weight": 0.55, "name": "durazno", "source": "fotos de 2022 (Galería 3 y 6) y Street View de octubre de 2025: paredes durazno o salmón; es casi todo lo que se ve en Mapillary (kaart_2, 2023-04-14), en Street View (oct 2025) y en la foto de usuario de ago 2023, de ahí su peso"},
+    {"color": "#e08a66", "weight": 0.2, "name": "naranja", "source": "fotos de 2022 (Galería 3 y 8); el tono, el de la casa naranja de la foto de usuario de una calle de Bromelia (ago 2023, solo mirada) medido contra la vereda: más salmón que el #e07a3c de las fotos de fábrica"},
+    {"color": "#d6a23a", "weight": 0.05, "name": "amarillo mostaza", "source": "foto de 2014 (IMG_2543, #ba852c a la sombra); en las fotos de 2023 y 2025 casi no se ve (peso estimado)"},
+    {"color": "#5f7a2e", "weight": 0.03, "name": "verde", "source": "fotos de 2014 y 2022; en las fotos de 2023 y 2025 casi no se ve (peso estimado)"},
+    {"color": "#c9b39a", "weight": 0.12, "name": "beige", "source": "dron de 2022 (DJI_0053)"},
+    {"color": "#7b5a44", "weight": 0.05, "name": "café repintado", "source": "Street View de octubre de 2025, esquina noroeste: repintadas de café, verde y verde oscuro (estimado)"}
+   ],
+   "source": "modelos.json palettes['Bromelia (2017-2022)']: durazno, naranja, amarillo y verde con molduras blancas, algunos paños de piedra y tejadillos rojos; los acentos y la piedra de cada modelo, los de sus fotos de fábrica (2023-2025, las mismas del catálogo actual). Pesos estimados (la más vista es la durazno)"
+  },
+  "camelia": {
+   "name": "Camelia (etapa 3, 2021-hoy)",
+   "colors": {"trim": "#dbdee6", "roofEdge": "#6f6660"},
+   "overrides": {},
+   "painted": ["main", "lindero", "pillar"],
+   "palette": [
+    {"color": "#c8bcb3", "weight": 0.3, "name": "beige", "source": "foto 2023 del Cedro (a pleno sol)"},
+    {"color": "#cfc8c2", "weight": 0.2, "name": "gris perla", "source": "foto 2023 del Olivo"},
+    {"color": "#bfab95", "weight": 0.2, "name": "arena", "source": "foto 2023 del Ebano"},
+    {"color": "#c9bba4", "weight": 0.2, "name": "beige arena", "source": "foto 2025 del Lirio"},
+    {"color": "#ecd6b2", "weight": 0.1, "name": "crema vainilla", "source": "foto 2025 de la Azalea"}
+   ],
+   "source": "modelos.json palettes['Camelia (2021-hoy)']: beige o arena con acentos verde pistacho (Roble), amarillo (Olivo) o verde claro (Ebano), enchape de piedra, molduras blancas gruesas y tejadillos café. Pesos estimados"
+  }
+ }
+}

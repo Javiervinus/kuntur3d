@@ -1,0 +1,7672 @@
+{
+ "name": "Durán City (etapas Amaranto, Bromelia y Camelia)",
+ "sources": [
+  "Marco: el de la investigación del trazado (origen en el techo de la garita de Amaranto, −2.196419, −79.762650; x a lo largo del bulevar, rumbo 85°; z hacia el sur); config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25)",
+  "Perímetros, calles y áreas sociales: OpenStreetMap (ODbL), © colaboradores de OpenStreetMap, ways 772178813/14/15, 1443279619–35 y las calles residential, bajado el 2026-09-25",
+  "Medidas en planta (loteo, anchos, garitas, parterre, áreas sociales, estado de obra): Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; perfiles promediados de la investigación y medidas propias en el mosaico enderezado (pipeline/.cache/model-place/duranCity/trazado/mosaic.npy)",
+  "Muros, entrada del bulevar, monolito DURÁN CITY, postes: Google Street View oct 2025, solo mirado (solo la Vía al PAN y la E40: Street View no entra al bulevar ni a las etapas); medidas estimadas con la focal calibrada de la investigación",
+  "Entrada del bulevar, letrero, parterre y muro de Bromelia en 2023: Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0, https://www.mapillary.com/app/?pKey=2424873607691348, ?pKey=211671068278341, ?pKey=269522292092536, ?pKey=1386992465429194 (no hay fotos de Mapillary en las garitas de Bromelia ni de Camelia: consultado el 2026-09-25)",
+  "Garita de Amaranto (torre, aleros, portones, letreros reglamentarios y monolito): foto de usuario de la ficha de Google Maps, oct 2024, solo mirada",
+  "Garita y área social de Bromelia: durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada; dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados",
+  "Calle interna de Bromelia (vereda, bordillo, postes de un brazo): foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada",
+  "Letreros de las garitas de Bromelia y Camelia: no aparecen en fuentes abiertas (Mapillary, durancity.com, fichas de Google Maps): sus garitas van sin monolito ni texto",
+  "Líneas de las canchas: medidas reglamentarias (FIBA, ITF y fútbol 5), no medidas en cada cancha",
+  "Asiento en el terreno (ground): un piso se separa del terreno a lo sumo 1 cm entre sus vértices (la mitad de los 2 cm que sube la franja de un bordillo sobre su losa) y sus triángulos no pasan de 20 m (dos celdas del relieve de 10 m, config/region.json → terrain.gridSpacing: el terreno de la urbanización es plano, con 0,1 % de pendiente mediana); la física de vallas y mallas, de al menos 0,25 m (como en las calles y los malls); la de los techos sobre postes, en escalones de 0,5 m (con las aguas de 30° de las garitas suben 0,29 m, menos que el escalón de 0,45 m de config/game.json → characters.roster.human.movement.stepHeight)"
+ ],
+ "clear": [
+  [
+   [
+    -185.45,
+    -2.47
+   ],
+   [
+    -161.72,
+    -19.34
+   ],
+   [
+    -24.86,
+    -19.44
+   ],
+   [
+    -13.09,
+    -6.81
+   ],
+   [
+    -4.48,
+    -5.97
+   ],
+   [
+    7.69,
+    -4.77
+   ],
+   [
+    18.08,
+    -3.75
+   ],
+   [
+    18.4,
+    -17.41
+   ],
+   [
+    131.53,
+    -6.53
+   ],
+   [
+    179.0,
+    0.39
+   ],
+   [
+    179.0,
+    36.0
+   ],
+   [
+    183.6,
+    36.0
+   ],
+   [
+    115.5,
+    306.0
+   ],
+   [
+    80.0,
+    298.5
+   ],
+   [
+    40.0,
+    291.8
+   ],
+   [
+    0.0,
+    282.2
+   ],
+   [
+    -40.0,
+    274.8
+   ],
+   [
+    -60.0,
+    270.3
+   ],
+   [
+    -80.0,
+    267.0
+   ],
+   [
+    -100.0,
+    262.5
+   ],
+   [
+    -120.0,
+    259.1
+   ],
+   [
+    -137.0,
+    251.8
+   ],
+   [
+    -149.57,
+    243.22
+   ],
+   [
+    -160.68,
+    233.31
+   ],
+   [
+    -171.99,
+    218.93
+   ],
+   [
+    -178.69,
+    199.89
+   ],
+   [
+    -181.44,
+    183.59
+   ],
+   [
+    -179.58,
+    138.82
+   ],
+   [
+    -179.32,
+    68.05
+   ],
+   [
+    -185.45,
+    -2.47
+   ]
+  ],
+  [
+   [
+    -275.64,
+    -394.37
+   ],
+   [
+    -64.96,
+    -324.93
+   ],
+   [
+    107.34,
+    -284.57
+   ],
+   [
+    102.7,
+    -34.51
+   ],
+   [
+    -52.35,
+    -47.17
+   ],
+   [
+    -56.46,
+    -56.6
+   ],
+   [
+    -62.47,
+    -56.78
+   ],
+   [
+    -77.0,
+    -57.24
+   ],
+   [
+    -80.05,
+    -57.34
+   ],
+   [
+    -87.25,
+    -47.12
+   ],
+   [
+    -169.77,
+    -46.83
+   ],
+   [
+    -190.59,
+    -52.27
+   ],
+   [
+    -209.69,
+    -130.66
+   ],
+   [
+    -240.1,
+    -215.95
+   ],
+   [
+    -319.0,
+    -399.6
+   ],
+   [
+    -275.64,
+    -394.37
+   ]
+  ],
+  [
+   [
+    250.0,
+    21.44
+   ],
+   [
+    542.16,
+    117.69
+   ],
+   [
+    440.4,
+    419.45
+   ],
+   [
+    115.53,
+    304.82
+   ],
+   [
+    180.6,
+    48.0
+   ],
+   [
+    239.7,
+    48.0
+   ],
+   [
+    239.7,
+    28.4
+   ],
+   [
+    250.0,
+    28.4
+   ]
+  ],
+  [
+   [
+    -217.0,
+    -62.0
+   ],
+   [
+    -190.59,
+    -52.27
+   ],
+   [
+    -169.77,
+    -46.83
+   ],
+   [
+    -87.25,
+    -47.12
+   ],
+   [
+    -80.05,
+    -57.34
+   ],
+   [
+    -77.0,
+    -57.24
+   ],
+   [
+    -62.47,
+    -56.78
+   ],
+   [
+    -56.46,
+    -56.6
+   ],
+   [
+    -52.35,
+    -47.17
+   ],
+   [
+    102.7,
+    -34.51
+   ],
+   [
+    180.0,
+    -30.0
+   ],
+   [
+    179.0,
+    0.39
+   ],
+   [
+    131.53,
+    -6.53
+   ],
+   [
+    18.4,
+    -17.41
+   ],
+   [
+    18.08,
+    -3.75
+   ],
+   [
+    -13.09,
+    -6.81
+   ],
+   [
+    -24.86,
+    -19.44
+   ],
+   [
+    -161.72,
+    -19.34
+   ],
+   [
+    -185.45,
+    -2.47
+   ],
+   [
+    -200.0,
+    20.0
+   ],
+   [
+    -217.0,
+    20.0
+   ]
+  ]
+ ],
+ "houses": "duran-city",
+ "ground": {
+  "tolerance": 0.01,
+  "maxEdge": 20.0,
+  "lift": 0.02,
+  "bury": 0.3,
+  "wall": 0.25,
+  "roofStep": 0.5
+ },
+ "detail": {
+  "near": 180,
+  "sides": 16,
+  "thin": 6
+ },
+ "finishes": {
+  "glass": {
+   "roughness": 0.1,
+   "metalness": 0.3
+  },
+  "water": {
+   "roughness": 0.05,
+   "metalness": 0.0,
+   "opacity": 0.72
+  },
+  "rails": {
+   "roughness": 0.6,
+   "metalness": 0.4
+  }
+ },
+ "styles": {
+  "walls": {
+   "amaranto": {
+    "height": 2.3,
+    "thickness": 0.12,
+    "bury": 0.3,
+    "body": {
+     "kind": "solid",
+     "color": "#ebdfc9",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9
+    },
+    "courses": {
+     "count": 5,
+     "pattern": "slabs",
+     "cell": [
+      3.6,
+      3
+     ]
+    },
+    "stripe": {
+     "courses": 2,
+     "sequence": [
+      0,
+      0,
+      1,
+      2,
+      3,
+      3,
+      2,
+      1
+     ],
+     "color": "#9d7d46",
+     "faces": [
+      "out"
+     ]
+    },
+    "posts": {
+     "spacing": 2.0,
+     "size": [
+      0.3,
+      0.3
+     ],
+     "rise": 0,
+     "color": "#e3d6bd",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.88
+    },
+    "physics": 20,
+    "step": 20,
+    "near": 160
+   },
+   "bromelia": {
+    "height": 2.4,
+    "thickness": 0.15,
+    "bury": 0.3,
+    "body": {
+     "kind": "solid",
+     "color": "#b9af98",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9
+    },
+    "posts": {
+     "spacing": 7.0,
+     "size": [
+      0.35,
+      0.4
+     ],
+     "rise": 0,
+     "color": "#b0a690",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.88
+    },
+    "physics": 20,
+    "step": 20,
+    "near": 160
+   },
+   "camelia": {
+    "height": 2.2,
+    "thickness": 0.15,
+    "bury": 0.3,
+    "body": {
+     "kind": "solid",
+     "color": "#bdb097",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9
+    },
+    "posts": {
+     "spacing": 6.5,
+     "size": [
+      0.35,
+      0.4
+     ],
+     "rise": 0,
+     "color": "#a99c83",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.88
+    },
+    "physics": 20,
+    "step": 20,
+    "near": 160
+   },
+   "malla": {
+    "height": 3.0,
+    "thickness": 0.05,
+    "bury": 0.3,
+    "body": {
+     "kind": "screen",
+     "color": "#5b605f",
+     "pattern": "chainLink",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 1
+    },
+    "posts": {
+     "spacing": 3.0,
+     "size": [
+      0.06,
+      0.06
+     ],
+     "rise": 0.05,
+     "color": "#4f5553",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 1
+    },
+    "physics": 12,
+    "step": 12,
+    "near": 220
+   },
+   "mallaAlta": {
+    "height": 4.5,
+    "thickness": 0.05,
+    "bury": 0.3,
+    "body": {
+     "kind": "screen",
+     "color": "#5b605f",
+     "pattern": "chainLink",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 1
+    },
+    "posts": {
+     "spacing": 3.0,
+     "size": [
+      0.07,
+      0.07
+     ],
+     "rise": 0.05,
+     "color": "#4f5553",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 1
+    },
+    "physics": 12,
+    "step": 12,
+    "near": 220
+   },
+   "muroBajo": {
+    "height": 1.0,
+    "thickness": 0.2,
+    "bury": 0.2,
+    "body": {
+     "kind": "solid",
+     "color": "#e2c29a",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9
+    },
+    "posts": {
+     "spacing": 3.5,
+     "size": [
+      0.45,
+      0.35
+     ],
+     "rise": 0.35,
+     "color": "#e2c29a",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.88
+    },
+    "physics": 12,
+    "step": 12,
+    "near": 160
+   },
+   "bromeliaCerco": {
+    "height": 2.4,
+    "thickness": 0.15,
+    "bury": 0.3,
+    "body": {
+     "kind": "solid",
+     "color": "#b9af98",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9
+    },
+    "posts": {
+     "spacing": 7.0,
+     "size": [
+      0.35,
+      0.4
+     ],
+     "rise": 0,
+     "color": "#b0a690",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.88
+    },
+    "physics": 20,
+    "step": 20,
+    "near": 160,
+    "topping": {
+     "height": 1.0,
+     "pattern": "wires",
+     "scale": [
+      1,
+      1
+     ],
+     "color": "#9aa0a3",
+     "posts": {
+      "per": 2,
+      "size": [
+       0.04,
+       0.04
+      ],
+      "color": "#6d7275"
+     }
+    }
+   }
+  },
+  "pavilions": {
+   "aleroAmaranto": {
+    "clear": 3.2,
+    "beam": {
+     "height": 0.25,
+     "width": 0.25,
+     "color": "#8a5a45"
+    },
+    "posts": {
+     "size": [
+      0.35,
+      0.35
+     ],
+     "spacing": 9.5,
+     "inset": 0.1,
+     "color": "#8a5a45",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.55,
+     "color": "#b5544c",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#d9c7b0",
+     "soffitAo": 0.65
+    },
+    "tiers": [],
+    "light": {
+     "size": [
+      0.6,
+      0.6
+     ],
+     "gap": 0.03,
+     "glow": {
+      "color": "#fff1d6",
+      "intensity": 1.2
+     },
+     "power": 0.6,
+     "led": true
+    }
+   },
+   "aleroBromelia": {
+    "clear": 3.2,
+    "beam": {
+     "height": 0.25,
+     "width": 0.25,
+     "color": "#c8704f"
+    },
+    "posts": {
+     "size": [
+      0.4,
+      0.4
+     ],
+     "spacing": 12.5,
+     "inset": 0.1,
+     "color": "#c8704f",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.55,
+     "color": "#b5443a",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#e6c7a8",
+     "soffitAo": 0.65
+    },
+    "tiers": [],
+    "light": {
+     "size": [
+      0.6,
+      0.6
+     ],
+     "gap": 0.03,
+     "glow": {
+      "color": "#fff1d6",
+      "intensity": 1.2
+     },
+     "power": 0.6,
+     "led": true
+    }
+   },
+   "aleroCamelia": {
+    "clear": 3.2,
+    "beam": {
+     "height": 0.25,
+     "width": 0.25,
+     "color": "#b6a58c"
+    },
+    "posts": {
+     "size": [
+      0.4,
+      0.4
+     ],
+     "spacing": 12,
+     "inset": 0.1,
+     "color": "#b6a58c",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.55,
+     "color": "#b5443a",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#d9ccb6",
+     "soffitAo": 0.65
+    },
+    "tiers": [],
+    "light": {
+     "size": [
+      0.6,
+      0.6
+     ],
+     "gap": 0.03,
+     "glow": {
+      "color": "#fff1d6",
+      "intensity": 1.2
+     },
+     "power": 0.6,
+     "led": true
+    }
+   },
+   "clubAmaranto": {
+    "clear": 3.2,
+    "beam": {
+     "height": 0.3,
+     "width": 0.3,
+     "color": "#efe3cf"
+    },
+    "posts": {
+     "size": [
+      0.4,
+      0.4
+     ],
+     "spacing": 4.5,
+     "inset": 0.1,
+     "color": "#efe3cf",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 15,
+     "overhang": 0.9,
+     "color": "#b5544c",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#e8dcc6",
+     "soffitAo": 0.65
+    },
+    "tiers": [],
+    "room": {
+     "rect": [
+      -8.5,
+      -10.5,
+      8.5,
+      10.5
+     ],
+     "color": "#efe3cf",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9,
+     "openings": [
+      {
+       "side": 0,
+       "at": -4.5,
+       "sill": 0,
+       "size": [
+        1.8,
+        2.3
+       ],
+       "kind": "door"
+      },
+      {
+       "side": 0,
+       "at": 1.5,
+       "sill": 0.9,
+       "size": [
+        2.4,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 0,
+       "at": 5.5,
+       "sill": 0.9,
+       "size": [
+        2.4,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 1,
+       "at": -6,
+       "sill": 0.9,
+       "size": [
+        2.4,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 1,
+       "at": 0,
+       "sill": 0,
+       "size": [
+        1.8,
+        2.3
+       ],
+       "kind": "door"
+      },
+      {
+       "side": 1,
+       "at": 6,
+       "sill": 0.9,
+       "size": [
+        2.4,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 2,
+       "at": 0,
+       "sill": 0.9,
+       "size": [
+        2.4,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 3,
+       "at": -6,
+       "sill": 0.9,
+       "size": [
+        2.4,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 3,
+       "at": 6,
+       "sill": 0.9,
+       "size": [
+        2.4,
+        1.3
+       ],
+       "kind": "window"
+      }
+     ],
+     "glazing": {
+      "reveal": 0.12,
+      "tone": 0.25,
+      "panes": [
+       2,
+       2
+      ],
+      "frame": "#3b3833",
+      "glass": "#56636b",
+      "door": "#6b4a33",
+      "glow": {
+       "color": "#ffe2b0",
+       "intensity": 1.0
+      },
+      "lit": 0.2,
+      "ao": 0.6
+     }
+    }
+   },
+   "clubBromelia": {
+    "clear": 3.4,
+    "beam": {
+     "height": 0.3,
+     "width": 0.25,
+     "color": "#5a3b2a"
+    },
+    "posts": {
+     "size": [
+      0.25,
+      0.25
+     ],
+     "spacing": 4.2,
+     "inset": 0.1,
+     "color": "#5a3b2a",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 22,
+     "overhang": 0.9,
+     "color": "#c0634a",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#8a6a52",
+     "soffitAo": 0.6
+    },
+    "tiers": [
+     {
+      "inset": 3.5,
+      "rise": 2.2,
+      "color": "#7a4a3a"
+     }
+    ],
+    "room": {
+     "rect": [
+      -10.2,
+      2.8,
+      10.2,
+      7.8
+     ],
+     "color": "#e7c9a4",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9,
+     "openings": [
+      {
+       "side": 0,
+       "at": -7,
+       "sill": 0,
+       "size": [
+        1.0,
+        2.2
+       ],
+       "kind": "door"
+      },
+      {
+       "side": 0,
+       "at": -2,
+       "sill": 0,
+       "size": [
+        1.0,
+        2.2
+       ],
+       "kind": "door"
+      },
+      {
+       "side": 0,
+       "at": 4,
+       "sill": 1.0,
+       "size": [
+        2.0,
+        1.1
+       ],
+       "kind": "window"
+      }
+     ],
+     "glazing": {
+      "reveal": 0.12,
+      "tone": 0.25,
+      "panes": [
+       2,
+       2
+      ],
+      "frame": "#3b3833",
+      "glass": "#56636b",
+      "door": "#6b4a33",
+      "glow": {
+       "color": "#ffe2b0",
+       "intensity": 1.0
+      },
+      "lit": 0.2,
+      "ao": 0.6
+     }
+    }
+   },
+   "clubCamelia": {
+    "clear": 3.4,
+    "beam": {
+     "height": 0.3,
+     "width": 0.3,
+     "color": "#e5e1d8"
+    },
+    "posts": {
+     "size": [
+      0.4,
+      0.4
+     ],
+     "spacing": 5.0,
+     "inset": 0.1,
+     "color": "#e5e1d8",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 12,
+     "overhang": 0.9,
+     "color": "#6e6e6a",
+     "pattern": "slabs",
+     "scale": [
+      2,
+      2
+     ],
+     "ao": 0.92,
+     "soffit": "#dedad2",
+     "soffitAo": 0.65
+    },
+    "tiers": [],
+    "room": {
+     "rect": [
+      -9.5,
+      -3.0,
+      9.5,
+      15.5
+     ],
+     "color": "#e5e1d8",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9,
+     "openings": [
+      {
+       "side": 0,
+       "at": -5,
+       "sill": 0,
+       "size": [
+        1.8,
+        2.3
+       ],
+       "kind": "door"
+      },
+      {
+       "side": 0,
+       "at": 2,
+       "sill": 0.9,
+       "size": [
+        3.0,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 1,
+       "at": 0,
+       "sill": 0.9,
+       "size": [
+        3.0,
+        1.3
+       ],
+       "kind": "window"
+      },
+      {
+       "side": 3,
+       "at": 0,
+       "sill": 0.9,
+       "size": [
+        3.0,
+        1.3
+       ],
+       "kind": "window"
+      }
+     ],
+     "glazing": {
+      "reveal": 0.12,
+      "tone": 0.25,
+      "panes": [
+       2,
+       2
+      ],
+      "frame": "#3b3833",
+      "glass": "#56636b",
+      "door": "#6b4a33",
+      "glow": {
+       "color": "#ffe2b0",
+       "intensity": 1.0
+      },
+      "lit": 0.2,
+      "ao": 0.6
+     }
+    }
+   },
+   "anexoBromelia": {
+    "clear": 2.6,
+    "beam": {
+     "height": 0.25,
+     "width": 0.2,
+     "color": "#5a3b2a"
+    },
+    "posts": {
+     "size": [
+      0.2,
+      0.2
+     ],
+     "spacing": 4.0,
+     "inset": 0.1,
+     "color": "#5a3b2a",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.7,
+     "color": "#b86a55",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#8a6a52",
+     "soffitAo": 0.65
+    },
+    "tiers": [],
+    "room": {
+     "rect": [
+      -1.75,
+      -1.75,
+      1.75,
+      1.75
+     ],
+     "color": "#c9a27a",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.9,
+     "openings": [
+      {
+       "side": 2,
+       "at": 0,
+       "sill": 0,
+       "size": [
+        0.9,
+        2.1
+       ],
+       "kind": "door"
+      }
+     ],
+     "glazing": {
+      "reveal": 0.12,
+      "tone": 0.25,
+      "panes": [
+       2,
+       2
+      ],
+      "frame": "#3b3833",
+      "glass": "#56636b",
+      "door": "#6b4a33",
+      "glow": {
+       "color": "#ffe2b0",
+       "intensity": 1.0
+      },
+      "lit": 0.2,
+      "ao": 0.6
+     }
+    }
+   },
+   "kiosco": {
+    "clear": 2.8,
+    "beam": {
+     "height": 0.25,
+     "width": 0.2,
+     "color": "#4a4a48"
+    },
+    "posts": {
+     "size": [
+      0.2,
+      0.2
+     ],
+     "spacing": 4.0,
+     "inset": 0.1,
+     "color": "#4a4a48",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 12,
+     "overhang": 0.6,
+     "color": "#4f4f4f",
+     "pattern": "slabs",
+     "scale": [
+      2,
+      2
+     ],
+     "ao": 0.92,
+     "soffit": "#d6d2ca",
+     "soffitAo": 0.65
+    },
+    "tiers": []
+   }
+  },
+  "towers": {
+   "garitaAmaranto": {
+    "levels": [
+     3.0,
+     2.8
+    ],
+    "walls": {
+     "color": "#ecdccb",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92
+    },
+    "trim": {
+     "height": 0.12,
+     "out": 0.06,
+     "color": "#e2d2bf"
+    },
+    "plinth": {
+     "height": 0.3,
+     "out": 0.03,
+     "color": "#b9a88f"
+    },
+    "openings": [
+     {
+      "side": 0,
+      "level": 0,
+      "at": 0,
+      "sill": 0.9,
+      "size": [
+       1.0,
+       1.2
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 0,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.1,
+       1.0
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 3,
+      "level": 0,
+      "at": 0,
+      "sill": 0.9,
+      "size": [
+       1.0,
+       1.2
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 3,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.0,
+       1.0
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 1,
+      "level": 0,
+      "at": 0.6,
+      "sill": 0,
+      "size": [
+       0.9,
+       2.1
+      ],
+      "kind": "door"
+     },
+     {
+      "side": 1,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.0,
+       1.0
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 2,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.0,
+       1.0
+      ],
+      "kind": "window"
+     }
+    ],
+    "glazing": {
+     "reveal": 0.12,
+     "tone": 0.25,
+     "panes": [
+      2,
+      2
+     ],
+     "frame": "#3b3833",
+     "glass": "#4f5d66",
+     "door": "#5a3b2a",
+     "glow": {
+      "color": "#ffe2b0",
+      "intensity": 1.4
+     },
+     "lit": 0.8,
+     "ao": 0.6
+    },
+    "tiles": {
+     "count": 4,
+     "size": [
+      0.35,
+      0.35
+     ],
+     "below": 0.3,
+     "out": 0.03,
+     "color": "#8a5a45"
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.55,
+     "color": "#b5544c",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#d9c7b0",
+     "soffitAo": 0.65
+    },
+    "lamp": {
+     "size": [
+      0.35,
+      0.25,
+      0.2
+     ],
+     "color": "#d8d8d6",
+     "glow": {
+      "color": "#fff2dc",
+      "intensity": 1.5
+     },
+     "power": 0.7,
+     "led": true
+    }
+   },
+   "garitaBromelia": {
+    "levels": [
+     3.0,
+     2.8
+    ],
+    "walls": {
+     "color": "#e39a6c",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92
+    },
+    "trim": {
+     "height": 0.25,
+     "out": 0.06,
+     "color": "#f0e6d8"
+    },
+    "plinth": {
+     "height": 0.3,
+     "out": 0.03,
+     "color": "#b9876a"
+    },
+    "openings": [
+     {
+      "side": 0,
+      "level": 0,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       2.6,
+       1.6
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 1,
+      "level": 0,
+      "at": -2.5,
+      "sill": 0.8,
+      "size": [
+       2.4,
+       1.6
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 3,
+      "level": 0,
+      "at": 2.5,
+      "sill": 0.8,
+      "size": [
+       2.4,
+       1.6
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 1,
+      "level": 0,
+      "at": 1.5,
+      "sill": 0,
+      "size": [
+       0.9,
+       2.1
+      ],
+      "kind": "door"
+     },
+     {
+      "side": 0,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.2,
+       1.0
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 2,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.2,
+       1.0
+      ],
+      "kind": "window"
+     }
+    ],
+    "glazing": {
+     "reveal": 0.12,
+     "tone": 0.25,
+     "panes": [
+      2,
+      2
+     ],
+     "frame": "#2f2d2a",
+     "glass": "#4a5961",
+     "door": "#5a3b2a",
+     "glow": {
+      "color": "#ffe2b0",
+      "intensity": 1.4
+     },
+     "lit": 0.8,
+     "ao": 0.6
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.55,
+     "color": "#b5443a",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#e6c7a8",
+     "soffitAo": 0.65
+    }
+   },
+   "garitaCamelia": {
+    "levels": [
+     3.0,
+     2.8
+    ],
+    "walls": {
+     "color": "#e8dcc9",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92
+    },
+    "trim": {
+     "height": 0.25,
+     "out": 0.06,
+     "color": "#d9ccb8"
+    },
+    "plinth": {
+     "height": 0.3,
+     "out": 0.03,
+     "color": "#a99c86"
+    },
+    "openings": [
+     {
+      "side": 0,
+      "level": 0,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       2.6,
+       1.6
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 1,
+      "level": 0,
+      "at": -2.5,
+      "sill": 0.8,
+      "size": [
+       2.4,
+       1.6
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 3,
+      "level": 0,
+      "at": 2.5,
+      "sill": 0.8,
+      "size": [
+       2.4,
+       1.6
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 1,
+      "level": 0,
+      "at": 1.5,
+      "sill": 0,
+      "size": [
+       0.9,
+       2.1
+      ],
+      "kind": "door"
+     },
+     {
+      "side": 0,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.2,
+       1.0
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 2,
+      "level": 1,
+      "at": 0,
+      "sill": 0.8,
+      "size": [
+       1.2,
+       1.0
+      ],
+      "kind": "window"
+     }
+    ],
+    "glazing": {
+     "reveal": 0.12,
+     "tone": 0.25,
+     "panes": [
+      2,
+      2
+     ],
+     "frame": "#2f2d2a",
+     "glass": "#4a5961",
+     "door": "#5a3b2a",
+     "glow": {
+      "color": "#ffe2b0",
+      "intensity": 1.4
+     },
+     "lit": 0.8,
+     "ao": 0.6
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.55,
+     "color": "#b5443a",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#e6c7a8",
+     "soffitAo": 0.65
+    }
+   },
+   "vigilancia": {
+    "shaft": {
+     "height": 4.4,
+     "size": [
+      0.6,
+      0.6
+     ],
+     "color": "#8a5a45",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "levels": [
+     2.1
+    ],
+    "walls": {
+     "color": "#7a4a3a",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92
+    },
+    "openings": [
+     {
+      "side": 0,
+      "level": 0,
+      "at": 0,
+      "sill": 0.9,
+      "size": [
+       1.2,
+       0.8
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 1,
+      "level": 0,
+      "at": 0,
+      "sill": 0.9,
+      "size": [
+       1.2,
+       0.8
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 2,
+      "level": 0,
+      "at": 0,
+      "sill": 0.9,
+      "size": [
+       1.2,
+       0.8
+      ],
+      "kind": "window"
+     },
+     {
+      "side": 3,
+      "level": 0,
+      "at": 0,
+      "sill": 0.9,
+      "size": [
+       1.2,
+       0.8
+      ],
+      "kind": "window"
+     }
+    ],
+    "glazing": {
+     "reveal": 0.12,
+     "tone": 0.25,
+     "panes": [
+      2,
+      2
+     ],
+     "frame": "#2f2d2a",
+     "glass": "#46525a",
+     "door": "#5a3b2a",
+     "glow": {
+      "color": "#ffe2b0",
+      "intensity": 1.0
+     },
+     "lit": 0.5,
+     "ao": 0.6
+    },
+    "roof": {
+     "kind": "hip",
+     "pitch": 30,
+     "overhang": 0.4,
+     "color": "#b5443a",
+     "pattern": "roofTiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.92,
+     "soffit": "#8a6a52",
+     "soffitAo": 0.65
+    }
+   }
+  },
+  "gates": {
+   "portonAmaranto": {
+    "height": 2.2,
+    "lift": 0.05,
+    "pattern": "bars",
+    "scale": [
+     1,
+     1
+    ],
+    "color": "#efefea",
+    "frame": {
+     "size": 0.06,
+     "color": "#efefea"
+    }
+   },
+   "portonBromelia": {
+    "height": 2.3,
+    "lift": 0.05,
+    "pattern": "bars",
+    "scale": [
+     1,
+     1
+    ],
+    "color": "#4a4c50",
+    "frame": {
+     "size": 0.07,
+     "color": "#4a4c50"
+    }
+   }
+  },
+  "barriers": {
+   "pluma": {
+    "pedestal": {
+     "size": [
+      0.3,
+      0.3,
+      1.05
+     ],
+     "color": "#6f7479"
+    },
+    "boom": {
+     "length": 4.2,
+     "size": [
+      0.08,
+      0.05
+     ],
+     "raised": 80,
+     "colors": [
+      "#f2f2f2",
+      "#c8302c"
+     ],
+     "stripe": 0.5
+    }
+   }
+  },
+  "stripes": {
+   "reductor": {
+    "width": 0.5,
+    "height": 0.05,
+    "stripe": 0.6,
+    "gap": 0,
+    "colors": [
+     "#e5b52a",
+     "#1d1d1d"
+    ],
+    "lift": 0.03
+   },
+   "cebra": {
+    "width": 3.0,
+    "height": 0,
+    "stripe": 0.5,
+    "gap": 0.5,
+    "colors": [
+     "#f1f1ee"
+    ],
+    "lift": 0.04
+   }
+  },
+  "bollards": {
+   "amarilloNegro": {
+    "radius": 0.1,
+    "height": 0.9,
+    "band": 0.15,
+    "colors": [
+     "#1d1d1d",
+     "#e5b52a"
+    ]
+   }
+  },
+  "signs": {
+   "monolitoDuranCity": {
+    "size": [
+     4.5,
+     1.6
+    ],
+    "depth": 0.35,
+    "lift": 0.85,
+    "color": "#e9e9e6",
+    "face": {
+     "color": "#e9e9e6",
+     "inset": [
+      0.05,
+      0.05,
+      0.05,
+      0.05
+     ]
+    },
+    "bands": [
+     {
+      "rect": [
+       0.56,
+       0.68,
+       1.62,
+       0.72
+      ],
+      "color": "#3a7fb5"
+     },
+     {
+      "rect": [
+       2.93,
+       0.68,
+       3.72,
+       0.72
+      ],
+      "color": "#3a7fb5"
+     }
+    ],
+    "plinth": {
+     "size": [
+      4.7,
+      0.85,
+      0.6
+     ],
+     "color": "#b9b7b0",
+     "pattern": "slabs",
+     "scale": [
+      6,
+      6
+     ]
+    },
+    "back": false,
+    "floodlights": {
+     "count": 3,
+     "distance": 2.2,
+     "size": [
+      0.25,
+      0.2,
+      0.2
+     ],
+     "color": "#3b3d3f",
+     "glow": {
+      "color": "#fff4e0",
+      "intensity": 1.0
+     },
+     "flood": 0.6
+    }
+   },
+   "monolitoEtapa": {
+    "size": [
+     2.5,
+     1.5
+    ],
+    "depth": 0.25,
+    "lift": 0.45,
+    "color": "#5aa845",
+    "face": {
+     "color": "#f7f7f5",
+     "inset": [
+      0.12,
+      0.08,
+      0.2,
+      0.1
+     ]
+    },
+    "bands": [
+     {
+      "rect": [
+       0,
+       0,
+       2.5,
+       0.2
+      ],
+      "color": "#1590b8"
+     },
+     {
+      "rect": [
+       0,
+       0.2,
+       0.12,
+       0.75
+      ],
+      "color": "#1590b8"
+     }
+    ],
+    "plinth": {
+     "size": [
+      2.9,
+      0.45,
+      0.7
+     ],
+     "color": "#b5b3ad",
+     "pattern": "stucco",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "back": false
+   },
+   "reglamentarioArriba": {
+    "size": [
+     0.5,
+     0.95
+    ],
+    "depth": 0.02,
+    "lift": 1.75,
+    "color": "#d9d9d6",
+    "face": {
+     "color": "#f4f4f2",
+     "inset": [
+      0.02,
+      0.02,
+      0.02,
+      0.02
+     ]
+    },
+    "bands": [],
+    "posts": {
+     "width": 0.06,
+     "color": "#8b8f93",
+     "at": [
+      0
+     ]
+    },
+    "back": false
+   },
+   "chevron": {
+    "size": [
+     0.6,
+     0.75
+    ],
+    "depth": 0.02,
+    "lift": 1.5,
+    "color": "#d9d9d6",
+    "face": {
+     "color": "#e5b52a",
+     "inset": [
+      0.02,
+      0.02,
+      0.02,
+      0.02
+     ]
+    },
+    "bands": [],
+    "posts": {
+     "width": 0.06,
+     "color": "#8b8f93",
+     "at": [
+      0
+     ]
+    },
+    "back": false
+   },
+   "reglamentarioAbajo": {
+    "size": [
+     0.65,
+     1.05
+    ],
+    "depth": 0.02,
+    "lift": 0.6,
+    "color": "#d9d9d6",
+    "face": {
+     "color": "#f4f4f2",
+     "inset": [
+      0.02,
+      0.02,
+      0.02,
+      0.02
+     ]
+    },
+    "bands": [
+     {
+      "rect": [
+       0.02,
+       0.5,
+       0.63,
+       0.51
+      ],
+      "color": "#9a9a96"
+     },
+     {
+      "rect": [
+       0.32,
+       0.02,
+       0.33,
+       0.5
+      ],
+      "color": "#9a9a96"
+     }
+    ],
+    "back": false
+   }
+  },
+  "floors": {
+   "adoquinGris": {
+    "lift": 0.06,
+    "color": "#8d8b86",
+    "pattern": "pavers",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true
+   },
+   "islaAmarilla": {
+    "lift": 0.15,
+    "color": "#a9b98a",
+    "pattern": "soil",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true,
+    "curb": {
+     "width": 0.15,
+     "color": "#e5b52a",
+     "paint": {
+      "colors": [
+       "#e5b52a",
+       "#1d1d1d"
+      ],
+      "dash": 1.0,
+      "film": 0.01
+     }
+    }
+   },
+   "parterre": {
+    "lift": 0.15,
+    "color": "#a3ad7f",
+    "pattern": "soil",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true,
+    "curb": {
+     "width": 0.15,
+     "color": "#c9c8c2",
+     "paint": {
+      "colors": [],
+      "dash": 1,
+      "film": 0.01
+     }
+    }
+   },
+   "isla": {
+    "lift": 0.15,
+    "color": "#a3ad7f",
+    "pattern": "soil",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true,
+    "curb": {
+     "width": 0.15,
+     "color": "#c9c8c2",
+     "paint": {
+      "colors": [],
+      "dash": 1,
+      "film": 0.01
+     }
+    }
+   },
+   "seto": {
+    "lift": 0.6,
+    "color": "#5d7f3c",
+    "pattern": "soil",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true,
+    "curb": {
+     "width": 0.05,
+     "color": "#4a6a33",
+     "paint": {
+      "colors": [],
+      "dash": 1,
+      "film": 0.01
+     }
+    }
+   },
+   "cesped": {
+    "lift": 0.04,
+    "color": "#a9b98a",
+    "pattern": "soil",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true
+   },
+   "deckBeige": {
+    "lift": 0.1,
+    "color": "#cdbfa2",
+    "pattern": "tiles",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true,
+    "curb": {
+     "width": 0.1,
+     "color": "#cfc3a8",
+     "paint": {
+      "colors": [],
+      "dash": 1,
+      "film": 0.01
+     }
+    }
+   },
+   "deckTerracota": {
+    "lift": 0.1,
+    "color": "#b86a4c",
+    "pattern": "pavers",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true,
+    "curb": {
+     "width": 0.1,
+     "color": "#d8cbb4",
+     "paint": {
+      "colors": [],
+      "dash": 1,
+      "film": 0.01
+     }
+    }
+   },
+   "cauchoNaranja": {
+    "lift": 0.07,
+    "color": "#d9793a",
+    "pattern": "none",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true
+   },
+   "cauchoTurquesa": {
+    "lift": 0.06,
+    "color": "#5a9e8a",
+    "pattern": "none",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true
+   },
+   "cauchoSalmon": {
+    "lift": 0.07,
+    "color": "#d69a84",
+    "pattern": "none",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true
+   },
+   "arenaJuegos": {
+    "lift": 0.05,
+    "color": "#d2c0a2",
+    "pattern": "none",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true
+   },
+   "jardinera": {
+    "lift": 0.35,
+    "color": "#8f8a64",
+    "pattern": "soil",
+    "scale": [
+     1,
+     1
+    ],
+    "walk": true,
+    "curb": {
+     "width": 0.15,
+     "color": "#c9c8c2",
+     "paint": {
+      "colors": [],
+      "dash": 1,
+      "film": 0.01
+     }
+    }
+   }
+  },
+  "pools": {
+   "piscina": {
+    "coping": {
+     "width": 0.45,
+     "height": 0.05,
+     "color": "#d9d2c3",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "shell": {
+     "color": "#3f86b8",
+     "pattern": "tiles",
+     "scale": [
+      1,
+      1
+     ],
+     "ao": 0.75
+    },
+    "water": {
+     "below": 0.15,
+     "color": "#4aa3c8"
+    }
+   }
+  },
+  "courts": {
+   "basquet": {
+    "surface": {
+     "lift": 0.08,
+     "color": "#3f6b9a",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "border": {
+     "width": 1.0,
+     "color": "#3f7f55"
+    },
+    "lines": {
+     "width": 0.05,
+     "color": "#f2f2ef",
+     "lift": 0.02,
+     "rects": [
+      [
+       -14.0,
+       -7.5,
+       14.0,
+       7.5
+      ],
+      [
+       -14.0,
+       -2.45,
+       -8.2,
+       2.45
+      ],
+      [
+       8.2,
+       -2.45,
+       14.0,
+       2.45
+      ]
+     ],
+     "segments": [
+      [
+       0,
+       -7.5,
+       0,
+       7.5
+      ],
+      [
+       -14.0,
+       -6.6,
+       -11.01,
+       -6.6
+      ],
+      [
+       -14.0,
+       6.6,
+       -11.01,
+       6.6
+      ],
+      [
+       14.0,
+       -6.6,
+       11.01,
+       -6.6
+      ],
+      [
+       14.0,
+       6.6,
+       11.01,
+       6.6
+      ]
+     ],
+     "circles": [
+      [
+       0,
+       0,
+       1.8
+      ],
+      [
+       -8.2,
+       0,
+       1.8
+      ],
+      [
+       8.2,
+       0,
+       1.8
+      ]
+     ],
+     "arcs": [
+      [
+       -12.425,
+       0,
+       6.75,
+       -77.9,
+       77.9
+      ],
+      [
+       12.425,
+       0,
+       6.75,
+       102.1,
+       257.9
+      ]
+     ]
+    },
+    "zonesLift": 0.01,
+    "zones": [
+     {
+      "rect": [
+       -14.0,
+       -2.45,
+       -8.2,
+       2.45
+      ],
+      "color": "#d5793a"
+     },
+     {
+      "rect": [
+       8.2,
+       -2.45,
+       14.0,
+       2.45
+      ],
+      "color": "#d5793a"
+     },
+     {
+      "circle": [
+       0,
+       0,
+       1.8
+      ],
+      "color": "#d5793a"
+     }
+    ],
+    "hoops": {
+     "at": 12.8,
+     "pole": {
+      "height": 3.95,
+      "size": 0.15,
+      "back": 1.4,
+      "color": "#3d5a80"
+     },
+     "board": {
+      "size": [
+       1.8,
+       1.05,
+       0.05
+      ],
+      "bottom": 2.9,
+      "color": "#f2f2f2"
+     },
+     "ring": {
+      "radius": 0.225,
+      "tube": 0.012,
+      "height": 3.05,
+      "reach": 0.15,
+      "color": "#d0502a"
+     }
+    },
+    "fence": {
+     "style": "malla",
+     "margin": 0.3,
+     "gaps": []
+    }
+   },
+   "futbol": {
+    "surface": {
+     "lift": 0.06,
+     "color": "#3d8a3a",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lines": {
+     "width": 0.08,
+     "color": "#f2f2ef",
+     "lift": 0.02,
+     "rects": [
+      [
+       -16,
+       -8,
+       16,
+       8
+      ],
+      [
+       -16,
+       -3,
+       -14,
+       3
+      ],
+      [
+       14,
+       -3,
+       16,
+       3
+      ],
+      [
+       -16,
+       -5.5,
+       -11,
+       5.5
+      ],
+      [
+       11,
+       -5.5,
+       16,
+       5.5
+      ]
+     ],
+     "segments": [
+      [
+       0,
+       -8,
+       0,
+       8
+      ]
+     ],
+     "circles": [
+      [
+       0,
+       0,
+       3
+      ]
+     ],
+     "arcs": []
+    },
+    "zonesLift": 0.01,
+    "zones": [],
+    "goals": {
+     "at": 16,
+     "width": 3,
+     "height": 2,
+     "depth": [
+      0.8,
+      1.0
+     ],
+     "bar": 0.08,
+     "color": "#f2f2ef",
+     "net": {
+      "pattern": "chainLink",
+      "scale": [
+       0.5,
+       0.5
+      ],
+      "color": "#e8e8e4"
+     }
+    },
+    "fence": {
+     "style": "mallaAlta",
+     "margin": 0.3,
+     "gaps": []
+    }
+   },
+   "tenis": {
+    "surface": {
+     "lift": 0.06,
+     "color": "#3569a8",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "border": {
+     "width": 2.0,
+     "color": "#3e7a52"
+    },
+    "lines": {
+     "width": 0.05,
+     "color": "#f2f2ef",
+     "lift": 0.02,
+     "rects": [
+      [
+       -11.885,
+       -5.485,
+       11.885,
+       5.485
+      ]
+     ],
+     "segments": [
+      [
+       -11.885,
+       -4.115,
+       11.885,
+       -4.115
+      ],
+      [
+       -11.885,
+       4.115,
+       11.885,
+       4.115
+      ],
+      [
+       -6.4,
+       -4.115,
+       -6.4,
+       4.115
+      ],
+      [
+       6.4,
+       -4.115,
+       6.4,
+       4.115
+      ],
+      [
+       -6.4,
+       0,
+       6.4,
+       0
+      ],
+      [
+       -11.885,
+       0,
+       -11.735,
+       0
+      ],
+      [
+       11.735,
+       0,
+       11.885,
+       0
+      ]
+     ],
+     "circles": [],
+     "arcs": []
+    },
+    "zonesLift": 0.01,
+    "zones": [],
+    "net": {
+     "at": 6.4,
+     "post": [
+      0.08,
+      1.07
+     ],
+     "postColor": "#2f3a33",
+     "height": 0.95,
+     "tape": 0.05,
+     "tapeColor": "#f2f2ef",
+     "pattern": "chainLink",
+     "scale": [
+      2,
+      2
+     ],
+     "color": "#222826"
+    },
+    "fence": {
+     "style": "malla",
+     "margin": 0.3,
+     "gaps": []
+    }
+   },
+   "futbolCamelia": {
+    "surface": {
+     "lift": 0.06,
+     "color": "#3d8a3a",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lines": {
+     "width": 0.08,
+     "color": "#f2f2ef",
+     "lift": 0.02,
+     "rects": [
+      [
+       -16,
+       -12.5,
+       16,
+       12.5
+      ],
+      [
+       -16,
+       -3,
+       -14,
+       3
+      ],
+      [
+       14,
+       -3,
+       16,
+       3
+      ],
+      [
+       -16,
+       -6,
+       -11,
+       6
+      ],
+      [
+       11,
+       -6,
+       16,
+       6
+      ]
+     ],
+     "segments": [
+      [
+       0,
+       -12.5,
+       0,
+       12.5
+      ]
+     ],
+     "circles": [
+      [
+       0,
+       0,
+       3
+      ]
+     ],
+     "arcs": []
+    },
+    "zonesLift": 0.01,
+    "zones": [],
+    "goals": {
+     "at": 16,
+     "width": 3,
+     "height": 2,
+     "depth": [
+      0.8,
+      1.0
+     ],
+     "bar": 0.08,
+     "color": "#f2f2ef",
+     "net": {
+      "pattern": "chainLink",
+      "scale": [
+       0.5,
+       0.5
+      ],
+      "color": "#e8e8e4"
+     }
+    },
+    "fence": {
+     "style": "mallaAlta",
+     "margin": 0.3,
+     "gaps": []
+    }
+   },
+   "futbolBromelia": {
+    "surface": {
+     "lift": 0.06,
+     "color": "#3d8a3a",
+     "pattern": "none",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lines": {
+     "width": 0.08,
+     "color": "#f2f2ef",
+     "lift": 0.02,
+     "rects": [
+      [
+       -14,
+       -7.75,
+       14,
+       7.75
+      ],
+      [
+       -14,
+       -3,
+       -12,
+       3
+      ],
+      [
+       12,
+       -3,
+       14,
+       3
+      ],
+      [
+       -14,
+       -5.5,
+       -9,
+       5.5
+      ],
+      [
+       9,
+       -5.5,
+       14,
+       5.5
+      ]
+     ],
+     "segments": [
+      [
+       0,
+       -7.75,
+       0,
+       7.75
+      ]
+     ],
+     "circles": [
+      [
+       0,
+       0,
+       3
+      ]
+     ],
+     "arcs": []
+    },
+    "zonesLift": 0.01,
+    "zones": [],
+    "goals": {
+     "at": 14,
+     "width": 3,
+     "height": 2,
+     "depth": [
+      0.8,
+      1.0
+     ],
+     "bar": 0.08,
+     "color": "#f2f2ef",
+     "net": {
+      "pattern": "chainLink",
+      "scale": [
+       0.5,
+       0.5
+      ],
+      "color": "#e8e8e4"
+     }
+    },
+    "fence": {
+     "style": "mallaAlta",
+     "margin": 0.3,
+     "gaps": []
+    }
+   }
+  },
+  "plays": {
+   "columpio": {
+    "kind": "swing",
+    "swing": {
+     "height": 2.4,
+     "length": 3.6,
+     "spread": 1.8,
+     "tube": 0.045,
+     "seats": {
+      "count": 2,
+      "size": [
+       0.45,
+       0.18,
+       0.04
+      ],
+      "height": 0.45
+     },
+     "chain": 0.008
+    },
+    "colors": {
+     "frame": "#2f6fb0",
+     "seat": "#1d1d1d",
+     "chute": "#e5b52a",
+     "deck": "#c8302c"
+    }
+   },
+   "resbaladera": {
+    "kind": "slide",
+    "slide": {
+     "deck": {
+      "height": 1.5,
+      "size": [
+       1.4,
+       1.4
+      ],
+      "thickness": 0.08
+     },
+     "post": 0.1,
+     "rail": 0.9,
+     "chute": {
+      "run": 2.8,
+      "width": 0.5,
+      "lip": 0.12
+     },
+     "ladder": {
+      "steps": 5,
+      "width": 0.5,
+      "run": 0.8,
+      "tube": 0.03,
+      "rung": 0.02
+     }
+    },
+    "colors": {
+     "frame": "#2f6fb0",
+     "seat": "#1d1d1d",
+     "chute": "#e5b52a",
+     "deck": "#c8302c"
+    }
+   }
+  },
+  "trees": {
+   "parterre": {
+    "height": [
+     6.0,
+     9.0
+    ],
+    "radius": [
+     3.2,
+     4.5
+    ],
+    "colors": [
+     "#4f6b35",
+     "#445f2f",
+     "#5a7640",
+     "#3e5a2c"
+    ]
+   },
+   "nim": {
+    "height": [
+     5.0,
+     7.0
+    ],
+    "radius": [
+     2.2,
+     3.2
+    ],
+    "colors": [
+     "#5f7a3e",
+     "#6b8446",
+     "#557238"
+    ]
+   },
+   "cipres": {
+    "height": [
+     2.2,
+     2.8
+    ],
+    "radius": [
+     0.45,
+     0.6
+    ],
+    "colors": [
+     "#2f4a25",
+     "#35522a"
+    ]
+   },
+   "grande": {
+    "height": [
+     9.0,
+     11.0
+    ],
+    "radius": [
+     5.5,
+     7.0
+    ],
+    "colors": [
+     "#445f2f",
+     "#3e5a2c"
+    ]
+   },
+   "jardin": {
+    "height": [
+     3.5,
+     5.0
+    ],
+    "radius": [
+     1.6,
+     2.4
+    ],
+    "colors": [
+     "#557238",
+     "#5d7a3c",
+     "#4a6a33"
+    ]
+   },
+   "arbusto": {
+    "height": [
+     1.4,
+     2.0
+    ],
+    "radius": [
+     0.8,
+     1.2
+    ],
+    "colors": [
+     "#4a6a33",
+     "#557238"
+    ]
+   }
+  },
+  "lamps": {
+   "bulevarLED": {
+    "pole": {
+     "height": 9.5,
+     "radius": [
+      0.12,
+      0.07
+     ],
+     "sides": 8,
+     "base": [
+      0.2,
+      0.3
+     ]
+    },
+    "arm": {
+     "reach": 2.4,
+     "rise": 0.8,
+     "radius": 0.045,
+     "segments": 6
+    },
+    "head": {
+     "size": [
+      0.7,
+      0.12,
+      0.32
+     ],
+     "tilt": 5,
+     "lens": {
+      "share": 0.85,
+      "thickness": 0.02
+     }
+    },
+    "light": {
+     "power": 1.0,
+     "led": true
+    },
+    "glow": {
+     "color": "#f4f6ff",
+     "intensity": 2.5
+    },
+    "colors": {
+     "pole": "#3a3d40",
+     "head": "#4a4d50",
+     "lens": "#eef1f2"
+    },
+    "sides": [
+     1
+    ],
+    "near": 320
+   },
+   "hormigon": {
+    "pole": {
+     "height": 10.5,
+     "radius": [
+      0.17,
+      0.1
+     ],
+     "sides": 8,
+     "base": [
+      0.2,
+      0.2
+     ]
+    },
+    "arm": {
+     "reach": 1.6,
+     "rise": 0.6,
+     "radius": 0.04,
+     "segments": 5
+    },
+    "head": {
+     "size": [
+      0.6,
+      0.14,
+      0.28
+     ],
+     "tilt": 8,
+     "lens": {
+      "share": 0.85,
+      "thickness": 0.02
+     }
+    },
+    "light": {
+     "power": 0.9,
+     "led": false
+    },
+    "glow": {
+     "color": "#ffd9a0",
+     "intensity": 2.2
+    },
+    "colors": {
+     "pole": "#9b9a95",
+     "head": "#6f7174",
+     "lens": "#eef1f2"
+    },
+    "sides": [
+     1
+    ],
+    "near": 320
+   },
+   "interna": {
+    "pole": {
+     "height": 7.5,
+     "radius": [
+      0.09,
+      0.055
+     ],
+     "sides": 8,
+     "base": [
+      0.15,
+      0.25
+     ]
+    },
+    "arm": {
+     "reach": 1.0,
+     "rise": 0.3,
+     "radius": 0.035,
+     "segments": 4
+    },
+    "head": {
+     "size": [
+      0.55,
+      0.1,
+      0.25
+     ],
+     "tilt": 5,
+     "lens": {
+      "share": 0.85,
+      "thickness": 0.02
+     }
+    },
+    "light": {
+     "power": 0.8,
+     "led": true
+    },
+    "glow": {
+     "color": "#f4f6ff",
+     "intensity": 2.2
+    },
+    "colors": {
+     "pole": "#2e3033",
+     "head": "#3a3c3f",
+     "lens": "#eef1f2"
+    },
+    "sides": [
+     1
+    ],
+    "near": 220
+   },
+   "hormigonSinBrazo": {
+    "pole": {
+     "height": 10.5,
+     "radius": [
+      0.17,
+      0.1
+     ],
+     "sides": 8,
+     "base": [
+      0.2,
+      0.2
+     ]
+    },
+    "arm": {
+     "reach": 1.6,
+     "rise": 0.6,
+     "radius": 0.04,
+     "segments": 5
+    },
+    "head": {
+     "size": [
+      0.6,
+      0.14,
+      0.28
+     ],
+     "tilt": 8,
+     "lens": {
+      "share": 0.85,
+      "thickness": 0.02
+     }
+    },
+    "light": {
+     "power": 0.9,
+     "led": false
+    },
+    "glow": {
+     "color": "#ffd9a0",
+     "intensity": 2.2
+    },
+    "colors": {
+     "pole": "#9b9a95",
+     "head": "#6f7174",
+     "lens": "#eef1f2"
+    },
+    "sides": [],
+    "near": 320
+   }
+  }
+ },
+ "perimeter": {
+  "cell": 250,
+  "runs": [
+   {
+    "id": "amaranto",
+    "style": "amaranto",
+    "line": [
+     [
+      -185.45,
+      -2.47
+     ],
+     [
+      -161.72,
+      -19.34
+     ],
+     [
+      -24.86,
+      -19.44
+     ],
+     [
+      -13.09,
+      -6.81
+     ],
+     [
+      -4.48,
+      -5.97
+     ],
+     [
+      7.69,
+      -4.77
+     ],
+     [
+      18.08,
+      -3.75
+     ],
+     [
+      18.4,
+      -17.41
+     ],
+     [
+      131.53,
+      -6.53
+     ],
+     [
+      192.18,
+      2.31
+     ],
+     [
+      115.5,
+      306.0
+     ],
+     [
+      80.0,
+      298.5
+     ],
+     [
+      40.0,
+      291.8
+     ],
+     [
+      0.0,
+      282.2
+     ],
+     [
+      -40.0,
+      274.8
+     ],
+     [
+      -60.0,
+      270.3
+     ],
+     [
+      -80.0,
+      267.0
+     ],
+     [
+      -100.0,
+      262.5
+     ],
+     [
+      -120.0,
+      259.1
+     ],
+     [
+      -137.0,
+      251.8
+     ],
+     [
+      -149.57,
+      243.22
+     ],
+     [
+      -160.68,
+      233.31
+     ],
+     [
+      -171.99,
+      218.93
+     ],
+     [
+      -178.69,
+      199.89
+     ],
+     [
+      -181.44,
+      183.59
+     ],
+     [
+      -179.58,
+      138.82
+     ],
+     [
+      -179.32,
+      68.05
+     ],
+     [
+      -185.45,
+      -2.47
+     ]
+    ],
+    "closed": true,
+    "skip": [
+     3,
+     4,
+     5
+    ],
+    "source": "OSM way 772178814 (2026-09-25), comparado con Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: los bordes calzan a ±2 m (Bromelia sur z≈−47, Amaranto norte z≈−19); muro: estimado (Google Street View, oct 2025) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25)); el lado sur (de x 115,5 a −137), corrido 1–3,5 m al sur: detrás de los techos de la última fila en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, más 1,38 m de la toma oblicua y 0,3 m (este trabajo, 2026-09-25); OSM lo dibuja sobre las casas. Sin muro en los lados 3–5: el portal de la garita (puertas OSM 11887535343 y 11887535342). El lado 9 (192,18, 2,31 → 115,53, 304,82) es el que comparte con Camelia (estimado: se le da el muro de Amaranto, que es la etapa más antigua); la franja en zigzag va hacia afuera en los lados vistos (bulevar, Vía al PAN y E40) y se supone igual en el resto"
+   },
+   {
+    "id": "bromelia",
+    "style": "bromelia",
+    "line": [
+     [
+      -275.64,
+      -394.37
+     ],
+     [
+      -64.96,
+      -324.93
+     ],
+     [
+      107.34,
+      -284.57
+     ],
+     [
+      102.7,
+      -34.51
+     ],
+     [
+      -52.35,
+      -47.17
+     ],
+     [
+      -56.46,
+      -56.6
+     ],
+     [
+      -62.47,
+      -56.78
+     ],
+     [
+      -77.0,
+      -57.24
+     ],
+     [
+      -80.05,
+      -57.34
+     ],
+     [
+      -87.25,
+      -47.12
+     ],
+     [
+      -169.77,
+      -46.83
+     ],
+     [
+      -190.59,
+      -52.27
+     ],
+     [
+      -209.69,
+      -130.66
+     ],
+     [
+      -240.1,
+      -215.95
+     ],
+     [
+      -319.0,
+      -399.6
+     ],
+     [
+      -275.64,
+      -394.37
+     ]
+    ],
+    "closed": true,
+    "skip": [
+     5,
+     6,
+     7,
+     11,
+     12,
+     13
+    ],
+    "source": "OSM way 772178813 (2026-09-25), comparado con Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: los bordes calzan a ±2 m (Bromelia sur z≈−47, Amaranto norte z≈−19); muro: estimado (Google Street View, oct 2025) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25)); el muro oeste desde z −217 al norte corrido 3–4 m al oeste, a la línea oscura del muro que se ve detrás del paso de hormigón en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (este trabajo, 2026-09-25); OSM lo dibuja sobre el fondo de los techos. Sin muro en los lados 5–7: el portal de la garita (puertas OSM 11887535360 y 11887535361); los lados 11–13 van con el cerco eléctrico (tramo bromelia-oeste)"
+   },
+   {
+    "id": "bromelia-oeste",
+    "style": "bromeliaCerco",
+    "line": [
+     [
+      -275.64,
+      -394.37
+     ],
+     [
+      -64.96,
+      -324.93
+     ],
+     [
+      107.34,
+      -284.57
+     ],
+     [
+      102.7,
+      -34.51
+     ],
+     [
+      -52.35,
+      -47.17
+     ],
+     [
+      -56.46,
+      -56.6
+     ],
+     [
+      -62.47,
+      -56.78
+     ],
+     [
+      -77.0,
+      -57.24
+     ],
+     [
+      -80.05,
+      -57.34
+     ],
+     [
+      -87.25,
+      -47.12
+     ],
+     [
+      -169.77,
+      -46.83
+     ],
+     [
+      -190.59,
+      -52.27
+     ],
+     [
+      -209.69,
+      -130.66
+     ],
+     [
+      -240.1,
+      -215.95
+     ],
+     [
+      -319.0,
+      -399.6
+     ],
+     [
+      -275.64,
+      -394.37
+     ]
+    ],
+    "closed": true,
+    "skip": [
+     0,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     14
+    ],
+    "source": "OSM way 772178813 (2026-09-25), comparado con Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: los bordes calzan a ±2 m (Bromelia sur z≈−47, Amaranto norte z≈−19); muro: estimado (Google Street View, oct 2025) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25)); el muro oeste desde z −217 al norte corrido 3–4 m al oeste, a la línea oscura del muro que se ve detrás del paso de hormigón en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (este trabajo, 2026-09-25); OSM lo dibuja sobre el fondo de los techos. Cerco eléctrico (postes de ~1 m, 5 hilos, uno en cada pilar y otro a mitad de vano) solo en el muro oeste, donde se vio desde la Vía al PAN (Google Street View oct 2025, solo mirado); en el resto no se pudo ver"
+   },
+   {
+    "id": "camelia",
+    "style": "camelia",
+    "line": [
+     [
+      192.18,
+      2.31
+     ],
+     [
+      542.16,
+      117.69
+     ],
+     [
+      440.4,
+      419.45
+     ],
+     [
+      115.53,
+      304.82
+     ],
+     [
+      192.18,
+      2.31
+     ]
+    ],
+    "closed": true,
+    "skip": [
+     0,
+     3
+    ],
+    "source": "OSM way 772178815 (2026-09-25), comparado con Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: los bordes calzan a ±2 m (Bromelia sur z≈−47, Amaranto norte z≈−19); muro: estimado (Google Street View, oct 2025) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25)). Muro en los lados este (1) y sur (2), vistos como línea continua en el satélite y el sur en Street View; el oeste (3) es el de Amaranto y el norte (0) no se conoce (la garita queda ~20 m adentro del polígono de OSM)"
+   }
+  ]
+ },
+ "streets": {
+  "sample": 2.0,
+  "corner": 0.3,
+  "minRun": 1.5,
+  "cell": 200,
+  "sections": {
+   "amaranto": {
+    "carriageway": 6.0,
+    "sidewalk": 1.0,
+    "paved": {
+     "height": 0.15,
+     "curb": 0.15,
+     "color": "#bdb8ad",
+     "curbColor": "#cfcac0",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "verge": {
+     "width": 1.75,
+     "lift": 0.08,
+     "color": "#9fae7c",
+     "pattern": "soil",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lamps": {
+     "style": "interna",
+     "spacing": 27,
+     "side": 1,
+     "inset": 0.4,
+     "phase": 12
+    },
+    "source": "calzada y fachada a fachada: perfil promediado de 110 m sobre la calle OSM 430540137 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); medianas automáticas en 49 tramos (el núcleo de asfalto uniforme subestima el ancho); vereda de hormigón de ~1 m, estimada en la foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada (calzada con cuneta y bordillo, vereda y franja de césped); franja de césped y jardines entre la vereda y la fachada (foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada); postes: postes metálicos delgados de un brazo, 7–8 m, en un solo lado cada ~25–30 m: estimado (foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada; Google Street View oct 2025, solo mirado, asoman sobre el muro de Camelia); el lado no se sabe"
+   },
+   "bromelia": {
+    "carriageway": 6.0,
+    "sidewalk": 1.0,
+    "paved": {
+     "height": 0.15,
+     "curb": 0.15,
+     "color": "#bdb8ad",
+     "curbColor": "#cfcac0",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "verge": {
+     "width": 2.0,
+     "lift": 0.08,
+     "color": "#9fae7c",
+     "pattern": "soil",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lamps": {
+     "style": "interna",
+     "spacing": 27,
+     "side": 1,
+     "inset": 0.4,
+     "phase": 12
+    },
+    "source": "calzada y fachada a fachada: perfil promediado de 70 m sobre la calle z≈−101 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); medianas automáticas en 40 tramos; vereda de hormigón de ~1 m, estimada en la foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada (calzada con cuneta y bordillo, vereda y franja de césped); franja de césped y jardines entre la vereda y la fachada (foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada); postes: postes metálicos delgados de un brazo, 7–8 m, en un solo lado cada ~25–30 m: estimado (foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada; Google Street View oct 2025, solo mirado, asoman sobre el muro de Camelia); el lado no se sabe"
+   },
+   "camelia": {
+    "carriageway": 5.5,
+    "sidewalk": 1.3,
+    "paved": {
+     "height": 0.15,
+     "curb": 0.15,
+     "color": "#bdb8ad",
+     "curbColor": "#cfcac0",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "verge": {
+     "width": 2.0,
+     "lift": 0.08,
+     "color": "#9fae7c",
+     "pattern": "soil",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lamps": {
+     "style": "interna",
+     "spacing": 27,
+     "side": 1,
+     "inset": 0.4,
+     "phase": 12
+    },
+    "source": "perfil promediado de 110 m (sub-marco Camelia, v −18..8): asfalto uniforme v −8..−3, franjas claras v −9,5..−8,5 y −2,5..−1 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); la franja, su retiro frontal; postes: postes metálicos delgados de un brazo, 7–8 m, en un solo lado cada ~25–30 m: estimado (foto de usuario de la ficha de Google Maps, ago 2023 (igual en feb 2025), solo mirada; Google Street View oct 2025, solo mirado, asoman sobre el muro de Camelia); el lado no se sabe"
+   },
+   "camelia-oeste": {
+    "carriageway": 7.0,
+    "sidewalk": 1.3,
+    "paved": {
+     "height": 0.15,
+     "curb": 0.15,
+     "color": "#bdb8ad",
+     "curbColor": "#cfcac0",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "verge": {
+     "width": 2.0,
+     "lift": 0.08,
+     "color": "#9fae7c",
+     "pattern": "soil",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lamps": {
+     "style": "interna",
+     "spacing": 27,
+     "side": 1,
+     "inset": 0.4,
+     "phase": 12
+    },
+    "source": "perfil de asfalto uniforme (sd<5) u -3..1, v -1..100; vereda como las calles de Camelia (perfil promediado de 110 m (sub-marco Camelia, v −18..8): asfalto uniforme v −8..−3, franjas claras v −9,5..−8,5 y −2,5..−1 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20)) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   "camelia-este": {
+    "carriageway": 8.5,
+    "sidewalk": 1.3,
+    "paved": {
+     "height": 0.15,
+     "curb": 0.15,
+     "color": "#bdb8ad",
+     "curbColor": "#cfcac0",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "verge": {
+     "width": 2.0,
+     "lift": 0.08,
+     "color": "#9fae7c",
+     "pattern": "soil",
+     "scale": [
+      1,
+      1
+     ]
+    },
+    "lamps": {
+     "style": "interna",
+     "spacing": 27,
+     "side": 1,
+     "inset": 0.4,
+     "phase": 12
+    },
+    "source": "perfil en v 60..100: asfalto uniforme u 309-316.5; vereda como las calles de Camelia (perfil promediado de 110 m (sub-marco Camelia, v −18..8): asfalto uniforme v −8..−3, franjas claras v −9,5..−8,5 y −2,5..−1 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20)) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   "camelia-central-oeste": {
+    "carriageway": 9.0,
+    "sidewalk": 1.3,
+    "paved": {
+     "height": 0.15,
+     "curb": 0.15,
+     "color": "#bdb8ad",
+     "curbColor": "#cfcac0",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "lamps": {
+     "style": "interna",
+     "spacing": 27,
+     "side": 1,
+     "inset": 0.4,
+     "phase": 12
+    },
+    "source": "perfil transversal promediado; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: calzada oeste u 141–150 del sub-marco (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   "camelia-central-este": {
+    "carriageway": 8.0,
+    "sidewalk": 1.3,
+    "paved": {
+     "height": 0.15,
+     "curb": 0.15,
+     "color": "#bdb8ad",
+     "curbColor": "#cfcac0",
+     "pattern": "slabs",
+     "scale": [
+      3,
+      3
+     ]
+    },
+    "source": "perfil transversal promediado; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20: calzada este u 153–161 del sub-marco (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   }
+  },
+  "list": [
+   {
+    "id": "430540128",
+    "section": "amaranto",
+    "axis": [
+     [
+      -167.5,
+      -3.64
+     ],
+     [
+      -169.71,
+      0.25
+     ],
+     [
+      -170.16,
+      5.79
+     ],
+     [
+      -164.99,
+      31.3
+     ],
+     [
+      -165.03,
+      64.77
+     ],
+     [
+      -162.49,
+      99.08
+     ],
+     [
+      -93.89,
+      111.57
+     ],
+     [
+      -64.56,
+      117.09
+     ],
+     [
+      -9.26,
+      128.06
+     ],
+     [
+      1.7,
+      130.12
+     ],
+     [
+      72.26,
+      143.15
+     ],
+     [
+      106.14,
+      150.62
+     ],
+     [
+      137.46,
+      157.22
+     ]
+    ],
+    "source": "eje: OSM way 430540128 corrido +2.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540129",
+    "section": "amaranto",
+    "axis": [
+     [
+      -162.02,
+      97.22
+     ],
+     [
+      -160.84,
+      128.58
+     ],
+     [
+      -164.07,
+      160.46
+     ],
+     [
+      -167.01,
+      189.49
+     ],
+     [
+      -165.0,
+      197.32
+     ],
+     [
+      -158.83,
+      213.48
+     ],
+     [
+      -139.62,
+      232.96
+     ],
+     [
+      -104.47,
+      246.31
+     ],
+     [
+      -68.72,
+      254.38
+     ],
+     [
+      -34.55,
+      260.18
+     ],
+     [
+      91.81,
+      285.3
+     ],
+     [
+      97.38,
+      285.66
+     ],
+     [
+      102.39,
+      284.62
+     ]
+    ],
+    "source": "eje: OSM way 430540129 corrido +0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540130",
+    "section": "amaranto",
+    "axis": [
+     [
+      5.89,
+      81.06
+     ],
+     [
+      6.39,
+      78.87
+     ],
+     [
+      6.97,
+      76.29
+     ],
+     [
+      6.1,
+      71.48
+     ],
+     [
+      3.44,
+      67.37
+     ],
+     [
+      0.87,
+      65.6
+     ],
+     [
+      -0.6,
+      64.6
+     ],
+     [
+      -5.43,
+      63.58
+     ],
+     [
+      -9.85,
+      64.35
+     ],
+     [
+      -13.72,
+      66.6
+     ],
+     [
+      -16.53,
+      70.08
+     ],
+     [
+      -17.92,
+      74.33
+     ],
+     [
+      -17.73,
+      77.2
+     ],
+     [
+      -17.57,
+      79.35
+     ],
+     [
+      -15.24,
+      83.83
+     ],
+     [
+      -11.31,
+      87.01
+     ],
+     [
+      -6.43,
+      88.39
+     ],
+     [
+      -1.41,
+      87.73
+     ],
+     [
+      2.94,
+      85.15
+     ],
+     [
+      5.89,
+      81.06
+     ]
+    ],
+    "source": "eje: OSM way 430540130 corrido +0.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))",
+    "lamps": false
+   },
+   {
+    "id": "430540131",
+    "section": "amaranto",
+    "axis": [
+     [
+      -5.71,
+      9.95
+     ],
+     [
+      -159.63,
+      -2.52
+     ],
+     [
+      -161.97,
+      -2.11
+     ],
+     [
+      -164.39,
+      -0.58
+     ]
+    ],
+    "source": "eje: OSM way 430540131 corrido -2.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540132",
+    "section": "amaranto",
+    "axis": [
+     [
+      3.23,
+      42.89
+     ],
+     [
+      161.73,
+      53.71
+     ]
+    ],
+    "source": "eje: OSM way 430540132 corrido +2.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540133",
+    "section": "amaranto",
+    "axis": [
+     [
+      120.29,
+      82.58
+     ],
+     [
+      104.91,
+      148.02
+     ]
+    ],
+    "source": "eje: OSM way 430540133 corrido +1.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540134",
+    "section": "amaranto",
+    "axis": [
+     [
+      -162.82,
+      32.35
+     ],
+     [
+      -7.82,
+      41.44
+     ]
+    ],
+    "source": "eje: OSM way 430540134 corrido +1.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540135",
+    "section": "amaranto",
+    "axis": [
+     [
+      85.29,
+      80.94
+     ],
+     [
+      72.08,
+      140.81
+     ]
+    ],
+    "source": "eje: OSM way 430540135 corrido +0.62 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540136",
+    "section": "amaranto",
+    "axis": [
+     [
+      -93.71,
+      69.73
+     ],
+     [
+      -95.87,
+      109.23
+     ]
+    ],
+    "source": "eje: OSM way 430540136 corrido +2.38 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540137",
+    "section": "amaranto",
+    "axis": [
+     [
+      -164.82,
+      199.78
+     ],
+     [
+      -28.17,
+      226.38
+     ],
+     [
+      113.82,
+      255.43
+     ]
+    ],
+    "source": "eje: OSM way 430540137 corrido +2.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540138",
+    "section": "amaranto",
+    "axis": [
+     [
+      -163.77,
+      162.61
+     ],
+     [
+      -20.39,
+      193.52
+     ],
+     [
+      121.8,
+      222.56
+     ]
+    ],
+    "source": "eje: OSM way 430540138 corrido +2.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540139",
+    "section": "amaranto",
+    "axis": [
+     [
+      -160.49,
+      130.44
+     ],
+     [
+      -16.03,
+      162.06
+     ],
+     [
+      128.8,
+      189.61
+     ]
+    ],
+    "source": "eje: OSM way 430540139 corrido +1.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540140",
+    "section": "amaranto",
+    "axis": [
+     [
+      -162.88,
+      66.16
+     ],
+     [
+      -91.45,
+      71.29
+     ],
+     [
+      -17.87,
+      78.63
+     ]
+    ],
+    "source": "eje: OSM way 430540140 corrido +1.44 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540141",
+    "section": "amaranto",
+    "axis": [
+     [
+      6.3,
+      82.0
+     ],
+     [
+      85.79,
+      84.2
+     ],
+     [
+      121.8,
+      86.1
+     ],
+     [
+      154.64,
+      88.28
+     ]
+    ],
+    "source": "eje: OSM way 430540141 corrido +3.13 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540142",
+    "section": "amaranto",
+    "axis": [
+     [
+      -1.74,
+      -5.76
+     ],
+     [
+      -2.79,
+      7.9
+     ],
+     [
+      -5.01,
+      40.4
+     ],
+     [
+      -7.11,
+      64.59
+     ]
+    ],
+    "source": "eje: OSM way 430540142 corrido -2.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))",
+    "pair": "430540143"
+   },
+   {
+    "id": "430540143",
+    "section": "amaranto",
+    "axis": [
+     [
+      0.75,
+      65.59
+     ],
+     [
+      3.3,
+      40.14
+     ],
+     [
+      6.71,
+      6.52
+     ],
+     [
+      7.57,
+      -4.78
+     ]
+    ],
+    "source": "eje: OSM way 430540143 corrido -0.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))",
+    "pair": "430540142"
+   },
+   {
+    "id": "430540145",
+    "section": "amaranto",
+    "axis": [
+     [
+      101.86,
+      283.24
+     ],
+     [
+      104.66,
+      281.64
+     ],
+     [
+      106.65,
+      278.85
+     ],
+     [
+      113.64,
+      252.56
+     ],
+     [
+      121.49,
+      220.31
+     ],
+     [
+      128.42,
+      187.59
+     ],
+     [
+      137.19,
+      154.84
+     ],
+     [
+      154.12,
+      84.99
+     ],
+     [
+      161.19,
+      50.81
+     ],
+     [
+      167.15,
+      25.78
+     ],
+     [
+      167.41,
+      19.74
+     ]
+    ],
+    "source": "eje: OSM way 430540145 corrido -0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "430540146",
+    "section": "amaranto",
+    "axis": [
+     [
+      -5.68,
+      88.44
+     ],
+     [
+      -8.09,
+      125.95
+     ],
+     [
+      -14.91,
+      160.35
+     ],
+     [
+      -19.21,
+      191.59
+     ],
+     [
+      -26.9,
+      223.84
+     ],
+     [
+      -33.67,
+      259.58
+     ]
+    ],
+    "source": "eje: OSM way 430540146 corrido -0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868110",
+    "section": "bromelia",
+    "axis": [
+     [
+      -71.3,
+      -128.12
+     ],
+     [
+      -73.17,
+      -101.46
+     ],
+     [
+      -75.14,
+      -64.02
+     ],
+     [
+      -76.07,
+      -57.11
+     ]
+    ],
+    "source": "eje: OSM way 769868110 corrido -0.94 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))",
+    "pair": "769868111"
+   },
+   {
+    "id": "769868111",
+    "section": "bromelia",
+    "axis": [
+     [
+      -61.47,
+      -56.86
+     ],
+     [
+      -62.11,
+      -64.55
+     ],
+     [
+      -60.2,
+      -100.96
+     ],
+     [
+      -61.14,
+      -127.52
+     ]
+    ],
+    "source": "eje: OSM way 769868111 corrido +1.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))",
+    "pair": "769868110"
+   },
+   {
+    "id": "769868112",
+    "section": "bromelia",
+    "axis": [
+     [
+      -176.7,
+      -64.26
+     ],
+     [
+      -179.01,
+      -65.95
+     ],
+     [
+      -180.6,
+      -68.81
+     ],
+     [
+      -187.39,
+      -103.05
+     ],
+     [
+      -195.91,
+      -138.93
+     ],
+     [
+      -235.73,
+      -249.23
+     ],
+     [
+      -252.98,
+      -289.09
+     ],
+     [
+      -269.06,
+      -329.27
+     ],
+     [
+      -286.01,
+      -367.86
+     ],
+     [
+      -296.0,
+      -390.31
+     ]
+    ],
+    "source": "eje: OSM way 769868112 corrido -1.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868113",
+    "section": "bromelia",
+    "axis": [
+     [
+      82.02,
+      -57.64
+     ],
+     [
+      83.49,
+      -59.34
+     ],
+     [
+      84.39,
+      -61.97
+     ],
+     [
+      85.84,
+      -95.97
+     ],
+     [
+      85.36,
+      -132.78
+     ],
+     [
+      86.1,
+      -167.03
+     ],
+     [
+      88.24,
+      -201.47
+     ],
+     [
+      88.23,
+      -235.67
+     ],
+     [
+      90.64,
+      -261.99
+     ],
+     [
+      90.62,
+      -267.02
+     ]
+    ],
+    "source": "eje: OSM way 769868113 corrido +1.81 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868114",
+    "section": "bromelia",
+    "axis": [
+     [
+      -194.11,
+      -137.46
+     ],
+     [
+      -157.61,
+      -137.73
+     ],
+     [
+      -119.88,
+      -136.55
+     ],
+     [
+      -97.52,
+      -136.94
+     ],
+     [
+      -79.48,
+      -136.61
+     ]
+    ],
+    "source": "eje: OSM way 769868114 corrido +2.06 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868115",
+    "section": "bromelia",
+    "axis": [
+     [
+      -185.6,
+      -100.58
+     ],
+     [
+      -74.16,
+      -98.65
+     ],
+     [
+      -61.3,
+      -98.11
+     ],
+     [
+      83.93,
+      -93.12
+     ]
+    ],
+    "source": "eje: OSM way 769868115 corrido +2.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868116",
+    "section": "bromelia",
+    "axis": [
+     [
+      -234.59,
+      -247.87
+     ],
+     [
+      -188.45,
+      -233.84
+     ],
+     [
+      -145.46,
+      -220.94
+     ],
+     [
+      -98.17,
+      -206.04
+     ],
+     [
+      2.05,
+      -180.34
+     ],
+     [
+      83.9,
+      -165.03
+     ]
+    ],
+    "source": "eje: OSM way 769868116 corrido +2.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868117",
+    "section": "bromelia",
+    "axis": [
+     [
+      -70.51,
+      -307.59
+     ],
+     [
+      -79.27,
+      -272.98
+     ],
+     [
+      -87.82,
+      -241.42
+     ],
+     [
+      -96.04,
+      -207.7
+     ]
+    ],
+    "source": "eje: OSM way 769868117 corrido -1.62 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868118",
+    "section": "bromelia",
+    "axis": [
+     [
+      -268.02,
+      -327.72
+     ],
+     [
+      -81.45,
+      -271.09
+     ],
+     [
+      85.9,
+      -233.42
+     ]
+    ],
+    "source": "eje: OSM way 769868118 corrido +2.38 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868119",
+    "section": "bromelia",
+    "axis": [
+     [
+      -251.84,
+      -287.78
+     ],
+     [
+      -89.93,
+      -239.77
+     ],
+     [
+      85.96,
+      -199.46
+     ]
+    ],
+    "source": "eje: OSM way 769868119 corrido +2.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868120",
+    "section": "bromelia",
+    "axis": [
+     [
+      -188.91,
+      -235.53
+     ],
+     [
+      -158.65,
+      -139.45
+     ]
+    ],
+    "source": "eje: OSM way 769868120 corrido +1.12 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868121",
+    "section": "bromelia",
+    "axis": [
+     [
+      -145.43,
+      -222.79
+     ],
+     [
+      -120.44,
+      -138.43
+     ]
+    ],
+    "source": "eje: OSM way 769868121 corrido +0.62 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "769868122",
+    "section": "bromelia",
+    "axis": [
+     [
+      3.27,
+      -182.41
+     ],
+     [
+      3.02,
+      -135.8
+     ]
+    ],
+    "source": "eje: OSM way 769868122 corrido -0.75 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "1009666334",
+    "section": "amaranto",
+    "axis": [
+     [
+      166.43,
+      22.08
+     ],
+     [
+      164.15,
+      20.28
+     ],
+     [
+      161.39,
+      19.65
+     ],
+     [
+      6.64,
+      9.4
+     ]
+    ],
+    "source": "eje: OSM way 1009666334 corrido -2.88 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "1009667793",
+    "section": "bromelia",
+    "axis": [
+     [
+      87.15,
+      -264.51
+     ],
+     [
+      85.28,
+      -265.78
+     ],
+     [
+      83.35,
+      -266.44
+     ],
+     [
+      -72.86,
+      -305.09
+     ],
+     [
+      -285.11,
+      -365.74
+     ]
+    ],
+    "source": "eje: OSM way 1009667793 corrido -3.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "1009667794",
+    "section": "bromelia",
+    "axis": [
+     [
+      -53.33,
+      -138.02
+     ],
+     [
+      -53.56,
+      -142.88
+     ],
+     [
+      -55.56,
+      -147.33
+     ],
+     [
+      -59.06,
+      -150.73
+     ],
+     [
+      -63.58,
+      -152.63
+     ],
+     [
+      -68.48,
+      -152.76
+     ],
+     [
+      -73.09,
+      -151.09
+     ],
+     [
+      -76.75,
+      -147.87
+     ],
+     [
+      -78.98,
+      -143.52
+     ],
+     [
+      -79.44,
+      -138.67
+     ],
+     [
+      -78.3,
+      -134.42
+     ],
+     [
+      -75.79,
+      -130.79
+     ],
+     [
+      -72.23,
+      -128.19
+     ],
+     [
+      -67.26,
+      -126.83
+     ],
+     [
+      -62.14,
+      -127.48
+     ],
+     [
+      -58.91,
+      -129.08
+     ],
+     [
+      -56.23,
+      -131.5
+     ],
+     [
+      -54.33,
+      -134.55
+     ],
+     [
+      -53.33,
+      -138.02
+     ]
+    ],
+    "source": "eje: OSM way 1009667794 corrido +0.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))",
+    "lamps": false
+   },
+   {
+    "id": "1009667795",
+    "section": "bromelia",
+    "axis": [
+     [
+      -53.47,
+      -134.46
+     ],
+     [
+      2.13,
+      -132.24
+     ],
+     [
+      83.42,
+      -129.23
+     ]
+    ],
+    "source": "eje: OSM way 1009667795 corrido +3.56 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "1009667796",
+    "section": "bromelia",
+    "axis": [
+     [
+      -63.03,
+      -62.58
+     ],
+     [
+      -76.08,
+      -62.08
+     ],
+     [
+      -171.38,
+      -62.98
+     ],
+     [
+      -176.0,
+      -63.84
+     ]
+    ],
+    "source": "eje: OSM way 1009667796 corrido -2.00 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "1009667797",
+    "section": "bromelia",
+    "axis": [
+     [
+      -63.22,
+      -62.33
+     ],
+     [
+      77.2,
+      -55.77
+     ],
+     [
+      79.58,
+      -56.1
+     ],
+     [
+      81.41,
+      -56.73
+     ]
+    ],
+    "source": "eje: OSM way 1009667797 corrido +2.25 m (mediana del centro del asfalto medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20); calzada y fachada-fachada: perfiles promediados (ver secciones) (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S0",
+    "section": "camelia",
+    "axis": [
+     [
+      197.6,
+      41.57
+     ],
+     [
+      506.92,
+      129.35
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S1",
+    "section": "camelia",
+    "axis": [
+     [
+      187.56,
+      79.05
+     ],
+     [
+      498.2,
+      161.9
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S2",
+    "section": "camelia",
+    "axis": [
+     [
+      178.26,
+      113.75
+     ],
+     [
+      489.05,
+      196.05
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S3",
+    "section": "camelia",
+    "axis": [
+     [
+      168.66,
+      149.58
+     ],
+     [
+      478.96,
+      233.7
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S4",
+    "section": "camelia",
+    "axis": [
+     [
+      157.82,
+      190.02
+     ],
+     [
+      466.17,
+      281.45
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S5",
+    "section": "camelia",
+    "axis": [
+     [
+      148.69,
+      224.09
+     ],
+     [
+      455.57,
+      321.0
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S6",
+    "section": "camelia",
+    "axis": [
+     [
+      139.43,
+      258.67
+     ],
+     [
+      447.62,
+      350.65
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-S7",
+    "section": "camelia",
+    "axis": [
+     [
+      130.18,
+      293.17
+     ],
+     [
+      438.28,
+      385.52
+     ]
+    ],
+    "source": "banda de asfalto uniforme (sd<5) en perfiles promediados, sub-marco Camelia girado 15°; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-oeste",
+    "section": "camelia-oeste",
+    "axis": [
+     [
+      206.8,
+      20.76
+     ],
+     [
+      131.22,
+      302.81
+     ]
+    ],
+    "source": "perfil de asfalto uniforme (sd<5) u -3..1, v -1..100 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-este",
+    "section": "camelia-este",
+    "axis": [
+     [
+      509.86,
+      101.97
+     ],
+     [
+      434.28,
+      384.02
+     ]
+    ],
+    "source": "perfil en v 60..100: asfalto uniforme u 309-316.5 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-central-oeste",
+    "section": "camelia-central-oeste",
+    "axis": [
+     [
+      354.1,
+      60.23
+     ],
+     [
+      278.53,
+      342.28
+     ]
+    ],
+    "shift": 6.0,
+    "pair": "C-central-este",
+    "source": "eje C-central (el parterre, u 151,5) corrido 6 m al oeste (u 145,5): perfil transversal promediado; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   },
+   {
+    "id": "C-central-este",
+    "section": "camelia-central-este",
+    "axis": [
+     [
+      354.1,
+      60.23
+     ],
+     [
+      278.53,
+      342.28
+     ]
+    ],
+    "shift": -5.5,
+    "pair": "C-central-oeste",
+    "source": "eje C-central corrido 5,5 m al este (u 157): perfil transversal promediado; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (config/sites/duran-city/trazado.json (de la investigación del trazado, 2026-09-25))"
+   }
+  ]
+ },
+ "zones": [
+  {
+   "id": "garita-amaranto",
+   "at": [
+    0.0,
+    -2.25
+   ],
+   "angle": 0,
+   "source": "trazado.json → volumes (Garita Amaranto) y entradas (Garita Amaranto: carriles en x −4,5 entra y 7,7 sale), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; forma, colores y letreros: foto de usuario de la ficha de Google Maps, oct 2024, solo mirada",
+   "floors": [
+    {
+     "id": "adoquin",
+     "ring": [
+      [
+       -13.5,
+       -12.25
+      ],
+      [
+       19.0,
+       -12.25
+      ],
+      [
+       19.0,
+       -1.5
+      ],
+      [
+       18.08,
+       -1.5
+      ],
+      [
+       7.69,
+       -2.52
+      ],
+      [
+       -4.48,
+       -3.72
+      ],
+      [
+       -13.09,
+       -4.56
+      ]
+     ],
+     "style": "adoquinGris",
+     "source": "carriles de adoquín gris (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); del portal hasta la calzada sur del bulevar (z −14,5), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; estimado"
+    },
+    {
+     "id": "isla-monolito",
+     "ring": [
+      [
+       -13.0,
+       -10.25
+      ],
+      [
+       -7.5,
+       -10.25
+      ],
+      [
+       -7.5,
+       -5.15
+      ],
+      [
+       -13.0,
+       -4.75
+      ]
+     ],
+     "style": "islaAmarilla",
+     "source": "isla de césped con el monolito, cipreses y palmas, bordillo amarillo y negro (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); medidas estimadas"
+    }
+   ],
+   "towers": [
+    {
+     "id": "torre",
+     "at": [
+      1.0,
+      0.0
+     ],
+     "size": [
+      4.0,
+      4.5
+     ],
+     "angle": 0,
+     "style": "garitaAmaranto",
+     "source": "planta: trazado.json → volumes (x −1..3, z −4,5..0, Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); 2 niveles de 3,0 y 2,8 m (trazado.json → facades, estimado); enlucido crema con 4 cuadros terracota bajo el alero, ventanas de marco oscuro, teja roja a 4 aguas y un reflector en la cumbrera (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada)"
+    }
+   ],
+   "pavilions": [
+    {
+     "id": "alero-entrada",
+     "at": [
+      -5.5,
+      0.0
+     ],
+     "size": [
+      9.0,
+      4.5
+     ],
+     "angle": 0,
+     "style": "aleroAmaranto",
+     "source": "trazado.json → volumes (alero oeste x −10..−1, z −4,5..0; carril de entrada OSM 1281213987); alto 4,5 m estimado; pilares cuadrados marrones y teja roja a 4 aguas (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada)"
+    },
+    {
+     "id": "alero-salida",
+     "at": [
+      6.5,
+      0.0
+     ],
+     "size": [
+      7.0,
+      4.5
+     ],
+     "angle": 0,
+     "style": "aleroAmaranto",
+     "source": "trazado.json → volumes (alero este x 3..10, z −4,5..0; carril de salida OSM 1281213986); alto estimado (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada)"
+    }
+   ],
+   "gates": [
+    {
+     "id": "porton-entrada",
+     "at": [
+      -4.5,
+      -3.2
+     ],
+     "width": 5.2,
+     "angle": 0,
+     "open": -5.4,
+     "style": "portonAmaranto",
+     "source": "portones blancos de barrotes (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); en la línea de las puertas de OSM (z ≈ −5,4), corrido hacia el muro del ala; ancho estimado"
+    },
+    {
+     "id": "porton-salida",
+     "at": [
+      7.7,
+      -3.2
+     ],
+     "width": 4.6,
+     "angle": 0,
+     "open": 4.8,
+     "style": "portonAmaranto",
+     "source": "ídem, carril de salida (x 7,7); estimado"
+    }
+   ],
+   "barriers": [
+    {
+     "id": "pluma-entrada",
+     "at": [
+      -1.6,
+      -3.0
+     ],
+     "angle": 180,
+     "style": "pluma",
+     "source": "pedestal gris de control de acceso junto al carril y la barrera que nombran los letreros (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); la pluma, levantada y estimada"
+    },
+    {
+     "id": "pluma-salida",
+     "at": [
+      3.6,
+      -3.0
+     ],
+     "angle": 0,
+     "style": "pluma",
+     "source": "como la de entrada, en el carril de salida (estimado)"
+    }
+   ],
+   "stripes": [
+    {
+     "id": "reductor-entrada",
+     "at": [
+      -4.5,
+      -8.0
+     ],
+     "angle": 0,
+     "length": 5.0,
+     "style": "reductor",
+     "source": "reductores amarillo y negro (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); lugar estimado"
+    },
+    {
+     "id": "reductor-salida",
+     "at": [
+      7.7,
+      -8.0
+     ],
+     "angle": 0,
+     "length": 4.6,
+     "style": "reductor",
+     "source": "ídem, carril de salida (estimado)"
+    },
+    {
+     "id": "cebra",
+     "at": [
+      1.6,
+      -10.5
+     ],
+     "angle": 0,
+     "length": 18.0,
+     "style": "cebra",
+     "source": "cebra blanca sobre el adoquín (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); franja clara en z ≈ −13 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); estimado"
+    }
+   ],
+   "bollards": [
+    {
+     "at": [
+      [
+       -2.0,
+       -3.7
+      ],
+      [
+       3.4,
+       -3.7
+      ]
+     ],
+     "style": "amarilloNegro",
+     "source": "bolardos pintados negro y amarillo junto a los carriles (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); lugar estimado"
+    }
+   ],
+   "signs": [
+    {
+     "id": "monolito-amaranto",
+     "at": [
+      -10.2,
+      -7.6
+     ],
+     "angle": 0,
+     "style": "monolitoEtapa",
+     "texts": [
+      {
+       "text": "Amaranto",
+       "at": [
+        0.05,
+        0.92
+       ],
+       "size": [
+        2.0,
+        0.62
+       ],
+       "color": "#3a3a3a",
+       "background": "#f7f7f5",
+       "font": "cursive",
+       "weight": 700,
+       "italic": true,
+       "fill": 0.8
+      }
+     ],
+     "source": "monolito bajo junto al carril de entrada: panel blanco con 'Amaranto' en letra manuscrita gris oscuro, borde verde, franja y cuña azul abajo, sobre un zócalo de hormigón (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); trazado.json → signs (2,5 × 1,5 m, x 1, z −10 ± 8 m); lugar y medidas estimados"
+    },
+    {
+     "id": "reglamentario-arriba",
+     "at": [
+      -7.8,
+      -8.6
+     ],
+     "angle": 0,
+     "style": "reglamentarioArriba",
+     "texts": [
+      {
+       "text": "SOLO",
+       "at": [
+        0,
+        0.84
+       ],
+       "size": [
+        0.4,
+        0.09
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "VISITANTES",
+       "at": [
+        0,
+        0.74
+       ],
+       "size": [
+        0.44,
+        0.09
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "DETENTE",
+       "at": [
+        0,
+        0.25
+       ],
+       "size": [
+        0.4,
+        0.08
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "IDENTIFIQUESE",
+       "at": [
+        0,
+        0.16
+       ],
+       "size": [
+        0.46,
+        0.08
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      }
+     ],
+     "marks": [
+      {
+       "shape": "octagon",
+       "at": [
+        0,
+        0.5
+       ],
+       "radius": 0.14,
+       "color": "#d8403a",
+       "ring": {
+        "width": 0.015,
+        "color": "#f4f4f2"
+       }
+      }
+     ],
+     "source": "letrero reglamentario del carril de entrada, textos como se leen en la foto de usuario de la ficha de Google Maps, oct 2024, solo mirada (sin tildes, como el letrero); la mano del pare no se copia; medidas estimadas"
+    },
+    {
+     "id": "reglamentario-abajo",
+     "at": [
+      -7.8,
+      -8.6
+     ],
+     "angle": 0,
+     "style": "reglamentarioAbajo",
+     "texts": [
+      {
+       "text": "ESPERE SU TURNO SOLO",
+       "at": [
+        0,
+        0.66
+       ],
+       "size": [
+        0.58,
+        0.06
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "PASA UN VEHICULO",
+       "at": [
+        0,
+        0.6
+       ],
+       "size": [
+        0.5,
+        0.06
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "POR LA CARRETERA",
+       "at": [
+        0,
+        0.54
+       ],
+       "size": [
+        0.5,
+        0.06
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "PROHIBIDO",
+       "at": [
+        -0.16,
+        0.2
+       ],
+       "size": [
+        0.28,
+        0.05
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "PITAR",
+       "at": [
+        -0.16,
+        0.15
+       ],
+       "size": [
+        0.2,
+        0.05
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "TODO DAÑO",
+       "at": [
+        0.16,
+        0.4
+       ],
+       "size": [
+        0.28,
+        0.05
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "A LA",
+       "at": [
+        0.16,
+        0.34
+       ],
+       "size": [
+        0.14,
+        0.05
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "BARRERA",
+       "at": [
+        0.16,
+        0.28
+       ],
+       "size": [
+        0.24,
+        0.05
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "SERÁ",
+       "at": [
+        0.16,
+        0.22
+       ],
+       "size": [
+        0.16,
+        0.05
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      },
+      {
+       "text": "COBRADO",
+       "at": [
+        0.16,
+        0.16
+       ],
+       "size": [
+        0.26,
+        0.05
+       ],
+       "color": "#3a3a3a",
+       "background": "#f4f4f2"
+      }
+     ],
+     "marks": [
+      {
+       "shape": "circle",
+       "at": [
+        -0.16,
+        0.34
+       ],
+       "radius": 0.08,
+       "color": "#f4f4f2",
+       "ring": {
+        "width": 0.015,
+        "color": "#d8403a"
+       }
+      }
+     ],
+     "source": "el mismo poste, panel de abajo: textos como se leen en la foto de usuario de la ficha de Google Maps, oct 2024, solo mirada (la investigación leyó 'POR LA BARRERA'; ampliada, la foto dice 'POR LA CARRETERA'); el dibujo del auto y la pluma no se copian; medidas estimadas"
+    }
+   ],
+   "trees": [
+    {
+     "style": "cipres",
+     "at": [
+      [
+       -12.3,
+       -8.3
+      ],
+      [
+       -8.0,
+       -8.0
+      ]
+     ],
+     "lift": 0.15,
+     "source": "cipreses pequeños a los lados del monolito (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); lugar estimado"
+    }
+   ],
+   "palms": [
+    {
+     "height": [
+      5.5,
+      7.0
+     ],
+     "at": [
+      [
+       -14.5,
+       -5.5
+      ],
+      [
+       -12.0,
+       -4.2
+      ]
+     ],
+     "lift": 0,
+     "source": "palmas detrás de la isla (foto de usuario de la ficha de Google Maps, oct 2024, solo mirada); lugar estimado"
+    }
+   ]
+  },
+  {
+   "id": "garita-bromelia",
+   "at": [
+    -69.0,
+    -57.0
+   ],
+   "angle": 0,
+   "source": "trazado.json → volumes (Garita Bromelia) y entradas (carriles en x −77 sale y −62,5 entra), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; forma y colores: durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada",
+   "floors": [
+    {
+     "id": "adoquin",
+     "ring": [
+      [
+       -18.25,
+       9.88
+      ],
+      [
+       -11.05,
+       -0.34
+      ],
+      [
+       -8.0,
+       -0.24
+      ],
+      [
+       6.53,
+       0.22
+      ],
+      [
+       12.54,
+       0.4
+      ],
+      [
+       16.65,
+       9.83
+      ]
+     ],
+     "style": "adoquinGris",
+     "source": "plazoleta de adoquín entre el portal y el bulevar (trazado.json → entradas: Garita Bromelia; durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); contorno: el del polígono de OSM 772178813 en el portal"
+    },
+    {
+     "id": "isla",
+     "ring": [
+      [
+       -2.2,
+       8.0
+      ],
+      [
+       2.2,
+       8.0
+      ],
+      [
+       1.4,
+       3.8
+      ],
+      [
+       -1.4,
+       3.8
+      ]
+     ],
+     "style": "isla",
+     "source": "isla plantada con un poste delante del portal (durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); medidas estimadas"
+    }
+   ],
+   "towers": [
+    {
+     "id": "torre",
+     "at": [
+      0.0,
+      -1.0
+     ],
+     "size": [
+      4.0,
+      8.0
+     ],
+     "angle": 180,
+     "style": "garitaBromelia",
+     "source": "planta: trazado.json → volumes (x −71..−67, z −62..−54, Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); torre de 2 niveles, abajo caseta vidriada y arriba ventana, techo rojo a 4 aguas (durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); alto 7 m estimado"
+    }
+   ],
+   "pavilions": [
+    {
+     "id": "alero-salida",
+     "at": [
+      -8.0,
+      0.5
+     ],
+     "size": [
+      12.0,
+      5.0
+     ],
+     "angle": 180,
+     "style": "aleroBromelia",
+     "source": "trazado.json → volumes (x −83..−71, z −59..−54; carril OSM 1281213989); pilares cuadrados terracota (durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); alto estimado"
+    },
+    {
+     "id": "alero-entrada",
+     "at": [
+      7.0,
+      0.5
+     ],
+     "size": [
+      10.0,
+      5.0
+     ],
+     "angle": 180,
+     "style": "aleroBromelia",
+     "source": "trazado.json → volumes (x −67..−57, z −59..−54; carril OSM 1281213988); alto estimado"
+    }
+   ],
+   "gates": [
+    {
+     "id": "porton-salida",
+     "at": [
+      -8.0,
+      3.4
+     ],
+     "width": 4.6,
+     "angle": 0,
+     "open": 4.6,
+     "style": "portonBromelia",
+     "source": "portones corredizos grises de barrotes (durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); corridos delante de la torre (abiertos); estimado"
+    },
+    {
+     "id": "porton-entrada",
+     "at": [
+      6.5,
+      3.6
+     ],
+     "width": 4.6,
+     "angle": 0,
+     "open": -4.6,
+     "style": "portonBromelia",
+     "source": "ídem, carril de entrada (estimado)"
+    }
+   ],
+   "lamps": [
+    {
+     "style": "interna",
+     "at": [
+      [
+       0.0,
+       6.0
+      ]
+     ],
+     "angle": 90,
+     "lift": 0.15,
+     "source": "poste con luminaria en la isla delante del portal (durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); estimado"
+    }
+   ],
+   "trees": [
+    {
+     "style": "arbusto",
+     "at": [
+      [
+       -1.2,
+       6.6
+      ],
+      [
+       1.2,
+       6.6
+      ]
+     ],
+     "lift": 0.15,
+     "source": "plantas de la isla (durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); estimado"
+    }
+   ]
+  },
+  {
+   "id": "garita-camelia",
+   "at": [
+    353.2,
+    76.9
+   ],
+   "angle": 0,
+   "source": "trazado.json → volumes (Garita Camelia: techo rojo 28 × 6 m sobre la calle central N-S), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; confirmada de lejos en Google Street View oct 2025, solo mirado (torre con cabina oscura y techo rojo a 4 aguas y un techo rojo más bajo al lado); todo lo demás, estimado con la tipología de Bromelia",
+   "towers": [
+    {
+     "id": "torre",
+     "at": [
+      -0.41,
+      -2.2
+     ],
+     "size": [
+      4.0,
+      6.0
+     ],
+     "angle": 15.95,
+     "style": "garitaCamelia",
+     "source": "torre que asoma al norte del techo (x 350–355, z 66–76 en trazado.json → volumes); medidas y colores estimados"
+    }
+   ],
+   "pavilions": [
+    {
+     "id": "alero-oeste",
+     "at": [
+      -8.17,
+      -2.34
+     ],
+     "size": [
+      11.0,
+      6.0
+     ],
+     "angle": 15.95,
+     "style": "aleroCamelia",
+     "source": "mitad oeste del techo rojo de 28 m (trazado.json → volumes); estimado"
+    },
+    {
+     "id": "alero-este",
+     "at": [
+      8.17,
+      2.34
+     ],
+     "size": [
+      11.0,
+      6.0
+     ],
+     "angle": 15.95,
+     "style": "aleroCamelia",
+     "source": "mitad este del techo rojo de 28 m (trazado.json → volumes); estimado"
+    }
+   ]
+  },
+  {
+   "id": "entrada",
+   "at": [
+    -200.0,
+    -2.0
+   ],
+   "angle": 0,
+   "source": "trazado.json → signs (DURÁN CITY: x −198, z −12 ± 5 m, 4,5 × 3 m) y entradas (acceso desde la Vía al PAN); Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0 (fotos 2424873607691348 y 211671068278341); Google Street View oct 2025, solo mirado (sin cambios desde 2023)",
+   "floors": [
+    {
+     "id": "isla",
+     "ring": [
+      [
+       -16.5,
+       -15.5
+      ],
+      [
+       15.5,
+       -15.5
+      ],
+      [
+       -1.5,
+       1.8
+      ],
+      [
+       -14.8,
+       21.0
+      ],
+      [
+       -16.5,
+       21.0
+      ]
+     ],
+     "style": "islaAmarilla",
+     "source": "isla triangular de césped entre la Vía al PAN, el bulevar (OSM 430540147) y la rampa de entrada (OSM 430540144, su borde a 3,5 m del eje), con bordillos pintados amarillo y negro (Google Street View oct 2025, solo mirado); contorno estimado"
+    },
+    {
+     "id": "setos",
+     "ring": [
+      [
+       -7.98,
+       -6.31
+      ],
+      [
+       -3.46,
+       -7.95
+      ],
+      [
+       -3.23,
+       -7.29
+      ],
+      [
+       -7.74,
+       -5.65
+      ]
+     ],
+     "style": "seto",
+     "source": "setos bajos con flores rojas delante del monolito (Google Street View oct 2025, solo mirado): la mancha oscura de 5 × 2 m en x −208,9..−203,8, z −9,9..−7,8 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo)"
+    },
+    {
+     "id": "nariz",
+     "ring": [
+      [
+       9.5,
+       -29.0
+      ],
+      [
+       9.5,
+       -22.0
+      ],
+      [
+       -14.5,
+       -22.0
+      ],
+      [
+       -16.5,
+       -22.9
+      ],
+      [
+       -17.7,
+       -24.3
+      ],
+      [
+       -18.0,
+       -25.5
+      ],
+      [
+       -17.7,
+       -26.7
+      ],
+      [
+       -16.5,
+       -28.1
+      ],
+      [
+       -14.5,
+       -29.0
+      ]
+     ],
+     "style": "islaAmarilla",
+     "source": "nariz del parterre en la boca del bulevar: césped con bordillo pintado amarillo y negro, un poste y el chevrón (Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0, fotos 2424873607691348 y 211671068278341; Google Street View oct 2025, solo mirado); la franja verde de x −218..−190,5, z −31..−24 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo), la punta redondeada estimada"
+    },
+    {
+     "id": "boca",
+     "ring": [
+      [
+       -18.0,
+       -50.0
+      ],
+      [
+       10.0,
+       -50.0
+      ],
+      [
+       16.0,
+       -38.0
+      ],
+      [
+       16.0,
+       -16.0
+      ],
+      [
+       -18.0,
+       -16.0
+      ]
+     ],
+     "style": "adoquinGris",
+     "source": "la boca del acceso es de adoquín gris (Google Street View oct 2025, solo mirado); en el satélite, el gris claro parejo de x −218..−184, z −52..−18 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); estimado"
+    }
+   ],
+   "stripes": [
+    {
+     "id": "reductor",
+     "at": [
+      6.4,
+      -18.5
+     ],
+     "angle": 90,
+     "length": 7.0,
+     "style": "reductor",
+     "source": "reductor pintado amarillo y negro de la nariz a la isla, al final del adoquín (Google Street View oct 2025, solo mirado): la franja clara de 2,4 × 7 m en x −194,8..−192,4, z −24..−17 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo)"
+    }
+   ],
+   "signs": [
+    {
+     "id": "monolito",
+     "at": [
+      -5.0,
+      -5.5
+     ],
+     "angle": -20,
+     "style": "monolitoDuranCity",
+     "texts": [
+      {
+       "text": "DURÁN",
+       "at": [
+        -1.13,
+        1.04
+       ],
+       "size": [
+        1.2,
+        0.56
+       ],
+       "color": "#22324f",
+       "background": "#e9e9e6",
+       "fill": 0.8
+      },
+      {
+       "text": "CITY",
+       "at": [
+        0.95,
+        1.04
+       ],
+       "size": [
+        0.9,
+        0.56
+       ],
+       "color": "#22324f",
+       "background": "#e9e9e6",
+       "fill": 0.8
+      }
+     ],
+     "source": "'DURÁN' y 'CITY' en letras azul marino, el logo en medio (no se copia: queda su lugar) y un subrayado celeste bajo cada palabra, sobre un zócalo de piedra gris; reflectores de piso delante (Google Street View oct 2025, solo mirado; Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0); proporciones medidas en la captura (panel 2,9 : 1, zócalo 0,55 del alto del panel) con el ancho de 4,5 m de trazado.json → signs. De noche lo bañan sus reflectores de piso (confirmados en la investigación; no hay tomas nocturnas): cuánto, estimado como un monumento de plaza (flood 0,6, como el parque Centenario). Lugar y giro medidos en el juego (2026-09-25) con la cámara de las dos fotos de Mapillary puesta sobre el carril de la Vía al PAN (su GPS la corría ~10 m al este) y la de Street View: detrás de los setos, en la mitad de la isla, mirando al noroeste hacia la boca del bulevar (en las fotos se ve de frente y algo de costado)"
+    },
+    {
+     "id": "chevron-nariz",
+     "at": [
+      -16.3,
+      -25.5
+     ],
+     "angle": -90,
+     "style": "chevron",
+     "texts": [],
+     "marks": [
+      {
+       "shape": "chevronLeft",
+       "at": [
+        0,
+        0.375
+       ],
+       "radius": 0.27,
+       "stroke": 0.16,
+       "color": "#1d1d1d",
+       "ring": {
+        "width": 0,
+        "color": "#1d1d1d"
+       }
+      }
+     ],
+     "source": "delineador de curva amarillo con el chevrón negro hacia la izquierda en la punta de la nariz, mirando a la Vía al PAN (Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0, fotos 2424873607691348 y 211671068278341); medidas de la señal de curva (0,60 × 0,75 m) y alto estimados"
+    },
+    {
+     "id": "chevron-isla",
+     "at": [
+      -14.0,
+      18.5
+     ],
+     "angle": -90,
+     "style": "chevron",
+     "texts": [],
+     "marks": [
+      {
+       "shape": "chevronRight",
+       "at": [
+        0,
+        0.375
+       ],
+       "radius": 0.27,
+       "stroke": 0.16,
+       "color": "#1d1d1d",
+       "ring": {
+        "width": 0,
+        "color": "#1d1d1d"
+       }
+      }
+     ],
+     "source": "el otro delineador, con el chevrón hacia la derecha, en la punta sur de la isla del monolito (Google Street View oct 2025, solo mirado); medidas estimadas como el de la nariz"
+    }
+   ]
+  },
+  {
+   "id": "bulevar-oeste",
+   "at": [
+    -120.0,
+    -31.5
+   ],
+   "angle": 0,
+   "source": "trazado.json → entradas (Bulevar de acceso: perfiles promediados sobre Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, ±0,5 m); el parterre con una fila densa de árboles y césped; la nariz, un montículo plantado con bordillo blanco y gris (Google Street View oct 2025, solo mirado)",
+   "floors": [
+    {
+     "id": "parterre",
+     "ring": [
+      [
+       60.0,
+       -7.0
+      ],
+      [
+       60.0,
+       7.0
+      ],
+      [
+       -52.0,
+       7.0
+      ],
+      [
+       -58.0,
+       5.9
+      ],
+      [
+       -61.5,
+       3.0
+      ],
+      [
+       -62.5,
+       0.0
+      ],
+      [
+       -61.5,
+       -3.0
+      ],
+      [
+       -58.0,
+       -5.9
+      ],
+      [
+       -52.0,
+       -7.0
+      ]
+     ],
+     "style": "parterre",
+     "source": "trazado.json → entradas (Bulevar de acceso: perfiles promediados sobre Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, ±0,5 m) (en x −165..−95; la nariz oeste, frente al cruce OSM 771084269, estimada)"
+    }
+   ],
+   "trees": [
+    {
+     "style": "parterre",
+     "line": {
+      "from": [
+       -58.0,
+       -3.2
+      ],
+      "to": [
+       60.0,
+       -3.2
+      ],
+      "spacing": 8.0
+     },
+     "lift": 0.15,
+     "source": "trazado.json → entradas (Bulevar de acceso: perfiles promediados sobre Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, ±0,5 m) (copa continua de x −225 a −60, copa de 8 m: trazado.json → site.landscape); dos hileras estimadas"
+    },
+    {
+     "style": "parterre",
+     "line": {
+      "from": [
+       -54.0,
+       3.2
+      ],
+      "to": [
+       60.0,
+       3.2
+      ],
+      "spacing": 8.0
+     },
+     "lift": 0.15,
+     "source": "ídem, la segunda hilera (estimada)"
+    },
+    {
+     "style": "nim",
+     "line": {
+      "from": [
+       -48.0,
+       -14.8
+      ],
+      "to": [
+       25.0,
+       -14.8
+      ],
+      "spacing": 10.0
+     },
+     "lift": 0,
+     "source": "fila de árboles en la franja de césped junto al muro de Bromelia (Google Street View oct 2025, solo mirado); estimado"
+    }
+   ],
+   "lamps": [
+    {
+     "style": "bulevarLED",
+     "line": {
+      "from": [
+       -43.0,
+       -14.9
+      ],
+      "to": [
+       60.0,
+       -14.9
+      ],
+      "spacing": 30.0
+     },
+     "angle": 90,
+     "lift": 0,
+     "source": "postes metálicos delgados gris oscuro con un brazo curvo largo y luminaria LED (~9–10 m) en el lado norte (Google Street View oct 2025, solo mirado); separación estimada (entre los árboles)"
+    },
+    {
+     "style": "hormigon",
+     "line": {
+      "from": [
+       -40.0,
+       11.5
+      ],
+      "to": [
+       60.0,
+       11.5
+      ],
+      "spacing": 70.0
+     },
+     "angle": -90,
+     "lift": 0,
+     "source": "postes de hormigón de la red con tendido aéreo, algunos con brazo de luminaria, junto al muro de Amaranto (Google Street View oct 2025, solo mirado; Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0); separación estimada"
+    },
+    {
+     "style": "hormigonSinBrazo",
+     "line": {
+      "from": [
+       -5.0,
+       11.5
+      ],
+      "to": [
+       60.0,
+       11.5
+      ],
+      "spacing": 70.0
+     },
+     "angle": -90,
+     "lift": 0,
+     "source": "postes de hormigón de la red con tendido aéreo, algunos con brazo de luminaria, junto al muro de Amaranto (Google Street View oct 2025, solo mirado; Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0); separación estimada"
+    }
+   ]
+  },
+  {
+   "id": "bulevar-centro",
+   "at": [
+    -25.0,
+    -31.5
+   ],
+   "angle": 0,
+   "source": "trazado.json → entradas (Bulevar de acceso: perfiles promediados sobre Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, ±0,5 m); el parterre sigue con árboles hasta el retorno frente a la garita de Amaranto (OSM 430540147 → 769868107 en x ≈ 17), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir",
+   "floors": [
+    {
+     "id": "parterre",
+     "ring": [
+      [
+       -35.0,
+       -7.0
+      ],
+      [
+       30.0,
+       -7.0
+      ],
+      [
+       35.0,
+       -5.9
+      ],
+      [
+       38.0,
+       -3.0
+      ],
+      [
+       39.0,
+       0.0
+      ],
+      [
+       38.0,
+       3.0
+      ],
+      [
+       35.0,
+       5.9
+      ],
+      [
+       30.0,
+       7.0
+      ],
+      [
+       -35.0,
+       7.0
+      ]
+     ],
+     "style": "parterre",
+     "source": "trazado.json → entradas (Bulevar de acceso: perfiles promediados sobre Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, ±0,5 m); hasta el retorno (x ≈ 14), medido en el satélite en este trabajo"
+    }
+   ],
+   "trees": [
+    {
+     "style": "parterre",
+     "line": {
+      "from": [
+       -31.0,
+       -3.2
+      ],
+      "to": [
+       34.0,
+       -3.2
+      ],
+      "spacing": 8.0
+     },
+     "lift": 0.15,
+     "source": "fila de árboles del parterre hasta x ≈ 15 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo); dos hileras estimadas"
+    },
+    {
+     "style": "parterre",
+     "line": {
+      "from": [
+       -27.0,
+       3.2
+      ],
+      "to": [
+       34.0,
+       3.2
+      ],
+      "spacing": 8.0
+     },
+     "lift": 0.15,
+     "source": "ídem, la segunda hilera (estimada)"
+    }
+   ],
+   "lamps": [
+    {
+     "style": "bulevarLED",
+     "line": {
+      "from": [
+       -18.0,
+       -14.9
+      ],
+      "to": [
+       35.0,
+       -14.9
+      ],
+      "spacing": 30.0
+     },
+     "angle": 90,
+     "lift": 0,
+     "source": "postes metálicos delgados gris oscuro con un brazo curvo largo y luminaria LED (~9–10 m) en el lado norte (Google Street View oct 2025, solo mirado); separación estimada"
+    },
+    {
+     "style": "hormigonSinBrazo",
+     "at": [
+      [
+       -30.0,
+       11.5
+      ]
+     ],
+     "angle": -90,
+     "lift": 0,
+     "source": "postes de hormigón de la red con tendido aéreo, algunos con brazo de luminaria, junto al muro de Amaranto (Google Street View oct 2025, solo mirado; Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0); separación estimada"
+    },
+    {
+     "style": "hormigon",
+     "at": [
+      [
+       5.0,
+       11.5
+      ]
+     ],
+     "angle": -90,
+     "lift": 0,
+     "source": "postes de hormigón de la red con tendido aéreo, algunos con brazo de luminaria, junto al muro de Amaranto (Google Street View oct 2025, solo mirado; Mapillary kaart_2, 2023-04-14, CC BY-SA 4.0); separación estimada"
+    }
+   ]
+  },
+  {
+   "id": "social-amaranto",
+   "at": [
+    -20.0,
+    100.0
+   ],
+   "angle": 0,
+   "source": "trazado.json → social.Amaranto y volumes (Casa club Amaranto), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; OSM 1443279625–28 (áreas sociales, piscinas, cancha); canchas multiuso pintadas de rojo, azul y verde con tableros (miniatura de ago 2025, solo mirada)",
+   "floors": [
+    {
+     "id": "deck",
+     "ring": [
+      [
+       -70.0,
+       -20.0
+      ],
+      [
+       -25.0,
+       -20.0
+      ],
+      [
+       -25.0,
+       13.0
+      ],
+      [
+       -70.0,
+       13.0
+      ]
+     ],
+     "style": "deckBeige",
+     "holes": [
+      "piscina",
+      "ninos"
+     ],
+     "source": "deck beige del recinto de la piscina (trazado.json → social.Amaranto.recintoPiscina, Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir)"
+    },
+    {
+     "id": "explanada",
+     "ring": [
+      [
+       -2.0,
+       -20.0
+      ],
+      [
+       9.1,
+       -20.0
+      ],
+      [
+       6.85,
+       15.0
+      ],
+      [
+       -2.0,
+       15.0
+      ]
+     ],
+     "style": "deckBeige",
+     "source": "explanada beige (trazado.json → social.Amaranto.explanada, Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); los senderos curvos no se dibujan; cortada en la vereda de la calle OSM 430540146, donde en el satélite termina lo beige (este trabajo (2026-09-25))"
+    },
+    {
+     "id": "cesped",
+     "ring": [
+      [
+       25.0,
+       -5.0
+      ],
+      [
+       47.0,
+       -5.0
+      ],
+      [
+       47.0,
+       25.0
+      ],
+      [
+       25.0,
+       25.0
+      ]
+     ],
+     "style": "cesped",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20; OSM 1443279628 (césped; OSM la marca como cancha, sin líneas visibles: va como césped)"
+    }
+   ],
+   "pools": [
+    {
+     "id": "piscina",
+     "ring": [
+      [
+       -64.0,
+       -8.0
+      ],
+      [
+       -62.0,
+       -11.5
+      ],
+      [
+       -59.5,
+       -13.5
+      ],
+      [
+       -56.5,
+       -14.0
+      ],
+      [
+       -54.0,
+       -12.5
+      ],
+      [
+       -52.5,
+       -10.5
+      ],
+      [
+       -51.0,
+       -12.5
+      ],
+      [
+       -48.5,
+       -13.7
+      ],
+      [
+       -45.5,
+       -13.5
+      ],
+      [
+       -43.0,
+       -11.5
+      ],
+      [
+       -42.0,
+       -9.0
+      ],
+      [
+       -39.0,
+       -8.0
+      ],
+      [
+       -37.0,
+       -6.5
+      ],
+      [
+       -36.5,
+       -4.5
+      ],
+      [
+       -38.0,
+       -3.0
+      ],
+      [
+       -41.0,
+       -2.5
+      ],
+      [
+       -42.0,
+       0.0
+      ],
+      [
+       -44.0,
+       2.0
+      ],
+      [
+       -47.0,
+       2.5
+      ],
+      [
+       -50.0,
+       1.0
+      ],
+      [
+       -53.0,
+       2.0
+      ],
+      [
+       -57.0,
+       2.5
+      ],
+      [
+       -60.5,
+       1.5
+      ],
+      [
+       -63.0,
+       -0.5
+      ],
+      [
+       -64.5,
+       -4.0
+      ]
+     ],
+     "depth": 1.4,
+     "lift": 0.1,
+     "style": "piscina",
+     "source": "forma libre (trébol) dentro de la envolvente x −84..−58, z 84..106 (trazado.json → social.Amaranto.piscinaAdultos; OSM 1443279626); contorno trazado en el satélite en este trabajo; hondo estimado"
+    },
+    {
+     "id": "ninos",
+     "ellipse": [
+      -31.0,
+      -2.5,
+      3.2,
+      6.0,
+      0
+     ],
+     "depth": 0.5,
+     "lift": 0.1,
+     "style": "piscina",
+     "source": "ovalada, envolvente x −54..−48, z 91..104 (trazado.json → social.Amaranto.piscinaNinos; OSM 1443279627); hondo estimado"
+    }
+   ],
+   "pavilions": [
+    {
+     "id": "club",
+     "at": [
+      -11.5,
+      -3.0
+     ],
+     "size": [
+      22.0,
+      24.0
+     ],
+     "angle": 0,
+     "style": "clubAmaranto",
+     "source": "trazado.json → volumes (Casa club Amaranto: x −44..−22, z 85..109, techo rojo a 4 aguas, alto 6 m estimado); muros, vanos y galería estimados"
+    }
+   ],
+   "courts": [
+    {
+     "id": "cancha-1",
+     "at": [
+      58.0,
+      9.0
+     ],
+     "size": [
+      30.0,
+      18.0
+     ],
+     "angle": 90,
+     "style": "basquet",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (multiuso/básquet, llaves naranjas y círculo central; 18 × 30 m)"
+    },
+    {
+     "id": "cancha-2",
+     "at": [
+      81.0,
+      9.0
+     ],
+     "size": [
+      30.0,
+      20.0
+     ],
+     "angle": 90,
+     "style": "basquet",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (multiuso/básquet; 20 × 30 m)"
+    }
+   ],
+   "trees": [
+    {
+     "style": "grande",
+     "at": [
+      [
+       50.0,
+       -13.0
+      ],
+      [
+       56.0,
+       -9.0
+      ],
+      [
+       44.0,
+       -8.0
+      ]
+     ],
+     "lift": 0,
+     "source": "grupo de árboles grandes al norte de las canchas, centro (32, 89), copa 12 m (trazado.json → social.Amaranto.arboles); cada árbol, estimado"
+    },
+    {
+     "style": "jardin",
+     "at": [
+      [
+       -68.0,
+       -17.0
+      ],
+      [
+       -40.0,
+       -18.0
+      ],
+      [
+       -27.0,
+       8.0
+      ],
+      [
+       -66.0,
+       10.0
+      ],
+      [
+       -46.0,
+       11.0
+      ]
+     ],
+     "lift": 0.1,
+     "source": "árboles del recinto de la piscina (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); estimado"
+    }
+   ]
+  },
+  {
+   "id": "social-bromelia",
+   "at": [
+    -60.0,
+    -168.0
+   ],
+   "angle": 0,
+   "source": "trazado.json → social.Bromelia y volumes (Casa club Bromelia), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; OSM 1443279632–35; piscina, deck de adoquín terracota, pabellón de techo rojo de dos niveles, muro bajo beige escalonado con jardineras, canchas con malla (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados)",
+   "floors": [
+    {
+     "id": "cesped",
+     "ring": [
+      [
+       12.7,
+       23.6
+      ],
+      [
+       12.9,
+       27.5
+      ],
+      [
+       56.7,
+       29.2
+      ],
+      [
+       56.9,
+       -7.1
+      ],
+      [
+       -39.9,
+       -32.0
+      ],
+      [
+       -75.4,
+       -43.2
+      ],
+      [
+       -55.2,
+       25.1
+      ],
+      [
+       -25.4,
+       25.0
+      ],
+      [
+       -25.1,
+       22.7
+      ],
+      [
+       -21.8,
+       16.2
+      ],
+      [
+       -16.4,
+       11.4
+      ],
+      [
+       -9.5,
+       8.9
+      ],
+      [
+       -2.2,
+       9.1
+      ],
+      [
+       4.5,
+       11.9
+      ],
+      [
+       9.7,
+       17.0
+      ]
+     ],
+     "style": "cesped",
+     "holes": [
+      "piscina",
+      "ninos"
+     ],
+     "source": "césped verde entre la casa club, los juegos y las canchas (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados; Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); cubre toda la manzana (lo que dejan las calles, este trabajo (2026-09-25)) y lo demás va encima"
+    },
+    {
+     "id": "deck",
+     "ring": [
+      [
+       -75.1,
+       -42.9
+      ],
+      [
+       -52.0,
+       -35.6
+      ],
+      [
+       -37.0,
+       -31.0
+      ],
+      [
+       -36.0,
+       -11.0
+      ],
+      [
+       -44.0,
+       -4.0
+      ],
+      [
+       -61.8,
+       2.0
+      ]
+     ],
+     "style": "deckTerracota",
+     "holes": [
+      "piscina",
+      "ninos"
+     ],
+     "source": "deck de adoquín cerámico terracota alrededor de las piscinas, hasta la punta de la esquina entre las dos calles y hasta el frente de la casa club (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); contorno: 0,5 m dentro del borde de las veredas de las calles OSM 769868116 y 769868121 (calzada, vereda y franja de la sección bromelia), y hacia la casa club el borde del terreno arenoso de Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (este trabajo (2026-09-25)); estimado"
+    },
+    {
+     "id": "juegos",
+     "ring": [
+      [
+       40.0,
+       -10.0
+      ],
+      [
+       58.0,
+       -10.0
+      ],
+      [
+       58.0,
+       25.0
+      ],
+      [
+       40.0,
+       25.0
+      ]
+     ],
+     "style": "cauchoTurquesa",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (piso de caucho turquesa, dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados)"
+    },
+    {
+     "id": "circulo-1",
+     "circle": [
+      49.4,
+      1.5,
+      4.0
+     ],
+     "style": "cauchoSalmon",
+     "source": "círculo rosa salmón de los juegos, centro (−10,6, −166,5), radio 4 m sin su borde plantado: medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir en este trabajo (2026-09-25) (trazado.json lo daba en z −171); color del dron (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados)"
+    },
+    {
+     "id": "circulo-2",
+     "circle": [
+      45.0,
+      22.2,
+      4.5
+     ],
+     "style": "cauchoSalmon",
+     "source": "el otro círculo, centro (−15,0, −145,8), radio 4,5 m (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo (2026-09-25))"
+    },
+    {
+     "id": "circulo-3",
+     "circle": [
+      46.5,
+      12.1,
+      1.8
+     ],
+     "style": "arenaJuegos",
+     "source": "la mancha clara de ~4,5 × 3,2 m entre los dos círculos, centro (−13,5, −155,9) (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo (2026-09-25)); qué es no se ve: va como un plato claro, estimado"
+    },
+    {
+     "id": "plato-1",
+     "circle": [
+      -46.4,
+      16.1,
+      4.3
+     ],
+     "style": "arenaJuegos",
+     "source": "plato redondo de arena con un juego al centro, centro (−106,4, −151,9), radio 4,3 m (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo (2026-09-25)); en dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados es arena clara con un carrusel, sin techo (trazado.json → social.Bromelia.glorietas lo tomaba por glorieta)"
+    },
+    {
+     "id": "plato-2",
+     "circle": [
+      -31.0,
+      17.6,
+      4.5
+     ],
+     "style": "arenaJuegos",
+     "source": "el otro plato, centro (−91,0, −150,4), radio 4,5 m (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo (2026-09-25))"
+    },
+    {
+     "id": "rotonda",
+     "circle": [
+      -6.4,
+      28.2,
+      9.5
+     ],
+     "style": "isla",
+     "source": "isla de la rotonda: dentro del anillo de la calle OSM 1009667794 (centro −66,4, −139,8; radio del eje ~13 m menos media calzada), trazado.json → social.Bromelia.rotonda (r 8 medido) y el satélite"
+    },
+    {
+     "id": "parterre-1",
+     "ring": [
+      [
+       -9.6,
+       50.0
+      ],
+      [
+       -7.0,
+       48.5
+      ],
+      [
+       -4.4,
+       50.0
+      ],
+      [
+       -4.4,
+       65.0
+      ],
+      [
+       -7.0,
+       66.5
+      ],
+      [
+       -9.6,
+       65.0
+      ]
+     ],
+     "style": "isla",
+     "source": "parterre plantado del par de calles de la garita (OSM 769868110/111): la isla verde de x −70,2..−64,3, z −119,5..−101,5 en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (medida de nuevo en este trabajo (2026-09-25): la de antes, en x −74,8..−70,5, caía sobre la calzada oeste); el borde oeste, 0,6 m adentro para no pisar esa calzada"
+    },
+    {
+     "id": "parterre-2",
+     "ring": [
+      [
+       -9.6,
+       74.5
+      ],
+      [
+       -7.3,
+       73.0
+      ],
+      [
+       -5.0,
+       74.5
+      ],
+      [
+       -5.0,
+       101.5
+      ],
+      [
+       -7.3,
+       103.0
+      ],
+      [
+       -9.6,
+       101.5
+      ]
+     ],
+     "style": "isla",
+     "source": "ídem, la isla de x −70,2..−64,8, z −95..−65 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo (2026-09-25))"
+    }
+   ],
+   "pools": [
+    {
+     "id": "piscina",
+     "ring": [
+      [
+       -57.06,
+       -31.05
+      ],
+      [
+       -49.54,
+       -10.37
+      ],
+      [
+       -58.94,
+       -6.95
+      ],
+      [
+       -66.46,
+       -27.63
+      ]
+     ],
+     "depth": 1.4,
+     "lift": 0.1,
+     "style": "piscina",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (paralela a la calle oeste 769868112) (10 × 22 m, centro [-118, -187]; OSM 1443279634); el eje largo, a 70° del x del lugar medido en el satélite en este trabajo (la investigación dice 67°); hondo estimado"
+    },
+    {
+     "id": "ninos",
+     "ring": [
+      [
+       -42.61,
+       -25.13
+      ],
+      [
+       -39.87,
+       -17.61
+      ],
+      [
+       -47.39,
+       -14.87
+      ],
+      [
+       -50.13,
+       -22.39
+      ]
+     ],
+     "depth": 0.5,
+     "lift": 0.1,
+     "style": "piscina",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (8 × 8 m); hondo estimado"
+    }
+   ],
+   "pavilions": [
+    {
+     "id": "club",
+     "at": [
+      -28.8,
+      -1.6
+     ],
+     "size": [
+      23.0,
+      18.2
+     ],
+     "angle": -23.5,
+     "style": "clubBromelia",
+     "source": "techo rojo de dos niveles de 23 × 18,2 m con el lado largo a −23,5° del x del lugar, centro (−88,8, −169,6): medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir en este trabajo (2026-09-25) (el techo corrido 0,73 m al este y 1,38 m al norte por la inclinación de la toma, como las casas; trazado.json → volumes daba solo su caja, x −103..−75, z −178..−157); pabellón abierto sobre postes del lado de la piscina y una parte cerrada al fondo (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); alto estimado"
+    },
+    {
+     "id": "anexo",
+     "at": [
+      -23.8,
+      7.0
+     ],
+     "size": [
+      5.5,
+      5.5
+     ],
+     "angle": -23.5,
+     "style": "anexoBromelia",
+     "source": "techo chico a 4 aguas que sale del lado sur de la casa club, centro (−83,8, −161,0) con la misma corrección de la toma (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo (2026-09-25)); cuarto cerrado de techo más bajo (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); medidas y alto estimados"
+    }
+   ],
+   "courts": [
+    {
+     "id": "futbol",
+     "at": [
+      9.2,
+      -2.2
+     ],
+     "size": [
+      29.0,
+      17.5
+     ],
+     "angle": 100,
+     "style": "futbolBromelia",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20; durancity.com (fotos oficiales subidas 2025-06; solo mirar) (fútbol, césped sintético verde con líneas blancas, dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); el cerco oscuro de 29 × 17,5 m, centro (−50,8, −170,2), girado 100° (el lado largo a 10° del z del lugar), medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir en este trabajo (2026-09-25): trazado.json la daba de 18 × 34 m sin girar"
+    },
+    {
+     "id": "tenis",
+     "at": [
+      28.1,
+      4.4
+     ],
+     "size": [
+      28.0,
+      15.0
+     ],
+     "angle": 101,
+     "style": "tenis",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (tenis azul, dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); las líneas de individuales se ven en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir: centro (−31,9, −163,6), girada 101°, lo azul de ~24 × 11 m y su franja hasta ~27 × 15 m, medido en este trabajo (2026-09-25)"
+    }
+   ],
+   "plays": [
+    {
+     "id": "columpio",
+     "at": [
+      49.4,
+      1.5
+     ],
+     "angle": 90,
+     "style": "columpio",
+     "source": "juegos sobre un círculo (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); piezas estimadas"
+    },
+    {
+     "id": "resbaladera",
+     "at": [
+      45.0,
+      22.2
+     ],
+     "angle": 0,
+     "style": "resbaladera",
+     "source": "ídem (estimado)"
+    }
+   ],
+   "fences": [
+    {
+     "id": "muro-bajo",
+     "style": "muroBajo",
+     "line": [
+      [
+       -61.8,
+       2.0
+      ],
+      [
+       -75.1,
+       -42.9
+      ],
+      [
+       -52.0,
+       -35.6
+      ],
+      [
+       -37.0,
+       -31.0
+      ]
+     ],
+     "closed": false,
+     "source": "muro bajo beige con remate escalonado a lo largo de las dos calles, en V en la esquina (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); por el borde del deck que da a las calles, estimado"
+    }
+   ],
+   "trees": [
+    {
+     "style": "jardin",
+     "at": [
+      [
+       -70.2,
+       -32.5
+      ],
+      [
+       -67.2,
+       -22.5
+      ],
+      [
+       -64.2,
+       -12.5
+      ],
+      [
+       -65.5,
+       -38.0
+      ],
+      [
+       -50.5,
+       -33.3
+      ],
+      [
+       -40.0,
+       -27.0
+      ],
+      [
+       -50.0,
+       -2.0
+      ],
+      [
+       -60.0,
+       0.0
+      ]
+     ],
+     "lift": 0.1,
+     "source": "árboles chicos en las jardineras junto al muro de las dos calles y en el deck (dron subido a la ficha de Google Maps en jun 2025 y foto de sep 2020, solo mirados); a ~1,8 m del muro, estimados"
+    },
+    {
+     "style": "jardin",
+     "at": [
+      [
+       -8.0,
+       26.0
+      ],
+      [
+       -4.0,
+       31.0
+      ],
+      [
+       -9.0,
+       31.0
+      ]
+     ],
+     "lift": 0.15,
+     "source": "árboles de la rotonda (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); estimado"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       -7.0,
+       51.0
+      ],
+      "to": [
+       -7.0,
+       64.0
+      ],
+      "spacing": 3.5
+     },
+     "lift": 0.15,
+     "source": "plantas del parterre del par de la garita (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; durancity.com, Bromelia-Drone.png (subida 2025-06), solo mirada); estimado"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       -7.3,
+       75.5
+      ],
+      "to": [
+       -7.3,
+       100.5
+      ],
+      "spacing": 3.5
+     },
+     "lift": 0.15,
+     "source": "ídem"
+    }
+   ]
+  },
+  {
+   "id": "social-camelia",
+   "at": [
+    390.0,
+    232.0
+   ],
+   "angle": 0,
+   "source": "trazado.json → social.Camelia y volumes (Casa club Camelia), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; OSM 1443279619–21 (la de vóley playa son juegos infantiles); sub-marco de Camelia girado 15°",
+   "floors": [
+    {
+     "id": "deck",
+     "ring": [
+      [
+       -27.22,
+       -24.5
+      ],
+      [
+       9.49,
+       -14.67
+      ],
+      [
+       0.17,
+       20.11
+      ],
+      [
+       -36.53,
+       10.27
+      ]
+     ],
+     "style": "deckBeige",
+     "holes": [
+      "piscina"
+     ],
+     "source": "deck beige (trazado.json → social.Camelia.deck, Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir)"
+    },
+    {
+     "id": "juegos-oeste",
+     "ring": [
+      [
+       -61.7,
+       -33.74
+      ],
+      [
+       -49.43,
+       -30.45
+      ],
+      [
+       -58.49,
+       3.35
+      ],
+      [
+       -70.76,
+       0.06
+      ]
+     ],
+     "style": "arenaJuegos",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (juegos sobre arena clara, Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); cortado en el borde de la vereda de la calzada este del eje central (el polígono de la investigación entraba a la calle: este trabajo (2026-09-25))"
+    },
+    {
+     "id": "juegos",
+     "ring": [
+      [
+       61.13,
+       1.24
+      ],
+      [
+       75.81,
+       5.17
+      ],
+      [
+       67.01,
+       38.01
+      ],
+      [
+       52.33,
+       34.08
+      ]
+     ],
+     "style": "cauchoNaranja",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (OSM 1443279621 lo marca como vóley playa en arena: no coincide) (piso de caucho naranja); cortado en el borde de la franja de la calle C-este: en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir lo naranja llega a x ≈ 460 (este trabajo (2026-09-25))"
+    },
+    {
+     "id": "rotonda",
+     "circle": [
+      -61.0,
+      -78.3,
+      9
+     ],
+     "style": "isla",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (rotonda de 9 m); el centro, en el cruce de la calle C-S2 con el eje central (329.0, 153.7), medido en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir en este trabajo (2026-09-25): trazado.json la ponía 7 m al norte"
+    }
+   ],
+   "pools": [
+    {
+     "id": "piscina",
+     "ring": [
+      [
+       -28.98,
+       -6.34
+      ],
+      [
+       0.97,
+       1.69
+      ],
+      [
+       -2.4,
+       14.25
+      ],
+      [
+       -32.34,
+       6.22
+      ]
+     ],
+     "depth": 1.4,
+     "lift": 0.1,
+     "style": "piscina",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (31 × 13 m en el sub-marco girado 15°; OSM 1443279620); el extremo escalonado no se dibuja; hondo estimado"
+    }
+   ],
+   "pavilions": [
+    {
+     "id": "club",
+     "at": [
+      -42.86,
+      -10.57
+     ],
+     "size": [
+      23.0,
+      35.0
+     ],
+     "angle": 15,
+     "style": "clubCamelia",
+     "source": "trazado.json → volumes (Casa club Camelia, techo gris, alto 5 m estimado; OSM 1443279624); muros y vanos estimados"
+    },
+    {
+     "id": "kiosco",
+     "at": [
+      -9.91,
+      -7.96
+     ],
+     "size": [
+      12.0,
+      9.0
+     ],
+     "angle": 15,
+     "style": "kiosco",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (techo oscuro, 12 × 9 m); alto estimado"
+    }
+   ],
+   "courts": [
+    {
+     "id": "futbol",
+     "at": [
+      19.54,
+      7.69
+     ],
+     "size": [
+      34.0,
+      27.0
+     ],
+     "angle": 105,
+     "style": "futbolCamelia",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (fútbol sintético, 27 × 34 m)"
+    },
+    {
+     "id": "tenis",
+     "at": [
+      46.81,
+      16.04
+     ],
+     "size": [
+      32.0,
+      16.0
+     ],
+     "angle": 105,
+     "style": "tenis",
+     "source": "Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20 (tenis / multiuso azul, 16 × 32 m)"
+    }
+   ],
+   "plays": [
+    {
+     "id": "columpio",
+     "at": [
+      66.0,
+      14.0
+     ],
+     "angle": 15,
+     "style": "columpio",
+     "source": "juegos infantiles sobre caucho naranja (trazado.json → social.Camelia.canchas[2]); piezas estimadas"
+    },
+    {
+     "id": "resbaladera",
+     "at": [
+      63.0,
+      30.0
+     ],
+     "angle": 105,
+     "style": "resbaladera",
+     "source": "ídem, dentro de lo naranja (estimado)"
+    }
+   ],
+   "trees": [
+    {
+     "style": "jardin",
+     "at": [
+      [
+       -61.0,
+       -78.3
+      ],
+      [
+       -64.4,
+       -75.1
+      ],
+      [
+       -57.4,
+       -81.6
+      ]
+     ],
+     "lift": 0.15,
+     "source": "árboles de la rotonda (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); estimado"
+    }
+   ]
+  },
+  {
+   "id": "jardines-amaranto",
+   "at": [
+    -4.0,
+    40.0
+   ],
+   "angle": 0,
+   "source": "par de calles de la garita (OSM 430540142/143) hasta la rotonda (−2, 70), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir; trazado.json → social.Amaranto.rotonda y arboles",
+   "floors": [
+    {
+     "id": "parterre",
+     "ring": [
+      [
+       1.4,
+       -36.0
+      ],
+      [
+       3.6,
+       -36.0
+      ],
+      [
+       1.8,
+       20.0
+      ],
+      [
+       0.6,
+       21.5
+      ],
+      [
+       -0.6,
+       20.0
+      ]
+     ],
+     "style": "isla",
+     "source": "parterre angosto y plantado entre el par de calles, medido en el satélite (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir) en este trabajo, ±0,5 m"
+    },
+    {
+     "id": "rotonda",
+     "circle": [
+      -1.5,
+      36.0,
+      9.0
+     ],
+     "style": "isla",
+     "source": "isla de la rotonda: dentro del anillo de la calle OSM 430540130 (centro −5,5, 76; radio del eje ~12,4 m menos media calzada); trazado.json → social.Amaranto.rotonda (r 12)"
+    }
+   ],
+   "trees": [
+    {
+     "style": "grande",
+     "at": [
+      [
+       -1.5,
+       36.0
+      ]
+     ],
+     "lift": 0.15,
+     "source": "árbol grande de la rotonda, copa 14 m (trazado.json → social.Amaranto.arboles)"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       2.3,
+       -34.0
+      ],
+      "to": [
+       0.8,
+       18.0
+      ],
+      "spacing": 6.0
+     },
+     "lift": 0.15,
+     "source": "plantas del parterre (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); estimado"
+    }
+   ]
+  },
+  {
+   "id": "vigilancia-amaranto",
+   "at": [
+    -176.1,
+    -8.9
+   ],
+   "angle": 0,
+   "source": "torre de vigilancia elevada dentro de Amaranto, junto a su muro norte cerca de la esquina NO: caseta marrón rojiza con techo a 4 aguas rojo sobre un fuste, ~7 m (Google Street View oct 2025, solo mirado; trazado.json → entradas.streetView.torreRoja); en el satélite, el cuadrado claro de ~2 m sobre el muro del chaflán en x −177,2..−175,1, z −10..−7,9 (Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir, este trabajo), que calza con su rumbo en Google Street View oct 2025, solo mirado",
+   "towers": [
+    {
+     "id": "torre",
+     "at": [
+      0,
+      0
+     ],
+     "size": [
+      2.2,
+      2.2
+     ],
+     "angle": -35,
+     "style": "vigilancia",
+     "source": "medidas y lugar estimados; girada como el muro del chaflán NO (−35°)"
+    }
+   ]
+  },
+  {
+   "id": "jardines-camelia",
+   "at": [
+    250.0,
+    25.0
+   ],
+   "angle": 0,
+   "source": "trazado.json → social.Camelia (parqueEntrada y jardinerasEje), Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir",
+   "floors": [
+    {
+     "id": "jardinera-oeste-1",
+     "ring": [
+      [
+       76.02,
+       60.84
+      ],
+      [
+       83.75,
+       62.91
+      ],
+      [
+       78.04,
+       84.22
+      ],
+      [
+       70.31,
+       82.15
+      ]
+     ],
+     "style": "jardinera",
+     "source": "franja plantada al oeste del eje central (u 131–139, v 2..24.1 del sub-marco; curva en la realidad, aquí recta), trazado.json → social.Camelia.jardinerasEje; cortada donde cruzan las calles transversales, como en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (este trabajo (2026-09-25)); estimado"
+    },
+    {
+     "id": "jardinera-oeste-2",
+     "ring": [
+      [
+       66.66,
+       95.78
+      ],
+      [
+       74.38,
+       97.85
+      ],
+      [
+       68.8,
+       118.67
+      ],
+      [
+       61.08,
+       116.6
+      ]
+     ],
+     "style": "jardinera",
+     "source": "franja plantada al oeste del eje central (u 131–139, v 38.2..59.7 del sub-marco; curva en la realidad, aquí recta), trazado.json → social.Camelia.jardinerasEje; cortada donde cruzan las calles transversales, como en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (este trabajo (2026-09-25)); estimado"
+    },
+    {
+     "id": "jardinera-oeste-3",
+     "ring": [
+      [
+       57.42,
+       130.25
+      ],
+      [
+       65.15,
+       132.32
+      ],
+      [
+       59.68,
+       152.74
+      ],
+      [
+       51.95,
+       150.67
+      ]
+     ],
+     "style": "jardinera",
+     "source": "franja plantada al oeste del eje central (u 131–139, v 73.9..95 del sub-marco; curva en la realidad, aquí recta), trazado.json → social.Camelia.jardinerasEje; cortada donde cruzan las calles transversales, como en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (este trabajo (2026-09-25)); estimado"
+    },
+    {
+     "id": "jardinera-este-1",
+     "ring": [
+      [
+       106.9,
+       69.23
+      ],
+      [
+       114.63,
+       71.3
+      ],
+      [
+       108.95,
+       92.47
+      ],
+      [
+       101.23,
+       90.4
+      ]
+     ],
+     "style": "jardinera",
+     "source": "franja plantada al este del eje central (u 163–171, v 2.1..24.0 del sub-marco; curva en la realidad, aquí recta), trazado.json → social.Camelia.jardinerasEje; cortada donde cruzan las calles transversales, como en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (este trabajo (2026-09-25)); estimado"
+    },
+    {
+     "id": "jardinera-este-2",
+     "ring": [
+      [
+       97.58,
+       104.02
+      ],
+      [
+       105.3,
+       106.09
+      ],
+      [
+       99.74,
+       126.87
+      ],
+      [
+       92.01,
+       124.8
+      ]
+     ],
+     "style": "jardinera",
+     "source": "franja plantada al este del eje central (u 163–171, v 38.1..59.6 del sub-marco; curva en la realidad, aquí recta), trazado.json → social.Camelia.jardinerasEje; cortada donde cruzan las calles transversales, como en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (este trabajo (2026-09-25)); estimado"
+    },
+    {
+     "id": "jardinera-este-3",
+     "ring": [
+      [
+       88.35,
+       138.44
+      ],
+      [
+       96.08,
+       140.51
+      ],
+      [
+       90.59,
+       161.02
+      ],
+      [
+       82.86,
+       158.95
+      ]
+     ],
+     "style": "jardinera",
+     "source": "franja plantada al este del eje central (u 163–171, v 73.8..95 del sub-marco; curva en la realidad, aquí recta), trazado.json → social.Camelia.jardinerasEje; cortada donde cruzan las calles transversales, como en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir (este trabajo (2026-09-25)); estimado"
+    }
+   ],
+   "trees": [
+    {
+     "style": "jardin",
+     "at": [
+      [
+       2.0,
+       1.0
+      ],
+      [
+       12.0,
+       6.0
+      ],
+      [
+       25.0,
+       8.0
+      ],
+      [
+       18.0,
+       -3.0
+      ]
+     ],
+     "lift": 0,
+     "source": "árboles del parque de la entrada (x 215–290, z 5–40; trazado.json → social.Camelia.parqueEntrada, Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, solo para medir); estimados"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       79.11,
+       64.77
+      ],
+      "to": [
+       74.95,
+       80.29
+      ],
+      "spacing": 7.0
+     },
+     "lift": 0.35,
+     "source": "plantas de la jardinera oeste (estimado)"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       69.74,
+       99.71
+      ],
+      "to": [
+       65.72,
+       114.74
+      ],
+      "spacing": 7.0
+     },
+     "lift": 0.35,
+     "source": "plantas de la jardinera oeste (estimado)"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       60.51,
+       134.18
+      ],
+      "to": [
+       56.59,
+       148.81
+      ],
+      "spacing": 7.0
+     },
+     "lift": 0.35,
+     "source": "plantas de la jardinera oeste (estimado)"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       109.99,
+       73.16
+      ],
+      "to": [
+       105.87,
+       88.53
+      ],
+      "spacing": 7.0
+     },
+     "lift": 0.35,
+     "source": "plantas de la jardinera este (estimado)"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       100.66,
+       107.96
+      ],
+      "to": [
+       96.65,
+       122.93
+      ],
+      "spacing": 7.0
+     },
+     "lift": 0.35,
+     "source": "plantas de la jardinera este (estimado)"
+    },
+    {
+     "style": "arbusto",
+     "line": {
+      "from": [
+       91.44,
+       142.37
+      ],
+      "to": [
+       87.5,
+       157.09
+      ],
+      "spacing": 7.0
+     },
+     "lift": 0.35,
+     "source": "plantas de la jardinera este (estimado)"
+    }
+   ]
+  }
+ ]
+}
