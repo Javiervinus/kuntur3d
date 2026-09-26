@@ -23,7 +23,8 @@ foto satelital donde más aporta.
 15. [Carga por partes](#carga-por-partes)
 16. [Rendimiento](#rendimiento)
 
-Los lugares modelados a mano (íconos y calles) están en [lugares.md](lugares.md).
+Los lugares modelados a mano (íconos, centros comerciales, urbanizaciones y calles) están en
+[lugares.md](lugares.md).
 
 ## Fuentes de datos
 

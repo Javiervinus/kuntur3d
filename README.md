@@ -30,6 +30,8 @@ Lo distinguen dos cosas:
   - la iglesia de San Francisco;
   - la Columna de los Próceres;
   - la avenida principal de la Alborada;
+  - The Point, la torre que gira en Puerto Santa Ana;
+  - los centros comerciales Mall del Sol, San Marino, CityMall y Paseo Shopping Durán;
   - La Perla, la Torre Morisca, La Rotonda y el faro del cerro Santa Ana.
 
 El resto de la ciudad (barrios, casas, fachadas comunes) se genera a partir de los datos. Se ve
@@ -122,7 +124,7 @@ correr `npm run data`.
 | Fotos de las fichas | Wikimedia Commons |
 
 ```
-config/          región, parámetros de la app, modelos, fichas de lugares y calles modeladas
+config/          región, parámetros de la app, modelos, fichas y lugares modelados (calles, sitios, casas)
 pipeline/        generación de los datos del mundo (public/world/)
 src/world/       terreno, edificios, calles, agua, árboles, puentes, íconos, tráfico y peatones
 src/player/      personaje, controlador, cámara y ala delta
