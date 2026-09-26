@@ -8,3 +8,5 @@ pipeline/.cache/
 pipeline/.last-run.log
 .wrangler
 __pycache__/
+# Secretos locales (tokens de APIs): nunca van al repo
+.env
