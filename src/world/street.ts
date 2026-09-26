@@ -3,6 +3,7 @@ import type { SignFace, SignRect } from '../render/signAtlas';
 import { type DowntownBuilding, DowntownBuilder, type DowntownKit, type DowntownLights, type DowntownStyle, deepMerge } from './downtown';
 import { type Median, type MedianStyle, buildMedian, medianLampModel, medianLamps, medianTrees } from './medians';
 import { Batch, type MonumentBase, type Surface, patternOf } from './monumentParts';
+import type { PlaceSite } from './placeKit';
 import { type FurnitureItem, type StreetFurniture, furnitureModels, layoutFurniture } from './streetFurniture';
 import { type Lane, type LaneStyle, type LotKit, type Retiro, type RetiroStyle, buildLane, buildRetiro, checkLane, checkRetiro } from './streetLots';
 
@@ -34,8 +35,8 @@ export interface StreetBlock {
   lane?: Lane;
 }
 
-/** Cómo se ve una vereda (o el piso de un parterre): alto, bordillo y su color, piso y su dibujo. */
-interface PavedStyle {
+/** Un piso con bordillo: alto sobre la calzada, ancho del bordillo, colores y dibujo (y cuántas unidades mide cada metro). */
+export interface PavedStyle {
   height: number;
   curb: number;
   color: string;
@@ -103,28 +104,17 @@ export function streetFile(name: string): StreetFile {
   return FILES[key];
 }
 
-/** Lo que una cuadra necesita de Monuments para entrar en la física y en el LOD. */
-export interface StreetSite {
-  /** Macizo que se trepa (planta local, del pie `y0` al techo `top`, alturas del mundo). */
-  block(outline: THREE.Vector3[], y0: number, top: number): void;
-  /** Rectángulo de física (marco local; largo en el ángulo `angle` = atan2(z, x) local). */
-  box(x: number, z: number, halfU: number, halfV: number, angle: number, top: number, floor: boolean, bottom: number): void;
-  /** Obstáculo redondo (marco local) de radio `r` hasta `top` (altura del mundo). */
-  circle(x: number, z: number, r: number, top: number): void;
-  /** Piso a `offset` sobre el terreno dentro del polígono (una vereda). */
-  ground(outline: THREE.Vector3[], offset: number): void;
-  /** Detalle que solo se ve a menos de `distance` m del centro de la cuadra. */
-  near(o: THREE.Object3D, distance: number): void;
-}
-
 /** Lo que la calle necesita de Monuments (world/monuments.ts) para armarse. */
 export interface StreetKit {
   root: THREE.Group;
   materials: { stone: THREE.Material; glass: THREE.Material; rails: THREE.Material };
   /** Altura del suelo en un punto del marco local. */
   terrain(x: number, z: number): number;
-  /** Un lugar de la física y del LOD con centro (x, z) del marco local. */
-  site(x: number, z: number): StreetSite;
+  /**
+   * Un lugar de la física y del LOD con centro (x, z) del marco local: una cuadra o un parterre
+   * (el mismo pedazo que el de un lugar de config/sites/, world/placeKit.ts).
+   */
+  site(x: number, z: number): PlaceSite;
   /** Un árbol de la vereda (marco local, pie a la altura `y` del mundo) para los árboles de la ciudad. */
   tree(x: number, z: number, y: number, height: number, radius: number, color: THREE.Color): void;
   /** Una palmera (marco local, pie a la altura `y` del mundo) para las palmeras de la ciudad. */
@@ -188,6 +178,52 @@ export function pave(batch: Batch, outline: readonly (readonly number[])[], top:
   }
 }
 
+/** El grosor de la física de las vallas (`ground.wall`): hace falta recién cuando hay una; `where` dice de qué archivo falta. */
+function wallOf(ground: { wall?: number }, where: string): number {
+  if (ground.wall === undefined) throw new Error(`${where}: falta ground.wall (el grosor de la física de las vallas)`);
+  return ground.wall;
+}
+
+/** Física de una valla (marco local): de a a b, hasta `top` (mundo), de `thick` m de grosor. */
+function fencePhysics(site: Pick<PlaceSite, 'box'>, a: THREE.Vector2, b: THREE.Vector2, top: number, thick: number): void {
+  const len = a.distanceTo(b);
+  if (len < 1e-3) return;
+  site.box((a.x + b.x) / 2, (a.y + b.y) / 2, len / 2, thick / 2, Math.atan2(b.y - a.y, b.x - a.x), top, false, -Infinity);
+}
+
+/**
+ * Lo que un retiro o un carril (world/streetLots.ts → buildRetiro, buildLane) necesita para
+ * armarse en el pedazo `site` de una calle o de un lugar: sus pisos siguen el terreno en tramos de
+ * `ground.step` m, sus vallas atajan con el grosor `ground.wall` y sus autos y palmeras van a los
+ * de la ciudad por `host`. `where` es el archivo, para el error si falta el grosor.
+ */
+export function lotKit(
+  host: Pick<StreetKit, 'terrain' | 'car' | 'palm'>,
+  batches: { stone: Batch; detail: Batch; rails: Batch },
+  site: Pick<PlaceSite, 'box' | 'ground'>,
+  ground: { step: number; wall?: number },
+  where: string,
+): LotKit {
+  const { step } = ground;
+  const terrain = (x: number, z: number): number => host.terrain(x, z);
+  return {
+    terrain,
+    stone: batches.stone,
+    detail: batches.detail,
+    rails: batches.rails,
+    step,
+    pave: (ring, lift, color, surface) => pave(batches.stone, ring, (x, z) => terrain(x, z) + lift, step, color, surface),
+    car: (x, z, angle, lift) => host.car(x, z, angle, lift),
+    palm: (x, z, y, height) => host.palm(x, z, y, height),
+    wall: (a, b, top) => fencePhysics(site, a, b, top, wallOf(ground, where)),
+    ground: (ring, offset) =>
+      site.ground(
+        ring.map(([x, z]) => new THREE.Vector3(x, 0, z)),
+        offset,
+      ),
+  };
+}
+
 /**
  * Arma la calle: por cuadra, los edificios (world/downtown.ts) y las veredas con su bordillo, en
  * mallas que se descartan juntas; los detalles chicos y las barandas solo de cerca.
@@ -213,13 +249,9 @@ export class StreetBuilder {
     for (const m of this.f.medians ?? []) this.median(m);
   }
 
-  /** Física de una valla (marco de la calle): de a a b, hasta `top` (mundo), del grosor de `ground.wall`. */
-  private fence(site: StreetSite, a: THREE.Vector2, b: THREE.Vector2, top: number): void {
-    const thick = this.f.ground.wall;
-    if (thick === undefined) throw new Error(`config/streets (${this.f.name}): falta ground.wall (el grosor de la física de las vallas)`);
-    const len = a.distanceTo(b);
-    if (len < 1e-3) return;
-    site.box((a.x + b.x) / 2, (a.y + b.y) / 2, len / 2, thick / 2, Math.atan2(b.y - a.y, b.x - a.x), top, false, -Infinity);
+  /** De qué archivo es la calle (para los errores). */
+  private get where(): string {
+    return `config/streets (${this.f.name})`;
   }
 
   /** Un estilo de retiro por nombre, con los retoques del retiro. */
@@ -234,27 +266,6 @@ export class StreetBuilder {
   /** Las entradas de los retiros de una cuadra (tramos en x de la calle): ahí no va un auto ni un árbol. */
   private entrances(block: StreetBlock): number[][] {
     return (block.retiros ?? []).flatMap((r) => this.retiroStyle(r).gaps);
-  }
-
-  /** Lo que un retiro o un carril necesita para armarse, en los lotes de su cuadra. */
-  private lotKit(stone: Batch, detail: Batch, rails: Batch, site: StreetSite): LotKit {
-    const step = this.f.ground.step;
-    return {
-      terrain: (x, z) => this.kit.terrain(x, z),
-      stone,
-      detail,
-      rails,
-      step,
-      pave: (ring, lift, color, surface) => pave(stone, ring, (x, z) => this.kit.terrain(x, z) + lift, step, color, surface),
-      car: (x, z, angle, lift) => this.kit.car(x, z, angle, lift),
-      palm: (x, z, y, height) => this.kit.palm(x, z, y, height),
-      wall: (a, b, top) => this.fence(site, a, b, top),
-      ground: (ring, offset) =>
-        site.ground(
-          ring.map(([x, z]) => new THREE.Vector3(x, 0, z)),
-          offset,
-        ),
-    };
   }
 
   /**
@@ -276,7 +287,7 @@ export class StreetBuilder {
       stone,
       rails,
       pave: (ring, curbs, paved) => this.pavement({ ring, curbs }, paved, stone, site),
-      wall: (a, b, top) => this.fence(site, a, b, top),
+      wall: (a, b, top) => fencePhysics(site, a, b, top, wallOf(this.f.ground, this.where)),
     });
     const lamps = medianLamps(style, [m]);
     if (lamps.length) {
@@ -291,7 +302,7 @@ export class StreetBuilder {
       group.add(mesh);
       site.near(mesh, style.lamps.near);
       const [baseR] = style.lamps.pole.base;
-      for (const l of lamps) site.circle(l.x, l.z, baseR, this.kit.terrain(l.x, l.z) + style.height + style.lamps.pole.height);
+      for (const l of lamps) site.circle(l.x, l.z, baseR, this.kit.terrain(l.x, l.z) + style.height + style.lamps.pole.height, false, -Infinity);
     }
     for (const t of medianTrees(style, [m])) this.kit.tree(t.x, t.z, this.kit.terrain(t.x, t.z) + style.height, t.height, t.radius, t.color);
     const add = (batch: Batch, material: THREE.Material, name: string, shadow: boolean): THREE.Mesh | null => {
@@ -362,7 +373,7 @@ export class StreetBuilder {
     }
     const S = f.sidewalks;
     for (const s of block.sidewalks) this.pavement(s, { height: S.height, curb: S.curb, color: S.color, curbColor: S.curbColor, pattern: S.pattern, scale: S.scale }, stone, site);
-    const lots = this.lotKit(stone, detail, rails, site);
+    const lots = lotKit(this.kit, { stone, detail, rails }, site, f.ground, this.where);
     for (const r of block.retiros ?? []) buildRetiro(r, this.retiroStyle(r), lots);
     if (block.lane) {
       if (!f.lane) throw new Error(`config/streets (${f.name}): la cuadra ${block.id} tiene carril y falta "lane"`);
@@ -396,7 +407,7 @@ export class StreetBuilder {
    * Mobiliario de la cuadra: faroles, maceteros, alcorques y bancas instanciados (solo de cerca),
    * con su física; los árboles van a los de la ciudad (world/trees.ts), que ya saben dibujarlos.
    */
-  private furnish(block: StreetBlock, group: THREE.Group, site: StreetSite): void {
+  private furnish(block: StreetBlock, group: THREE.Group, site: PlaceSite): void {
     const F = this.f.furniture;
     const top = (x: number, z: number): number => this.kit.terrain(x, z) + this.f.sidewalks.height;
     const mine = <T extends FurnitureItem>(items: readonly T[]): T[] => items.filter((i) => i.block === block.id);
@@ -426,10 +437,10 @@ export class StreetBuilder {
     instanced(this.models.grate, trees.filter((t) => !t.planter), 'grates', false);
     instanced(this.models.bench, benches, 'benches', false);
     const baseRadius = Math.max(...F.lamp.base.map(([r]) => r));
-    for (const l of lamps) site.circle(l.x, l.z, baseRadius, top(l.x, l.z) + F.lamp.shaft.height);
+    for (const l of lamps) site.circle(l.x, l.z, baseRadius, top(l.x, l.z) + F.lamp.shaft.height, false, -Infinity);
     for (const t of trees) {
       const y = top(t.x, t.z);
-      if (t.planter) site.circle(t.x, t.z, F.planter.radius, y + F.planter.height);
+      if (t.planter) site.circle(t.x, t.z, F.planter.radius, y + F.planter.height, false, -Infinity);
       this.kit.tree(t.x, t.z, y, t.height, t.radius, t.color);
     }
     const B = F.bench;
@@ -437,58 +448,70 @@ export class StreetBuilder {
     for (const b of benches) site.box(b.x, b.z, B.depth / 2, B.length / 2, b.angle, top(b.x, b.z) + B.seat, true, -Infinity);
   }
 
-  /**
-   * Vereda (o el piso de un parterre): la losa a `height` sobre el terreno (en tramos de
-   * `ground.step` que lo siguen), con su dibujo en uv del marco de la calle; en los lados que dan
-   * a la calzada, el bordillo (su canto y su franja de arriba).
-   */
-  private pavement(s: Sidewalk, S: PavedStyle, stone: Batch, site: StreetSite): void {
-    const f = this.f;
-    const step = f.ground.step;
-    const color = new THREE.Color(S.color);
-    const curbColor = new THREE.Color(S.curbColor);
-    const ring = s.ring.map(([x, z]) => new THREE.Vector2(x, z));
-    const top = (x: number, z: number): number => this.kit.terrain(x, z) + S.height;
-    // Losa: sigue el terreno, con el dibujo de la vereda.
-    pave(stone, s.ring, top, step, color, { pattern: patternOf(S.pattern), scale: S.scale });
-    // Bordillos: hacia afuera del polígono (la calzada).
-    let area = 0;
-    for (let k = 0; k < ring.length; k++) {
-      const p = ring[k];
-      const q = ring[(k + 1) % ring.length];
-      area += p.x * q.y - q.x * p.y;
-    }
-    const outward = (dx: number, dz: number): THREE.Vector2 => (area > 0 ? new THREE.Vector2(dz, -dx) : new THREE.Vector2(-dz, dx));
-    for (const i of s.curbs) {
-      const a = ring[i];
-      const b = ring[(i + 1) % ring.length];
-      const len = a.distanceTo(b);
-      const dir = b.clone().sub(a).divideScalar(len);
-      const n = outward(dir.x, dir.y);
-      const parts = Math.max(1, Math.ceil(len / step));
-      for (let k = 0; k < parts; k++) {
-        const p = a.clone().addScaledVector(dir, (len * k) / parts);
-        const q = a.clone().addScaledVector(dir, (len * (k + 1)) / parts);
-        const pIn = p.clone().addScaledVector(n, -S.curb);
-        const qIn = q.clone().addScaledVector(n, -S.curb);
-        const P = (v: THREE.Vector2, y: number): THREE.Vector3 => new THREE.Vector3(v.x, y, v.y);
-        const yp = top(p.x, p.y);
-        const yq = top(q.x, q.y);
-        const lift = f.ground.lift;
-        // Canto (mira a la calzada) y la franja de arriba del bordillo (apenas sobre la losa).
-        const face = [P(p, yp - S.height - f.ground.bury), P(q, yq - S.height - f.ground.bury), P(q, yq), P(p, yp)];
-        const facing = new THREE.Vector3().subVectors(face[1], face[0]).cross(new THREE.Vector3().subVectors(face[3], face[0]));
-        if (facing.x * n.x + facing.z * n.y > 0) stone.quad(face[0], face[1], face[2], face[3], curbColor);
-        else stone.quad(face[1], face[0], face[3], face[2], curbColor);
-        const band = [P(p, yp + lift), P(q, yq + lift), P(qIn, top(qIn.x, qIn.y) + lift), P(pIn, top(pIn.x, pIn.y) + lift)];
-        const up = new THREE.Vector3().subVectors(band[1], band[0]).cross(new THREE.Vector3().subVectors(band[3], band[0])).y > 0;
-        if (up) stone.quad(band[0], band[1], band[2], band[3], curbColor);
-        else stone.quad(band[1], band[0], band[3], band[2], curbColor);
-      }
-    }
-    site.ground(
-      ring.map((p) => new THREE.Vector3(p.x, 0, p.y)),
-      S.height,
-    );
+  /** Vereda (o el piso de un parterre) de esta calle: ver `pavement`. */
+  private pavement(s: Sidewalk, S: PavedStyle, stone: Batch, site: PlaceSite): void {
+    pavement(s, S, this.f.ground, (x, z) => this.kit.terrain(x, z), stone, site);
   }
+}
+
+/**
+ * Vereda (o el piso de un parterre): la losa a `height` sobre el terreno (en tramos de
+ * `ground.step` que lo siguen), con su dibujo en uv del marco local; en los lados que dan a la
+ * calzada, el bordillo (su canto y su franja de arriba), que baja `ground.bury` bajo la calzada y
+ * sube `ground.lift` sobre la losa. Sirve para una calle y para cualquier lugar.
+ */
+export function pavement(
+  s: Sidewalk,
+  S: PavedStyle,
+  ground: { step: number; lift: number; bury: number },
+  terrain: (x: number, z: number) => number,
+  stone: Batch,
+  site: { ground(outline: THREE.Vector3[], offset: number): void },
+): void {
+  const step = ground.step;
+  const color = new THREE.Color(S.color);
+  const curbColor = new THREE.Color(S.curbColor);
+  const ring = s.ring.map(([x, z]) => new THREE.Vector2(x, z));
+  const top = (x: number, z: number): number => terrain(x, z) + S.height;
+  // Losa: sigue el terreno, con el dibujo de la vereda.
+  pave(stone, s.ring, top, step, color, { pattern: patternOf(S.pattern), scale: S.scale });
+  // Bordillos: hacia afuera del polígono (la calzada).
+  let area = 0;
+  for (let k = 0; k < ring.length; k++) {
+    const p = ring[k];
+    const q = ring[(k + 1) % ring.length];
+    area += p.x * q.y - q.x * p.y;
+  }
+  const outward = (dx: number, dz: number): THREE.Vector2 => (area > 0 ? new THREE.Vector2(dz, -dx) : new THREE.Vector2(-dz, dx));
+  for (const i of s.curbs) {
+    const a = ring[i];
+    const b = ring[(i + 1) % ring.length];
+    const len = a.distanceTo(b);
+    const dir = b.clone().sub(a).divideScalar(len);
+    const n = outward(dir.x, dir.y);
+    const parts = Math.max(1, Math.ceil(len / step));
+    for (let k = 0; k < parts; k++) {
+      const p = a.clone().addScaledVector(dir, (len * k) / parts);
+      const q = a.clone().addScaledVector(dir, (len * (k + 1)) / parts);
+      const pIn = p.clone().addScaledVector(n, -S.curb);
+      const qIn = q.clone().addScaledVector(n, -S.curb);
+      const P = (v: THREE.Vector2, y: number): THREE.Vector3 => new THREE.Vector3(v.x, y, v.y);
+      const yp = top(p.x, p.y);
+      const yq = top(q.x, q.y);
+      const lift = ground.lift;
+      // Canto (mira a la calzada) y la franja de arriba del bordillo (apenas sobre la losa).
+      const face = [P(p, yp - S.height - ground.bury), P(q, yq - S.height - ground.bury), P(q, yq), P(p, yp)];
+      const facing = new THREE.Vector3().subVectors(face[1], face[0]).cross(new THREE.Vector3().subVectors(face[3], face[0]));
+      if (facing.x * n.x + facing.z * n.y > 0) stone.quad(face[0], face[1], face[2], face[3], curbColor);
+      else stone.quad(face[1], face[0], face[3], face[2], curbColor);
+      const band = [P(p, yp + lift), P(q, yq + lift), P(qIn, top(qIn.x, qIn.y) + lift), P(pIn, top(pIn.x, pIn.y) + lift)];
+      const up = new THREE.Vector3().subVectors(band[1], band[0]).cross(new THREE.Vector3().subVectors(band[3], band[0])).y > 0;
+      if (up) stone.quad(band[0], band[1], band[2], band[3], curbColor);
+      else stone.quad(band[1], band[0], band[3], band[2], curbColor);
+    }
+  }
+  site.ground(
+    ring.map((p) => new THREE.Vector3(p.x, 0, p.y)),
+    S.height,
+  );
 }

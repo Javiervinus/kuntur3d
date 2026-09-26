@@ -101,10 +101,23 @@ export function medianLamps(style: MedianStyle, medians: readonly Median[]): { x
  * (hacia su calzada), con su altura sobre el pie y hacia dónde sale el brazo (ángulo local).
  */
 export function medianLights(style: MedianStyle, medians: readonly Median[]): { x: number; z: number; h: number; out: number }[] {
-  const { pole, arm } = style.lamps;
-  return medianLamps(style, medians).flatMap((l) =>
-    [-1, 1].map((s) => ({ x: l.x, z: l.z + s * arm.reach, h: pole.height + arm.rise, out: s > 0 ? Math.PI / 2 : -Math.PI / 2 })),
-  );
+  return medianLamps(style, medians).flatMap((l) => lampLightsAt(style.lamps, l.x, l.z, TWO_ARMS));
+}
+
+/** Los brazos del poste del parterre: uno hacia cada calzada (−z y +z del poste). */
+const TWO_ARMS = [-1, 1] as const;
+
+/** Un poste de brazos: el fuste, los brazos y la luminaria (lo común del parterre y de los postes de un lugar). */
+export type LampStyle = Pick<MedianStyle['lamps'], 'pole' | 'arm' | 'head' | 'light' | 'glow'>;
+
+/**
+ * Las luces de un poste con pie en (x, z) y un brazo hacia cada lado de `sides` (±1 = hacia ±z del
+ * poste, sin girar): una por luminaria, en su punta, con su altura sobre el pie y hacia dónde sale
+ * (atan2(z, x) del marco del poste).
+ */
+export function lampLightsAt(lamps: LampStyle, x: number, z: number, sides: readonly number[]): { x: number; z: number; h: number; out: number }[] {
+  const { pole, arm } = lamps;
+  return sides.map((s) => ({ x, z: z + s * arm.reach, h: pole.height + arm.rise, out: s > 0 ? Math.PI / 2 : -Math.PI / 2 }));
 }
 
 /** Dónde van los árboles (marco de la calle), por la línea media, sin pisar un poste. */
@@ -140,8 +153,16 @@ export function medianTrees(style: MedianStyle, medians: readonly Median[]): { x
  * plana en cada punta, un poco inclinada hacia la calzada (su lente brilla de noche).
  */
 export function medianLampModel(style: MedianStyle): THREE.BufferGeometry {
-  const c = colorsOf(style.colors);
-  const { pole, arm, head } = style.lamps;
+  return lampModel(style.lamps, style.colors, TWO_ARMS);
+}
+
+/**
+ * Un poste de brazos (para instanciar; pie en el origen): base, fuste que se afina y un brazo con
+ * su luminaria LED hacia cada lado de `sides` (±1 = hacia ±z; [1] es el poste de un brazo).
+ */
+export function lampModel(lamps: LampStyle, colors: MedianStyle['colors'], sides: readonly number[]): THREE.BufferGeometry {
+  const c = colorsOf(colors);
+  const { pole, arm, head } = lamps;
   const b = new Batch();
   const put = (g: THREE.BufferGeometry, m: THREE.Matrix4, color: THREE.Color, surface: Surface = {}): void => {
     b.geometry(g, m, color, surface);
@@ -152,7 +173,7 @@ export function medianLampModel(style: MedianStyle): THREE.BufferGeometry {
   put(new THREE.CylinderGeometry(baseR, baseR, baseH, pole.sides), at(0, baseH / 2, 0), c.pole);
   const [r0, r1] = pole.radius;
   put(new THREE.CylinderGeometry(r1, r0, pole.height - baseH, pole.sides, 1, true), at(0, (pole.height + baseH) / 2, 0), c.pole);
-  for (const s of [-1, 1]) {
+  for (const s of sides) {
     // Brazo: un cuarto de elipse del fuste a la punta (sale horizontal, sube al principio).
     const pts: THREE.Vector3[] = [];
     for (let k = 0; k <= arm.segments; k++) {
@@ -166,7 +187,7 @@ export function medianLampModel(style: MedianStyle): THREE.BufferGeometry {
     const m = at(0, tip.y, tip.z).multiply(tilt);
     b.box(m.clone().multiply(at(0, 0, 0)), hw, hh, hl, c.head);
     const { share, thickness } = head.lens;
-    b.box(m.clone().multiply(at(0, -(hh + thickness) / 2, 0)), hw * share, thickness, hl * share, c.lens, { glow: glowOf(style.lamps.glow) });
+    b.box(m.clone().multiply(at(0, -(hh + thickness) / 2, 0)), hw * share, thickness, hl * share, c.lens, { glow: glowOf(lamps.glow) });
   }
   return b.build();
 }
