@@ -1,0 +1,56 @@
+{
+  "paths": {
+    "spec": "config/houses/{name}/spec.json",
+    "lots": "config/houses/{name}/lotes.json",
+    "models": "config/houses/{name}/modelos.json",
+    "out": "config/houses/{name}.json",
+    "site": "config/sites/{name}.json"
+  },
+  "states": {
+    "construida": "built",
+    "en obra": "building",
+    "lote vacío": "empty"
+  },
+  "measuredRoof": "ancho y fondo del techo medidos",
+  "longRoof": 9.0,
+  "rowMeasured": 3,
+  "roofedTolerance": 0.3,
+  "snap": 0.1,
+  "roofClasses": {
+    "light": 170,
+    "red": 25,
+    "reddish": 8,
+    "grey": 18,
+    "dark": 110
+  },
+  "roofRatio": [0.8, 1.25],
+  "decimals": 3,
+  "mirrorShare": 0.5,
+  "longShareFallback": 0.5,
+  "wall": {"clearance": 0.3, "step": 0.1, "max": 4.0},
+  "lotStates": {
+    "mosaic": "pipeline/.cache/model-place/{place}/trazado/mosaic",
+    "stages": ["Camelia"],
+    "nativeRes": 0.5,
+    "shrink": 0.6,
+    "grid": [14, 10],
+    "fallback": [6.0, 9.0],
+    "roof": {"maxSat": 0.19, "maxTexture": 0.1},
+    "empty": {"minSat": 0.22, "maxRed": 0.2},
+    "red": {"overGreen": 1.2, "overBlue": 1.25, "minValue": 0.4},
+    "source": "huella del techo en Esri World Imagery (WorldView-2, 0,5 m) 2025-04-20, revisada con lot_states.py (2026-09-25; umbrales calibrados mirando 250 lotes de Camelia uno por uno)"
+  },
+  "help": {
+    "longRoof": "fondo del techo medido en el satélite (m) desde el que una casa es de la familia larga: los techos de las compactas miden 7,3-8,3 m con sus aleros y los de las largas 9,5-11",
+    "rowMeasured": "cuántos techos medidos necesita una fila para que el borde de adelante de sus techos salga de la mediana de ellos (si no, de la línea de la fila más el retiro)",
+    "roofedTolerance": "un volumen lo cubre el techo si su tope llega a menos de esto (m) del más alto",
+    "snap": "dos cotas de la planta de un modelo que difieren menos que esto (m) son la misma pared: el ruido de medir en los planos deja escalones de 2-8 cm entre la PB y la PA",
+    "roofClasses": "clases de color aparente del techo en el satélite (las mismas de la investigación, work/roofcolors.py): claro si el canal más bajo pasa `light`; rojo si el rojo le gana al verde y al azul por `red`; rojizo si por `reddish`; gris si los canales difieren menos de `grey` (oscuro si además no pasan `dark`)",
+    "roofRatio": "cuánto puede alejarse el color de un techo del de su clase (por canal) al llevar su color aparente al real",
+    "decimals": "decimales de las coordenadas que se escriben (lotes y plantas recortadas)",
+    "mirrorShare": "parte de las filas que van con la otra mano (espejadas) de la que describe cada modelo: la investigación no encontró cuál domina, así que mitad y mitad, con la semilla de la fila",
+    "longShareFallback": "parte de casas largas en una etapa sin techos medidos en el satélite (sin dato, mitad y mitad); con techos medidos sale de ellos",
+    "lotStates": "lot_states.py: en las etapas `stages` (techos grises, del color del suelo), el estado de cada lote sale de su huella en el mosaico de la investigación (`mosaic`, con `{place}` = spec.json → id), achicada `shrink` m y muestreada en una grilla `grid` (a lo largo, a lo ancho; `fallback` = frente y fondo si el lote no los tiene): techo gris si la saturación media baja de `roof.maxSat` (en los lotes de las filas enteras vacías no baja de ~0,19) y parejo si la mediana del laplaciano del gris, a la resolución nativa de la toma (`nativeRes` m), baja de `roof.maxTexture`; sin techo si la saturación llega a `empty.minSat` y los pixeles rojos (rojo sobre verde y azul por `red.overGreen` y `red.overBlue`, con brillo desde `red.minValue`: techos de teja) no pasan `empty.maxRed`",
+    "wall": "una casa no pasa el muro de su etapa (spec.json → etapas.<etapa>.wall: el tramo del muro perimetral en config/sites/<nombre>.json): si lo pasa, se la trae hacia su calle de a `step` m (hasta `max`) hasta que quede a `clearance` m del muro"
+  }
+}
