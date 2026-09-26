@@ -38,6 +38,7 @@ Ante la duda, mirar cómo se resolvió ahí.
 | `references/browser.md` | En el juego: capturas, física, caminar, transectos, costo de GPU y memoria |
 | `references/pitfalls.md` | Antes de cerrar (la lista de revisión), o cuando algo se ve raro |
 | `scripts/street/*.py` | OSM, satélite enderezado, planos, fotos (Mapillary y propias) y armar la calle (`uv run …`, desde la raíz del repo) |
+| `scripts/urbanization/*.py` | Una urbanización: armar sus casas (`config/houses/<conjunto>.json`) desde sus fuentes y revisar el estado de los lotes en el satélite, con `--check` |
 | `scripts/browser/helpers.js` | Los ayudantes de consola (`window.__mp`); sus valores, en `settings.json` |
 | `assets/compare.html` | La plantilla de la página foto real \| juego |
 
@@ -79,7 +80,9 @@ decide licenciarlas (CC BY-SA 4.0, como el resto del contenido), y entonces sin 
 
 **Privacidad de una casa**: se modela en detalle solo si es de quien la pide o su dueño está de
 acuerdo, y solo lo que se ve desde la calle. **No lleva ficha ni punto de interés** con nombre o
-dirección (entra al mundo como cualquier otro edificio), salvo que el dueño lo pida.
+dirección (entra al mundo como cualquier otro edificio), salvo que el dueño lo pida. Lo mismo en
+una urbanización privada: su estructura y sus casas por modelos, sin ficha, sin punto de interés
+y sin nombres de etapas en la interfaz (los letreros que están en la calle, sí).
 
 ## Reglas
 
@@ -259,8 +262,9 @@ plazas) **sí** se modela aunque cueste, porque es donde está quien explora.
 ## 4. Configurar y modelar
 
 **Primero, ver si ya hay un tipo que sirva** (`references/kit.md`): el palacio, la iglesia, la
-columna, el parque y la calle ya son paramétricos. Un lugar de una familia que ya existe es
-config, o una extensión del builder con config; nunca una copia.
+columna, el parque, la calle, el centro comercial, la torre, la urbanización y la casa ya son
+paramétricos. Un lugar de una familia que ya existe es config, o una extensión del builder con
+config; nunca una copia.
 
 **La config va primero.** Cada lugar es una entrada en `config/game.json` → `monuments.list` con:
 
@@ -273,12 +277,17 @@ config, o una extensión del builder con config; nunca una copia.
 - un bloque por parte: niveles, vanos, ventanas, colores, `ao`, luces y `detail` con las
   distancias de LOD.
 
+Los tipos con archivo propio (centro comercial, torre, urbanización, casa) llevan ahí solo `id`,
+`type`, `file`, `lat`/`lon`, `headingDeg`, `exclude` y `flood`; lo demás va en
+`config/sites/<file>.json` (ver `references/kit.md`, sección 2).
+
 La interfaz de la entrada extiende `MonumentBase` y vive junto a su builder, sumada a la unión
 `MonumentConfig` de `monuments.ts`. El JSON se edita **como texto**, insertando bloques:
 reescribirlo con un serializador reformatea el archivo entero.
 
 **Código.** Un tipo nuevo es un `case` en `src/world/monuments.ts` que arma un builder en su
-propio archivo. El builder recibe su config y un kit:
+propio archivo o, si lleva archivo propio, un `PlaceType` sumado a `PLACE_TYPES`. El builder
+recibe su config y un kit:
 - `root` y los materiales;
 - `terrain(x, z)`;
 - `box`/`circle`/`ring`/`block`/`ground` para la física;
@@ -287,8 +296,8 @@ propio archivo. El builder recibe su config y un kit:
 Las piezas y cómo se arma (coordenadas locales, instancias con LOD, oclusión, luces, despejes)
 están en `references/kit.md`.
 
-**Pensar en el siguiente**: lo que falte en el kit se agrega como pieza genérica. La primera casa
-tiene que dejar un tipo `house` paramétrico, para que la próxima sea solo config y fotos.
+**Pensar en el siguiente**: lo que falte en el kit se agrega como pieza genérica. El tipo `house`
+ya es paramétrico: la próxima casa es solo config y fotos.
 
 ## 5. Física
 
@@ -343,12 +352,13 @@ las capturas no mostraban. Verificar cada hallazgo, corregir y volver a mirar en
 ## 9. Documentar y cerrar
 
 - **Lugar público**: su ficha en `config/places.json` (texto, dato curioso, año, `sources` con
-  cada URL verificada, foto de Commons con su `focus`). Si ya existe, corregirla con lo que salió
+  cada URL verificada, foto de Commons con su `focus`). La foto, solo con licencia clara: una
+  subida como CC0 por quien no es su autor no va. Si ya existe, corregirla con lo que salió
   en la investigación. La foto de la ficha se baja con `uv run pipeline/build_world.py --steps
   places`. **Casa o negocio**: sin ficha, salvo que el dueño la quiera.
-- `docs/lugares.md`: el lugar en "Íconos" o "Calles" (qué tiene y cómo se recorre) y su fila
-  en "Costo". Si es de los que la gente más reconoce, también en la lista de "Qué es" del
-  `README.md`, que se mantiene corta.
+- `docs/lugares.md`: el lugar en su sección ("Íconos", "Centros comerciales", "Urbanizaciones"
+  o "Calles": qué tiene y cómo se recorre) y su fila en "Costo". Si es de los que la gente más
+  reconoce, también en la lista de "Qué es" del `README.md`, que se mantiene corta.
 - Si se agregó una pieza al kit, un dibujo, un tipo o un script: anotarlo en
   `references/kit.md` (o en la referencia que corresponda) y en "Cómo se modela un lugar" de
   `docs/lugares.md`.

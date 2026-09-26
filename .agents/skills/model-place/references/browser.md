@@ -173,16 +173,33 @@ parterre hasta]`. En la Alborada se midió con `median: 12`.
 // → {mb, geometries}
 ```
 
+Cuenta cada arreglo una sola vez: los atributos y el índice de cada geometría (aunque dos
+geometrías compartan un atributo, como las variantes de un modelo de casa) y los búferes de
+instancias de las `InstancedMesh` (`instanceMatrix` e `instanceColor`).
+
 **Tiempo de armado**: importar el builder desde la página (`/src/world/<builder>.ts`) y armar
-una copia sin física, cronometrando. Referencias:
+una copia sin física, cronometrando. Un lugar con archivo se arma con el `PlaceKit` de
+`Monuments`: se cronometra `new Monuments` con la lista de solo ese lugar, menos uno con la lista
+vacía (los mismos argumentos que en `src/main.ts`, con `__gye.geo` y `__gye.heightmap`), cinco
+veces en la misma página, y se da la mediana. El armado en frío (el de la carga) sale del perfil
+de CPU de una traza de la carga. Referencias:
 
 | Lugar | Tiempo |
 |---|---|
 | Palacio | ~80 ms |
 | La avenida entera | ~105 ms |
 | La iglesia | 16 ms |
+| Mall del Sol | ~20 ms |
+| San Marino y CityMall | ~15 ms cada uno |
+| The Point | ~12 ms |
+| Paseo Shopping Durán | ~17 ms |
+| Durán City | ~55 ms |
 
-**GPU** (el método de las copias): prender y apagar un solo edificio se pierde en el ruido.
+**GPU** (el método de las copias): prender y apagar un solo edificio se pierde en el ruido. El
+ayudante agrega N copias del lugar (`copies`, corridas `offset` m) que comparten geometría y
+material, y las prende y apaga en rondas intercaladas (`rounds`: se asienta `settle` ms y se
+muestrea `sample` ms). El resultado es la mediana de las diferencias pareadas ÷ N, con su
+intervalo intercuartil.
 
 1. Llevar la cámara a la vista más cargada con `shotAt`.
 2. Correr de fondo:
@@ -194,22 +211,38 @@ una copia sin física, cronometrando. Referencias:
    ```
 
 3. Para saber qué pesa, repetir con variantes: sin sombras, sin una capa, solo el macizo.
-4. **Solo unas cuadras** de una calle: cada cuadra es un grupo que se llama
-   `street-<id de la cuadra>` (p. ej. `street-N1024`). Se mide pasando ese nombre en vez del id
-   de la calle.
+4. **Solo una parte**: se pasa el nombre de su grupo o su malla en vez del id. Cada cuadra de una
+   calle es `street-<id de la cuadra>` (p. ej. `street-N1024`); en un lugar con archivo, cada
+   pedazo es un grupo `<id>-<parte>` (p. ej. `duranCity-veredas-1_1`).
+
+Dos métricas, que se dan por separado:
+- **Copias opacas** (lo de `settings.json`): vértices, sombras y llamadas de dibujo. Es la
+  métrica de la vara (la tabla de abajo).
+- **Copias transparentes** (`transparent: true`, sin escribir profundidad): lo mismo más el
+  sombreado de cada pixel. Es una cota alta del costo por fragmento y depende de cuánta pantalla
+  tapa el lugar. Hace falta porque en GPUs de Apple las copias opacas en el mismo lugar no miden
+  el costo por pixel (solo se pinta la de adelante).
 
 Trampas:
-- En GPUs de Apple, copias **opacas** en el mismo lugar no miden el costo por pixel (solo se pinta
-  la de adelante): para eso, `transparent: true`. El ayudante les copia el shader propio del
-  juego, porque `material.clone()` lo pierde.
+- **Un lugar liviano da negativo** con 10 copias opacas: con poca carga, la GPU baja el reloj y
+  bajar la carga no baja el tiempo. Se repite con 30 (entre 10 y 30, según cuánto pese).
+- **La calidad adaptativa** cambia la resolución en medio de la medición: el ayudante la apaga
+  (`__gye.quality.cfg.adaptive = false`) mientras mide y al terminar la deja como estaba.
+- **La resolución** va en el resultado (`pixelRatio`): se dice junto a los números.
+- **Una sola pestaña del juego** y un solo agente midiendo: todas comparten la misma GPU.
+- **Medir la vara en la misma corrida** (el Palacio, desde una vista parecida): los números
+  absolutos dependen de la carga de la máquina.
+- El ayudante copia a las copias transparentes el shader propio del juego, porque
+  `material.clone()` lo pierde, y a todas las copias los ganchos de render y de sombra
+  (`onBeforeRender`, `onBeforeShadow`…), porque `clone()` tampoco los copia. Sin ellos, las casas
+  instanciadas por celdas se dibujan siempre con todo el detalle y en todas las cascadas: en Durán
+  City daba 0,77 ms en vez de 0,65.
 - Si el servidor de dev recarga la página por un cambio en `src/` o `config/`, la medición se
   pierde: no editar mientras mide.
-- Los números absolutos dependen de la carga de la máquina: comparar solo dentro de la misma
-  corrida.
 
 Referencias medidas (de cerca, sombras incluidas, resolución 2×, en la ventana del navegador del
-agente). Sirven de vara, no de comparación exacta: para comparar de verdad, medir la referencia en
-la misma corrida y desde una vista parecida.
+agente, copias opacas). Sirven de vara, no de comparación exacta: para comparar de verdad, medir
+la referencia en la misma corrida y desde una vista parecida.
 
 | Lugar | GPU | Memoria |
 |---|---|---|
@@ -218,10 +251,15 @@ la misma corrida y desde una vista parecida.
 | Principal de la Alborada (13 cuadras, parterre y retiros) | ~0,4 × la 9 de Octubre en la misma corrida | 8,8 MB (+ atlas de letreros) |
 | Iglesia de San Francisco con su plaza | ~0,15 ms | 3,5 MB |
 | Parque Centenario con la Columna | ~0,11 ms | ~4 MB |
+| Mall del Sol (30 copias; el Palacio, 0,57 ms en la misma corrida) | ~0,22 ms | 4 MB |
+| The Point, desde la base (ídem) | ~0,08 ms | 2,9 MB |
+| Paseo Shopping Durán, desde arriba (30 copias; el Palacio, 0,56 ms en la misma corrida) | ~0,18 ms | 1,6 MB |
+| Durán City, sobre las casas (ídem) | ~0,65 ms | 4,4 MB con las instancias |
 
 Palancas si cuesta de más:
 - adornos chicos sin `castShadow`;
 - distancias de LOD por tipo de pieza;
 - menos lados en lo que no se ve de cerca;
 - partir el macizo en cuadrantes (se descarta lo que queda fuera de cuadro);
-- soldar vértices y compactar (ya lo hacen `Parts` y `Batch`).
+- soldar vértices y compactar: `Parts` suelda y compacta; `Batch` compacta pero no suelda (ver
+  `kit.md`, sección 4).
