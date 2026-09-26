@@ -1,0 +1,2984 @@
+{
+  "name": "CityMall",
+  "sources": [
+    "Marco (lat −2,14091, lon −79,90944, rumbo 24°: centro del predio de OSM, way 138801810, eje x a lo largo de la Av. Benjamín Carrión) y hoja de medidas: pipeline/.cache/model-place/cityMall/sheet.json y notes.md (2026-09-25).",
+    "Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir): plantas, techos (lucernarios, patios de máquinas, cúpula de los cines, terraza roja), árboles. Toma oblicua: los techos altos pueden verse corridos 1-3 m; el frente y el tambor salen de las fotos a pie de calle y del predio de OSM (±3 m).",
+    "Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m): alturas de control de cada volumen.",
+    "Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0): estructura del frente en 2023 (marquesina, alturas por ángulo en panorámicas niveladas con la cámara a 2,2 m, tambor Marathon por tangentes); revestimiento y letreros de 2023 quedaron viejos con la obra de 2025.",
+    "Obra de la fachada: anunciada el 2025-09-14 (Quebakan, 2,5 M USD) y estrenada el 2025-12-10 (Alcaldía de Guayaquil, 2025-12-11). Lo construido sale de foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) y de foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada); el render de sept 2025 no es lo construido (mostraba lamas marrones).",
+    "Posiciones a lo largo del frente renovado (paneles rojos, letreros): proporciones medidas en la foto aérea oficial (el tramo de Megamaxi con escala uniforme, ~9,2 px/m, anclado a las letras de 2,4 m de alto) y en la foto Mapillary 1212013139478402 (2023); ±3-5 m (estimado).",
+    "Google Street View oct–dic 2024 (antes de la obra) y fotos y videos de usuarios en la ficha «C.C. City Mall» (Eurocontrol Ecuador, Kuro), mar–jun 2026, y la esfera de Rcg360 de oct 2025: solo mirados, nada copiado; todo lo que sale de ahí va como estimado. Deja viejas las fotos de 2023 y 2024: tambor cobre, caja roja de Kywi, rayas amarillas y verdes, paneles rojos con ETAFASHION y multicines, panel gris del logo CityMall, pórtico cobre de City Garden.",
+    "Parqueo: 1.000 espacios (citymall.com.ec); a nivel de calle bajo la parte de atrás, abierto tras rejas en Pedro Valverde y Jorge Jara Grau (Street View nov 2024, Rcg360 oct 2025); no hay parqueo en altura ni en la azotea (satélite 2025, aérea de Commons 2012).",
+    "Noche: desde el estreno los paneles rojos se encienden desde atrás (rojo saturado), igual que los letreros CityMall, multicines y ETAFASHION y la pantalla (guayaquil.gob.ec 2025-12-11, radiocresatelital.com, TikTok 2025-12-10; solo mirado). El tambor Marathon y los lados: sin dato de noche. Los plafones de las marquesinas alumbran el piso (uno cada ~7-9 m, potencia 0,5 de un poste de la calle, LED): estimado."
+  ],
+  "clear": [
+    [[-108, -72], [40, -72], [40, -80], [62, -80], [62, -72], [116.55, -70.8], [106.37, -10.8], [106.5, 6], [101, 15.5], [79, 33.5], [60.5, 44], [41, 55], [30, 61], [17, 64], [17, 76], [-60, 77], [-108, 76.5]]
+  ],
+  "ground": {
+    "step": 2,
+    "lift": 0.12,
+    "bury": 0.5,
+    "wall": 0.25
+  },
+  "detail": {
+    "near": 280,
+    "arc": 1.5,
+    "sides": 16,
+    "small": 8,
+    "curve": 4,
+    "film": 0.01
+  },
+  "finishes": {
+    "glass": {
+      "roughness": 0.1,
+      "metalness": 0.35
+    },
+    "metal": {
+      "roughness": 0.4,
+      "metalness": 0.6
+    },
+    "rails": {
+      "roughness": 0.6,
+      "metalness": 0.3,
+      "cutout": true
+    },
+    "letters": {
+      "roughness": 0.6,
+      "metalness": 0.1,
+      "cutout": true
+    },
+    "clear": {
+      "roughness": 0.2,
+      "metalness": 0.1,
+      "opacity": 0.45
+    }
+  },
+  "lights": {
+    "window": {
+      "color": "#ffd9a3",
+      "intensity": 1.2
+    },
+    "shop": {
+      "color": "#fff1d6",
+      "intensity": 1.6
+    },
+    "soffit": {
+      "color": "#fff0d0",
+      "intensity": 2.2
+    },
+    "sign": {
+      "color": "#fff6e6",
+      "intensity": 1.5
+    },
+    "panel": {
+      "color": "#ff3b2e",
+      "intensity": 0.9
+    },
+    "screen": {
+      "color": "#d6e4ff",
+      "intensity": 1.3
+    },
+    "garage": {
+      "color": "#e6eeff",
+      "intensity": 0.8
+    },
+    "stripes": {
+      "color": "#ffe4a0",
+      "intensity": 0.45
+    }
+  },
+  "skins": {
+    "beige": {
+      "color": "#D8CBBF",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1, 1.2],
+      "source": "muro beige de Megamaxi y del remate NE: foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) (muestra #D8CBBF); placas de ~3,6 × 2,5 m estimadas (Street View oct 2024)"
+    },
+    "redPanel": {
+      "color": "#B5524A",
+      "material": "stone",
+      "pattern": "glazing",
+      "scale": [0.455, 0.357],
+      "tone": 0.42,
+      "glow": "panel",
+      "source": "relleno rojo de los paneles (chapa perforada) con su retícula de montantes cada ~2,2 × 2,8 m: foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) (muestras #B26F60, #A45B52, #B86F5A con bruma, a ojo más saturado); fotos de usuarios mar–may 2026 #A85A57; de noche se encienden desde atrás (estreno 2025-12-10)"
+    },
+    "redBar": {
+      "color": "#D9281C",
+      "material": "metal",
+      "source": "montantes y borde rojo de los paneles: foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) (muestra en el panel Kywi)"
+    },
+    "darkPanel": {
+      "color": "#6A6E6B",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.9, 1.2],
+      "source": "panel liso del logo CityMall: gris medio de día (#797B76, estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 31) y casi negro de noche (#2F3B3F en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) con gradación verdosa); tono intermedio estimado"
+    },
+    "stripeBack": {
+      "color": "#262B29",
+      "material": "stone",
+      "source": "fondo oscuro entre las rayas de la ventana (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); estimado"
+    },
+    "stripeYellow": {
+      "color": "#EED062",
+      "material": "stone",
+      "glow": "stripes",
+      "source": "rayas verticales amarillas de la ventana bajo la viga: foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); de noche se encienden desde atrás (foto aérea nocturna del estreno, quebakan.com 2025-12-12, solo mirada; comparación en el juego 2026-09-25)"
+    },
+    "stripeGreen": {
+      "color": "#729469",
+      "material": "stone",
+      "glow": "stripes",
+      "source": "rayas verticales verdes: foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); de noche se encienden desde atrás (foto aérea nocturna del estreno, quebakan.com 2025-12-12, solo mirada; comparación en el juego 2026-09-25)"
+    },
+    "stripeLime": {
+      "color": "#A9C27A",
+      "material": "stone",
+      "glow": "stripes",
+      "source": "rayas verde claro que alternan con las verdes (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); tono estimado; de noche se encienden desde atrás (foto aérea nocturna del estreno, quebakan.com 2025-12-12, solo mirada; comparación en el juego 2026-09-25)"
+    },
+    "beam": {
+      "color": "#E3DCD0",
+      "material": "stone",
+      "source": "viga suelta de 2011 sobre el tramo Megamaxi, con sus puntales (Street View oct 2024 captura 05; estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 30): crema claro, estimado"
+    },
+    "curtainGlass": {
+      "color": "#56646B",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.55, 0.42],
+      "tone": 0.35,
+      "glow": "window",
+      "lit": 0.5,
+      "source": "muro cortina de vidrio gris entre el tambor y la caja de Kywi (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); carpintería estimada"
+    },
+    "shopGlass": {
+      "color": "#3A4446",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.4, 0.3],
+      "tone": 0.3,
+      "glow": "shop",
+      "lit": 0.85,
+      "source": "vitrinas de los locales bajo la marquesina (Mapillary 2023, Street View oct 2024); tono estimado"
+    },
+    "pier": {
+      "color": "#4A4D50",
+      "material": "stone",
+      "source": "pilastras gris oscuro entre locales de la planta baja (Street View oct 2024, captura 05)"
+    },
+    "canopyTop": {
+      "color": "#6E7174",
+      "material": "stone",
+      "source": "marquesina gris oscuro (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); estimado"
+    },
+    "canopySoffit": {
+      "color": "#B9BBBA",
+      "material": "stone",
+      "ao": 0.75,
+      "source": "cielo raso de la marquesina con listones claros (Street View oct 2024, captura 05); estimado"
+    },
+    "canopyFascia": {
+      "color": "#3A3E42",
+      "material": "metal",
+      "source": "canto gris oscuro de la marquesina: foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) (#3A3E42)"
+    },
+    "soffitLamp": {
+      "color": "#FFF6E4",
+      "material": "stone",
+      "glow": "soffit",
+      "source": "plafones bajo las marquesinas y el pórtico (Street View oct 2024; video de usuario may 2026); estimado"
+    },
+    "drumGlass": {
+      "color": "#4F5A62",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.42, 0.3],
+      "tone": 0.4,
+      "glow": "window",
+      "lit": 0.6,
+      "source": "cilindro de vidrio del tambor Marathon (Street View oct 2024, captura 33); tono estimado"
+    },
+    "drumBand": {
+      "color": "#8F9195",
+      "material": "metal",
+      "source": "antepechos grises entre las cintas de vidrio del tambor (Street View oct 2024, captura 33)"
+    },
+    "copper": {
+      "color": "#B47450",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.6, 0.8],
+      "source": "concha cobre del tambor Marathon: foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) (#BF7D55) y fotos de usuarios mar 2026 (#B9967E con bruma); tono intermedio estimado"
+    },
+    "drumCap": {
+      "color": "#A3A5A4",
+      "material": "metal",
+      "source": "casquete gris abombado del tambor (Street View oct 2024, captura 33)"
+    },
+    "pillarWhite": {
+      "color": "#E8E8E4",
+      "material": "stone",
+      "source": "columnas blancas redondas de la vitrina del tambor (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada))"
+    },
+    "ledScreen": {
+      "color": "#27313B",
+      "material": "stone",
+      "glow": "screen",
+      "source": "pantalla LED bajo ETAFASHION (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada), con una película en cartel): sin imagen (el contenido cambia); de noche emite"
+    },
+    "ledFrame": {
+      "color": "#1F2124",
+      "material": "metal",
+      "source": "marco negro de la pantalla (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada))"
+    },
+    "ledGlass": {
+      "color": "#ABBAB8",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.1, 0.83],
+      "tone": 0.6,
+      "glow": "window",
+      "lit": 0.5,
+      "source": "cara lateral de la caja saliente, vidrio celeste pálido con montantes horizontales (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 21)"
+    },
+    "soffitDark": {
+      "color": "#393839",
+      "material": "stone",
+      "ao": 0.8,
+      "source": "cielo raso gris carbón bajo la caja saliente y el pórtico (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 15)"
+    },
+    "entryPanel": {
+      "color": "#93A09F",
+      "material": "metal",
+      "pattern": "slabs",
+      "scale": [1.2, 1.2],
+      "source": "panel metálico gris sobre las puertas de la entrada central (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 15)"
+    },
+    "lightStrip": {
+      "color": "#F4F4EE",
+      "material": "stone",
+      "glow": "soffit",
+      "source": "franja de luz blanca bajo el cielo raso de la entrada central (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 15)"
+    },
+    "portico": {
+      "color": "#B0683F",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1, 2],
+      "source": "pórtico cobre de City Garden: foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada) (#CB8551) y foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) (#9D5939)"
+    },
+    "porticoTop": {
+      "color": "#3B3B3B",
+      "material": "stone",
+      "source": "losa oscura del pórtico (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); estimado"
+    },
+    "darkBand": {
+      "color": "#2B2E30",
+      "material": "stone",
+      "source": "franja oscura de letreros sobre los locales, bajo el pórtico (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada))"
+    },
+    "roofGallery": {
+      "color": "#A9A9A2",
+      "material": "stone",
+      "pattern": "shutter",
+      "scale": [1, 0.3],
+      "source": "techo abovedado nervado de la galería curva NE (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)); tono estimado"
+    },
+    "terracotta": {
+      "color": "#B4553C",
+      "material": "stone",
+      "pattern": "tiles",
+      "scale": [1.25, 1.25],
+      "source": "piso rojo teja de la terraza NE: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (#B4553C)"
+    },
+    "glassRail": {
+      "color": "#B8CCD0",
+      "material": "clear",
+      "source": "baranda de vidrio de las terrazas NE (Street View nov 2024, captura 11; foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada))"
+    },
+    "slabWhite": {
+      "color": "#ECEAE4",
+      "material": "stone",
+      "source": "losa blanca del balcón del remate NE (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada))"
+    },
+    "peach": {
+      "color": "#A88D7C",
+      "material": "stone",
+      "pattern": "tiles",
+      "scale": [0.5, 0.5],
+      "source": "marco de losetas durazno de la entrada de Felipe Pezo (estimado (Google Street View, solo mirado, oct–dic 2024), captura 08); ~0,8 m por loseta estimado"
+    },
+    "louverGrey": {
+      "color": "#8F9195",
+      "material": "metal",
+      "pattern": "shutter",
+      "scale": [1, 0.5],
+      "source": "celosía gris de lamas horizontales de la entrada de Felipe Pezo (estimado (Google Street View, solo mirado, oct–dic 2024), captura 08)"
+    },
+    "bandMetal": {
+      "color": "#8F9195",
+      "material": "metal",
+      "source": "bandas metálicas grises del volumen curvo en voladizo (estimado (Google Street View, solo mirado, oct–dic 2024), captura 08)"
+    },
+    "darkGlass": {
+      "color": "#2E3A45",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.4, 0.5],
+      "tone": 0.35,
+      "glow": "window",
+      "lit": 0.55,
+      "source": "cintas de vidrio oscuro del volumen en voladizo (estimado (Google Street View, solo mirado, oct–dic 2024), captura 08)"
+    },
+    "whiteWall": {
+      "color": "#E4E1DA",
+      "material": "stone",
+      "source": "franja blanca sobre la celosía (estimado (Google Street View, solo mirado, oct–dic 2024), captura 08)"
+    },
+    "fpSoffit": {
+      "color": "#E4D3BF",
+      "material": "stone",
+      "ao": 0.8,
+      "source": "cielo raso beige cálido bajo el volumen en S en voladizo de Felipe Pezo, con un filo oscuro en el borde (Google Street View, solo mirado, dic 2024, captura 08: #7F746A a la sombra, más cálido que la franja blanca de al lado, que ahí sale #C3BFBB). Color: el de esa franja (#E4E1DA) con el matiz del cielo raso (la proporción entre sus canales en la foto); lo oscuro es la sombra, que la pone el juego, y la oclusión es la de los otros cielos rasos: estimado"
+    },
+    "nneGrey": {
+      "color": "#707171",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1, 1.2],
+      "source": "caja NNE: violeta en dic 2024, pintada gris medio en oct 2025 (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 35); se toma lo más nuevo, la cara de Felipe Pezo de hoy no se ve en ninguna imagen"
+    },
+    "magenta": {
+      "color": "#8C374F",
+      "material": "stone",
+      "source": "panel rojo magenta alto de la caja NNE, cara de Pedro Valverde (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 35)"
+    },
+    "sideWall": {
+      "color": "#C2BDB7",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.2, 2],
+      "source": "muro ciego gris claro con juntas horizontales de Jorge Jara Grau (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, capturas 26 y 27)"
+    },
+    "ribbed": {
+      "color": "#979589",
+      "material": "metal",
+      "pattern": "shutter",
+      "scale": [1, 0.5],
+      "source": "chapa nervada horizontal de la esquina de atrás (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, captura 36)"
+    },
+    "backWall": {
+      "color": "#B7B5AF",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.25, 1.4],
+      "source": "caja alta ciega gris clara de atrás (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), capturas 23 y 24, nublado)"
+    },
+    "podiumBand": {
+      "color": "#908E88",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.6, 2],
+      "source": "banda maciza del podio del parqueo en Pedro Valverde (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 24: #908E88)"
+    },
+    "parkDark": {
+      "color": "#1D2124",
+      "material": "stone",
+      "glow": "garage",
+      "lit": 1,
+      "ao": 0.6,
+      "source": "el parqueo a nivel de calle visto por las aberturas (estimado (Google Street View, solo mirado, oct–dic 2024), captura 26; foto de usuario jun 2026: techo bajo con tubos de luz)"
+    },
+    "rollDoor": {
+      "color": "#9A9C9C",
+      "material": "metal",
+      "pattern": "shutter",
+      "scale": [1, 1],
+      "source": "puerta enrollable de servicio en la esquina de atrás (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, captura 36)"
+    },
+    "banner1": {
+      "color": "#E9E6E1",
+      "material": "stone",
+      "source": "banderola blanca de outlet en ménsula (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, captura 27); el contenido cambia: sin texto"
+    },
+    "banner2": {
+      "color": "#C4353E",
+      "material": "stone",
+      "source": "banderola roja de outlet en ménsula (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, captura 27); el contenido cambia: sin texto"
+    },
+    "roofSheet": {
+      "color": "#D9D2C3",
+      "material": "stone",
+      "source": "techo de chapa clara de la caja principal: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (#D9D2C3)"
+    },
+    "roofGrey": {
+      "color": "#8E918D",
+      "material": "stone",
+      "source": "membrana gris de la franja del frente y de los techos bajos: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)"
+    },
+    "roofWhite": {
+      "color": "#E6E3DC",
+      "material": "stone",
+      "source": "techos blancos (caja clara del frente, remate NE): Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)"
+    },
+    "roofMaroon": {
+      "color": "#6B2A2C",
+      "material": "stone",
+      "source": "techo granate del podio de atrás: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (#6B2A2C)"
+    },
+    "roofConcrete": {
+      "color": "#B9B3A6",
+      "material": "stone",
+      "source": "techo claro del tramo oeste del podio: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)"
+    },
+    "roofDrum": {
+      "color": "#8F918E",
+      "material": "stone",
+      "source": "techo redondo gris de los cines: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)"
+    },
+    "skyGlass": {
+      "color": "#8FA6AA",
+      "material": "glass",
+      "glow": "window",
+      "lit": 0.4,
+      "source": "franjas translúcidas de los lucernarios: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); tono estimado"
+    },
+    "skyFrame": {
+      "color": "#C9C9C4",
+      "material": "metal",
+      "source": "marcos claros de los lucernarios (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir))"
+    },
+    "unitWhite": {
+      "color": "#E2E2DD",
+      "material": "stone",
+      "source": "equipos de aire blancos de los techos: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)"
+    },
+    "fanDark": {
+      "color": "#3C3F42",
+      "material": "stone",
+      "source": "ventiladores de los equipos (estimado)"
+    },
+    "planterWall": {
+      "color": "#BDB8AE",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "muro bajo de la jardinera del frente (Street View oct 2024, captura 05)"
+    },
+    "hedge": {
+      "color": "#4E6B34",
+      "material": "stone",
+      "pattern": "soil",
+      "scale": [1, 1],
+      "source": "seto y arbustos de flor de la jardinera del frente (Street View oct 2024, captura 05)"
+    },
+    "railSteel": {
+      "color": "#C6C8C8",
+      "material": "rails",
+      "pattern": "bars",
+      "scale": [1, 1],
+      "source": "baranda de tubo gris claro entre la vereda techada y la jardinera (Street View oct 2024, captura 05)"
+    },
+    "railPost": {
+      "color": "#C6C8C8",
+      "material": "metal",
+      "source": "parantes de la baranda (Street View oct 2024)"
+    },
+    "railBase": {
+      "color": "#9A968F",
+      "material": "stone",
+      "source": "bordillo bajo la baranda (estimado)"
+    },
+    "fenceWhite": {
+      "color": "#E6E7E4",
+      "material": "rails",
+      "pattern": "bars",
+      "scale": [1, 1],
+      "source": "reja blanca de tubo del parqueo de atrás (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 24)"
+    },
+    "fenceWhitePost": {
+      "color": "#E6E7E4",
+      "material": "metal",
+      "source": "parantes de la reja de atrás (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada))"
+    },
+    "fenceBlack": {
+      "color": "#2E3032",
+      "material": "rails",
+      "pattern": "bars",
+      "scale": [1, 1],
+      "source": "reja negra de barrotes de la vereda de Felipe Pezo (estimado (Google Street View, solo mirado, oct–dic 2024), dic 2024, capturas 08 y 09)"
+    },
+    "fenceBlackPost": {
+      "color": "#2E3032",
+      "material": "metal",
+      "source": "parantes de la reja de Felipe Pezo"
+    },
+    "shelterRoof": {
+      "color": "#5E6266",
+      "material": "metal",
+      "source": "techo de la parada de bus del frente (Street View oct 2024, captura 05; Mapillary 2023)"
+    },
+    "shelterSoffit": {
+      "color": "#5E6266",
+      "material": "metal",
+      "ao": 0.8,
+      "source": "cara de abajo del techo de la parada: el color del techo (Street View oct 2024, captura 05; Mapillary 2023), a la sombra (oclusión estimada)"
+    },
+    "shelterPost": {
+      "color": "#9A9C9E",
+      "material": "metal",
+      "source": "postes de la parada (Street View oct 2024)"
+    },
+    "bench": {
+      "color": "#7A7C7E",
+      "material": "metal",
+      "source": "banca de la parada (estimado)"
+    },
+    "totemBlack": {
+      "color": "#141516",
+      "material": "stone",
+      "source": "tótem negro de City Garden (foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada); foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada))"
+    }
+  },
+  "volumes": [
+    {
+      "id": "caja",
+      "name": "Caja principal (hipermercado Megamaxi, Kywi y tiendas; 3 niveles) con el patio de máquinas de atrás",
+      "ring": [[-98, -59], [-12, -59], [-12, -50], [16, -50], [16, 18], [-98, 18]],
+      "base": 0,
+      "height": 19.5,
+      "parapet": [1, 0.3],
+      "skin": "backWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofSheet"
+      },
+      "faces": [
+        {
+          "sides": [5],
+          "span": [0, 58],
+          "bands": [],
+          "openings": [
+            {
+              "u": 6,
+              "width": 7,
+              "y": [0, 3.8],
+              "depth": 5,
+              "skin": "parkDark",
+              "repeat": [6, 9.3]
+            }
+          ]
+        },
+        {
+          "sides": [5],
+          "span": [58, 77],
+          "bands": [
+            {
+              "y": [9, 20.5],
+              "skin": "ribbed"
+            }
+          ]
+        },
+        {
+          "sides": [0],
+          "span": [0, 22],
+          "bands": [
+            {
+              "y": [8, 20.5],
+              "skin": "ribbed"
+            }
+          ]
+        },
+        {
+          "sides": [2],
+          "bands": [],
+          "openings": [
+            {
+              "u": 13,
+              "width": 20,
+              "y": [0, 4.5],
+              "depth": 6,
+              "skin": "parkDark"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (borde del techo, ±2 m); el muro SSO va en x ≈ −98 y no en el borde del predio (comparación en el juego, 2026-09-25: Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) pasa de 0 a 20 m entre x −100 y −97 en todo el lado; en el satélite el techo se ve en x ≈ −95, corrido por la toma oblicua, y la sombra llega a x ≈ −110, 11 m afuera del pie del muro; ±1,5 m); atrás el muro alto en z ≈ −59 sobre el podio (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada)); alto 19,5: sombra del muro SSO sobre la calle (11 m con sol de ~10:30 → 19,3 m) y Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p50 19,1; lado SSO de estimado (Google Street View, solo mirado, oct–dic 2024) (nov 2024, capturas 26 y 27): muro ciego con juntas, aberturas del parqueo tras la reja, chapa nervada atrás arriba."
+    },
+    {
+      "id": "podio-oeste",
+      "name": "Podio del parqueo de atrás, tramo oeste (techo claro)",
+      "ring": [[-98, -68], [-70, -68], [-70, -59], [-98, -59]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0.6, 0.25],
+      "skin": "podiumBand",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofConcrete"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [3.8, 4.2],
+              "skin": "podiumBand",
+              "out": 0.15
+            }
+          ],
+          "openings": [
+            {
+              "u": 4.25,
+              "width": 7.3,
+              "y": [0, 3.8],
+              "depth": 1,
+              "skin": "parkDark",
+              "repeat": [3, 8.5]
+            }
+          ],
+          "fins": []
+        },
+        {
+          "sides": [3],
+          "bands": [],
+          "openings": [
+            {
+              "u": 4.5,
+              "width": 4.5,
+              "y": [0, 4.2],
+              "depth": 0.3,
+              "skin": "rollDoor"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "podio del parqueo a nivel de calle en Pedro Valverde: abertura ≈3,5–4 m tras la reja blanca, casi corrida (solo columnas entre los vanos: el fondo oscuro va a 1 m para que se vea el parqueo al mirar de sesgo; comparación en el juego con la captura 24, 2026-09-25), banda maciza hasta ≈7,5–9 m (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), capturas 23 y 24); planta Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (techo granate en x −70…−14 con la punta NNE redondeada, techo claro al oeste); alto 8 estimado (±1 m); la puerta enrollable de servicio con PARE de la esquina SO (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, captura 36)."
+    },
+    {
+      "id": "podio",
+      "name": "Podio del parqueo de atrás (techo granate), con la entrada y salida de autos",
+      "ring": [[-70, -68], [-18.5, -68, 3], [-18.5, -59], [-70, -59]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0.6, 0.25],
+      "skin": "podiumBand",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofMaroon"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [3.8, 4.2],
+              "skin": "podiumBand",
+              "out": 0.15
+            }
+          ],
+          "openings": [
+            {
+              "u": 4.25,
+              "width": 7.3,
+              "y": [0, 3.8],
+              "depth": 1,
+              "skin": "parkDark",
+              "repeat": [5, 8.5]
+            }
+          ],
+          "fins": []
+        }
+      ],
+      "physics": "block",
+      "source": "podio del parqueo a nivel de calle en Pedro Valverde: abertura ≈3,5–4 m tras la reja blanca, casi corrida (solo columnas entre los vanos: el fondo oscuro va a 1 m para que se vea el parqueo al mirar de sesgo; comparación en el juego con la captura 24, 2026-09-25), banda maciza hasta ≈7,5–9 m (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), capturas 23 y 24); planta Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (techo granate en x −70…−14 con la punta NNE redondeada, techo claro al oeste); alto 8 estimado (±1 m); la entrada de servicio (OSM way 1211179132) pasa por x ≈ −12, entre el podio y la caja en voladizo."
+    },
+    {
+      "id": "voladizo",
+      "name": "Caja en voladizo sobre el patio de servicio de atrás (x −10…15)",
+      "ring": [[-10, -61], [15, -61], [15, -50], [-10, -50]],
+      "base": 8,
+      "height": 19.5,
+      "parapet": [1, 0.3],
+      "skin": "backWall",
+      "soffit": "soffitDark",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [8, 8.6],
+              "skin": "podiumBand",
+              "out": 0.1
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "caja en voladizo sobre un piso abierto oscuro con una columna, en x ≈ −8…+15 (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 23); fondo y alto del vacío estimados; Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (hueco oscuro en x −12…13, z −60…−50)."
+    },
+    {
+      "id": "columna",
+      "name": "Columna de la caja en voladizo",
+      "ring": [[1.6, -60.8], [2.4, -60.8], [2.4, -60], [1.6, -60]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0, 0],
+      "skin": "backWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "backWall"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "una columna bajo la caja en voladizo (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 23); lugar estimado."
+    },
+    {
+      "id": "esquina-sso",
+      "name": "Caja de la esquina SSO (sobresale hacia Jorge Jara Grau)",
+      "ring": [[-99.5, 18], [-80, 18], [-80, 43], [-99.5, 43]],
+      "base": 0,
+      "height": 22,
+      "parapet": [0.8, 0.3],
+      "skin": "sideWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [3],
+          "bands": [
+            {
+              "y": [0, 4.6],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [4.6, 5.2],
+              "skin": "pier",
+              "out": 0.1
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 2,
+              "repeat": [3, 3.6],
+              "points": [[0, 11.5], [2.5, 11.5], [2.5, 18.5], [0, 18.5]],
+              "out": 0.9,
+              "skin": "banner1"
+            },
+            {
+              "u": 5.6,
+              "points": [[0, 11.5], [2.5, 11.5], [2.5, 18.5], [0, 18.5]],
+              "out": 0.92,
+              "skin": "banner2"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (techo blanco en x −95…−80, z 18…38; con el desplome de la toma oblicua, el pie queda en x ≈ −99,5: sale ~1,5 m del muro SSO, Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) −100…−101,5 aquí contra −98 en el resto; comparación en el juego 2026-09-25) y estimado (Google Street View, solo mirado, oct–dic 2024) (nov 2024, captura 27: sobresale hacia la calle, con vitrina abajo y 3 banderolas verticales de outlet en ménsulas; sin letrero de Juguetón); alto 22: Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p50 21,6. Las banderolas van lisas (el contenido cambia)."
+    },
+    {
+      "id": "tambor",
+      "name": "Tambor Marathon (esquina SO, Benjamín Carrión y Jorge Jara Grau)",
+      "ring": [[-99, 54, 11.5], [-76, 54, 11.5]],
+      "base": 0,
+      "height": 24,
+      "parapet": [0, 0],
+      "skin": "drumBand",
+      "roof": {
+        "kind": "flat",
+        "skin": "drumCap"
+      },
+      "faces": [
+        {
+          "sides": [0, 1],
+          "bands": [
+            {
+              "y": [0.5, 5.4],
+              "skin": "shopGlass"
+            },
+            {
+              "y": [6.3, 9.9],
+              "skin": "drumGlass"
+            },
+            {
+              "y": [10.9, 14.5],
+              "skin": "drumGlass"
+            },
+            {
+              "y": [15.5, 19],
+              "skin": "drumGlass"
+            },
+            {
+              "y": [20, 23.2],
+              "skin": "drumGlass"
+            }
+          ],
+          "fins": [
+            {
+              "every": 5.2,
+              "phase": 1.5,
+              "span": [5, 25],
+              "width": 0.5,
+              "out": 0.45,
+              "y": [0, 5.4],
+              "skin": "pillarWhite",
+              "round": true
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 10.44,
+              "points": [[0, 10.5], [14.4, 10.5], [14.4, 0.5], [21.28, 0.5], [21.28, 24.8], [0, 24]],
+              "out": 0.8,
+              "follow": true,
+              "skin": "copper"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "centro (−87,5; 54) y radio 11,5 (corregido al comparar en el juego, 2026-09-25; antes −93): Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) pone el cilindro alto (28–29 m) en x −90…−81, z 47…59, con el borde oeste en x ≈ −99; el arco del predio de OSM tiene su centro en (−87,5; 53,3); el ancho angular en la panorámica Mapillary kaart_2 1561482187667539 (2023-04-15, CC BY-SA 4.0), desde la esquina de enfrente, da centro (−86; 55,7) y R ≈ 11,5; y en la foto aérea oficial el muro cortina y la caja de Kywi empiezan justo al este de su tangente (x ≈ −76). Las tangentes de la hoja (centro −96,5) salían de las posiciones SfM de las panorámicas, corridas varios metros; estimado (±2 m, ±1 m). Cilindro de vidrio: vitrina en planta baja (piso ~0,5 m sobre la vereda) y 4 cintas de vidrio entre antepechos grises hasta ≈24 m, con el casquete encima hasta ≈29 m (forma: estimado (Google Street View, solo mirado, oct–dic 2024), oct 2024, captura 33; alto: en la panorámica Mapillary kaart_2 730765345414788 (2023-04-15) desde su posición GPS el borde de arriba de la concha queda a ≈24 m, y Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) da p90 28 m; la hoja decía 19 y 22–23 m con la cámara a ≈19 m, que era más cerca de lo real; comparación en el juego 2026-09-25). Concha cobre con «marathon» (amarilla hasta 2024): foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) y estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados); cubre de ~22° a ~128° medidos desde +x (la cara a la avenida), hasta ~24-25 m con el borde de arriba inclinado; del lado oeste arranca a ~10,5 m, sobre la vitrina y la primera cinta de vidrio, y desde ~56° hacia el este baja hasta el piso (panorámica Mapillary kaart_2 730765345414788 de 2023 y foto aérea oficial de 2026, comparadas en el juego el 2026-09-25; estimado)."
+    },
+    {
+      "id": "frente",
+      "name": "Franja del frente (galería de 3 niveles) con el muro-pantalla curvo de la Benjamín Carrión",
+      "ring": [[-82, 18], [-82, 57, 0.942], [-15, 63, 1.139], [17, 59.5], [17, 18]],
+      "base": 0,
+      "height": 21.5,
+      "parapet": [1, 0.5],
+      "skin": "beige",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [1, 2],
+          "bands": [
+            {
+              "y": [0, 5.6],
+              "skin": "shopGlass",
+              "out": -0.4
+            }
+          ],
+          "openings": [
+            {
+              "u": 55.52,
+              "width": 52.4,
+              "y": [18.7, 22.5],
+              "depth": 0.9,
+              "skin": "stripeBack"
+            }
+          ],
+          "fins": [
+            {
+              "every": 8.2,
+              "phase": 3,
+              "width": 0.9,
+              "out": 0.3,
+              "y": [0, 5.6],
+              "skin": "pier",
+              "round": false
+            }
+          ],
+          "panels": [
+            {
+              "y": 18.7,
+              "width": [0.45, 1.5],
+              "height": [6, 6],
+              "gap": [0.06, 0.4],
+              "out": -0.55,
+              "margin": [29.62, 18.18],
+              "skins": [
+                "stripeYellow",
+                "stripeGreen",
+                "stripeLime",
+                "stripeYellow"
+              ]
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 6.06,
+              "points": [[0, 7.9], [5.35, 7.9], [5.35, 19.8], [0, 19.8]],
+              "out": 0.05,
+              "follow": true,
+              "skin": "curtainGlass"
+            },
+            {
+              "u": 6.06,
+              "points": [[0, 19.8], [5.35, 19.8], [5.35, 22.3], [0, 22.3]],
+              "out": 0.5,
+              "follow": true,
+              "skin": "copper"
+            },
+            {
+              "u": 23.39,
+              "points": [[0, 7.2], [13.67, 7.2], [10.56, 13.4], [0, 13.4]],
+              "out": 0.35,
+              "follow": true,
+              "skin": "redPanel"
+            },
+            {
+              "u": 23.39,
+              "points": [[0, 7.2], [13.67, 7.2], [10.56, 13.4], [0, 13.4]],
+              "width": 0.3,
+              "closed": true,
+              "out": 0.45,
+              "follow": true,
+              "skin": "redBar"
+            },
+            {
+              "u": 72.1,
+              "points": [[0, 7.2], [27.5, 7.2], [27.5, 25], [9.62, 25], [9.62, 18.2], [5.91, 18.2]],
+              "out": 0.35,
+              "back": 0.4,
+              "follow": true,
+              "skin": "redPanel"
+            },
+            {
+              "u": 72.1,
+              "points": [[0, 7.2], [27.5, 7.2], [27.5, 25], [9.62, 25], [9.62, 18.2], [5.91, 18.2]],
+              "width": 0.35,
+              "closed": true,
+              "out": 0.45,
+              "follow": true,
+              "skin": "redBar"
+            },
+            {
+              "u": 29.32,
+              "points": [[0, 22.4], [52.4, 22.4], [52.4, 24.7], [0, 24.7]],
+              "out": -0.65,
+              "back": 0.9,
+              "follow": true,
+              "skin": "stripeBack"
+            },
+            {
+              "u": 31.53,
+              "points": [[0, 24.5], [46.48, 24.5], [46.48, 26.2], [0, 26.2]],
+              "out": 2.4,
+              "back": 0,
+              "follow": true,
+              "skin": "beam"
+            },
+            {
+              "u": 33.26,
+              "repeat": [6, 8.6],
+              "points": [[-0.3, 24.2], [0.3, 24.2], [0.3, 24.9], [-0.3, 24.9]],
+              "out": 0.3,
+              "back": 0.9,
+              "follow": true,
+              "skin": "beam"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: franja entre la caja y la fachada (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)) y el frente curvo por (−82; 57), (−60; 59,5), (−35; 62), (−15; 63), (0; 62,5) y (17; 59,5), de la línea del predio de OpenStreetMap (ODbL), way 138801810 (predio, reconocimiento de campo 2016) corrida ~4 m y Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) (masa de 24–25 m hasta z ≈ 62–64), confirmado con la distancia de la cámara en Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) y Street View (±3 m). Alturas (Street View oct 2024 calibrado, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0)): canto de la marquesina 5,6–6,9 m, letras MEGAMAXI ≈10,5–13 m, ventana de rayas 18,7–22 m, viga suelta hasta ≈26 m (su curva es la del frente en planta: en las panorámicas parece un arco), que vuela ~2,4 m delante del muro con puntales cortos hasta las rayas (foto de usuario de mar 2026 desde la calzada, captura 30: se le ve la cara de abajo; comparada en el juego el 2026-09-25, estimado), remate a 22,5 m. Tramos del frente renovado (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada), proporciones; ±3-5 m): muro cortina gris x −76…−70,7; caja roja de Kywi −70,5…−53,5 con un trapecio rojo abajo de −58,8 a −45,3; muro beige de Megamaxi con la ventana de rayas de −52,9 a −0,6 y la viga suelta de −50,7 a −4,3; panel rojo de ETAFASHION con la diagonal de −10,2 (abajo) a −4,3, el escalón donde terminan las rayas y su borde de arriba a ~25 m, a la altura de la viga (foto aérea y foto oficial desde el redondel: es lo más alto del frente, estimado); las rayas llegan hasta la viga, sin cielo entre ellas (foto de usuario de mar 2026, captura 30, y la foto aérea, donde asoman sobre la viga), con su fondo oscuro sobre el antepecho (medidos el 2026-09-25 en la foto aérea con la escala local de MEGAMAXI, anclada en sus extremos medidos a pie de calle: x −42,2…−14,4 en las panorámicas Mapillary kaart_2 594658229316049 y 542290274775546 niveladas y comparadas con el juego desde el mismo punto; ±1,5 m). Techo 21,5 (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p50 19,5-21,4: la franja y la caja clara van juntas)."
+    },
+    {
+      "id": "caja-clara",
+      "name": "Caja clara más alta sobre la franja del frente (techo blanco)",
+      "ring": [[-38, 38], [16, 38], [16, 53.5], [-38, 53.5]],
+      "on": "frente",
+      "base": 21.5,
+      "height": 21.9,
+      "parapet": [0, 0],
+      "skin": "roofWhite",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [],
+      "physics": "none",
+      "source": "techo blanco de la caja clara en x −38…16, z 38…53,5: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) 21,4 (la franja ya va a 21,5: queda solo la losa clara)."
+    },
+    {
+      "id": "kywi",
+      "name": "Caja roja saliente de Kywi (chapa perforada con nervios)",
+      "ring": [[-70.5, 58.57], [-53.5, 60.48], [-53.84, 63.96], [-70.94, 62.04]],
+      "base": 9,
+      "height": 26,
+      "parapet": [0, 0],
+      "skin": "redPanel",
+      "soffit": "soffitDark",
+      "roof": {
+        "kind": "flat",
+        "skin": "redPanel"
+      },
+      "faces": [
+        {
+          "sides": [1, 2, 3],
+          "bands": [
+            {
+              "y": [9, 9.35],
+              "skin": "redBar",
+              "out": 0.05
+            },
+            {
+              "y": [9.35, 25.6],
+              "skin": "redPanel"
+            },
+            {
+              "y": [25.6, 26],
+              "skin": "redBar",
+              "out": 0.05
+            }
+          ],
+          "fins": [
+            {
+              "every": 4.4,
+              "phase": 0.2,
+              "width": 0.3,
+              "out": 0.12,
+              "y": [9.35, 25.6],
+              "skin": "redBar",
+              "round": false
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "no es un panel plano: una caja saliente roja de chapa perforada con nervios verticales, con el logo en la cara ESE y una marquesina gris curva debajo (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), may 2026, captura 18); de x −70,5 a −53,5 junto al muro cortina (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada), medida con la escala local de las letras MEGAMAXI (10,3 px/m, 2026-09-25): 17 m de ancho, el trapecio de abajo termina ~3 m antes de la M de MEGA; la hoja decía −76…−58); vuelo 3,5 m, de ~9 m a ~26 m: en la foto aérea su borde de arriba queda sobre la viga suelta, aunque sale hacia la cámara (comparación en el juego, 2026-09-25); estimado. De noche la chapa se enciende en rojo como los otros paneles (foto aérea nocturna del estreno, quebakan.com 2025-12-12, solo mirada)."
+    },
+    {
+      "id": "caja-led-pb",
+      "name": "Planta baja de la entrada central, retirada bajo la caja de la pantalla",
+      "ring": [[17, 32], [34, 32], [34, 53], [17, 53]],
+      "base": 0,
+      "height": 7.5,
+      "parapet": [0, 0],
+      "skin": "pier",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [
+            {
+              "y": [0, 3],
+              "skin": "shopGlass"
+            },
+            {
+              "y": [3, 6.4],
+              "skin": "entryPanel",
+              "out": 0.1
+            },
+            {
+              "y": [6.4, 7.5],
+              "skin": "lightStrip"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "entrada central (Etafashion / pasillo) bajo la caja saliente (vuelo ~4-6 m): Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 617401677076585; el cielo raso gris carbón con focos, la franja de luz, el panel metálico gris y las puertas de vidrio de estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados) (captura 15; la hoja la ubicaba en la entrada de x ≈ 45, estimado)."
+    },
+    {
+      "id": "caja-led",
+      "name": "Caja saliente de la pantalla LED (antes caja de vidrio de Etafashion)",
+      "ring": [[17, 32], [34, 32], [34, 57.5], [17, 59.5]],
+      "base": 7.5,
+      "height": 19,
+      "parapet": [0.6, 0.4],
+      "skin": "ledGlass",
+      "soffit": "soffitDark",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [
+            {
+              "y": [7.5, 22.5],
+              "skin": "redPanel"
+            }
+          ],
+          "openings": [
+            {
+              "u": 8.55,
+              "width": 16,
+              "y": [8, 13.2],
+              "depth": -0.35,
+              "skin": "ledScreen",
+              "frame": "ledFrame"
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 17.12,
+              "points": [[0, 7.5], [17.12, 7.5], [17.12, 22.5], [0, 22.5]],
+              "width": 0.35,
+              "closed": true,
+              "out": 0.1,
+              "skin": "redBar"
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "caja clara en x 17…34 (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p50 18,5), con el frente en la línea del muro-pantalla (en el satélite, z ≈ 55–57: la toma oblicua lo corre); base 7,5 (entrada debajo). Hoy: panel rojo con ETAFASHION arriba y la pantalla LED de ~16 × 5 m abajo (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); en las fotos oblicuas de usuarios de mar 2026 no se ve: estimado); los lados, vidrio celeste pálido con montantes horizontales (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 21)."
+    },
+    {
+      "id": "galeria",
+      "name": "Galería curva NE: los paneles de CityMall y multicines sobre el pórtico de City Garden",
+      "ring": [[34, 32], [34, 49.46, 3.462], [90, 9.13], [90, -12], [55, -12], [55, 8]],
+      "base": 0,
+      "height": 15.5,
+      "parapet": [1, 0.4],
+      "skin": "beige",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [1],
+          "span": [0, 50],
+          "bands": [
+            {
+              "y": [0, 4.6],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [4.6, 6.4],
+              "skin": "darkBand"
+            },
+            {
+              "y": [16.5, 21],
+              "skin": "beige"
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 0,
+              "points": [[0, 7.2], [11.71, 7.2], [8.88, 21], [0, 21]],
+              "out": 0.35,
+              "follow": true,
+              "skin": "redPanel"
+            },
+            {
+              "u": 0,
+              "points": [[0, 7.2], [11.71, 7.2], [8.88, 21], [0, 21]],
+              "width": 0.35,
+              "closed": true,
+              "out": 0.45,
+              "follow": true,
+              "skin": "redBar"
+            },
+            {
+              "u": 8.88,
+              "points": [[2.82, 7.2], [14.38, 7.2], [18.54, 21], [0, 21]],
+              "out": 0.3,
+              "follow": true,
+              "skin": "darkPanel"
+            },
+            {
+              "u": 23.27,
+              "points": [[0, 7.2], [45.91, 7.2], [43.26, 14.3], [37.73, 14.3], [37.73, 17.4], [42.1, 17.4], [41.13, 20], [3.86, 20]],
+              "out": 0.35,
+              "follow": true,
+              "skin": "redPanel"
+            },
+            {
+              "u": 23.27,
+              "points": [[0, 7.2], [45.91, 7.2], [43.26, 14.3], [37.73, 14.3], [37.73, 17.4], [42.1, 17.4], [41.13, 20], [3.86, 20]],
+              "width": 0.35,
+              "closed": true,
+              "out": 0.45,
+              "follow": true,
+              "skin": "redBar"
+            }
+          ]
+        },
+        {
+          "sides": [1],
+          "span": [50, 69.47],
+          "bands": [
+            {
+              "y": [0, 4.6],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [4.6, 6.4],
+              "skin": "darkBand"
+            },
+            {
+              "y": [16.5, 20],
+              "skin": "beige"
+            }
+          ],
+          "panels": [
+            {
+              "y": 14.3,
+              "width": [0.4, 1.2],
+              "height": [3.1, 3.1],
+              "gap": [0.06, 0.35],
+              "out": 0.12,
+              "margin": [11, 0.3],
+              "skins": ["stripeYellow", "stripeGreen", "stripeLime", "stripeYellow"]
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 11,
+              "points": [[0, 14.3], [8.47, 14.3], [8.47, 17.4], [0, 17.4]],
+              "out": 0.05,
+              "follow": true,
+              "skin": "stripeBack"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "fachada curva por (35; 49), (72; 26) y (101; −4): línea interior del pórtico de la hoja y del predio de OpenStreetMap (ODbL), way 138801810 (predio, reconocimiento de campo 2016) (radio ~174 m; ±3 m); techo abovedado de ~12 m detrás (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); aérea de Commons 2012); alto 15,5 (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p90) con el remate hasta ~20-21 m. Paneles (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada), proporciones; ±3-5 m): rojo de ETAFASHION hasta x ≈ 42–44,5, panel liso gris del logo CityMall más ancho arriba (x 42…58) que abajo (44,5…54,5), rojo de multicines hasta x ≈ 86,5–89,8 con el borde en diagonal; de 7,2 m (sobre el pórtico) a 20–21 m. Rayas amarillas y verdes del lado NE, de 14,3 a 17,4 m, desde un escalón del panel de multicines hasta el final de la galería (foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada), foto aérea oficial y foto de usuario de mar 2026, captura 31; agregadas al comparar en el juego el 2026-09-25; alto y largo estimados)."
+    },
+    {
+      "id": "terraza",
+      "name": "Terraza roja del nivel 1 bajo el frente curvo NE (Servientrega, Movistar)",
+      "ring": [[73.5, 24.77], [74.6, 29.4], [97.1, 11.9], [94.5, 4.5], [90, 9.13, -0.372]],
+      "base": 0,
+      "height": 7,
+      "parapet": [0, 0],
+      "skin": "beige",
+      "roof": {
+        "kind": "flat",
+        "skin": "terracotta"
+      },
+      "faces": [
+        {
+          "sides": [0, 1],
+          "bands": [
+            {
+              "y": [0, 4.6],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [7, 8.1],
+              "skin": "glassRail"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "terraza abierta con piso rojo teja (#B4553C) en x 77…99: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); alto 7 (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) 7,1); la entrada NE del lado del redondel debajo (Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 732907251906789 y 1012825973434587); baranda de vidrio estimada."
+    },
+    {
+      "id": "remate-ne",
+      "name": "Remate beige redondeado del frente NE (hacia Felipe Pezo), con su terraza y baranda de vidrio",
+      "ring": [[90, 9.13], [90, -12], [99.27, -12, 2.4], [97.1, 11.9], [94.5, 4.5]],
+      "base": 0,
+      "height": 13,
+      "parapet": [0, 0],
+      "skin": "beige",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [
+            {
+              "y": [0, 4.6],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [8.2, 8.6],
+              "skin": "slabWhite",
+              "out": 0.9
+            },
+            {
+              "y": [13, 14.1],
+              "skin": "glassRail"
+            }
+          ]
+        },
+        {
+          "sides": [4],
+          "bands": [
+            {
+              "y": [13, 14.1],
+              "skin": "glassRail"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "remate beige redondeado hacia el redondel con una terraza con baranda de vidrio (la otra ventana de rayas amarillas y verdes va en la galería, a la altura de «multicines»: en la foto de usuario de mar 2026, captura 31, y en la foto oficial desde el redondel hay una sola franja, no una más baja sobre la terraza; comparación en el juego 2026-09-25) (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 31; Street View nov 2024, captura 11): techo blanco en x 96…105, borde curvo de (105; −8) a (100; 14) (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)); alto 13 (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) 10,6 en el techo; la baranda más arriba) estimado."
+    },
+    {
+      "id": "cines",
+      "name": "Tambor de los cines (redondo NE, Multicines en el nivel 2), cortado por la fachada recta de Felipe Pezo",
+      "ring": [[64.39, -12, 17.168], [81, -58, 4.057], [104.54, -43.04], [99.58, -13.82, 0.035], [97.61, -12]],
+      "base": 0,
+      "height": 16.5,
+      "parapet": [1, 0.3],
+      "skin": "backWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofDrum"
+      },
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [
+            {
+              "y": [0, 3.8],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [3.8, 8.6],
+              "skin": "louverGrey",
+              "out": -0.2
+            },
+            {
+              "y": [8.6, 9.6],
+              "skin": "peach",
+              "out": 0.4
+            },
+            {
+              "y": [9.6, 10.2],
+              "skin": "whiteWall"
+            }
+          ],
+          "fins": [
+            {
+              "every": 7.2,
+              "phase": 1,
+              "width": 1.2,
+              "out": 0.4,
+              "y": [0, 8.6],
+              "skin": "peach",
+              "round": false
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "círculo de radio 26 (el anillo de equipos del techo: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir), centro (85; −30) en la imagen; la hoja: (84; −30)) corrido a (81; −32) por la toma oblicua, cortado por la galería (z = −12) y por la fachada recta de Felipe Pezo (el borde del techo de (103,5; −10) a (113; −66) en el satélite, 4,5 m adentro por la misma razón: así cae dentro del predio de OSM; ±2 m); alto 16,5 (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p50 15,8 / p75 16,8). Cara de Felipe Pezo: entrada con marco de losetas durazno y celosía gris de lamas, franja blanca encima (estimado (Google Street View, solo mirado, oct–dic 2024), dic 2024, captura 08)."
+    },
+    {
+      "id": "voladizo-fp",
+      "name": "Volumen curvo en S en voladizo sobre la entrada de Felipe Pezo",
+      "ring": [[99.72, -14.6, 1.2], [103.37, -17.03, 0.7], [104.23, -28.06, 0.7], [107.42, -39.71, 1.4], [104.44, -42.45]],
+      "base": 10,
+      "height": 17.5,
+      "parapet": [0, 0],
+      "skin": "bandMetal",
+      "soffit": "fpSoffit",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [11.3, 13.2],
+              "skin": "darkGlass",
+              "out": -0.15
+            },
+            {
+              "y": [13.8, 16.2],
+              "skin": "darkGlass",
+              "out": -0.15
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "volumen curvo en S en voladizo con 2 cintas de vidrio oscuro entre bandas metálicas grises, de ~10 m a ~17–20 m, sobre la entrada de Felipe Pezo (estimado (Google Street View, solo mirado, oct–dic 2024), dic 2024, capturas 07 y 08); planta (vuelo ~2–3,5 m, de z ≈ −13 a −40) de Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (franja fuera de la línea del techo de los cines) y estimado."
+    },
+    {
+      "id": "caja-nne",
+      "name": "Caja NNE junto a Felipe Pezo y Pedro Valverde (violeta hasta 2024, gris desde la obra)",
+      "ring": [[93, -68], [108.77, -68], [105.38, -48], [93, -48]],
+      "base": 0,
+      "height": 18,
+      "parapet": [1, 0.3],
+      "skin": "nneGrey",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [],
+          "reliefs": [
+            {
+              "u": 2,
+              "points": [[0, 9], [12, 9], [12, 17], [0, 17]],
+              "out": 0.15,
+              "skin": "magenta"
+            }
+          ]
+        },
+        {
+          "sides": [1],
+          "bands": [
+            {
+              "y": [0, 4.2],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [4.2, 5.2],
+              "skin": "whiteWall",
+              "out": 0.15
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "caja de x 93 a la línea de Felipe Pezo y de z −68 a −48 (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir): techo con equipos, corrido por la toma oblicua; en la aérea de Commons 2012 azul con «Súper Éxito»; la hoja la estimaba de z −70 a −40, ±3 m); alto 18 (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p90 17,4; estimado (Google Street View, solo mirado, oct–dic 2024): 17–20 m). Color de oct 2025 (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 35): gris medio con un panel rojo magenta alto en la cara de atrás; en dic 2024 era violeta con SÚPER ÉXITO en losetas doradas (estimado (Google Street View, solo mirado, oct–dic 2024), captura 09). La cara de Felipe Pezo de hoy no se ve: va gris y sin letrero (estimado). Planta baja con locales (KFC, El Español)."
+    },
+    {
+      "id": "bloque-b",
+      "name": "Bloque B (entre la caja principal y el ala NE)",
+      "ring": [[20, -62], [55, -62], [55, 8], [20, 8]],
+      "base": 0,
+      "height": 20,
+      "parapet": [1, 0.3],
+      "skin": "backWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofSheet"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "planta Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (techo claro; al NNO una caja de ~20 m en x 20…50, z −62…−46); alto 20 (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p50 19,2–19,8); la cara de atrás es la caja alta ciega gris clara de Pedro Valverde (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), captura 23)."
+    },
+    {
+      "id": "anexo-norte",
+      "name": "Techo bajo al norte de los cines (patio de equipos)",
+      "ring": [[55, -63], [93, -63], [93, -48], [60, -48], [60, -12], [55, -12]],
+      "base": 0,
+      "height": 13,
+      "parapet": [1, 0.3],
+      "skin": "backWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "techo oscuro con equipos entre el bloque B, el tambor de los cines y la caja NNE: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); alto estimado (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m): 13,6–16,9 en la zona)."
+    },
+    {
+      "id": "grieta",
+      "name": "Grieta entre la caja principal y el bloque B (techo más bajo)",
+      "ring": [[16, -50], [20, -50], [20, 18], [16, 18]],
+      "base": 0,
+      "height": 16,
+      "parapet": [0.6, 0.25],
+      "skin": "backWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "skyGlass"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "franja de ~4 m más baja entre la caja principal y el bloque B, con lucernario: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); alto estimado."
+    },
+    {
+      "id": "enlace-centro",
+      "name": "Techo intermedio entre el bloque B, la galería NE y la caja central",
+      "ring": [[20, 8], [55, 8], [34, 32], [17, 32], [17, 18], [20, 18]],
+      "base": 0,
+      "height": 14,
+      "parapet": [0.8, 0.3],
+      "skin": "backWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "techo gris más bajo en x 17…55, z 8…32: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); alto estimado (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) 14–17,5)."
+    },
+    {
+      "id": "totem-city-garden",
+      "name": "Tótem negro de City Garden",
+      "ring": [[57.42, 44.34], [59.53, 43], [60.07, 43.85], [57.96, 45.19]],
+      "base": 0,
+      "height": 6.5,
+      "parapet": [0, 0],
+      "skin": "totemBlack",
+      "roof": {
+        "kind": "flat",
+        "skin": "totemBlack"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "tótem negro de ~2,5 × 1 × 6,5 m frente al pórtico, bajo el panel CityMall (foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada); foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); la hoja: (40; 55)); lugar estimado."
+    }
+  ],
+  "canopies": [
+    {
+      "id": "cielo-entrada-central",
+      "on": "caja-led-pb",
+      "line": [[17.3, 53], [33.7, 53]],
+      "depth": 5.5,
+      "height": 7,
+      "thickness": 0.4,
+      "drop": 0,
+      "fascia": 0.4,
+      "skins": {
+        "top": "soffitDark",
+        "soffit": "soffitDark",
+        "fascia": "ledFrame"
+      },
+      "lamps": {
+        "every": 3,
+        "size": [0.35, 0.05],
+        "skin": "soffitLamp",
+        "light": {"every": 3, "power": 0.5, "led": true}
+      },
+      "source": "cielo raso gris carbón con focos redondos bajo la caja de la pantalla (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 15); alto estimado."
+    },
+    {
+      "id": "marquesina-tambor",
+      "on": "frente",
+      "line": [[-75.9, 57.86], [-74.5, 58.05], [-73.11, 58.23], [-71.71, 58.42], [-70.31, 58.59], [-68.91, 58.77], [-67.51, 58.94], [-66.11, 59.11], [-64.71, 59.27], [-63.31, 59.44], [-61.91, 59.59], [-60.51, 59.75], [-59.11, 59.9], [-57.71, 60.05], [-56.31, 60.2], [-54.91, 60.34], [-53.5, 60.48]],
+      "depth": 3.2,
+      "height": 7.6,
+      "thickness": 0.3,
+      "drop": 0,
+      "fascia": 0.45,
+      "skins": {
+        "top": "canopyTop",
+        "soffit": "canopySoffit",
+        "fascia": "canopyFascia"
+      },
+      "lamps": {
+        "every": 4,
+        "size": [0.4, 0.06],
+        "skin": "soffitLamp",
+        "light": {"every": 2, "power": 0.5, "led": true}
+      },
+      "source": "marquesina gris curva que sale del tambor y pasa bajo la caja de Kywi (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 18; foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); a ~7,5-8 m y ~3 m de vuelo, estimado (en la foto sube hacia el tambor: aquí va plana)."
+    },
+    {
+      "id": "marquesina-frente",
+      "on": "frente",
+      "line": [
+        [-53.5, 60.48],
+        [-52.31, 60.59],
+        [-50.82, 60.73],
+        [-49.33, 60.87],
+        [-47.84, 61],
+        [-46.35, 61.13],
+        [-44.86, 61.26],
+        [-43.37, 61.38],
+        [-41.88, 61.5],
+        [-40.39, 61.62],
+        [-38.89, 61.73],
+        [-37.4, 61.83],
+        [-35.91, 61.94],
+        [-34.42, 62.04],
+        [-32.93, 62.13],
+        [-31.43, 62.23],
+        [-29.94, 62.32],
+        [-28.45, 62.4],
+        [-26.95, 62.48],
+        [-25.46, 62.56],
+        [-23.97, 62.63],
+        [-22.47, 62.7],
+        [-20.98, 62.77],
+        [-19.48, 62.83],
+        [-17.99, 62.89],
+        [-16.49, 62.95],
+        [-15, 63],
+        [-13.53, 63.04],
+        [-12.06, 63.06],
+        [-10.6, 63.06],
+        [-9.13, 63.04],
+        [-7.66, 63],
+        [-6.19, 62.95],
+        [-4.73, 62.87],
+        [-3.26, 62.78],
+        [-1.8, 62.66],
+        [-0.34, 62.53],
+        [1.12, 62.38],
+        [2.58, 62.21],
+        [4.04, 62.03],
+        [5.49, 61.82],
+        [6.94, 61.59],
+        [8.39, 61.35],
+        [9.83, 61.09],
+        [11.28, 60.81],
+        [12.71, 60.51],
+        [14.15, 60.19],
+        [15.58, 59.85],
+        [16.6, 59.6]
+      ],
+      "depth": 4.5,
+      "height": 6.55,
+      "thickness": 0.35,
+      "drop": 0,
+      "fascia": 0.9,
+      "skins": {
+        "top": "canopyTop",
+        "soffit": "canopySoffit",
+        "fascia": "canopyFascia"
+      },
+      "lamps": {
+        "every": 4,
+        "size": [0.4, 0.06],
+        "skin": "soffitLamp",
+        "light": {"every": 2, "power": 0.5, "led": true}
+      },
+      "source": "marquesina corrida del frente: canto de 5,6 a 6,9 m (Street View oct 2024 calibrado, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0): 13–15,5° a ~17–18 m), vuelo ~4,5 m hasta la baranda y la jardinera (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir): borde en z ≈ 66–68); losa gris oscuro (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); canto de ~0,9 m (en la foto aérea, con la escala de las letras MEGAMAXI, ~1 m; en 2023 era una chapa más delgada; comparación en el juego 2026-09-25, estimado); arranca en x −53,5, donde termina la caja de Kywi."
+    },
+    {
+      "id": "portico-city-garden",
+      "on": "galeria",
+      "line": [
+        [34.5, 49.23],
+        [35.34, 48.85],
+        [36.68, 48.22],
+        [38.02, 47.58],
+        [39.35, 46.94],
+        [40.67, 46.28],
+        [41.99, 45.61],
+        [43.3, 44.92],
+        [44.6, 44.23],
+        [45.9, 43.53],
+        [47.2, 42.81],
+        [48.48, 42.09],
+        [49.77, 41.35],
+        [51.04, 40.6],
+        [52.31, 39.84],
+        [53.57, 39.07],
+        [54.83, 38.29],
+        [56.08, 37.5],
+        [57.32, 36.7],
+        [58.55, 35.89],
+        [59.78, 35.06],
+        [61, 34.23],
+        [62.22, 33.39],
+        [63.42, 32.53],
+        [64.62, 31.67],
+        [65.81, 30.8],
+        [67, 29.91],
+        [68.18, 29.02],
+        [69.35, 28.11],
+        [70.51, 27.2],
+        [71.66, 26.28],
+        [72.81, 25.34],
+        [73.94, 24.4],
+        [75.07, 23.45],
+        [76, 22.65]
+      ],
+      "depth": 5,
+      "height": 6.3,
+      "thickness": 0.4,
+      "drop": 0,
+      "fascia": 0.9,
+      "skins": {
+        "top": "porticoTop",
+        "soffit": "soffitDark",
+        "fascia": "portico"
+      },
+      "posts": {
+        "at": [[0.4, 4.55], [7.8, 4.55], [15.2, 4.55], [22.6, 4.55], [30, 4.55], [37.4, 4.55], [44.8, 4.55]],
+        "size": [0.8, 0.8],
+        "round": false,
+        "skin": "portico"
+      },
+      "lamps": {
+        "every": 3.5,
+        "size": [0.35, 0.05],
+        "skin": "soffitLamp",
+        "light": {"every": 2, "power": 0.5, "led": true}
+      },
+      "source": "pórtico cobre de City Garden (Michael’s, Don Parrilla, Prego…): columnas cuadradas de ~0,8 m cada ~7–8 m y viga a ~6,8 m, bajo él las terrazas de los restaurantes (foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada); foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); en 2023 naranja, Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 617401677076585); de x 34,5 a 76 y ~5 m de vuelo según la huella de la hoja (estimado)."
+    }
+  ],
+  "signs": [
+    {
+      "text": "MEGA",
+      "size": [14.7, 3.8],
+      "background": "#D8CBBF",
+      "color": "#CF2A2E",
+      "font": "Georgia, \"Times New Roman\", serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "frente",
+      "side": 1,
+      "x": -35.75,
+      "y": 11.8,
+      "out": 0.35,
+      "stretch": 1.28,
+      "res": 0.4,
+      "source": "letras rojas anchas (#D7262B en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); más oscuras en Street View oct 2024, captura 05) de ≈10,6 a 13 m (Street View calibrado, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0): 9,5–13,7 m), iguales desde 2011: MEGA, la M blanca en el rombo rojo y AXI. Comparadas en el juego el 2026-09-25 desde el mismo punto y con el mismo lente que las panorámicas Mapillary kaart_2 594658229316049 y 542290274775546 (2023-04-15, CC BY-SA 4.0, niveladas): letras de ~2,35 m (1,4 veces las de antes), MEGA de x −42,2 a −29,3, rombo centrado en −26,4 y AXI de −23,3 a −14,4 (la foto aérea oficial da lo mismo: MEGA −42,2…−29, rombo −25,9, AXI −22,7…−14,4); ±1 m. La letra es genérica (Georgia negrita, estirada)."
+    },
+    {
+      "text": "M",
+      "size": [4.6, 3.6],
+      "background": "#CF2A2E",
+      "color": "#FFFFFF",
+      "font": "Georgia, \"Times New Roman\", serif",
+      "weight": 700,
+      "fill": 0.95,
+      "depth": 0,
+      "plates": [
+        {
+          "shape": "diamond",
+          "size": [6.9, 8.4],
+          "offset": [0, 0.25],
+          "out": 0.3,
+          "color": "#CF2A2E"
+        }
+      ],
+      "on": "frente",
+      "side": 1,
+      "x": -26.4,
+      "y": 11.8,
+      "out": 0.4,
+      "stretch": 1.2,
+      "res": 0.5,
+      "source": "rombo rojo liso de ~6,9 × 8,4 m (más alto que ancho: medido en la panorámica Mapillary kaart_2 594658229316049 comparada en el juego desde el mismo punto, 2026-09-25; la foto aérea oficial da 6,4 m de ancho) con la M blanca del alto de las otras letras (Street View oct 2024, captura 05; estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 30); sin copiar el logo."
+    },
+    {
+      "text": "AXI",
+      "size": [10.2, 3.8],
+      "background": "#D8CBBF",
+      "color": "#CF2A2E",
+      "font": "Georgia, \"Times New Roman\", serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "frente",
+      "side": 1,
+      "x": -18.85,
+      "y": 11.8,
+      "out": 0.35,
+      "stretch": 1.29,
+      "res": 0.4,
+      "source": "ídem MEGA: después del rombo."
+    },
+    {
+      "text": "Kywi",
+      "size": [7.8, 3.4],
+      "background": "#B5524A",
+      "color": "#1C6DB4",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 800,
+      "fill": 0.85,
+      "depth": 0,
+      "on": "kywi",
+      "side": 2,
+      "x": -59.8,
+      "y": 14.3,
+      "out": 0.1,
+      "res": 0.6,
+      "source": "Kywi en azul (#1C6DB4) en la cara ESE de la caja roja (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), may 2026, captura 18); en 2023–2024 estaba a la derecha de MEGAMAXI. Solo el nombre: sin el cuadrado azul ni el recuadro blanco del logo; el logo mide ~8,7 m de ancho con el cuadrado (la mitad del ancho de la caja) y queda en la mitad de abajo de la cara (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada) con la escala local de MEGAMAXI; captura 18), estimado."
+    },
+    {
+      "text": "ETAFASHION",
+      "size": [19, 2.5],
+      "background": "#B5524A",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "at": [12.2, 60.6],
+      "angle": 80,
+      "y": 16.3,
+      "out": 0.45,
+      "stretch": 1.15,
+      "res": 0.5,
+      "source": "ETAFASHION en blanco sobre el panel rojo, sobre la pantalla (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)): letras de ~1,6 m y ~16,7 m de largo, x ≈ 3,8…20,5, a ~16,3 m (foto aérea con la escala local de MEGAMAXI, 2026-09-25; la hoja: x 12, 10 × 1,2 m); suelto porque cruza del muro-pantalla a la caja saliente."
+    },
+    {
+      "text": "City",
+      "size": [4.6, 2.9],
+      "background": "#6A6E6B",
+      "color": "#1F6FB5",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "galeria",
+      "side": 1,
+      "x": 45.6,
+      "y": 15.4,
+      "out": 0.35,
+      "follow": true,
+      "res": 0.6,
+      "source": "el nombre CityMall en sus colores (City azul #1F6FB5, Ma rojo #D7262B, las dos l amarilla #F2C318 y verde #5DAA3A) sobre el panel gris, en letra genérica y sin las piezas del logo (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada); estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 31): ~11 m de largo y ~3 m de alto centrado en x ≈ 50 (proporciones de la foto aérea; la hoja: x 46, 13 × 3,2 m), estimado."
+    },
+    {
+      "text": "Ma",
+      "size": [3.6, 2.9],
+      "background": "#6A6E6B",
+      "color": "#D7262B",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "galeria",
+      "side": 1,
+      "x": 49.5,
+      "y": 15.4,
+      "out": 0.35,
+      "follow": true,
+      "res": 0.6,
+      "source": "ídem City."
+    },
+    {
+      "text": "l",
+      "size": [0.9, 3.8],
+      "background": "#6A6E6B",
+      "color": "#F2C318",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "galeria",
+      "side": 1,
+      "x": 51.7,
+      "y": 15.9,
+      "out": 0.35,
+      "res": 0.6,
+      "source": "ídem City: la primera l, amarilla y más alta."
+    },
+    {
+      "text": "l",
+      "size": [0.9, 3.8],
+      "background": "#6A6E6B",
+      "color": "#5DAA3A",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "galeria",
+      "side": 1,
+      "x": 52.5,
+      "y": 16.1,
+      "out": 0.35,
+      "res": 0.6,
+      "source": "ídem City: la segunda l, verde."
+    },
+    {
+      "text": "multicines",
+      "size": [9.5, 1.8],
+      "background": "#B5524A",
+      "color": "#FFFFFF",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "galeria",
+      "side": 1,
+      "x": 77.5,
+      "y": 15,
+      "out": 0.45,
+      "follow": true,
+      "res": 0.5,
+      "source": "multicines en blanco, minúscula, a ~2/3 del alto del panel rojo del arco NE (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 31): texto de x ≈ 73 a 82 (proporciones de la foto aérea; la hoja: x 75, 13 × 1,6 con la marca), sin la M de colores."
+    },
+    {
+      "text": "marathon",
+      "size": [16, 3.2],
+      "background": "#B47450",
+      "color": "#FFFFFF",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "tambor",
+      "side": 0,
+      "u": 20.07,
+      "y": 19,
+      "out": 0.85,
+      "follow": true,
+      "stretch": 1.1,
+      "res": 0.5,
+      "source": "marathon en blanco, minúscula, sobre la concha cobre (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), mar 2026, captura 30): ~14 m de largo (un 57 % del ancho del tambor en la foto aérea, 2026-09-25), letras de ~2 m con astas a ~17 m, centrado a ~80° desde +x (la cara a la avenida), estimado."
+    },
+    {
+      "text": "P",
+      "size": [1.2, 1.2],
+      "background": "#4B2A6E",
+      "color": "#F2C318",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 800,
+      "fill": 0.85,
+      "depth": 0.15,
+      "on": "podio",
+      "side": 0,
+      "x": -35,
+      "y": 6,
+      "out": 0.2,
+      "res": 1,
+      "source": "señal de parqueo: P amarilla en cuadro morado sobre la banda del podio (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), capturas 23 y 24)."
+    },
+    {
+      "text": "City Garden",
+      "size": [1.9, 0.55],
+      "background": "#3E8E4E",
+      "color": "#FFFFFF",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "fill": 0.8,
+      "depth": 0,
+      "plates": [
+        {
+          "shape": "circle",
+          "size": [2.2, 2.2],
+          "offset": [0, 0],
+          "out": 0.05,
+          "color": "#3E8E4E"
+        }
+      ],
+      "on": "totem-city-garden",
+      "side": 2,
+      "u": 1.25,
+      "y": 5,
+      "out": 0.1,
+      "res": 1,
+      "source": "tótem negro de City Garden con el redondel verde y blanco (foto oficial «cm-fachada» desde el redondel (citymall.com.ec, 2026-04-14; solo mirada); foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)): solo el nombre sobre un disco verde liso."
+    }
+  ],
+  "skylights": [
+    {
+      "on": "caja",
+      "kind": "ridge",
+      "a": [-60, -48],
+      "b": [-60, 16],
+      "width": 2.4,
+      "rise": 0.5,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.1],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "banda de lucernarios de ~12 m (x −62…−50) con tres franjas translúcidas a todo lo largo de la caja: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); ancho de cada franja y flecha estimados."
+    },
+    {
+      "on": "caja",
+      "kind": "ridge",
+      "a": [-56, -48],
+      "b": [-56, 16],
+      "width": 2.4,
+      "rise": 0.5,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.1],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "banda de lucernarios de ~12 m (x −62…−50) con tres franjas translúcidas a todo lo largo de la caja: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); ancho de cada franja y flecha estimados."
+    },
+    {
+      "on": "caja",
+      "kind": "ridge",
+      "a": [-52, -48],
+      "b": [-52, 16],
+      "width": 2.4,
+      "rise": 0.5,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.1],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "banda de lucernarios de ~12 m (x −62…−50) con tres franjas translúcidas a todo lo largo de la caja: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); ancho de cada franja y flecha estimados."
+    },
+    {
+      "on": "frente",
+      "kind": "ridge",
+      "a": [-62, 38],
+      "b": [-47, 38],
+      "width": 4.4,
+      "rise": 0.8,
+      "y": 0,
+      "curb": [0.4, 0.3],
+      "ribs": [1.5, 0.08],
+      "grid": [5, 3, 2, 5],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "lucernario reticulado del atrio (15 × 10 m, 5 × 2 módulos) en x −62…−47, z 33…43: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); interior con claraboya en Commons «Detalles del City Mall» (Ceibos, 2023-07-13); flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [33.04, 42.2],
+      "b": [38.08, 39.74],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [38.08, 39.74],
+      "b": [43.04, 37.11],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [43.04, 37.11],
+      "b": [47.91, 34.32],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [47.91, 34.32],
+      "b": [52.68, 31.36],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [52.68, 31.36],
+      "b": [57.35, 28.25],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [57.35, 28.25],
+      "b": [61.91, 24.98],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [61.91, 24.98],
+      "b": [66.36, 21.56],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [66.36, 21.56],
+      "b": [70.69, 17.99],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [70.69, 17.99],
+      "b": [74.89, 14.28],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [74.89, 14.28],
+      "b": [78.97, 10.42],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    },
+    {
+      "on": "galeria",
+      "kind": "vault",
+      "a": [78.97, 10.42],
+      "b": [82.92, 6.44],
+      "width": 9.5,
+      "rise": 1.6,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [3, 0.15],
+      "skins": {
+        "glass": "roofGallery",
+        "frame": "skyFrame"
+      },
+      "source": "techo abovedado continuo de ~12 m de ancho sobre la galería curva (banda blanca en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y en la aérea de Commons 2012; nervado gris en foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); en tramos rectos de ~6 m, flecha estimada."
+    }
+  ],
+  "domes": [
+    {
+      "on": "tambor",
+      "at": [-87.5, 54],
+      "radius": 11,
+      "rise": 2.3,
+      "drum": 2.5,
+      "y": 0,
+      "from": 0,
+      "arc": 360,
+      "ribs": 0,
+      "rib": 0.2,
+      "skins": {
+        "shell": "drumCap",
+        "drum": "drumGlass",
+        "frame": "drumCap"
+      },
+      "source": "casquete gris abombado del tambor Marathon sobre un anillo de vidrio (foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); Street View oct 2024, captura 33): de 24 a ≈28,8 m (Google Open Buildings 2.5D Temporal 2023-06-30 (alto, píxel 4 m) p90 28 sobre el tambor); estimado."
+    },
+    {
+      "on": "cines",
+      "at": [85, -26],
+      "radius": 6.5,
+      "rise": 0.8,
+      "drum": 1.8,
+      "y": 0,
+      "from": 0,
+      "arc": 360,
+      "ribs": 12,
+      "rib": 0.2,
+      "skins": {
+        "shell": "skyGlass",
+        "drum": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "lucernario-cúpula cilíndrico de Ø ≈ 12–14 m y ~2 m de alto en el techo de los cines, centro (85; −26) (en el satélite (89; −24), corrido por la toma oblicua; elipse con su sombra en Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); interior amarillo en la aérea de Commons 2012); estimado."
+    }
+  ],
+  "equipment": [
+    {
+      "on": "caja",
+      "area": [[-95, -58.3], [-14, -58.3], [-14, -51.5], [-95, -51.5]],
+      "margin": 0,
+      "count": 22,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "caja",
+      "area": [[-95, -47], [-64, -47], [-64, 15], [-95, 15]],
+      "margin": 0,
+      "count": 6,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "caja",
+      "area": [[-48, -47], [12, -47], [12, 15], [-48, 15]],
+      "margin": 0,
+      "count": 8,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "frente",
+      "area": [[-80, 20], [14, 20], [14, 32.5], [-80, 32.5]],
+      "margin": 0,
+      "count": 22,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "frente",
+      "area": [[-74, 33], [-64, 33], [-64, 52], [-74, 52]],
+      "margin": 0,
+      "count": 5,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "cines",
+      "area": [
+        [76.7, -7.4],
+        [72.4, -8.5],
+        [68.5, -10.3],
+        [64.9, -12.8],
+        [61.8, -15.9],
+        [59.3, -19.5],
+        [57.5, -23.4],
+        [56.4, -27.7],
+        [56, -32],
+        [56.4, -36.3],
+        [57.5, -40.6],
+        [59.3, -44.5],
+        [61.8, -48.1],
+        [64.9, -51.2],
+        [68.5, -53.7],
+        [72.4, -55.5],
+        [76.7, -56.6],
+        [81, -57],
+        [85.3, -56.6],
+        [89.6, -55.5],
+        [93.5, -53.7],
+        [97.1, -51.2],
+        [100.2, -48.1],
+        [102.7, -44.5],
+        [99.6, -42.8],
+        [97.5, -45.8],
+        [94.8, -48.5],
+        [91.8, -50.6],
+        [88.4, -52.2],
+        [84.7, -53.2],
+        [81, -53.5],
+        [77.3, -53.2],
+        [73.6, -52.2],
+        [70.2, -50.6],
+        [67.2, -48.5],
+        [64.5, -45.8],
+        [62.4, -42.8],
+        [60.8, -39.4],
+        [59.8, -35.7],
+        [59.5, -32],
+        [59.8, -28.3],
+        [60.8, -24.6],
+        [62.4, -21.2],
+        [64.5, -18.2],
+        [67.2, -15.5],
+        [70.2, -13.4],
+        [73.6, -11.8],
+        [77.3, -10.8]
+      ],
+      "margin": 0,
+      "count": 34,
+      "angle": 0,
+      "size": [[1.1, 0.9, 0.9], [2.2, 1.6, 1.4]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "anexo-norte",
+      "area": [[56, -62], [92, -62], [92, -58.5], [56, -58.5]],
+      "margin": 0,
+      "count": 12,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "bloque-b",
+      "area": [[22, -40], [53, -40], [53, 6], [22, 6]],
+      "margin": 0,
+      "count": 8,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "enlace-centro",
+      "area": [[22, 10], [48, 10], [34, 26], [22, 26]],
+      "margin": 0,
+      "count": 5,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    },
+    {
+      "on": "caja-nne",
+      "margin": 2,
+      "count": 4,
+      "angle": 0,
+      "size": [[1.6, 1.2, 1], [3.6, 2.4, 1.9]],
+      "skin": "unitWhite",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      },
+      "source": "equipos de aire (cajas blancas) en filas: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) y aérea de Commons 2012; cantidad y tamaños estimados."
+    }
+  ],
+  "solar": [],
+  "masts": [],
+  "bridges": [],
+  "stairs": [],
+  "lots": [],
+  "retiros": {},
+  "site": {
+    "pavedStyles": {
+      "vereda": {
+        "height": 0.15,
+        "curb": 0.2,
+        "color": "#ABA69C",
+        "curbColor": "#C9C3B8",
+        "pattern": "tiles",
+        "scale": [1, 1]
+      },
+      "techada": {
+        "height": 0.15,
+        "curb": 0.2,
+        "color": "#B8B3AA",
+        "curbColor": "#C9C3B8",
+        "pattern": "slabs",
+        "scale": [5, 5]
+      }
+    },
+    "paved": [
+      {
+        "ring": [
+          [-81.2, 57.12],
+          [-80.52, 57.21],
+          [-79.04, 57.43],
+          [-77.56, 57.63],
+          [-76.08, 57.84],
+          [-74.59, 58.04],
+          [-73.11, 58.23],
+          [-71.63, 58.43],
+          [-70.14, 58.61],
+          [-68.66, 58.8],
+          [-67.18, 58.98],
+          [-65.69, 59.16],
+          [-64.21, 59.33],
+          [-62.72, 59.5],
+          [-61.23, 59.67],
+          [-59.75, 59.83],
+          [-58.26, 59.99],
+          [-56.77, 60.15],
+          [-55.28, 60.3],
+          [-53.8, 60.45],
+          [-52.31, 60.59],
+          [-50.82, 60.73],
+          [-49.33, 60.87],
+          [-47.84, 61],
+          [-46.35, 61.13],
+          [-44.86, 61.26],
+          [-43.37, 61.38],
+          [-41.88, 61.5],
+          [-40.39, 61.62],
+          [-38.89, 61.73],
+          [-37.4, 61.83],
+          [-35.91, 61.94],
+          [-34.42, 62.04],
+          [-32.93, 62.13],
+          [-31.43, 62.23],
+          [-29.94, 62.32],
+          [-28.45, 62.4],
+          [-26.95, 62.48],
+          [-25.46, 62.56],
+          [-23.97, 62.63],
+          [-22.47, 62.7],
+          [-20.98, 62.77],
+          [-19.48, 62.83],
+          [-17.99, 62.89],
+          [-16.49, 62.95],
+          [-15, 63],
+          [-13.53, 63.04],
+          [-12.06, 63.06],
+          [-10.6, 63.06],
+          [-9.13, 63.04],
+          [-7.66, 63],
+          [-6.19, 62.95],
+          [-4.73, 62.87],
+          [-3.26, 62.78],
+          [-1.8, 62.66],
+          [-0.34, 62.53],
+          [1.12, 62.38],
+          [2.58, 62.21],
+          [4.04, 62.03],
+          [5.49, 61.82],
+          [6.94, 61.59],
+          [8.39, 61.35],
+          [9.83, 61.09],
+          [11.28, 60.81],
+          [12.71, 60.51],
+          [14.15, 60.19],
+          [15.58, 59.85],
+          [17, 59.5],
+          [17, 75.5],
+          [0, 76.3],
+          [-30, 76.6],
+          [-60, 76.6],
+          [-81.2, 76.4]
+        ],
+        "curbs": [68, 69, 70, 71],
+        "style": "vereda",
+        "source": "vereda del frente, del muro a la calzada cercana (z ≈ 76–77: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir); calzada de la Benjamín Carrión en z ≈ 77–91 según la hoja), con baldosas cuadradas grises (Street View oct 2024, captura 05); tono estimado."
+      },
+      {
+        "ring": [[-108, 43], [-81.2, 43], [-81.2, 76.4], [-108, 76]],
+        "curbs": [2, 3],
+        "style": "vereda",
+        "source": "vereda de la esquina Marathon alrededor del tambor (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)); estimado."
+      },
+      {
+        "ring": [[-108, -72], [-98, -72], [-98, 18], [-99.5, 18], [-99.5, 43], [-108, 43]],
+        "curbs": [5],
+        "style": "vereda",
+        "source": "vereda de Jorge Jara Grau con la parada de taxis en el bordillo (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, capturas 26 y 27; Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir): calzada en x ≈ −122…−108)."
+      },
+      {
+        "ring": [[-98, -72], [-12, -72], [-12, -68], [-98, -68]],
+        "curbs": [0],
+        "style": "vereda",
+        "source": "vereda de Pedro Valverde frente al podio (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), capturas 23 y 24; calzada en z ≈ −97…−80 según la hoja, vereda estimada)."
+      },
+      {
+        "ring": [
+          [34.5, 49.23],
+          [35.34, 48.85],
+          [36.68, 48.22],
+          [38.02, 47.58],
+          [39.35, 46.94],
+          [40.67, 46.28],
+          [41.99, 45.61],
+          [43.3, 44.92],
+          [44.6, 44.23],
+          [45.9, 43.53],
+          [47.2, 42.81],
+          [48.48, 42.09],
+          [49.77, 41.35],
+          [51.04, 40.6],
+          [52.31, 39.84],
+          [53.57, 39.07],
+          [54.83, 38.29],
+          [56.08, 37.5],
+          [57.32, 36.7],
+          [58.55, 35.89],
+          [59.78, 35.06],
+          [61, 34.23],
+          [62.22, 33.39],
+          [63.42, 32.53],
+          [64.62, 31.67],
+          [65.81, 30.8],
+          [67, 29.91],
+          [68.18, 29.02],
+          [69.35, 28.11],
+          [70.51, 27.2],
+          [71.66, 26.28],
+          [72.81, 25.34],
+          [73.94, 24.4],
+          [75.07, 23.45],
+          [76, 22.65],
+          [81.54, 29.1],
+          [80.55, 29.94],
+          [79.37, 30.94],
+          [78.18, 31.93],
+          [76.97, 32.91],
+          [75.76, 33.88],
+          [74.54, 34.84],
+          [73.32, 35.79],
+          [72.08, 36.72],
+          [70.84, 37.65],
+          [69.59, 38.57],
+          [68.33, 39.47],
+          [67.07, 40.37],
+          [65.79, 41.25],
+          [64.51, 42.13],
+          [63.22, 42.99],
+          [61.93, 43.84],
+          [60.62, 44.68],
+          [59.31, 45.51],
+          [58, 46.33],
+          [56.67, 47.14],
+          [55.34, 47.93],
+          [54, 48.72],
+          [52.66, 49.49],
+          [51.31, 50.25],
+          [49.95, 51],
+          [48.59, 51.74],
+          [47.22, 52.47],
+          [45.84, 53.18],
+          [44.46, 53.88],
+          [43.07, 54.57],
+          [41.68, 55.25],
+          [40.28, 55.92],
+          [38.88, 56.58],
+          [38.03, 56.96]
+        ],
+        "curbs": [],
+        "style": "techada",
+        "source": "piso de adoquín claro bajo el pórtico de City Garden y su plaza (estimado (fotos y videos de usuarios en la ficha «C.C. City Mall» de Google Maps, mar–jun 2026, solo mirados), captura 15; foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)); ancho estimado."
+      },
+      {
+        "ring": [[99.27, -12], [108.44, -66], [115.14, -64.86], [105.98, -10.86]],
+        "curbs": [2],
+        "style": "vereda",
+        "source": "vereda de Felipe Pezo con la bahía de taxis (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir): x ≈ 113; estimado (Google Street View, solo mirado, oct–dic 2024), dic 2024, capturas 08 y 09); ancho estimado."
+      }
+    ],
+    "fenceStyles": {
+      "baranda": {
+        "height": 1,
+        "base": [0.12, 0.2],
+        "posts": [2, 0.06],
+        "skins": {
+          "bars": "railSteel",
+          "base": "railBase",
+          "post": "railPost"
+        }
+      },
+      "tubo-blanco": {
+        "height": 1.6,
+        "base": [0.2, 0.2],
+        "posts": [2.5, 0.08],
+        "skins": {
+          "bars": "fenceWhite",
+          "base": "railBase",
+          "post": "fenceWhitePost"
+        }
+      },
+      "reja-negra": {
+        "height": 1.2,
+        "base": [0.1, 0.15],
+        "posts": [2.4, 0.07],
+        "skins": {
+          "bars": "fenceBlack",
+          "base": "railBase",
+          "post": "fenceBlackPost"
+        }
+      }
+    },
+    "fences": [
+      {
+        "line": [[-54.47, 65.11], [-54.26, 65.13], [-52.76, 65.27], [-51.26, 65.41], [-49.76, 65.55], [-48.26, 65.69], [-46.76, 65.82], [-45.25, 65.94], [-43.75, 66.07], [-42.25, 66.19], [-40.75, 66.3], [-39.24, 66.41], [-37.74, 66.52], [-36.24, 66.63], [-35.31, 66.69]],
+        "style": "baranda",
+        "gaps": [],
+        "source": "baranda de tubo de ~1 m al borde de la vereda techada, detrás de la jardinera (Street View oct 2024, captura 05); estimado."
+      },
+      {
+        "line": [[-25.23, 67.28], [-24.2, 67.33], [-22.69, 67.4], [-21.19, 67.47], [-19.68, 67.53], [-18.18, 67.59], [-16.67, 67.65], [-15.16, 67.7], [-13.65, 67.74], [-12.13, 67.76], [-10.6, 67.76], [-9.07, 67.74], [-7.88, 67.71]],
+        "style": "baranda",
+        "gaps": [],
+        "source": "baranda de tubo de ~1 m al borde de la vereda techada, detrás de la jardinera (Street View oct 2024, captura 05); estimado."
+      },
+      {
+        "line": [[-1.64, 67.37], [-1.44, 67.35], [0.08, 67.21], [1.6, 67.06], [3.12, 66.88], [4.64, 66.69], [6.15, 66.47], [7.66, 66.24], [9.17, 65.99], [10.67, 65.71], [12.17, 65.42], [13.67, 65.11], [15.16, 64.78], [16.65, 64.43], [17.63, 64.19]],
+        "style": "baranda",
+        "gaps": [],
+        "source": "baranda de tubo de ~1 m al borde de la vereda techada, detrás de la jardinera (Street View oct 2024, captura 05); estimado."
+      },
+      {
+        "line": [[-98, -68.6], [-19, -68.6]],
+        "style": "tubo-blanco",
+        "gaps": [[35, 42], [55, 62]],
+        "source": "reja blanca de tubo con portones de barrera frente al parqueo del podio (estimado (esfera 360 de usuario Rcg360 en Pedro Valverde, oct 2025, solo mirada), capturas 23 y 24); portones ubicados a ojo (x ≈ −65…−58 y −45…−38)."
+      },
+      {
+        "line": [[-98.6, 16], [-98.6, -40]],
+        "style": "tubo-blanco",
+        "gaps": [],
+        "source": "reja frente a las aberturas del parqueo de Jorge Jara Grau (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, captura 26)."
+      },
+      {
+        "line": [[105.95, -11.9], [114.6, -62.9]],
+        "style": "reja-negra",
+        "gaps": [],
+        "source": "reja negra de barrotes al borde de la vereda de Felipe Pezo (estimado (Google Street View, solo mirado, oct–dic 2024), dic 2024, capturas 08 y 09); estimado."
+      }
+    ],
+    "bollards": [],
+    "planters": [
+      {
+        "ring": [
+          [-54.49, 65.3],
+          [-54.28, 65.32],
+          [-52.78, 65.47],
+          [-51.28, 65.61],
+          [-49.78, 65.75],
+          [-48.28, 65.88],
+          [-46.77, 66.02],
+          [-45.27, 66.14],
+          [-43.77, 66.27],
+          [-42.27, 66.39],
+          [-40.76, 66.5],
+          [-39.26, 66.61],
+          [-37.75, 66.72],
+          [-36.25, 66.83],
+          [-35.33, 66.89],
+          [-35.42, 68.29],
+          [-36.35, 68.22],
+          [-37.86, 68.12],
+          [-39.36, 68.01],
+          [-40.87, 67.9],
+          [-42.38, 67.78],
+          [-43.88, 67.66],
+          [-45.39, 67.54],
+          [-46.9, 67.41],
+          [-48.4, 67.28],
+          [-49.91, 67.14],
+          [-51.41, 67.01],
+          [-52.92, 66.86],
+          [-54.42, 66.72],
+          [-54.62, 66.7]
+        ],
+        "height": 0.55,
+        "wall": 0.2,
+        "drop": 0.15,
+        "skins": {
+          "wall": "planterWall",
+          "soil": "hedge"
+        },
+        "source": "jardinera baja con seto y arbustos de flor frente a la marquesina (Street View oct 2024, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 1212013139478402); corte en las entradas estimado."
+      },
+      {
+        "ring": [
+          [-25.24, 67.48],
+          [-24.21, 67.53],
+          [-22.7, 67.6],
+          [-21.2, 67.67],
+          [-19.69, 67.73],
+          [-18.18, 67.79],
+          [-16.68, 67.84],
+          [-15.17, 67.9],
+          [-13.66, 67.94],
+          [-12.13, 67.96],
+          [-10.6, 67.96],
+          [-9.07, 67.94],
+          [-7.88, 67.91],
+          [-7.84, 69.31],
+          [-9.05, 69.34],
+          [-10.6, 69.36],
+          [-12.15, 69.36],
+          [-13.7, 69.34],
+          [-15.22, 69.3],
+          [-16.73, 69.24],
+          [-18.24, 69.19],
+          [-19.75, 69.13],
+          [-21.26, 69.06],
+          [-22.77, 69],
+          [-24.28, 68.93],
+          [-25.31, 68.88]
+        ],
+        "height": 0.55,
+        "wall": 0.2,
+        "drop": 0.15,
+        "skins": {
+          "wall": "planterWall",
+          "soil": "hedge"
+        },
+        "source": "jardinera baja con seto y arbustos de flor frente a la marquesina (Street View oct 2024, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 1212013139478402); corte en las entradas estimado."
+      },
+      {
+        "ring": [
+          [-1.62, 67.57],
+          [-1.42, 67.55],
+          [0.1, 67.41],
+          [1.63, 67.26],
+          [3.15, 67.08],
+          [4.66, 66.89],
+          [6.18, 66.67],
+          [7.69, 66.44],
+          [9.2, 66.18],
+          [10.71, 65.91],
+          [12.21, 65.62],
+          [13.71, 65.31],
+          [15.21, 64.97],
+          [16.7, 64.62],
+          [17.68, 64.38],
+          [18.02, 65.74],
+          [17.02, 65.99],
+          [15.51, 66.34],
+          [14, 66.68],
+          [12.48, 66.99],
+          [10.96, 67.29],
+          [9.44, 67.56],
+          [7.91, 67.82],
+          [6.38, 68.06],
+          [4.84, 68.27],
+          [3.31, 68.47],
+          [1.77, 68.65],
+          [0.23, 68.81],
+          [-1.32, 68.95],
+          [-1.52, 68.96]
+        ],
+        "height": 0.55,
+        "wall": 0.2,
+        "drop": 0.15,
+        "skins": {
+          "wall": "planterWall",
+          "soil": "hedge"
+        },
+        "source": "jardinera baja con seto y arbustos de flor frente a la marquesina (Street View oct 2024, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 1212013139478402); corte en las entradas estimado."
+      }
+    ],
+    "shelters": [
+      {
+        "at": [-44, 72.8],
+        "angle": 90,
+        "size": [9, 2.6],
+        "height": 2.8,
+        "thickness": 0.12,
+        "rise": 0,
+        "every": 3,
+        "post": 0.1,
+        "back": 0,
+        "bench": [0.45, 0.4, 3],
+        "skins": {
+          "roof": "shelterRoof",
+          "soffit": "shelterSoffit",
+          "post": "shelterPost",
+          "back": "glassRail",
+          "bench": "bench"
+        },
+        "source": "paradas «Ruta Rotonda-Florida» (OSM nodes 4483293689/4483293690) con techo plano sobre postes en la vereda del mall (Street View oct 2024, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 1212013139478402); lugar y largo estimados."
+      },
+      {
+        "at": [-70, 72.8],
+        "angle": 90,
+        "size": [6, 2.6],
+        "height": 2.8,
+        "thickness": 0.12,
+        "rise": 0,
+        "every": 3,
+        "post": 0.1,
+        "back": 0,
+        "bench": [0.45, 0.4, 3],
+        "skins": {
+          "roof": "shelterRoof",
+          "soffit": "shelterSoffit",
+          "post": "shelterPost",
+          "back": "glassRail",
+          "bench": "bench"
+        },
+        "source": "paradas «Ruta Rotonda-Florida» (OSM nodes 4483293689/4483293690) con techo plano sobre postes en la vereda del mall (Street View oct 2024, captura 05; Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 1212013139478402); lugar y largo estimados."
+      }
+    ],
+    "fountains": [],
+    "billboards": [],
+    "lampModels": {
+      "plaza": {
+        "pole": {
+          "height": 5.5,
+          "radius": [0.07, 0.05],
+          "sides": 10,
+          "base": [0.15, 0.3]
+        },
+        "arm": {
+          "reach": 0.45,
+          "rise": 0.1,
+          "radius": 0.03,
+          "segments": 3
+        },
+        "head": {
+          "size": [0.5, 0.12, 0.25],
+          "tilt": 5,
+          "lens": {
+            "share": 0.9,
+            "thickness": 0.02
+          }
+        },
+        "light": {
+          "power": 0.5,
+          "led": true
+        },
+        "glow": {
+          "color": "#f4f7ff",
+          "intensity": 2.5
+        },
+        "sides": [-1, 1],
+        "colors": {
+          "pole": "#4A4D50",
+          "head": "#4A4D50",
+          "lens": "#eef3f5"
+        },
+        "near": 600
+      }
+    },
+    "lamps": [
+      {
+        "model": "plaza",
+        "at": [[-50.67, 68.08, 95.26], [-39.54, 69, 94.26], [-28.4, 69.71, 93.12], [-17.27, 70.22, 92.12], [-5.63, 70.23, 87.07], [6.03, 69.12, 81.92], [17.76, 66.83, 76.03]],
+        "angle": 0,
+        "source": "postes de plaza de dos brazos de ~5,5 m cada ~10 m a lo largo del frente (cabezas a 15,5–17° a ~11,5 m en Mapillary kaart_2 2023-04-14/15 (CC BY-SA 4.0) 542290274775546 y 594658229316049; Street View oct 2024, captura 05); lugar estimado."
+      }
+    ],
+    "cars": [
+      {
+        "at": [[108.97, -16.53, -80.37], [109.82, -21.53, -80.37], [110.67, -26.53, -80.37], [111.51, -31.53, -80.37], [112.36, -36.53, -80.37]],
+        "lift": 0.12,
+        "source": "bahía de taxis junto a la fachada de Felipe Pezo (Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir): x ≈ 113, z −40…−15); van con los colores de los autos de la ciudad (el kit no pasa el color)."
+      },
+      {
+        "at": [[-106.8, 24, 90], [-106.8, 29.5, 90]],
+        "lift": 0.12,
+        "source": "taxis parados en el bordillo de Jorge Jara Grau junto a la caja de la esquina (estimado (Google Street View, solo mirado, oct–dic 2024), nov 2024, captura 26)."
+      }
+    ],
+    "palms": [],
+    "trees": [
+      {
+        "at": [[-70.34, 69.47], [-45.91, 72.01], [-34.2, 72.88], [-21.48, 73.56], [-9.36, 73.84], [3.24, 73.01], [15.34, 70.99]],
+        "height": [4.5, 6.5],
+        "radius": [1.8, 2.6],
+        "colors": [
+          "#4a6a33",
+          "#3d5a2c",
+          "#557238"
+        ],
+        "source": "árboles jóvenes de copa redonda en la vereda del frente, cada ~12 m (Street View oct 2024, captura 05; foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada); Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir)); lugar estimado."
+      },
+      {
+        "at": [[-101, 65], [-57.5, 68]],
+        "height": [8, 9.5],
+        "radius": [4.5, 5.5],
+        "colors": [
+          "#4a6a33",
+          "#3d5a2c",
+          "#557238"
+        ],
+        "source": "árboles grandes en la esquina SO y frente a la caja de Kywi: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (copas de ~11 m); foto aérea oficial de la fachada renovada (citymall.com.ec, subida 2026-04-28; solo mirada)."
+      },
+      {
+        "at": [[26.5, 72]],
+        "height": [6.5, 7],
+        "radius": [3, 3.5],
+        "colors": [
+          "#A8423A",
+          "#9C3B34"
+        ],
+        "source": "árbol de flor roja frente a la caja de la pantalla: Esri World Imagery, Vantor GE01 2025-05-09 (0,46 m; precisión declarada 8,47 m), enderezado con satellite.py (solo para medir) (copa roja)."
+      }
+    ]
+  }
+}

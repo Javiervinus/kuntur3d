@@ -3210,6 +3210,46 @@
         "flood": 0
       },
       {
+        "id": "mallDelSol",
+        "type": "mall",
+        "file": "mall-del-sol",
+        "lat": -2.15575,
+        "lon": -79.89265,
+        "headingDeg": 81,
+        "exclude": 0,
+        "flood": 0
+      },
+      {
+        "id": "sanMarino",
+        "type": "mall",
+        "file": "san-marino",
+        "lat": -2.16914,
+        "lon": -79.89827,
+        "headingDeg": 36.5,
+        "exclude": 0,
+        "flood": 0.6
+      },
+      {
+        "id": "cityMall",
+        "type": "mall",
+        "file": "city-mall",
+        "lat": -2.14091,
+        "lon": -79.90944,
+        "headingDeg": 24,
+        "exclude": 0,
+        "flood": 0
+      },
+      {
+        "id": "paseoShoppingDuran",
+        "type": "mall",
+        "file": "paseo-shopping-duran",
+        "lat": -2.178505,
+        "lon": -79.824395,
+        "headingDeg": 306.3,
+        "exclude": 0,
+        "flood": 0
+      },
+      {
         "id": "iglesiaSanFrancisco",
         "type": "church",
         "lat": -2.192075,

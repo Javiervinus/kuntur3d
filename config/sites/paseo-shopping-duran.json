@@ -1,0 +1,2016 @@
+{
+  "name": "Paseo Shopping Durán",
+  "sources": [
+    "Marco (lat −2,178505, lon −79,824395, rumbo 306,3°: la esquina frontal SE del edificio; x a lo largo de la fachada principal hacia el NO, paralela a la Av. Nicolás Lapentti, km 3,5 de la vía Durán-Boliche; z hacia adentro del edificio, NE) y hoja de medidas: pipeline/.cache/model-place/paseoShoppingDuran/sheet.json y notes.md (2026-09-25).",
+    "«satélite 2023-12-30»: Esri World Imagery, WorldView-3 (0,31 m; precisión nominal 8,5 m) del 2023-12-30, enderezado con satellite.py, solo para medir: plantas, techos y sus colores, paneles solares, equipos, filas del parqueo, paraderos, sombras (alturas de lo de atrás, calibradas con la esquina roja NO). En esta parte de Durán es lo más nuevo que hay.",
+    "Mapillary kaart_2 2023-04-13/18 (CC BY-SA 4.0): fachadas, colores (muestreados y corregidos por la subexposición y la dominante magenta), letreros de 2023 y alturas; kaartcam 2016-06-15 solo para ver qué cambió.",
+    "«Street View mar 2025»: Google Street View mar 2025 (colectora del frente), abr 2025 (Av. E40) y jun 2022 (calle trasera), solo mirado, nada copiado; todo lo que sale de ahí va como estimado. Manda sobre Mapillary 2023: límites del tramo SE (x −1,4 / 6,4 / 19,2 / 38,9), alturas del frente, letreros de hoy (SUPERCINES en caja azul, locales SE y NO), marquesinas atirantadas con mástiles de ~15 m, portal ciego sin entrada, torres de vigilancia, valla (cara NO roja) y fondo NE.",
+    "Alturas: se toman las de Street View (medidas desde la base de cada fachada, ±0,5 m); salen 0,8–1 m más que las de Mapillary porque aquella hoja calibró el lente con un portal de 36,7 m que Street View mide en 34,7 m (111,2–145,9). Lo que solo tiene alto por sombra en el satélite va escalado ×1,067 con la misma corrección (la esquina roja NO pasa de 10,5 a ~11,2 m).",
+    "OpenStreetMap (ODbL), consultado 2026-09-25: lote (way 40759879), colectora y bahía de buses (way 328287195), accesos vehiculares x≈130,9 y 138,4 (ways 1187504614, 737769384), pasillos del parqueo (ways 737769385/6), pasos peatonales (ways 1180302898/9) y vecinos (terminal terrestre, gasolinera).",
+    "elpaseoshopping.com/duran (consultado 2026-09-25): tiendas y anclas del Hipermarket (Mi Comisariato, Ferrisariato, Río Store, Mi Juguetería). El Universo 2014-04-01 y 2014-04-05: una sola planta, 485 parqueos, 6 salas de Supercines (lo confirma el letrero «SUPERCINES 6» de adentro, foto de usuario ago 2023 en Google Maps, solo mirada).",
+    "Letreros: solo los nombres, con una letra genérica; los logos (el sol de El Paseo en las cajas blancas, la «b» del banco, los dibujos de Mi Comisariato) no se copian y queda su lugar liso.",
+    "Noche: sin fuente (no hay fotos de noche ni en Street View ni en las fotos de usuarios): letreros, plafones de las marquesinas, puertas de vidrio, garitas y valla encendidos, estimado; los plafones de las marquesinas alumbran el piso (uno cada ~9-12 m, potencia 0,5 de un poste de la calle, LED), estimado.",
+    "No se modela: el interior; el desnivel de ~0,8–1 m del parqueo sobre la acera de la colectora, que baja hacia la reja (el terreno del juego es plano ahí y la calle y la acera son de los datos); el chaflán del extremo SE de la caja blanca SE; los puestos informales y los buses del lote de tierra al NO; la cadena, los conos y el bolardo del acceso vehicular."
+  ],
+  "clear": [
+    [[-3.5, -58.5], [291.5, -58.5], [291.5, -30], [-3.5, -30]]
+  ],
+  "ground": {"step": 5, "lift": 0.12, "bury": 0.5, "wall": 0.25},
+  "detail": {"near": 280, "arc": 1.5, "sides": 12, "small": 8, "curve": 4, "film": 0.01},
+  "finishes": {
+    "glass": {"roughness": 0.1, "metalness": 0.35},
+    "metal": {"roughness": 0.4, "metalness": 0.6},
+    "rails": {"roughness": 0.6, "metalness": 0.3, "cutout": true},
+    "letters": {"roughness": 0.6, "metalness": 0.1, "cutout": true}
+  },
+  "lights": {
+    "sign": {"color": "#fff6e6", "intensity": 1.5},
+    "soffit": {"color": "#fff0d0", "intensity": 2.2},
+    "door": {"color": "#ffe9c4", "intensity": 1.1},
+    "tower": {"color": "#fff4dc", "intensity": 0.5},
+    "billboard": {"color": "#fff2dc", "intensity": 0.9},
+    "reflector": {"color": "#fff6e0", "intensity": 3}
+  },
+  "skins": {
+    "mosaic": {
+      "color": "#FFFFFF",
+      "material": "stone",
+      "pattern": "mosaic",
+      "scale": [1, 1],
+      "source": "mosaico de placas cuadradas de ~1,1 m en tres tonos (rojo, rojo rosado y naranja: sus colores y cuántas de cada uno en config/game.json → monuments.patterns.mosaic). Los tonos salen de Street View mar 2025 con luz pareja (esquina SE y portal: rojo #982F32 ~52 %, rojo rosado #AC4143 ~33 % y naranja #BE4732 ~15 % de las placas (el naranja contado por placas, no por pixeles)), pasados a color propio con la caja blanca de placas de al lado como referencia y subidos lo justo para que en el juego, a la sombra, se vean como en esa foto (el tono del juego aplasta los verdes y azules oscuros: con los de la foto tal cual el rojo salía carmesí); en Mapillary 739398817918208 (2023-04-13, con sol) salían con un tinte magenta de la cámara (#7F182B/#922038/#A82D2B) y quedaban carmesí en el juego; 7 columnas × 9 filas en la esquina SE y ~10 filas en los bloques del portal, hasta el piso (Street View mar 2025). En 2016 eran rojo liso con puntos."
+    },
+    "mosaicNO": {
+      "color": "#FFFFFF",
+      "material": "stone",
+      "pattern": "mosaic",
+      "scale": [0.88, 1.16],
+      "source": "esquina roja NO del Hipermarket: 8 columnas × ~11 filas de placas de ~1,25 × 0,95 m (Mapillary 739398817918208, 2023-04-13); mismo mosaico."
+    },
+    "coping": {
+      "color": "#C9676B",
+      "material": "stone",
+      "source": "cubrejunta rosado-rojo que se ve desde arriba en los bloques de mosaico de las esquinas (satélite 2023-12-30); tono estimado."
+    },
+    "copingGrey": {
+      "color": "#A9A9A4",
+      "material": "stone",
+      "source": "remate gris de los bloques rojos del portal (satélite 2023-12-30)."
+    },
+    "whitePlates": {
+      "color": "#ECEEE8",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [3.27, 2.73],
+      "source": "cajas blancas de las entradas y del portal: placas cuadradas de ~1,1 m en retícula, también en el remate inclinado (Street View mar 2025); color de Mapillary 267918655600084 (2023-04-13, #C7CAC3 ×1,2)."
+    },
+    "greyRib": {
+      "color": "#D5D6D1",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.3, 6.67],
+      "source": "panel metálico gris claro de nervaduras horizontales de la caja de Supercines (Street View mar 2025; nervaduras cada ~0,45 m estimadas); color de Mapillary 267918655600084 (#B2B3AE ×1,2)."
+    },
+    "hiperPanel": {
+      "color": "#C4C8CC",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.3, 2.73],
+      "source": "panel gris claro de nervaduras horizontales del Hipermarket, en bandas de ~1,1 m (Street View mar 2025); color de Mapillary 739398817918208 (#989CA1/#9AA3AA ×1,25)."
+    },
+    "greyPanel": {
+      "color": "#8E9296",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1.5],
+      "source": "caseta gris de acceso peatonal junto a la esquina NO del Hipermarket (Mapillary 739398817918208, 2023-04-13); tono estimado."
+    },
+    "shopWall": {
+      "color": "#D2D5D1",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "muro gris claro liso de los locales bajo la franja de letreros, hasta el piso: no hay vitrinas hacia el parqueo (Street View mar 2025; la hoja #E6E8E4, estimado)."
+    },
+    "signBand": {
+      "color": "#7C817F",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1, 1],
+      "source": "franja gris oscura de ~2,5 a 6,7 m con las cajas de letrero (Street View mar 2025); tono estimado."
+    },
+    "frosted": {
+      "color": "#A9BDB5",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [1, 1],
+      "tone": 0.55,
+      "source": "paneles de vidrio esmerilado verdoso entre los letreros (Street View mar 2025); color de Mapillary 6529435590435072 (#7F9A90, aclarado)."
+    },
+    "beigePanel": {
+      "color": "#CDBFA3",
+      "material": "stone",
+      "source": "paneles beige entre los letreros (Street View mar 2025); tono estimado."
+    },
+    "poster": {
+      "color": "#8A6F63",
+      "material": "stone",
+      "source": "afiche con una foto de manos en x≈87–91 (Street View mar 2025): sin la foto, su tono medio (estimado)."
+    },
+    "blueBox": {
+      "color": "#1E3F8F",
+      "material": "stone",
+      "source": "caja azul con borde y logo amarillos en x≈95–99, tapada por el paradero (Street View mar 2025): sin el logo."
+    },
+    "yellowEdge": {
+      "color": "#E8C22A",
+      "material": "stone",
+      "source": "borde amarillo de la caja azul de x≈95–99 (Street View mar 2025)."
+    },
+    "plaster": {
+      "color": "#D9D8D2",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "muro enlucido blanco grisáceo de las caras de servicio (Street View mar 2025, cara NO del Hipermarket); tono estimado."
+    },
+    "rearWall": {
+      "color": "#BDBDB6",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "muro gris claro de concreto o enlucido, manchado, del fondo NE (Street View jun 2022, calle trasera); tono estimado."
+    },
+    "glassDoor": {
+      "color": "#3C474B",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.67, 0.35],
+      "tone": 0.3,
+      "glow": "door",
+      "source": "fachada de vidrio con puertas bajo las marquesinas rojas (Mapillary 267918655600084 y 627319695980051, 2023; Street View mar 2025); encendida de noche (estimado)."
+    },
+    "doorFrame": {
+      "color": "#8E9296",
+      "material": "metal",
+      "source": "marco de aluminio de las puertas (estimado)."
+    },
+    "shutterDark": {
+      "color": "#5D6164",
+      "material": "stone",
+      "pattern": "shutter",
+      "source": "cortina metálica o vidrio oscuro con franjas horizontales bajo la marquesina roja NO, x≈213,8–222,1 (Street View mar 2025; pudo estar cerrada al momento de la toma)."
+    },
+    "dockDark": {
+      "color": "#2B2C2E",
+      "material": "stone",
+      "source": "aberturas oscuras de los andenes de carga (Street View jun 2022)."
+    },
+    "dockRed": {
+      "color": "#8C5A4E",
+      "material": "metal",
+      "source": "pórticos de concreto gris claro de los andenes de carga con los cantos pintados de rojo óxido: de lejos, un rojo apagado (Street View jun 2022, vista de cerca desde la calle trasera)."
+    },
+    "roofSupercines": {
+      "color": "#D7C597",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina beige del techo de Supercines (satélite 2023-12-30)."
+    },
+    "roofShops": {
+      "color": "#D7C295",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina beige de los locales, entre #D5BB8A y #DACBA7 de sus dos franjas (satélite 2023-12-30)."
+    },
+    "roofAtrio": {
+      "color": "#7A7F80",
+      "material": "stone",
+      "source": "techo oscuro (posible translúcido) del atrio SE (satélite 2023-12-30)."
+    },
+    "roofVest": {
+      "color": "#9C9E99",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "techo gris con textura detrás del portal y de la entrada NO (satélite 2023-12-30)."
+    },
+    "roofTeal": {
+      "color": "#5B8984",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina verde azulada detrás de Supercines (satélite 2023-12-30)."
+    },
+    "roofGreenLight": {
+      "color": "#9BC39B",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina verde claro de la nave larga detrás de los locales SE (satélite 2023-12-30)."
+    },
+    "roofYellow": {
+      "color": "#DBCE95",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina amarilla de las salas de Supercines, z 34…63 (satélite 2023-12-30)."
+    },
+    "roofGreyLight": {
+      "color": "#C3BFAC",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina gris de las salas, z 63…83 (satélite 2023-12-30)."
+    },
+    "roofGreyBack": {
+      "color": "#CEC9B9",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina gris del bloque trasero SE (satélite 2023-12-30)."
+    },
+    "roofRed": {
+      "color": "#D87F73",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina roja del bloque del medio (satélite 2023-12-30)."
+    },
+    "roofBeige": {
+      "color": "#C8BB9A",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina beige con equipos (satélite 2023-12-30)."
+    },
+    "roofGreyFlat": {
+      "color": "#D1CBBB",
+      "material": "stone",
+      "source": "techo plano gris con equipos (satélite 2023-12-30)."
+    },
+    "roofGreenDark": {
+      "color": "#4E7A5E",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina verde oscuro detrás del portal (satélite 2023-12-30); tono estimado."
+    },
+    "roofGreen3": {
+      "color": "#AFC8A0",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina verde claro de la nave de tres aguas (satélite 2023-12-30)."
+    },
+    "roofWhite": {
+      "color": "#E6E6E0",
+      "material": "stone",
+      "source": "remates triangulares blancos en diente de sierra (satélite 2023-12-30)."
+    },
+    "roofGreenSolar": {
+      "color": "#86AE8E",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina verde con paneles solares y bordes verdes detrás de los locales NO (satélite 2023-12-30); tono estimado."
+    },
+    "roofBeigeNO": {
+      "color": "#D6C8A4",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "franja de lámina beige NO (satélite 2023-12-30); tono estimado."
+    },
+    "roofGreyNO": {
+      "color": "#BEBCB4",
+      "material": "stone",
+      "source": "techo plano gris con paneles solares de la nave NO (satélite 2023-12-30); tono estimado."
+    },
+    "roofHiper": {
+      "color": "#C0504D",
+      "material": "stone",
+      "source": "techo del Hipermarket pintado de rojo en los pasillos entre los paneles (satélite 2023-12-30)."
+    },
+    "roofBodega": {
+      "color": "#BAB8B0",
+      "material": "stone",
+      "source": "techo gris de la bodega trasera (satélite 2023-12-30); tono estimado."
+    },
+    "canopyBlue": {
+      "color": "#4A92E0",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina azul de las marquesinas (satélite 2023-12-30, #4791E0 y #4D94E0), también su borde curvo visto desde la calle (Street View mar 2025)."
+    },
+    "canopyGreen": {
+      "color": "#67AE85",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "lámina verde de las marquesinas (satélite 2023-12-30, #67AE85 y #66B288)."
+    },
+    "canopyCharcoal": {
+      "color": "#3A3B3D",
+      "material": "stone",
+      "source": "borde curvo gris carbón de las dos marquesinas pegadas al portal (x 85–111 y 147–176,8) y de la del extremo SE (x 39,5–49,6): desde la calle no se ven verdes ni azules (Street View mar 2025)."
+    },
+    "canopySoffit": {
+      "color": "#4A4C4F",
+      "material": "stone",
+      "ao": 0.8,
+      "source": "cara de abajo gris carbón de las marquesinas, que desde la calle se ve gris media con las vigas vino (hoja; Street View mar 2025)."
+    },
+    "canopyLight": {
+      "color": "#D9D6CF",
+      "material": "stone",
+      "source": "techo claro de las marquesinas rojas de las entradas (satélite 2023-12-30)."
+    },
+    "canopyLightSoffit": {
+      "color": "#D4D3CE",
+      "material": "stone",
+      "ao": 0.75,
+      "source": "cielo raso claro bajo las marquesinas rojas (Mapillary 267918655600084, 2023; estimado)."
+    },
+    "redBand": {
+      "color": "#C8102E",
+      "material": "stone",
+      "source": "faja roja de las marquesinas de las entradas (Mapillary 267918655600084: #851F37 con dominante magenta, corregido)."
+    },
+    "steelWine": {
+      "color": "#6E2B2C",
+      "material": "metal",
+      "source": "columnas y puntales en V de acero vino-marrón de las marquesinas (Street View mar 2025)."
+    },
+    "mastSteel": {
+      "color": "#C7CACD",
+      "material": "metal",
+      "source": "mástiles de los tensores, delgados y claros (Street View mar 2025)."
+    },
+    "tieSteel": {
+      "color": "#A4A8AC",
+      "material": "metal",
+      "source": "tensores de cable del mástil al borde delantero: contra el cielo se ven claros, casi del tono de los mástiles (Street View mar 2025)."
+    },
+    "soffitLamp": {
+      "color": "#F4F1EA",
+      "material": "stone",
+      "glow": "soffit",
+      "source": "plafones bajo las marquesinas (estimado: sin foto de noche)."
+    },
+    "lotPavers": {
+      "color": "#8A8984",
+      "material": "stone",
+      "pattern": "pavers",
+      "scale": [1, 1],
+      "source": "adoquín gris de concreto del parqueo (Street View mar 2025, con luz pareja; el satélite 2023-12-30 lo ve gris medio, más oscuro que las veredas)."
+    },
+    "ironRail": {
+      "color": "#1A1A1A",
+      "material": "rails",
+      "pattern": "bars",
+      "scale": [0.6, 1],
+      "source": "reja de barrotes de acero negro de ~4,5 cm, uno cada ~0,17 m (Street View mar 2025, vista de cerca; hoja #1A1A1A). El dibujo de barrotes tiene una sola razón barrote/paso (config/game.json → monuments.patterns.bars): aquí uno de 3,3 cm cada 0,22 m, que conserva el grosor visible y no se vuelve tramado hasta ~25 m, contra el de 2,6 cm cada 0,17 m que se tramaba a 20 m."
+    },
+    "fenceBase": {
+      "color": "#B3B2AC",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "antepecho de concreto de la reja (Street View mar 2025)."
+    },
+    "ironPost": {
+      "color": "#1A1A1A",
+      "material": "metal",
+      "source": "pilares de la reja (Street View mar 2025)."
+    },
+    "shelterRoof": {
+      "color": "#B7AF99",
+      "material": "stone",
+      "pattern": "corrugated",
+      "source": "techo curvo de lámina corrugada beige, sucia, de los paraderos, que cae hacia el frente como una capota (color: la cara del frente sale a ~0,78 de la caja blanca del portal en la misma vista de Street View mar 2025, con luz pareja; en las fotos de Mapillary 2023 con sol se ve aún más oscura): sobre la acera, atrás ~2,4 m, arriba ~2,7 m y el borde del frente a ~2 m (Street View mar 2025, vista desde la colectora con la cámara a ~2,1 m sobre la acera: la cumbre queda ~0,7 m sobre el lente a 15 m; altos estimados, ±0,2 m). Los altos van sobre el terreno, 0,15 m bajo la acera; el borde del frente deja pasar a alguien parado en la acera."
+    },
+    "shelterSoffit": {
+      "color": "#B7AF99",
+      "material": "stone",
+      "pattern": "corrugated",
+      "ao": 0.8,
+      "source": "cara de abajo de la lámina corrugada de los paraderos: el mismo color y la misma onda (Street View mar 2025), a la sombra (oclusión estimada)."
+    },
+    "shelterPost": {
+      "color": "#2F4A3A",
+      "material": "metal",
+      "source": "arcos de tubo verde oscuro de los paraderos (Street View mar 2025)."
+    },
+    "bench": {
+      "color": "#2C3A30",
+      "material": "stone",
+      "source": "bancas de los paraderos (Street View mar 2025); tono estimado."
+    },
+    "towerPole": {
+      "color": "#8D9296",
+      "material": "metal",
+      "source": "poste gris de las torres de vigilancia (Street View mar 2025)."
+    },
+    "towerCabin": {
+      "color": "#8E9398",
+      "material": "stone",
+      "glow": "tower",
+      "source": "cajas grises de las torres de vigilancia (Street View mar 2025); encendidas de noche (estimado)."
+    },
+    "towerRed": {
+      "color": "#C62828",
+      "material": "stone",
+      "source": "remates rojos de las cajas de las torres (Street View mar 2025)."
+    },
+    "bollardBlack": {
+      "color": "#1C1C1C",
+      "material": "stone",
+      "source": "franjas negras del bolardo del acceso de autos (Street View mar 2025)."
+    },
+    "bollardYellow": {
+      "color": "#E8B81E",
+      "material": "stone",
+      "source": "franjas amarillas del bolardo del acceso de autos (Street View mar 2025); el mismo amarillo de los topes."
+    },
+    "billboardPole": {
+      "color": "#9EA3A6",
+      "material": "metal",
+      "source": "poste de la valla unipolar (Street View mar/abr 2025)."
+    },
+    "billboardFrame": {
+      "color": "#6E7275",
+      "material": "metal",
+      "source": "estructura del panel de la valla (estimado)."
+    },
+    "adRed": {
+      "color": "#C8102E",
+      "material": "stone",
+      "glow": "billboard",
+      "source": "cara NO de la valla, roja (mujer, productos y «MENOR PRECIO Siempre»): Street View mar/abr 2025 (en 2023 era blanca). Sin la foto del anuncio, su rojo."
+    },
+    "adYellow": {
+      "color": "#F2C230",
+      "material": "stone",
+      "glow": "billboard",
+      "source": "cara SE de la valla, amarilla («ARMA TU COLECCIÓN…», ilegible): Street View mar 2025. Sin el anuncio, su amarillo."
+    },
+    "reflector": {
+      "color": "#D6D8DA",
+      "material": "stone",
+      "glow": "reflector",
+      "source": "reflectores en brazos sobre el marco de la valla (Street View abr 2025)."
+    },
+    "solarPanel": {
+      "color": "#22304A",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [1, 0.6],
+      "tone": 0.75,
+      "source": "paneles solares en filas (satélite 2023-12-30)."
+    },
+    "unitWhite": {
+      "color": "#E4E6E4",
+      "material": "stone",
+      "source": "equipos de aire (cajas blancas de ~2 × 1 m) sobre los techos (satélite 2023-12-30)."
+    },
+    "fanDark": {
+      "color": "#3A3C3E",
+      "material": "stone",
+      "source": "ventiladores de los equipos (estimado)."
+    },
+    "planterWall": {
+      "color": "#A9A8A2",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "bordillo de concreto del parterre y de la jardinera (Street View mar 2025)."
+    },
+    "hedge": {
+      "color": "#6E8F4E",
+      "material": "stone",
+      "pattern": "soil",
+      "source": "seto recortado verde amarillo del parterre y de la jardinera frente al Hipermarket (Street View mar 2025)."
+    }
+  },
+  "volumes": [
+    {
+      "id": "esquina-se",
+      "name": "Esquina roja SE (mosaico en L)",
+      "ring": [[-1.4, -1.6], [6.4, -1.6], [6.4, -0.5], [0.5, -0.5], [0.5, 8.2], [-1.4, 8.2]],
+      "base": 0,
+      "height": 10.1,
+      "parapet": [0, 0.3],
+      "skin": "mosaic",
+      "roof": {"kind": "flat", "skin": "coping"},
+      "faces": [],
+      "physics": "block",
+      "source": "L del satélite 2023-12-30 (frente y cara SE, sobresale de la cara SE); el frente va de x −1,4 a 6,4 (Street View mar 2025; el satélite dice −2,6: dentro del error de la panorámica); alto 10,1 m por ángulos y 9 filas de placas de 1,1 m (Street View mar 2025; la hoja 9,3)."
+    },
+    {
+      "id": "supercines",
+      "name": "Caja gris de Supercines (frente SE)",
+      "ring": [[0.5, -0.5], [19.2, -0.5], [19.2, 1.5], [26, 1.5], [26, 15], [0.5, 15]],
+      "base": 0,
+      "height": 8.8,
+      "parapet": [0.6, 0.25],
+      "skin": "plaster",
+      "roof": {"kind": "flat", "skin": "roofSupercines"},
+      "faces": [
+        {"sides": [0], "bands": [{"y": [0, 9.4], "skin": "greyRib"}]}
+      ],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; la cara gris va de x 6,4 a 19,2 (Street View mar 2025: el corte del techo en x 12,5 y 26 no es un límite de fachada); alto 9,4 m con el antepecho (Street View mar 2025; la hoja 9,0)."
+    },
+    {
+      "id": "caja-se",
+      "name": "Caja blanca de la entrada SE",
+      "ring": [[19.2, -1.5], [39.2, -1.5], [39.2, 1.5], [19.2, 1.5]],
+      "base": 0,
+      "height": 9.1,
+      "parapet": [0, 0.3],
+      "skin": "whitePlates",
+      "roof": {"kind": "shed", "skin": "whitePlates", "rise": 2.5, "along": 0, "gable": "whitePlates"},
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [],
+          "openings": [{"u": 13.55, "width": 7.5, "y": [0, 2.9], "depth": 0.4, "skin": "glassDoor", "frame": "doorFrame"}]
+        }
+      ],
+      "physics": "block",
+      "source": "franja blanca de 3 m del satélite 2023-12-30; de x 19,2 a 38,9 (aquí hasta 39,2, donde arranca la marquesina azul), cara vertical hasta ≈9,1 m y remate inclinado que sube hacia atrás hasta ≈11,6 m, placas en retícula (Street View mar 2025; Mapillary 267918655600084); puertas de vidrio en x≈29–36,5 bajo la marquesina roja. El logo del sol (x≈33, ~7,1 m) no se copia."
+    },
+    {
+      "id": "atrio-se",
+      "name": "Atrio de la entrada SE (techo bajo detrás de la caja blanca)",
+      "ring": [[26, 1.5], [39.2, 1.5], [39.2, 18], [26, 18]],
+      "base": 0,
+      "height": 6.4,
+      "parapet": [0.3, 0.2],
+      "skin": "plaster",
+      "roof": {"kind": "flat", "skin": "roofAtrio"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; alto por la sombra de 2,6 m de la caja SE sobre este techo (≈4,9 m bajo su tope de 11,6 m con la razón corregida): 6,7 m con el antepecho, estimado."
+    },
+    {
+      "id": "locales-se",
+      "name": "Bloque de locales SE (detrás de las marquesinas)",
+      "ring": [[39.2, 2], [111.2, 2], [111.2, 18], [39.2, 18]],
+      "base": 0,
+      "height": 6.5,
+      "parapet": [0.2, 0.3],
+      "skin": "shopWall",
+      "roof": {"kind": "flat", "skin": "roofShops"},
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [{"y": [2.5, 6.7], "skin": "signBand"}],
+          "openings": [
+            {"u": 10.3, "width": 2.2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 18.8, "width": 2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 27.3, "width": 2.2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 35.8, "width": 2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 44.2, "width": 1.6, "y": [2.6, 6], "depth": -0.05, "skin": "beigePanel", "frame": "beigePanel"},
+            {"u": 46.3, "width": 1.6, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 49.8, "width": 4, "y": [2.8, 5.4], "depth": -0.2, "skin": "poster", "frame": "poster"},
+            {"u": 53.8, "width": 2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 57.8, "width": 4, "y": [2.8, 5.4], "depth": -0.3, "skin": "blueBox", "frame": "yellowEdge"},
+            {"u": 63, "width": 2.2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 66.8, "width": 1.6, "y": [2.6, 6], "depth": -0.05, "skin": "beigePanel", "frame": "beigePanel"},
+            {"u": 69.5, "width": 2.2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"}
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; muro ciego de ~6,7 m hasta donde nacen las columnas de la marquesina: abajo gris claro liso y una franja gris oscura de ~2,5 a 6,7 m con 7 cajas de letrero separadas por paneles de vidrio esmerilado y paneles beige, sin vitrinas (Street View mar 2025; la hoja 7,0 sin medida). Lugares de los paneles entre letreros: estimados (±2 m)."
+    },
+    {
+      "id": "portal-rojo-se",
+      "name": "Portal central: bloque rojo SE",
+      "ring": [[111.2, -4.5], [119, -4.5], [119, 1.5], [111.2, 1.5]],
+      "base": 0,
+      "height": 10.8,
+      "parapet": [0, 0.3],
+      "skin": "mosaic",
+      "roof": {"kind": "flat", "skin": "copingGrey"},
+      "faces": [],
+      "physics": "block",
+      "source": "techo claro del portal en el satélite 2023-12-30 (z −4,5…1,5); x 111,2–119,0 y ≈10,8 m (~10 filas de placas de 1,1 m), hasta el piso (Street View mar 2025)."
+    },
+    {
+      "id": "portal-caja",
+      "name": "Portal central: caja blanca EL PASEO (muro ciego)",
+      "ring": [[119, -4.5], [137.9, -4.5], [137.9, 1.5], [119, 1.5]],
+      "base": 0,
+      "height": 8.6,
+      "parapet": [0, 0.3],
+      "skin": "whitePlates",
+      "roof": {"kind": "shed", "skin": "whitePlates", "rise": 2.8, "along": 0, "gable": "whitePlates"},
+      "faces": [],
+      "physics": "block",
+      "source": "rectángulo blanco del satélite 2023-12-30; x 119,0–137,9, cara vertical hasta ≈8,6 m y remate inclinado hasta ≈11,4 m; muro ciego de placas hasta el piso, sin puertas ni marquesina (Street View mar 2025: contradice la entrada supuesta en x 129 de la hoja)."
+    },
+    {
+      "id": "portal-rojo-no",
+      "name": "Portal central: bloque rojo NO",
+      "ring": [[137.9, -4.5], [145.9, -4.5], [145.9, 1.5], [137.9, 1.5]],
+      "base": 0,
+      "height": 10.8,
+      "parapet": [0, 0.3],
+      "skin": "mosaic",
+      "roof": {"kind": "flat", "skin": "copingGrey"},
+      "faces": [],
+      "physics": "block",
+      "source": "satélite 2023-12-30; x 137,9–145,9 y ≈10,8 m, hasta el piso (Street View mar 2025)."
+    },
+    {
+      "id": "vestibulo",
+      "name": "Vestíbulo central detrás del portal",
+      "ring": [[111.2, 1.5], [145.9, 1.5], [145.9, 17], [111.2, 17]],
+      "base": 0,
+      "height": 7.5,
+      "parapet": [0, 0.3],
+      "skin": "plaster",
+      "roof": {"kind": "flat", "skin": "roofVest"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; alto sin medida (no asoma desde la calle: Street View mar 2025), estimado."
+    },
+    {
+      "id": "locales-no",
+      "name": "Bloque de locales NO (detrás de las marquesinas)",
+      "ring": [[145.9, 1], [211.8, 1], [211.8, 17], [145.9, 17]],
+      "base": 0,
+      "height": 6.5,
+      "parapet": [0.2, 0.3],
+      "skin": "shopWall",
+      "roof": {"kind": "flat", "skin": "roofShops"},
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [{"y": [2.5, 6.7], "skin": "signBand"}],
+          "openings": [
+            {"u": 8.1, "width": 2.2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 16.6, "width": 1.8, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 25.6, "width": 2.2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 33.6, "width": 1.6, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 42.6, "width": 2.2, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 50.6, "width": 1.8, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"},
+            {"u": 58.6, "width": 1.8, "y": [3.3, 5.2], "depth": -0.06, "skin": "frosted", "frame": "frosted"}
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; como el bloque SE: muro ciego de ~6,7 m con la franja de letreros, 8 locales de ~8,2 m, sin vitrinas (Street View mar 2025). Paneles entre letreros: estimados (±2–4 m)."
+    },
+    {
+      "id": "caja-no",
+      "name": "Caja blanca de la entrada NO",
+      "ring": [[211.8, -3], [230.6, -3], [230.6, 0], [211.8, 0]],
+      "base": 0,
+      "height": 8.4,
+      "parapet": [0, 0.3],
+      "skin": "whitePlates",
+      "roof": {"kind": "shed", "skin": "whitePlates", "rise": 2.7, "along": 0, "gable": "whitePlates"},
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [],
+          "openings": [{"u": 6.15, "width": 8.3, "y": [0, 3.2], "depth": 0.3, "skin": "shutterDark", "frame": "doorFrame"}]
+        }
+      ],
+      "physics": "block",
+      "source": "franja blanca del satélite 2023-12-30; x 211,8–230,6, cara vertical hasta ≈8,4 m y remate inclinado hasta ≈11,1 m, placas en retícula; cortina o vidrio oscuro con franjas en x 213,8–222,1 (Street View mar 2025). El logo del sol (x≈218, 5,9–8,1 m) no se copia."
+    },
+    {
+      "id": "vestibulo-no",
+      "name": "Vestíbulo de la entrada NO",
+      "ring": [[211.8, 0], [230.6, 0], [230.6, 22], [224, 22], [224, 17], [211.8, 17]],
+      "base": 0,
+      "height": 6.5,
+      "parapet": [0, 0.3],
+      "skin": "plaster",
+      "roof": {"kind": "flat", "skin": "roofVest"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (techo con textura, posible translúcido); alto sin medida, estimado."
+    },
+    {
+      "id": "hipermarket",
+      "name": "Hipermarket (sala de ventas): Mi Comisariato, Ferrisariato, Río Store, Mi Juguetería",
+      "ring": [[230.6, -30.5], [280.5, -30.5], [280.5, 22], [230.6, 22]],
+      "base": 0,
+      "height": 10.9,
+      "parapet": [0, 0.3],
+      "skin": "plaster",
+      "roof": {"kind": "flat", "skin": "roofHiper"},
+      "faces": [
+        {"sides": [0], "bands": [{"y": [0, 10.9], "skin": "hiperPanel"}]},
+        {"sides": [3], "span": [0, 30.5], "bands": [{"y": [0, 10.9], "skin": "hiperPanel"}]},
+        {"sides": [3], "span": [30.5, 40.4], "bands": [{"y": [0, 10.9], "skin": "mosaic"}]},
+        {"sides": [3], "span": [40.4, 52.5], "bands": [{"y": [0, 10.9], "skin": "hiperPanel"}]}
+      ],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (cara SW en z −30,5, medida a 0,1 m/px); la esquina SE sale en x≈230,9 (Street View mar 2025); alto ≈10,9 m (Street View mar 2025; la hoja 10,0). Retorno SE de panel gris con nervaduras y, en su medio, una columna de mosaico rojo de todo el alto en z ≈ −18,4…−8,5 (triangulada desde tres panorámicas de Street View mar 2025, ±1,5 m, y en Mapillary 6529435590435072, 2023): desde la avenida parece estar en la esquina con la entrada NO porque el retorno se ve de canto. La esquina con la cara SW no lleva faja roja (Mapillary 6529435590435072)."
+    },
+    {
+      "id": "franja-hiper",
+      "name": "Franja elevada sobre el borde SE del techo del Hipermarket",
+      "on": "hipermarket",
+      "ring": [[230.9, -17], [236.9, -17], [236.9, 15], [230.9, 15]],
+      "base": 10.9,
+      "height": 11.9,
+      "parapet": [0, 0.3],
+      "skin": "hiperPanel",
+      "roof": {"kind": "flat", "skin": "roofBodega"},
+      "faces": [],
+      "physics": "block",
+      "source": "franja ~1 m más alta con sombra de ~1 m en el satélite 2023-12-30 (x 232,5…238,5 del satélite, corrida con la esquina SE de Street View)."
+    },
+    {
+      "id": "caseta-hiper",
+      "name": "Caseta de acceso peatonal junto a la esquina NO del Hipermarket",
+      "ring": [[264, -33.5], [270, -33.5], [270, -30.5], [264, -30.5]],
+      "base": 0,
+      "height": 2.6,
+      "parapet": [0, 0.3],
+      "skin": "greyPanel",
+      "roof": {"kind": "shed", "skin": "roofBodega", "rise": 0.5, "along": 0, "gable": "greyPanel"},
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [],
+          "openings": [{"u": 3, "width": 1.8, "y": [0, 2.2], "depth": 0.15, "skin": "glassDoor", "frame": "doorFrame"}]
+        }
+      ],
+      "physics": "block",
+      "source": "caseta gris de techo inclinado delante de la fachada (Mapillary 739398817918208, 2023-04-13); en Street View mar 2025 la tapa un bus. Medidas estimadas."
+    },
+    {
+      "id": "esquina-no",
+      "name": "Esquina roja NO del Hipermarket",
+      "ring": [[280.5, -31], [290.5, -31], [290.5, -8], [280.5, -8]],
+      "base": 0,
+      "height": 11.2,
+      "parapet": [0, 0.3],
+      "skin": "mosaicNO",
+      "roof": {"kind": "flat", "skin": "coping"},
+      "faces": [
+        {"sides": [1], "span": [5, 23], "bands": [{"y": [0, 11.2], "skin": "plaster"}]},
+        {"sides": [2], "bands": [{"y": [0, 11.2], "skin": "plaster"}]}
+      ],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (su sombra de 6,1 m llega hasta z −8); alto: la única medida con la base a la vista, 10,5 m en Mapillary 739398817918208, recalibrada ×1,067 (~11,2), y 0,4 m sobre la cara gris de 10,9 (Street View mar 2025). El mosaico da la vuelta solo ~5 m por la cara NO; después, muro enlucido blanco grisáceo (Street View mar 2025)."
+    },
+    {
+      "id": "anexo-no",
+      "name": "Anexo NO bajo (servicios)",
+      "ring": [[280.5, -8], [290.5, -8], [290.5, 40], [280.5, 40]],
+      "base": 0,
+      "height": 4.9,
+      "parapet": [0, 0.3],
+      "skin": "plaster",
+      "roof": {"kind": "flat", "skin": "roofBeige"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; alto por su sombra de 2,6 m al suelo (4,6 m de la hoja ×1,067)."
+    },
+    {
+      "id": "bodega",
+      "name": "Bodega trasera del Hipermarket (andenes de carga)",
+      "ring": [[224, 22], [280.5, 22], [280.5, 35], [250, 84], [224, 84]],
+      "base": 0,
+      "height": 8.5,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofBodega"},
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [],
+          "openings": [{"u": 12, "width": 4, "y": [0, 4.2], "depth": 1, "skin": "dockDark", "frame": "dockRed", "repeat": [4, 9]}]
+        }
+      ],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (esquina NE en chaflán de (280, 35) a (250, 84), que sigue la rampa de camiones); andenes de carga con marcos de acero rojo y aberturas oscuras (Street View jun 2022; cuántos y dónde, estimado); alto sin medida."
+    },
+    {
+      "id": "bloque-verde",
+      "name": "Bloque verde azulado detrás de Supercines",
+      "ring": [[0.5, 15], [26, 15], [26, 18], [28, 18], [28, 34], [0.5, 34]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofTeal"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; alto sin medida (desde la avenida no asoma nada de atrás: Street View mar 2025)."
+    },
+    {
+      "id": "nave-se",
+      "name": "Nave larga verde detrás de los locales SE",
+      "ring": [[28, 18], [111.2, 18], [111.2, 36], [35, 36], [35, 34], [28, 34]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofGreenLight"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (x 28…110, z 19…36, ajustada a los vecinos); alto sin medida."
+    },
+    {
+      "id": "salas-a",
+      "name": "Salas de Supercines (techo amarillo)",
+      "ring": [[1, 34], [35, 34], [35, 41], [44.6, 41], [44.6, 63], [1, 63]],
+      "base": 0,
+      "height": 11.7,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofYellow"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 con su muesca NO; alto por la sombra sobre el techo rojo vecino (~2,7 m más alto; 11 m de la hoja ×1,067). Que son las 6 salas: estimado."
+    },
+    {
+      "id": "salas-b",
+      "name": "Salas de Supercines (techo gris)",
+      "ring": [[1, 63], [44.6, 63], [44.6, 83], [1, 83]],
+      "base": 0,
+      "height": 11.7,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofGreyLight"},
+      "faces": [],
+      "physics": "block",
+      "source": "ídem salas-a, techo gris en z 63…83 (satélite 2023-12-30)."
+    },
+    {
+      "id": "trasero-se",
+      "name": "Bloque trasero gris SE",
+      "ring": [[2.6, 85], [45.4, 85], [45.4, 110], [2.6, 110]],
+      "base": 0,
+      "height": 10.2,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofGreyBack"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; alto por su sombra de 5,4 m al suelo (9,6 m de la hoja ×1,067)."
+    },
+    {
+      "id": "techo-rojo",
+      "name": "Bloque de techo rojo (a dos aguas)",
+      "ring": [[44.6, 41], [86, 41], [86, 86], [44.6, 86]],
+      "base": 0,
+      "height": 8.85,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "gable", "skin": "roofRed", "rise": 1.2, "along": 1, "gable": "rearWall"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (x 46…86, ajustada a las salas); alto relativo a las salas por la sombra (8,3 m de la hoja ×1,067); cumbrera a lo largo de z probable y su alto estimado."
+    },
+    {
+      "id": "franja-servicio",
+      "name": "Franja beige de servicio",
+      "ring": [[70, 36], [111.2, 36], [111.2, 45], [86, 45], [86, 41], [70, 41]],
+      "base": 0,
+      "height": 7,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofBeige"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (x 70…110, z 37…45, ajustada a los vecinos); alto sin medida."
+    },
+    {
+      "id": "bloque-gris",
+      "name": "Bloque gris plano con equipos",
+      "ring": [[86, 45], [110, 45], [110, 86], [86, 86]],
+      "base": 0,
+      "height": 7.5,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofGreyFlat"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; alto sin medida."
+    },
+    {
+      "id": "techo-verde-central",
+      "name": "Techo verde oscuro detrás del portal",
+      "ring": [[111.2, 17], [148, 17], [148, 31], [111.2, 31]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofGreenDark"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30; alto sin medida."
+    },
+    {
+      "id": "nave3-a",
+      "name": "Nave de tres aguas (probable patio de comidas): agua SE",
+      "ring": [[114, 31], [124.5, 31], [124.5, 73], [114, 73]],
+      "base": 0,
+      "height": 9.5,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "gable", "skin": "roofGreen3", "rise": 2.2, "along": 1, "gable": "rearWall"},
+      "faces": [],
+      "physics": "block",
+      "source": "tres naves de ~10 m a lo largo de z con las limahoyas en x 124,5 y 134,5 (satélite 2023-12-30); cumbrera a ~11,7 m por las sombras de 1–2 m sobre los vecinos (11 m de la hoja ×1,067); alero estimado. El uso (patio de comidas) es supuesto."
+    },
+    {
+      "id": "nave3-b",
+      "name": "Nave de tres aguas: agua del medio",
+      "ring": [[124.5, 31], [134.5, 31], [134.5, 73], [124.5, 73]],
+      "base": 0,
+      "height": 9.5,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "gable", "skin": "roofGreen3", "rise": 2.2, "along": 1, "gable": "rearWall"},
+      "faces": [],
+      "physics": "block",
+      "source": "ídem nave3-a."
+    },
+    {
+      "id": "nave3-c",
+      "name": "Nave de tres aguas: agua NO",
+      "ring": [[134.5, 31], [144, 31], [144, 73], [134.5, 73]],
+      "base": 0,
+      "height": 9.5,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "gable", "skin": "roofGreen3", "rise": 2.2, "along": 1, "gable": "rearWall"},
+      "faces": [],
+      "physics": "block",
+      "source": "ídem nave3-a."
+    },
+    {
+      "id": "dientes",
+      "name": "Remates triangulares en diente de sierra junto a la nave de tres aguas",
+      "ring": [[110, 38], [114, 38], [114, 65], [110, 65]],
+      "base": 0,
+      "height": 8.5,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "sawtooth", "skin": "roofWhite", "rise": 2, "along": 1, "teeth": 4, "gable": "roofWhite"},
+      "faces": [],
+      "physics": "block",
+      "source": "4 triángulos blancos en diente de sierra en el costado SE de la nave de tres aguas, x 110…114, z 38…65 (satélite 2023-12-30); función desconocida; altos estimados."
+    },
+    {
+      "id": "bloque-solar-no",
+      "name": "Bloque con paneles solares detrás de los locales NO",
+      "ring": [[148, 17], [224, 17], [224, 34], [148, 34]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofGreenSolar"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (x 150…222, ajustada a los vecinos); alto sin medida."
+    },
+    {
+      "id": "franja-beige-no",
+      "name": "Franja beige NO",
+      "ring": [[144, 34], [224, 34], [224, 43], [144, 43]],
+      "base": 0,
+      "height": 7.5,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofBeigeNO"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (x 150…214, z 35…43, ajustada a los vecinos); alto sin medida."
+    },
+    {
+      "id": "nave-gris-no",
+      "name": "Nave gris con paneles solares (atrás NO)",
+      "ring": [[144, 43], [224, 43], [224, 84], [144, 84]],
+      "base": 0,
+      "height": 8,
+      "parapet": [0, 0.3],
+      "skin": "rearWall",
+      "roof": {"kind": "flat", "skin": "roofGreyNO"},
+      "faces": [],
+      "physics": "block",
+      "source": "planta del satélite 2023-12-30 (x 150…223, ajustada a los vecinos); alto sin medida."
+    }
+  ],
+  "canopies": [
+    {
+      "id": "marquesina-se-1",
+      "on": "locales-se",
+      "line": [[39.5, 2], [49.6, 2]],
+      "depth": -11,
+      "height": 9.0,
+      "thickness": 0.25,
+      "drop": -0.92,
+      "fascia": 1.75,
+      "nose": 2.0,
+      "skins": {"top": "canopyBlue", "soffit": "canopySoffit", "fascia": "canopyCharcoal"},
+      "posts": {"at": [[2.1, 0.3], [6.3, 0.3]], "size": [0.3, 0.3], "round": false, "skin": "steelWine", "foot": 6.7, "y": {"spread": 1.5, "rise": 1, "radius": 0.07}},
+      "ties": {"at": [[2.1, 0.3, 14.8, 2.1, 8.8], [6.3, 0.3, 14.8, 6.3, 8.8]], "radius": 0.02, "skin": "tieSteel"},
+      "lamps": {"every": 6, "size": [0.6, 0.06], "skin": "soffitLamp", "light": {"every": 2, "power": 0.5, "led": true}},
+      "source": "marquesina de x 39,5 a 49,6, azul por arriba (satélite 2023-12-30; el cambio de color en el borde delantero, x≈49,6, de Street View mar 2025) y gris carbón en la curva y por debajo, z −9…2. De las altas: borde delantero con una curva grande de ≈8,25 a ≈10 m (Street View mar 2025, vistas de la colectora frente a los locales SE, medido contra el remate del muro de 6,7 m: +1,4…+3,1 m y +1,7…+3,5 m); cielo raso junto al muro a ~9 m, estimado. Las siete marquesinas no van a la misma altura: se escalonan (Street View mar 2025; Mapillary 2023 lo muestra igual). En voladizo y atirantada: columnas de acero vino-marrón cada ~4,2 m que nacen sobre el muro de 6,7 m, se abren en Y en su último metro bajo la lámina y siguen como mástiles hasta ≈15 m con un tensor claro al borde delantero (Street View mar 2025)."
+    },
+    {
+      "id": "marquesina-se-2",
+      "on": "locales-se",
+      "line": [[49.6, 2], [70.9, 2]],
+      "depth": -11,
+      "height": 7.5,
+      "thickness": 0.25,
+      "drop": -0.29,
+      "fascia": 1.2,
+      "nose": 1.5,
+      "skins": {"top": "canopyGreen", "soffit": "canopySoffit", "fascia": "canopyGreen"},
+      "posts": {"at": [[0.4, 0.3], [4.6, 0.3], [8.8, 0.3], [13, 0.3], [17.2, 0.3]], "size": [0.3, 0.3], "round": false, "skin": "steelWine", "foot": 6.7, "y": {"spread": 1.0, "rise": 0.35, "radius": 0.07}},
+      "ties": {"at": [[0.4, 0.3, 14.8, 0.4, 9.3], [4.6, 0.3, 14.8, 4.6, 9.3], [8.8, 0.3, 14.8, 8.8, 9.3], [13, 0.3, 14.8, 13, 9.3], [17.2, 0.3, 14.8, 17.2, 9.3]], "radius": 0.02, "skin": "tieSteel"},
+      "lamps": {"every": 6, "size": [0.6, 0.06], "skin": "soffitLamp", "light": {"every": 2, "power": 0.5, "led": true}},
+      "source": "marquesina verde de x 49,6 a 70,9 (satélite 2023-12-30; límites de color de Street View mar 2025). La más baja del lado SE: una curva grande al frente de ≈6,8 a ≈8,0 m y el cielo raso junto al muro a ≈7,5 m, con columnas cortas (Street View mar 2025, vistas de cerca desde la colectora: el pie de la curva queda ~0,1 m sobre el remate del muro y la punta 1,3 m). Estructura como marquesina-se-1."
+    },
+    {
+      "id": "marquesina-se-3",
+      "on": "locales-se",
+      "line": [[70.9, 2], [85, 2]],
+      "depth": -11,
+      "height": 9.1,
+      "thickness": 0.25,
+      "drop": 0.64,
+      "fascia": 0.6,
+      "nose": 0.7,
+      "skins": {"top": "canopyBlue", "soffit": "canopySoffit", "fascia": "canopyBlue"},
+      "posts": {"at": [[0.1, 0.3], [4.3, 0.3], [8.5, 0.3], [12.7, 0.3]], "size": [0.3, 0.3], "round": false, "skin": "steelWine", "foot": 6.7, "y": {"spread": 1.5, "rise": 1, "radius": 0.07}},
+      "ties": {"at": [[0.1, 0.3, 14.8, 0.1, 9.8], [4.3, 0.3, 14.8, 4.3, 9.8], [8.5, 0.3, 14.8, 8.5, 9.8], [12.7, 0.3, 14.8, 12.7, 9.8]], "radius": 0.02, "skin": "tieSteel"},
+      "lamps": {"every": 6, "size": [0.6, 0.06], "skin": "soffitLamp", "light": {"every": 2, "power": 0.5, "led": true}},
+      "source": "marquesina azul de x 70,9 a 85 (satélite 2023-12-30; Street View mar 2025): lámina delgada con un labio chico al frente, de ≈8,15 a ≈8,75 m, y el cielo raso junto al muro más alto, a ≈9,1 m (cae hacia el frente; Street View mar 2025, dos vistas de cerca). Estructura como marquesina-se-1."
+    },
+    {
+      "id": "marquesina-se-4",
+      "on": "locales-se",
+      "line": [[85, 2], [111, 2]],
+      "depth": -11,
+      "height": 9.0,
+      "thickness": 0.25,
+      "drop": -0.93,
+      "fascia": 0.8,
+      "nose": 0.9,
+      "skins": {"top": "canopyGreen", "soffit": "canopySoffit", "fascia": "canopyCharcoal"},
+      "posts": {"at": [[2.8, 0.3], [7, 0.3], [11.2, 0.3], [15.4, 0.3], [19.6, 0.3], [23.8, 0.3]], "size": [0.3, 0.3], "round": false, "skin": "steelWine", "foot": 6.7, "y": {"spread": 1.5, "rise": 1, "radius": 0.07}},
+      "ties": {"at": [[2.8, 0.3, 14.8, 2.8, 9.8], [7, 0.3, 14.8, 7, 9.8], [11.2, 0.3, 14.8, 11.2, 9.8], [15.4, 0.3, 14.8, 15.4, 9.8], [19.6, 0.3, 14.8, 19.6, 9.8], [23.8, 0.3, 14.8, 23.8, 9.8]], "radius": 0.02, "skin": "tieSteel"},
+      "lamps": {"every": 6, "size": [0.6, 0.06], "skin": "soffitLamp", "light": {"every": 2, "power": 0.5, "led": true}},
+      "source": "marquesina pegada al portal, x 85–111: verde por arriba (satélite 2023-12-30) y gris carbón en el borde curvo y por debajo (Street View mar 2025). La más alta del lado SE: borde delantero de ≈9,3 a ≈10,1 m y cielo raso junto al muro a ≈9 m (sube hacia el frente; Street View mar 2025, dos vistas). Estructura como marquesina-se-1."
+    },
+    {
+      "id": "marquesina-no-1",
+      "on": "locales-no",
+      "line": [[147, 1], [176.8, 1]],
+      "depth": -13,
+      "height": 8.4,
+      "thickness": 0.25,
+      "drop": -0.16,
+      "fascia": 0.6,
+      "nose": 0.7,
+      "skins": {"top": "canopyGreen", "soffit": "canopySoffit", "fascia": "canopyCharcoal"},
+      "posts": {"at": [[2.1, 0.3], [6.3, 0.3], [10.5, 0.3], [14.7, 0.3], [18.9, 0.3], [23.1, 0.3], [27.3, 0.3]], "size": [0.3, 0.3], "round": false, "skin": "steelWine", "foot": 6.7, "y": {"spread": 1.5, "rise": 1, "radius": 0.07}},
+      "ties": {"at": [[2.1, 0.3, 14.8, 2.1, 11.8], [6.3, 0.3, 14.8, 6.3, 11.8], [10.5, 0.3, 14.8, 10.5, 11.8], [14.7, 0.3, 14.8, 14.7, 11.8], [18.9, 0.3, 14.8, 18.9, 11.8], [23.1, 0.3, 14.8, 23.1, 11.8], [27.3, 0.3, 14.8, 27.3, 11.8]], "radius": 0.02, "skin": "tieSteel"},
+      "lamps": {"every": 6, "size": [0.6, 0.06], "skin": "soffitLamp", "light": {"every": 2, "power": 0.5, "led": true}},
+      "source": "marquesina pegada al portal, x 147–176,8, z −12…1: verde por arriba (satélite 2023-12-30, franja de 0,1 m/px) y gris carbón desde la calle; 7 columnas en ~29,5 m (Street View mar 2025). Casi plana y alta: borde delantero de ≈8,2 a ≈8,8 m y cielo raso junto al muro a ≈8,4 m, con columnas largas (Street View mar 2025, vista de frente y de cerca). Estructura como marquesina-se-1."
+    },
+    {
+      "id": "marquesina-no-2",
+      "on": "locales-no",
+      "line": [[176.8, 1], [195.8, 1]],
+      "depth": -13,
+      "height": 7.4,
+      "thickness": 0.25,
+      "drop": -0.29,
+      "fascia": 1.3,
+      "nose": 1.6,
+      "skins": {"top": "canopyBlue", "soffit": "canopySoffit", "fascia": "canopyBlue"},
+      "posts": {"at": [[1.7, 0.3], [5.9, 0.3], [10.1, 0.3], [14.3, 0.3], [18.5, 0.3]], "size": [0.3, 0.3], "round": false, "skin": "steelWine", "foot": 6.7, "y": {"spread": 1.0, "rise": 0.35, "radius": 0.07}},
+      "ties": {"at": [[1.7, 0.3, 14.8, 1.7, 11.2], [5.9, 0.3, 14.8, 5.9, 11.2], [10.1, 0.3, 14.8, 10.1, 11.2], [14.3, 0.3, 14.8, 14.3, 11.2], [18.5, 0.3, 14.8, 18.5, 11.2]], "radius": 0.02, "skin": "tieSteel"},
+      "lamps": {"every": 6, "size": [0.6, 0.06], "skin": "soffitLamp", "light": {"every": 2, "power": 0.5, "led": true}},
+      "source": "marquesina azul de x 176,8 a 195,8 (satélite 2023-12-30; límite verde/azul en x≈195,8 de Street View mar 2025). La más baja del lado NO, como la verde del SE: curva grande al frente de ≈6,6 a ≈7,9 m y columnas cortas (Street View mar 2025; Mapillary 6529435590435072, 2023). Estructura como marquesina-se-1."
+    },
+    {
+      "id": "marquesina-no-3",
+      "on": "locales-no",
+      "line": [[195.8, 1], [212, 1]],
+      "depth": -13,
+      "height": 8.25,
+      "thickness": 0.25,
+      "drop": 0,
+      "fascia": 0.6,
+      "nose": 0.7,
+      "skins": {"top": "canopyGreen", "soffit": "canopySoffit", "fascia": "canopyGreen"},
+      "posts": {"at": [[3.7, 0.3], [7.9, 0.3], [12.1, 0.3]], "size": [0.3, 0.3], "round": false, "skin": "steelWine", "foot": 6.7, "y": {"spread": 1.5, "rise": 1, "radius": 0.07}},
+      "ties": {"at": [[3.7, 0.3, 14.8, 3.7, 11.8], [7.9, 0.3, 14.8, 7.9, 11.8], [12.1, 0.3, 14.8, 12.1, 11.8]], "radius": 0.02, "skin": "tieSteel"},
+      "lamps": {"every": 6, "size": [0.6, 0.06], "skin": "soffitLamp", "light": {"every": 2, "power": 0.5, "led": true}},
+      "source": "marquesina verde de x 195,8 a 212 (satélite 2023-12-30; Street View mar 2025): lámina delgada con labio chico, borde delantero de ≈7,9 a ≈8,5 m, entre la azul (más baja) y la del portal (más alta) (Street View mar 2025; Mapillary 6529435590435072, 2023). Estructura como marquesina-se-1."
+    },
+    {
+      "id": "marquesina-roja-se",
+      "on": "caja-se",
+      "line": [[25.6, -1.5], [39.2, -1.5]],
+      "depth": -3.5,
+      "height": 2.9,
+      "thickness": 1.3,
+      "drop": 0,
+      "fascia": 1.3,
+      "skins": {"top": "canopyLight", "soffit": "canopyLightSoffit", "fascia": "redBand"},
+      "lamps": {"every": 3, "size": [0.5, 0.06], "skin": "soffitLamp", "light": {"every": 3, "power": 0.5, "led": true}},
+      "source": "marquesina de la entrada SE: de x≈25,6 a 39,2, al ras del extremo NO de la caja blanca, con la faja roja de ~2,9 a 4,2 m (Street View mar 2025; la hoja: x 21–34, 3,8–5,4 m); vuelo hasta z −5 y techo claro (satélite 2023-12-30); sin postes a la vista."
+    },
+    {
+      "id": "marquesina-roja-no",
+      "on": "caja-no",
+      "line": [[212.4, -3], [223.4, -3]],
+      "depth": -5,
+      "height": 3.2,
+      "thickness": 1.4,
+      "drop": 0,
+      "fascia": 1.4,
+      "skins": {"top": "canopyLight", "soffit": "canopyLightSoffit", "fascia": "redBand"},
+      "lamps": {"every": 3, "size": [0.5, 0.06], "skin": "soffitLamp", "light": {"every": 3, "power": 0.5, "led": true}},
+      "source": "marquesina de la entrada NO: de x≈212,4 a 223,4 con la faja roja de ~3,2 a 4,6 m (Street View mar 2025; la hoja: x 213–231, 3,8–5,4 m); vuelo hasta z −8 (satélite 2023-12-30)."
+    }
+  ],
+  "signs": [
+    {
+      "text": "SUPERCINES",
+      "size": [9.5, 1.7],
+      "background": "#2146A6",
+      "color": "#F6D12B",
+      "font": "'Arial Black', Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "italic": true,
+      "fill": 0.75,
+      "depth": 0.3,
+      "plates": [
+        {"shape": "diamond", "size": [1.4, 1.7], "offset": [-4.75, 0], "out": 0.15, "color": "#2146A6"},
+        {"shape": "diamond", "size": [1.4, 1.7], "offset": [4.75, 0], "out": 0.15, "color": "#2146A6"}
+      ],
+      "on": "supercines",
+      "side": 0,
+      "x": 12.7,
+      "y": 7.25,
+      "out": 0.35,
+      "res": 0.35,
+      "source": "caja azul con las puntas en cola de banderín (los rombos de las puntas) y letras amarillas en cursiva gruesa, ~9,5 × 1,7 m centrada en x≈12,7, de ~6,4 a 8,1 m (Street View mar 2025, vista de frente con el lente medido contra la esquina roja: la hoja la ponía 0,3 m más alta): ya no es el óvalo claro con letras rojas de Mapillary 2023. Solo el nombre, en letra genérica."
+    },
+    {
+      "text": "EL PASEO",
+      "size": [9, 1.3],
+      "background": "#ECEEE8",
+      "color": "#2A4F9E",
+      "font": "'Arial Black', Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "portal-caja",
+      "side": 0,
+      "x": 131,
+      "y": 7.05,
+      "out": 0.05,
+      "stretch": 2,
+      "res": 0.6,
+      "source": "letras azules de palo seco extendido de 7,9 m de ancho y 0,9 m de alto de mayúscula, de 6,6 a 7,5 m, centradas en x≈131 (Street View mar 2025, vista de frente: el lente sale del ancho de las letras y la base del portal): la cara es 1/0,88 más ancha que las letras (el margen del atlas) y 1,3 m de alto para que la mayúscula mida 0,9; color de Mapillary 283588724095650 (2023). Igual en 2016."
+    },
+    {
+      "text": "Shopping",
+      "size": [6.35, 1.15],
+      "background": "#ECEEE8",
+      "color": "#C8102E",
+      "font": "'Brush Script MT', 'Segoe Script', cursive",
+      "weight": 700,
+      "italic": true,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "portal-caja",
+      "side": 0,
+      "x": 131,
+      "y": 5.7,
+      "out": 0.05,
+      "res": 0.6,
+      "stretch": 2,
+      "source": "letras rojas cursivas gruesas de 5,6 m de ancho, de 5,2 a 6,2 m con la S y la cola de la g (Street View mar 2025, misma vista que EL PASEO); color de Mapillary 283588724095650."
+    },
+    {
+      "text": "DURÁN",
+      "size": [5, 1.05],
+      "background": "#ECEEE8",
+      "color": "#2A4F9E",
+      "font": "'Arial Black', Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "portal-caja",
+      "side": 0,
+      "x": 131,
+      "y": 4.25,
+      "out": 0.05,
+      "stretch": 2,
+      "res": 0.6,
+      "source": "letras azules de 4,4 m de ancho y 0,74 m de mayúscula, de 3,9 a 4,6 m (Street View mar 2025, misma vista que EL PASEO). El logo del sol a la derecha (x≈124,5) no se copia."
+    },
+    {
+      "text": "Banco Internacional",
+      "size": [4, 2.6],
+      "background": "#E87722",
+      "color": "#FFFFFF",
+      "fill": 0.3,
+      "depth": 0.25,
+      "on": "locales-se",
+      "side": 0,
+      "x": 45,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja naranja con letras blancas en x≈43–47, de ~2,8 a 5,4 m (Street View mar 2025)."
+    },
+    {
+      "text": "marcimex",
+      "size": [4, 2.6],
+      "background": "#141414",
+      "color": "#5DBB46",
+      "fill": 0.45,
+      "depth": 0.25,
+      "on": "locales-se",
+      "side": 0,
+      "x": 54,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja negra con letras verdes en x≈52–56 (Street View mar 2025)."
+    },
+    {
+      "text": "PYCCA",
+      "size": [4, 2.6],
+      "background": "#F7F7F5",
+      "color": "#1F4FA0",
+      "fill": 0.5,
+      "depth": 0.25,
+      "on": "locales-se",
+      "side": 0,
+      "x": 62,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja blanca con letras azules en x≈60–64 (Street View mar 2025; la hoja lo ponía en x≈70, Mapillary 2261695250680394, 2023). Sin el logo."
+    },
+    {
+      "text": "CENTRO MÉDICO",
+      "size": [4, 2.6],
+      "background": "#F7F7F5",
+      "color": "#6B6E70",
+      "fill": 0.28,
+      "depth": 0.25,
+      "on": "locales-se",
+      "side": 0,
+      "x": 71,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja blanca con letras grises en x≈69–73 (Street View mar 2025). Sin el logo."
+    },
+    {
+      "text": "Solidario",
+      "size": [4, 2.6],
+      "background": "#15A3A6",
+      "color": "#FFFFFF",
+      "fill": 0.45,
+      "depth": 0.25,
+      "on": "locales-se",
+      "side": 0,
+      "x": 79,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja turquesa con letras blancas en x≈77–81 (Street View mar 2025; la hoja lo ponía en x≈52, Mapillary 1005064093994213, 2023)."
+    },
+    {
+      "text": "Banco del Pacífico",
+      "size": [5, 2.6],
+      "background": "#2E9BD6",
+      "color": "#FFFFFF",
+      "fill": 0.3,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 149.5,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja celeste con logo blanco en x≈147–152 (Street View mar 2025: es el Banco del Pacífico, no el Bolivariano de la hoja). Solo el nombre."
+    },
+    {
+      "text": "KAO",
+      "size": [2.25, 2.6],
+      "background": "#141414",
+      "color": "#F28C28",
+      "weight": 900,
+      "italic": true,
+      "fill": 0.42,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 159.9,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja negra de x≈156 a 161 con «KAO» naranja en itálica gruesa y «SPORT» blanco más chico (Street View mar 2025, vista de cerca): la caja va en dos mitades pegadas, una por color; esta, «KAO», del lado NO."
+    },
+    {
+      "text": "SPORT",
+      "size": [2.75, 2.6],
+      "background": "#141414",
+      "color": "#FFFFFF",
+      "weight": 800,
+      "italic": true,
+      "fill": 0.3,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 157.4,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "«SPORT» blanco de la caja de KAO SPORT, la mitad SE (Street View mar 2025)."
+    },
+    {
+      "text": "KOAJ",
+      "size": [5, 2.6],
+      "background": "#F2F2F0",
+      "color": "#6D6E70",
+      "fill": 0.45,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 166.5,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja blanca con foto de gente y letras grises en x≈164–169 (Street View mar 2025): sin la foto."
+    },
+    {
+      "text": "mjc",
+      "size": [4, 2.6],
+      "background": "#F28C28",
+      "color": "#FFFFFF",
+      "fill": 0.5,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 176,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja naranja con foto de niños y letras blancas en x≈174–178 (Street View mar 2025; la hoja lo tenía como afiche): sin la foto."
+    },
+    {
+      "text": "GLORIA",
+      "size": [5, 1.3],
+      "background": "#B01E2E",
+      "color": "#FFFFFF",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "fill": 0.55,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 183.5,
+      "y": 4.75,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja roja de x≈181 a 186 con «GLORIA» y «SALTOS» en dos renglones de letras blancas con serifa (Street View mar 2025; Mapillary 6529435590435072): la caja va en dos mitades pegadas, una por renglón; esta, la de arriba. Sin el lema."
+    },
+    {
+      "text": "SALTOS",
+      "size": [5, 1.3],
+      "background": "#B01E2E",
+      "color": "#FFFFFF",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "fill": 0.55,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 183.5,
+      "y": 3.45,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "renglón de abajo de la caja de GLORIA SALTOS (Street View mar 2025)."
+    },
+    {
+      "text": "Advance",
+      "size": [4, 2.6],
+      "background": "#141414",
+      "color": "#FFFFFF",
+      "fill": 0.4,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 193,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja negra con letras blancas y fotos de equipos en x≈191–195 (Street View mar 2025: antes una caja azul, Mapillary 2023): sin las fotos."
+    },
+    {
+      "text": "marathon",
+      "size": [5, 2.6],
+      "background": "#1D2330",
+      "color": "#FFFFFF",
+      "fill": 0.4,
+      "depth": 0.25,
+      "on": "locales-no",
+      "side": 0,
+      "x": 200.5,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja azul marino con letras blancas en x≈198–203 (Street View mar 2025; Mapillary 6529435590435072). Sin el recuadro rojo del logo."
+    },
+    {
+      "text": "RM",
+      "size": [4, 2.6],
+      "background": "#F7F7F5",
+      "color": "#D2232A",
+      "fill": 0.55,
+      "depth": 0.25,
+      "plates": [{"shape": "rect", "size": [4.3, 2.9], "offset": [0, 0], "out": 0.2, "color": "#D2232A"}],
+      "on": "locales-no",
+      "side": 0,
+      "x": 208,
+      "y": 4.1,
+      "out": 0.3,
+      "res": 0.6,
+      "source": "caja blanca con borde rojo y «RM» rojo en x≈206–210 (Street View mar 2025; en 2023 era roja con letras blancas, Mapillary 6529435590435072)."
+    },
+    {
+      "text": "RIO STORE",
+      "size": [8.9, 2.05],
+      "background": "#C4C8CC",
+      "color": "#2B2B2B",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "fill": 0.85,
+      "depth": 0,
+      "on": "hipermarket",
+      "side": 0,
+      "x": 237.6,
+      "y": 9.1,
+      "out": 0.05,
+      "res": 0.4,
+      "source": "letras con serifa gris oscuro de x 233,7 a 241,5, la R y la S de ~1,4 m (Street View mar 2025, vista de la entrada NO; Mapillary 853863982743145). Aquí todas mayúsculas de ~1,2 m, sin las versalitas ni la fila de estrellas."
+    },
+    {
+      "text": "HIPER",
+      "size": [8.2, 2.1],
+      "background": "#C4C8CC",
+      "color": "#C8102E",
+      "font": "'Arial Black', Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "italic": true,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "hipermarket",
+      "side": 0,
+      "x": 249.7,
+      "y": 9.3,
+      "out": 0.05,
+      "res": 0.4,
+      "source": "«HIPER» rojo en itálica gruesa de x≈246,1 a 253,3 y ~1,45 m de alto, centrado a ~9,3 m (Street View mar 2025, vista de la entrada NO con el lente medido contra la caja blanca; Mapillary 853863982743145)."
+    },
+    {
+      "text": "MARKET",
+      "size": [4.3, 0.88],
+      "background": "#C4C8CC",
+      "color": "#1E1E1E",
+      "font": "'Arial Black', Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "italic": true,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "hipermarket",
+      "side": 0,
+      "x": 247.2,
+      "y": 8.3,
+      "out": 0.07,
+      "res": 0.4,
+      "source": "«MARKET» negro más chico, de x≈245,3 a 249,1 y ~0,6 m de alto: debajo de HIPER y hacia su punta SE (Street View mar 2025; Mapillary 853863982743145)."
+    },
+    {
+      "text": "Ferrisariato",
+      "size": [10.3, 2.2],
+      "background": "#C4C8CC",
+      "color": "#1F4FA8",
+      "weight": 800,
+      "italic": true,
+      "fill": 0.85,
+      "depth": 0,
+      "on": "hipermarket",
+      "side": 0,
+      "x": 261.4,
+      "y": 9.1,
+      "out": 0.05,
+      "res": 0.4,
+      "source": "letras azules en cursiva gruesa de x 256,9 a 265,9, la F de ~2 m y las minúsculas de ~1 m (Street View mar 2025, vista de la entrada NO; Mapillary 853863982743145)."
+    },
+    {
+      "text": "comisariato",
+      "size": [9.5, 1.9],
+      "background": "#C4C8CC",
+      "color": "#C8102E",
+      "weight": 800,
+      "fill": 0.85,
+      "depth": 0,
+      "on": "hipermarket",
+      "side": 0,
+      "x": 273.7,
+      "y": 8.9,
+      "out": 0.05,
+      "res": 0.4,
+      "source": "«comisariato» rojo de x≈269,5 a 277,9 y ~1,2 m de alto, con «mi» encima de su punta NO (Street View mar 2025, vistas de la entrada NO y del Hipermarket; Mapillary 739398817918208). Sin el lema de debajo."
+    },
+    {
+      "text": "mi",
+      "size": [1.8, 1.75],
+      "background": "#C4C8CC",
+      "color": "#C8102E",
+      "weight": 800,
+      "fill": 0.85,
+      "depth": 0,
+      "on": "hipermarket",
+      "side": 0,
+      "x": 276.9,
+      "y": 10.05,
+      "out": 0.05,
+      "res": 0.4,
+      "source": "«mi» rojo sobre la punta NO de «comisariato», de x≈276,1 a 277,6 y ~1,1 m de alto (Street View mar 2025, vista de la entrada NO)."
+    },
+    {
+      "text": "Mi Juguetería",
+      "size": [10.2, 2.1],
+      "background": "#C4C8CC",
+      "color": "#E53935",
+      "weight": 800,
+      "fill": 0.85,
+      "depth": 0,
+      "on": "hipermarket",
+      "side": 3,
+      "z": -23.6,
+      "y": 9.1,
+      "out": 0.05,
+      "res": 0.4,
+      "source": "arriba en el retorno SE del Hipermarket, en letras de colores de ~1,8 m de alto, de z≈−28,5 a −19 (triangulado desde dos panorámicas de Street View mar 2025: la hoja lo daba de 7 × 1,2 m); aquí de un solo color. Sigue abierta en sept 2026 (foto de usuario en Google Maps, solo mirada)."
+    },
+    {
+      "text": "HIPER MARKET",
+      "size": [4.6, 1.6],
+      "background": "#F4F4F2",
+      "color": "#C8102E",
+      "font": "'Arial Black', Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "italic": true,
+      "fill": 0.45,
+      "depth": 0.3,
+      "on": "esquina-no",
+      "side": 1,
+      "u": 2.5,
+      "y": 9.8,
+      "out": 0.35,
+      "res": 0.4,
+      "source": "caja blanca «HIPER MARKET» arriba del mosaico en la cara NO (Street View mar 2025, desde el lote del NO); tamaño estimado."
+    },
+    {
+      "text": "MENOR PRECIO",
+      "size": [5.2, 1],
+      "background": "#C8102E",
+      "color": "#FFFFFF",
+      "font": "'Arial Black', Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "fill": 0.9,
+      "depth": 0,
+      "at": [0, -48.3],
+      "angle": 0,
+      "y": 12.3,
+      "out": 0.03,
+      "res": 0.4,
+      "source": "cara NO de la valla: «MENOR PRECIO Siempre» y «mi comisariato» junto a una mujer y productos (Street View mar/abr 2025): solo el texto, en la mitad derecha de la cara; lugar y tamaño estimados."
+    },
+    {
+      "text": "Siempre",
+      "size": [3, 0.7],
+      "background": "#C8102E",
+      "color": "#FFD23F",
+      "weight": 800,
+      "italic": true,
+      "fill": 0.9,
+      "depth": 0,
+      "at": [0, -48.3],
+      "angle": 0,
+      "y": 11.35,
+      "out": 0.03,
+      "res": 0.4,
+      "source": "ídem «MENOR PRECIO»."
+    },
+    {
+      "text": "mi comisariato",
+      "size": [4.4, 0.8],
+      "background": "#C8102E",
+      "color": "#FFFFFF",
+      "weight": 800,
+      "fill": 0.9,
+      "depth": 0,
+      "at": [0, -48.3],
+      "angle": 0,
+      "y": 9.4,
+      "out": 0.03,
+      "res": 0.4,
+      "source": "ídem «MENOR PRECIO»."
+    }
+  ],
+  "skylights": [],
+  "domes": [],
+  "equipment": [
+    {
+      "on": "hipermarket",
+      "area": [[237.5, -28], [239.5, -28], [239.5, 21], [237.5, 21]],
+      "margin": 0,
+      "count": 12,
+      "angle": 0,
+      "size": [[1.8, 0.9, 0.9], [2.2, 1.1, 1.1]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.3, "skin": "fanDark"},
+      "source": "~36 equipos (cajas blancas de ~2 × 1 m) sobre la sala del Hipermarket, en filas junto a los dos campos de paneles (satélite 2023-12-30); aquí en tres franjas de 12, conteo aproximado."
+    },
+    {
+      "on": "hipermarket",
+      "area": [[255, -28], [256.5, -28], [256.5, 21], [255, 21]],
+      "margin": 0,
+      "count": 12,
+      "angle": 0,
+      "size": [[1.8, 0.9, 0.9], [2.2, 1.1, 1.1]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.3, "skin": "fanDark"},
+      "source": "ídem, entre los dos campos."
+    },
+    {
+      "on": "hipermarket",
+      "area": [[277.3, -28], [279.5, -28], [279.5, 21], [277.3, 21]],
+      "margin": 0,
+      "count": 12,
+      "angle": 0,
+      "size": [[1.8, 0.9, 0.9], [2.2, 1.1, 1.1]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.3, "skin": "fanDark"},
+      "source": "ídem, al NO del segundo campo."
+    },
+    {
+      "on": "nave-gris-no",
+      "area": [[146, 77], [222, 77], [222, 83], [146, 83]],
+      "margin": 0,
+      "count": 14,
+      "angle": 0,
+      "size": [[1.6, 1, 0.9], [2.6, 1.6, 1.4]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.35, "skin": "fanDark"},
+      "source": "franja de equipos en z 77…83 detrás de las naves NO (satélite 2023-12-30); cantidad estimada."
+    },
+    {
+      "on": "bloque-gris",
+      "area": [[100, 61], [106, 61], [106, 68], [100, 68]],
+      "margin": 0,
+      "count": 4,
+      "angle": 0,
+      "size": [[1.6, 1, 0.9], [2.6, 1.6, 1.4]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.35, "skin": "fanDark"},
+      "source": "equipos en x 100…106, z 61…68 (satélite 2023-12-30); cantidad estimada."
+    },
+    {
+      "on": "franja-servicio",
+      "area": [[88, 37.5], [110, 37.5], [110, 44], [88, 44]],
+      "margin": 0,
+      "count": 6,
+      "angle": 0,
+      "size": [[1.6, 1, 0.9], [2.6, 1.6, 1.4]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.35, "skin": "fanDark"},
+      "source": "lámina beige con equipos (satélite 2023-12-30); cantidad estimada."
+    },
+    {
+      "on": "atrio-se",
+      "margin": 1.5,
+      "count": 4,
+      "angle": 0,
+      "size": [[1.6, 1, 0.9], [2.6, 1.6, 1.4]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.35, "skin": "fanDark"},
+      "source": "techo del atrio con equipos (satélite 2023-12-30); cantidad estimada."
+    },
+    {
+      "on": "anexo-no",
+      "margin": 1,
+      "count": 8,
+      "angle": 0,
+      "size": [[1.6, 1, 0.9], [2.6, 1.6, 1.4]],
+      "skin": "unitWhite",
+      "fan": {"radius": 0.35, "skin": "fanDark"},
+      "source": "lámina beige con equipos del anexo NO (satélite 2023-12-30); equipos en el techo también en Street View mar 2025; cantidad estimada."
+    }
+  ],
+  "solar": [
+    {
+      "on": "hipermarket",
+      "area": [[240, -28], [255, -28], [255, 21], [240, 21]],
+      "angle": 0,
+      "pitch": 4.5,
+      "depth": 3.5,
+      "tilt": 8,
+      "lift": 0.3,
+      "skin": "solarPanel",
+      "source": "primer campo de paneles solares de la sala del Hipermarket: ~11 filas de ~3,5 m con pasillos pintados de rojo de ~1 m (satélite 2023-12-30, conteo); inclinación estimada. Ya estaban en 2023; sin fecha de instalación publicada."
+    },
+    {
+      "on": "hipermarket",
+      "area": [[256.5, -28], [277, -28], [277, 21], [256.5, 21]],
+      "angle": 0,
+      "pitch": 4.5,
+      "depth": 3.5,
+      "tilt": 8,
+      "lift": 0.3,
+      "skin": "solarPanel",
+      "source": "segundo campo, ídem."
+    },
+    {
+      "on": "bodega",
+      "area": [[226, 24], [278, 24], [278, 36], [251, 78], [226, 78]],
+      "angle": 0,
+      "pitch": 4.5,
+      "depth": 3.3,
+      "tilt": 8,
+      "lift": 0.3,
+      "skin": "solarPanel",
+      "source": "paneles solares en filas sobre la bodega trasera (satélite 2023-12-30)."
+    },
+    {
+      "on": "bloque-solar-no",
+      "area": [[152, 19], [220, 19], [220, 32], [152, 32]],
+      "angle": 0,
+      "pitch": 4.2,
+      "depth": 3.2,
+      "tilt": 8,
+      "lift": 0.3,
+      "skin": "solarPanel",
+      "source": "paneles solares con bordes verdes detrás de los locales NO (satélite 2023-12-30)."
+    },
+    {
+      "on": "nave-gris-no",
+      "area": [[150, 45], [172, 45], [172, 75], [150, 75]],
+      "angle": 0,
+      "pitch": 4.5,
+      "depth": 3.5,
+      "tilt": 8,
+      "lift": 0.3,
+      "skin": "solarPanel",
+      "source": "paneles solares en 3 columnas de filas sobre la nave gris NO (satélite 2023-12-30); primera columna."
+    },
+    {
+      "on": "nave-gris-no",
+      "area": [[175, 45], [197, 45], [197, 75], [175, 75]],
+      "angle": 0,
+      "pitch": 4.5,
+      "depth": 3.5,
+      "tilt": 8,
+      "lift": 0.3,
+      "skin": "solarPanel",
+      "source": "ídem, segunda columna."
+    },
+    {
+      "on": "nave-gris-no",
+      "area": [[200, 45], [221, 45], [221, 75], [200, 75]],
+      "angle": 0,
+      "pitch": 4.5,
+      "depth": 3.5,
+      "tilt": 8,
+      "lift": 0.3,
+      "skin": "solarPanel",
+      "source": "ídem, tercera columna."
+    }
+  ],
+  "masts": [
+    {
+      "on": "locales-se",
+      "y": 7.9,
+      "at": [[41.6, 1.7, 7.1], [45.8, 1.7, 7.1], [50, 1.7, 7.1], [54.2, 1.7, 7.1], [58.4, 1.7, 7.1], [62.6, 1.7, 7.1], [66.8, 1.7, 7.1], [71, 1.7, 7.1], [75.2, 1.7, 7.1], [79.4, 1.7, 7.1], [83.6, 1.7, 7.1], [87.8, 1.7, 7.1], [92, 1.7, 7.1], [96.2, 1.7, 7.1], [100.4, 1.7, 7.1], [104.6, 1.7, 7.1], [108.8, 1.7, 7.1]],
+      "radius": 0.09,
+      "heads": {"count": 0, "size": [0.1, 0.1, 0.1], "skin": "mastSteel"},
+      "skin": "mastSteel",
+      "source": "mástiles de los tensores: la prolongación de cada columna de la marquesina por encima de ella, uno por columna cada ~4,2 m, con la punta a ≈15 m (Street View mar 2025; no son astas ni pararrayos, y la hoja los daba cada 3,4 m hasta ≈11 m). Ya estaban en 2016."
+    },
+    {
+      "on": "locales-no",
+      "y": 7.9,
+      "at": [[149.1, 0.7, 7.1], [153.3, 0.7, 7.1], [157.5, 0.7, 7.1], [161.7, 0.7, 7.1], [165.9, 0.7, 7.1], [170.1, 0.7, 7.1], [174.3, 0.7, 7.1], [178.5, 0.7, 7.1], [182.7, 0.7, 7.1], [186.9, 0.7, 7.1], [191.1, 0.7, 7.1], [195.3, 0.7, 7.1], [199.5, 0.7, 7.1], [203.7, 0.7, 7.1], [207.9, 0.7, 7.1]],
+      "radius": 0.09,
+      "heads": {"count": 0, "size": [0.1, 0.1, 0.1], "skin": "mastSteel"},
+      "skin": "mastSteel",
+      "source": "ídem en el frente NO (7 en los ~29,5 m de la marquesina pegada al portal: Street View mar 2025)."
+    }
+  ],
+  "bridges": [],
+  "stairs": [],
+  "lots": [
+    {
+      "id": "parqueo-se",
+      "ring": [[-3.5, -52], [129.5, -52], [129.5, -4.5], [111.2, -4.5], [111.2, 2], [39.2, 2], [39.2, -1.5], [19.2, -1.5], [19.2, -0.5], [6.4, -0.5], [6.4, -1.6], [-3.5, -1.6]],
+      "skin": "lotPavers",
+      "lift": 0.1,
+      "rows": [
+        {"a": [2, -44], "b": [2, -9], "side": 1, "style": "puesto"},
+        {"a": [3, -45], "b": [27.5, -45], "side": -1, "style": "puesto"},
+        {"a": [5, -37.5], "b": [28, -37.5], "side": 1, "style": "puesto"},
+        {"a": [34, -37.5], "b": [129.5, -37.5], "side": 1, "style": "puesto", "set": {"gaps": [[83.75, 86.25]]}},
+        {"a": [5, -27.5], "b": [28, -27.5], "side": -1, "style": "puesto"},
+        {"a": [34, -27.5], "b": [129.5, -27.5], "side": -1, "style": "puesto", "set": {"gaps": [[43.5, 46.5], [83.75, 86.25], [123.5, 126.5]]}},
+        {"a": [9, -21.3], "b": [28, -21.3], "side": 1, "style": "puesto"},
+        {"a": [34, -21.3], "b": [129.5, -21.3], "side": 1, "style": "puesto", "set": {"gaps": [[78.75, 81.25], [126.75, 129.25]]}},
+        {"a": [9, -11.3], "b": [28, -11.3], "side": -1, "style": "puesto"},
+        {"a": [34, -11.3], "b": [129.5, -11.3], "side": -1, "style": "puesto", "set": {"gaps": [[78.75, 81.25], [126.75, 129.25]]}}
+      ],
+      "source": "parqueo a nivel del tramo SE (no hay parqueo en altura): filas a 90° con puestos de 2,5 m (autocorrelación de las filas en el satélite 2023-12-30: 2,40–2,64 m); una fila a lo largo del andén del terminal (x −3…2), una contra la reja (x 2…27,5), y dos filas dobles cabeza con cabeza en z −37,5…−27,5 y −21,3…−11,3 (centros de los autos medidos en el satélite), cortadas por el paso peatonal amarillo de x 28…34; pasillos del lazo de OSM (ways 737769385/6); delante del portal ciego (z −11,3…−4,5) queda el pasillo que sigue al de debajo de las marquesinas: en el satélite de 2023 ahí no hay autos, y la camioneta que en Street View mar 2025 parece estacionada contra el muro está en realidad a ~36 m de la cámara (z≈−35: su ancho de 1,85 m ocupa 55 px con el lente de 1069 px que da el ancho del bloque rojo del portal), en la fila doble; el tele aplana la profundidad. Autos en ~la mitad de los puestos: el satélite 2023-12-30 (el sábado antes de fin de año) los muestra casi llenos y Street View mar 2025 (día de semana) casi vacíos al frente del SE; estimado. Huecos de un puesto para las torres de vigilancia y los postes (lugares de los postes estimados). En total ~420 puestos con el tramo NO y el Hipermarket (dato de 2014: 485)."
+    },
+    {
+      "id": "parqueo-no",
+      "ring": [[129.5, -52], [230.6, -52], [230.6, -3], [211.8, -3], [211.8, 1], [145.9, 1], [145.9, -4.5], [129.5, -4.5]],
+      "skin": "lotPavers",
+      "lift": 0.1,
+      "rows": [
+        {"a": [129.5, -37.5], "b": [215, -37.5], "side": 1, "style": "puesto", "set": {"gaps": [[163.75, 166.25]]}},
+        {"a": [129.5, -27.5], "b": [215, -27.5], "side": -1, "style": "puesto", "set": {"gaps": [[163.75, 166.25], [207.5, 210.5]]}},
+        {"a": [129.5, -21.3], "b": [215, -21.3], "side": 1, "style": "puesto", "set": {"gaps": [[173.75, 176.25]]}},
+        {"a": [129.5, -11.3], "b": [215, -11.3], "side": -1, "style": "puesto", "set": {"gaps": [[173.75, 176.25]]}},
+        {"a": [158, -47], "b": [215, -47], "side": -1, "style": "puesto"}
+      ],
+      "source": "parqueo del tramo NO (satélite 2023-12-30): las dos filas dobles siguen hasta x 215, antes del paso peatonal amarillo NO (x 216…222), y una fila contra la reja en x 158…215 (z −52…−47); acceso de autos desde la colectora en x≈130,9 y 138,4 (OSM). Resto como parqueo-se."
+    },
+    {
+      "id": "parqueo-hiper",
+      "ring": [[230.6, -52], [291, -52], [291, -31], [230.6, -31]],
+      "skin": "lotPavers",
+      "lift": 0.1,
+      "rows": [
+        {"a": [223, -47], "b": [280, -47], "side": -1, "style": "puesto"},
+        {"a": [232, -35.5], "b": [280, -35.5], "side": 1, "style": "puesto", "set": {"gaps": [[263.5, 270.5]]}}
+      ],
+      "source": "lote frente al Hipermarket, x 222…280, z −52…−33: dos filas, ~44 puestos (satélite 2023-12-30); la de la fachada con los topes al pie del panel gris (Street View mar 2025) y sin la caseta de acceso."
+    }
+  ],
+  "retiros": {
+    "puesto": {
+      "height": 0.13,
+      "surface": {"color": "#8A8984", "pattern": "pavers", "scale": [1, 1]},
+      "stalls": {"width": 2.5, "depth": 5, "line": 0.06, "color": "#B4B2AA", "lift": 0.005, "cars": 0.5, "margin": 0.2},
+      "stops": {"size": [1.8, 0.12, 0.2], "inset": 0.7, "stripe": 1.8, "colors": ["#E2B81C"]},
+      "edge": {"kind": "open", "height": 0, "width": 0, "fence": 0, "posts": [0, 0], "stripe": 0, "colors": ["#FFFFFF"]},
+      "palms": {"spacing": 0, "inset": 0, "height": [0, 0]},
+      "gaps": []
+    }
+  },
+  "site": {
+    "pavedStyles": {
+      "vereda": {"height": 0.15, "curb": 0.15, "color": "#B9B7AF", "curbColor": "#A8A69E", "pattern": "slabs", "scale": [1.2, 1.2]},
+      "asfalto": {"height": 0.05, "curb": 0.15, "color": "#5B5D5E", "curbColor": "#A8A69E", "pattern": "none", "scale": [1, 1]},
+      "anden": {"height": 0.16, "curb": 0.15, "color": "#CFCBC0", "curbColor": "#E2B81C", "pattern": "slabs", "scale": [1.5, 1.5]},
+      "cebra": {"height": 0.11, "curb": 0.15, "color": "#E3B81C", "curbColor": "#E3B81C", "pattern": "none", "scale": [1, 1]}
+    },
+    "paved": [
+      {"ring": [[-3.5, -58], [126.6, -58], [126.6, -52], [-3.5, -52]], "curbs": [0, 1], "style": "vereda", "source": "acera delante de la reja, con los paraderos, hasta la bahía de buses de la colectora (z −70…−58: OSM way 328287195 y satélite 2023-12-30; Street View mar 2025)."},
+      {"ring": [[126.6, -58], [141, -58], [141, -52], [126.6, -52]], "curbs": [], "style": "asfalto", "source": "entrada y salida de autos desde la colectora, x 126,6…141 (OSM ways 1187504614 y 737769384; satélite 2023-12-30; el borde SE de la abertura en x≈126,6 de Street View mar 2025, vista del portal)."},
+      {"ring": [[141, -58], [291, -58], [291, -52], [141, -52]], "curbs": [0, 3], "style": "vereda", "source": "acera frente al tramo NO y al Hipermarket, con el parterre y la jardinera, hasta la bahía de buses (satélite 2023-12-30; Street View mar 2025)."},
+      {"ring": [[28, -37.5], [34, -37.5], [34, -27.5], [28, -27.5]], "curbs": [0, 1, 2, 3], "style": "anden", "source": "paso peatonal SE (OSM way 1180302898): anden claro entre los puestos de la fila doble (satélite 2023-12-30)."},
+      {"ring": [[28, -21.3], [34, -21.3], [34, -11.3], [28, -11.3]], "curbs": [0, 1, 2, 3], "style": "anden", "source": "ídem en la segunda fila doble."},
+      {"ring": [[28, -52], [34, -52], [34, -37.5], [28, -37.5]], "curbs": [], "style": "cebra", "source": "paso peatonal SE pintado de amarillo en los pasillos, de la reja a la entrada SE (OSM way 1180302898; satélite 2023-12-30, #E3B81C); la cebra va lisa."},
+      {"ring": [[28, -27.5], [34, -27.5], [34, -21.3], [28, -21.3]], "curbs": [], "style": "cebra", "source": "ídem."},
+      {"ring": [[28, -11.3], [34, -11.3], [34, -1.5], [28, -1.5]], "curbs": [], "style": "cebra", "source": "ídem, hasta las puertas de la entrada SE."},
+      {"ring": [[216, -37.5], [222, -37.5], [222, -27.5], [216, -27.5]], "curbs": [0, 1, 2, 3], "style": "anden", "source": "paso peatonal NO (OSM way 1180302899): anden claro a la altura de la fila doble (satélite 2023-12-30)."},
+      {"ring": [[216, -21.3], [222, -21.3], [222, -11.3], [216, -11.3]], "curbs": [0, 1, 2, 3], "style": "anden", "source": "ídem."},
+      {"ring": [[216, -52], [222, -52], [222, -37.5], [216, -37.5]], "curbs": [], "style": "cebra", "source": "paso peatonal NO pintado de amarillo, de la puerta peatonal doble de la reja a la entrada NO (OSM way 1180302899; satélite 2023-12-30; Street View mar 2025)."},
+      {"ring": [[216, -27.5], [222, -27.5], [222, -21.3], [216, -21.3]], "curbs": [], "style": "cebra", "source": "ídem."},
+      {"ring": [[216, -11.3], [222, -11.3], [222, -3], [216, -3]], "curbs": [], "style": "cebra", "source": "ídem, hasta la entrada NO."},
+      {"ring": [[133.6, -55.6], [134.4, -55.6], [134.4, -52], [133.6, -52]], "curbs": [0, 1, 2, 3], "style": "anden", "source": "isla angosta de bordillo amarillo en el medio del acceso de autos, que separa la entrada de la salida, de la línea de la reja hacia la colectora, con el bolardo en su punta de adentro (Street View mar 2025, vista del acceso desde la colectora: ~0,8 × 3,6 m, medidas a ojo con el guardia de al lado, estimado)."}
+    ],
+    "fenceStyles": {
+      "reja": {"height": 1.9, "base": [0.55, 0.25], "posts": [2.4, 0.08], "skins": {"bars": "ironRail", "base": "fenceBase", "post": "ironPost"}}
+    },
+    "fences": [
+      {"line": [[-3.5, -52], [28, -52]], "style": "reja", "gaps": [], "source": "reja de barrotes de acero negro de ~1,9 m sobre un antepecho de concreto de ~0,55 m en el borde del lote hacia la colectora, z≈−52, de x −3,5 a 291, abierta en el paso peatonal SE (x 28…34), en el acceso de autos (x 126,6…141) y en la puerta peatonal doble frente a la entrada NO (x≈216–222, aquí abierta) (Street View mar 2025; hoja); en tramos entre las aberturas."},
+      {"line": [[34, -52], [126.6, -52]], "style": "reja", "gaps": [], "source": "ídem, del paso peatonal SE al acceso de autos."},
+      {"line": [[141, -52], [216, -52]], "style": "reja", "gaps": [], "source": "ídem, del acceso de autos a la puerta peatonal NO."},
+      {"line": [[222, -52], [291, -52]], "style": "reja", "gaps": [], "source": "ídem, frente al Hipermarket (sigue frente a él: hoja)."},
+      {"line": [[291, -52], [291, -31]], "style": "reja", "gaps": [], "source": "la reja sigue por el costado NO del lote hasta la esquina roja, junto a los kioscos del lote vecino (Street View mar 2025)."}
+    ],
+    "bollards": [
+      {
+        "line": [[134, -52.4]],
+        "every": 1,
+        "radius": 0.2,
+        "height": 1.3,
+        "stripe": [0.35, 0.55, 0.75, 0.95, 1.15, 1.3],
+        "skins": {"body": "bollardBlack", "stripe": "bollardYellow"},
+        "source": "bolardo grueso de franjas negras y amarillas en la punta de adentro de la isla del acceso, sobre la línea de la reja, donde se engancha la cadena que va a los postes de la reja a cada lado (Street View mar 2025): ~1,1 m sobre la isla y ~0,4 m de ancho, con el guardia al lado de escala; en la foto las franjas van en diagonal, aquí en anillos de ~0,2 m. Sin la cadena ni los conos, que se mueven."
+      }
+    ],
+    "planters": [
+      {"ring": [[142, -58], [193, -58], [193, -53], [142, -53]], "height": 0.35, "wall": 0.15, "drop": 0.1, "skins": {"wall": "planterWall", "soil": "hedge"}, "source": "parterre con césped, seto recortado y cordylines rojas al pie de las palmeras, x 142…193, z −58…−53 (satélite 2023-12-30; Street View mar 2025); alto del bordillo estimado."},
+      {"ring": [[252, -56.2], [282, -56.2], [282, -53], [252, -53]], "height": 0.3, "wall": 0.15, "drop": 0.1, "skins": {"wall": "planterWall", "soil": "hedge"}, "source": "jardinera de arbustos junto a la reja frente al Hipermarket (Street View mar 2025; Mapillary 739398817918208); largo estimado."}
+    ],
+    "shelters": [
+      {"at": [2.1, -54.8], "angle": -90, "size": [6.2, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "paraderos de bus de techo curvo (bóveda) de lámina corrugada beige sobre arcos de tubo verde oscuro, con bancas, en la acera delante de la reja (satélite 2023-12-30, techo de ~2,4 m de fondo; Street View mar 2025); alto ~2,6 m estimado. Frente a la esquina SE solo queda este, de x≈5,2 hacia el terminal: en Street View mar 2025, desde la colectora frente a Supercines, no hay paradero entre x≈5 y ~37 (el satélite de 2023 lo tenía de x −1 a 36)."},
+      {"at": [42.98, -54.8], "angle": -90, "size": [9.97, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "tramo de x 38 a 67,9, en tres módulos (satélite 2023-12-30; tapa las cajas de letrero hasta ~2,5 m: Street View mar 2025, donde el tramo termina en x≈67,9 con su punta redonda)."},
+      {"at": [52.95, -54.8], "angle": -90, "size": [9.97, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "ídem."},
+      {"at": [62.92, -54.8], "angle": -90, "size": [9.97, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "ídem."},
+      {"at": [74.55, -54.8], "angle": -90, "size": [10.1, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "tramo de x 69,5 a 120, en cinco módulos: entre los dos tramos queda un paso de ~1,6 m (Street View mar 2025, dos vistas desde la colectora); hasta x≈120, junto al acceso de autos (Street View mar 2025, vista del portal)."},
+      {"at": [84.65, -54.8], "angle": -90, "size": [10.1, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "ídem."},
+      {"at": [94.75, -54.8], "angle": -90, "size": [10.1, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "ídem."},
+      {"at": [104.85, -54.8], "angle": -90, "size": [10.1, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "ídem."},
+      {"at": [114.95, -54.8], "angle": -90, "size": [10.1, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "ídem."},
+      {"at": [231.5, -54.8], "angle": -90, "size": [13, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "paso cubierto curvo frente al Hipermarket, junto a la reja, de x≈225 hasta al menos 248 (Street View mar 2025; satélite 2023-12-30: hasta 251), en dos módulos."},
+      {"at": [244.5, -54.8], "angle": -90, "size": [13, 2.6], "height": 2.55, "thickness": 0.05, "rise": 0.5, "front": 0.4, "every": 3, "post": 0.08, "back": 0, "bench": [0.45, 0.4, 3], "skins": {"roof": "shelterRoof", "soffit": "shelterSoffit", "post": "shelterPost", "back": "shelterPost", "bench": "bench"}, "source": "ídem."}
+    ],
+    "fountains": [],
+    "billboards": [
+      {
+        "at": [-0.3, -46.6],
+        "angle": 0,
+        "pole": [0.45, 8],
+        "panel": [10, 5.5, 0.6],
+        "border": 0.25,
+        "back": true,
+        "skins": {"pole": "billboardPole", "frame": "billboardFrame", "face": "adRed", "back": "adYellow"},
+        "reflectors": {"count": 2, "arm": 1.2, "rod": 0.06, "size": [0.45, 0.25, 0.3], "skin": "reflector"},
+        "source": "valla unipolar de Mi Comisariato con dos caras casi perpendiculares a la avenida (para los dos sentidos): la del NO roja y la del SE amarilla, panel de ~8 a ~13,5 m con reflectores en brazos arriba; poste triangulado desde dos panorámicas en x≈−0,3, z≈−46,6, ±2 m (Street View mar/abr 2025; la hoja: x 5, z −47). Ancho del panel no exacto (~8–12 m): 10 m, estimado."
+      }
+    ],
+    "towers": [
+      {
+        "at": [[45, -28], [125, -28], [209, -28]],
+        "angle": 90,
+        "pole": {"radius": 0.15, "height": 6.6, "skin": "towerPole"},
+        "parts": [
+          {"shape": "box", "y": 3.4, "size": [1.8, 1.4, 1.8], "skin": "towerCabin", "rims": {"height": 0.15, "skin": "towerRed"}},
+          {"shape": "flare", "y": 5.45, "size": [2.4, 1.75, 0.4], "skin": "towerCabin"},
+          {"shape": "box", "y": 5.85, "size": [1.75, 0.75, 1.75], "skin": "towerCabin", "rims": {"height": 0.12, "skin": "towerRed"}}
+        ],
+        "source": "tres torres de vigilancia en medio del lote, en x≈45, 125 (en el eje del portal) y 209, z≈−28: dos cajas grises con remates rojos, la de arriba con un alero acampanado, sobre un poste gris de ~6,5–7 m (Street View mar 2025; la hoja: x 30, 100 y 215). Tamaños de las cajas medidos a ojo en la captura del portal, estimados."
+      }
+    ],
+    "lampModels": {
+      "parqueo": {
+        "pole": {"height": 11, "radius": [0.12, 0.08], "sides": 12, "base": [0.2, 0.5]},
+        "arm": {"reach": 1.6, "rise": 0.3, "radius": 0.04, "segments": 3},
+        "head": {"size": [0.7, 0.15, 0.3], "tilt": 5, "lens": {"share": 0.85, "thickness": 0.02}},
+        "light": {"power": 0.8, "led": true},
+        "glow": {"color": "#f4f8ff", "intensity": 2.5},
+        "sides": [-1, 1],
+        "colors": {"pole": "#9EA3A6", "head": "#8C9196", "lens": "#eef4ff"},
+        "near": 600
+      },
+      "torre": {
+        "pole": {"height": 20, "radius": [0.22, 0.12], "sides": 12, "base": [0.3, 0.6]},
+        "arm": {"reach": 0.9, "rise": 0.2, "radius": 0.05, "segments": 3},
+        "head": {"size": [0.6, 0.18, 0.4], "tilt": 20, "lens": {"share": 0.85, "thickness": 0.02}},
+        "light": {"power": 1.4, "led": true},
+        "glow": {"color": "#f4f8ff", "intensity": 3},
+        "sides": [-1, 1],
+        "turns": [0, 90],
+        "colors": {"pole": "#9EA3A6", "head": "#8C9196", "lens": "#eef4ff"},
+        "near": 800
+      }
+    },
+    "lamps": [
+      {"model": "parqueo", "at": [[31, -32.5], [45, -31.8], [85, -32.5], [125, -31.8], [165, -32.5], [209, -31.8], [219, -32.5], [31, -16.3], [80, -16.3], [175, -16.3], [219, -16.3]], "angle": 90, "source": "postes de ~10–12 m de brazo doble en el lote (Mapillary 283588724095650 y 6529435590435072, 2023; Street View mar 2025, vistos cerca de x≈80, 100, 180 y 200); posiciones exactas sin medir: aquí sobre la línea de las cabeceras de las filas dobles, en los andenes de los pasos peatonales, junto a las torres o en una isla de un puesto, estimado."},
+      {"model": "torre", "at": [[128, -16.3]], "angle": 90, "source": "poste alto tipo torre con varias luminarias frente al portal, en el eje del acceso (Street View mar 2025, vistas del portal: pasa delante de la camioneta estacionada contra el portal y su punta sube sobre el horizonte ~3 veces lo que sube la de la torre de vigilancia): ~20 m si está en la fila doble de z −16,3, ~18 m si estuviera en la de −28; lugar a lo largo de z estimado."},
+      {"model": "parqueo", "at": [[245, -52.7], [272, -52.7]], "angle": 90, "source": "postes frente al Hipermarket (Mapillary 853863982743145, 2023): aquí en la acera, junto a la reja; lugares estimados."}
+    ],
+    "cars": [],
+    "motos": {
+      "model": {
+        "wheel": [0.3, 0.1],
+        "base": 1.3,
+        "body": [1.1, 0.45, 0.35],
+        "clearance": 0.35,
+        "seat": [0.65, 0.12, 0.28, 0.25],
+        "bars": [0.7, 1.05, 0.55],
+        "fork": 0.025,
+        "colors": ["#1E1E1E", "#1E1E1E", "#2B2B2B", "#1E1E1E", "#B71C1C", "#7F1616", "#9E9E9E", "#0D47A1", "#F5F5F5", "#2B2B2B"],
+        "seatColor": "#1A1A1A",
+        "tire": "#222222",
+        "metal": "#9AA0A6"
+      },
+      "rows": [
+        {"line": [[38, -50.3], [124, -50.3]], "every": 1, "angle": 90, "turn": 12, "share": 0.7, "source": "parqueo de motos en filas densas junto a la reja, detrás de los paraderos, x 38…110 (satélite 2023-12-30) y hasta el acceso (Street View mar 2025: motos en x≈112–122), con la rueda de adelante hacia el mall; cuántas, estimado. Colores del modelo: casi todas negras o gris oscuro y algunas rojas, blancas o azules (Street View mar 2025, vistas del portal y de los paraderos), repetidos en la lista según cuántas hay de cada uno."},
+        {"line": [[38, -47], [124, -47]], "every": 1, "angle": 90, "turn": 12, "share": 0.6, "source": "ídem, segunda fila."}
+      ]
+    },
+    "palms": [
+      {"at": [[177, -55.5], [184, -55.5]], "height": [13, 14], "source": "dos palmeras de tronco liso y copa plumosa en el parterre, x≈177 y 184, de ~13–14 m (Street View mar 2025; la hoja: 176 y 186). La copa oscura del satélite 2023-12-30 en x 172…192 son sus copas: no hay otro árbol en el parterre (Street View mar 2025, vista de frente; Mapillary 6529435590435072, 2023)."},
+      {"at": [[262.3, -54.6], [271.7, -54.6]], "height": [7, 8], "source": "cocoteros junto a la jardinera frente al Hipermarket, en x≈262,3 y 271,7 y de ~7–8 m hasta la punta de la copa (Street View mar 2025, vista de frente al Hipermarket: la copa llega justo al remate del muro de 10,9 m, que está al doble de distancia; Mapillary 739398817918208 y 3481484742178520, 2023)."},
+      {"at": [[293, -45], [289, -48]], "height": [10, 12], "source": "dos cocoteros junto a la esquina NO, delante de la esquina roja y de la reja del costado (Street View mar 2025, vista desde el lote del NO); lugares estimados desde una sola vista (±4 m) y altos por su copa, estimados."}
+    ],
+    "trees": []
+  }
+}

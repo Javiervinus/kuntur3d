@@ -1,0 +1,3708 @@
+{
+  "name": "San Marino Shopping",
+  "sources": [
+    "Marco (lat −2,16914, lon −79,89827, rumbo 36,5°: nodo OSM 5823746057) y hoja de medidas: pipeline/.cache/model-place/sanMarino/sheet.json y notes.md (2026-09-25).",
+    "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: planta, techos, rumbo, patio y jardín (precisión absoluta declarada 8,47 m; toma oblicua: los techos altos se ven corridos hacia +x/+z, ~0,15-0,3 m por metro de alto). Solo para medir. Los techos que solo se ven desde arriba (nave, lucernarios, cúpulas) se re-midieron con el marco del juego; las fachadas van donde dicen la hoja, las panorámicas y los edificios de los datos.",
+    "edificios de los datos del juego (Overture/ML, game_buildings.json): la huella de la torre Zara (x 31,8…40,2, z 34,6…43,6), el borde este de De Prati (x 76) y la fachada oeste (x −113,4) confirman la hoja.",
+    "Mapillary kaart_2, panorámica 360° 2023-04-14/15 (CC BY-SA 4.0): todas las fachadas a la Orellana y a Plaza Dañín, alturas por ángulo con el horizonte corregido, letreros de 2023.",
+    "Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0): patio, portón, reja, rotonda (Movistar) y vereda al este; no pasó por el frente central.",
+    "Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0): bloque oeste, rotonda, torre Casa Res, colores y conteo de vanos; File:San Marino Shopping's food court.jpg (misma fecha) para la nave del patio de comidas.",
+    "Google Street View, ene 2025 (Orellana), sept / abr / mar 2025 (Plaza Dañín), dic y ago 2024: solo mirado, nada copiado; todo lo que sale de ahí va como estimado. Deja viejas las fotos de 2023: letrero ZARA nuevo (gris plata desde fines de 2024), Deprati y multicines en el frontón (sin el neón de Supercines), Claro en la torre del reloj, sin la lona Food Hall, tótem en Plaza Dañín, palmeras cada ~4,5 m y postes cada ~8 m.",
+    "Prensa: remodelación de 2022 (El Universo 2022-01-28), H&M abierto el 2022-11-17, Supercines fuera en jul 2023 y Multicines desde el 2024-03-02 en el piso 2 (Expreso 2024-03-09). La foto nocturna de Commons de 2016 es anterior a la remodelación: no se usó.",
+    "Sin fotos de noche recientes: la de usuario de feb 2024 (Google Maps, solo mirada) muestra los reflectores cálidos que bañan el crema, el mirador de la torre Zara encendido entero y luz en los arcos de De Prati; vitrinas, ventanas y letreros encendidos son lo esperable, no medido.",
+    "Comparado en el juego (2026-09-25), tramo por tramo y con el mismo lente, contra las panorámicas de kaart_2 (recortes en perspectiva hechos con su rumbo), la foto de Commons de 2024 (24 mm eq., ~73° de campo, EXIF) y las capturas de Street View; página foto | juego en pipeline/.cache/model-place/sanMarino/compare.html. Lo que se corrigió: el cuadrado de teja del satélite delante de De Prati es el techo de la torre Zara (no un ala saliente); el ala oeste va en el plano del frente; la torre Casa Res y la rotonda van ~8 y 5 m más al norte; la torre del reloj, 5 m más al norte; el módulo de las ventanas del bloque Pull&Bear es ~4,45 m; faldones, letreros y la composición de la torre Zara según las fotos. La inclinación de la toma del satélite (~0,26-0,3 m por metro de alto hacia +x/+z, medida con la cúpula del reloj, el techo de Zara y el arco de la rotonda) explica los corrimientos; los bloques de ~15 m se dejaron donde estaban porque las fotos (escala de las ventanas contra la reja) no piden moverlos."
+  ],
+  "clear": [
+    [[-119.5, -49.5], [76.5, -49.5], [76.5, 58], [-119.5, 58]]
+  ],
+  "ground": {
+    "step": 2,
+    "lift": 0.12,
+    "bury": 0.5,
+    "wall": 0.25
+  },
+  "detail": {
+    "near": 280,
+    "arc": 1.2,
+    "sides": 16,
+    "small": 8,
+    "curve": 4,
+    "film": 0.01
+  },
+  "finishes": {
+    "glass": {
+      "roughness": 0.1,
+      "metalness": 0.35
+    },
+    "metal": {
+      "roughness": 0.45,
+      "metalness": 0.55
+    },
+    "rails": {
+      "roughness": 0.6,
+      "metalness": 0.3,
+      "cutout": true
+    },
+    "letters": {
+      "roughness": 0.6,
+      "metalness": 0.1,
+      "cutout": true
+    }
+  },
+  "lights": {
+    "window": {
+      "color": "#ffd9a3",
+      "intensity": 1.2
+    },
+    "shop": {
+      "color": "#fff1d6",
+      "intensity": 1.6
+    },
+    "sign": {
+      "color": "#fff6e6",
+      "intensity": 1.5
+    },
+    "mirador": {
+      "color": "#ffe2b0",
+      "intensity": 1.4
+    }
+  },
+  "skins": {
+    "cream": {
+      "color": "#E3D0A6",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0): #AFA080 con luz de tarde, corregido a ojo (hoja de medidas); las panorámicas 2023 salen subexpuestas (#807463-#908470): estimado"
+    },
+    "creamShade": {
+      "color": "#CDB98F",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "cuadritos decorativos entre los dos faldones del bloque oeste, en sombra (estimado, Google Street View ene 2025, solo mirado)"
+    },
+    "creamDoor": {
+      "color": "#D6C49A",
+      "material": "stone",
+      "source": "puerta crema ciega del frente De Prati (Mapillary kaart_2 2023; estimado)"
+    },
+    "creamDiamonds": {
+      "color": "#E3D0A6",
+      "material": "stone",
+      "pattern": "diamonds",
+      "source": "relieve de rombos de la torre del reloj (estimado (Google Street View, solo mirado), sept 2025, captura 19)"
+    },
+    "moldWhite": {
+      "color": "#F2EEE4",
+      "material": "stone",
+      "source": "molduras, cornisas y balaustres blancos (hoja: estimado)"
+    },
+    "tile": {
+      "color": "#B4583E",
+      "material": "stone",
+      "pattern": "roofTiles",
+      "source": "Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0): #764537 entre sombras; satélite #AE6F58-#B86951: estimado (hoja)"
+    },
+    "tileDome": {
+      "color": "#B06A4E",
+      "material": "stone",
+      "pattern": "roofTiles",
+      "source": "cúpula baja de teja terracota de la torre del reloj (satélite 2025-05-09, disco #B0705A; estimado)"
+    },
+    "soffitCream": {
+      "color": "#D8C79E",
+      "material": "stone",
+      "ao": 0.7,
+      "source": "cielo raso de aleros y faldones (estimado)"
+    },
+    "blueTile": {
+      "color": "#3E6FB0",
+      "material": "stone",
+      "pattern": "tiles",
+      "source": "Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0): #335F9E en sombra y #6EA3D3 en el brillo (hoja: estimado)"
+    },
+    "rubbleStone": {
+      "color": "#9A8F7B",
+      "material": "stone",
+      "pattern": "rubble",
+      "source": "Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1165801537429188 (#545042 subexpuesto); hoja #8A8170 aclarado a ojo por el tinte de cada piedra: estimado"
+    },
+    "parkDark": {
+      "color": "#0E100E",
+      "material": "stone",
+      "ao": 0.35,
+      "source": "Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 107556845663717: bocas del parqueo (#0A0C0A)"
+    },
+    "shopGlass": {
+      "color": "#34403F",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.5, 0.3],
+      "tone": 0.85,
+      "glow": "shop",
+      "lit": 0.85,
+      "source": "vitrinas de piso a techo con carpintería blanca (Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0); Google Street View ene 2025, solo mirado): tono estimado"
+    },
+    "windowGlass": {
+      "color": "#4A5557",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.9, 0.7],
+      "tone": 0.9,
+      "glow": "window",
+      "lit": 0.55,
+      "source": "ventanas con marco blanco (Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0); Google Street View ene 2025): los vinilos de las marcas (Mami-T, MANGO, PB, STRADIVARIUS) no se copian; tono estimado"
+    },
+    "doorGlass": {
+      "color": "#2A3133",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.6, 0.4],
+      "tone": 0.25,
+      "glow": "shop",
+      "source": "puertas de vidrio oscuro de las entradas (estimado)"
+    },
+    "hmGlass": {
+      "color": "#5E8C80",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.53, 0.33],
+      "tone": 0.45,
+      "glow": "window",
+      "lit": 0.7,
+      "source": "Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 254228117014027: muro cortina verdoso a contraluz (hoja: estimado)"
+    },
+    "towerGlass": {
+      "color": "#3A474B",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [1.4, 0.8],
+      "tone": 0.2,
+      "glow": "window",
+      "lit": 0.4,
+      "source": "ventanas en arco de la torre del reloj (estimado (Google Street View, solo mirado), sept 2025)"
+    },
+    "gridGreen": {
+      "color": "#2E4638",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [2.2, 2.2],
+      "tone": 0.12,
+      "glow": "window",
+      "lit": 0.4,
+      "source": "ventanas cuadradas con cuadrícula verde oscuro de la torre del reloj (estimado (Google Street View, solo mirado), sept 2025)"
+    },
+    "miradorFill": {
+      "color": "#E3D0A6",
+      "material": "stone",
+      "glow": "mirador",
+      "source": "arcos del mirador de la torre Zara, rellenos del mismo crema (ciegos de día) y encendidos enteros de noche (estimado (Google Street View, solo mirado), ene 2025; foto de usuario feb 2024)"
+    },
+    "ironBlack": {
+      "color": "#1E1F20",
+      "material": "metal",
+      "source": "Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1802804007563958: hierro negro de la reja, los postes y los pasamanos"
+    },
+    "ironRail": {
+      "color": "#1E1F20",
+      "material": "rails",
+      "pattern": "bars",
+      "source": "Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1802804007563958: barrotes de hierro negro de la reja y los balcones"
+    },
+    "meshDark": {
+      "color": "#232526",
+      "material": "rails",
+      "pattern": "bars",
+      "source": "malla negra sobre el muro de piedra del lindero este (estimado (Google Street View, solo mirado), ago 2024)"
+    },
+    "balustrade": {
+      "color": "#F0ECE2",
+      "material": "rails",
+      "pattern": "balusters",
+      "source": "balaustradas blancas de la terraza de la rotonda, de Casa Res y de la torre del reloj (estimado (Google Street View, solo mirado), ene y sept 2025)"
+    },
+    "railDark": {
+      "color": "#2C2E30",
+      "material": "rails",
+      "pattern": "bars",
+      "source": "baranda metálica oscura en el borde del techo de la cara este (estimado (Google Street View, solo mirado), ago 2024)"
+    },
+    "pergolaRoof": {
+      "color": "#2A2B2C",
+      "material": "stone",
+      "pattern": "shutter",
+      "source": "pérgola de metal negro con techo de lamas a cuatro aguas (estimado (Google Street View, solo mirado), ene 2025)"
+    },
+    "pergolaSoffit": {
+      "color": "#2A2B2C",
+      "material": "stone",
+      "pattern": "shutter",
+      "ao": 0.7,
+      "source": "las lamas negras del techo de la pérgola vistas desde abajo (estimado (Google Street View, solo mirado), ene 2025), a la sombra (oclusión estimada)"
+    },
+    "brick": {
+      "color": "#9A4A3A",
+      "material": "stone",
+      "pattern": "pavers",
+      "scale": [1, 1],
+      "source": "muro de ladrillo rojo al fondo de la terraza (estimado (Google Street View, solo mirado), ene 2025)"
+    },
+    "awningBlue": {
+      "color": "#2C62B0",
+      "material": "stone",
+      "source": "toldos azules de media cúpula (estimado (Google Street View, solo mirado), ene 2025; Mapillary Blackberry_ 2026 1356662106238814)"
+    },
+    "terraceFloor": {
+      "color": "#D8D0C0",
+      "material": "stone",
+      "pattern": "tiles",
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: piso claro de la terraza (estimado)"
+    },
+    "roofMetal": {
+      "color": "#83877D",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [6, 0.1],
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: chapa gris #83877D (hoja)"
+    },
+    "roofMembrane": {
+      "color": "#6C7358",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1],
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: membrana gris verdosa #6C7358 (hoja)"
+    },
+    "roofLight": {
+      "color": "#D6CCB9",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1],
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: techo claro #D6CCB9 (hoja)"
+    },
+    "roofGreyW": {
+      "color": "#7A7C70",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1],
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: techo gris alrededor de la nave del patio de comidas (muestreado a ojo)"
+    },
+    "naveWhite": {
+      "color": "#E8E7E2",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [4, 0.12],
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: cubierta blanca a dos aguas del patio de comidas"
+    },
+    "naveSoffit": {
+      "color": "#E8E7E2",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [4, 0.12],
+      "ao": 0.7,
+      "source": "cara de abajo del alero de la cubierta blanca del patio de comidas: la misma chapa blanca (por dentro, cerchas blancas: Wikimedia Commons File:San Marino Shopping's food court.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0)), a la sombra (oclusión estimada)"
+    },
+    "skyGlass": {
+      "color": "#5F7572",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.5, 0.8],
+      "tone": 0.9,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: lucernarios de las galerías, vidrio con costillas blancas (tono estimado)"
+    },
+    "atriumGlass": {
+      "color": "#34403F",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.42, 0.5],
+      "tone": 0.95,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: bóveda del atrio, vidrio oscuro #304140 con marco blanco (hoja)"
+    },
+    "skyFrame": {
+      "color": "#E8E8E4",
+      "material": "metal",
+      "source": "marcos blancos de los lucernarios (hoja)"
+    },
+    "unitGrey": {
+      "color": "#CFD0CC",
+      "material": "stone",
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: equipos claros (estimado)"
+    },
+    "fanDark": {
+      "color": "#2B2D2F",
+      "material": "stone",
+      "source": "estimado"
+    },
+    "antenna": {
+      "color": "#E3E3E0",
+      "material": "stone",
+      "source": "antena de celular en el techo de la fachada oeste (estimado (Google Street View, solo mirado), sept 2025)"
+    },
+    "clockFace": {
+      "color": "#F4F2EC",
+      "material": "stone",
+      "glow": "window",
+      "source": "esferas blancas de números romanos de la torre del reloj (estimado (Google Street View, solo mirado), sept 2025)"
+    },
+    "clockDark": {
+      "color": "#2A2A2A",
+      "material": "stone",
+      "source": "aro oscuro y agujas de las esferas (estimado)"
+    },
+    "bronze": {
+      "color": "#4A3B2A",
+      "material": "metal",
+      "source": "medallón redondo de bronce oscuro del tótem (estimado (Google Street View, solo mirado), mar 2025)"
+    },
+    "kioskWhite": {
+      "color": "#EDEDEA",
+      "material": "stone",
+      "source": "quiosco blanco de la Unidad de Policía (estimado (Google Street View, solo mirado), ene 2025)"
+    },
+    "fenceBase": {
+      "color": "#E6E2D6",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1802804007563958: muro bajo blanco de la reja"
+    },
+    "planterStone": {
+      "color": "#B8AC92",
+      "material": "stone",
+      "pattern": "rubble",
+      "source": "zócalo de piedra rústica de la escalinata Zara, a los costados de las gradas (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0); Mapillary Blackberry_ 2026 1091841380209051; estimado)"
+    },
+    "planterCream": {
+      "color": "#D8CBA8",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "bordes de las jardineras y el zócalo curvo de la esquina (estimado (Google Street View, solo mirado), ene 2025)"
+    },
+    "hedge": {
+      "color": "#4F6B35",
+      "material": "stone",
+      "pattern": "soil",
+      "scale": [1, 1],
+      "source": "setos y jardín del frente (Google Street View ene 2025, solo mirado)"
+    },
+    "patioPavers": {
+      "color": "#8C6058",
+      "material": "stone",
+      "pattern": "pavers",
+      "scale": [1, 1],
+      "source": "Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1802804007563958 y 1112835857974714: adoquín de ladrillo rojo apagado del patio de parqueo (mediana #827778 con luz nublada; con #A0503C salía anaranjado en el juego al lado de la foto: corregido a ojo, estimado; la espiga no está en el kit: hileras trabadas)"
+    },
+    "stairStep": {
+      "color": "#C9BFAE",
+      "material": "stone",
+      "source": "gradas de la entrada Zara (estimado)"
+    }
+  },
+  "volumes": [
+    {
+      "id": "cuerpo-oeste",
+      "name": "cuerpo oeste hacia la Av. Carlos Luis Plaza Dañín (ETAFASHION), con el patio de comidas encima",
+      "ring": [[-111, 17], [-113, 10], [-113, -40], [-82, -40], [-82, 17]],
+      "base": 0,
+      "height": 15,
+      "parapet": [1, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGreyW"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [14.2, 14.6],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ]
+        },
+        {
+          "sides": [1],
+          "bands": [
+            {
+              "y": [9.8, 10.1],
+              "skin": "moldWhite",
+              "out": 0.12
+            },
+            {
+              "y": [14.2, 14.6],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "arches": [
+            {
+              "u": 2.4,
+              "width": 3.4,
+              "top": 4.4,
+              "foot": 0,
+              "repeat": [7, 4.2],
+              "rings": [
+                {
+                  "width": 0.22,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "shopGlass"
+            },
+            {
+              "u": 3.1,
+              "width": 1.3,
+              "top": 9.2,
+              "foot": 6.4,
+              "repeat": [4, 7.5],
+              "rings": [
+                {
+                  "width": 0.15,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            },
+            {
+              "u": 4.8,
+              "width": 1.3,
+              "top": 9.2,
+              "foot": 6.4,
+              "repeat": [4, 7.5],
+              "rings": [
+                {
+                  "width": 0.15,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            },
+            {
+              "u": 6.5,
+              "width": 1.3,
+              "top": 9.2,
+              "foot": 6.4,
+              "repeat": [4, 7.5],
+              "rings": [
+                {
+                  "width": 0.15,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            }
+          ],
+          "openings": [
+            {
+              "u": 3.1,
+              "width": 1.1,
+              "y": [10.7, 12.8],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [3, 7.5]
+            },
+            {
+              "u": 4.8,
+              "width": 1.1,
+              "y": [10.7, 12.8],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [3, 7.5]
+            },
+            {
+              "u": 6.5,
+              "width": 1.1,
+              "y": [10.7, 12.8],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [3, 7.5]
+            }
+          ],
+          "fins": [
+            {
+              "every": 7.5,
+              "phase": 1.05,
+              "width": 0.7,
+              "out": 0.2,
+              "y": [5.6, 14.2],
+              "skin": "cream",
+              "round": false
+            }
+          ],
+          "eaves": [
+            {
+              "y": 5.5,
+              "out": 1,
+              "drop": 0.5,
+              "thickness": 0.12,
+              "skins": {
+                "top": "tile",
+                "soffit": "soffitCream",
+                "edge": "moldWhite"
+              }
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 11,
+              "points": [[0, 18.2, 0.5], [2.4, 16.9], [3.6, 16.4], [3.6, 14.6], [0, 14.6]],
+              "mirror": true,
+              "out": 0.1,
+              "back": 0.3,
+              "skin": "cream"
+            },
+            {
+              "u": 11,
+              "points": [[0, 18.25, 0.5], [2.45, 16.95], [3.7, 16.45]],
+              "mirror": true,
+              "width": 0.18,
+              "out": 0.2,
+              "back": 0.3,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 11,
+              "points": [[0, 19.4], [0.12, 19], [0.2, 18.2], [0, 18.2]],
+              "mirror": true,
+              "out": 0.15,
+              "back": 0.15,
+              "skin": "moldWhite"
+            }
+          ]
+        },
+        {
+          "sides": [2],
+          "bands": [
+            {
+              "y": [14.2, 14.6],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 10,
+              "width": 1,
+              "y": [11, 12.1],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [4, 3]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "fachada oeste en x −113 y norte en z −40 medidas en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja) y en los edificios de los datos del juego (Overture/ML, game_buildings.json) (borde oeste x −113,4); alto 16 m por proporción con la torre del reloj (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 796919612106982, 2023-04-14; hoja: ±2 m). Fachada: arcos de tienda bajo un alero de teja, arcos del piso 2 en grupos de 3 entre pilastras, ventanas rectangulares en el piso 3 y remate curvo con pináculo hacia el sur: estimado (Google Street View, solo mirado), sept 2025 (capturas 16-18); conteos y ubicación de los grupos estimados (los fícus tapan la fachada). Ventanitas de la cara norte: estimado (Google Street View, solo mirado), mar 2025 (captura 22)."
+    },
+    {
+      "id": "reloj",
+      "name": "torre del reloj: fuste (bocas del parqueo, arcos ciegos, rombos, Claro, balaustrada, ventanas en arco y faldón de teja)",
+      "ring": [[-113.4, -29], [-113.4, -37], [-105.4, -37], [-105.4, -29]],
+      "base": 0,
+      "height": 25,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGreyW"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [5.6, 6.1],
+              "skin": "moldWhite",
+              "out": 0.35
+            },
+            {
+              "y": [19.7, 20.1],
+              "skin": "moldWhite",
+              "out": 0.4
+            }
+          ],
+          "arches": [
+            {
+              "u": 2.1,
+              "width": 3.2,
+              "top": 4.6,
+              "foot": 0,
+              "rings": [
+                {
+                  "width": 0.4,
+                  "out": 0.12,
+                  "skin": "rubbleStone"
+                }
+              ],
+              "infill": "parkDark"
+            },
+            {
+              "u": 5.9,
+              "width": 3.2,
+              "top": 4.6,
+              "foot": 0,
+              "rings": [
+                {
+                  "width": 0.4,
+                  "out": 0.12,
+                  "skin": "rubbleStone"
+                }
+              ],
+              "infill": "parkDark"
+            },
+            {
+              "u": 1.3,
+              "width": 1.4,
+              "top": 9.6,
+              "foot": 6.7,
+              "out": 0.03,
+              "repeat": [4, 8],
+              "rings": [
+                {
+                  "width": 0.12,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "moldWhite"
+            },
+            {
+              "u": 3.1,
+              "width": 1.4,
+              "top": 9.6,
+              "foot": 6.7,
+              "out": 0.03,
+              "repeat": [4, 8],
+              "rings": [
+                {
+                  "width": 0.12,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "moldWhite"
+            },
+            {
+              "u": 4.9,
+              "width": 1.4,
+              "top": 9.6,
+              "foot": 6.7,
+              "out": 0.03,
+              "repeat": [4, 8],
+              "rings": [
+                {
+                  "width": 0.12,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "moldWhite"
+            },
+            {
+              "u": 6.7,
+              "width": 1.4,
+              "top": 9.6,
+              "foot": 6.7,
+              "out": 0.03,
+              "repeat": [4, 8],
+              "rings": [
+                {
+                  "width": 0.12,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "moldWhite"
+            },
+            {
+              "u": 1.333,
+              "width": 1.5,
+              "top": 24,
+              "foot": 20.6,
+              "repeat": [12, 2.6667],
+              "rings": [
+                {
+                  "width": 0.18,
+                  "out": 0.1,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "towerGlass"
+            }
+          ],
+          "openings": [
+            {
+              "u": 1.333,
+              "width": 1.1,
+              "y": [17.4, 19.2],
+              "depth": 0.2,
+              "skin": "gridGreen",
+              "frame": "moldWhite",
+              "repeat": [12, 2.6667]
+            }
+          ],
+          "fins": [
+            {
+              "every": 1,
+              "phase": 0.5,
+              "width": 0.18,
+              "out": 0.3,
+              "y": [5.2, 5.6],
+              "skin": "moldWhite",
+              "round": false
+            },
+            {
+              "every": 1,
+              "phase": 0.5,
+              "width": 0.2,
+              "out": 0.35,
+              "y": [19.3, 19.7],
+              "skin": "moldWhite",
+              "round": false
+            }
+          ],
+          "balconies": [
+            {
+              "u": 4,
+              "width": 8,
+              "y": 16.5,
+              "depth": 0.45,
+              "slab": 0.3,
+              "rail": 0.8,
+              "handrail": 0.1,
+              "repeat": [4, 8],
+              "skins": {
+                "slab": "moldWhite",
+                "rail": "balustrade",
+                "handrail": "moldWhite"
+              }
+            }
+          ],
+          "eaves": [
+            {
+              "y": 25.3,
+              "out": 0.9,
+              "drop": 0.7,
+              "thickness": 0.15,
+              "skins": {
+                "top": "tile",
+                "soffit": "soffitCream",
+                "edge": "moldWhite"
+              }
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 4,
+              "repeat": [4, 8],
+              "points": [[-3.6, 6.3], [3.6, 6.3], [3.6, 12.3], [-3.6, 12.3]],
+              "out": 0.03,
+              "skin": "creamDiamonds"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "base triangulada con 3 panorámicas (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0), 2023-04-14) en (−106, −28) ±4 m; cúpula en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py en (−98, −21,5) (corrida por la inclinación de la toma). Comparada en el juego con Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 796919612106982 (recorte a 40°) y estimado (Google Street View, solo mirado), abr y mar 2025 (capturas 16 y 24): la torre queda a ~3-4 m de la punta norte de la fachada, no a 8 m; va 5 m más al norte (z −37…−29), lo que también pide la cúpula del satélite con la inclinación de la toma (~0,3 m por metro de alto en z). Los 4 arcos ciegos y el relieve de rombos (que cubre toda la franja, detrás de los arcos) dan la vuelta a las cuatro caras (captura 19). Va con su cara oeste 0,4 m afuera de la fachada: en las capturas de estimado (Google Street View, solo mirado), sept 2025 (16, 18 y 19) sus bocas SALIDA y ENTRADA dan directo a la vereda. Etapas de abajo arriba (bocas en arco con piedra, cornisa con ménsulas, 4 arcos ciegos, rombos, Claro, balaustrada, 3 ventanas cuadradas con cuadrícula verde, repisa con ménsulas, 3 ventanas en arco por cara, faldón de teja): capturas 19 y 20; altos por proporción con el antepecho de 16 m (estimados ±1 m)."
+    },
+    {
+      "id": "reloj-cuerpo",
+      "name": "torre del reloj: cuerpo liso con cornisa sobre el faldón",
+      "ring": [[-112.8, -29.6], [-112.8, -36.4], [-106, -36.4], [-106, -29.6]],
+      "on": "reloj",
+      "base": 25,
+      "height": 28.4,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGreyW"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [27.9, 28.4],
+              "skin": "moldWhite",
+              "out": 0.3
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "estimado (Google Street View, solo mirado), sept 2025 (captura 20): cuerpo liso con cornisa, apenas más angosto que el fuste (estimado)."
+    },
+    {
+      "id": "reloj-esfera",
+      "name": "torre del reloj: cuerpo del reloj con sus cuatro esferas",
+      "ring": [[-112.1, -30.3], [-112.1, -35.7], [-106.7, -35.7], [-106.7, -30.3]],
+      "on": "reloj-cuerpo",
+      "base": 28.4,
+      "height": 32.6,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGreyW"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [32.2, 32.6],
+              "skin": "moldWhite",
+              "out": 0.25
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 2.7,
+              "repeat": [4, 5.4],
+              "points": [[-1, 31, 0.293], [0, 32, 0.293], [1, 31, 0.293], [0, 30, 0.293]],
+              "out": 0.06,
+              "skin": "clockFace"
+            },
+            {
+              "u": 2.7,
+              "repeat": [4, 5.4],
+              "points": [[-1, 31, 0.293], [0, 32, 0.293], [1, 31, 0.293], [0, 30, 0.293]],
+              "width": 0.12,
+              "closed": true,
+              "out": 0.1,
+              "skin": "clockDark"
+            },
+            {
+              "u": 2.7,
+              "repeat": [4, 5.4],
+              "points": [[0, 31], [0, 31.75]],
+              "width": 0.07,
+              "out": 0.12,
+              "skin": "clockDark"
+            },
+            {
+              "u": 2.7,
+              "repeat": [4, 5.4],
+              "points": [[0, 31], [0.45, 30.75]],
+              "width": 0.1,
+              "out": 0.12,
+              "skin": "clockDark"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "hoja (cuerpo del reloj ~6 × 6 m, relojes Ø ~2 m a ~31,5 m); estimado (Google Street View, solo mirado), sept 2025 (captura 20): se ven las esferas oeste y sur, las otras dos son supuestas."
+    },
+    {
+      "id": "reloj-tambor",
+      "name": "torre del reloj: tambor octogonal con rosetones bajo la cúpula",
+      "ring": [[-107.28, -33.88], [-107.28, -32.12], [-108.52, -30.88], [-110.28, -30.88], [-111.52, -32.12], [-111.52, -33.88], [-110.28, -35.12], [-108.52, -35.12]],
+      "on": "reloj-esfera",
+      "base": 32.6,
+      "height": 34.2,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGreyW"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3, 4, 5, 6, 7],
+          "bands": [
+            {
+              "y": [33.9, 34.2],
+              "skin": "moldWhite",
+              "out": 0.15
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 0.88,
+              "repeat": [4, 3.5207],
+              "points": [[-0.35, 33.3, 0.103], [0, 33.65, 0.103], [0.35, 33.3, 0.103], [0, 32.95, 0.103]],
+              "width": 0.08,
+              "closed": true,
+              "out": 0.08,
+              "skin": "moldWhite"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "estimado (Google Street View, solo mirado), sept 2025 (captura 20): tambor chico con rosetones; octogonal como el contorno blanco del Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (estimado)."
+    },
+    {
+      "id": "nave",
+      "name": "nave del patio de comidas: cubierta blanca a dos aguas con linterna de cumbrera",
+      "ring": [[-97.5, -23], [-81.5, -23], [-81.5, 17], [-97.5, 17]],
+      "on": "cuerpo-oeste",
+      "base": 15,
+      "height": 16.5,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "gable",
+        "skin": "naveWhite",
+        "rise": 4.5,
+        "along": 1,
+        "eave": 0.6,
+        "gable": "cream",
+        "under": {"soffit": "naveSoffit", "fascia": 0.15, "edge": "naveWhite"}
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: cubierta blanca de 16 m de ancho con la linterna en la cumbrera (re-medida con el marco del juego; la hoja la tenía en x −101…−82) y edificios de los datos del juego (Overture/ML, game_buildings.json) (x −98,3…−81,4); alero ~16 y cumbrera ~21 m estimados (hoja); por dentro, cerchas blancas (Wikimedia Commons File:San Marino Shopping's food court.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0))."
+    },
+    {
+      "id": "rotonda",
+      "name": "rotonda SO: planta baja con locales y toldos, terraza con balaustrada",
+      "ring": [[-111, 26, 12], [-87, 26, 12]],
+      "base": 0,
+      "height": 8.5,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "terraceFloor"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [3.9, 4.35],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [8.05, 8.5],
+              "skin": "moldWhite",
+              "out": 0.35
+            },
+            {
+              "y": [8.5, 9.35],
+              "skin": "balustrade"
+            },
+            {
+              "y": [9.35, 9.5],
+              "skin": "moldWhite",
+              "out": 0.05
+            }
+          ],
+          "openings": [
+            {
+              "u": 3.4,
+              "width": 2.6,
+              "y": [0.4, 3.5],
+              "depth": 0.3,
+              "skin": "shopGlass",
+              "frame": "moldWhite",
+              "repeat": [8, 4.4]
+            },
+            {
+              "u": 3.4,
+              "width": 1.5,
+              "y": [5.1, 7.5],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [8, 4.4]
+            }
+          ],
+          "hoods": [
+            {
+              "u": 7.8,
+              "width": 2.9,
+              "y": 3.55,
+              "height": 1.1,
+              "depth": 0.95,
+              "repeat": [4, 4.4],
+              "skin": "awningBlue"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "radio 12 m (borde de la terraza) en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja); centro en (−99, 26): el arco blanco de la balaustrada se ve en el satélite con su punto más al sur en z ≈ 41 y a ~9,5 m de alto se corre ~3 m hacia +z con la inclinación de la toma (la misma que corre la cúpula del reloj y el techo de la torre Zara), así que el frente queda en z ≈ 38, a la par de la torre Casa Res como en estimado (Google Street View, solo mirado), ene 2025 (captura 13); la hoja lo tenía 5 m más al sur; terraza a 8,5 m con balaustrada blanca de ~1 m, locales con toldos azules de media cúpula (al menos 3) y ventanas del piso 2: Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0); Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1356662106238814; estimado (Google Street View, solo mirado), ene 2025 (capturas 13-15). Vanos y toldos contados en la mitad visible; su separación es estimada."
+    },
+    {
+      "id": "pergola",
+      "name": "pérgola negra de la terraza (Casa Res)",
+      "ring": [[-106, 35], [-92, 35], [-92, 27.5], [-106, 27.5]],
+      "on": "rotonda",
+      "base": 8.5,
+      "height": 11.2,
+      "parapet": [0, 0],
+      "skin": "open",
+      "roof": {
+        "kind": "hip",
+        "skin": "pergolaRoof",
+        "rise": 1.2,
+        "along": 0,
+        "eave": 0.5,
+        "under": {"soffit": "pergolaSoffit", "fascia": 0.1, "edge": "ironBlack"}
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [],
+          "fins": [
+            {
+              "every": 3.5,
+              "phase": 0,
+              "width": 0.14,
+              "out": 0.14,
+              "y": [8.5, 11.2],
+              "skin": "ironBlack",
+              "round": false
+            }
+          ]
+        }
+      ],
+      "physics": "none",
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (capturas 13 y 14): pérgola de metal negro con techo de lamas a cuatro aguas, abierta a los lados; planta y alto estimados."
+    },
+    {
+      "id": "rotonda-cuerpo",
+      "name": "cuerpo crema con frontón curvo detrás de la terraza, con la cúpula de azulejo azul",
+      "ring": [[-105, 27.5], [-93, 27.5], [-93, 15.5], [-105, 15.5]],
+      "base": 0,
+      "height": 14.5,
+      "parapet": [0.5, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGreyW"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [8.5, 11.2],
+              "skin": "brick"
+            },
+            {
+              "y": [14.1, 14.5],
+              "skin": "moldWhite",
+              "out": 0.25
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 6,
+              "points": [[0, 17.2, 0.6], [2.6, 15.8], [4, 15.3], [4, 14.2], [0, 14.2]],
+              "mirror": true,
+              "out": 0.1,
+              "back": 0.4,
+              "skin": "cream"
+            },
+            {
+              "u": 6,
+              "points": [[0, 17.25, 0.6], [2.65, 15.85], [4.1, 15.35]],
+              "mirror": true,
+              "width": 0.18,
+              "out": 0.22,
+              "back": 0.4,
+              "skin": "moldWhite"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "hoja: cuerpo crema con frontón curvo (~14 m) detrás de la terraza y cúpula de Ø ~11,5 m (Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0)); muro de ladrillo rojo al fondo de la pérgola: estimado (Google Street View, solo mirado), ene 2025 (captura 14). Planta estimada para que la cúpula quede sobre la rotonda (en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py el disco azul está en (−92, 29), corrido ~6 m en x y en z por la inclinación de la toma a ~21 m de alto), corrida al norte con la rotonda (z 15,5…27,5)."
+    },
+    {
+      "id": "casa-res",
+      "name": "torre Casa Res: techo de teja a cuatro aguas con alero muy volado, medallón, letrero, ventanal con balcón y ventana en arco con balcón",
+      "ring": [[-79.5, 39.5], [-70.5, 39.5], [-70.5, 30], [-79.5, 30]],
+      "base": 0,
+      "height": 16.5,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "hip",
+        "skin": "tile",
+        "rise": 2.5,
+        "along": 0,
+        "eave": 1.2,
+        "under": {"soffit": "soffitCream", "fascia": 0.2, "edge": "moldWhite"}
+      },
+      "faces": [
+        {
+          "sides": [3, 0, 1, 2],
+          "bands": [
+            {
+              "y": [4.4, 4.8],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [12.6, 12.9],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.9, 16.3],
+              "skin": "moldWhite",
+              "out": 0.25
+            }
+          ],
+          "openings": [
+            {
+              "u": 14,
+              "width": 4,
+              "y": [10, 12.2],
+              "depth": 0.3,
+              "skin": "windowGlass",
+              "frame": "moldWhite"
+            },
+            {
+              "u": 4.75,
+              "width": 1.6,
+              "y": [7, 9.2],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite"
+            },
+            {
+              "u": 4.75,
+              "width": 1.6,
+              "y": [10.2, 12.2],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite"
+            },
+            {
+              "u": 4.75,
+              "width": 1.2,
+              "y": [13.4, 14.9],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite"
+            },
+            {
+              "u": 14,
+              "width": 7,
+              "y": [0.3, 4.2],
+              "depth": 0.3,
+              "skin": "shopGlass",
+              "frame": "moldWhite"
+            }
+          ],
+          "arches": [
+            {
+              "u": 14,
+              "width": 1.9,
+              "top": 8.8,
+              "foot": 6.8,
+              "rings": [
+                {
+                  "width": 0.2,
+                  "out": 0.1,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            }
+          ],
+          "balconies": [
+            {
+              "u": 14,
+              "width": 5.6,
+              "y": 9.9,
+              "depth": 0.7,
+              "slab": 0.25,
+              "rail": 0.85,
+              "handrail": 0.12,
+              "skins": {
+                "slab": "moldWhite",
+                "rail": "balustrade",
+                "handrail": "moldWhite"
+              }
+            },
+            {
+              "u": 14,
+              "width": 3,
+              "y": 6.1,
+              "depth": 0.5,
+              "slab": 0.2,
+              "rail": 0.75,
+              "handrail": 0.1,
+              "skins": {
+                "slab": "moldWhite",
+                "rail": "balustrade",
+                "handrail": "moldWhite"
+              }
+            }
+          ],
+          "fins": [
+            {
+              "every": 1.1,
+              "phase": 0.55,
+              "width": 0.16,
+              "out": 1.3,
+              "y": [15.3, 15.9],
+              "skin": "moldWhite",
+              "round": false
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 14,
+              "points": [[-0.62, 15.1, 0.182], [0, 15.72, 0.182], [0.62, 15.1, 0.182], [0, 14.48, 0.182]],
+              "width": 0.12,
+              "closed": true,
+              "out": 0.12,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 14,
+              "points": [[-0.48, 15.1, 0.141], [0, 15.58, 0.141], [0.48, 15.1, 0.141], [0, 14.62, 0.141]],
+              "out": 0.05,
+              "skin": "moldWhite"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py re-medida con el marco del juego (techo de teja en x −78…−67,4, z 33,3…44,5, corrido por la inclinación de la toma ~0,17 m en x y ~0,3 m en z por metro de alto; menos el alero): x −79,5…−70,5, z 30…39,5, unos 3,5 m delante del bloque oeste (en Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0) se ve la cara lateral de ~4 m); la hoja la tenía 8 m más adelante. Cuatro niveles comparados en el juego con Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0) (a escala con el bloque oeste): ventana en arco con balconcito de balaustres a ~6,8-8,8 m, ventanal con balcón a ~10-12,2 m, letrero a ~13,6 m, medallón tipo rosetón (no es reloj) a ~15 m y alero muy volado con ménsulas a ~16,5 m (estimado (Google Street View, solo mirado), ene 2025, capturas 13 y 14); altos ±1 m."
+    },
+    {
+      "id": "teja-trasera",
+      "name": "cuerpo de teja detrás de la torre Casa Res",
+      "ring": [[-79.5, 30], [-70, 30], [-70, 17], [-79.5, 17]],
+      "base": 0,
+      "height": 11,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "hip",
+        "skin": "tile",
+        "rise": 2,
+        "along": 1,
+        "eave": 0.8,
+        "under": {"soffit": "soffitCream", "fascia": 0.15, "edge": "moldWhite"}
+      },
+      "faces": [
+        {
+          "sides": [3],
+          "bands": [
+            {
+              "y": [10.6, 11],
+              "skin": "moldWhite",
+              "out": 0.25
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "techo de teja a cuatro aguas en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (x −78…−69, z 14…30, corrido por la inclinación de la toma) y edificios de los datos del juego (Overture/ML, game_buildings.json) (x −81,9…−72, z 22,5…31,6, 10 m); detrás de la torre Casa Res; alto supuesto (hoja)."
+    },
+    {
+      "id": "rotonda-este",
+      "name": "cuerpo bajo entre la rotonda y la torre Casa Res",
+      "ring": [[-93, 30], [-79.5, 30], [-79.5, 17], [-93, 17]],
+      "base": 0,
+      "height": 12,
+      "parapet": [0.5, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGreyW"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [11.6, 12],
+              "skin": "moldWhite",
+              "out": 0.25
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "techo gris en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py entre la cúpula azul y la teja de Casa Res (x −87…−79, z 14…31); se ve apenas detrás de la pérgola en estimado (Google Street View, solo mirado), ene 2025 (captura 13); alto estimado."
+    },
+    {
+      "id": "bloque-oeste",
+      "name": "bloque oeste (Mami-T, MANGO, marathon) sobre el patio de parqueo",
+      "ring": [[-70, 36], [-37.5, 36], [-37.5, 17], [-70, 17]],
+      "base": 0,
+      "height": 15,
+      "parapet": [0.9, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofLight"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [0, 4.3],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [5.8, 6.1],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [15.65, 15.9],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "fins": [
+            {
+              "every": 4,
+              "phase": 0.25,
+              "width": 0.55,
+              "out": 0.25,
+              "y": [0, 4.3],
+              "skin": "cream",
+              "round": false
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.25,
+              "width": 2,
+              "y": [6.9, 10],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [8, 4]
+            },
+            {
+              "u": 2.25,
+              "width": 0.7,
+              "y": [12.8, 13.5],
+              "depth": 0.08,
+              "skin": "creamShade",
+              "frame": "moldWhite",
+              "repeat": [8, 4]
+            }
+          ],
+          "balconies": [
+            {
+              "u": 2.25,
+              "width": 2.3,
+              "y": 6.9,
+              "depth": 0.5,
+              "slab": 0.15,
+              "rail": 0.95,
+              "handrail": 0.05,
+              "repeat": [8, 4],
+              "skins": {
+                "slab": "moldWhite",
+                "rail": "ironRail",
+                "handrail": "ironBlack"
+              }
+            }
+          ],
+          "eaves": [
+            {
+              "y": 12.3,
+              "out": 1.3,
+              "drop": 1.3,
+              "thickness": 0.12,
+              "skins": {
+                "top": "tile",
+                "soffit": "soffitCream",
+                "edge": "moldWhite"
+              }
+            },
+            {
+              "y": 15.2,
+              "out": 1,
+              "drop": 0.9,
+              "thickness": 0.12,
+              "skins": {
+                "top": "tile",
+                "soffit": "soffitCream",
+                "edge": "moldWhite"
+              }
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja) y edificios de los datos del juego (Overture/ML, game_buildings.json); 8 vanos con balcón de hierro contados (Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0); estimado (Google Street View, solo mirado), ene 2025, captura 12: Mami-T ×4 y MANGO ×4, vinilos que no se copian), módulo ~4,0 m; ventanas del piso 2 de ~6,9 a ~10 m, faldones de teja empinados (~45°, se ven como dos franjas anchas de teja desde la calle en Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0), comparado en el juego) de ~12,3 a ~11 m y de ~15,2 a ~14,3 m, cuadritos decorativos entre ellos y antepecho a ~15,9 m: captura 12 (estimados)."
+    },
+    {
+      "id": "hm",
+      "name": "bloque H&M: el más adelantado, con el muro cortina verde al centro",
+      "ring": [[-37.5, 43], [-33, 43], [-33, 49], [-8, 49], [-8, 43.5], [-3, 43.5], [-3, 17], [-37.5, 17]],
+      "base": 0,
+      "height": 15.2,
+      "parapet": [0.8, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofMembrane"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.25,
+              "width": 2,
+              "y": [1.2, 3.4],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [3, 4.9]
+            }
+          ]
+        },
+        {
+          "sides": [1],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 3,
+              "width": 2,
+              "y": [1.2, 3.4],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [3, 4.9]
+            }
+          ]
+        },
+        {
+          "sides": [2],
+          "span": [0, 3],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 1.5,
+              "width": 1.6,
+              "y": [6.2, 8.6],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [2, 4.6]
+            }
+          ]
+        },
+        {
+          "sides": [2],
+          "span": [3, 22],
+          "bands": [
+            {
+              "y": [0, 4.6],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [4.6, 5.2],
+              "skin": "moldWhite",
+              "out": 0.15
+            },
+            {
+              "y": [5.2, 14.3],
+              "skin": "hmGlass",
+              "out": -0.25
+            },
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "fins": [
+            {
+              "every": 1.9,
+              "phase": 0,
+              "width": 0.12,
+              "out": 0.18,
+              "y": [5.2, 14.3],
+              "skin": "skyFrame",
+              "round": false
+            }
+          ]
+        },
+        {
+          "sides": [2],
+          "span": [22, 25],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 1.5,
+              "width": 1.6,
+              "y": [6.2, 8.6],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [2, 4.6]
+            }
+          ]
+        },
+        {
+          "sides": [3],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.75,
+              "width": 2,
+              "y": [1.2, 3.4],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [3, 4.9]
+            }
+          ]
+        },
+        {
+          "sides": [4],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.5,
+              "width": 2,
+              "y": [1.2, 3.4],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [3, 4.9]
+            }
+          ]
+        },
+        {
+          "sides": [5],
+          "span": [0, 5],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.5,
+              "width": 2,
+              "y": [1.2, 3.4],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [3, 4.9]
+            }
+          ]
+        },
+        {
+          "sides": [7],
+          "span": [19, 26],
+          "bands": [
+            {
+              "y": [14.3, 14.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 3.5,
+              "width": 2,
+              "y": [1.2, 3.4],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "rows": [3, 4.9]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja, recorte a 0,12 m/px) y edificios de los datos del juego (Overture/ML, game_buildings.json); muro cortina verde de dos pisos al centro y muros laterales con ventanas cuadradas grandes en 3 niveles: Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 254228117014027; estimado (Google Street View, solo mirado), ene 2025 (capturas 10 y 36: tapado por palmeras y fícus). Anchos del muro cortina, montantes y ventanas estimados; alto 16 m estimado (hoja ±2)."
+    },
+    {
+      "id": "pb",
+      "name": "bloque Pull&Bear / Stradivarius, retirado detrás de la bahía de taxis",
+      "ring": [[-3, 38.5], [33, 38.5], [33, 10], [-3, 10]],
+      "base": 0,
+      "height": 15,
+      "parapet": [1, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofMembrane"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [0, 4.6],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [4.6, 5.3],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [14.5, 15],
+              "skin": "moldWhite",
+              "out": 0.25
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "fins": [
+            {
+              "every": 4.45,
+              "phase": 0.575,
+              "width": 0.6,
+              "out": 0.25,
+              "y": [0, 4.6],
+              "skin": "cream",
+              "round": false
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.8,
+              "width": 2,
+              "y": [6.8, 9.8],
+              "depth": 0.25,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [8, 4.45]
+            },
+            {
+              "u": 2.8,
+              "width": 0.9,
+              "y": [12.4, 13.3],
+              "depth": 0.15,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [8, 4.45]
+            }
+          ],
+          "balconies": [
+            {
+              "u": 2.8,
+              "width": 2.3,
+              "y": 6.8,
+              "depth": 0.5,
+              "slab": 0.15,
+              "rail": 0.95,
+              "handrail": 0.05,
+              "repeat": [8, 4.45],
+              "skins": {
+                "slab": "moldWhite",
+                "rail": "ironRail",
+                "handrail": "ironBlack"
+              }
+            }
+          ],
+          "eaves": [
+            {
+              "y": 11.4,
+              "out": 0.75,
+              "drop": 0.45,
+              "thickness": 0.12,
+              "skins": {
+                "top": "tile",
+                "soffit": "soffitCream",
+                "edge": "moldWhite"
+              }
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "frente en z 38,5 en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja); de x ≈ 1,5 a 32 en estimado (Google Street View, solo mirado), ene 2025 (captura 30). 8 ventanas con balcón de hierro en el piso 2 y 8 ventanitas en el ático contadas (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1856482211400658; captura 30); comparado en el juego con esa panorámica, las 8 ocupan el bloque casi entero: módulo ~4,45 m desde u 2,8 (no 3,6 m con márgenes ciegos); ventanas de ~6,8 a ~9,8 m, faldón de teja a ~11,4 m y antepecho a ~16 m con la cara en z 38,5 (captura 30; estimados)."
+    },
+    {
+      "id": "deprati",
+      "name": "bloque De Prati y cines: caja alta con el frontón Misión y las bocas del parqueo",
+      "ring": [[42.5, 43], [76, 43], [76, -40], [33, -40], [33, 33.5], [42.5, 33.5]],
+      "base": 0,
+      "height": 21.5,
+      "parapet": [1, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofMetal"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "span": [0, 10],
+          "bands": [
+            {
+              "y": [4, 4.4],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [6, 6.5],
+              "skin": "moldWhite",
+              "out": 0.4
+            }
+          ],
+          "arches": [
+            {
+              "u": 1.9,
+              "width": 2.2,
+              "top": 3.7,
+              "foot": 0,
+              "repeat": [3, 3.1],
+              "rings": [
+                {
+                  "width": 0.18,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "shopGlass"
+            },
+            {
+              "u": 1.9,
+              "width": 2.4,
+              "top": 9,
+              "foot": 7,
+              "rise": 0.6,
+              "repeat": [3, 3.1],
+              "rings": [
+                {
+                  "width": 0.16,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            }
+          ],
+          "eaves": [
+            {
+              "y": 11.4,
+              "out": 1,
+              "drop": 0.8,
+              "thickness": 0.12,
+              "skins": {
+                "top": "tile",
+                "soffit": "soffitCream",
+                "edge": "moldWhite"
+              }
+            }
+          ]
+        },
+        {
+          "sides": [0],
+          "span": [10, 27],
+          "bands": [
+            {
+              "y": [3.7, 4.1],
+              "skin": "moldWhite",
+              "out": 0.1
+            },
+            {
+              "y": [6, 6.5],
+              "skin": "moldWhite",
+              "out": 0.8
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.4,
+              "width": 3.4,
+              "y": [0, 3.1],
+              "depth": 1.5,
+              "skin": "parkDark",
+              "frame": "parkDark"
+            },
+            {
+              "u": 9,
+              "width": 7.4,
+              "y": [0, 3.1],
+              "depth": 1.5,
+              "skin": "parkDark",
+              "frame": "parkDark"
+            },
+            {
+              "u": 15.3,
+              "width": 3,
+              "y": [0, 3.1],
+              "depth": 1.5,
+              "skin": "parkDark",
+              "frame": "parkDark"
+            }
+          ],
+          "fins": [
+            {
+              "every": 100,
+              "phase": 0.35,
+              "width": 0.7,
+              "out": 0.3,
+              "y": [0, 3.7],
+              "skin": "rubbleStone",
+              "round": false
+            },
+            {
+              "every": 100,
+              "phase": 4.7,
+              "width": 1.2,
+              "out": 0.3,
+              "y": [0, 3.7],
+              "skin": "rubbleStone",
+              "round": false
+            },
+            {
+              "every": 100,
+              "phase": 13.25,
+              "width": 1.1,
+              "out": 0.3,
+              "y": [0, 3.7],
+              "skin": "rubbleStone",
+              "round": false
+            },
+            {
+              "every": 1.2,
+              "phase": 0.6,
+              "width": 0.18,
+              "out": 0.6,
+              "y": [5.6, 6],
+              "skin": "moldWhite",
+              "round": false
+            }
+          ],
+          "arches": [
+            {
+              "u": 3,
+              "width": 1.5,
+              "top": 9.4,
+              "foot": 7.1,
+              "out": 0.2,
+              "rings": [
+                {
+                  "width": 0.16,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            },
+            {
+              "u": 8.5,
+              "width": 4.2,
+              "top": 9.3,
+              "foot": 7.1,
+              "rise": 0.8,
+              "out": 0.2,
+              "rings": [
+                {
+                  "width": 0.22,
+                  "out": 0.1,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            },
+            {
+              "u": 14,
+              "width": 1.5,
+              "top": 9.4,
+              "foot": 7.1,
+              "out": 0.2,
+              "rings": [
+                {
+                  "width": 0.16,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 8.5,
+              "points": [[0, 15.3, 0.9], [3.3, 12.5], [7.6, 12.5], [7.6, 12.9], [8.5, 12.9], [8.5, 6.5], [0, 6.5]],
+              "mirror": true,
+              "out": 0.2,
+              "skin": "cream"
+            },
+            {
+              "u": 8.5,
+              "points": [[0, 15.35, 0.9], [3.35, 12.55], [7.65, 12.55], [7.65, 12.95], [8.55, 12.95]],
+              "mirror": true,
+              "width": 0.3,
+              "out": 0.32,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 8.5,
+              "points": [[0, 14.7, 0.75], [2.9, 12], [7.9, 12]],
+              "mirror": true,
+              "width": 0.18,
+              "out": 0.28,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 8.5,
+              "points": [[0, 20, 0.9], [5.8, 17, -0.65], [9, 13.9], [10.5, 13.9], [10.5, 12.6]],
+              "mirror": true,
+              "width": 0.35,
+              "out": 0.3,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 8.5,
+              "points": [[0, 19.4, 0.8], [5.6, 16.5, -0.6], [8.7, 13.4], [10.1, 13.4], [10.1, 12.6]],
+              "mirror": true,
+              "width": 0.22,
+              "out": 0.26,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 8.5,
+              "points": [[-8.85, 13.35, 0.103], [-8.5, 13.7, 0.103], [-8.15, 13.35, 0.103], [-8.5, 13, 0.103]],
+              "out": 0.4,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 8.5,
+              "points": [[8.15, 13.35, 0.103], [8.5, 13.7, 0.103], [8.85, 13.35, 0.103], [8.5, 13, 0.103]],
+              "out": 0.4,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 8.5,
+              "points": [[-0.3, 20.75, 0.088], [0, 21.05, 0.088], [0.3, 20.75, 0.088], [0, 20.45, 0.088]],
+              "out": 0.4,
+              "skin": "moldWhite"
+            }
+          ]
+        },
+        {
+          "sides": [0, 1],
+          "span": [27, 41.5],
+          "bands": [
+            {
+              "y": [6, 6.5],
+              "skin": "moldWhite",
+              "out": 0.8
+            }
+          ],
+          "openings": [
+            {
+              "u": 2.1,
+              "width": 3,
+              "y": [0, 3.1],
+              "depth": 1.5,
+              "skin": "parkDark",
+              "frame": "parkDark"
+            },
+            {
+              "u": 5.1,
+              "width": 1.8,
+              "y": [0, 2.8],
+              "depth": 0.12,
+              "skin": "creamDoor",
+              "frame": "moldWhite"
+            }
+          ],
+          "fins": [
+            {
+              "every": 100,
+              "phase": 0.35,
+              "width": 0.7,
+              "out": 0.3,
+              "y": [0, 3.7],
+              "skin": "rubbleStone",
+              "round": false
+            },
+            {
+              "every": 100,
+              "phase": 3.95,
+              "width": 0.7,
+              "out": 0.3,
+              "y": [0, 3.7],
+              "skin": "rubbleStone",
+              "round": false
+            },
+            {
+              "every": 1.2,
+              "phase": 0.6,
+              "width": 0.18,
+              "out": 0.6,
+              "y": [5.6, 6],
+              "skin": "moldWhite",
+              "round": false
+            }
+          ],
+          "arches": [
+            {
+              "u": 3.3,
+              "width": 2.4,
+              "top": 9,
+              "foot": 7.1,
+              "rise": 0.6,
+              "rings": [
+                {
+                  "width": 0.16,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            },
+            {
+              "u": 10.5,
+              "width": 2,
+              "top": 9,
+              "foot": 7.1,
+              "rise": 0.5,
+              "rings": [
+                {
+                  "width": 0.16,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "creamShade"
+            }
+          ],
+          "eaves": [
+            {
+              "y": 11.4,
+              "out": 1,
+              "drop": 0.8,
+              "thickness": 0.12,
+              "skins": {
+                "top": "tile",
+                "soffit": "soffitCream",
+                "edge": "moldWhite"
+              }
+            }
+          ]
+        },
+        {
+          "sides": [1],
+          "span": [8, 83],
+          "bands": [
+            {
+              "y": [6, 6.5],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [22.5, 23.4],
+              "skin": "railDark"
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 22,
+              "points": [[0, 20, 0.9], [5.8, 17, -0.65], [9, 13.9], [10.5, 13.9], [10.5, 12.6]],
+              "mirror": true,
+              "width": 0.35,
+              "out": 0.3,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 22,
+              "points": [[0, 19.4, 0.8], [5.6, 16.5, -0.6], [8.7, 13.4], [10.1, 13.4], [10.1, 12.6]],
+              "mirror": true,
+              "width": 0.22,
+              "out": 0.26,
+              "skin": "moldWhite"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja: x 33…77, z −40…45) con el borde este en x 76 (lindero con SAMADI; edificios de los datos del juego (Overture/ML, game_buildings.json): x 75,5-76,5) y el frente en z 43, donde estimado (Google Street View, solo mirado) (ene 2025, triangulado con tres panorámicas) pone la cara de la torre Zara (z 40-43). Frente: la torre (x 33…42,5), el ala de teja oeste (42,5…52,5), el paño del frontón (52,5…69,5, eje x 61) y el ala de teja este (69,5…76), medidos por proporción en las capturas 04 y 05 (ene 2025) con el letrero Deprati de ~8 m como escala. El ala oeste va en el mismo plano que el paño, con 3 vitrinas en arco (Springfield), 3 ventanas en arco rebajado y faldón de teja de ~10,6 a ~11,4 m (por proporción con el cinturón de 6,25 m y el pretil de 22 m en la captura 04, igual en las dos alas): comparado en el juego con Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 107556845663717 y 1165801537429188 (recortes rasantes, las vitrinas y las bocas a la misma escala) y la captura 04; el cuadrado de teja que el satélite muestra delante es el techo de la torre Zara corrido por la inclinación de la toma. Pretil 22,3 m, ápice del frontón exterior ~20,5, interior ~15,3, cinturón ~6,4, arco grande de 7,1 a 9,1 y dintel de SALIDA ~3,5 m (Street View; Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1165801537429188 y 107556845663717: pretil 22,4 / 22,9). Bocas SALIDA / SALIDA ENTRADA / ENTRADA / ENTRADA y puerta ciega, con pilares de piedra rústica, contadas; molduras del frontón Misión dibujadas a ojo sobre la captura 05; el frontón exterior, comparado en el juego con la captura 04 de frente, mide ~21 m de ancho (no ~26) con los hombros a ~12,6-13,9 m. Cara este lisa con baranda oscura en el borde del techo y el mismo frontón en relieve (captura 08, ago 2024)."
+    },
+    {
+      "id": "zara",
+      "name": "torre Zara: fuste con la entrada principal en arco, el letrero y el frontón con medallón",
+      "ring": [[33, 43], [42.5, 43], [42.5, 33.5], [33, 33.5]],
+      "base": 0,
+      "height": 22.7,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofMetal"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [6.1, 6.5],
+              "skin": "moldWhite",
+              "out": 0.25
+            },
+            {
+              "y": [15.3, 15.7],
+              "skin": "moldWhite",
+              "out": 0.2
+            },
+            {
+              "y": [15.9, 16.5],
+              "skin": "moldWhite",
+              "out": 0.4
+            },
+            {
+              "y": [22.2, 22.7],
+              "skin": "moldWhite",
+              "out": 0.35
+            }
+          ],
+          "fins": [
+            {
+              "every": 100,
+              "phase": 1.9,
+              "width": 0.6,
+              "out": 0.25,
+              "y": [0, 6.1],
+              "skin": "moldWhite",
+              "round": false
+            },
+            {
+              "every": 100,
+              "phase": 7.6,
+              "width": 0.6,
+              "out": 0.25,
+              "y": [0, 6.1],
+              "skin": "moldWhite",
+              "round": false
+            }
+          ],
+          "arches": [
+            {
+              "u": 4.75,
+              "width": 4.4,
+              "top": 4.9,
+              "foot": 0,
+              "rings": [
+                {
+                  "width": 0.3,
+                  "out": 0.15,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "doorGlass"
+            },
+            {
+              "u": 4.75,
+              "width": 1.3,
+              "top": 9.3,
+              "foot": 7.2,
+              "rings": [
+                {
+                  "width": 0.16,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 4.75,
+              "points": [[0, 11.3, 0.6], [1.7, 10.55], [2.7, 10.55], [2.7, 10.1]],
+              "mirror": true,
+              "width": 0.18,
+              "out": 0.12,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 4.75,
+              "points": [[0, 21.1, 0.8], [2.5, 19.4], [3.4, 19.4], [3.4, 16.5]],
+              "mirror": true,
+              "width": 0.2,
+              "out": 0.15,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 4.75,
+              "points": [[-0.75, 18.5, 0.22], [0, 19.25, 0.22], [0.75, 18.5, 0.22], [0, 17.75, 0.22]],
+              "width": 0.16,
+              "closed": true,
+              "out": 0.15,
+              "skin": "moldWhite"
+            }
+          ]
+        },
+        {
+          "sides": [1, 2, 3],
+          "bands": [
+            {
+              "y": [22.2, 22.7],
+              "skin": "moldWhite",
+              "out": 0.35
+            }
+          ],
+          "arches": [
+            {
+              "u": 26.25,
+              "width": 2.2,
+              "top": 3.6,
+              "foot": 0,
+              "rings": [
+                {
+                  "width": 0.2,
+                  "out": 0.08,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "doorGlass"
+            },
+            {
+              "u": 26.25,
+              "width": 1,
+              "top": 8.3,
+              "foot": 6.4,
+              "rings": [
+                {
+                  "width": 0.12,
+                  "out": 0.06,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "windowGlass"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "edificios de los datos del juego (Overture/ML, game_buildings.json): prisma de 16,6 m en x 31,8…40,2, z 34,6…43,6 (la torre); estimado (Google Street View, solo mirado), ene 2025 (triangulada con tres panorámicas): cara frontal en z ≈ 40…43; ancho 9-9,5 m por ángulo (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1283637459238880). De abajo arriba, comparado en el juego con la panorámica Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1283637459238880 (recortes a 0°, 22° y 42° de inclinación) y estimado (Google Street View, solo mirado), ene 2025 (capturas 01-03, 29 y 30): entrada en arco ancha (~4,4 m, clave a ~4,9 m), cornisa a ~6,4 m, ventanita en arco (~7,2-9,3 m) bajo una moldura curva con clave a ~11,3 m, letrero a ~13,4 m, cornisa doble a ~15,3-16,5 m y encima el frontón curvo con medallón (Ø ~1,5 m a ~18,5 m, clave ~21 m) hasta la cornisa del mirador a ~22,7 m; la puerta en arco de la cara oeste, entre el bloque Pull&Bear y el frente, en la captura 30. Altos por ángulo con el horizonte de la panorámica corregido (±1 m)."
+    },
+    {
+      "id": "zara-mirador",
+      "name": "torre Zara: mirador con tres arcos por cara y cornisa final muy volada sobre ménsulas",
+      "ring": [[33.6, 42.4], [41.9, 42.4], [41.9, 34.1], [33.6, 34.1]],
+      "on": "zara",
+      "base": 22.7,
+      "height": 29.5,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "hip",
+        "skin": "tile",
+        "rise": 1.4,
+        "along": 0
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [22.7, 23.3],
+              "skin": "moldWhite",
+              "out": 0.55
+            },
+            {
+              "y": [23.3, 23.9],
+              "skin": "moldWhite",
+              "out": 0.3
+            },
+            {
+              "y": [28.9, 29.5],
+              "skin": "moldWhite",
+              "out": 1
+            }
+          ],
+          "arches": [
+            {
+              "u": 1.383,
+              "width": 2,
+              "top": 27.2,
+              "foot": 24.2,
+              "repeat": [12, 2.7667],
+              "rings": [
+                {
+                  "width": 0.22,
+                  "out": 0.12,
+                  "skin": "moldWhite"
+                }
+              ],
+              "infill": "miradorFill"
+            }
+          ],
+          "fins": [
+            {
+              "every": 0.83,
+              "phase": 0.415,
+              "width": 0.18,
+              "out": 0.85,
+              "y": [28.3, 28.9],
+              "skin": "moldWhite",
+              "round": false
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (capturas 02, 03 y 29): mirador de 3 arcos por cara con archivolta blanca y relleno crema, cornisa plana muy volada sobre ménsulas y mástil fino. Desde la calle no se ve techo (ni desde la vereda de enfrente, captura 28, ago 2024), pero el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py muestra un cuadrado de teja de ~11 m que calza con la torre corrida por la inclinación de la toma (~0,17 m en x y ~0,3 m en z por metro de alto): va un techo de teja a cuatro aguas bajo (~19°, tapado por la cornisa desde abajo), estimado; arranca en el muro: su alero es la cornisa misma (1 m), que lo tapa. Cornisa del mirador ~22,7-24 m, claves de los arcos ~27 m y cornisa final ~28,3-29,5 m por ángulo en Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1283637459238880 (recorte a 42°); ±1 m."
+    },
+    {
+      "id": "cuerpo-este",
+      "name": "cuerpo bajo con balaustrada pegado a la cara este de De Prati",
+      "ring": [[76, 37.5], [79.5, 37.5], [79.5, 12], [76, 12]],
+      "base": 0,
+      "height": 9.5,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofLight"
+      },
+      "faces": [
+        {
+          "sides": [0, 1],
+          "bands": [
+            {
+              "y": [8.9, 9.5],
+              "skin": "moldWhite",
+              "out": 0.25
+            },
+            {
+              "y": [9.5, 10.3],
+              "skin": "balustrade"
+            },
+            {
+              "y": [10.3, 10.45],
+              "skin": "moldWhite",
+              "out": 0.05
+            }
+          ],
+          "openings": [
+            {
+              "u": 5.5,
+              "width": 1.2,
+              "y": [5.5, 7.5],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [6, 4]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (capturas 08 y 09): cuerpo más bajo con pretiles de balaustrada blanca (~9-10 m) detrás de la tienda SAMADI (que no es del mall); planta estimada."
+    },
+    {
+      "id": "central-oeste",
+      "name": "cuerpo central oeste (galería oeste, techo claro)",
+      "ring": [[-82, -40], [-37.5, -40], [-37.5, 17], [-82, 17]],
+      "base": 0,
+      "height": 15,
+      "parapet": [1, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofLight"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [14.5, 15],
+              "skin": "moldWhite",
+              "out": 0.25
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 3,
+              "width": 1,
+              "y": [11, 12.1],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [8, 5.5]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja: cuerpo central x −82…33, z −40…17) partida en x −37,5 por el color del techo (claro #D6CCB9 al oeste); alto estimado (hoja). Cara norte (vía 12 NO) sin fotos más allá de la esquina NO: muro crema liso con ventanitas en el piso 3 (estimado (Google Street View, solo mirado), mar 2025, captura 22), el resto supuesto."
+    },
+    {
+      "id": "central-este",
+      "name": "cuerpo central este (atrio con bóveda de vidrio y galería este)",
+      "ring": [[-37.5, -40], [33, -40], [33, 10], [-3, 10], [-3, 17], [-37.5, 17]],
+      "base": 0,
+      "height": 15,
+      "parapet": [1, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofMembrane"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [14.5, 15],
+              "skin": "moldWhite",
+              "out": 0.25
+            },
+            {
+              "y": [15.75, 16],
+              "skin": "moldWhite",
+              "out": 0.08
+            }
+          ],
+          "openings": [
+            {
+              "u": 3,
+              "width": 1,
+              "y": [11, 12.1],
+              "depth": 0.2,
+              "skin": "windowGlass",
+              "frame": "moldWhite",
+              "repeat": [12, 5.5]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py (hoja); membrana gris verdosa; alto estimado (hoja). Cara norte supuesta como la oeste."
+    },
+    {
+      "id": "caseta",
+      "name": "caseta de máquinas clara con el tanque de enfriamiento",
+      "ring": [[20, -35], [30, -35], [30, -23], [20, -23]],
+      "on": "central-este",
+      "base": 15,
+      "height": 18,
+      "parapet": [0.5, 0.2],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofLight"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: caja clara de ~10 × 12 m con el tanque circular de Ø ~3 m en (23, −33) (hoja); alto estimado."
+    },
+    {
+      "id": "totem",
+      "name": "tótem SAN MARINO SHOPPING / PARQUEOS en Plaza Dañín",
+      "ring": [[-116.3, -25.9], [-116.3, -28.1], [-115.7, -28.1], [-115.7, -25.9]],
+      "base": 0,
+      "height": 1.9,
+      "parapet": [0, 0],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "cream"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [0, 0.35],
+              "skin": "rubbleStone",
+              "out": 0.04
+            }
+          ],
+          "reliefs": [
+            {
+              "u": 1.1,
+              "points": [[0, 2.6, 0.25], [0.7, 2.15], [1.1, 2.15], [1.1, 1.8], [0, 1.8]],
+              "mirror": true,
+              "out": 0.02,
+              "back": 0.62,
+              "skin": "cream"
+            },
+            {
+              "u": 1.1,
+              "points": [[-1.12, 2.3, 0.035], [-1, 2.42, 0.035], [-0.88, 2.3, 0.035], [-1, 2.18, 0.035]],
+              "out": 0.05,
+              "back": 0.65,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 1.1,
+              "points": [[0.88, 2.3, 0.035], [1, 2.42, 0.035], [1.12, 2.3, 0.035], [1, 2.18, 0.035]],
+              "out": 0.05,
+              "back": 0.65,
+              "skin": "moldWhite"
+            },
+            {
+              "u": 1.1,
+              "points": [[-0.2, 2.12, 0.059], [0, 2.32, 0.059], [0.2, 2.12, 0.059], [0, 1.92, 0.059]],
+              "out": 0.05,
+              "skin": "bronze"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "estimado (Google Street View, solo mirado), mar, abr y sept 2025 (captura 24): monumento crema con remate curvo tipo Misión, dos bolas en los hombros, medallón de bronce y letras oscuras con flecha, de ~2-2,5 m de alto y ~2 m de ancho, junto a la boca ENTRADA, apenas al sur de la torre (captura 24; en el juego, con la torre corrida al norte: z ≈ −27); medidas y lugar estimados."
+    },
+    {
+      "id": "quiosco",
+      "name": "quiosco de la Unidad de Policía en la esquina Orellana / Plaza Dañín",
+      "ring": [[-104.5, 56.6], [-100.5, 56.6], [-100.5, 54], [-104.5, 54]],
+      "base": 0,
+      "height": 2.5,
+      "parapet": [0, 0.1],
+      "skin": "kioskWhite",
+      "roof": {
+        "kind": "flat",
+        "skin": "kioskWhite"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [0.9, 2.1],
+              "skin": "windowGlass",
+              "out": -0.05
+            },
+            {
+              "y": [2.35, 2.6],
+              "skin": "kioskWhite",
+              "out": 0.2
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (captura 15): quiosco blanco \"Unidad de Policía\" junto a las gradas de la rotonda (hoja: x ≈ −100, z ≈ 55); medidas estimadas. El escudo no se copia."
+    }
+  ],
+  "canopies": [],
+  "signs": [
+    {
+      "text": "Deprati",
+      "size": [8.2, 2],
+      "background": "#E3D0A6",
+      "color": "#D22D35",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "italic": true,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "deprati",
+      "side": 0,
+      "u": 18.5,
+      "y": 10.75,
+      "out": 0.32,
+      "res": 0.5,
+      "stretch": 1.3,
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (capturas 04 y 05; ya en ago 2024): \"Deprati\" en letra manuscrita roja de ~8 m, de 9,9 a 11,5 m, centrada en x ≈ 61 sobre el ARCO GRANDE (solo el nombre, con una letra genérica: el logo no se copia)."
+    },
+    {
+      "text": "multicines",
+      "size": [3.2, 0.75],
+      "background": "#E3D0A6",
+      "color": "#4A4A4A",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 400,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "deprati",
+      "side": 0,
+      "u": 25,
+      "y": 18.9,
+      "out": 0.05,
+      "res": 0.8,
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (captura 05) y ago 2024: \"multicines\" en minúsculas gris oscuro bajo su logo, arriba a la derecha del frente (x ≈ 67, 18,5-21,3 m); la M de colores es logo y no se copia."
+    },
+    {
+      "text": "multicines",
+      "size": [3.2, 0.75],
+      "background": "#E3D0A6",
+      "color": "#4A4A4A",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 400,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "deprati",
+      "side": 1,
+      "u": 4,
+      "y": 18.9,
+      "out": 0.05,
+      "res": 0.8,
+      "source": "estimado (Google Street View, solo mirado), ago 2024 y ene 2025 (capturas 06-09): el mismo letrero en la cara este, junto a la esquina SE."
+    },
+    {
+      "text": "ZARA",
+      "size": [4.4, 1.4],
+      "background": "#E3D0A6",
+      "color": "#C9C9C6",
+      "font": "'Times New Roman', Times, serif",
+      "weight": 400,
+      "fill": 0.95,
+      "depth": 0,
+      "on": "zara",
+      "side": 0,
+      "u": 4.75,
+      "y": 13.4,
+      "out": 0.08,
+      "res": 0.6,
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (capturas 01, 02 y 30): letras serif altas en relieve gris plata desde la renovación de fines de 2024 (en ago 2024 y en Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) eran oscuras: quedaron viejas); centro a ~13,6 m. Letra genérica: el logo no se copia."
+    },
+    {
+      "text": "H&M",
+      "size": [3.4, 1.9],
+      "background": "#5E8C80",
+      "color": "#E50010",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "italic": true,
+      "fill": 0.8,
+      "depth": 0,
+      "on": "hm",
+      "side": 2,
+      "u": 13.5,
+      "y": 11.6,
+      "out": 0.3,
+      "res": 0.5,
+      "source": "Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 254228117014027 y estimado (Google Street View, solo mirado), ene 2025 (captura 10): letras rojas sueltas arriba al centro, sobre el vidrio (hoja: 3,5 × 2 m a 11 m); H&M abrió aquí el 2022-11-17 (El Universo)."
+    },
+    {
+      "text": "ETAFASHION",
+      "size": [8, 1.1],
+      "background": "#E3D0A6",
+      "color": "#C8C8C4",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "cuerpo-oeste",
+      "side": 1,
+      "u": 34.3,
+      "y": 13,
+      "out": 0.06,
+      "res": 0.5,
+      "source": "estimado (Google Street View, solo mirado), sept 2025 (capturas 18 y 19): letras de palo seco en relieve gris claro justo al sur de la torre del reloj (hoja: 8 × 1,1 m)."
+    },
+    {
+      "text": "Claro",
+      "size": [2.2, 0.85],
+      "background": "#E1261C",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "reloj",
+      "side": 0,
+      "u": 4,
+      "y": 14.3,
+      "out": 0.08,
+      "res": 0.8,
+      "plates": [
+        {
+          "shape": "circle",
+          "size": [3.4, 3.4],
+          "offset": [0, 0],
+          "out": 0.04,
+          "color": "#E1261C"
+        }
+      ],
+      "source": "estimado (Google Street View, solo mirado), sept 2025 (captura 19): círculo rojo de ~3,5 m con el nombre en blanco en la cara oeste de la torre del reloj, bajo la balaustrada (no en la fachada, como decía la hoja de 2023). Solo el nombre en un disco: el logo no se copia."
+    },
+    {
+      "text": "CASA RES",
+      "size": [3.5, 1.1],
+      "background": "#7A2E25",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.15,
+      "on": "casa-res",
+      "side": 0,
+      "u": 4.5,
+      "y": 13.6,
+      "out": 0.2,
+      "res": 0.8,
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (captura 14) y Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0): caja rojo ladrillo con CASA RES en blanco (el cuadro de color y \"Steak House\" chico son del logo); a ~10 m (hoja)."
+    },
+    {
+      "text": "marathon",
+      "size": [3.4, 0.8],
+      "background": "#E3D0A6",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "bloque-oeste",
+      "side": 0,
+      "u": 10.25,
+      "y": 4.95,
+      "out": 0.05,
+      "res": 0.8,
+      "source": "Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0) y estimado (Google Street View, solo mirado), ene 2025 (captura 12): \"marathon\" dos veces sobre la planta baja, letras sueltas blancas (hoja: 3,5 × 0,6 m a 4,6 m)."
+    },
+    {
+      "text": "marathon",
+      "size": [3.4, 0.8],
+      "background": "#E3D0A6",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "fill": 0.9,
+      "depth": 0,
+      "on": "bloque-oeste",
+      "side": 0,
+      "u": 22.25,
+      "y": 4.95,
+      "out": 0.05,
+      "res": 0.8,
+      "source": "ídem."
+    },
+    {
+      "text": "SALIDA",
+      "size": [2.6, 0.45],
+      "background": "#111111",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.12,
+      "on": "deprati",
+      "side": 0,
+      "u": 12.4,
+      "y": 3.4,
+      "out": 0.14,
+      "res": 1,
+      "source": "Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 107556845663717 y estimado (Google Street View, solo mirado), ene 2025 (captura 05): rótulos blancos en mayúsculas sobre el dintel negro de cada boca."
+    },
+    {
+      "text": "SALIDA ENTRADA",
+      "size": [6.2, 0.45],
+      "background": "#111111",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.12,
+      "on": "deprati",
+      "side": 0,
+      "u": 19,
+      "y": 3.4,
+      "out": 0.14,
+      "res": 1,
+      "source": "ídem."
+    },
+    {
+      "text": "ENTRADA",
+      "size": [2.6, 0.45],
+      "background": "#111111",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.12,
+      "on": "deprati",
+      "side": 0,
+      "u": 25.3,
+      "y": 3.4,
+      "out": 0.14,
+      "res": 1,
+      "source": "ídem."
+    },
+    {
+      "text": "ENTRADA",
+      "size": [2.6, 0.45],
+      "background": "#111111",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.12,
+      "on": "deprati",
+      "side": 0,
+      "u": 29.1,
+      "y": 3.4,
+      "out": 0.14,
+      "res": 1,
+      "source": "ídem."
+    },
+    {
+      "text": "SALIDA",
+      "size": [2.6, 0.45],
+      "background": "#111111",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.12,
+      "on": "reloj",
+      "side": 0,
+      "u": 5.9,
+      "y": 3.2,
+      "out": 0.14,
+      "res": 1,
+      "source": "estimado (Google Street View, solo mirado), mar y sept 2025 (capturas 16 y 24): bocas SALIDA y ENTRADA en la base de la torre del reloj."
+    },
+    {
+      "text": "ENTRADA",
+      "size": [2.6, 0.45],
+      "background": "#111111",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.12,
+      "on": "reloj",
+      "side": 0,
+      "u": 2.1,
+      "y": 3.2,
+      "out": 0.14,
+      "res": 1,
+      "source": "ídem."
+    },
+    {
+      "text": "SAN MARINO SHOPPING",
+      "size": [1.8, 0.3],
+      "background": "#E3D0A6",
+      "color": "#2A2622",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "totem",
+      "side": 0,
+      "u": 1.1,
+      "y": 1.35,
+      "out": 0.04,
+      "res": 1,
+      "source": "estimado (Google Street View, solo mirado), mar 2025 (captura 24): nombre del mall en letras oscuras en el tótem de Plaza Dañín."
+    },
+    {
+      "text": "PARQUEOS",
+      "size": [1.3, 0.28],
+      "background": "#E3D0A6",
+      "color": "#2A2622",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "totem",
+      "side": 0,
+      "u": 1.1,
+      "y": 0.9,
+      "out": 0.04,
+      "res": 1,
+      "source": "ídem (la flecha no se dibuja)."
+    },
+    {
+      "text": "Deprati",
+      "size": [0.8, 0.3],
+      "background": "#E3D0A6",
+      "color": "#D22D35",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "italic": true,
+      "depth": 0.5,
+      "at": [45.4, 56.9],
+      "angle": 90,
+      "y": 1.15,
+      "out": 0.26,
+      "res": 1,
+      "pole": {
+        "width": 0.45,
+        "color": "#E3D0A6"
+      },
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (captura 31): pilarcito crema con \"Deprati\" en rojo junto a las gradas de la entrada Zara; medidas estimadas."
+    }
+  ],
+  "skylights": [
+    {
+      "on": "nave",
+      "kind": "ridge",
+      "a": [-89.5, -21.5],
+      "b": [-89.5, 15.5],
+      "width": 1.8,
+      "rise": 0.9,
+      "y": 4.5,
+      "curb": [0.35, 0.12],
+      "ribs": [2, 0.08],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: linterna a lo largo de la cumbrera (hoja); medidas estimadas."
+    },
+    {
+      "on": "central-oeste",
+      "kind": "ridge",
+      "a": [-70, -12],
+      "b": [-38.5, -12],
+      "width": 10,
+      "rise": 2,
+      "y": 0,
+      "curb": [0.6, 0.35],
+      "ribs": [2.2, 0.14],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: lucernario lineal de la galería oeste, x −70…−37, z −17…−5 (hoja), costillas blancas; alto ~17-18 m estimado."
+    },
+    {
+      "on": "central-este",
+      "kind": "ridge",
+      "a": [-3, -12],
+      "b": [32, -12],
+      "width": 10,
+      "rise": 2,
+      "y": 0,
+      "curb": [0.6, 0.35],
+      "ribs": [2.2, 0.14],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: lucernario lineal de la galería este, x −3…32, z −17…−5 (hoja)."
+    },
+    {
+      "on": "central-este",
+      "kind": "vault",
+      "a": [-16.5, -24],
+      "b": [-16.5, 13.5],
+      "width": 21,
+      "rise": 4,
+      "y": 0,
+      "curb": [1, 1.6],
+      "ribs": [2.4, 0.22],
+      "skins": {
+        "glass": "atriumGlass",
+        "frame": "skyFrame"
+      },
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: bóveda de cañón vidriada del atrio central, x −30…−3, z −25…+17, eje a lo largo de z, marco blanco y vidrio oscuro #304140; clave ~20 m estimada (hoja). Los testeros redondeados van planos."
+    }
+  ],
+  "domes": [
+    {
+      "on": "rotonda-cuerpo",
+      "at": [-99, 21.5],
+      "radius": 5.75,
+      "rise": 5.3,
+      "drum": 0.7,
+      "y": 0.2,
+      "from": 0,
+      "arc": 360,
+      "ribs": 0,
+      "rib": 0,
+      "skins": {
+        "shell": "blueTile",
+        "drum": "cream",
+        "frame": "moldWhite"
+      },
+      "source": "hoja: cúpula de azulejo azul de Ø ~11,5 m, arranque ~15 m y clave ~21 m (Wikimedia Commons File:San Marino Shopping.jpg, Freddy eduardo, 2024-02-29 (CC BY-SA 4.0); Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py)."
+    },
+    {
+      "on": "rotonda-cuerpo",
+      "at": [-99, 21.5],
+      "radius": 0.75,
+      "rise": 0.7,
+      "drum": 1.1,
+      "y": 6.2,
+      "from": 0,
+      "arc": 360,
+      "ribs": 0,
+      "rib": 0,
+      "skins": {
+        "shell": "moldWhite",
+        "drum": "moldWhite",
+        "frame": "moldWhite"
+      },
+      "source": "linterna blanca con remate sobre la cúpula azul (estimado (Google Street View, solo mirado), ene 2025, captura 14); medidas estimadas."
+    },
+    {
+      "on": "reloj-tambor",
+      "at": [-109.4, -33],
+      "radius": 2.25,
+      "rise": 1.9,
+      "drum": 0,
+      "y": 0,
+      "from": 0,
+      "arc": 360,
+      "ribs": 0,
+      "rib": 0,
+      "skins": {
+        "shell": "tileDome",
+        "drum": "cream",
+        "frame": "moldWhite"
+      },
+      "source": "cúpula baja de teja terracota de Ø ~4,5 m (hoja; estimado (Google Street View, solo mirado), sept 2025, captura 20); alto estimado."
+    },
+    {
+      "on": "bloque-oeste",
+      "at": [-49, 29],
+      "radius": 2,
+      "rise": 1.9,
+      "drum": 0.6,
+      "y": 0.2,
+      "from": 0,
+      "arc": 360,
+      "ribs": 0,
+      "rib": 0,
+      "skins": {
+        "shell": "cream",
+        "drum": "cream",
+        "frame": "moldWhite"
+      },
+      "source": "cupulita crema que asoma detrás del pretil en x ≈ −49 con tope a ~17,7 m (estimado (Google Street View, solo mirado), ene 2025, captura 12); Ø ~4 m (hoja)."
+    },
+    {
+      "on": "caseta",
+      "at": [23, -32.5],
+      "radius": 1.5,
+      "rise": 0.35,
+      "drum": 2.2,
+      "y": 0,
+      "from": 0,
+      "arc": 360,
+      "ribs": 0,
+      "rib": 0,
+      "skins": {
+        "shell": "unitGrey",
+        "drum": "unitGrey",
+        "frame": "unitGrey"
+      },
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: tanque o torre de enfriamiento circular de Ø ~3 m en (23, −33) (hoja); alto estimado."
+    }
+  ],
+  "equipment": [
+    {
+      "on": "hm",
+      "area": [[-30, 22], [-8, 22], [-8, 40], [-30, 40]],
+      "margin": 0,
+      "count": 8,
+      "angle": 0,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: equipos de aire en grupos (hoja: ~25-35 unidades chicas); cantidad y tamaños estimados.",
+      "size": [[1.4, 1, 0.9], [2.8, 1.8, 1.6]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "pb",
+      "area": [[4, 28], [16, 28], [16, 36], [4, 36]],
+      "margin": 0,
+      "count": 5,
+      "angle": 0,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: equipos de aire en grupos (hoja: ~25-35 unidades chicas); cantidad y tamaños estimados.",
+      "size": [[1.4, 1, 0.9], [2.8, 1.8, 1.6]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "pb",
+      "area": [[18, 14], [30, 14], [30, 34], [18, 34]],
+      "margin": 0,
+      "count": 8,
+      "angle": 0,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: equipos de aire en grupos (hoja: ~25-35 unidades chicas); cantidad y tamaños estimados.",
+      "size": [[1.4, 1, 0.9], [2.8, 1.8, 1.6]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "central-este",
+      "area": [[18, -8], [30, -8], [30, 8], [18, 8]],
+      "margin": 0,
+      "count": 5,
+      "angle": 0,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: equipos de aire en grupos (hoja: ~25-35 unidades chicas); cantidad y tamaños estimados.",
+      "size": [[1.4, 1, 0.9], [2.8, 1.8, 1.6]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "central-este",
+      "area": [[-30, -38], [18, -38], [18, -34], [-30, -34]],
+      "margin": 0,
+      "count": 5,
+      "angle": 0,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: equipos en fila en el borde norte (hoja); cantidad estimada.",
+      "size": [[1.4, 1, 0.9], [2.8, 1.8, 1.6]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "central-oeste",
+      "area": [[-56, 4], [-44, 4], [-44, 14], [-56, 14]],
+      "margin": 0,
+      "count": 5,
+      "angle": 0,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: equipos de aire en grupos (hoja: ~25-35 unidades chicas); cantidad y tamaños estimados.",
+      "size": [[1.4, 1, 0.9], [2.8, 1.8, 1.6]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.35,
+        "skin": "fanDark"
+      }
+    }
+  ],
+  "solar": [],
+  "masts": [
+    {
+      "on": "zara-mirador",
+      "y": 29.5,
+      "at": [[37.75, 38.25, 3.5]],
+      "radius": 0.05,
+      "heads": {
+        "count": 0,
+        "size": [0.1, 0.1, 0.1],
+        "skin": "ironBlack"
+      },
+      "skin": "ironBlack",
+      "source": "estimado (Google Street View, solo mirado), ene 2025 (captura 29): mástil fino sobre el mirador (pararrayos o antena); alto estimado."
+    },
+    {
+      "on": "reloj-tambor",
+      "y": 36,
+      "at": [[-109.4, -33, 1]],
+      "radius": 0.06,
+      "heads": {
+        "count": 0,
+        "size": [0.1, 0.1, 0.1],
+        "skin": "ironBlack"
+      },
+      "skin": "ironBlack",
+      "source": "remate de la cúpula del reloj (estimado)."
+    },
+    {
+      "on": "rotonda-cuerpo",
+      "y": 15,
+      "at": [[-104.3, 26.8, 4], [-93.7, 26.8, 4]],
+      "radius": 0.05,
+      "heads": {
+        "count": 0,
+        "size": [0.1, 0.1, 0.1],
+        "skin": "ironBlack"
+      },
+      "skin": "ironBlack",
+      "source": "dos astas junto a la cúpula azul (estimado (Google Street View, solo mirado), ene 2025, captura 14); lugar estimado."
+    },
+    {
+      "on": "cuerpo-oeste",
+      "y": 15,
+      "at": [[-104, -12, 6]],
+      "radius": 0.12,
+      "heads": {
+        "count": 3,
+        "size": [0.3, 1.4, 0.12],
+        "skin": "antenna"
+      },
+      "skin": "ironBlack",
+      "source": "antena de celular en el techo de la fachada oeste (estimado (Google Street View, solo mirado), sept 2025, captura 18); lugar y alto estimados."
+    }
+  ],
+  "bridges": [],
+  "stairs": [
+    {
+      "id": "gradas-zara",
+      "a": [38.5, 57.4],
+      "b": [38.5, 55],
+      "width": 6,
+      "rise": 0.6,
+      "riser": 0.15,
+      "stringer": [0.6, 0.3],
+      "rail": 0,
+      "posts": 1.5,
+      "skins": {
+        "steps": "stairStep",
+        "stringer": "planterStone",
+        "rail": "ironBlack"
+      },
+      "source": "3-4 gradas anchas en la abertura de la reja que suben a la placita de la entrada Zara (estimado (Google Street View, solo mirado), ene 2025, captura 31; Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0): escalinata de 6-7 peldaños y ~1,1 m hasta el arco); alto estimado."
+    }
+  ],
+  "lots": [
+    {
+      "id": "patio",
+      "ring": [[-99, 39.5], [-86, 39.5], [-86, 30], [-79.5, 30], [-79.5, 39.5], [-70, 39.5], [-70, 36.5], [-44, 36.5], [-44, 55.5], [-99, 55.5]],
+      "skin": "patioPavers",
+      "lift": 0.1,
+      "rows": [
+        {
+          "a": [-98.5, 55.3],
+          "b": [-51.5, 55.3],
+          "side": -1,
+          "style": "patio"
+        }
+      ],
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py: patio de parqueo entre el bloque oeste y la reja, con una fila de puestos a 90° contra la reja y el carril interno 12 NO; adoquín rojo y líneas amarillas (Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1802804007563958; estimado (Google Street View, solo mirado), ene 2025, capturas 12 y 13: los autos llegan hasta delante de la rotonda). Cuántos puestos: estimado."
+    }
+  ],
+  "retiros": {
+    "patio": {
+      "height": 0.16,
+      "surface": {
+        "color": "#8C6058",
+        "pattern": "pavers",
+        "scale": [1, 1]
+      },
+      "stalls": {
+        "width": 2.5,
+        "depth": 5,
+        "line": 0.1,
+        "color": "#E2C040",
+        "lift": 0.01,
+        "cars": 0.8,
+        "margin": 0.4
+      },
+      "stops": {
+        "size": [1.6, 0.12, 0.15],
+        "inset": 0.6,
+        "stripe": 0.3,
+        "colors": [
+          "#E2C040",
+          "#2A2A2A"
+        ]
+      },
+      "edge": {
+        "kind": "open",
+        "height": 0,
+        "width": 0,
+        "fence": 0,
+        "posts": [0, 0],
+        "stripe": 0,
+        "colors": [
+          "#FFFFFF"
+        ]
+      },
+      "palms": {
+        "spacing": 0,
+        "inset": 0,
+        "height": [0, 0]
+      },
+      "gaps": []
+    }
+  },
+  "site": {
+    "pavedStyles": {
+      "bay": {
+        "height": 0.12,
+        "curb": 0.15,
+        "color": "#9E9A92",
+        "curbColor": "#C8C4BA",
+        "pattern": "pavers",
+        "scale": [1.5, 1.5]
+      },
+      "placita": {
+        "height": 0.6,
+        "curb": 0.25,
+        "color": "#C9BFAE",
+        "curbColor": "#D8CFBE",
+        "pattern": "tiles",
+        "scale": [0.8, 0.8]
+      },
+      "explanada": {
+        "height": 0.1,
+        "curb": 0.15,
+        "color": "#B8B3A8",
+        "curbColor": "#CFC9BC",
+        "pattern": "slabs",
+        "scale": [1.5, 1.5]
+      }
+    },
+    "paved": [
+      {
+        "ring": [[49, 43], [76, 43], [76, 57], [44.5, 57], [44.5, 55], [49, 55]],
+        "curbs": [2],
+        "style": "explanada",
+        "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py/satgrid.py y estimado (Google Street View, solo mirado), ene 2025 (captura 04): explanada abierta de la Orellana a las bocas del parqueo, sin reja (hoja: x 48…77, z 45…58)."
+      },
+      {
+        "ring": [[33, 43], [49, 43], [49, 55], [33, 55]],
+        "curbs": [1, 2, 3],
+        "style": "placita",
+        "source": "estimado (Google Street View, solo mirado), ene 2025 (captura 31) y Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 107556845663717 y 1283637459238880: placita elevada delante del arco de la torre Zara y del ala de teja (hasta la vitrina en arco de Springfield), a la que suben 3-4 gradas desde la vereda, con jardineras en su borde; alto y planta estimados."
+      },
+      {
+        "ring": [[-3, 38.5], [33, 38.5], [33, 55.2], [-3, 55.2]],
+        "curbs": [],
+        "style": "bay",
+        "source": "bahía de taxis delante del bloque Pull&Bear (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1856482211400658; estimado (Google Street View, solo mirado), ene 2025, captura 01); piso estimado."
+      }
+    ],
+    "fenceStyles": {
+      "reja": {
+        "height": 1.55,
+        "base": [0.55, 0.3],
+        "posts": [4.5, 0.14],
+        "skins": {
+          "bars": "ironRail",
+          "base": "fenceBase",
+          "post": "ironBlack"
+        }
+      },
+      "lindero": {
+        "height": 0.9,
+        "base": [2.5, 0.4],
+        "posts": [3, 0.08],
+        "skins": {
+          "bars": "meshDark",
+          "base": "rubbleStone",
+          "post": "ironBlack"
+        }
+      }
+    },
+    "fences": [
+      {
+        "line": [[-100.3, 57], [33.2, 57]],
+        "style": "reja",
+        "gaps": [[49.3, 55.3], [79.3, 81.3], [97.8, 103.8]],
+        "source": "reja frontal: muro bajo blanco ~0,5 m y barrotes de hierro negro con puntas de lanza ~1,6 m (Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1802804007563958; Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0)); se abre en el portón vehicular del patio (x ≈ −48, ~6 m), en la puerta peatonal del jardín H&M y en el portón de la bahía de taxis, y termina en las gradas de la entrada Zara (estimado (Google Street View, solo mirado), ene 2025). Anchos de las aberturas estimados."
+      },
+      {
+        "line": [[-104.8, 57], [-109.5, 55.8], [-113.5, 53.2], [-116.4, 49.5], [-118, 45], [-118, -15.5]],
+        "style": "reja",
+        "gaps": [[0, 2.5]],
+        "source": "reja sobre el zócalo curvo de la esquina y a lo largo de Plaza Dañín, con los taxis adentro (estimado (Google Street View, solo mirado), ene y mar 2025, capturas 15 y 17); trazado estimado."
+      },
+      {
+        "line": [[76.5, 57], [76.5, 43.2]],
+        "style": "lindero",
+        "gaps": [],
+        "source": "lindero con SAMADI: muro de piedra rústica de ~2,5 m con malla negra encima (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 756117142554688; estimado (Google Street View, solo mirado), ago 2024, captura 04); lugar estimado."
+      }
+    ],
+    "bollards": [],
+    "planters": [
+      {
+        "ring": [[33.2, 55], [35.4, 55], [35.4, 57.4], [33.2, 57.4]],
+        "height": 0.95,
+        "wall": 0.25,
+        "drop": 0.2,
+        "skins": {
+          "wall": "planterCream",
+          "soil": "hedge"
+        },
+        "source": "jardineras de muro crema liso a los lados de las gradas de la entrada Zara (el zócalo de piedra de abajo no va: la jardinera tiene una sola piel) (estimado (Google Street View, solo mirado), ene 2025, capturas 30 y 31; Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0) 1283637459238880); medidas estimadas."
+      },
+      {
+        "ring": [[41.6, 55], [44.5, 55], [44.5, 57.4], [41.6, 57.4]],
+        "height": 0.95,
+        "wall": 0.25,
+        "drop": 0.2,
+        "skins": {
+          "wall": "planterCream",
+          "soil": "hedge"
+        },
+        "source": "ídem."
+      },
+      {
+        "ring": [[3.5, 55.2], [33, 55.2], [33, 56.75], [3.5, 56.75]],
+        "height": 0.35,
+        "wall": 0.15,
+        "drop": 0.05,
+        "skins": {
+          "wall": "planterCream",
+          "soil": "hedge"
+        },
+        "source": "seto corrido por dentro de la reja de la bahía de taxis (estimado (Google Street View, solo mirado), ene 2025, captura 01)."
+      },
+      {
+        "ring": [[-33, 49.5], [-8, 49.5], [-8, 56.75], [-33, 56.75]],
+        "height": 0.25,
+        "wall": 0.15,
+        "drop": 0.05,
+        "skins": {
+          "wall": "planterCream",
+          "soil": "hedge"
+        },
+        "source": "jardín con palmeras y fícus delante del bloque H&M (estimado (Google Street View, solo mirado), ene 2025, captura 10); planta estimada."
+      },
+      {
+        "ring": [[-100, 57.4], [-51.5, 57.4], [-51.5, 59.2], [-100, 59.2]],
+        "height": 0.18,
+        "wall": 0.15,
+        "drop": 0.03,
+        "skins": {
+          "wall": "planterCream",
+          "soil": "hedge"
+        },
+        "source": "franja verde de la vereda delante de la reja, con las palmeras (estimado (Google Street View, solo mirado), ene 2025, capturas 12 y 13); el bordillo de aros de hierro bajos va liso."
+      },
+      {
+        "ring": [[-117.5, 44.5], [-117.5, 20], [-111.3, 20], [-111.3, 26], [-111.1, 28.1], [-110.5, 30.2], [-109.7, 32.2], [-108.5, 34.1], [-107.1, 35.8], [-105.4, 37.2], [-103.4, 38.1], [-99.5, 38.6], [-99.5, 53.5], [-104.8, 53.5], [-109.3, 52.5], [-113, 50.6], [-115.9, 47.9]],
+        "height": 0.7,
+        "wall": 0.3,
+        "drop": 0.3,
+        "skins": {
+          "wall": "planterCream",
+          "soil": "hedge"
+        },
+        "source": "jardín de la esquina alrededor de la rotonda, con zócalo curvo de hormigón de ~0,8 m (estimado (Google Street View, solo mirado), ene 2025, captura 15; Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1091841380209051); trazado estimado."
+      }
+    ],
+    "shelters": [],
+    "fountains": [],
+    "billboards": [],
+    "lampModels": {
+      "reflector": {
+        "pole": {
+          "height": 7.5,
+          "radius": [0.1, 0.07],
+          "sides": 12,
+          "base": [0.18, 0.4]
+        },
+        "arm": {
+          "reach": 0.9,
+          "rise": 0.15,
+          "radius": 0.035,
+          "segments": 3
+        },
+        "head": {
+          "size": [0.45, 0.14, 0.32],
+          "tilt": 35,
+          "lens": {
+            "share": 0.85,
+            "thickness": 0.02
+          }
+        },
+        "light": {
+          "power": 0.6,
+          "led": false
+        },
+        "glow": {
+          "color": "#ffe2b0",
+          "intensity": 2.5
+        },
+        "sides": [-1, 1],
+        "turns": [0, 90],
+        "colors": {
+          "pole": "#1E1F20",
+          "head": "#1E1F20",
+          "lens": "#fff1d6"
+        },
+        "near": 700
+      }
+    },
+    "lamps": [
+      {
+        "model": "reflector",
+        "at": [[-102, 56.3], [-93.8, 56.3], [-85.7, 56.3], [-77.5, 56.3], [-69.3, 56.3], [-61.2, 56.3], [-53, 56.3]],
+        "angle": 90,
+        "source": "postes negros con brazos en cruz y reflectores LED en la línea de la reja: 7 entre x −102 y −53 (estimado (Google Street View, solo mirado), ene 2025, capturas 12 y 13; foto de usuario feb 2024: luz amarilla cálida que baña las fachadas). Alto ~7-8 m (hoja); el par de brazos de más abajo no está."
+      },
+      {
+        "model": "reflector",
+        "at": [[-38, 56.3], [-30, 56.3], [-23, 56.3], [-14, 56.3], [-6, 56.3]],
+        "angle": 90,
+        "source": "ídem, delante del jardín H&M (estimado (Google Street View, solo mirado), ene 2025, captura 10: cada ~8 m)."
+      },
+      {
+        "model": "reflector",
+        "at": [[7, 56.3], [15, 56.3], [23, 56.3], [30, 56.3]],
+        "angle": 90,
+        "source": "ídem, en la bahía de taxis (x 15, 23 y 30 en estimado (Google Street View, solo mirado), ene 2025, captura 01; el de x 7 estimado)."
+      }
+    ],
+    "cars": [
+      {
+        "at": [[6, 52.3, 0], [10.7, 52.3, 0], [15.4, 52.3, 0], [20.1, 52.3, 0], [24.8, 52.3, 0], [29.5, 52.3, 0]],
+        "lift": 0.12,
+        "source": "taxis en fila dentro de la reja de la bahía (estimado (Google Street View, solo mirado), ene 2025, capturas 01 y 30); van con los colores de los autos de la ciudad, no amarillos."
+      },
+      {
+        "at": [[-115.6, 0, 90], [-115.6, 5.5, 90], [-115.6, 11, 90], [-115.6, 24, 90], [-115.6, 29.5, 90]],
+        "lift": 0,
+        "source": "taxis estacionados dentro de la reja de la fachada oeste (estimado (Google Street View, solo mirado), mar 2025, captura 17); cuántos y dónde, estimado."
+      }
+    ],
+    "palms": [
+      {
+        "at": [[-92, 58.3], [-87.5, 58.3], [-83, 58.3], [-78.5, 58.3], [-74, 58.3], [-69.5, 58.3], [-65, 58.3], [-60.5, 58.3], [-56, 58.3]],
+        "height": [11, 15],
+        "source": "palmeras reales en la franja de la vereda: 9 troncos entre x −92 y −56, cada ~4,5 m (estimado (Google Street View, solo mirado), ene 2025, captura 26; la hoja decía ~7 m); altos estimados (más altas que el bloque de 16 m en las capturas 12 y 13)."
+      },
+      {
+        "at": [[-106.5, 58.4], [-111.5, 56.4], [-115.4, 52.6], [-118.9, 47.5]],
+        "height": [11, 15],
+        "source": "ídem, ~4 en la esquina (x −111…−100); lugar estimado."
+      },
+      {
+        "at": [[4, 56], [10, 56], [16.6, 56], [20.7, 56], [24.8, 56], [28.8, 56]],
+        "height": [11, 15],
+        "source": "dentro del jardín de la bahía de taxis: 4 entre x 16,6 y 28,8 (estimado (Google Street View, solo mirado), ene 2025) y 2 más al oeste (captura 01, estimadas; ninguna en el portón de la bahía, x −2,5…3,5)."
+      },
+      {
+        "at": [[-30.5, 53.5], [-26, 53.5], [-21.5, 53.5], [-17, 53.5], [-12.5, 53.5], [-8.8, 53.5]],
+        "height": [11, 15],
+        "source": "6 palmeras en ~26 m dentro del jardín delante de H&M (estimado (Google Street View, solo mirado), ene 2025, captura 10)."
+      }
+    ],
+    "trees": [
+      {
+        "at": [[-28.5, 52], [-23.5, 51.2], [-14.5, 51.2], [-10.5, 52.2]],
+        "height": [6.5, 8.5],
+        "radius": [3, 4],
+        "colors": [
+          "#4a6a33",
+          "#3d5a2c",
+          "#557238"
+        ],
+        "source": "fícus de copa redonda delante del bloque H&M (Mapillary kaart_2, panorámica 360° 2023-04-15 (CC BY-SA 4.0); estimado (Google Street View, solo mirado), ene 2025, captura 10); lugar estimado."
+      },
+      {
+        "at": [[37.5, 51.5], [47.5, 55]],
+        "height": [7, 9],
+        "radius": [3.5, 4.5],
+        "colors": [
+          "#4a6a33",
+          "#3d5a2c",
+          "#557238"
+        ],
+        "source": "fícus delante de la entrada Zara y junto al ala de teja (estimado (Google Street View, solo mirado), ene 2025, capturas 30 y 31); lugar estimado."
+      },
+      {
+        "at": [[-113.5, 40], [-110, 46.5], [-105, 49.5], [-114.5, 31.5]],
+        "height": [5.5, 7],
+        "radius": [2.5, 3.5],
+        "colors": [
+          "#4a6a33",
+          "#3d5a2c",
+          "#557238"
+        ],
+        "source": "árboles de copa ancha en el jardín de la rotonda (Mapillary Blackberry_, 2026-09-05 (CC BY-SA 4.0) 1091841380209051; estimado (Google Street View, solo mirado), ene 2025, captura 15: la terraza y el piso 2 de la rotonda asoman sobre las copas, de ~5,5-7 m); lugar estimado."
+      }
+    ]
+  }
+}

@@ -1,0 +1,3125 @@
+{
+  "name": "Mall del Sol",
+  "sources": [
+    "Marco (lat, lon, rumbo 81°) y hoja de medidas: pipeline/.cache/model-place/mallDelSol/sheet.json y notes.md (2026-09-25).",
+    "Plano oficial malldelsol.com.ec/assets/map/map-p2.svg, map-pb.svg y map-p3.svg (2025): planta de cada volumen, ajustada al satélite con 4 puntos de control (escala 0,352 m/unidad, error 0,5-3 m).",
+    "Esri World Imagery, GeoEye-1 (Vantor Vivid Advanced) del 2025-05-09, 0,46 m, enderezado a 0,25 m/px con satellite.py: rumbo (81,0°), bordes, techos, lucernarios, parqueos y puentes. Solo para medir.",
+    "Mapillary kaart_2, 2023-04-13/15 (CC BY-SA 4.0): fachadas sur y oeste, alturas medidas en panos con el horizonte corregido 4,5°, colores y letreros.",
+    "Mapillary kaartcam, 2016-06-10/15 (CC BY-SA 4.0): fachadas norte y este (lo único abierto de esos lados).",
+    "Wikimedia Commons, Category:Mall_del_Sol, Freddy eduardo, 2024-01-29 y 2024-02-26 (CC BY-SA 4.0): portal terminado, colores, interior de multicines.",
+    "OpenStreetMap (ODbL), consultado 2026-09-25: way 35468710 (landuse), node 7946441393 (capilla), node 12432213162 (entrada del parqueo norte), calles.",
+    "Google Street View, sept 2024 (frente) y ago 2024 (resto), y panos contribuidos por Rcg360 de ago 2025: solo mirado, nada copiado; todo lo que sale de ahí va como estimado. Deja viejas las fotos de 2023: bloque SW y fachada al este del arco terminados, piso nuevo sobre el muro curvo oeste, H&M, ETAFASHION en el bloque SW, multicines, AutoTop, torres de 7 niveles.",
+    "Prensa: El Comercio 2010-11 (Torres del Mall), El Universo 2020-01-10 (ala oeste y 300 parqueos), 2023-06-29 (tercer nivel: Portela, Strikes), Vistazo 2023-11-09 (Cinemark → Multicines).",
+    "Coche bomba en la Orrantia frente al mall el 2025-10-14 (Expreso 2025-10-15): sin imágenes posteriores; si hubo daños en vidrios, no se ven aquí.",
+    "Sin fotos de noche: letreros, vitral y vitrinas encendidos son lo esperable, no medido. Los plafones de las marquesinas alumbran el piso (uno cada ~7-10 m, potencia 0,5 de un poste de la calle, LED): estimado.",
+    "Comparación en el juego (2026-09-25): cada tramo desde el punto de las capturas de Street View y de las fotos de Mapillary y Commons, y la vista cenital contra el satélite enderezado. Corrigió la planta del parqueo norte-este, el lucernario (ancho, eje y el tramo diagonal), la cúpula del cruce, el techo oscuro de la galería, el arco del portal, el cuerpo medio de las torres y los edificios de los datos al oeste del bloque SW."
+  ],
+  "clear": [
+    [[-131, -30], [41, -30], [41, 21], [-131, 21]],
+    [[-196, -109], [-193, -97], [-188, -85], [-182, -73], [-175, -64], [-167, -55], [-157, -47], [-148, -42], [-141, -38], [-133, -34], [-137, -27], [-145, -31], [-152, -35], [-162, -40], [-172, -49], [-181, -59], [-189, -69], [-195, -82], [-201, -94], [-204, -107]],
+    [[-30, -80], [116, -80], [116, -70], [-30, -70]],
+    [[136, 19], [200, 19], [200, 29], [136, 29]],
+    [[-205, -128], [-180, -128], [-180, -110], [-205, -110]],
+    [[-154, -126], [-145, -126], [-128, -109], [-125, -112], [-142, -129], [-154, -129]],
+    [[-205, -186], [-146, -186], [-146, -136], [-205, -136]],
+    [[-152, -30], [-131, -30], [-131, -2], [-152, -2]],
+    [[22, -137], [68, -137], [68, -120], [22, -120]]
+  ],
+  "ground": {
+    "step": 2,
+    "lift": 0.12,
+    "bury": 0.5,
+    "wall": 0.25
+  },
+  "detail": {
+    "near": 280,
+    "arc": 1.5,
+    "sides": 16,
+    "small": 8,
+    "curve": 4,
+    "film": 0.01
+  },
+  "finishes": {
+    "glass": {
+      "roughness": 0.1,
+      "metalness": 0.35
+    },
+    "metal": {
+      "roughness": 0.4,
+      "metalness": 0.6
+    },
+    "rails": {
+      "roughness": 0.6,
+      "metalness": 0.3,
+      "cutout": true
+    },
+    "letters": {
+      "roughness": 0.6,
+      "metalness": 0.1,
+      "cutout": true
+    },
+    "clear": {
+      "roughness": 0.25,
+      "metalness": 0.1,
+      "opacity": 0.55
+    },
+    "water": {
+      "roughness": 0.05,
+      "metalness": 0.1,
+      "opacity": 0.75
+    }
+  },
+  "lights": {
+    "window": {
+      "color": "#ffd9a3",
+      "intensity": 1.2
+    },
+    "shop": {
+      "color": "#fff1d6",
+      "intensity": 1.6
+    },
+    "soffit": {
+      "color": "#fff0d0",
+      "intensity": 2.2
+    },
+    "sign": {
+      "color": "#fff6e6",
+      "intensity": 1.5
+    },
+    "vitral": {
+      "color": "#ffe0b0",
+      "intensity": 1.3
+    }
+  },
+  "skins": {
+    "westWall": {
+      "color": "#DEDBD3",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Street View ago 2024 muestreado #BFBBB2 con cielo nublado; aclarado a ojo como en la hoja (#E6E6E3, Mapillary 1237165193839464, 2023)"
+    },
+    "westGarden": {
+      "color": "#2A3D24",
+      "material": "stone",
+      "pattern": "soil",
+      "scale": [1, 1],
+      "source": "Street View ago 2024 (jardines verticales)"
+    },
+    "shopGlass": {
+      "color": "#3A4446",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.5, 0.28],
+      "tone": 0.3,
+      "glow": "shop",
+      "lit": 0.85,
+      "source": "vitrinas de piso a techo con carpintería oscura (Mapillary 2023, Street View 2024); tono estimado"
+    },
+    "panelDark": {
+      "color": "#504F4B",
+      "material": "stone",
+      "source": "Street View ago 2024, nublado"
+    },
+    "panelOrange": {
+      "color": "#C17957",
+      "material": "stone",
+      "source": "Street View ago 2024 con sol (captura 11: #C17958 muestreado); con cielo nublado (capturas 13, 14 y 15) se ven más rojos, #7F3F41-#AE7E68"
+    },
+    "panelStone": {
+      "color": "#A49987",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [6, 2.5],
+      "source": "Street View ago 2024, nublado (piedra en placas de ~0,6 × 1,2 m, estimadas)"
+    },
+    "panelGlass": {
+      "color": "#6580AB",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.77, 0.4],
+      "tone": 0.4,
+      "source": "Mapillary 1237165193839464 (2023-04-15), vidrio reflejante azul"
+    },
+    "newGlass": {
+      "color": "#2B3136",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.22, 0.21],
+      "tone": 0.55,
+      "glow": "window",
+      "lit": 0.6,
+      "source": "Street View ago 2025 (Rcg360): cinta de vidrio oscuro con parteluces; tono estimado"
+    },
+    "cornice": {
+      "color": "#B9B8B3",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.9, 1.67],
+      "source": "Street View ago 2025: cornisa gris clara (estimado)"
+    },
+    "noGrey": {
+      "color": "#B5B3AC",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.9, 1.0],
+      "source": "Street View ago 2024: muro gris claro del extremo norte (estimado)"
+    },
+    "oliveBox": {
+      "color": "#777061",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1, 1],
+      "source": "Street View ago 2024"
+    },
+    "louver": {
+      "color": "#6E6A5E",
+      "material": "stone",
+      "pattern": "shutter",
+      "scale": [0.5, 0.5],
+      "source": "Street View ago 2024: persianas de ventilación (estimado)"
+    },
+    "roofWhite": {
+      "color": "#E6E6E1",
+      "material": "stone",
+      "source": "satélite 2025-05-09: membrana blanca brillante"
+    },
+    "roofGrey": {
+      "color": "#9A9993",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1.0],
+      "source": "satélite 2025-05-09: techo gris (estimado)"
+    },
+    "roofDark": {
+      "color": "#5E5F5A",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1.0],
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09: techo gris oscuro de la galería, muestreado #585A55-#5B5C58 (comparación 2026-09-25)"
+    },
+    "parkFloor": {
+      "color": "#8F8C86",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.72, 0.6],
+      "source": "losas de hormigón (estimado)"
+    },
+    "parkSoffit": {
+      "color": "#B8B5AE",
+      "material": "stone",
+      "ao": 0.7,
+      "source": "estimado"
+    },
+    "parkConcrete": {
+      "color": "#C9C6BE",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Street View ago 2024: antepecho gris de la losa del nivel 1 (estimado)"
+    },
+    "parkColumn": {
+      "color": "#A9A6A0",
+      "material": "stone",
+      "source": "estimado"
+    },
+    "parkCream": {
+      "color": "#B3B3AA",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Street View ago 2024 (#B3B3AA-#A29B87)"
+    },
+    "camel": {
+      "color": "#8E7654",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.5, 1.9],
+      "source": "Street View sept 2024, nublado; paneles de ~2,4 × 1,6 m estimados"
+    },
+    "nearBlack": {
+      "color": "#3A3B3E",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.5, 1.2],
+      "source": "Street View ago 2024, a ojo"
+    },
+    "cream": {
+      "color": "#CFC8BA",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 2.0],
+      "source": "Street View ago 2024 (captura 09), a ojo"
+    },
+    "greyLight": {
+      "color": "#BDBBB5",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.44, 2.0],
+      "source": "Street View ago 2024 (captura 06), a ojo"
+    },
+    "darkBand": {
+      "color": "#5F6166",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.5, 1.2],
+      "source": "Commons 2024-02-26, muestreado #656974 con cielo nublado; sin el tinte azul (a ojo)"
+    },
+    "railGlass": {
+      "color": "#9FB3B5",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.67, 0.9],
+      "tone": 0.2,
+      "source": "barandas de vidrio (Street View 2024), tono estimado"
+    },
+    "portalDark": {
+      "color": "#41454A",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [2.88, 1.2],
+      "source": "Commons \"Fachada Mall del Sol\" 2024-02-26 (#3E4651) y Street View sept 2024 (#3D464D), los dos nublados; sin el tinte azul del cielo cubierto (a ojo): gris carbón"
+    },
+    "orange": {
+      "color": "#D68760",
+      "material": "stone",
+      "source": "Commons 2024-02-26, nublado"
+    },
+    "vitral": {
+      "color": "#656E6D",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [1.25, 1.25],
+      "tone": 0.5,
+      "glow": "vitral",
+      "source": "Commons 2024-02-26"
+    },
+    "archGlass": {
+      "color": "#4A5559",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.67, 0.45],
+      "tone": 0.5,
+      "glow": "shop",
+      "source": "Commons 2024-02-26 (vidrio bajo el arco), tono estimado"
+    },
+    "arcGlass": {
+      "color": "#8C989A",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [1.6, 1.0],
+      "tone": 0.4,
+      "glow": "vitral",
+      "source": "estimado (Google Street View, solo mirado), sept 2024 (captura 02): vidrio gris claro con parteluces entre las bandas naranja del arco"
+    },
+    "aluminium": {
+      "color": "#C9CCCE",
+      "material": "metal",
+      "source": "parteluces de aluminio (Commons 2024-02-26)"
+    },
+    "louverGrey": {
+      "color": "#6A6B66",
+      "material": "stone",
+      "pattern": "shutter",
+      "scale": [0.4, 0.4],
+      "source": "estimado (Google Street View, solo mirado), sept 2024 (captura 02): celosía horizontal gris sobre el arco, muestreada #686964 (la hoja la tenía casi negra)"
+    },
+    "beige": {
+      "color": "#CFC3A0",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [3.0, 5.0],
+      "source": "Commons 2024-02-26, muestreado #9B9682 y aclarado a ojo por la sombra (hoja)"
+    },
+    "canopyCream": {
+      "color": "#CFCAC0",
+      "material": "stone",
+      "source": "Street View sept 2024: gris-crema (a ojo)"
+    },
+    "canopySoffit": {
+      "color": "#D8D3C8",
+      "material": "stone",
+      "ao": 0.7,
+      "source": "estimado"
+    },
+    "pillarGrey": {
+      "color": "#7D8085",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [2.88, 1.2],
+      "source": "Street View sept 2024: pilar gris (a ojo)"
+    },
+    "steel": {
+      "color": "#B9BCBF",
+      "material": "metal",
+      "source": "tensores y mástiles de acero (estimado)"
+    },
+    "soffitLamp": {
+      "color": "#F4F1EA",
+      "material": "stone",
+      "glow": "soffit",
+      "source": "plafones (estimado)"
+    },
+    "hmCream": {
+      "color": "#D6D0C2",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1.0],
+      "source": "Street View sept 2024: bandas crema (a ojo)"
+    },
+    "centralWall": {
+      "color": "#C9C6BE",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1.0],
+      "source": "estimado"
+    },
+    "wedgeOlive": {
+      "color": "#888879",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.86, 1.36],
+      "source": "Street View ago 2024: paneles gris oliva en bandas de ~2,2 m"
+    },
+    "wedgeCream": {
+      "color": "#C5BBAC",
+      "material": "stone",
+      "source": "Street View ago 2024"
+    },
+    "podiumCream": {
+      "color": "#D0CCC2",
+      "material": "stone",
+      "source": "Mapillary 2023 y Street View 2024 (a ojo)"
+    },
+    "podiumGlass": {
+      "color": "#2F3A40",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.44, 0.3],
+      "tone": 0.3,
+      "glow": "window",
+      "lit": 0.6,
+      "source": "Street View ago 2024: vidrio oscuro del nivel 1 (a ojo)"
+    },
+    "towerSlab": {
+      "color": "#BCBBB6",
+      "material": "stone",
+      "source": "Street View ago 2024, nublado"
+    },
+    "towerSoffit": {
+      "color": "#BCBBB6",
+      "material": "stone",
+      "ao": 0.8,
+      "source": "cara de abajo de las torres donde vuelan sobre la curva del podio: el color de sus losas crema (Street View ago 2024, nublado), a la sombra (oclusión estimada)"
+    },
+    "towerGlass": {
+      "color": "#A3B9B7",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.56, 0.26],
+      "tone": 0.35,
+      "glow": "window",
+      "lit": 0.45,
+      "source": "Street View ago 2024, nublado"
+    },
+    "megaTop": {
+      "color": "#75756A",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.71, 1.43],
+      "source": "Street View ago 2024: gris oliva/caqui en paneles de ~2 m (la hoja decía gris oscuro)"
+    },
+    "megaCream": {
+      "color": "#B4B0A5",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.06, 1.2],
+      "source": "Street View ago 2024"
+    },
+    "megaLow": {
+      "color": "#585043",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.2, 1.25],
+      "source": "Street View ago 2024"
+    },
+    "megaGlass": {
+      "color": "#394348",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.62, 0.4],
+      "tone": 0.4,
+      "glow": "shop",
+      "lit": 0.9,
+      "source": "Street View ago 2024 (captura 24), a ojo"
+    },
+    "megaRoof": {
+      "color": "#4A4D50",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [6, 0.1],
+      "source": "satélite 2025-05-09: metálico de junta alzada gris oscuro"
+    },
+    "eastPlates": {
+      "color": "#848076",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [1.67, 1.4],
+      "source": "Street View ago 2024 (pano OnJ8feu0RXph_JGgoRfLJg): placas de ~2,0-2,3 m"
+    },
+    "plinthGrey": {
+      "color": "#7C7B76",
+      "material": "stone",
+      "source": "Street View ago 2024: zócalo gris de ~1 m"
+    },
+    "skyGlass": {
+      "color": "#5F7775",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.67, 0.8],
+      "tone": 0.6,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09: bóveda de vidrio verde azulado, muestreada #576361 (comparación 2026-09-25; la hoja decía azulado #6F8FA6)"
+    },
+    "domeGlass": {
+      "color": "#34403F",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.5, 0.5],
+      "tone": 0.5,
+      "source": "Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09: cúpula de vidrio casi negro verdoso (a ojo)"
+    },
+    "skyFrame": {
+      "color": "#D9DCDD",
+      "material": "metal",
+      "source": "estimado"
+    },
+    "flatSky": {
+      "color": "#C3CCD0",
+      "material": "glass",
+      "pattern": "glazing",
+      "scale": [0.5, 0.5],
+      "tone": 0.7,
+      "source": "satélite 2025-05-09: lucernarios claros"
+    },
+    "halfVault": {
+      "color": "#3F4447",
+      "material": "metal",
+      "source": "satélite 2025-05-09: media bóveda oscura"
+    },
+    "unitGrey": {
+      "color": "#CFD0CC",
+      "material": "stone",
+      "source": "satélite 2025-05-09: equipos claros (estimado)"
+    },
+    "fanDark": {
+      "color": "#2B2D2F",
+      "material": "stone",
+      "source": "estimado"
+    },
+    "antenna": {
+      "color": "#E3E3E0",
+      "material": "stone",
+      "source": "Street View sept 2024: paneles blancos de las antenas"
+    },
+    "clearRoof": {
+      "color": "#B7C7D3",
+      "material": "clear",
+      "pattern": "glazing",
+      "scale": [0.33, 0.33],
+      "tone": 0.9,
+      "source": "Street View sept 2024: paneles translúcidos gris azulado sobre retícula de acero blanco"
+    },
+    "steelWhite": {
+      "color": "#E6E6E3",
+      "material": "metal",
+      "source": "Street View sept 2024: acero blanco"
+    },
+    "greenRoof": {
+      "color": "#4E6B35",
+      "material": "stone",
+      "pattern": "soil",
+      "scale": [1, 1],
+      "source": "Street View ago 2025: marquesina con cubierta verde"
+    },
+    "westFascia": {
+      "color": "#6E7176",
+      "material": "stone",
+      "source": "Mapillary 2023: marquesina gris (a ojo)"
+    },
+    "postGrey": {
+      "color": "#8D8F91",
+      "material": "metal",
+      "source": "Street View ago 2024: postes delgados (a ojo)"
+    },
+    "bridgeFloor": {
+      "color": "#9B9891",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [2, 2],
+      "source": "estimado"
+    },
+    "bridgeSoffit": {
+      "color": "#B4B2AC",
+      "material": "stone",
+      "ao": 0.8,
+      "source": "estimado"
+    },
+    "bridgeRoof": {
+      "color": "#DCDCD8",
+      "material": "metal",
+      "source": "Street View ago 2024: techo blanco"
+    },
+    "bridgeTruss": {
+      "color": "#EDEDEA",
+      "material": "metal",
+      "source": "Street View ago 2024: armadura de acero blanca"
+    },
+    "banner": {
+      "color": "#D5CFC2",
+      "material": "stone",
+      "source": "lona publicitaria de contenido cambiante (Tatos en ago 2024, \"NO SE DETIENE\" en ago 2025): sin texto, color neutro estimado"
+    },
+    "pier": {
+      "color": "#B8B4AB",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Street View ago 2024: columnas redondas de hormigón"
+    },
+    "pierWhite": {
+      "color": "#E4E3DF",
+      "material": "stone",
+      "source": "Street View ago 2024: columna redonda blanca en la vereda este"
+    },
+    "stairSteel": {
+      "color": "#6F7377",
+      "material": "metal",
+      "source": "escalera metálica (Street View ago 2024), color estimado"
+    },
+    "stairStep": {
+      "color": "#8C8A85",
+      "material": "stone",
+      "source": "estimado"
+    },
+    "fenceCream": {
+      "color": "#A7A18E",
+      "material": "rails",
+      "pattern": "bars",
+      "source": "Street View ago 2024: reja crema de barrotes planos (no blanca)"
+    },
+    "fencePost": {
+      "color": "#A7A18E",
+      "material": "stone",
+      "source": "Street View ago 2024"
+    },
+    "fenceBase": {
+      "color": "#8E8C86",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Street View ago 2024: muro bajo gris"
+    },
+    "bollardBlack": {
+      "color": "#1E1F20",
+      "material": "stone",
+      "source": "Mapillary 1295785591028805 (2023)"
+    },
+    "bollardYellow": {
+      "color": "#E5BD1F",
+      "material": "stone",
+      "source": "Mapillary 1295785591028805 (2023)"
+    },
+    "planterWall": {
+      "color": "#BDB8AE",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "Commons 2024 y Mapillary 2023 (a ojo)"
+    },
+    "hedge": {
+      "color": "#4F6B35",
+      "material": "stone",
+      "pattern": "soil",
+      "scale": [1, 1],
+      "source": "seto e ixora (Commons 2024)"
+    },
+    "shelterRoof": {
+      "color": "#2F3235",
+      "material": "stone",
+      "source": "Street View ago 2024 y ago 2025: techo plano oscuro"
+    },
+    "shelterSoffit": {
+      "color": "#2F3235",
+      "material": "stone",
+      "ao": 0.8,
+      "source": "cara de abajo del techo plano oscuro de las paradas: el color del techo (Street View ago 2024 y ago 2025), a la sombra (oclusión estimada)"
+    },
+    "shelterPost": {
+      "color": "#3A3D40",
+      "material": "metal",
+      "source": "estimado"
+    },
+    "bench": {
+      "color": "#6B6E70",
+      "material": "metal",
+      "source": "estimado"
+    },
+    "fountainWall": {
+      "color": "#CFCAC0",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "estimado"
+    },
+    "water": {
+      "color": "#4E7C8C",
+      "material": "water",
+      "source": "estimado"
+    },
+    "jet": {
+      "color": "#DDEBF0",
+      "material": "water",
+      "source": "estimado"
+    },
+    "towerBeige": {
+      "color": "#D6CAB0",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.8, 0.5],
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (captura 11, con sol): #DCCFB6 muestreado"
+    },
+    "autotopGrey": {
+      "color": "#A5A29A",
+      "material": "stone",
+      "pattern": "stucco",
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (captura 20): muro gris #9D9A92 muestreado con cielo nublado, aclarado a ojo"
+    },
+    "coral": {
+      "color": "#C8958A",
+      "material": "stone",
+      "pattern": "slabs",
+      "scale": [0.5, 0.42],
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (captura 20): banda de fachada coral desteñida #BF8E83 muestreada con cielo nublado (la hoja: #C08D82)"
+    },
+    "garitaWhite": {
+      "color": "#E9E9E6",
+      "material": "stone",
+      "source": "Street View ago 2025: módulo blanco"
+    }
+  },
+  "volumes": [
+    {
+      "id": "ala-oeste",
+      "name": "ala oeste curva (Pycca, H&M, Sukasa, Big Mr. Joy), con el piso nuevo de 2024-25",
+      "ring": [[-196, -109], [-193, -97], [-188, -85], [-182, -73], [-175, -64], [-167, -55], [-157, -47], [-148, -42], [-141, -38], [-133, -34], [-130, -45], [-150, -62], [-165, -80], [-173, -95], [-178, -112], [-186, -113], [-191, -118]],
+      "base": 0,
+      "height": 25,
+      "parapet": [0, 0.3],
+      "skin": "westWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+          "bands": [
+            {
+              "y": [0, 6.6],
+              "skin": "shopGlass",
+              "out": -0.35
+            },
+            {
+              "y": [6.6, 7.2],
+              "skin": "cornice",
+              "out": 1.0
+            },
+            {
+              "y": [18.4, 23.3],
+              "skin": "newGlass",
+              "out": -0.3
+            },
+            {
+              "y": [23.3, 25.0],
+              "skin": "cornice",
+              "out": 1.8
+            }
+          ],
+          "fins": [
+            {
+              "every": 10.5,
+              "phase": 5.25,
+              "width": 1.4,
+              "out": 0.6,
+              "y": [0, 6.6],
+              "skin": "westGarden",
+              "round": false
+            }
+          ],
+          "panels": [
+            {
+              "y": 7.2,
+              "width": [2.0, 2.9],
+              "height": [3.5, 8.2],
+              "gap": [0.25, 0.9],
+              "out": 0.12,
+              "margin": [3, 8],
+              "skins": [
+                "panelStone",
+                "panelDark",
+                "panelOrange",
+                "panelStone",
+                "panelGlass",
+                "panelDark",
+                "panelOrange",
+                "panelStone"
+              ]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: plano oficial malldelsol.com.ec/assets/map/map-p2.svg (2025) ajustado al satélite (error 0,5-3 m); Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py. Muro blanco 18,5 m (pano Mapillary 614316853665338, 2023-04-15); piso nuevo de vidrio con cornisa volada ~1,5-2 m hasta ~25 m: estimado (Google Street View, solo mirado), ago 2024 (en obra) y ago 2025 (Rcg360, terminado). Vitrinas con jardines verticales cada 10,5 m (11 contados, Mapillary 1237165193839464 y 180766951136773). Paneles de colores ~2,5-3 m (unos 40, sembrados: no siguen el módulo). La repisa corrida a 6,6-7,2 m y el vuelo de 1 m son estimados en la captura 14 de Street View."
+    },
+    {
+      "id": "caja-no",
+      "name": "caja NO (Sukasa, Kywi, capilla Santa Isabel)",
+      "ring": [[-186, -110], [-173, -123], [-171, -127], [-154, -126], [-145, -126], [-128, -109], [-119, -114], [-106, -106], [-106, -88], [-118, -85], [-150, -62], [-165, -80], [-173, -95], [-178, -104]],
+      "base": 0,
+      "height": 16,
+      "parapet": [1.0, 0.25],
+      "skin": "noGrey",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "planta: plano oficial map-pb.svg (zona SUKASA y CAPILLA) ajustado, ±3 m; OSM node 7946441393 (capilla) adentro; alto 16 m estimado a ojo contra el muro oeste (Mapillary 1012372906594772, 2023); muro gris claro: estimado (Google Street View, solo mirado), ago 2024."
+    },
+    {
+      "id": "feria-no",
+      "name": "edificio NO (salón de ferias o bodega, detrás de la misma reja)",
+      "ring": [[-190, -178], [-150, -178], [-150, -140], [-190, -140]],
+      "base": 0,
+      "height": 12,
+      "parapet": [0.8, 0.2],
+      "skin": "oliveBox",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [8.0, 11.0],
+              "skin": "louver",
+              "out": -0.2
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta a ojo en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py; alto 12 m estimado (Mapillary 1012372906594772 y 971872657173017, 2023); caja gris oliva #777061 con persianas de ventilación: estimado (Google Street View, solo mirado), ago 2024. Puede ser un edificio aparte del mall (lonas de la Feria del Mueble Cuenca)."
+    },
+    {
+      "id": "sw-parqueo",
+      "name": "Parqueo Express (planta baja y nivel 1 bajo el bloque SW)",
+      "ring": [[-131, -18], [-100, -24], [-60, -27], [-27, -27], [-27, 10], [-60, 11], [-131, 13]],
+      "base": 0,
+      "height": 7.0,
+      "parapet": [0, 0.3],
+      "skin": "open",
+      "roof": {
+        "kind": "flat",
+        "skin": "parkFloor"
+      },
+      "faces": [
+        {
+          "sides": [0, 1],
+          "bands": [
+            {
+              "y": [4.0, 5.3],
+              "skin": "parkConcrete"
+            }
+          ]
+        },
+        {
+          "sides": [3],
+          "bands": [
+            {
+              "y": [0, 7.0],
+              "skin": "parkConcrete"
+            }
+          ]
+        },
+        {
+          "sides": [4, 5, 6],
+          "bands": [
+            {
+              "y": [4.0, 5.3],
+              "skin": "parkConcrete"
+            }
+          ]
+        }
+      ],
+      "physics": "none",
+      "deck": {
+        "levels": [4.0, 7.0],
+        "slab": 0.35,
+        "guard": [1.1, 0.3],
+        "climb": 0.3,
+        "skins": {
+          "floor": "parkFloor",
+          "soffit": "parkSoffit",
+          "edge": "parkConcrete",
+          "column": "parkColumn"
+        },
+        "columns": {
+          "grid": [8.4, 8.4],
+          "size": 0.7,
+          "round": false,
+          "margin": 1.5
+        },
+        "stalls": {
+          "width": 2.5,
+          "line": 0.1,
+          "color": "#e8e4d8",
+          "lift": 0.01
+        },
+        "rows": [
+          {
+            "a": [-121, -13],
+            "b": [-33, -13],
+            "side": -1,
+            "depth": 5,
+            "levels": [0, 1],
+            "cars": 0.55
+          },
+          {
+            "a": [-121, -6.5],
+            "b": [-33, -6.5],
+            "side": 1,
+            "depth": 5,
+            "levels": [0, 1],
+            "cars": 0.55
+          },
+          {
+            "a": [-100, 3.5],
+            "b": [-33, 3.5],
+            "side": -1,
+            "depth": 5,
+            "levels": [0, 1],
+            "cars": 0.55
+          }
+        ],
+        "ramps": [
+          {
+            "a": [-129, 8],
+            "b": [-104, 8],
+            "width": 6,
+            "y": [0, 4.0],
+            "skin": "parkFloor"
+          }
+        ],
+        "entrances": [[5, 50, 66], [6, 1, 11]],
+        "cars": {
+          "size": [4.3, 1.75, 0.8],
+          "cabin": [2.2, 0.62, 0.3, 0.12],
+          "wheel": [0.32, 0.2, 0.8],
+          "clearance": 0.25,
+          "colors": [
+            "#c8c8c6",
+            "#1f2022",
+            "#e9e9e7",
+            "#7a7f85",
+            "#8a1f1f",
+            "#2b3f66",
+            "#b7b09c",
+            "#5a5e62"
+          ],
+          "glass": "#26303a",
+          "tire": "#1a1a1a"
+        }
+      },
+      "source": "planta: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py (techo blanco nítido x −131…−27, z −27…+13). Planta baja abierta con columnas y plumas (0-4 m), losa del nivel 1 con antepecho gris (4-7 m) y rampa desde el oeste: estimado (Google Street View, solo mirado), ago y sept 2024 (pano c6pKRl3XiyfQs-DPisRHWw). ~600 puestos en la zona (El Universo 2020-01-10); columnas, hileras y rampa ubicadas estimadas."
+    },
+    {
+      "id": "sw-caja",
+      "name": "caja camel del bloque SW (Marathon, ETAFASHION), con la terraza de Portela encima al oeste",
+      "ring": [[-131, -6], [-110, -6], [-110, -22], [-100, -24], [-62, -26.5], [-62, 11.1], [-131, 13]],
+      "on": "sw-parqueo",
+      "base": 7.0,
+      "height": 16.7,
+      "parapet": [0, 0.3],
+      "skin": "camel",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [5],
+          "span": [0, 38.03],
+          "bands": [
+            {
+              "y": [7.0, 9.1],
+              "skin": "camel"
+            },
+            {
+              "y": [9.1, 12.7],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [12.7, 16.7],
+              "skin": "camel"
+            }
+          ]
+        },
+        {
+          "sides": [5],
+          "span": [38.03, 69.03],
+          "bands": [
+            {
+              "y": [7.0, 9.1],
+              "skin": "camel"
+            },
+            {
+              "y": [9.1, 12.7],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [12.7, 16.7],
+              "skin": "camel"
+            },
+            {
+              "y": [16.7, 17.8],
+              "skin": "railGlass"
+            }
+          ]
+        },
+        {
+          "sides": [6],
+          "bands": [
+            {
+              "y": [7.0, 9.1],
+              "skin": "camel"
+            },
+            {
+              "y": [9.1, 12.7],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [12.7, 16.7],
+              "skin": "camel"
+            },
+            {
+              "y": [16.7, 17.8],
+              "skin": "railGlass"
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "bloque terminado (2024): estimado (Google Street View, solo mirado), ago 2024 y sept 2024 (capturas 06, 09 y 31): fondo de la caja camel a 7,0 m y tope a 16,7 m (pano c6pK a ~26 m, cámara 2,5 m); vitrina del nivel 2 a 9,1-12,7 m medida a ojo en la captura 06. Partición del bloque en cajas: estimada en las capturas."
+    },
+    {
+      "id": "sw-crema",
+      "name": "volumen crema alto de la esquina NO del bloque SW (ETAFASHION, PORTELA), con la esquina SO redondeada",
+      "ring": [[-131, -18], [-110, -22], [-110, -6], [-127, -6, 1.17], [-131, -10]],
+      "on": "sw-parqueo",
+      "base": 7.0,
+      "height": 24.5,
+      "parapet": [0, 0.3],
+      "skin": "cream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [4],
+          "bands": [],
+          "openings": [
+            {
+              "u": 4.0,
+              "width": 1.6,
+              "y": [16.5, 21.5],
+              "depth": 0.2,
+              "skin": "shopGlass"
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (captura 09): esquina SO redondeada de radio ~4 m, remate a ~24-25 m; planta estimada a ojo."
+    },
+    {
+      "id": "sw-vidrio",
+      "name": "caja oscura con el piso de vidrio del bloque SW (Strikes al fondo de la terraza)",
+      "ring": [[-100, -24], [-62, -26.5], [-62, 11.1], [-100, 12]],
+      "on": "sw-parqueo",
+      "base": 16.7,
+      "height": 24.3,
+      "parapet": [0, 0.3],
+      "skin": "nearBlack",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [
+            {
+              "y": [17.4, 22.3],
+              "skin": "newGlass",
+              "out": -0.2
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "estimado (Google Street View, solo mirado), ago 2024: piso de vidrio con cortinas y remate gris casi negro hasta 24,3 m (pano c6pK); planta estimada."
+    },
+    {
+      "id": "sw-este",
+      "name": "volumen gris claro del este del bloque SW (terraza con baranda de vidrio y vitrina)",
+      "ring": [[-62, -26.5], [-27, -27], [-27, 10], [-62, 11.1]],
+      "on": "sw-parqueo",
+      "base": 7.0,
+      "height": 21.0,
+      "parapet": [0.9, 0.25],
+      "skin": "greyLight",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofWhite"
+      },
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [
+            {
+              "y": [7.0, 7.6],
+              "skin": "darkBand",
+              "out": 0.3
+            },
+            {
+              "y": [7.6, 10.4],
+              "skin": "shopGlass",
+              "out": -0.2
+            },
+            {
+              "y": [10.4, 11.0],
+              "skin": "darkBand",
+              "out": 0.3
+            },
+            {
+              "y": [13.2, 13.7],
+              "skin": "darkBand",
+              "out": 1.6
+            },
+            {
+              "y": [13.7, 16.3],
+              "skin": "shopGlass",
+              "out": -0.4
+            },
+            {
+              "y": [13.7, 14.8],
+              "skin": "railGlass",
+              "out": 1.5
+            },
+            {
+              "y": [16.3, 16.9],
+              "skin": "darkBand",
+              "out": 1.6
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (captura 06): llega a ~21 m; bandas gris oscuro que enmarcan cintas de vidrio, medidas a ojo."
+    },
+    {
+      "id": "portal-beige",
+      "name": "muro beige de placas a la izquierda del portal",
+      "ring": [[-27, -16], [-17.5, -16], [-17.5, -4], [-27, -4]],
+      "base": 0,
+      "height": 17.6,
+      "parapet": [0.5, 0.2],
+      "skin": "beige",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "Commons \"Fachada Mall del Sol\" (Freddy eduardo, 2024-02-26): muro beige de placas a la izquierda del portal (#CFC3A0); alto y planta estimados a ojo en la captura 01 de Street View (sept 2024)."
+    },
+    {
+      "id": "portal",
+      "name": "portal principal (bloque gris del arco)",
+      "ring": [[-17.5, -15], [3, -15], [3, -3], [-17.5, -3]],
+      "base": 0,
+      "height": 19.0,
+      "parapet": [0, 0.3],
+      "skin": "portalDark",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [2],
+          "bands": [],
+          "openings": [
+            {
+              "u": 10.0,
+              "width": 7.5,
+              "y": [17.4, 19.0],
+              "depth": 0.8,
+              "skin": "louverGrey"
+            }
+          ],
+          "arches": [
+            {
+              "u": 10.0,
+              "width": 12.2,
+              "top": 17.8,
+              "foot": 0,
+              "rings": [
+                {
+                  "width": 0.65,
+                  "out": 0.5,
+                  "skin": "orange"
+                },
+                {
+                  "width": 0.6,
+                  "out": 0.05,
+                  "skin": "arcGlass"
+                },
+                {
+                  "width": 0.6,
+                  "out": 0.4,
+                  "skin": "orange"
+                },
+                {
+                  "width": 0.6,
+                  "out": 0.05,
+                  "skin": "arcGlass"
+                },
+                {
+                  "width": 0.65,
+                  "out": 0.3,
+                  "skin": "orange"
+                }
+              ],
+              "infill": "archGlass",
+              "rose": {
+                "y": 12.1,
+                "radius": 2.6,
+                "spokes": 16,
+                "rings": [1.0, 1.8, 2.6],
+                "bar": 0.12,
+                "out": [0.02, 0.03],
+                "skin": "vitral",
+                "frame": "aluminium"
+              }
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "cara del arco triangulada con los panos Mapillary 1269763810606119 y 195998736553590 (2023-04): centro del arco en x −7,0, bloque de x −17,5 a +3; parapeto 19,0 m, cresta del arco 17,8 m, centro del sol 12,1 m, arco exterior 12,2 m (Street View sept 2024, pano h_5XhxUllhQQCgaAXM2vzA: confirma la hoja); tres bandas naranja de ~0,65, 0,6 y 0,65 m separadas por dos franjas de vidrio de ~0,6 m con parteluces radiales y rosetón de ~5,2 m de diámetro (medidos contra el arco de 12,2 m en la captura 02 de Street View, sept 2024, comparación 2026-09-25); rebaje central con celosía horizontal: Commons 2024-02-26 y Street View. El sol del vitral es logo: solo parteluces radiales y anillos lisos."
+    },
+    {
+      "id": "hm",
+      "name": "bloque H&M al este del arco",
+      "ring": [[3, -15], [37, -9], [41, -3], [3, -3]],
+      "base": 0,
+      "height": 15.3,
+      "parapet": [0, 0.3],
+      "skin": "hmCream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [1, 2],
+          "bands": [
+            {
+              "y": [0, 4.0],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [7.0, 9.8],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [12.1, 14.6],
+              "skin": "shopGlass",
+              "out": -1.2
+            },
+            {
+              "y": [14.6, 15.3],
+              "skin": "hmCream",
+              "out": 0.8
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "estimado (Google Street View, solo mirado), sept 2024 (capturas 01 y 02): PB con vitrina 0-4 m, banda crema 4-7, nivel 2 con vitrinas 7-9,8, banda del letrero 9,8-12,1 y piso alto retranqueado 12,1-15 bajo una losa volada; planta estimada entre el portal y el podio de las torres."
+    },
+    {
+      "id": "cuerpo-central",
+      "name": "cuerpo central (galería de dos niveles con el lucernario)",
+      "ring": [[-130, -45], [-128, -30], [-28, -28], [-28, -20], [4, -16], [37, -9], [105, -9], [112, -35], [116, -75], [104, -73], [-28, -72], [-31, -75], [-94, -76], [-106, -88], [-118, -85], [-150, -62]],
+      "base": 0,
+      "height": 18.0,
+      "parapet": [0.6, 0.25],
+      "skin": "centralWall",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofDark"
+      },
+      "faces": [
+        {
+          "sides": [3, 4, 5],
+          "bands": [
+            {
+              "y": [15.3, 18.6],
+              "skin": "darkBand"
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: plano oficial malldelsol.com.ec/assets/map/map-p2.svg (2025) ajustado al satélite (error 0,5-3 m); Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py. Alto 18 m estimado: banda gris oscuro del cuerpo principal a ~18 m detrás de H&M (estimado (Google Street View, solo mirado), sept 2024); la hoja lo estimaba en 14 m sin foto de perfil."
+    },
+    {
+      "id": "cuna-norte",
+      "name": "cuña norte (entrada norte, bebemundo)",
+      "ring": [[-43, -141, 4], [-1, -177], [8, -170], [14, -159], [17, -142], [15, -129], [23, -127], [23, -118], [-28, -118], [-28, -127]],
+      "base": 0,
+      "height": 19.0,
+      "parapet": [0.6, 0.25],
+      "skin": "wedgeOlive",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [
+            {
+              "y": [0, 2.0],
+              "skin": "wedgeCream",
+              "out": 0.05
+            }
+          ],
+          "openings": [
+            {
+              "u": 22.0,
+              "width": 5.0,
+              "y": [7.5, 12.0],
+              "depth": -2.2,
+              "skin": "shopGlass",
+              "frame": "wedgeCream"
+            }
+          ]
+        },
+        {
+          "sides": [1, 2, 3],
+          "bands": [
+            {
+              "y": [0, 2.0],
+              "skin": "wedgeCream",
+              "out": 0.05
+            }
+          ],
+          "fins": [
+            {
+              "every": 1000,
+              "phase": 14.0,
+              "width": 2.4,
+              "out": 0.25,
+              "y": [2.0, 19.0],
+              "skin": "wedgeCream",
+              "round": false
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: plano oficial malldelsol.com.ec/assets/map/map-p2.svg (2025) ajustado al satélite (error 0,5-3 m) (punta del satélite en (−1, −177)); alto 19 m: estimado (Google Street View, solo mirado), ago 2024 (pano yTargOd2NTu8FsJH2fg0fw: punta a 15-17 m, tope a 45,7°), contra 13 m de la foto de 2016 (quedan los dos). Paneles gris oliva en bandas, franja vertical crema en la cara este, mirador de vidrio con marco crema y zócalo crema: Street View ago 2024 y ago 2025 (capturas 17-19). Flecha de la cara oeste curva: estimada."
+    },
+    {
+      "id": "enlace-norte",
+      "name": "cuerpo entre los dos parqueos norte",
+      "ring": [[-36, -118], [20, -118], [20, -72], [-36, -72]],
+      "base": 0,
+      "height": 12.5,
+      "parapet": [1.0, 0.25],
+      "skin": "parkCream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [],
+      "physics": "block",
+      "source": "franja con techos de lámina entre los dos parqueos (x −36…20, entre la azotea del parqueo oeste y la del este): Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py, medida en la comparación (2026-09-25); volumen gris claro con una cinta de vidrio detrás del taller AutoTop (estimado (Google Street View, solo mirado), ago 2024, captura 21); alto estimado igual al de los parqueos."
+    },
+    {
+      "id": "parqueo-ne",
+      "name": "parqueo norte-este (PB + 3 niveles y azotea)",
+      "ring": [[20, -108], [113, -108], [113, -76], [20, -76]],
+      "base": 0,
+      "height": 12.4,
+      "parapet": [1.1, 0.25],
+      "skin": "parkCream",
+      "roof": {
+        "kind": "flat",
+        "skin": "parkFloor"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [],
+          "openings": [
+            {
+              "u": 3.0,
+              "width": 0.45,
+              "y": [1.0, 2.8],
+              "depth": 0.25,
+              "repeat": [70, 1.1],
+              "rows": [4, 3.1]
+            },
+            {
+              "u": 85.0,
+              "width": 12,
+              "y": [4.3, 5.8],
+              "depth": 0.25,
+              "rows": [3, 3.1]
+            }
+          ]
+        },
+        {
+          "sides": [1],
+          "bands": [],
+          "openings": [
+            {
+              "u": 15.0,
+              "width": 0.45,
+              "y": [1.0, 2.8],
+              "depth": 0.25,
+              "repeat": [19, 1.1],
+              "rows": [4, 3.1]
+            },
+            {
+              "u": 9.5,
+              "width": 9.0,
+              "y": [0, 2.8],
+              "depth": 0.25
+            }
+          ]
+        }
+      ],
+      "physics": "none",
+      "deck": {
+        "levels": [3.1, 6.2, 9.3, 12.4],
+        "slab": 0.3,
+        "guard": [1.1, 0.25],
+        "climb": 0.3,
+        "skins": {
+          "floor": "parkFloor",
+          "soffit": "parkSoffit",
+          "edge": "parkConcrete",
+          "column": "parkColumn"
+        },
+        "columns": {
+          "grid": [8.0, 8.0],
+          "size": 0.6,
+          "round": false,
+          "margin": 2.0
+        },
+        "stalls": {
+          "width": 2.5,
+          "line": 0.1,
+          "color": "#e8e4d8",
+          "lift": 0.01
+        },
+        "rows": [
+          {
+            "a": [23, -102.8],
+            "b": [102, -102.8],
+            "side": -1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [23, -102.8],
+            "b": [102, -102.8],
+            "side": -1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          },
+          {
+            "a": [23, -96.8],
+            "b": [102, -96.8],
+            "side": 1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [23, -96.8],
+            "b": [102, -96.8],
+            "side": 1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          },
+          {
+            "a": [23, -86.8],
+            "b": [102, -86.8],
+            "side": -1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [23, -86.8],
+            "b": [102, -86.8],
+            "side": -1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          },
+          {
+            "a": [23, -81.2],
+            "b": [102, -81.2],
+            "side": 1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [23, -81.2],
+            "b": [102, -81.2],
+            "side": 1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          }
+        ],
+        "ramps": [
+          {
+            "a": [108.5, -80],
+            "b": [108.5, -104],
+            "width": 6,
+            "y": [0, 3.1],
+            "skin": "parkFloor"
+          },
+          {
+            "a": [108.5, -80],
+            "b": [108.5, -104],
+            "width": 6,
+            "y": [3.1, 6.2],
+            "skin": "parkFloor"
+          },
+          {
+            "a": [108.5, -80],
+            "b": [108.5, -104],
+            "width": 6,
+            "y": [6.2, 9.3],
+            "skin": "parkFloor"
+          },
+          {
+            "a": [108.5, -80],
+            "b": [108.5, -104],
+            "width": 6,
+            "y": [9.3, 12.4],
+            "skin": "parkFloor"
+          }
+        ],
+        "entrances": [[1, 5, 14]],
+        "cars": {
+          "size": [4.3, 1.75, 0.8],
+          "cabin": [2.2, 0.62, 0.3, 0.12],
+          "wheel": [0.32, 0.2, 0.8],
+          "clearance": 0.25,
+          "colors": [
+            "#c8c8c6",
+            "#1f2022",
+            "#e9e9e7",
+            "#7a7f85",
+            "#8a1f1f",
+            "#2b3f66",
+            "#b7b09c",
+            "#5a5e62"
+          ],
+          "glass": "#26303a",
+          "tire": "#1a1a1a"
+        }
+      },
+      "source": "planta: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py, vuelta a medir en la comparación (2026-09-25) sobre la azotea clara con su óvalo pintado: x 20…113, z −108…−76 (±1,5 m; la hoja la tenía 30 m al oeste, montada sobre el cuerpo del medio; al norte queda el patio de servicio con autos y tanques azules, a nivel de la calle); PB + 3 niveles (4 filas de vanos verticales angostos), muro crema #B3B3AA y 3 franjas abiertas sobre la entrada de la esquina este: estimado (Google Street View, solo mirado), ago 2024 (capturas 20-22); entrada de autos por el este (OSM parking_entrance 12432213162). Azotea con ~2 autos en el satélite. Alto de los niveles, hileras, rampas y columnas: estimados; las rampas van apiladas y suben todas hacia el norte (cada losa se abre sobre la que le llega)."
+    },
+    {
+      "id": "parqueo-no",
+      "name": "parqueo norte-oeste (con parqueo en la azotea)",
+      "ring": [[-106, -110], [-36, -110], [-36, -72], [-94, -76], [-106, -88]],
+      "base": 0,
+      "height": 12.0,
+      "parapet": [1.1, 0.25],
+      "skin": "parkCream",
+      "roof": {
+        "kind": "flat",
+        "skin": "parkFloor"
+      },
+      "faces": [
+        {
+          "sides": [0],
+          "bands": [],
+          "openings": [
+            {
+              "u": 3.0,
+              "width": 0.45,
+              "y": [1.0, 2.8],
+              "depth": 0.25,
+              "repeat": [52, 1.1],
+              "rows": [4, 3.0]
+            },
+            {
+              "u": 65.0,
+              "width": 8.0,
+              "y": [0, 2.6],
+              "depth": 0.25
+            }
+          ]
+        },
+        {
+          "sides": [3, 4],
+          "bands": [],
+          "openings": [
+            {
+              "u": 2.0,
+              "width": 0.45,
+              "y": [1.0, 2.8],
+              "depth": 0.25,
+              "repeat": [26, 1.1],
+              "rows": [4, 3.0]
+            }
+          ]
+        }
+      ],
+      "physics": "none",
+      "deck": {
+        "levels": [3.0, 6.0, 9.0, 12.0],
+        "slab": 0.3,
+        "guard": [1.1, 0.25],
+        "climb": 0.3,
+        "skins": {
+          "floor": "parkFloor",
+          "soffit": "parkSoffit",
+          "edge": "parkConcrete",
+          "column": "parkColumn"
+        },
+        "columns": {
+          "grid": [8.0, 8.0],
+          "size": 0.6,
+          "round": false,
+          "margin": 2.0
+        },
+        "stalls": {
+          "width": 2.5,
+          "line": 0.1,
+          "color": "#e8e4d8",
+          "lift": 0.01
+        },
+        "rows": [
+          {
+            "a": [-93, -104.8],
+            "b": [-40, -104.8],
+            "side": -1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [-93, -104.8],
+            "b": [-40, -104.8],
+            "side": -1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          },
+          {
+            "a": [-93, -98.3],
+            "b": [-40, -98.3],
+            "side": 1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [-93, -98.3],
+            "b": [-40, -98.3],
+            "side": 1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          },
+          {
+            "a": [-93, -88.3],
+            "b": [-40, -88.3],
+            "side": -1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [-93, -88.3],
+            "b": [-40, -88.3],
+            "side": -1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          },
+          {
+            "a": [-93, -81.8],
+            "b": [-40, -81.8],
+            "side": 1,
+            "depth": 5,
+            "levels": [0, 1, 2, 3],
+            "cars": 0.5
+          },
+          {
+            "a": [-93, -81.8],
+            "b": [-40, -81.8],
+            "side": 1,
+            "depth": 5,
+            "levels": [4],
+            "cars": 0.04
+          }
+        ],
+        "ramps": [
+          {
+            "a": [-99.5, -87],
+            "b": [-99.5, -107.5],
+            "width": 6,
+            "y": [0, 3.0],
+            "skin": "parkFloor"
+          },
+          {
+            "a": [-99.5, -87],
+            "b": [-99.5, -107.5],
+            "width": 6,
+            "y": [3.0, 6.0],
+            "skin": "parkFloor"
+          },
+          {
+            "a": [-99.5, -87],
+            "b": [-99.5, -107.5],
+            "width": 6,
+            "y": [6.0, 9.0],
+            "skin": "parkFloor"
+          },
+          {
+            "a": [-99.5, -87],
+            "b": [-99.5, -107.5],
+            "width": 6,
+            "y": [9.0, 12.0],
+            "skin": "parkFloor"
+          }
+        ],
+        "entrances": [[0, 61, 69]],
+        "cars": {
+          "size": [4.3, 1.75, 0.8],
+          "cabin": [2.2, 0.62, 0.3, 0.12],
+          "wheel": [0.32, 0.2, 0.8],
+          "clearance": 0.25,
+          "colors": [
+            "#c8c8c6",
+            "#1f2022",
+            "#e9e9e7",
+            "#7a7f85",
+            "#8a1f1f",
+            "#2b3f66",
+            "#b7b09c",
+            "#5a5e62"
+          ],
+          "glass": "#26303a",
+          "tire": "#1a1a1a"
+        }
+      },
+      "source": "planta: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py (±1,5 m); azotea de parqueo con óvalo de circulación. Sin foto a pie de calle de este lado: fachada, niveles, hileras y rampas estimados como los del parqueo norte-este (rampas apiladas que suben todas hacia el norte)."
+    },
+    {
+      "id": "podio-torres",
+      "name": "podio de las Torres del Mall (Banco Pichincha, Claro, Produbanco)",
+      "ring": [[37, -9], [42, -3], [45, 2], [50, 7], [57, 12], [65, 14], [73, 15], [81, 14], [87, 11], [94, 6], [98, 6], [110, 21], [110, -9]],
+      "base": 0,
+      "height": 8.6,
+      "parapet": [1.1, 0.2],
+      "skin": "podiumCream",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "bands": [
+            {
+              "y": [0, 4.0],
+              "skin": "shopGlass",
+              "out": -1.2
+            },
+            {
+              "y": [4.0, 4.6],
+              "skin": "podiumCream",
+              "out": 0.2
+            },
+            {
+              "y": [4.6, 7.9],
+              "skin": "podiumGlass",
+              "out": -0.6
+            },
+            {
+              "y": [8.6, 9.7],
+              "skin": "railGlass"
+            }
+          ],
+          "fins": [
+            {
+              "every": 9.0,
+              "phase": 4.5,
+              "width": 0.8,
+              "out": 0,
+              "y": [0, 4.0],
+              "skin": "podiumCream",
+              "round": true
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: plano oficial malldelsol.com.ec/assets/map/map-p2.svg (2025) ajustado al satélite (error 0,5-3 m); alto 8,6 m (pano Mapillary 250114394154457); columnas redondas cada 9 m (contadas en 1295785591028805, 2023); PB con bandas de Banco Pichincha y Claro, nivel 1 de vidrio oscuro con terraza y baranda: estimado (Google Street View, solo mirado), ago 2024."
+    },
+    {
+      "id": "torre-oeste",
+      "name": "torre curva oeste (NOE, Produbanco)",
+      "ring": [[39.5, -18], [63, -18], [63, 15, 0.4], [54.5, 19, 0.5], [46.8, 16, 0.5], [41.6, 9, 0.4], [39, 0]],
+      "on": "podio-torres",
+      "base": 8.6,
+      "height": 37.0,
+      "parapet": [0, 0.3],
+      "skin": "towerSlab",
+      "soffit": "towerSoffit",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3, 4, 5, 6],
+          "bands": [
+            {
+              "y": [8.6, 9.2],
+              "skin": "towerSlab",
+              "out": 1.2,
+              "repeat": [5, 4.5]
+            },
+            {
+              "y": [9.2, 13.1],
+              "skin": "towerGlass",
+              "repeat": [4, 4.5]
+            },
+            {
+              "y": [27.2, 31.1],
+              "skin": "towerGlass",
+              "out": -1.2
+            },
+            {
+              "y": [27.2, 28.3],
+              "skin": "railGlass",
+              "out": 1.1
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "dos torres gemelas en espejo con 7 niveles (PB + 1 del podio + 4 cintas de vidrio entre losas crema curvas en voladizo + un piso alto retranqueado con balcón) y corona ciega hasta ~37 m (estimado (Google Street View, solo mirado), ago y sept 2024; prensa: El Comercio 2010). Planta: la del Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py está corrida por el desplazamiento del relieve; se corrió a Street View (letrero NOE triangulado en (42; 5,5) a ~34-36 m) con el eje de simetría de la curva del podio en x = 69 y un cuerpo medio de ~12 m entre las dos (estimado). Piso a piso 4,5 m estimado para llegar a 37 m."
+    },
+    {
+      "id": "torre-medio",
+      "name": "cuerpo medio de vidrio entre las torres",
+      "ring": [[63, -18], [75, -18], [75, 4], [63, 4]],
+      "on": "podio-torres",
+      "base": 8.6,
+      "height": 26.6,
+      "parapet": [1.0, 0.2],
+      "skin": "towerSlab",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [8.6, 9.2],
+              "skin": "towerSlab",
+              "out": 0.3,
+              "repeat": [4, 4.5]
+            },
+            {
+              "y": [9.2, 13.1],
+              "skin": "towerGlass",
+              "repeat": [4, 4.5]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "dos torres gemelas en espejo con 7 niveles (PB + 1 del podio + 4 cintas de vidrio entre losas crema curvas en voladizo + un piso alto retranqueado con balcón) y corona ciega hasta ~37 m (estimado (Google Street View, solo mirado), ago y sept 2024; prensa: El Comercio 2010). Planta: la del Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py está corrida por el desplazamiento del relieve; se corrió a Street View (letrero NOE triangulado en (42; 5,5) a ~34-36 m) con el eje de simetría de la curva del podio en x = 69 y un cuerpo medio de ~12 m entre las dos (estimado). Piso a piso 4,5 m estimado para llegar a 37 m. El cuerpo medio queda metido detrás de las curvas (su cara sur en z ≈ 4): en Street View se ven las caras interiores de las dos torres abriéndose en V (captura 25, ago 2024) y en el satélite su azotea llega a z ≈ 1-5 (estimado)."
+    },
+    {
+      "id": "torre-este",
+      "name": "torre curva este (gemela en espejo)",
+      "ring": [[98.5, -18], [99, 0, 0.4], [96.4, 9, 0.5], [91.2, 16, 0.5], [83.5, 19, 0.4], [75, 15], [75, -18]],
+      "on": "podio-torres",
+      "base": 8.6,
+      "height": 37.0,
+      "parapet": [0, 0.3],
+      "skin": "towerSlab",
+      "soffit": "towerSoffit",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3, 4, 5, 6],
+          "bands": [
+            {
+              "y": [8.6, 9.2],
+              "skin": "towerSlab",
+              "out": 1.2,
+              "repeat": [5, 4.5]
+            },
+            {
+              "y": [9.2, 13.1],
+              "skin": "towerGlass",
+              "repeat": [4, 4.5]
+            },
+            {
+              "y": [27.2, 31.1],
+              "skin": "towerGlass",
+              "out": -1.2
+            },
+            {
+              "y": [27.2, 28.3],
+              "skin": "railGlass",
+              "out": 1.1
+            }
+          ]
+        }
+      ],
+      "physics": "raised",
+      "source": "dos torres gemelas en espejo con 7 niveles (PB + 1 del podio + 4 cintas de vidrio entre losas crema curvas en voladizo + un piso alto retranqueado con balcón) y corona ciega hasta ~37 m (estimado (Google Street View, solo mirado), ago y sept 2024; prensa: El Comercio 2010). Planta: la del Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py está corrida por el desplazamiento del relieve; se corrió a Street View (letrero NOE triangulado en (42; 5,5) a ~34-36 m) con el eje de simetría de la curva del podio en x = 69 y un cuerpo medio de ~12 m entre las dos (estimado). Piso a piso 4,5 m estimado para llegar a 37 m."
+    },
+    {
+      "id": "megamaxi",
+      "name": "bloque Megamaxi (GASTRO food hall, McDonald's, multicines arriba)",
+      "ring": [[110, 21], [116, 21], [124, 24], [139, 24], [195, 24], [195, 15], [202, 16], [203, 6], [200, 1], [200, -51], [194, -60], [188, -66], [179, -74], [178, -84], [192, -84], [192, -97], [204, -97], [204, -112], [118, -114], [117, -77], [112, -35]],
+      "base": 0,
+      "height": 17.4,
+      "parapet": [1.0, 0.3],
+      "skin": "eastPlates",
+      "roof": {
+        "kind": "flat",
+        "skin": "megaRoof"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2],
+          "bands": [
+            {
+              "y": [0, 4.2],
+              "skin": "shopGlass",
+              "out": -0.3
+            },
+            {
+              "y": [7.3, 10.2],
+              "skin": "railGlass"
+            },
+            {
+              "y": [10.2, 14.8],
+              "skin": "megaCream"
+            },
+            {
+              "y": [14.8, 19.9],
+              "skin": "megaTop"
+            }
+          ]
+        },
+        {
+          "sides": [3],
+          "bands": [
+            {
+              "y": [0, 7.3],
+              "skin": "megaLow"
+            },
+            {
+              "y": [7.3, 14.8],
+              "skin": "megaCream"
+            },
+            {
+              "y": [14.8, 19.9],
+              "skin": "megaTop"
+            }
+          ],
+          "openings": [
+            {
+              "u": 3.7,
+              "width": 3.8,
+              "y": [9.4, 13.2],
+              "depth": 0.3,
+              "skin": "megaGlass"
+            },
+            {
+              "u": 9.8,
+              "width": 5.4,
+              "y": [7.8, 13.0],
+              "depth": 0.3,
+              "skin": "megaGlass"
+            },
+            {
+              "u": 34.15,
+              "width": 32.9,
+              "y": [7.9, 10.5],
+              "depth": 0.3,
+              "skin": "megaGlass"
+            },
+            {
+              "u": 37.15,
+              "width": 19.7,
+              "y": [10.5, 13.2],
+              "depth": 0.3,
+              "skin": "megaGlass"
+            }
+          ]
+        },
+        {
+          "sides": [7, 8],
+          "bands": [
+            {
+              "y": [0, 1.0],
+              "skin": "plinthGrey",
+              "out": 0.05
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: plano oficial malldelsol.com.ec/assets/map/map-p2.svg (2025) ajustado al satélite (error 0,5-3 m); Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py. Frente (pano Mapillary 6564647116880945, 2023-04-15, confirmado en estimado (Google Street View, solo mirado), ago 2024, pano 0U7C5hDrzjStWU3segBLJQ): voladizo a 7,3-7,4 m, banda crema hasta 14,8 m, banda superior gris oliva hasta la cresta a 19,9 m; frente recto en z = 24 de x 139 a la esquina SE en x 195, con la marquesina de punta a punta (su borde se ve en el satélite de x 139 a 196); lo de adentro (dos ventanales, la lengua crema, la cinta de vidrio larga con sus puntas en diagonal, MEGA + rombo + AXI, McDonald's, multicines y los postes cada ~7,5 m) ubicado con las capturas 23 (frontal, ago 2025) y 24 (ago 2024) de Street View, ajustadas a esos dos extremos (comparación 2026-09-25; la escala sale de ~49 px/m en la captura 23 y el rombo queda en x ≈ 155; los panos de Mapillary de 2023, con su GPS corrido a lo largo de la avenida, lo ponían en x ≈ 160). Antes: rombo en x 140 y un escalón del frente a z 21 que el satélite no muestra. Cara este de placas de ~2,15 m, gris oliva, ~18 m (pano OnJ8feu0RXph_JGgoRfLJg). Cuerpo trasero estimado."
+    },
+    {
+      "id": "nucleo-so",
+      "name": "núcleo beige entre el muro curvo oeste y el bloque SW (sobre la entrada oeste)",
+      "ring": [[-134, -31], [-128, -31], [-128, -19], [-134, -19]],
+      "base": 0,
+      "height": 22.5,
+      "parapet": [0.6, 0.25],
+      "skin": "towerBeige",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [3],
+          "bands": [],
+          "openings": [
+            {
+              "u": 6.0,
+              "width": 1.1,
+              "y": [6.5, 9.3],
+              "depth": 0.25,
+              "skin": "shopGlass",
+              "rows": [3, 4.5]
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "torre angosta beige con una columna de ventanas altas entre el final del muro curvo (con H&M y PYCCA) y el bloque SW, detrás de la marquesina de la entrada oeste: estimado (Google Street View, solo mirado), ago 2024 y ago 2025 (capturas 09, 11 y 13); en el satélite (Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09) el hueco x −136…−128, z −30…−18 tiene techo. Planta, alto (~22,5 m, algo menos que el volumen crema) y ventanas estimados en la comparación (2026-09-25)."
+    },
+    {
+      "id": "autotop",
+      "name": "taller AutoTop (servicios automotrices) del lado norte, delante del parqueo norte-este",
+      "ring": [[28, -135], [64.5, -135], [64.5, -122], [28, -122]],
+      "base": 0,
+      "height": 6.6,
+      "parapet": [0, 0.3],
+      "skin": "autotopGrey",
+      "roof": {
+        "kind": "flat",
+        "skin": "roofGrey"
+      },
+      "faces": [
+        {
+          "sides": [3, 0],
+          "bands": [
+            {
+              "y": [4.2, 6.6],
+              "skin": "coral",
+              "out": 0.6
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "planta: techo claro de x 27,5…64,4, z −135…−122 con el patio de servicio al sur, Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py (comparación 2026-09-25); edificio bajo de muro gris con banda de fachada coral desteñida y letras blancas, que reemplazó al Havoline de 2016: estimado (Google Street View, solo mirado), ago 2024 (capturas 20-22). Alto (~6,6 m) y banda (4,2-6,6 m) estimados."
+    },
+    {
+      "id": "garita-upc",
+      "name": "garita policial (UPC móvil) junto a la entrada oeste",
+      "ring": [[-152, -33], [-146, -33], [-146, -30.5], [-152, -30.5]],
+      "base": 0,
+      "height": 2.9,
+      "parapet": [0, 0.2],
+      "skin": "garitaWhite",
+      "roof": {
+        "kind": "flat",
+        "skin": "garitaWhite"
+      },
+      "faces": [
+        {
+          "sides": [0, 1, 2, 3],
+          "bands": [
+            {
+              "y": [1.0, 2.1],
+              "skin": "shopGlass",
+              "out": -0.05
+            }
+          ]
+        }
+      ],
+      "physics": "block",
+      "source": "módulo blanco tipo remolque con ventanas junto a la parada oeste (Mapillary 262108886384197, 2023; estimado (Google Street View, solo mirado), ago 2025); ubicación y medidas estimadas."
+    }
+  ],
+  "canopies": [
+    {
+      "id": "marquesina-portal",
+      "on": "portal",
+      "line": [[-17.5, -3.1], [-6.5, -3.1]],
+      "depth": 6.0,
+      "height": 8.25,
+      "thickness": 0.35,
+      "drop": 0,
+      "fascia": 0.55,
+      "skins": {
+        "top": "canopyCream",
+        "soffit": "canopySoffit",
+        "fascia": "canopyCream"
+      },
+      "posts": {
+        "at": [[1.8, 3.0]],
+        "size": [2.6, 1.3],
+        "round": false,
+        "skin": "pillarGrey",
+        "top": 12.5
+      },
+      "ties": {
+        "at": [[1.8, 3.0, 12.2, 10.0, 5.5], [1.8, 3.0, 12.2, 10.0, 0.8]],
+        "radius": 0.05,
+        "skin": "steel"
+      },
+      "lamps": {
+        "every": 3.5,
+        "size": [0.5, 0.08],
+        "skin": "soffitLamp",
+        "light": {"every": 2, "power": 0.5, "led": true}
+      },
+      "source": "estimado (Google Street View, solo mirado), sept 2024 (pano h_5XhxUllhQQCgaAXM2vzA): losa plana gris-crema a ~8-8,5 m sobre x ≈ −16…−5, colgada de un pilar gris cuadrado de ~2,6 m y ~12-13 m en x ≈ −14 con 2 tensores diagonales (la hoja la ponía a 5,5 m y de x −35 a −10: quedan los dos). Vuelo ~6 m de Commons 2024-02-26. En la comparación (2026-09-25) contra la captura 02 (sept 2024) la losa va de x ≈ −17,5 a −6,5 y el pilar queda ~1,2 m a la izquierda del arco."
+    },
+    {
+      "id": "marquesina-megamaxi",
+      "on": "megamaxi",
+      "line": [[139, 24], [195, 24]],
+      "depth": 3.5,
+      "height": 7.3,
+      "thickness": 0.4,
+      "drop": 0,
+      "fascia": 0.7,
+      "skins": {
+        "top": "roofGrey",
+        "soffit": "canopySoffit",
+        "fascia": "megaCream"
+      },
+      "posts": {
+        "at": [[6.5, 3.3], [14.1, 3.3], [21.6, 3.3], [28.9, 3.3], [36.3, 3.3], [43.6, 3.3], [52.0, 3.3]],
+        "size": [0.3],
+        "round": true,
+        "skin": "postGrey"
+      },
+      "lamps": {
+        "every": 5.0,
+        "size": [0.5, 0.08],
+        "skin": "soffitLamp",
+        "light": {"every": 2, "power": 0.5, "led": true}
+      },
+      "source": "voladizo de la banda crema a 7,3 m (pano Mapillary 6564647116880945; Street View ago 2024: 7,4 m) a todo lo largo del frente, de x 139 a 195 (su borde claro en z ≈ 27,5 en el Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09: vuelo ~3,5 m); postes redondos delgados cada ~7,5 m ubicados en las capturas 23 y 24 de Street View (estimado (Google Street View, solo mirado), ago 2024 y ago 2025; comparación 2026-09-25)."
+    },
+    {
+      "id": "marquesina-oeste",
+      "line": [[-134.0, -36.0], [-131.0, -19.0]],
+      "depth": 9.0,
+      "height": 4.5,
+      "thickness": 0.4,
+      "drop": 0,
+      "fascia": 0.9,
+      "skins": {
+        "top": "greenRoof",
+        "soffit": "canopySoffit",
+        "fascia": "westFascia"
+      },
+      "posts": {
+        "at": [[1.0, 8.6], [16.0, 8.6]],
+        "size": [0.5, 0.5],
+        "round": false,
+        "skin": "pillarGrey"
+      },
+      "lamps": {
+        "every": 4.0,
+        "size": [0.5, 0.08],
+        "skin": "soffitLamp",
+        "light": {"every": 2, "power": 0.5, "led": true}
+      },
+      "source": "marquesina gris plana de la entrada oeste (Mapillary 262108886384197, 2023) con cubierta verde y letreros MALL DEL SOL (estimado (Google Street View, solo mirado), ago 2025, captura 13); lugar, alto (4,5 m) y vuelo estimados."
+    },
+    {
+      "id": "pergola-portela",
+      "on": "sw-caja",
+      "line": [[-102, -5.5], [-136, -5.5]],
+      "depth": -21.5,
+      "height": 24.2,
+      "thickness": 0.2,
+      "drop": 0,
+      "fascia": 0.5,
+      "skins": {
+        "top": "clearRoof",
+        "soffit": "clearRoof",
+        "fascia": "steelWhite"
+      },
+      "posts": {
+        "at": [[6, 11], [17, 11], [28, 11]],
+        "size": [0.45],
+        "round": true,
+        "skin": "steelWhite",
+        "foot": 16.7,
+        "y": {
+          "spread": 4.0,
+          "rise": 3.5,
+          "radius": 0.14
+        }
+      },
+      "source": "cubierta plana de paneles translúcidos sobre retícula de acero blanco con 3 vigas en columnas en Y, a ~24-25 m sobre la terraza de Portela (16,7 m), volada hacia el SO (estimado (Google Street View, solo mirado), sept 2024, capturas 08-09); planta estimada."
+    }
+  ],
+  "signs": [
+    {
+      "text": "AutoTop",
+      "size": [6.5, 1.7],
+      "background": "#C8958A",
+      "color": "#F2F2F0",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "italic": true,
+      "depth": 0,
+      "on": "autotop",
+      "side": 0,
+      "u": 31.0,
+      "y": 5.4,
+      "out": 0.65,
+      "res": 0.5,
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (capturas 20 y 22): letras blancas en la banda coral, cerca del extremo este de la cara norte (solo el nombre, sin el logo ni el lema)."
+    },
+    {
+      "text": "MALL DEL SOL",
+      "size": [6, 1.1],
+      "background": "#161920",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.15,
+      "on": "portal",
+      "side": 2,
+      "u": 11.0,
+      "y": 4.45,
+      "out": 0.6,
+      "res": 1,
+      "source": "Commons 2024-02-26; estimado (Google Street View, solo mirado), sept 2024: letras blancas sobre banda oscura centradas bajo el arco (x ≈ −8), ~6 m, de 3,9 a 5,0 m."
+    },
+    {
+      "text": "H&M",
+      "size": [1.8, 1.1],
+      "background": "#D6D0C2",
+      "color": "#AF4C51",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "italic": true,
+      "depth": 0,
+      "on": "hm",
+      "side": 2,
+      "u": 32.0,
+      "y": 11.0,
+      "out": 0.05,
+      "res": 1,
+      "source": "estimado (Google Street View, solo mirado), sept 2024: letras rojas ~1,1 × 1,7 m a ~11 m sobre la banda crema (#AF4C51 muestreado nublado)."
+    },
+    {
+      "text": "H&M",
+      "size": [4.2, 3.4],
+      "background": "#DEDBD3",
+      "color": "#B3454A",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "italic": true,
+      "depth": 0,
+      "on": "ala-oeste",
+      "side": 5,
+      "u": 8.77,
+      "y": 17.0,
+      "out": 0.05,
+      "res": 0.5,
+      "source": "estimado (Google Street View, solo mirado), ago 2024 y ago 2025: a la izquierda de PYCCA, a la misma altura (#B3454A). Medido en la captura 14 contra PYCCA (9 m): ~3,8 m de ancho y letras ~1,45 veces más altas que las de PYCCA (comparación 2026-09-25)."
+    },
+    {
+      "text": "PYCCA",
+      "size": [9, 2.6],
+      "background": "#DEDBD3",
+      "color": "#0E1943",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 900,
+      "depth": 0,
+      "on": "ala-oeste",
+      "side": 6,
+      "u": 7.96,
+      "y": 17.0,
+      "out": 0.05,
+      "res": 0.5,
+      "source": "pano Mapillary 614316853665338 (2023-04-15): letras a ~17 m, 9 × 2,6 m; color #0E1943 de Street View ago 2024 (el acento rojo de la Y es del logo: no se copia)."
+    },
+    {
+      "text": "SUKASA",
+      "size": [10, 2.5],
+      "background": "#555252",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 400,
+      "depth": 0.3,
+      "on": "ala-oeste",
+      "side": 0,
+      "u": 6.0,
+      "y": 12.5,
+      "out": 0.3,
+      "res": 0.5,
+      "source": "Mapillary 1012372906594772 (2023): 10 × 2,5 m a ~12 m; caja gris oscura #555252 en el extremo norte del muro curvo (estimado (Google Street View, solo mirado), ago 2024)."
+    },
+    {
+      "text": "KYWI",
+      "size": [6, 3],
+      "background": "#1D6FB8",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.4,
+      "on": "caja-no",
+      "side": 0,
+      "u": 7.0,
+      "y": 10.0,
+      "out": 0.4,
+      "res": 0.5,
+      "source": "Mapillary 1012372906594772 (2023): letrero azul de caja, 6 × 3 m a ~11 m, en el volumen bajo detrás de SUKASA (estimado (Google Street View, solo mirado), ago 2024)."
+    },
+    {
+      "text": "marathon",
+      "size": [11, 2.2],
+      "background": "#8E7654",
+      "color": "#FFFFFF",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "sw-caja",
+      "side": 5,
+      "u": 33.0,
+      "y": 14.4,
+      "out": 0.05,
+      "res": 0.4,
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (captura 06): letras blancas en minúscula en la banda alta de la caja camel; tamaño y lugar estimados."
+    },
+    {
+      "text": "ETAFASHION",
+      "size": [9, 1.3],
+      "background": "#8E7654",
+      "color": "#3A3A3A",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "sw-caja",
+      "side": 6,
+      "u": 10.0,
+      "y": 14.6,
+      "out": 0.05,
+      "res": 0.6,
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (captura 09): letras gris oscuro en la banda camel sobre las vitrinas de la cara oeste (ETAFASHION se mudó aquí en 2023)."
+    },
+    {
+      "text": "PORTELA",
+      "size": [6, 1.3],
+      "background": "#CFC8BA",
+      "color": "#1C3F71",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "sw-crema",
+      "side": 2,
+      "u": 6.0,
+      "y": 22.8,
+      "out": 0.05,
+      "res": 0.6,
+      "source": "estimado (Google Street View, solo mirado), ago 2024 (capturas 09 y 10): letras azul rey #1C3F71 arriba de la cara sur, junto a la esquina redondeada."
+    },
+    {
+      "text": "NOE",
+      "size": [4.5, 2.2],
+      "background": "#BCBBB6",
+      "color": "#2B3140",
+      "font": "\"Century Gothic\", Futura, sans-serif",
+      "weight": 400,
+      "depth": 0,
+      "on": "torre-oeste",
+      "side": 5,
+      "u": 3.6,
+      "y": 34.2,
+      "out": 0.05,
+      "res": 0.6,
+      "source": "letrero de la corona triangulado en (42; 5,5) a ~34-36 m (estimado (Google Street View, solo mirado), ago y sept 2024); tamaño de Mapillary 789730159530973 (2023). Solo el nombre (sin el ojo del logo)."
+    },
+    {
+      "text": "Produbanco",
+      "size": [6, 1.5],
+      "background": "#BCBBB6",
+      "color": "#0B6B3A",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "italic": true,
+      "depth": 0,
+      "on": "torre-oeste",
+      "side": 4,
+      "u": 3.5,
+      "y": 32.2,
+      "out": 0.05,
+      "res": 0.6,
+      "source": "Mapillary 789730159530973 (2023) y estimado (Google Street View, solo mirado), sept 2024 (captura 01): en la corona, abajo a la izquierda de NOE; sin la estrella del logo."
+    },
+    {
+      "text": "BANCO PICHINCHA",
+      "size": [6, 0.6],
+      "background": "#F5C400",
+      "color": "#1A1A1A",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.2,
+      "on": "podio-torres",
+      "side": 4,
+      "u": 4.0,
+      "y": 4.3,
+      "out": 0.25,
+      "res": 1,
+      "source": "Mapillary 1295785591028805 (2023) y estimado (Google Street View, solo mirado), ago 2024 (captura 25): banda amarilla en la PB del podio."
+    },
+    {
+      "text": "MEGA",
+      "size": [10.8, 2.0],
+      "background": "#6A6A60",
+      "color": "#9C2A3A",
+      "font": "Georgia, \"Times New Roman\", serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "megamaxi",
+      "side": 3,
+      "u": 8.7,
+      "y": 17.0,
+      "out": 0.2,
+      "stretch": 1.7,
+      "res": 0.35,
+      "source": "fondo #6A6A60: el tono con que se ve la banda gris oliva (#75756A) con su dibujo de placas, para que las letras sueltas no dejen un recuadro. Letras rojo carmesí anchas (#9C5B60 muestreado nublado en Street View ago 2024, corregido a ojo) antes del rombo: x 142,3…153,1 y centro a ~17 m, de la captura 23 de Street View (estimado (Google Street View, solo mirado), ago 2025) ajustada a los extremos del frente en el satélite (comparación 2026-09-25). El nombre se lee MEGA + la M del rombo + AXI."
+    },
+    {
+      "text": "M",
+      "size": [2.6, 1.5],
+      "background": "#A3243A",
+      "color": "#FFFFFF",
+      "font": "Georgia, \"Times New Roman\", serif",
+      "weight": 700,
+      "fill": 0.95,
+      "plates": [{"shape": "diamond", "size": [5.5, 6.0], "offset": [0, 0.5], "out": 0.45, "color": "#A3243A"}],
+      "depth": 0,
+      "on": "megamaxi",
+      "side": 3,
+      "u": 15.8,
+      "y": 17.0,
+      "out": 0.6,
+      "stretch": 1.3,
+      "res": 0.5,
+      "source": "la M blanca del rombo rojo que asoma ~0,7 m sobre el remate, centrado en x ≈ 154,8 y de ~5,5 m de ancho (capturas 23 y 24 de Street View, estimado (Google Street View, solo mirado), ago 2024 y ago 2025; comparación 2026-09-25): rombo liso y la letra, sin copiar el logo. El rombo baja hasta el tope de la banda crema y asoma sobre el remate; la M va apenas bajo su centro."
+    },
+    {
+      "text": "AXI",
+      "size": [6.6, 2.0],
+      "background": "#6A6A60",
+      "color": "#9C2A3A",
+      "font": "Georgia, \"Times New Roman\", serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "megamaxi",
+      "side": 3,
+      "u": 20.8,
+      "y": 17.0,
+      "out": 0.2,
+      "stretch": 1.7,
+      "res": 0.35,
+      "source": "ídem MEGA: x 156,5…163,1, después del rombo."
+    },
+    {
+      "text": "McDonald's",
+      "size": [4.8, 0.9],
+      "background": "#6A6A60",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "megamaxi",
+      "side": 3,
+      "u": 33.9,
+      "y": 15.3,
+      "out": 0.05,
+      "res": 0.6,
+      "source": "Mapillary 2182765175235685 (2023); estimado (Google Street View, solo mirado), ago 2024: letras blancas a ~15,5 m (los arcos amarillos son logo: solo el nombre). Solo el texto, x 170,5…175,3 a ~15,3 m, de las capturas 23 y 24 ajustadas a los extremos del frente (comparación 2026-09-25)."
+    },
+    {
+      "text": "multicines",
+      "size": [8.7, 1.7],
+      "background": "#6A6A60",
+      "color": "#FFFFFF",
+      "font": "\"Trebuchet MS\", Arial, sans-serif",
+      "weight": 700,
+      "depth": 0,
+      "on": "megamaxi",
+      "side": 3,
+      "u": 49.3,
+      "y": 16.0,
+      "out": 0.05,
+      "res": 0.5,
+      "source": "el exterior ya dice multicines desde ago 2024 (estimado (Google Street View, solo mirado), captura 24; Commons File:Multicines Mall del Sol.jpg, 2024-02-26); letras blancas en minúscula, sin la M multicolor del logo. Texto de x ~184 a 192,7 a ~16 m, junto a la esquina SE, de la captura 24 ajustada a los extremos del frente (comparación 2026-09-25)."
+    },
+    {
+      "text": "MALL DEL SOL",
+      "size": [6, 1.1],
+      "background": "#161920",
+      "color": "#FFFFFF",
+      "font": "Arial, Helvetica, sans-serif",
+      "weight": 700,
+      "depth": 0.15,
+      "at": [-141.36, -25.94],
+      "angle": 170.0,
+      "y": 4.45,
+      "out": 0.05,
+      "res": 1,
+      "source": "estimado (Google Street View, solo mirado), ago 2025 (captura 13): la marquesina de la entrada oeste lleva letreros MALL DEL SOL; lugar estimado."
+    }
+  ],
+  "skylights": [
+    {
+      "on": "cuerpo-central",
+      "kind": "vault",
+      "a": [-103, -48.5],
+      "b": [-14.6, -48.5],
+      "width": 7,
+      "rise": 2.2,
+      "y": 0,
+      "curb": [0.6, 0.5],
+      "ribs": [3.3, 0.18],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "lucernario central (bóveda de vidrio verde azulado de ~7 m de ancho, eje en z −48,5), tramo oeste: de la cúpula del cruce (x −14,6) a x −103, donde dobla hacia el noroeste: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py, medido en la comparación (2026-09-25; la hoja decía z −58…−45 y 13 m de ancho) (±1 m); flecha y costillas estimadas."
+    },
+    {
+      "on": "cuerpo-central",
+      "kind": "vault",
+      "a": [-128, -72],
+      "b": [-103, -48.5],
+      "width": 7,
+      "rise": 2.2,
+      "y": 0,
+      "curb": [0.6, 0.5],
+      "ribs": [3.3, 0.18],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "tramo diagonal del lucernario: de (−103; −48,5) a (−128; −72), hacia la esquina del ala oeste: ídem."
+    },
+    {
+      "on": "cuerpo-central",
+      "kind": "vault",
+      "a": [4.2, -48.5],
+      "b": [110, -48.5],
+      "width": 7,
+      "rise": 2.2,
+      "y": 0,
+      "curb": [0.6, 0.5],
+      "ribs": [3.3, 0.18],
+      "skins": {
+        "glass": "skyGlass",
+        "frame": "skyFrame"
+      },
+      "source": "tramo este del lucernario: de la cúpula del cruce (x 4,2) a x 110: ídem."
+    },
+    {
+      "on": "megamaxi",
+      "kind": "flat",
+      "a": [150, -54],
+      "b": [150, -46],
+      "width": 6,
+      "rise": 0.4,
+      "y": 0,
+      "curb": [0.3, 0.2],
+      "ribs": [0, 0],
+      "grid": [6, 10, 2, 10],
+      "skins": {
+        "glass": "flatSky",
+        "frame": "skyFrame"
+      },
+      "source": "retícula de lucernarios claros en x 140…160, z −55…+5 (cuadros de ~6 × 10 m): Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py."
+    }
+  ],
+  "domes": [
+    {
+      "on": "cuerpo-central",
+      "at": [-5, -46.5],
+      "radius": 7.8,
+      "rise": 5.0,
+      "drum": 1.0,
+      "y": 0,
+      "from": 0,
+      "arc": 360,
+      "ribs": 16,
+      "rib": 0.3,
+      "skins": {
+        "shell": "domeGlass",
+        "drum": "skyFrame",
+        "frame": "skyFrame"
+      },
+      "source": "cúpula de vidrio oscuro en el cruce del lucernario, centro (−5; −46,5) y ~15,6 m de diámetro, dentro de un marco cuadrado de x −14,6…4,2: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py, medida en la comparación (2026-09-25); alto y costillas estimados (no asoma en ninguna foto de la calle)."
+    },
+    {
+      "on": "cuerpo-central",
+      "at": [-12, -68],
+      "radius": 4,
+      "rise": 2.6,
+      "drum": 1.0,
+      "y": 0,
+      "from": 0,
+      "arc": 360,
+      "ribs": 12,
+      "rib": 0.25,
+      "skins": {
+        "shell": "skyGlass",
+        "drum": "skyFrame",
+        "frame": "skyFrame"
+      },
+      "source": "dos cúpulas o lucernarios redondos de ~8 m de diámetro: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py (estimado)."
+    },
+    {
+      "on": "cuerpo-central",
+      "at": [2, -68],
+      "radius": 4,
+      "rise": 2.6,
+      "drum": 1.0,
+      "y": 0,
+      "from": 0,
+      "arc": 360,
+      "ribs": 12,
+      "rib": 0.25,
+      "skins": {
+        "shell": "skyGlass",
+        "drum": "skyFrame",
+        "frame": "skyFrame"
+      },
+      "source": "ídem."
+    },
+    {
+      "on": "megamaxi",
+      "at": [163, -27.5],
+      "radius": 27.5,
+      "rise": 3.0,
+      "drum": 0.5,
+      "y": 0,
+      "from": -90,
+      "arc": 180,
+      "ribs": 0,
+      "rib": 0,
+      "skins": {
+        "shell": "halfVault",
+        "drum": "halfVault",
+        "frame": "skyFrame"
+      },
+      "source": "media bóveda oscura (semicírculo de r ≈ 27 m, cuerda en x 163 entre z −55 y 0): Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py; alto estimado y bajo: no asoma en ninguna foto de la calle."
+    }
+  ],
+  "equipment": [
+    {
+      "on": "cuerpo-central",
+      "area": [[-100, -43], [-17, -43], [-17, -33], [-100, -33]],
+      "margin": 0,
+      "count": 15,
+      "angle": 0,
+      "source": "equipos de aire en filas: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py; cantidad y tamaños estimados.",
+      "size": [[1.6, 1.2, 1.0], [3.2, 2.2, 1.8]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.4,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "cuerpo-central",
+      "area": [[7, -43], [100, -43], [100, -33], [7, -33]],
+      "margin": 0,
+      "count": 15,
+      "angle": 0,
+      "source": "ídem (las filas se cortan en la cúpula del cruce).",
+      "size": [[1.6, 1.2, 1.0], [3.2, 2.2, 1.8]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.4,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "cuerpo-central",
+      "area": [[-90, -71], [-20, -71], [-20, -60], [-90, -60]],
+      "margin": 0,
+      "count": 16,
+      "angle": 0,
+      "source": "ídem.",
+      "size": [[1.6, 1.2, 1.0], [3.2, 2.2, 1.8]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.4,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "cuerpo-central",
+      "area": [[10, -71], [100, -71], [100, -60], [10, -60]],
+      "margin": 0,
+      "count": 20,
+      "angle": 0,
+      "source": "ídem.",
+      "size": [[1.6, 1.2, 1.0], [3.2, 2.2, 1.8]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.4,
+        "skin": "fanDark"
+      }
+    },
+    {
+      "on": "megamaxi",
+      "area": [[191, -48], [198, -48], [198, -3], [191, -3]],
+      "margin": 0,
+      "count": 10,
+      "angle": 0,
+      "source": "equipos en el borde este: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py; Mapillary 2182765175235685 (2023).",
+      "size": [[1.6, 1.2, 1.0], [3.2, 2.2, 1.8]],
+      "skin": "unitGrey",
+      "fan": {
+        "radius": 0.4,
+        "skin": "fanDark"
+      }
+    }
+  ],
+  "solar": [],
+  "masts": [
+    {
+      "on": "portal",
+      "y": 19.0,
+      "at": [[-15.5, -8, 3.0], [-10.0, -8, 3.0], [-4.5, -8, 3.0], [-7.0, -11, 5.0]],
+      "radius": 0.1,
+      "heads": {
+        "count": 3,
+        "size": [0.3, 1.3, 0.12],
+        "skin": "antenna"
+      },
+      "skin": "steel",
+      "source": "4 mástiles de antenas sobre el bloque del portal: tres de ~22 m y uno central de ~24 m (estimado (Google Street View, solo mirado), sept 2024; la hoja contaba 3). Lugar a ojo en la captura 01."
+    }
+  ],
+  "bridges": [
+    {
+      "id": "puente-orrantia",
+      "line": [[113.5, 25.5], [113.5, 75]],
+      "width": 4.5,
+      "deck": [5.6, 5.6],
+      "slab": 0.5,
+      "height": 3.0,
+      "roof": 0.4,
+      "truss": {
+        "panel": 2.5,
+        "size": 0.15,
+        "kind": "warren"
+      },
+      "rail": 1.1,
+      "gaps": [[1, 0.75, 2.85], [1, 46.45, 48.55]],
+      "banner": {
+        "y": [0.3, 2.4],
+        "span": [4, 46],
+        "skin": "banner"
+      },
+      "piers": {
+        "at": [1.0, 24.5, 48.5],
+        "radius": 0.35,
+        "skin": "pier"
+      },
+      "skins": {
+        "floor": "bridgeFloor",
+        "soffit": "bridgeSoffit",
+        "roof": "bridgeRoof",
+        "truss": "bridgeTruss"
+      },
+      "source": "franja blanca de 4-5 m × 50 m sobre la Orrantia en x 111…116, z 25…75: Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py (±1 m); gálibo ~5,6 m y tope ~9,5 m, armadura de acero blanca con techo, columnas redondas de hormigón y lona publicitaria: estimado (Google Street View, solo mirado), ago 2024 (pano DsL0z57mLh7DWpsUUxjbHw; cruza en x ≈ 119: quedan los dos). Pilas estimadas."
+    },
+    {
+      "id": "puente-este",
+      "line": [[202.8, 11], [240, 11]],
+      "width": 4.0,
+      "deck": [6.0, 6.0],
+      "slab": 0.5,
+      "height": 3.2,
+      "roof": 0.3,
+      "truss": {
+        "panel": 2.5,
+        "size": 0.15,
+        "kind": "warren"
+      },
+      "rail": 1.1,
+      "piers": {
+        "at": [34.0],
+        "radius": 0.45,
+        "skin": "pierWhite"
+      },
+      "skins": {
+        "floor": "bridgeFloor",
+        "soffit": "bridgeSoffit",
+        "roof": "bridgeRoof",
+        "truss": "bridgeTruss"
+      },
+      "source": "puente cubierto de armadura blanca tipo Warren entre la esquina SE de Megamaxi y el podio del Tryp/Mundo Sonesta, tablero a ~6 m, sobre una columna redonda blanca en la vereda este: estimado (Google Street View, solo mirado), ago 2024 y ago 2025; z ≈ 15-27 según Street View (la hoja: z 0…5; quedan los dos): va en z = 11, donde la cara este del bloque (x ≈ 203, z 6…16) lo recibe. Planta estimada ±5 m."
+    }
+  ],
+  "stairs": [
+    {
+      "id": "escalera-puente-norte",
+      "a": [100.3, 27.3],
+      "b": [111.25, 27.3],
+      "width": 1.8,
+      "rise": 6.1,
+      "riser": 0.175,
+      "stringer": [0.35, 0.12],
+      "rail": 1.0,
+      "posts": 1.5,
+      "skins": {
+        "steps": "stairStep",
+        "stringer": "stairSteel",
+        "rail": "stairSteel"
+      },
+      "source": "escalera metálica del lado del mall que baja hacia el oeste pegada a la fachada del GASTRO food hall (estimado (Google Street View, solo mirado), ago 2024, captura 27); lugar y medidas estimados. Arriba llega al costado oeste del puente (x = 111,25), por el hueco de su baranda (gaps del puente)."
+    },
+    {
+      "id": "escalera-puente-sur",
+      "a": [100.3, 73.0],
+      "b": [111.25, 73.0],
+      "width": 1.8,
+      "rise": 6.1,
+      "riser": 0.175,
+      "stringer": [0.35, 0.12],
+      "rail": 1.0,
+      "posts": 1.5,
+      "skins": {
+        "steps": "stairStep",
+        "stringer": "stairSteel",
+        "rail": "stairSteel"
+      },
+      "source": "estimado: no hay foto del extremo sur del puente; se repite la del lado del mall (llega al costado oeste del puente, x = 111,25, por el hueco de su baranda)."
+    }
+  ],
+  "lots": [],
+  "retiros": {},
+  "site": {
+    "pavedStyles": {
+      "plaza": {
+        "height": 0.15,
+        "curb": 0.2,
+        "color": "#B9B2A6",
+        "curbColor": "#CFC9BC",
+        "pattern": "slabs",
+        "scale": [6, 5]
+      }
+    },
+    "paved": [
+      {
+        "ring": [[-27, -4], [-17.5, -4], [-17.5, -3], [41, -3], [41, 20.6], [-27, 20.6]],
+        "curbs": [4],
+        "style": "plaza",
+        "source": "plaza del portal hasta la reja (z ≈ 20-22): Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py; baldosas grises de ~0,6 m y colores a ojo (Commons 2024-02-26; Street View sept 2024)."
+      }
+    ],
+    "fenceStyles": {
+      "crema": {
+        "height": 1.2,
+        "base": [0.3, 0.25],
+        "posts": [2.5, 0.12],
+        "skins": {
+          "bars": "fenceCream",
+          "base": "fenceBase",
+          "post": "fencePost"
+        }
+      }
+    },
+    "fences": [
+      {
+        "line": [[-26, 20.6], [40, 20.6]],
+        "style": "crema",
+        "gaps": [[22, 28]],
+        "source": "reja de barrotes ~1,2 m en el perímetro de la plaza del portal (panos 1269/1959, 2023; Street View sept 2024: crema); la abertura es estimada."
+      },
+      {
+        "line": [[-131, 16], [-28, 16]],
+        "style": "crema",
+        "gaps": [[6, 22]],
+        "source": "reja crema a lo largo del Parqueo Express (Street View ago 2024, captura 06), con la entrada de autos en x −125…−109 (estimado)."
+      },
+      {
+        "line": [[207, 5], [207, -112]],
+        "style": "crema",
+        "gaps": [],
+        "source": "reja crema de barrotes planos sobre muro bajo gris en la cara este (Mapillary 771347160251290, 2016; Street View ago 2024); lugar estimado."
+      },
+      {
+        "line": [[-200.4, -93.9], [-195.3, -81.7], [-188.8, -68.7], [-181.2, -58.9], [-172.5, -49.2], [-161.5, -40.3], [-151.9, -35.0]],
+        "style": "crema",
+        "gaps": [],
+        "source": "reja de barrotes corrida junto al bordillo de la JTM frente al muro curvo, hasta la plaza de la entrada oeste (Mapillary 1237165193839464 y 262108886384197, 2023-04-15; Street View ago 2024, captura 11); a ~8 m del muro, a lo largo de su curva: estimado en la comparación (2026-09-25)."
+      }
+    ],
+    "bollards": [
+      {
+        "line": [[38, 25.5], [98, 25.5]],
+        "every": 2.5,
+        "radius": 0.1,
+        "height": 0.9,
+        "stripe": [0.6, 0.75],
+        "skins": {
+          "body": "bollardBlack",
+          "stripe": "bollardYellow"
+        },
+        "source": "bolardos negros con franja amarilla cada ~2,5 m en el borde de la vereda de la Orrantia (Mapillary 1295785591028805, 2023); alto estimado."
+      }
+    ],
+    "planters": [
+      {
+        "ring": [[42, 21.5], [108, 21.5], [108, 23.5], [42, 23.5]],
+        "height": 0.5,
+        "wall": 0.2,
+        "drop": 0.2,
+        "skins": {
+          "wall": "planterWall",
+          "soil": "hedge"
+        },
+        "source": "jardineras bajas con ixora roja y seto en la vereda de la Orrantia (Commons 2024 y Mapillary 2023); medidas estimadas."
+      },
+      {
+        "ring": [[-193.5, -96.8], [-188.5, -84.8], [-182.4, -72.7], [-175.4, -63.7], [-167.3, -54.6], [-157.3, -46.6], [-148.2, -41.6], [-150.2, -38.1], [-159.5, -43.2], [-170.1, -51.7], [-178.5, -61.1], [-185.8, -70.6], [-192.1, -83.1], [-197.2, -95.3]],
+        "height": 0.9,
+        "wall": 0.25,
+        "drop": 0.25,
+        "skins": {
+          "wall": "planterWall",
+          "soil": "hedge"
+        },
+        "source": "jardinera alta corrida con seto, flores rojas y palmeras frente a las vitrinas del muro curvo oeste, de ~4 m de ancho a 0,5 m del muro, hasta la plaza de la entrada oeste (Mapillary 1237165193839464, 2023-04-15; Street View ago 2024, captura 11); ancho y alto (~0,9 m) estimados en la comparación (2026-09-25)."
+      }
+    ],
+    "shelters": [
+      {
+        "at": [-155.5, -39.1],
+        "angle": 119,
+        "size": [9, 2.4],
+        "height": 2.7,
+        "thickness": 0.15,
+        "rise": 0,
+        "every": 3,
+        "post": 0.12,
+        "back": 0,
+        "bench": [0.45, 0.4, 3],
+        "skins": {
+          "roof": "shelterRoof",
+          "soffit": "shelterSoffit",
+          "post": "shelterPost",
+          "back": "railGlass",
+          "bench": "bench"
+        },
+        "source": "paradas de bus de la JTM con techo plano oscuro sobre postes (Mapillary 262108886384197, 2023; Street View ago 2024 y ago 2025); dos, una al final de la jardinera del muro curvo, antes de la entrada, y otra pasando la garita policial (Street View ago 2024, captura 11, y ago 2025, captura 13); lugar estimado en la comparación (2026-09-25; antes en x −166…−160, z −3…8, frente al bloque SW)."
+      },
+      {
+        "at": [-148, -23],
+        "angle": 175,
+        "size": [9, 2.4],
+        "height": 2.7,
+        "thickness": 0.15,
+        "rise": 0,
+        "every": 3,
+        "post": 0.12,
+        "back": 0,
+        "bench": [0.45, 0.4, 3],
+        "skins": {
+          "roof": "shelterRoof",
+          "soffit": "shelterSoffit",
+          "post": "shelterPost",
+          "back": "railGlass",
+          "bench": "bench"
+        },
+        "source": "ídem."
+      }
+    ],
+    "fountains": [
+      {
+        "at": [1, 12],
+        "radius": 7,
+        "wall": [0.5, 0.35],
+        "water": 0.15,
+        "jets": {
+          "count": 12,
+          "ring": 4.5,
+          "height": 2.2,
+          "radius": 0.12
+        },
+        "skins": {
+          "wall": "fountainWall",
+          "water": "water",
+          "jet": "jet"
+        },
+        "source": "fuente circular con chorros de r ≈ 7 m en (1, 12): Esri World Imagery, GeoEye-1 (Vantor) 2025-05-09, 0,46 m, enderezado con satellite.py; panos 1269/1959 (2023). Chorros estimados."
+      }
+    ],
+    "billboards": [],
+    "lampModels": {
+      "reflector": {
+        "pole": {
+          "height": 14,
+          "radius": [0.16, 0.1],
+          "sides": 12,
+          "base": [0.3, 0.5]
+        },
+        "arm": {
+          "reach": 0.7,
+          "rise": 0.3,
+          "radius": 0.06,
+          "segments": 4
+        },
+        "head": {
+          "size": [0.6, 0.35, 0.5],
+          "tilt": 25,
+          "lens": {
+            "share": 0.85,
+            "thickness": 0.02
+          }
+        },
+        "light": {
+          "power": 1.4,
+          "led": true
+        },
+        "glow": {
+          "color": "#f2f6ff",
+          "intensity": 3
+        },
+        "sides": [-1, 1],
+        "colors": {
+          "pole": "#B9BCBF",
+          "head": "#3A3D40",
+          "lens": "#eef3f5"
+        },
+        "near": 900
+      }
+    },
+    "lamps": [
+      {
+        "model": "reflector",
+        "at": [[-31, 18.5], [28, 18.5]],
+        "angle": 90,
+        "source": "postes altos de doble reflector junto a la plaza del portal (Street View sept 2024, captura 01); alto y lugar estimados."
+      },
+      {
+        "model": "reflector",
+        "at": [[-3, -117.5], [-60, -113.5]],
+        "angle": 0,
+        "source": "postes altos de reflectores frente a los parqueos norte (Street View ago 2024, captura 22); lugar estimado."
+      }
+    ],
+    "cars": [],
+    "palms": [
+      {
+        "at": [[45, 22.5], [50, 22.5], [55, 22.5], [60, 22.5], [65, 22.5], [70, 22.5], [75, 22.5], [80, 22.5], [85, 22.5], [90, 22.5], [95, 22.5], [100, 22.5], [105, 22.5]],
+        "height": [5, 7],
+        "source": "palmeras manila (Adonidia) en fila frente al podio de las torres, x 30…110 (Mapillary 2023, ~16); en la jardinera."
+      },
+      {
+        "at": [[30, 8], [34, 12], [38, 4], [26, 14]],
+        "height": [5, 7],
+        "source": "palmeras frente a H&M (Street View sept 2024, captura 01); lugar estimado."
+      },
+      {
+        "at": [[-194.0, -92.8], [-191.3, -86.3], [-188.3, -80.0], [-185.1, -73.7], [-181.2, -68.0], [-176.9, -62.4], [-172.3, -57.2], [-167.4, -52.2], [-162.0, -47.8], [-156.3, -43.7]],
+        "height": [4, 6],
+        "source": "palmeras (Adonidia) en la jardinera del muro curvo oeste, una cada ~7 m (Mapillary 1237165193839464, 2023-04-15; Street View ago 2024, captura 11); cuántas y dónde, estimado."
+      }
+    ],
+    "trees": [
+      {
+        "at": [[22, 27.5], [40, 27.5], [58, 27.5]],
+        "height": [7, 9],
+        "radius": [3, 4.5],
+        "colors": [
+          "#4a6a33",
+          "#3d5a2c",
+          "#557238"
+        ],
+        "source": "árboles de copa (almendro o guachapelí) en la vereda sur, x −20…+60, z 20…30 (Commons 2024-02-26; Street View ago 2024, captura 25); lugar estimado."
+      }
+    ]
+  }
+}
