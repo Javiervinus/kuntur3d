@@ -3250,6 +3250,16 @@
         "flood": 0
       },
       {
+        "id": "thePoint",
+        "type": "tower",
+        "file": "the-point",
+        "lat": -2.178319,
+        "lon": -79.876203,
+        "headingDeg": 56,
+        "exclude": 0,
+        "flood": 0
+      },
+      {
         "id": "iglesiaSanFrancisco",
         "type": "church",
         "lat": -2.192075,

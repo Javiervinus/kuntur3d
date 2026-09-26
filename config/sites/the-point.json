@@ -1,0 +1,745 @@
+{
+ "name": "The Point",
+ "sources": [
+  "Eje y orientación de la planta baja: OpenStreetMap way 431946020 (ODbL, © colaboradores de OpenStreetMap; Overpass 2026-06-01), ajuste de la huella: caras a rumbo 57-62° según qué vértices entran (se usa 59,3°, que cuadra con Street View ago 2024), eje en (-0,61, -0,24)",
+  "Esquinas redondeadas con un radio de 10 m (tangente a las caras; la punta de la esquina a 18,5 m del eje), no recortadas por un círculo concéntrico: ajuste del ancho de la silueta piso por piso en la foto de Commons 'Puerto Santa Ana. Guayaquil, Guayas, Ecuador.jpg' (2015-09-03, CC0; error 1,5 px contra 4,2 px del círculo recortado) y de la huella de OSM (0,37 m contra 0,41 m); satélite de Esri 2025-05-09: 18,3 m a la punta",
+  "Giro medido en la misma foto de 2015 (ancho de la silueta de las franjas 17 a 35, visto desde el malecón de Puerto Santa Ana): las franjas 32 a 35 (los tres pisos altos) tienen la misma orientación, y de ahí para abajo gira de a 5,5-7° por franja; con las franjas 1 y 2 sin girar (Street View ago 2024) y el techo a rumbo ≈41° (Esri 2025-05-09: 39 ± 3; la foto de 2015: 42-46), las 30 franjas de la 3 a la 32 giran 198° en total, 6,6° cada una (estimado; las fuentes dicen 6° por losa)",
+  "Planta de 32 × 32 m con los vértices redondeados, 6° de giro por losa en sentido antihorario al subir, 136,5 m de altura arquitectónica (130,1 m ocupada) y 36 pisos: CTBUH Skyscraper Center, https://www.skyscrapercenter.com/building/the-point/9448 (consultado 2026-09-25); El Comercio, 2026-09-24, https://www.elcomercio.com/tendencias/construir/edificios-the-point-guayaquil-ecuador-arquitectura-construccion-alexa/; BAQ 2014, https://arquitecturapanamericana.com/the-point/",
+  "Techo y corona (anillo con la planta de la torre a rumbo 39° ± 3, ~16 costillas, anillo interior a radio 13,5-14,7 m, equipos al centro): foto satelital de Esri World Imagery (Vantor GE01, 2025-05-09), solo para medir",
+  "Alturas por piso: planta baja ≈5 m sobre el zócalo (Street View ago 2024, solo mirado); en la foto de Commons 'Puerto Santa Ana. Guayaquil, Guayas, Ecuador.jpg' (2015-09-03, CC0), el paso entre franjas da que el piso 33 mide lo mismo que los de abajo y los dos de arriba ≈1,45 veces eso, y de la terraza al medio del anillo ≈1,35 veces: con los 136,5 m del CTBUH salen 32 pisos de 3,61 m, dos de 5,22 m (franja de ≈2 m y vidrio alto) y 4,35 m de la terraza al tope del anillo de 1,7 m (estimado). Franja blanca y vidrio ≈53/47, la primera franja más gruesa y en voladizo, el zócalo de 1,1-1,4 m, la marquesina, los locales, el anexo y el parqueo: recorrido de Google Street View de agosto de 2024, solo mirado (estimado); nada de sus imágenes está en el repositorio",
+  "Conteo de las 36 franjas (35 de losa y el anillo) y control de las alturas: foto del río del 2026-05-19 (Commons 'Torre Maxximus.webp', licencia dudosa: solo mirada)",
+  "Fachada de LED: El Comercio (10.400 nodos en los 26 pisos de arriba, US$350.000, de 19:00 a 22:30), https://www.elcomercio.com/actualidad/ecuador/edificio-thepoint-construccion-guayaquil-nobis/; colores de marzo de 2026 (líneas amarillas, corona azul): Commons 'Puerto Santa Ana, Guayaquil.jpg' (licencia dudosa: solo mirada); las 8 franjas de abajo sin LED: foto de la ficha de Google Maps de agosto de 2021 (solo mirada)",
+  "Torre de parqueo: OpenStreetMap way 795724484 (ODbL); dos niveles ciegos, seis abiertos, terraza, rampa helicoidal en la punta SO y núcleo ciego junto al anexo: Street View ago 2024 (estimado)",
+  "Marquesina: la huella de 3,7 m de alto de los datos del mundo (paso buildings del pipeline) alargada hasta el edificio; cielo a 3,5-3,7 m, canto de 1,0-1,2 m, columnas de 0,9 m y letras 'THE POINT' de ≈0,45 × 2 m: Street View ago 2024 (estimado)",
+  "Colores (franjas #e8eaea, vidrio #1b2430, zócalo #3a3431, parqueo #e6e8e6, adoquín #c9a37a): recomendados en la hoja de investigación a partir de fotos de Mapillary (CC BY-SA 4.0): kaartcam 2016-06-16, https://www.mapillary.com/app/?pKey=165590472158414 y ?pKey=895601684621536; kaart_2 2023-04-13, ?pKey=148278664839955; Bron 2026-07-30, ?pKey=4160065147628219",
+  "Vidrio del fuste (shaft.glazings: oficinas y club) #131b26, más oscuro que el #1b2430 recomendado (el que siguen usando los cuerpos de al lado): corregido al comparar el juego desde el malecón de Puerto Santa Ana (x 66, z 300 del marco local, lente 45°; comparación del 2026-09-25) con la foto de Commons 'Puerto Santa Ana. Guayaquil, Guayas, Ecuador.jpg' (2015-09-03, CC0), donde las franjas de vidrio se ven casi negras y en el juego salían claras porque el acabado refleja más cielo; va hacia la muestra más oscura de la hoja (#0a1622, foto del río 2026-05-19). Aun con el cambio, el vidrio del juego se ve más claro que el de la foto (estimado)",
+  "Calle Dolores Trullas Masats: OpenStreetMap way 380630557 (ODbL); la palmera del medio de la vereda SE, en el lugar del árbol de los datos del mundo",
+  "Polígonos derivados (terraza, núcleo, rampa, acera, carril, jardinera, escaleras, palmeras y despejes): config/sites/the-point/geometry.py, con sus entradas y lo estimado"
+ ],
+ "clear": [
+  [[-21.1, -0.24], [-20.41, -5.54], [-18.36, -10.49], [-15.1, -14.73], [-10.86, -17.99], [-5.91, -20.04], [-0.61, -20.73], [4.69, -20.04], [9.64, -17.99], [13.88, -14.73], [17.07, -10.58], [19.29, -7.52], [19.88, -0.22], [18.07, 14.18], [16.24, 16.26], [14.4, 17.95], [12.38, 19.44], [10.0, 20.84], [-0.7, 20.24], [-5.91, 19.56], [-10.76, 17.55], [-13.79, 16.08], [-18.36, 10.0], [-20.41, 5.06]],
+  [[-73.74, -25.11], [-71.03, -37.42], [-25.8, -26.68], [-31.99, 3.98], [-55.1, -1.77], [-56.29, -2.19], [-57.08, -2.59], [-58.74, -3.87], [-59.97, -5.47], [-68.33, -16.98]],
+  [[-33.93, 3.48], [-27.77, -27.02], [-8.78, -25.03], [-7.44, -23.73], [-4.71, -19.79], [-16.0, 8.35]],
+  [[-31.68, 17.14], [-29.87, 9.22], [-24.76, 4.79], [-21.13, 5.71], [-19.59, 6.2], [-17.77, 12.13], [-18.01, 20.43], [-18.43, 22.18], [-31.61, 19.01]]
+ ],
+ "ground": {
+  "samples": [[-10.54, 17.7], [-2.2, 19.35], [6.14, 21.0]],
+  "step": 2.0,
+  "lift": 0.05,
+  "bury": 0.5,
+  "wall": 0.25
+ },
+ "detail": {
+  "near": 250,
+  "crown": 900
+ },
+ "finishes": {
+  "glass": {
+   "roughness": 0.12,
+   "metalness": 0.1
+  },
+  "storefront": {
+   "roughness": 0.12,
+   "metalness": 0.1
+  },
+  "open": {
+   "roughness": 1.0,
+   "metalness": 0.0
+  },
+  "rails": {
+   "roughness": 0.3,
+   "metalness": 0.6,
+   "cutout": true
+  },
+  "railGlass": {
+   "roughness": 0.05,
+   "metalness": 0.1,
+   "opacity": 0.35
+  }
+ },
+ "shaft": {
+  "center": [-0.61, -0.24],
+  "plan": {
+   "size": [32, 32],
+   "radius": 0,
+   "fillet": 10.0,
+   "segments": 12
+  },
+  "lift": 1.2,
+  "floors": [
+   {
+    "count": 1,
+    "height": 5.0,
+    "band": 2.3,
+    "inset": 1.5,
+    "glazing": "vitrinas"
+   },
+   {
+    "count": 32,
+    "height": 3.61,
+    "band": 1.9,
+    "inset": 0.8,
+    "glazing": "oficinas"
+   },
+   {
+    "count": 2,
+    "height": 5.22,
+    "band": 2.0,
+    "inset": 0.8,
+    "glazing": "club"
+   }
+  ],
+  "glazings": {
+   "vitrinas": {
+    "color": "#7f939c",
+    "tone": 0.55,
+    "module": 2.5,
+    "panes": [1, 2],
+    "share": 0.8,
+    "glow": {
+     "color": "#fff1d6",
+     "intensity": 1.6
+    },
+    "ao": [0.8, 0.6],
+    "finish": "storefront"
+   },
+   "oficinas": {
+    "color": "#131b26",
+    "tone": 0.3,
+    "module": 1.5,
+    "panes": [1, 1],
+    "share": 0.12,
+    "glow": {
+     "color": "#f2e6c8",
+     "intensity": 0.25
+    },
+    "ao": [0.85, 0.62],
+    "finish": "glass"
+   },
+   "club": {
+    "color": "#131b26",
+    "tone": 0.3,
+    "module": 1.5,
+    "panes": [1, 2],
+    "share": 0.35,
+    "glow": {
+     "color": "#ffe2b8",
+     "intensity": 0.4
+    },
+    "ao": [0.85, 0.62],
+    "finish": "glass"
+   },
+   "baranda": {
+    "color": "#b8c7cc",
+    "tone": 0.33,
+    "module": 1.5,
+    "panes": [1, 1],
+    "share": 0,
+    "glow": {
+     "color": "#000000",
+     "intensity": 0
+    },
+    "ao": [1, 1],
+    "finish": "railGlass"
+   }
+  },
+  "twist": [[0, 3.3], [2, 3.3], [32, -194.7]],
+  "band": {
+   "round": 0.8,
+   "segments": 4,
+   "overlap": 1.0,
+   "color": "#e8eaea",
+   "ao": {
+    "top": 0.85,
+    "soffit": 0.62
+   }
+  },
+  "skirt": {
+   "color": "#3a3431",
+   "pattern": "slabs",
+   "scale": [6, 20]
+  },
+  "leds": {
+   "from": 9,
+   "to": 35,
+   "y": 0.5,
+   "height": 0.3,
+   "out": 0.02,
+   "color": "#e8eaea",
+   "glow": {
+    "color": "#ffb000",
+    "intensity": 1.6
+   }
+  },
+  "spots": {
+   "level": 1,
+   "offset": -0.75,
+   "spacing": 3.0,
+   "size": 0.25,
+   "drop": 0.01,
+   "color": "#f4f1ea",
+   "glow": {
+    "color": "#fff3dc",
+    "intensity": 3.0
+   },
+   "sides": [[-30, 140]],
+   "light": {
+    "every": 3,
+    "power": 0.25,
+    "led": true
+   }
+  },
+  "sections": 12,
+  "physics": {
+   "every": 3,
+   "depth": 4.0,
+   "segments": 6
+  }
+ },
+ "crown": {
+  "height": 4.35,
+  "ring": {
+   "height": 1.7,
+   "depth": 0.6,
+   "out": 0.2,
+   "round": 0.3,
+   "color": "#eceeee"
+  },
+  "fins": {
+   "spacing": 1.2,
+   "size": [0.1, 0.3],
+   "inset": 0.15,
+   "color": "#a9adb0"
+  },
+  "inner": {
+   "inset": 3.5,
+   "size": [0.5, 0.6],
+   "color": "#e3e5e5"
+  },
+  "ribs": {
+   "count": 16,
+   "size": [0.35, 0.6],
+   "color": "#e3e5e5"
+  },
+  "led": {
+   "y": 0.5,
+   "height": 0.4,
+   "out": 0.02,
+   "color": "#eceeee",
+   "glow": {
+    "color": "#2f4dff",
+    "intensity": 2.0
+   }
+  },
+  "rail": {
+   "height": 1.1,
+   "inset": 0.6,
+   "glazing": "baranda"
+  },
+  "floor": {
+   "color": "#b9b4ab",
+   "pattern": "tiles",
+   "scale": [0.67, 0.67],
+   "ao": 0.9
+  },
+  "rooms": [
+   {
+    "at": [-3.61, -4.54],
+    "size": [4.0, 4.0, 3.0],
+    "angle": 0,
+    "color": "#d6d8d6"
+   },
+   {
+    "at": [3.39, 3.26],
+    "size": [4.0, 6.0, 3.0],
+    "angle": 0,
+    "color": "#d6d8d6"
+   }
+  ],
+  "masts": [
+   {
+    "at": [-3.61, -4.54],
+    "base": 3.0,
+    "height": 5.0,
+    "radius": 0.08,
+    "sides": 6,
+    "color": "#9a9d9f"
+   },
+   {
+    "at": [3.39, 3.26],
+    "base": 3.0,
+    "height": 4.0,
+    "radius": 0.08,
+    "sides": 6,
+    "color": "#9a9d9f"
+   }
+  ]
+ },
+ "street": {
+  "platforms": [
+   {
+    "id": "terraza",
+    "ring": [[-13.99, 13.18], [-13.14, 15.28], [9.75, 19.82], [11.83, 18.61], [13.76, 17.18], [15.53, 15.56], [17.11, 13.75], [18.32, -7.16], [13.83, -7.42], [10.33, 4.69], [0.6, 11.7], [-9.08, 8.26]],
+    "height": 1.2,
+    "edges": [0, 1, 2, 3, 4, 5, 6, 7, 11],
+    "wall": {
+     "color": "#3a3431",
+     "pattern": "slabs",
+     "scale": [6, 20]
+    },
+    "floor": {
+     "color": "#c9c6bf",
+     "pattern": "tiles",
+     "scale": [0.67, 0.67]
+    },
+    "rail": {
+     "height": 1.03,
+     "inset": 0.15,
+     "post": 1.6,
+     "color": "#c9ccce",
+     "pattern": "bars",
+     "scale": [0.39, 0.39],
+     "gaps": [[0, 0.13, 2.13], [1, 21.0, 23.0], [6, 7.47, 13.47]]
+    },
+    "source": "Terraza sobre un zócalo de piedra laja oscura (1,1-1,4 m sobre la vereda SE), paralela a la calle y en cuña con la vitrina, con baranda de acero inoxidable de 3 tubos: estimado (Google Street View, ago 2024; solo mirado); zócalo #3a3431: Mapillary kaartcam 2016-06-16 (?pKey=165590472158414); anchos y piso: estimados"
+   }
+  ],
+  "flights": [
+   {
+    "id": "escalera-s",
+    "kind": "steps",
+    "at": [-13.56, 14.23],
+    "angle": 158.0,
+    "width": 2.0,
+    "top": 1.2,
+    "rise": 0.17,
+    "run": 0.3,
+    "color": "#8d8a86",
+    "pattern": "tiles",
+    "scale": [0.67, 0.67],
+    "source": "Escaleras en la esquina S, hacia el acceso: estimado (Google Street View, ago 2024; solo mirado)"
+   },
+   {
+    "id": "rampa-se",
+    "kind": "ramp",
+    "at": [9.27, 20.49],
+    "angle": -168.8,
+    "width": 1.5,
+    "top": 1.2,
+    "rise": 0.15,
+    "slope": 0.1,
+    "color": "#b9b4a9",
+    "pattern": "tiles",
+    "scale": [0.67, 0.67],
+    "source": "Rampa paralela a la calle, por fuera del zócalo SE: arranca en la vereda junto al farol del medio y sube hacia el NE hasta la terraza cerca de la punta E: Mapillary kaartcam 2016-06-16 (?pKey=165590472158414) y Google Street View ago 2024 (solo mirado); largo y pendiente: estimado"
+   },
+   {
+    "id": "escalinata-ne",
+    "kind": "steps",
+    "at": [17.72, 3.29],
+    "angle": 3.3,
+    "width": 6.0,
+    "top": 1.2,
+    "rise": 0.17,
+    "run": 0.35,
+    "color": "#8d8a86",
+    "pattern": "tiles",
+    "scale": [0.67, 0.67],
+    "source": "Escalinata ancha de 3-4 escalones hacia la plaza del malecón: estimado (foto 360 de usuario en Google Maps, jun 2022; solo mirada)"
+   }
+  ],
+  "canopies": [
+   {
+    "id": "marquesina",
+    "ring": [[-27.6, 17.3], [-22.2, 18.6], [-19.59, 6.2], [-21.13, 5.71], [-24.76, 4.79]],
+    "soffit": 3.6,
+    "fascia": 1.1,
+    "attached": [2, 3],
+    "columns": {
+     "at": [[-25.36, 10.57], [-26.69, 16.45]],
+     "size": 0.9,
+     "plinth": 1.1,
+     "color": "#c9cccd",
+     "plinthColor": "#1e1e1e"
+    },
+    "colors": {
+     "fascia": "#c4c7c9",
+     "soffit": "#d7d9d9",
+     "top": "#9c9e9e"
+    },
+    "cladding": {
+     "pattern": "slabs",
+     "scale": [3.0, 2.73]
+    },
+    "ao": 0.72,
+    "spots": {
+     "spacing": 2.5,
+     "inset": 0.8,
+     "size": 0.3,
+     "drop": 0.01,
+     "color": "#f4f1ea",
+     "glow": {
+      "color": "#fff3dc",
+      "intensity": 3.0
+     },
+     "light": {
+      "every": 3,
+      "power": 0.35,
+      "led": true
+     }
+    },
+    "strip": 1.0,
+    "signs": [
+     {
+      "text": "THE POINT",
+      "size": [2.0, 0.45],
+      "background": "#c4c7c9",
+      "color": "#1c1c1c",
+      "font": "Georgia, 'Times New Roman', serif",
+      "weight": 700,
+      "fill": 0.92,
+      "depth": 0,
+      "edge": 0,
+      "at": 3.89,
+      "source": "Letras corpóreas negras en mayúsculas con serifa, ≈0,45 × 2 m, en el canto de la calle, extremo E: estimado (Google Street View, ago 2024; solo mirado) (Mapillary kaartcam 2016-06-16, ?pKey=483654522948922)"
+     }
+    ],
+    "source": "Huella: el edificio de 3,7 m de los datos del mundo en (-24,1, 14,2), alargado hasta la base del anexo; cielo 3,5-3,7 m, canto 1,0-1,2 m de paneles gris claro con juntas verticales, dos columnas de 0,9 m gris claro con zócalo negro de 1,1 m del lado de la jardinera: estimado (Google Street View, ago 2024; solo mirado)"
+   }
+  ],
+  "beds": [
+   {
+    "id": "jardinera-acceso",
+    "ring": [[-31.19, 17.26], [-18.01, 20.43], [-18.43, 22.18], [-31.61, 19.01]],
+    "curb": {
+     "height": 0.3,
+     "color": "#cfcac0"
+    },
+    "hedge": {
+     "height": 0.7,
+     "color": "#557530",
+     "pattern": "soil",
+     "scale": [1, 1]
+    },
+    "palms": [[-27.45, 19.09, 8.5]],
+    "source": "Jardinera con seto, ixora y una palmera entre el carril del acceso y la calle: estimado (Google Street View, ago 2024; solo mirado)"
+   }
+  ],
+  "curbs": [
+   {
+    "id": "bordillo-acceso",
+    "line": [[-29.87, 9.22], [-25.98, 10.15], [-20.69, 11.43], [-17.77, 12.13]],
+    "height": 0.15,
+    "width": 0.2,
+    "color": "#e8b53a",
+    "pattern": "stripes",
+    "scale": [1, 1],
+    "source": "Bordillo pintado amarillo y negro entre la acera del lobby y el carril de dejar pasajeros: estimado (Google Street View, ago 2024; solo mirado) (y Mapillary 2016)"
+   }
+  ],
+  "paved": [
+   {
+    "id": "carril-acceso",
+    "ring": [[-29.87, 9.22], [-31.68, 17.14], [-19.47, 20.08], [-17.77, 12.13]],
+    "lift": 0.03,
+    "color": "#7d6a60",
+    "pattern": "pavers",
+    "scale": [1, 1],
+    "source": "Carril de dejar pasajeros de adoquín de arcilla rojizo bajo la marquesina: Mapillary kaartcam 2016-06-16 (?pKey=483654522948922) y Google Street View ago 2024 (solo mirado); color: estimado"
+   },
+   {
+    "id": "acera-se",
+    "ring": [[-16.5, 14.62], [12.5, 20.37], [12.5, 23.28], [-16.5, 18.38]],
+    "lift": 0.03,
+    "color": "#c9a37a",
+    "pattern": "pavers",
+    "scale": [1, 1],
+    "source": "Vereda SE de adoquín ocre, entre el zócalo y el bordillo de la calle (el bordillo de los datos del mundo: z 19,3 a 23 m): Mapillary kaartcam 2016-06-16 (?pKey=165590472158414) y Google Street View ago 2024 (solo mirado); color: estimado"
+   },
+   {
+    "id": "acera-lobby",
+    "ring": [[-21.13, 5.71], [-24.76, 4.79], [-25.98, 10.15], [-20.69, 11.43], [-19.59, 6.2]],
+    "lift": 0.15,
+    "color": "#c9a37a",
+    "pattern": "pavers",
+    "scale": [1, 1],
+    "source": "Acera del lobby de adoquín ocre (#c9a37a, Mapillary kaartcam 2016-06-16, ?pKey=165590472158414): estimado (Google Street View, ago 2024; solo mirado)"
+   }
+  ],
+  "palms": [[-9.43, 18.05, 8.5], [-0.6, 19.8, 8.5], [8.23, 21.55, 8.5]],
+  "signs": [
+   {
+    "text": "pharmacy's",
+    "size": [1.8, 0.55],
+    "background": "#c8102e",
+    "color": "#ffffff",
+    "depth": 0.1,
+    "at": [-6.35, 12.45],
+    "y": 3.4,
+    "angle": 93.3,
+    "glow": {
+     "color": "#ffffff",
+     "intensity": 1.2
+    },
+    "source": "Farmacia de la esquina S de la cara SE, caja de luz roja con letras blancas: estimado (Google Street View, ago 2024; solo mirado)"
+   }
+  ],
+  "rails": "rails"
+ },
+ "bodies": {
+  "defaults": {
+   "ground": 5.0,
+   "floor": 3.3,
+   "curve": 6,
+   "portal": {
+    "depth": 0,
+    "columns": "square",
+    "size": [0.55, 0.55],
+    "sides": 14,
+    "bay": 4.2,
+    "beam": 0.5,
+    "pier": 0.7,
+    "floor": "tiles"
+   },
+   "shops": {
+    "height": 3.4,
+    "shutter": 0,
+    "lit": 0.8,
+    "transom": 0.6,
+    "inset": 0.2,
+    "pier": 0.5,
+    "pane": 1.6,
+    "mullion": [0.08, 0.1],
+    "sign": [0, 0, 0]
+   },
+   "facade": {
+    "kind": "ribbon",
+    "bay": 4.2,
+    "margin": 0.4,
+    "pier": 0.35,
+    "window": [3.0, 1.5, 0.95],
+    "reveal": 0.15,
+    "panes": [3, 1],
+    "sill": [0, 0, 0],
+    "ledge": [0, 0],
+    "frame": [0.35, 0.3, 0.3],
+    "every": 1,
+    "balcony": [1.0, 0.16, 1.0],
+    "rail": "bars",
+    "railBar": [0.06, 0.06],
+    "module": [1.5, 1.0],
+    "arches": [],
+    "surround": [0, 0],
+    "pilaster": [0, 0],
+    "balconettes": [],
+    "balconette": [0.5, 0.25]
+   },
+   "crown": {
+    "parapet": [1.0, 0.2],
+    "balustrade": false,
+    "cap": [0, 0],
+    "profile": [],
+    "machine": [0, 0, 0, 0],
+    "machineFloors": 1
+   },
+   "ac": {
+    "share": 0,
+    "size": [0.8, 0.55, 0.32]
+   },
+   "ao": {
+    "soffit": 0.6,
+    "floor": 0.65,
+    "shop": 0.8,
+    "reveal": 0.7,
+    "balcony": 0.75,
+    "roof": 0.9,
+    "band": 0.75
+   },
+   "colors": {
+    "wall": "#e6e8e6",
+    "trim": "#eceeee",
+    "frame": "#2b3036",
+    "glass": "#1b2430",
+    "spandrel": "#2a3440",
+    "column": "#e0e2e0",
+    "soffit": "#e2e4e2",
+    "floor": "#c9c6bf",
+    "shutter": "#8f9496",
+    "rail": "#9a9ea2",
+    "ac": "#e4e2dc",
+    "roof": "#9a9994"
+   },
+   "frameTone": 0.3
+  },
+  "styles": {
+   "anexo": {
+    "ground": 5.0,
+    "floor": 3.25,
+    "colors": {
+     "wall": "#e8eaea"
+    }
+   },
+   "nucleo": {
+    "ground": 0,
+    "floor": 3.1,
+    "facade": {
+     "kind": "blank",
+     "cladding": {
+      "pattern": "slabs",
+      "scale": [0.3, 2.0]
+     }
+    },
+    "crown": {
+     "parapet": [0.6, 0.2]
+    }
+   },
+   "parqueo-zocalo": {
+    "ground": 0,
+    "floor": 3.3,
+    "facade": {
+     "kind": "blank",
+     "cladding": {
+      "pattern": "slabs",
+      "scale": [0.72, 1.07]
+     }
+    },
+    "crown": {
+     "parapet": [0, 0.2]
+    }
+   },
+   "parqueo": {
+    "ground": 0,
+    "floor": 3.3,
+    "facade": {
+     "kind": "ribbon",
+     "bay": 8.0,
+     "pier": 0.6,
+     "margin": 0.6,
+     "window": [3.0, 1.6, 1.0],
+     "reveal": 2.5,
+     "ledge": [0.25, 0.3],
+     "panes": [1, 1]
+    },
+    "crown": {
+     "parapet": [1.1, 0.2],
+     "machine": [6.0, 5.0, 3.5, 0],
+     "machineFloors": 1
+    },
+    "colors": {
+     "glass": "#2b2d2f"
+    },
+    "frameTone": 0.33,
+    "ao": {
+     "reveal": 0.4
+    }
+   },
+   "rampa": {
+    "ground": 1.65,
+    "floor": 3.3,
+    "shops": {
+     "pane": 1000
+    },
+    "facade": {
+     "kind": "ribbon",
+     "bay": 2.0,
+     "pier": 0.3,
+     "margin": 0,
+     "window": [3.0, 1.5, 1.0],
+     "reveal": 1.2,
+     "ledge": [0.2, 0.25],
+     "panes": [1, 1]
+    },
+    "crown": {
+     "parapet": [1.1, 0.2]
+    },
+    "colors": {
+     "glass": "#2b2d2f"
+    },
+    "frameTone": 0.33,
+    "ao": {
+     "reveal": 0.45
+    }
+   }
+  },
+  "lights": {
+   "share": 0.3,
+   "window": {
+    "color": "#ffe7c2",
+    "intensity": 1.0
+   },
+   "shop": {
+    "color": "#fff1d6",
+    "intensity": 1.6
+   },
+   "lamp": {
+    "color": "#fff0d0",
+    "intensity": 2.5
+   },
+   "lampSize": [0.5, 0.08]
+  },
+  "signs": ["#c8102e"],
+  "list": [
+   {
+    "id": "anexo",
+    "ring": [[-16.6, 7.15], [-21.13, 5.71], [-15.3, -23.16], [-9.23, -24.07], [-8.21, -23.08], [-6.96, -21.06], [-5.84, -19.66], [-3.57, -18.42]],
+    "fronts": [0, 2, 3, 4, 5, 6],
+    "floors": 8,
+    "style": "anexo",
+    "glass": "glass",
+    "source": "Anexo de oficinas de ≈8-9 pisos con ventanas corridas y el lobby en su base: vértices 23-30 de OSM way 431946020 cerrados contra la torre; pisos y alturas: estimado (Google Street View, ago 2024; solo mirado)"
+   },
+   {
+    "id": "nucleo",
+    "ring": [[-21.13, 5.71], [-15.3, -23.16], [-26.97, -25.93], [-32.76, 2.76]],
+    "fronts": [1, 3],
+    "floors": 10,
+    "style": "nucleo",
+    "glass": "glass",
+    "source": "Núcleo ciego blanco con bruñas horizontales entre el parqueo y el anexo, a la altura del anexo: estimado (Google Street View, ago 2024; solo mirado); ancho de 12 m: estimado (Street View y techo claro en Esri 2025-05-09)"
+   },
+   {
+    "id": "parqueo",
+    "ring": [[-32.76, 2.76], [-26.97, -25.93], [-70.27, -36.21], [-72.67, -25.31], [-67.51, -17.55], [-57.73, -15.0], [-59.68, -7.16], [-55.89, -3.11]],
+    "fronts": [1, 2, 3, 4, 5, 6, 7],
+    "floors": 2,
+    "style": "parqueo-zocalo",
+    "glass": "open",
+    "tower": {
+     "inset": 0,
+     "floors": 6,
+     "style": "parqueo",
+     "ring": [[-32.76, 2.76], [-26.97, -25.93], [-70.27, -36.21], [-72.67, -25.31], [-67.51, -17.55], [-57.73, -15.0], [-59.68, -7.16], [-55.89, -3.11]],
+     "fronts": [1, 2, 3, 4, 5, 6, 7]
+    },
+    "source": "Torre de parqueo: OSM way 795724484 sin la franja del núcleo; 2 niveles ciegos de paneles rehundidos, 6 abiertos con cantos de losa volados y la terraza con su caja de escalera: estimado (Google Street View, ago 2024; solo mirado); 3,3 m por nivel: estimado (27-30 m en total)"
+   },
+   {
+    "id": "rampa",
+    "ring": [[-60.23, -16.92], [-45.69, -16.92], [-45.69, -2.38], [-60.23, -2.38]],
+    "fronts": [0, 1, 2, 3],
+    "round": [
+     {
+      "vertex": 0,
+      "radius": 7.17
+     },
+     {
+      "vertex": 1,
+      "radius": 7.17
+     },
+     {
+      "vertex": 2,
+      "radius": 7.17
+     },
+     {
+      "vertex": 3,
+      "radius": 7.17
+     }
+    ],
+    "floors": 7,
+    "style": "rampa",
+    "glass": "open",
+    "source": "Rampa helicoidal semicircular en la punta SO del parqueo, con aberturas a medio nivel: el círculo por los vértices de la punta SO de OSM way 795724484; niveles: estimado (Google Street View, ago 2024; solo mirado). Su planta baja es el medio nivel sin vanos (shops.pane más ancho que cada tramo del tambor)"
+   }
+  ]
+ }
+}
