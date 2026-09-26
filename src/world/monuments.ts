@@ -15,18 +15,23 @@ import {
   patternUniforms,
 } from '../render/surfacePatterns';
 import type { DeckHit } from './bridges';
-import type { BuildingRecord } from './buildings';
+import type { BuildingRecord, RoofShape } from './buildings';
 import type { Heightmap } from './heightmap';
 import { medianLights } from './medians';
 import { type Glow, type MonumentBase, NO_GLOW, Parts, colorsOf, glowOf, place, prism, strut } from './monumentParts';
 import type { ExtraSpots } from './parkedCars';
+import { HOUSE } from './house';
+import { MALL } from './mall';
 import { type Palace, PalaceBuilder } from './palace';
+import { type LocalRoof, type Place, type PlaceKit, type PlaceSite, type PlaceType, siteFile } from './placeKit';
 import { type Church, ChurchBuilder } from './church';
 import { ColumnBuilder, type VictoryColumn } from './column';
 import { type Park, ParkBuilder, parkLights } from './park';
-import { type Street, StreetBuilder, streetFile } from './street';
+import { type Street, StreetBuilder, lotKit, streetFile } from './street';
 import { lampLights, layoutFurniture } from './streetFurniture';
 import type { LanternLights } from './streetLamps';
+import { TOWER } from './tower';
+import { URBANIZATION } from './urbanization';
 
 type MonumentsConfig = GameConfig['monuments'];
 type FogConfig = GameConfig['render']['fog'];
@@ -136,7 +141,35 @@ interface Lighthouse extends MonumentBase {
   lanternGlow: Glow;
 }
 
-type MonumentConfig = FerrisWheel | ClockTower | Hemicycle | Lighthouse | Palace | Street | Church | VictoryColumn | Park;
+type MonumentConfig = FerrisWheel | ClockTower | Hemicycle | Lighthouse | Palace | Street | Church | VictoryColumn | Park | Place;
+
+/** Los tipos de lugar con su archivo en config/sites/ (world/placeKit.ts). */
+const PLACE_TYPES: Record<string, PlaceType<unknown>> = { mall: MALL, tower: TOWER, urbanization: URBANIZATION, house: HOUSE };
+
+/** El tipo de un lugar con archivo en config/sites/, o nada si el monumento no es de esos. */
+function placeType(m: MonumentConfig): PlaceType<unknown> | undefined {
+  return Object.hasOwn(PLACE_TYPES, m.type) ? PLACE_TYPES[m.type] : undefined;
+}
+
+/** Archivos de config/sites/ ya revisados (se revisan una vez, al pedirlos por primera vez). */
+const CHECKED = new Set<string>();
+
+/** El archivo de un lugar de config/sites/, revisado por su tipo. */
+function placeFile(p: Place, type: PlaceType<unknown>): unknown {
+  const f = siteFile<unknown>(p.file);
+  if (!CHECKED.has(p.file)) {
+    type.check(f, `config/sites/${p.file}.json (${p.id})`);
+    CHECKED.add(p.file);
+  }
+  return f;
+}
+
+/** Lo que se ve de cerca o de lejos según la distancia (en planta) de la cámara a un centro. */
+interface LodGroup {
+  x: number;
+  z: number;
+  items: { object: THREE.Object3D; distance: number; near: boolean }[];
+}
 
 /** Pieza del mundo físico: obstáculo, o piso donde se puede estar (su tope). */
 interface Shape {
@@ -149,6 +182,9 @@ interface Shape {
   b: number;
   /** ring: centro del sector; box: dirección del largo (rad, atan2(z, x) en el mundo). */
   angle: number;
+  /** Coseno y seno de `angle`, calculados al crear la pieza (la física prueba las cajas en cada consulta). */
+  cos: number;
+  sin: number;
   /** ring: medio ancho del sector (rad). */
   halfArc: number;
   top: number;
@@ -310,7 +346,36 @@ export interface Finish {
   opacity?: number;
   /** Calado (barandas de barrotes): descarta los huecos de su dibujo y se ve de los dos lados. */
   cutout?: boolean;
+  /**
+   * (Del código, no de la config) Para piezas instanciadas con `instanceColor`: el color de cada
+   * instancia tiñe solo lo pintado (`Surface.paint`, en el byte del LED), y el pie sucio del
+   * revoque se mide desde la base de cada instancia, no desde la base horneada en el modelo.
+   */
+  paint?: boolean;
 }
+
+/**
+ * `color_vertex` de three.js con la máscara de pintura: `instanceColor` tiñe según `aSurface.y`
+ * (lo que no se pintó queda con su color por vértice).
+ */
+const PAINT_COLOR_VERTEX = /* glsl */ `
+#if defined( USE_COLOR ) || defined( USE_COLOR_ALPHA ) || defined( USE_INSTANCING_COLOR ) || defined( USE_BATCHING_COLOR )
+  vColor = vec4( 1.0 );
+#endif
+#ifdef USE_COLOR_ALPHA
+  vColor *= color;
+#elif defined( USE_COLOR )
+  vColor.rgb *= color;
+#endif
+#ifdef USE_INSTANCING_COLOR
+  vColor.rgb *= mix( vec3( 1.0 ), instanceColor.rgb, aSurface.y );
+#endif`;
+
+/** Con la máscara de pintura: el pie del revoque desde la base de la instancia (el modelo va con su base en y = 0). */
+const PAINT_FOOT = /* glsl */ `
+#ifdef USE_INSTANCING
+  vGyeFoot = vGyeWorld.y - ( modelMatrix * instanceMatrix * vec4( 0.0, 0.0, 0.0, 1.0 ) ).y - aFlood.y;
+#endif`;
 
 /**
  * Material de los monumentos: color por vértice; de noche, reflectores cálidos desde la base
@@ -333,6 +398,7 @@ function createMaterial(cfg: MonumentsConfig, leds?: Leds, finish: Finish = {}, 
     side: glass || finish.cutout ? THREE.DoubleSide : THREE.FrontSide,
   });
   if (finish.cutout) material.defines = { GYE_CUTOUT: '' };
+  const paint = !!finish.paint && !leds;
   const uniforms = {
     uFloodColor: { value: new THREE.Color(cfg.flood.color).multiplyScalar(cfg.flood.intensity) },
     uFloodTop: { value: cfg.flood.top },
@@ -350,6 +416,7 @@ function createMaterial(cfg: MonumentsConfig, leds?: Leds, finish: Finish = {}, 
   vLed = vec3( 0.0 );`;
   material.onBeforeCompile = (shader) => {
     Object.assign(shader.uniforms, uniforms);
+    if (paint) shader.vertexShader = shader.vertexShader.replace('#include <color_vertex>', PAINT_COLOR_VERTEX);
     shader.vertexShader = shader.vertexShader
       .replace(
         '#include <common>',
@@ -383,7 +450,7 @@ ${ledPars}`,
   vFlood = aFlood.x * mix( 1.0, uFloodTop, gyeFloodH ) * gyeFloodAim;
   vGlow = aGlow;${ledVertex}
 }
-${PATTERN_VERTEX}`,
+${PATTERN_VERTEX}${paint ? PAINT_FOOT : ''}`,
       );
     shader.fragmentShader = shader.fragmentShader
       .replace(
@@ -399,7 +466,7 @@ ${PATTERN_VERTEX}`,
 totalEmissiveRadiance += ( diffuseColor.rgb * uFloodColor * vFlood * vGyeAo + vGlow * gyeMask * gyeGlowTint + vLed ) * uLightsOn;`,
       );
   };
-  material.customProgramCacheKey = () => `gye-monument-v7${leds ? `-led${leds.colors}` : ''}${finish.cutout ? '-cutout' : ''}`;
+  material.customProgramCacheKey = () => `gye-monument-v8${leds ? `-led${leds.colors}` : ''}${finish.cutout ? '-cutout' : ''}${paint ? '-paint' : ''}`;
   withNightLight(material);
   return material;
 }
@@ -456,7 +523,7 @@ export class Monuments {
   /** Macizos de los monumentos que entran como edificios (se trepan y se caminan encima). */
   readonly records: BuildingRecord[] = [];
   /** Piezas que solo se ven de cerca o solo de lejos, por monumento (distancia a su centro). */
-  private readonly lod: { x: number; z: number; items: { object: THREE.Object3D; distance: number; near: boolean }[] }[] = [];
+  private readonly lod: LodGroup[] = [];
   /** Despejes de las calles y lugares modelados, con su caja (ver `cleared`). */
   private readonly clearAreas: ClearSet;
   /** Árboles de las veredas de las calles modeladas, como los de los datos (ver `streetTrees`). */
@@ -465,8 +532,10 @@ export class Monuments {
   private readonly palmData: number[][] = [];
   /** Autos estacionados en los retiros y carriles de las calles modeladas (ver `parkingSpots`). */
   private readonly spots: { x: number; z: number; heading: number; seed: number; lift: number }[] = [];
-  /** Los letreros de las calles modeladas, en un atlas (render/signAtlas.ts). */
+  /** Los letreros de las calles modeladas y de los lugares, en un atlas (render/signAtlas.ts). */
   private readonly signAtlas: SignAtlas;
+  /** Materiales con otro acabado de los lugares de config/sites/ (ver `finish`). */
+  private readonly finishes = new Map<string, THREE.MeshStandardMaterial>();
 
   constructor(
     private readonly cfg: MonumentsConfig,
@@ -517,8 +586,11 @@ export class Monuments {
         case 'street':
           this.street(root, m as Street);
           break;
-        default:
-          throw new Error(`Monumento de tipo desconocido en config/game.json → monuments: ${m.type}`);
+        default: {
+          const type = placeType(m);
+          if (!type) throw new Error(`Monumento de tipo desconocido en config/game.json → monuments: ${m.type}`);
+          this.place(root, site, m as Place, type);
+        }
       }
       for (const s of site.shapes) {
         const extent = s.kind === 'box' ? Math.hypot(s.a, s.b) : s.a;
@@ -530,11 +602,13 @@ export class Monuments {
     this.group.updateMatrixWorld(true);
   }
 
-  /** Los letreros de los edificios de todas las calles modeladas (para armar el atlas). */
+  /** Los letreros de los edificios de todas las calles modeladas y de los lugares de config/sites/ (para armar el atlas). */
   private static signFaces(cfg: MonumentsConfig): SignFace[] {
-    return (cfg.list as readonly MonumentConfig[])
-      .filter((m) => m.type === 'street')
-      .flatMap((m) => streetFile((m as Street).file).blocks.flatMap((b) => b.buildings.flatMap((bd) => bd.signs ?? [])));
+    return (cfg.list as readonly MonumentConfig[]).flatMap((m) => {
+      if (m.type === 'street') return streetFile((m as Street).file).blocks.flatMap((b) => b.buildings.flatMap((bd) => bd.signs ?? []));
+      const type = placeType(m);
+      return type ? type.signs(placeFile(m as Place, type)) : [];
+    });
   }
 
   /** Círculos (marco local) donde los monumentos reemplazan a los edificios de los datos. */
@@ -550,7 +624,15 @@ export class Monuments {
   static clearings(cfg: MonumentsConfig, geo: GeoFrame): { x: number; z: number }[][] {
     const out: { x: number; z: number }[][] = [];
     for (const m of cfg.list as readonly MonumentConfig[]) {
-      const polys = m.type === 'street' ? streetFile((m as Street).file).clear : 'clear' in m ? (m as Church | VictoryColumn | Park).clear : [];
+      const type = placeType(m);
+      const polys =
+        m.type === 'street'
+          ? streetFile((m as Street).file).clear
+          : type
+            ? type.clear(placeFile(m as Place, type))
+            : 'clear' in m
+              ? (m as Church | VictoryColumn | Park).clear
+              : [];
       const at = geo.toLocal(m.lat, m.lon);
       const r = Math.PI / 2 - THREE.MathUtils.degToRad(m.headingDeg ?? 0);
       const c = Math.cos(r);
@@ -567,12 +649,21 @@ export class Monuments {
   static lanterns(cfg: MonumentsConfig, geo: GeoFrame, heightmap: Heightmap): LanternLights {
     const lights: { x: number; z: number; y: number; h: number; arm: number; power: number; led: boolean }[] = [];
     for (const m of cfg.list as readonly MonumentConfig[]) {
-      if (m.type !== 'street' && m.type !== 'park') continue;
+      const type = placeType(m);
+      if (m.type !== 'street' && m.type !== 'park' && !type) continue;
       const at = geo.toLocal(m.lat, m.lon);
       const r = Math.PI / 2 - THREE.MathUtils.degToRad(m.headingDeg ?? 0);
       const c = Math.cos(r);
       const s = Math.sin(r);
       const world = (lx: number, lz: number): { x: number; z: number } => ({ x: at.x + lx * c + lz * s, z: at.z - lx * s + lz * c });
+      if (type) {
+        // Las luces de un lugar de config/sites/: el pie sobre el terreno y el brazo hacia su lado.
+        for (const l of type.lights(placeFile(m as Place, type))) {
+          const w = world(l.x, l.z);
+          lights.push({ x: w.x, z: w.z, y: heightmap.sample(w.x, w.z) + l.lift, h: l.h, arm: l.out - r, power: l.power, led: l.led });
+        }
+        continue;
+      }
       if (m.type === 'park') {
         // Los faroles de globos alumbran alrededor (sin brazo que apunte): el ángulo es el del marco.
         const p = m as Park;
@@ -724,7 +815,7 @@ export class Monuments {
   /** Obstáculo o piso circular en (lx, lz) del marco local; `top` (y `bottom`) en el mundo. */
   private circle(site: Site, root: THREE.Object3D, lx: number, lz: number, r: number, top: number, floor = false, bottom = -Infinity): void {
     const p = this.world(root, lx, lz);
-    site.shapes.push({ kind: 'circle', x: p.x, z: p.z, a: r, b: 0, angle: 0, halfArc: 0, top, bottom, floor });
+    site.shapes.push({ kind: 'circle', x: p.x, z: p.z, a: r, b: 0, angle: 0, cos: 1, sin: 0, halfArc: 0, top, bottom, floor });
   }
 
   /**
@@ -733,7 +824,8 @@ export class Monuments {
    */
   private ring(site: Site, root: THREE.Object3D, inner: number, outer: number, angle: number, halfArc: number, top: number, floor = false, bottom = -Infinity, cx = 0, cz = 0): void {
     const c = this.world(root, cx, cz);
-    site.shapes.push({ kind: 'ring', x: c.x, z: c.z, a: outer, b: inner, angle: angle - root.rotation.y, halfArc, top, bottom, floor });
+    const a = angle - root.rotation.y;
+    site.shapes.push({ kind: 'ring', x: c.x, z: c.z, a: outer, b: inner, angle: a, cos: Math.cos(a), sin: Math.sin(a), halfArc, top, bottom, floor });
   }
 
   /**
@@ -742,7 +834,8 @@ export class Monuments {
    */
   private box(site: Site, root: THREE.Object3D, lx: number, lz: number, halfU: number, halfV: number, top: number, floor = false, bottom = -Infinity, angle = 0): void {
     const p = this.world(root, lx, lz);
-    site.shapes.push({ kind: 'box', x: p.x, z: p.z, a: halfU, b: halfV, angle: angle - root.rotation.y, halfArc: 0, top, bottom, floor });
+    const a = angle - root.rotation.y;
+    site.shapes.push({ kind: 'box', x: p.x, z: p.z, a: halfU, b: halfV, angle: a, cos: Math.cos(a), sin: Math.sin(a), halfArc: 0, top, bottom, floor });
   }
 
   /**
@@ -751,15 +844,12 @@ export class Monuments {
    */
   private palace(root: THREE.Group, site: Site, p: Palace): void {
     const finish = (f: { roughness: number; metalness: number; opacity?: number }) => createMaterial(this.cfg, undefined, f);
-    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    const lod: LodGroup = { ...this.world(root, 0, 0), items: [] };
     const y = (v: number): number => root.position.y + v;
     new PalaceBuilder(p, {
       root,
       materials: { stone: this.material, glass: finish(p.glass), vault: finish(p.vault) },
-      terrain: (lx, lz) => {
-        const w = this.world(root, lx, lz);
-        return this.heightmap.sample(w.x, w.z);
-      },
+      terrain: this.terrainOf(root),
       box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, y(top), floor, y(bottom), angle),
       circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, y(top), floor, y(bottom)),
       ring: (cx, cz, inner, outer, angle, halfArc, top, floor, bottom) => this.ring(site, root, inner, outer, angle, halfArc, y(top), floor, y(bottom), cx, cz),
@@ -793,14 +883,11 @@ export class Monuments {
    */
   private church(root: THREE.Group, site: Site, ch: Church): void {
     const finish = (f: { roughness: number; metalness: number; opacity?: number }) => createMaterial(this.cfg, undefined, f);
-    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    const lod: LodGroup = { ...this.world(root, 0, 0), items: [] };
     new ChurchBuilder(ch, {
       root,
       materials: { stone: this.material, glass: finish(ch.glass), water: finish(ch.water) },
-      terrain: (lx, lz) => {
-        const w = this.world(root, lx, lz);
-        return this.heightmap.sample(w.x, w.z);
-      },
+      terrain: this.terrainOf(root),
       box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, top, floor, bottom, angle),
       circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, top, floor, bottom),
       ring: (cx, cz, inner, outer, top, floor) => this.ring(site, root, inner, outer, 0, Math.PI, top, floor, -Infinity, cx, cz),
@@ -825,19 +912,16 @@ export class Monuments {
     });
     let r = 0;
     for (let k = 0; k < ring.length; k += 2) r = Math.max(r, Math.hypot(ring[k] - cx, ring[k + 1] - cz));
-    site.shapes.push({ kind: 'poly', x: cx, z: cz, a: r, b: 0, angle: 0, halfArc: 0, top: offset, bottom: -Infinity, floor: true, outline: ring });
+    site.shapes.push({ kind: 'poly', x: cx, z: cz, a: r, b: 0, angle: 0, cos: 1, sin: 0, halfArc: 0, top: offset, bottom: -Infinity, floor: true, outline: ring });
   }
 
   /** Una columna conmemorativa con su óvalo de césped (world/column.ts). */
   private column(root: THREE.Group, site: Site, col: VictoryColumn): void {
-    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    const lod: LodGroup = { ...this.world(root, 0, 0), items: [] };
     new ColumnBuilder(col, {
       root,
       materials: { stone: this.material, rails: createMaterial(this.cfg, undefined, { ...col.rails, cutout: true }) },
-      terrain: (lx, lz) => {
-        const w = this.world(root, lx, lz);
-        return this.heightmap.sample(w.x, w.z);
-      },
+      terrain: this.terrainOf(root),
       box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, top, floor, bottom, angle),
       circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, top, floor, bottom),
       ring: (cx, cz, inner, outer, top, floor) => this.ring(site, root, inner, outer, 0, Math.PI, top, floor, -Infinity, cx, cz),
@@ -849,14 +933,11 @@ export class Monuments {
 
   /** Un parque con sus paseos, reja, portadas, faroles y mástiles (world/park.ts). */
   private park(root: THREE.Group, site: Site, p: Park): void {
-    const lod = { ...this.world(root, 0, 0), items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
+    const lod: LodGroup = { ...this.world(root, 0, 0), items: [] };
     new ParkBuilder(p, {
       root,
       materials: { stone: this.material, rails: createMaterial(this.cfg, undefined, { ...p.rails, cutout: true }) },
-      terrain: (lx, lz) => {
-        const w = this.world(root, lx, lz);
-        return this.heightmap.sample(w.x, w.z);
-      },
+      terrain: this.terrainOf(root),
       box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => this.box(site, root, lx, lz, halfU, halfV, top, floor, bottom, angle),
       circle: (lx, lz, r, top, floor, bottom) => this.circle(site, root, lx, lz, r, top, floor, bottom),
       ground: (outline, offset) => this.floorPoly(site, root, outline, offset),
@@ -865,8 +946,8 @@ export class Monuments {
     this.lod.push(lod);
   }
 
-  /** Macizo de un monumento como edificio (planta local): se trepa y se camina encima. */
-  private record(root: THREE.Object3D, outline: THREE.Vector3[], y0: number, y1: number): void {
+  /** Macizo de un monumento como edificio (planta local): se trepa y se camina encima (por sus aguas, si trae techo inclinado). */
+  private record(root: THREE.Object3D, outline: THREE.Vector3[], y0: number, y1: number, roof?: LocalRoof): void {
     const ring = new Float32Array(outline.length * 2);
     let minX = Infinity;
     let maxX = -Infinity;
@@ -881,75 +962,33 @@ export class Monuments {
       minZ = Math.min(minZ, w.z);
       maxZ = Math.max(maxZ, w.z);
     });
-    this.records.push({ y0, y1, rings: [ring], minX, maxX, minZ, maxZ, chunk: MONUMENT_CHUNK, roof: null });
+    this.records.push({ y0, y1, rings: [ring], minX, maxX, minZ, maxZ, chunk: MONUMENT_CHUNK, roof: roof ? this.roofShape(root, roof) : null });
+  }
+
+  /** Un techo inclinado del marco local de un monumento, en el mundo (world/buildings.ts → roofTop). */
+  private roofShape(root: THREE.Object3D, r: LocalRoof): RoofShape {
+    const c = this.world(root, r.x, r.z);
+    const cr = Math.cos(root.rotation.y);
+    const sr = Math.sin(root.rotation.y);
+    const ux = Math.cos(r.angle);
+    const uz = Math.sin(r.angle);
+    return { hip: r.hip, cx: c.x, cz: c.z, ax: ux * cr + uz * sr, az: -ux * sr + uz * cr, halfWidth: r.halfWidth, halfLength: r.halfLength, slope: r.slope, edge: r.edge };
+  }
+
+  /** Altura del suelo en un punto del marco local de un monumento. */
+  private terrainOf(root: THREE.Object3D): (lx: number, lz: number) => number {
+    return (lx, lz) => {
+      const w = this.world(root, lx, lz);
+      return this.heightmap.sample(w.x, w.z);
+    };
   }
 
   /**
-   * Una calle modelada (world/street.ts): cada cuadra es su propio lugar de la física y del LOD
-   * (así una consulta no recorre la calle entera), con sus macizos como edificios y sus veredas
-   * como pisos que siguen el terreno.
+   * Lo que una calle o un lugar le pasa a la ciudad desde su marco local: sus árboles, palmeras y
+   * autos estacionados van a los de la ciudad, y sus letreros salen del atlas compartido.
    */
-  private street(root: THREE.Group, st: Street): void {
-    const file = streetFile(st.file);
-    const finish = (f: Finish): THREE.MeshStandardMaterial => createMaterial(this.cfg, undefined, f);
-    const glassFinish = this.cfg.street;
-    new StreetBuilder(file, {
-      root,
-      materials: {
-        stone: this.material,
-        glass: finish(glassFinish.glass),
-        rails: finish({ ...glassFinish.rails, cutout: true }),
-      },
-      terrain: (lx, lz) => {
-        const w = this.world(root, lx, lz);
-        return this.heightmap.sample(w.x, w.z);
-      },
-      site: (lx, lz) => {
-        const c = this.world(root, lx, lz);
-        const site: Site = { x: c.x, z: c.z, r: 0, shapes: [] };
-        this.sites.push(site);
-        const lod = { x: c.x, z: c.z, items: [] as { object: THREE.Object3D; distance: number; near: boolean }[] };
-        this.lod.push(lod);
-        const grow = (x: number, z: number, extent: number): void => {
-          site.r = Math.max(site.r, Math.hypot(x - site.x, z - site.z) + extent);
-        };
-        return {
-          block: (outline, y0, top) => {
-            this.record(root, outline, y0, top);
-            for (const q of outline) {
-              const w = this.world(root, q.x, q.z);
-              grow(w.x, w.z, 0);
-            }
-          },
-          box: (lx2, lz2, halfU, halfV, angle, top, floor, bottom) => {
-            this.box(site, root, lx2, lz2, halfU, halfV, top, floor, bottom, angle);
-            const w = this.world(root, lx2, lz2);
-            grow(w.x, w.z, Math.hypot(halfU, halfV));
-          },
-          circle: (lx2, lz2, r, top) => {
-            this.circle(site, root, lx2, lz2, r, top);
-            const w = this.world(root, lx2, lz2);
-            grow(w.x, w.z, r);
-          },
-          ground: (outline, offset) => {
-            const ring = new Float32Array(outline.length * 2);
-            let cx = 0;
-            let cz = 0;
-            outline.forEach((q, k) => {
-              const w = this.world(root, q.x, q.z);
-              ring[k * 2] = w.x;
-              ring[k * 2 + 1] = w.z;
-              cx += w.x / outline.length;
-              cz += w.z / outline.length;
-            });
-            let r = 0;
-            for (let k = 0; k < ring.length; k += 2) r = Math.max(r, Math.hypot(ring[k] - cx, ring[k + 1] - cz));
-            site.shapes.push({ kind: 'poly', x: cx, z: cz, a: r, b: 0, angle: 0, halfArc: 0, top: offset, bottom: -Infinity, floor: true, outline: ring });
-            grow(cx, cz, r);
-          },
-          near: (object, distance) => lod.items.push({ object, distance, near: true }),
-        };
-      },
+  private cityKit(root: THREE.Object3D): Pick<PlaceKit, 'tree' | 'palm' | 'car' | 'signRect' | 'signOffset'> {
+    return {
       tree: (lx, lz, y, height, radius, color) => {
         const w = this.world(root, lx, lz);
         const photo = color.clone().convertLinearToSRGB();
@@ -966,6 +1005,107 @@ export class Monuments {
       },
       signRect: (sign) => this.signAtlas.rect(sign),
       signOffset: this.cfg.signs.offset,
+    };
+  }
+
+  /**
+   * Un lugar de config/sites/ (world/placeKit.ts: tipos mall, tower y urbanization). El lugar
+   * entero es un pedazo de la física y del LOD (centro en su origen) y puede partirse en más con
+   * `site`; sus árboles, palmeras y autos van a los de la ciudad, como los de las calles.
+   */
+  private place(root: THREE.Group, site: Site, p: Place, type: PlaceType<unknown>): void {
+    const lod: LodGroup = { ...this.world(root, 0, 0), items: [] };
+    this.lod.push(lod);
+    const kit: PlaceKit = {
+      ...this.placeSite(root, site, lod),
+      ...this.cityKit(root),
+      root,
+      materials: { stone: this.material, paint: this.finish({ paint: true }) },
+      finish: (f) => this.finish(f),
+      flood: p.flood,
+      terrain: this.terrainOf(root),
+      site: (lx, lz) => this.subSite(root, lx, lz),
+      lotKit: (ps, batches, ground) => lotKit(kit, batches, ps, ground, `config/sites/${p.file}.json (${p.id})`),
+    };
+    type.build(placeFile(p, type), kit);
+  }
+
+  /**
+   * Un pedazo nuevo de la física y del LOD con centro (lx, lz) del marco local: una cuadra de una
+   * calle, una celda de casas, un volumen de un mall.
+   */
+  private subSite(root: THREE.Object3D, lx: number, lz: number): PlaceSite {
+    const c = this.world(root, lx, lz);
+    const site: Site = { x: c.x, z: c.z, r: 0, shapes: [] };
+    this.sites.push(site);
+    const lod: LodGroup = { x: c.x, z: c.z, items: [] };
+    this.lod.push(lod);
+    return this.placeSite(root, site, lod);
+  }
+
+  /** Un pedazo de una calle o un lugar para la física y el LOD: sus piezas van a `site` y su círculo crece con ellas. */
+  private placeSite(root: THREE.Object3D, site: Site, lod: LodGroup): PlaceSite {
+    const grow = (x: number, z: number, extent: number): void => {
+      site.r = Math.max(site.r, Math.hypot(x - site.x, z - site.z) + extent);
+    };
+    return {
+      block: (outline, y0, top, roof) => {
+        this.record(root, outline, y0, top, roof);
+        for (const q of outline) {
+          const w = this.world(root, q.x, q.z);
+          grow(w.x, w.z, 0);
+        }
+      },
+      box: (lx, lz, halfU, halfV, angle, top, floor, bottom) => {
+        this.box(site, root, lx, lz, halfU, halfV, top, floor, bottom, angle);
+        const w = this.world(root, lx, lz);
+        grow(w.x, w.z, Math.hypot(halfU, halfV));
+      },
+      circle: (lx, lz, r, top, floor, bottom) => {
+        this.circle(site, root, lx, lz, r, top, floor, bottom);
+        const w = this.world(root, lx, lz);
+        grow(w.x, w.z, r);
+      },
+      ground: (outline, offset) => {
+        this.floorPoly(site, root, outline, offset);
+        const s = site.shapes[site.shapes.length - 1];
+        grow(s.x, s.z, s.a);
+      },
+      near: (object, distance) => lod.items.push({ object, distance, near: true }),
+      far: (object, distance) => lod.items.push({ object, distance, near: false }),
+    };
+  }
+
+  /** El material de los monumentos con otro acabado (uno por acabado distinto, compartido entre lugares). */
+  private finish(f: Finish): THREE.MeshStandardMaterial {
+    const key = JSON.stringify(f);
+    let m = this.finishes.get(key);
+    if (!m) {
+      m = createMaterial(this.cfg, undefined, f, this.signAtlas.texture);
+      this.finishes.set(key, m);
+    }
+    return m;
+  }
+
+  /**
+   * Una calle modelada (world/street.ts): cada cuadra es su propio lugar de la física y del LOD
+   * (así una consulta no recorre la calle entera), con sus macizos como edificios y sus veredas
+   * como pisos que siguen el terreno.
+   */
+  private street(root: THREE.Group, st: Street): void {
+    const file = streetFile(st.file);
+    const finish = (f: Finish): THREE.MeshStandardMaterial => createMaterial(this.cfg, undefined, f);
+    const glassFinish = this.cfg.street;
+    new StreetBuilder(file, {
+      ...this.cityKit(root),
+      root,
+      materials: {
+        stone: this.material,
+        glass: finish(glassFinish.glass),
+        rails: finish({ ...glassFinish.rails, cutout: true }),
+      },
+      terrain: this.terrainOf(root),
+      site: (lx, lz) => this.subSite(root, lx, lz),
     }).build();
   }
 
@@ -1576,9 +1716,18 @@ void main() {
     if (on) this.pixels.value = renderer.getDrawingBufferSize(_size).y / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2));
     for (const c of this.clocks) if (c.shown !== hours) this.setClock(c, hours);
     for (const l of this.lod) {
+      if (!l.items.length) continue;
       const d = Math.hypot(camera.position.x - l.x, camera.position.z - l.z);
       for (const it of l.items) it.object.visible = d < it.distance === it.near;
     }
+  }
+
+  /** ¿Cae (x, z) en el círculo de un pedazo, con un margen (m)? (sin raíz: se prueba en cada consulta por cada pedazo). */
+  private static near(site: Site, x: number, z: number, margin: number): boolean {
+    const dx = x - site.x;
+    const dz = z - site.z;
+    const r = site.r + margin;
+    return dx * dx + dz * dz <= r * r;
   }
 
   private static inside(s: Shape, x: number, z: number, margin: number): boolean {
@@ -1590,14 +1739,12 @@ void main() {
       case 'ring': {
         const d = Math.hypot(dx, dz);
         if (d > s.a + margin || d < s.b - margin) return false;
-        const t = Math.atan2(dz, dx) - s.angle;
-        return Math.abs(Math.atan2(Math.sin(t), Math.cos(t))) <= s.halfArc + margin / Math.max(d, 1);
+        // Ángulo del punto desde el centro del sector, ya entre −π y π (el punto girado −angle).
+        const t = Math.atan2(dz * s.cos - dx * s.sin, dx * s.cos + dz * s.sin);
+        return Math.abs(t) <= s.halfArc + margin / Math.max(d, 1);
       }
-      case 'box': {
-        const c = Math.cos(s.angle);
-        const sn = Math.sin(s.angle);
-        return Math.abs(dx * c + dz * sn) <= s.a + margin && Math.abs(dz * c - dx * sn) <= s.b + margin;
-      }
+      case 'box':
+        return Math.abs(dx * s.cos + dz * s.sin) <= s.a + margin && Math.abs(dz * s.cos - dx * s.sin) <= s.b + margin;
       case 'poly':
         return dx * dx + dz * dz <= (s.a + margin) * (s.a + margin) && !!s.outline && Monuments.inPolygon(s.outline, x, z);
     }
@@ -1616,9 +1763,10 @@ void main() {
   deckAt(x: number, z: number, maxY: number, best = -Infinity, hit?: DeckHit): number {
     let y = -Infinity;
     for (const site of this.sites) {
-      if (Math.hypot(x - site.x, z - site.z) > site.r) continue;
+      if (!Monuments.near(site, x, z, 0)) continue;
       for (const s of site.shapes) {
-        if (!s.floor || !Monuments.inside(s, x, z, 0)) continue;
+        // Un tope fijo que no cambia la respuesta se descarta antes de la prueba de adentro.
+        if (!s.floor || (s.kind !== 'poly' && (s.top > maxY || s.top <= y)) || !Monuments.inside(s, x, z, 0)) continue;
         const top = this.topOf(s, x, z);
         if (top <= maxY && top > y) y = top;
       }
@@ -1638,9 +1786,10 @@ void main() {
   wallTop(x: number, z: number, y: number): number {
     let top = -Infinity;
     for (const site of this.sites) {
-      if (Math.hypot(x - site.x, z - site.z) > site.r) continue;
+      if (!Monuments.near(site, x, z, 0)) continue;
       for (const s of site.shapes) {
-        if (y + this.cfg.clearance <= s.bottom || !Monuments.inside(s, x, z, 0)) continue;
+        // Un tope fijo que no cambia la respuesta se descarta antes de la prueba de adentro.
+        if (y + this.cfg.clearance <= s.bottom || (s.kind !== 'poly' && (s.top <= y || s.top <= top)) || !Monuments.inside(s, x, z, 0)) continue;
         const t = this.topOf(s, x, z);
         if (y < t && t > top) top = t;
       }
@@ -1654,7 +1803,7 @@ void main() {
    */
   occupied(x: number, z: number, margin = 0): boolean {
     for (const site of this.sites) {
-      if (Math.hypot(x - site.x, z - site.z) > site.r + margin) continue;
+      if (!Monuments.near(site, x, z, margin)) continue;
       for (const s of site.shapes) if (s.kind !== 'poly' && Monuments.inside(s, x, z, margin)) return true;
     }
     return false;
