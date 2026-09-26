@@ -149,7 +149,8 @@ def place_frame(target: str) -> tuple:
         lat, lon, heading = (float(v) for v in target.split(','))
     except ValueError:
         raise SystemExit(f"'{target}' no es una calle, ni un monumento de config/game.json, ni 'lat,lon,rumbo'")
-    return Frame(manifest(), [lat, lon], heading=heading), defaults(), cache_dir('places', 'point')
+    # Una carpeta por punto y rumbo: dos lugares sueltos (o dos agentes a la vez) no se pisan.
+    return Frame(manifest(), [lat, lon], heading=heading), defaults(), cache_dir('places', f'point_{lat:.5f}_{lon:.5f}_{heading:g}')
 
 
 def game_buildings(frame: Frame, margin: list) -> list:
